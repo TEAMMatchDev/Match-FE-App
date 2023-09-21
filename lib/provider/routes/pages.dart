@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
-import 'package:match/modules/main%20copy/binding/main_binding.dart';
-import 'package:match/modules/main%20copy/view/main_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
@@ -13,6 +11,8 @@ import '../../modules/event/binding/event_binding.dart';
 import '../../modules/event/view/event_view.dart';
 import '../../modules/home/binding/home_binding.dart';
 import '../../modules/home/view/home_view.dart';
+import '../../modules/main/binding/main_binding.dart';
+import '../../modules/main/view/main_view.dart';
 import 'routes.dart';
 
 class Pages {
