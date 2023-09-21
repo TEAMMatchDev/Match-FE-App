@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,30 +21,34 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.bottom]);
     return ScreenUtilInit(
-      child: GetMaterialApp(
-        getPages: Pages.routes,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          scaffoldBackgroundColor: AppColors.white,
-          fontFamily: 'AppleSDGothicNeo',
-        ),
-        supportedLocales: const [
-          Locale('ko', 'KR'),
-        ],
-        builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-          child: child!,
-        ),
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate
-        ],
-        initialRoute: "/home",
-        initialBinding: HomeBinding(),
-        smartManagement: SmartManagement.full,
-        navigatorKey: Get.key,
-      ),
-    );
+        designSize: const Size(360, 640),
+        builder: ((context, child) {
+          return GetMaterialApp(
+            getPages: Pages.routes,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              scaffoldBackgroundColor: AppColors.white,
+              fontFamily: 'AppleSDGothicNeo',
+            ),
+            supportedLocales: const [
+              Locale('ko', 'KR'),
+            ],
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: child!,
+            ),
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate
+            ],
+            initialRoute: "/home",
+            initialBinding: HomeBinding(),
+            smartManagement: SmartManagement.full,
+            navigatorKey: Get.key,
+          );
+        }));
   }
 }
