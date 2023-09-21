@@ -38,7 +38,11 @@ flutter:
   uses-material-design: true
   assets:
     - .env
-    - asset/
+    - asset/image/icon/bottomNavi
+    - asset/image/icon/login
+    - asset/image/icon/
+    - asset/image/logo/
+
   fonts:
     - family: AppleSDGothicNeo
       fonts:
