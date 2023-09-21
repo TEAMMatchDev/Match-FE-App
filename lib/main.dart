@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           scaffoldBackgroundColor: AppColors.white,
-          fontFamily: 'Apple SD Gothic Neo',
+          fontFamily: 'AppleSDGothicNeo',
         ),
         supportedLocales: const [
           Locale('ko', 'KR'),

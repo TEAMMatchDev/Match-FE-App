@@ -35,17 +35,28 @@ flutter:
   uses-material-design: true
   assets:
     - asset/
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: AppleSDGothicNeo
+      fonts:
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoUL.ttf
+          weight: 100
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoT.ttf
+          weight: 200
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoSB.ttf
+          weight: 300
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoR.ttf
+          weight: 400
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoM.ttf
+          weight: 500
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoL.ttf
+          weight: 600
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoH.ttf
+          weight: 700
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoEB.ttf
+          weight: 800
+        - asset: asset/fonts/appleSD/AppleSDGothicNeoB.ttf
+          weight: 900
+ 
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
