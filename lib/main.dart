@@ -4,7 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:match/modules/home/binding/home_binding.dart';
+import 'package:match/modules/splash/binding/splash_binding.dart';
 
 import 'provider/routes/pages.dart';
 import 'util/style/global_color.dart';
@@ -44,8 +44,8 @@ class MyApp extends StatelessWidget {
               GlobalMaterialLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate
             ],
-            initialRoute: "/home",
-            initialBinding: HomeBinding(),
+            initialRoute: "/splash",
+            initialBinding: SplashBinding(),
             smartManagement: SmartManagement.full,
             navigatorKey: Get.key,
           );
