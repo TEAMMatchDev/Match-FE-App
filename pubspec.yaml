@@ -22,9 +22,12 @@ dependencies:
   flutter_dotenv: ^5.1.0
   url_launcher: ^6.1.14
   flutter_localization: ^0.1.14
+  freezed: ^2.4.2
 
 dev_dependencies:
   build_runner: ^2.3.3
+  freezed: ^2.3.2
+  json_serializable: ^6.5.4
   flutter_test:
     sdk: flutter
 
@@ -34,29 +37,30 @@ flutter:
 
   uses-material-design: true
   assets:
+    - .env
     - asset/
   fonts:
     - family: AppleSDGothicNeo
       fonts:
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoUL.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoUL.ttf
           weight: 100
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoT.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoT.ttf
           weight: 200
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoSB.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoSB.ttf
           weight: 300
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoR.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoR.ttf
           weight: 400
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoM.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoM.ttf
           weight: 500
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoL.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoL.ttf
           weight: 600
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoH.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoH.ttf
           weight: 700
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoEB.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoEB.ttf
           weight: 800
-        - asset: asset/fonts/appleSD/AppleSDGothicNeoB.ttf
+        - asset: asset/font/appleSD/AppleSDGothicNeoB.ttf
           weight: 900
- 
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

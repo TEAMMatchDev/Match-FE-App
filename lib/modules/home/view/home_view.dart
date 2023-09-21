@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:match/util/style/global_text_styles.dart';
 
 import '../controller/home_controller.dart';
 
@@ -9,7 +12,10 @@ class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("test"),
+      body: Text(
+        controller.text.value,
+        style: AppTextStyles.heading1Bold,
+      ),
     );
   }
 }
