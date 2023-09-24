@@ -8,38 +8,65 @@ class AppTextStyles {
   static const _defaultTextColor = AppColors.grey9;
   static const _defaultFontFamily = 'AppleSDGothicNeo';
 
-  static const _heading1Height = 45.0 / 30.0;
-  static const _title3Height = 19.0 / 16.0;
-  static const _body2Height = 16.0 / 13.0;
-  static const _body3Height = 14.0 / 12.0;
+  //design system 명시대로 나머지는 행간 auto로 설정
+  static const _body1Height = 28.0 / 15.0;
+  static const _body2Height = 28.0 / 14.0;
 
-  //TODO: design font system 구축시 수정
-  static var heading1Bold = TextStyle(
-    color: _defaultTextColor,
-    fontFamily: _defaultFontFamily,
-    fontSize: 30.sp,
-    fontWeight: FontWeight.w700,
-    height: _heading1Height,
-  );
-  static var title3Bold = TextStyle(
-    color: _defaultTextColor,
-    fontFamily: _defaultFontFamily,
-    fontSize: 16.sp,
-    fontWeight: FontWeight.w700,
-    height: _title3Height,
-  );
+  static var heading1Medium = TextStyle(
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 24.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.1);
+  static var heading2Bold = TextStyle(
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.08);
+  static var heading3Bold = TextStyle(
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.08);
+  static var subtitle1Bold = TextStyle(
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.08);
+  static var subtitle2Bold = TextStyle(
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.08);
+  static var subtitle3Bold = TextStyle(
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.08);
+  static var body1Regular = TextStyle(
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w500,
+      height: _body1Height,
+      letterSpacing: -0.08);
   static var body2Regular = TextStyle(
-    color: _defaultTextColor,
-    fontFamily: _defaultFontFamily,
-    fontSize: 13.sp,
-    fontWeight: FontWeight.w500,
-    height: _body2Height,
-  );
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w500,
+      height: _body2Height,
+      letterSpacing: -0.08);
+  //design guide 아직 추가 전
   static var body3Bold = TextStyle(
-    color: _defaultTextColor,
-    fontFamily: _defaultFontFamily,
-    fontSize: 12.sp,
-    fontWeight: FontWeight.w700,
-    height: _body3Height,
-  );
+      color: _defaultTextColor,
+      fontFamily: _defaultFontFamily,
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w700,
+      letterSpacing: -0.08);
 }
