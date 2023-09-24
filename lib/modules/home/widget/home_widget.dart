@@ -74,3 +74,90 @@ class OrganizationItem extends StatelessWidget {
     );
   }
 }
+
+class TodayMatchItem extends StatelessWidget {
+  final String title;
+  final String organization;
+  final int count;
+  final Rx<bool> isLike;
+  //TODO: imgUrl 추가
+  const TodayMatchItem(
+      {super.key,
+      required this.title,
+      required this.organization,
+      required this.count,
+      required this.isLike});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          height: 170.h,
+          width: 130.w,
+          decoration: BoxDecoration(
+            //radius 수정
+            borderRadius: BorderRadius.circular(10.r),
+            image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(imgDir + "iv_test_ad_320.png"),
+                colorFilter: ColorFilter.mode(
+                    //TODO: gradient 적용 detail 수정
+
+                    Colors.black.withOpacity(0.6),
+                    BlendMode.saturation)),
+          ),
+          child: Stack(
+            children: [
+              Obx(
+                () => Positioned(
+                    right: 12.w,
+                    top: 12.h,
+                    child: isLike.value
+                        ? SvgPicture.asset(iconDir + "ic_like_able_24.svg")
+                        : SvgPicture.asset(iconDir + "ic_like_unable_24.svg")),
+              ),
+              Positioned(
+                  bottom: 14.h,
+                  left: 14.w,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          //TODO: boxfit.fill로 변경
+                          //TODO: 테두리 하얀색으로 변경
+                          CircleAvatar(
+                            child: Image.asset(imgDir + "iv_test_ad_320.png"),
+                            radius: 11.r,
+                          ),
+                          Text(
+                            "+${count}",
+                            style: AppTextStyles.subtitle3Bold13
+                                .copyWith(color: AppColors.white),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(organization,
+                          style: AppTextStyles.subtitle3Bold13.copyWith(
+                            color: AppColors.white,
+                          )),
+                    ],
+                  ))
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 13.h,
+        ),
+        Text(
+          title,
+          style: AppTextStyles.subtitle3Bold13,
+        )
+      ],
+    );
+  }
+}
