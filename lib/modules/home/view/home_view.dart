@@ -57,7 +57,7 @@ class HomeScreen extends GetView<HomeController> {
                     ),
                     Text(
                       "고유 이름을 입력해보세요.",
-                      style: AppTextStyles.body2Regular
+                      style: AppTextStyles.body2Regular13
                           .copyWith(color: AppColors.grey4),
                     ),
                   ],
@@ -75,6 +75,7 @@ class HomeScreen extends GetView<HomeController> {
                 options: CarouselOptions(
                     autoPlay: true, viewportFraction: 320 / 186),
                 itemBuilder: (context, index, realIndex) {
+                  //TODO: index 표시하는 container 추가
                   return Container(
                       decoration: BoxDecoration(color: AppColors.black),
                       child: Text("text"));
@@ -148,9 +149,10 @@ class HomeScreen extends GetView<HomeController> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 2,
                 itemBuilder: (context, index) {
-                  return Container(
-                      decoration: BoxDecoration(color: AppColors.black),
-                      child: Text("text"));
+                  return OrganizationItem(
+                    title: "test",
+                    comment: "testest",
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(

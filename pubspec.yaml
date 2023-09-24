@@ -39,6 +39,7 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - asset/image/
     - asset/image/icon/bottomNavi/
     - asset/image/icon/login/
     - asset/image/icon/
