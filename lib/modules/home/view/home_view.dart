@@ -17,21 +17,6 @@ class HomeScreen extends GetView<HomeController> {
         controller.text.value,
         style: AppTextStyles.heading1Bold,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [],
-      ),
     );
   }
-}
-
-BottomNavigationBarItem bottomNaviItem({
-  required String iconUrl,
-  required String naviText,
-}) {
-  return BottomNavigationBarItem(
-      icon: SvgPicture.asset(
-        "asset/image/icon/bottomNavi/ic_$iconUrl",
-        height: 20.h,
-      ),
-      label: naviText);
 }
