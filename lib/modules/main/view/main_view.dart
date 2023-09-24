@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/donate/view/donate_view.dart';
+import 'package:match/modules/event/view/event_view.dart';
+import 'package:match/modules/home/view/home_view.dart';
+import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/util/style/global_text_styles.dart';
 
 import '../../../util/style/global_color.dart';
@@ -16,7 +20,12 @@ class MainScren extends GetView<MainController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        body: Text('main'),
+        body: [
+          HomeScreen(),
+          DonateScreen(),
+          EventScreen(),
+          MypageScreen(),
+        ][controller.selectIdx.value],
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           showUnselectedLabels: true,
