@@ -14,25 +14,28 @@ class MainScren extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text('main'),
-      bottomNavigationBar: BottomNavigationBar(
-        showUnselectedLabels: true,
-        currentIndex: controller.selectIdx.value,
-        onTap: ((value) async {
-          controller.selectIdx.value = value;
-        }),
-        selectedItemColor: AppColors.grey9,
-        selectedLabelStyle: AppTextStyles.body2Bold,
-        unselectedItemColor: AppColors.grey3,
-        unselectedLabelStyle:
-            AppTextStyles.body2Bold.copyWith(color: AppColors.grey3),
-        items: [
-          bottomNaviItem(iconUrl: 'home', naviText: '홈'),
-          bottomNaviItem(iconUrl: 'donate', naviText: '후원'),
-          bottomNaviItem(iconUrl: 'event', naviText: '이벤트'),
-          bottomNaviItem(iconUrl: 'mypage', naviText: 'MY'),
-        ],
+    return Obx(
+      () => Scaffold(
+        body: Text('main'),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showUnselectedLabels: true,
+          currentIndex: controller.selectIdx.value,
+          onTap: ((value) async {
+            controller.selectIdx.value = value;
+          }),
+          selectedItemColor: AppColors.grey9,
+          selectedLabelStyle: AppTextStyles.body2Bold,
+          unselectedItemColor: AppColors.grey3,
+          unselectedLabelStyle:
+              AppTextStyles.body2Bold.copyWith(color: AppColors.grey3),
+          items: [
+            bottomNaviItem(iconUrl: 'home', naviText: '홈'),
+            bottomNaviItem(iconUrl: 'donate', naviText: '후원'),
+            bottomNaviItem(iconUrl: 'event', naviText: '이벤트'),
+            bottomNaviItem(iconUrl: 'mypage', naviText: 'MY'),
+          ],
+        ),
       ),
     );
   }
