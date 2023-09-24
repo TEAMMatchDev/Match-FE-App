@@ -9,6 +9,7 @@ class AppTextStyles {
   static const _defaultFontFamily = 'AppleSDGothicNeo';
 
   static const _heading1Height = 45.0 / 30.0;
+  static const _title3Height = 19.0 / 16.0;
   static const _body2Height = 16.0 / 13.0;
   static const _body3Height = 14.0 / 12.0;
 
@@ -19,6 +20,13 @@ class AppTextStyles {
     fontSize: 30.sp,
     fontWeight: FontWeight.w700,
     height: _heading1Height,
+  );
+  static var title3Bold = TextStyle(
+    color: _defaultTextColor,
+    fontFamily: _defaultFontFamily,
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w700,
+    height: _title3Height,
   );
   static var body2Regular = TextStyle(
     color: _defaultTextColor,

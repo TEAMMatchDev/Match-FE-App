@@ -1,12 +1,15 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../controller/home_controller.dart';
+import '../widget/home_widget.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
@@ -61,8 +64,49 @@ class HomeScreen extends GetView<HomeController> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 20.h,
+            ),
             //3. 광고 section
+            SizedBox(
+              height: 136.h,
+              child: CarouselSlider.builder(
+                itemCount: 2,
+                options: CarouselOptions(
+                    autoPlay: true, viewportFraction: 320 / 186),
+                itemBuilder: (context, index, realIndex) {
+                  return Container(
+                      decoration: BoxDecoration(color: AppColors.black),
+                      child: Text("text"));
+                },
+              ),
+            ),
+            SizedBox(
+              height: 4.h,
+            ),
             //4. 자신의 매치 section
+            // 제목
+            CommonSectionHeader(
+                title: '박정은님의 불타는 매치',
+                //TODO : destination 임시 처리
+                destination: Routes.donate),
+            SizedBox(
+              height: 180.h,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: 2,
+                itemBuilder: (context, index) {
+                  return Container(
+                      decoration: BoxDecoration(color: AppColors.black),
+                      child: Text("text"));
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    width: 20.w,
+                  );
+                },
+              ),
+            )
             //5. 매치 추천 section
             //6. 기부처 추천 section
           ],
