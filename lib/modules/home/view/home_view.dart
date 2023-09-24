@@ -106,9 +106,62 @@ class HomeScreen extends GetView<HomeController> {
                   );
                 },
               ),
-            )
+            ),
+            Container(
+              color: AppColors.searchBackground,
+              height: 10.h,
+            ),
             //5. 매치 추천 section
+            CommonSectionHeader(
+                title: '오늘 이 매치는 어때요?',
+                //TODO : destination 임시 처리
+                destination: Routes.donate),
+            SizedBox(
+              height: 223.h,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: 2,
+                itemBuilder: (context, index) {
+                  return Container(
+                      decoration: BoxDecoration(color: AppColors.black),
+                      child: Text("text"));
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    width: 20.w,
+                  );
+                },
+              ),
+            ),
+            Container(
+              color: AppColors.searchBackground,
+              height: 10.h,
+            ),
             //6. 기부처 추천 section
+            CommonSectionHeader(
+                title: '박레이님께 꼭 맞는 기부처 추천',
+                //TODO : destination 임시 처리
+                destination: Routes.donate),
+            SizedBox(
+              height: 99.h,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: 2,
+                itemBuilder: (context, index) {
+                  return Container(
+                      decoration: BoxDecoration(color: AppColors.black),
+                      child: Text("text"));
+                },
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    width: 20.w,
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 25.h,
+            )
           ],
         ),
       ),

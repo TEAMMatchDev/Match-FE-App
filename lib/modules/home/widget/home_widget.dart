@@ -14,7 +14,7 @@ Widget CommonSectionHeader(
       children: [
         Text(
           title,
-          style: AppTextStyles.title3Bold,
+          style: AppTextStyles.heading3Bold,
         ),
         GestureDetector(
             onTap: () async {
