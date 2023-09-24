@@ -8,9 +8,9 @@ import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/event/view/event_view.dart';
 import 'package:match/modules/home/view/home_view.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
-import 'package:match/util/style/global_text_styles.dart';
+import 'package:match/util/const/style/global_text_styles.dart';
 
-import '../../../util/style/global_color.dart';
+import '../../../util/const/style/global_color.dart';
 import '../controller/main_controller.dart';
 
 class MainScren extends GetView<MainController> {
@@ -34,10 +34,10 @@ class MainScren extends GetView<MainController> {
             controller.selectIdx.value = value;
           }),
           selectedItemColor: AppColors.grey9,
-          selectedLabelStyle: AppTextStyles.body2Bold,
+          selectedLabelStyle: AppTextStyles.body3Bold,
           unselectedItemColor: AppColors.grey3,
           unselectedLabelStyle:
-              AppTextStyles.body2Bold.copyWith(color: AppColors.grey3),
+              AppTextStyles.body3Bold.copyWith(color: AppColors.grey3),
           items: [
             bottomNaviItem(iconUrl: 'home', naviText: '홈'),
             bottomNaviItem(iconUrl: 'donate', naviText: '후원'),
