@@ -24,9 +24,9 @@ class _CarouselExampleState extends State<OnboardingWidget> {
   ];
   final List<String> titles = ['Title 1', 'Title 2', 'Title 3'];
   final List<String> descriptions = [
-    'Description for Item 1',
-    'Description for Item 2',
-    'Description for Item 3',
+    'MATCH에서 후원으로\n꿈꾸고 있던 세상을 만들어 보세요.',
+    'MATCH에서\n특별한 후원 경험을 만나보세요.',
+    'MATCH에서 후원금이\n어떻게 관리되고 있는지 알아보세요.',
   ];
 
   int _currentSlide = 0;
@@ -60,7 +60,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
           '건너뛰기',
           style: TextStyle(
             color: AppColors.grey6, // 색상 설정
-            fontSize: 13.0, // 폰트 크기 설정
+            fontSize: 13.sp, // 폰트 크기 설정
             fontWeight: FontWeight.w500, // 폰트 굵기 설정
             decoration: TextDecoration.underline, // 밑줄 설정
             fontFamily: 'Apple SD Gothic Neo', // 폰트 설정
@@ -95,13 +95,18 @@ class _CarouselExampleState extends State<OnboardingWidget> {
                     height: 180.h,
                   ),
                 ),
-                SizedBox(height: 8.0), // Add spacing
-                Text(
-                  description,
-                  style: TextStyle(
-                    fontSize: 16.sp,
+                SizedBox(height: 28.h), // Add spacing
+                Container(
+                  width: 225.w, // Set your desired width
+                  child: Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                    ),
+                    textAlign: TextAlign.center, // 중앙 정렬 설정
                   ),
                 ),
+
               ],
             ),
           );
@@ -168,13 +173,16 @@ class _CarouselExampleState extends State<OnboardingWidget> {
           child: Text(
             '시작하기',
             style: TextStyle(
-              color: Colors.white, // Text color
-              fontSize: 16.sp, // Text font size
+              color: AppColors.white, // 색상 설정
+              fontSize: 16.sp, // 폰트 크기 설정
+              fontWeight: FontWeight.w700, // 폰트 굵기 설정
+              fontFamily: 'Apple SD Gothic Neo', // 폰트 설정
             ),
+            textAlign: TextAlign.center, // 중앙 정렬 설정
+          ),
           ),
         ),
-      ),
-    );
+      );
   }
 
 
