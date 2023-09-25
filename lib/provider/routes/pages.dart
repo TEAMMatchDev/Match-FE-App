@@ -4,8 +4,12 @@ import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
+import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
+import 'package:match/modules/onboarding/view/onboarding_view.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
 import 'package:match/modules/splash/view/splash_view.dart';
+import 'package:match/modules/login/binding/login_binding.dart';
+import 'package:match/modules/login/view/login_view.dart';
 
 import '../../modules/event/binding/event_binding.dart';
 import '../../modules/event/view/event_view.dart';
@@ -17,13 +21,30 @@ import 'routes.dart';
 
 class Pages {
   static final routes = [
-    //온보딩 화면
+    GetPage(
+      title: "온보딩 화면",
+      name: Routes.onboarding,
+      page: () => const OnboardingScren(),
+      transition: Transition.noTransition,
+      binding: OnboardingBiding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
     GetPage(
       title: "스플래시 화면",
       name: Routes.splash,
       page: () => const SplashScreen(),
       transition: Transition.noTransition,
       binding: SplashBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "로그인 화면",
+      name: Routes.login,
+      page: () => const LoginScreen(),
+      transition: Transition.noTransition,
+      binding: LoginBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
