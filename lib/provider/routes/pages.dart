@@ -24,7 +24,7 @@ class Pages {
     GetPage(
       title: "온보딩 화면",
       name: Routes.onboarding,
-      page: () => const OnboardingScren(),
+      page: () => const OnboardingScreen(),
       transition: Transition.noTransition,
       binding: OnboardingBiding(),
       curve: Curves.easeIn,
