@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:match/provider/routes/pages.dart';
+import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../provider/routes/routes.dart';
 
@@ -23,7 +25,15 @@ class SplashScreen extends GetView<SplashController> {
               onTap: () {
                 Get.toNamed(Routes.onboarding); //Get.toNamed(Routes.main);
               },
-              child: Text('splash'))),
+            child: SizedBox(
+
+              child: Image.asset(
+                imgDir + "logo/iv_home_logo.png",
+                width: 120.w,
+              ),
+            ),
+          )
+      ),
     );
   }
 }
