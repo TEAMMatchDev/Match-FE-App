@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:match/util/style/global_text_styles.dart';
+import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../controller/login_controller.dart';
 
