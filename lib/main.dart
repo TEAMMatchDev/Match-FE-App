@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
 
 import 'provider/routes/pages.dart';
-import 'util/style/global_color.dart';
+import 'util/const/style/global_color.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

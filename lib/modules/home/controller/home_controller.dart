@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:match/model/project/project.dart';
 
 class HomeController extends GetxController {
+  //임시 변순
+  Rx<bool> isLike = false.obs;
   RxString text = ''.obs;
   @override
   void onInit() {
