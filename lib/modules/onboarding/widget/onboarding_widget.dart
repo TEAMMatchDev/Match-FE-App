@@ -117,15 +117,19 @@ class _CarouselExampleState extends State<OnboardingWidget> {
             }),
           ),
           SizedBox(height: 27.h),
+
           if(_currentSlide==2)
             GestureDetector(
               onTap: () {
                 Get.toNamed(Routes.login);
               },
               child: Container(
-                width: 120.w,
-                height: 40.h,
-                color: AppColors.grey10, // Button's background color
+                width: 300.w,
+                height: 50.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0), // Set border radius to 10px
+                  color: AppColors.grey10, // Button's background color
+                ),
                 child: Center(
                   child: Text(
                     '시작하기',
