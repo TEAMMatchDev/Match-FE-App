@@ -38,6 +38,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
     return Scaffold(
       body: Column(
         children: [
+          skipWidget(),
           sliderWidget(images, _currentSlide),
           indicatorWidget(images.length, _currentSlide),
           SizedBox(height: 100.h),
@@ -45,6 +46,31 @@ class _CarouselExampleState extends State<OnboardingWidget> {
       ),
     );
   }
+
+  @override
+  Widget skipWidget() {
+    return Container(
+      alignment: Alignment.centerRight, // 오른쪽 정렬을 위한 설정
+      padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 11.h), // 가로 여백 설정
+      child: GestureDetector(
+        onTap: () {
+          Get.toNamed(Routes.login);
+        },
+        child: Text(
+          '건너뛰기',
+          style: TextStyle(
+            color: AppColors.grey6, // 색상 설정
+            fontSize: 13.0, // 폰트 크기 설정
+            fontWeight: FontWeight.w500, // 폰트 굵기 설정
+            decoration: TextDecoration.underline, // 밑줄 설정
+            fontFamily: 'Apple SD Gothic Neo', // 폰트 설정
+          ),
+          textAlign: TextAlign.center, // 중앙 정렬 설정
+        ),
+      ),
+    );
+  }
+
 
   @override
   Widget sliderWidget(List<String> images, int currentSlide) {
@@ -117,7 +143,6 @@ class _CarouselExampleState extends State<OnboardingWidget> {
             }),
           ),
           SizedBox(height: 27.h),
-
           if(_currentSlide==2)
             loginButton()
         ],
