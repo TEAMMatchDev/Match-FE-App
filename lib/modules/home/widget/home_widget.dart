@@ -9,7 +9,7 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 Widget CommonSectionHeader(
-    {required String title, required String destination}) {
+    {required String title, required Future<void> Function() destination}) {
   return Padding(
     padding: EdgeInsets.only(top: 31.h, bottom: 17.5.h),
     child: Row(
@@ -20,10 +20,7 @@ Widget CommonSectionHeader(
           style: AppTextStyles.heading3Bold16,
         ),
         GestureDetector(
-            onTap: () async {
-              //TODO: 상세화면 라우팅 추후 설정
-              // await Get.toNamed(destination);
-            },
+            onTap: destination,
             child: SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"))
       ],
     ),
@@ -35,6 +32,17 @@ const String tmpProfileImg =
     "http://k.kakaocdn.net/dn/bq8XQY/btsjqweTr1J/c0kplPW8eo8iOCeoYTBGxK/img_640x640.jpg";
 const String tmpBackgroundImg =
     "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
+var onLikeTap = ({
+  required Rx<bool> isLike,
+}) {
+  var likeToastMsg = "매치를 찜하셨어요!";
+  var dislikeToastMsg = "찜 내역에서 삭제됩니다!";
+  Fluttertoast.showToast(
+      msg: isLike.value ? dislikeToastMsg : likeToastMsg,
+      //design 확인
+      fontSize: 12.sp);
+  isLike.value = !isLike.value;
+};
 
 ///*광고 section 순서 표시하는 위젯
 Widget adIndexItem({required int total, required int currentIdx}) {
@@ -168,15 +176,6 @@ class TodayMatchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var onLikeTap = () {
-      var likeToastMsg = "매치를 찜하셨어요!";
-      var dislikeToastMsg = "찜 내역에서 삭제됩니다!";
-      Fluttertoast.showToast(
-          msg: isLike.value ? dislikeToastMsg : likeToastMsg,
-          //design 확인
-          fontSize: 12.sp);
-      isLike.value = !isLike.value;
-    };
     return GestureDetector(
       onTap: () {
         //TODO: add route
@@ -214,11 +213,11 @@ class TodayMatchItem extends StatelessWidget {
                       top: 12.h,
                       child: isLike.value
                           ? GestureDetector(
-                              onTap: onLikeTap,
+                              onTap: onLikeTap(isLike: isLike),
                               child: SvgPicture.asset(
                                   iconDir + "ic_like_able_24.svg"))
                           : GestureDetector(
-                              onTap: onLikeTap,
+                              onTap: onLikeTap(isLike: isLike),
                               child: SvgPicture.asset(
                                   iconDir + "ic_like_disable_24.svg"))),
                 ),

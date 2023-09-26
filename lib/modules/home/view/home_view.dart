@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/home/view/today_match_view.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
@@ -115,7 +116,7 @@ class HomeScreen extends GetView<HomeController> {
                 CommonSectionHeader(
                     title: '박정은님의 불타는 매치',
                     //TODO : destination 임시 처리
-                    destination: Routes.donate),
+                    destination: () async {}),
                 SizedBox(
                   height: 180.h,
                   child: ListView.separated(
@@ -149,9 +150,12 @@ class HomeScreen extends GetView<HomeController> {
             child: Column(
               children: [
                 CommonSectionHeader(
-                    title: '오늘 이 매치는 어때요?',
-                    //TODO : destination 임시 처리
-                    destination: Routes.donate),
+                  title: '오늘 이 매치는 어때요?',
+                  //TODO : destination 임시 처리
+                  destination: () async {
+                    Get.to(TodayMatchScreen());
+                  },
+                ),
                 SizedBox(
                   height: 223.h,
                   child: ListView.separated(
@@ -188,7 +192,7 @@ class HomeScreen extends GetView<HomeController> {
                 CommonSectionHeader(
                     title: '박레이님께 꼭 맞는 기부처 추천',
                     //TODO : destination 임시 처리
-                    destination: Routes.donate),
+                    destination: () async {}),
                 SizedBox(
                   height: 99.h,
                   child: ListView.separated(
