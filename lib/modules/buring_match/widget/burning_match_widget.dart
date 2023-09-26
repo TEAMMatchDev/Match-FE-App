@@ -5,6 +5,7 @@ import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../util/components/global_button.dart';
 import '../../../util/const/style/global_color.dart';
 
 ///<h2>불타는 진행중인 매치 목록 item </h2>
@@ -30,11 +31,15 @@ class BurningMatchCredit extends StatelessWidget {
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: AppTextStyles.heading2Bold18),
+                SizedBox(
+                  height: 7.h,
+                ),
                 Text(date,
                     style: AppTextStyles.subtitle2Bold14
                         .copyWith(color: AppColors.grey6)),
@@ -68,7 +73,7 @@ class BurningMatchCredit extends StatelessWidget {
           height: 20.h,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text("후원 금액",
                 style: AppTextStyles.subtitle2Bold14
@@ -84,6 +89,29 @@ class BurningMatchCredit extends StatelessWidget {
         SizedBox(
           height: 20.h,
         ),
+        Row(
+          children: [
+            Expanded(
+              child: CommonButton(
+                text: "매치 기록",
+                onTap: () async {
+                  //TODO: 매치 기록 페이지로 이동
+                },
+              ),
+            ),
+            SizedBox(
+              width: 12.w,
+            ),
+            Expanded(
+              child: CommonButton(
+                text: "매치 해지",
+                onTap: () async {
+                  //TODO: 매치 해지 로직 추가
+                },
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
