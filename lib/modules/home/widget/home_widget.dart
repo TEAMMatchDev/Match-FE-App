@@ -33,11 +33,14 @@ class MyMatchItem extends StatelessWidget {
   final String title;
   final int count;
   final List<String> imgList;
+  final String backgroundImg;
   const MyMatchItem(
       {super.key,
       required this.title,
       required this.count,
-      required this.imgList});
+      required this.imgList,
+      //TODO: NetworkImage(backgroundImg)로 변경
+      this.backgroundImg = imgDir + "iv_test_ad_320.png"});
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +52,7 @@ class MyMatchItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
         image: DecorationImage(
             fit: BoxFit.fill,
+            //TODO: NetworkImage(backgroundImg)로 변경
             image: AssetImage(imgDir + "iv_test_ad_320.png"),
             colorFilter: ColorFilter.mode(
                 //TODO: gradient 적용 detail 수정
@@ -106,13 +110,15 @@ class TodayMatchItem extends StatelessWidget {
   final String organization;
   final int count;
   final Rx<bool> isLike;
-  //TODO: imgUrl 추가
+  //TODO: NetworkImage(backgroundImg)로 변경
+  final String backgroundImg;
   const TodayMatchItem(
       {super.key,
       required this.title,
       required this.organization,
       required this.count,
-      required this.isLike});
+      required this.isLike,
+      this.backgroundImg = imgDir + "iv_test_ad_320.png"});
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +133,7 @@ class TodayMatchItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r),
             image: DecorationImage(
                 fit: BoxFit.fill,
+                //TODO: NetworkImage(backgroundImg)로 변경
                 image: AssetImage(imgDir + "iv_test_ad_320.png"),
                 colorFilter: ColorFilter.mode(
                     //TODO: gradient 적용 detail 수정
@@ -200,9 +207,14 @@ class TodayMatchItem extends StatelessWidget {
 class OrganizationItem extends StatelessWidget {
   final String title;
   final String comment;
-  //TODO: imgUrl
+  //TODO: NetworkImage(backgroundImg)로 변경
+  final String backgroundImg;
   const OrganizationItem(
-      {super.key, required this.title, required this.comment});
+      {super.key,
+      required this.title,
+      required this.comment,
+      //TODO: NetworkImage(backgroundImg)로 변경
+      this.backgroundImg = imgDir + "iv_test_ad_320.png"});
 
   @override
   Widget build(BuildContext context) {
