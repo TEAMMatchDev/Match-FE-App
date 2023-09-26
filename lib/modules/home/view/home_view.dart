@@ -53,6 +53,7 @@ class HomeScreen extends GetView<HomeController> {
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SvgPicture.asset(iconDir + "ic_search_16.svg"),
                         SizedBox(
@@ -62,6 +63,8 @@ class HomeScreen extends GetView<HomeController> {
                           "고유 이름을 입력해보세요.",
                           style: AppTextStyles.body2Regular13
                               .copyWith(color: AppColors.grey4),
+                          textHeightBehavior: TextHeightBehavior(
+                              applyHeightToFirstAscent: false),
                         ),
                       ],
                     ),
@@ -73,7 +76,7 @@ class HomeScreen extends GetView<HomeController> {
                 //3. 광고 section
                 SizedBox(
                   child: CarouselSlider.builder(
-                    itemCount: 2,
+                    itemCount: controller.adCount.value,
                     options: CarouselOptions(
                         autoPlay: true, viewportFraction: 300.w / 136.h),
                     itemBuilder: (context, index, realIndex) {
@@ -96,7 +99,8 @@ class HomeScreen extends GetView<HomeController> {
                                   bottom: 25.h,
                                   right: 16.w,
                                   child: adIndexItem(
-                                      total: 2, currentIdx: index + 1))
+                                      total: controller.adCount.value,
+                                      currentIdx: index + 1))
                             ],
                           ));
                     },
