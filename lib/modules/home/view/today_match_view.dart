@@ -38,7 +38,7 @@ class TodayMatchScreen extends GetView<HomeController> {
                       count: 5,
                       imgList: ["df", "fds"],
                       isLike: controller.isLike),
-                  TypeChip(type: "분야"),
+                  TypeChip(type: controller.tmpText.value),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

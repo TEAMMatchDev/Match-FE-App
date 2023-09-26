@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -32,17 +34,20 @@ const String tmpProfileImg =
     "http://k.kakaocdn.net/dn/bq8XQY/btsjqweTr1J/c0kplPW8eo8iOCeoYTBGxK/img_640x640.jpg";
 const String tmpBackgroundImg =
     "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
-var onLikeTap = ({
-  required bool isLike,
+
+///API 연결이후에 테스트
+///* 현재 동작X
+void onLikeTap({
+  required Rx<bool> isLike,
 }) {
   var likeToastMsg = "매치를 찜하셨어요!";
   var dislikeToastMsg = "찜 내역에서 삭제됩니다!";
-  Fluttertoast.showToast(
-      msg: isLike ? dislikeToastMsg : likeToastMsg,
-      //design 확인
-      fontSize: 12.sp);
-  isLike = !isLike;
-};
+  // Fluttertoast.showToast(
+  //     msg: isLike.value ? dislikeToastMsg : likeToastMsg,
+  //     //design 확인
+  //     fontSize: 12.sp);
+  isLike.value = !isLike.value;
+}
 
 ///*광고 section 순서 표시하는 위젯
 Widget adIndexItem({required int total, required int currentIdx}) {
@@ -271,10 +276,10 @@ class LikeIcon extends StatelessWidget {
         top: topPosition.h,
         child: isLike.value
             ? GestureDetector(
-                onTap: onLikeTap(isLike: isLike.value),
+                onTap: () => onLikeTap(isLike: isLike),
                 child: SvgPicture.asset(iconDir + "ic_like_able_24.svg"))
             : GestureDetector(
-                onTap: onLikeTap(isLike: isLike.value),
+                onTap: () => onLikeTap(isLike: isLike),
                 child: SvgPicture.asset(iconDir + "ic_like_disable_24.svg")));
   }
 }

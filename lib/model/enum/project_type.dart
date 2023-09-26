@@ -11,11 +11,11 @@ enum ProjectType {
   ANIMAL("동물"),
   ENVIRONMENT("환경");
 
-  final String? stateName;
+  final String stateName;
   const ProjectType(this.stateName);
 }
 
-const _projectMap = {
+const _projectTypeMap = {
   'DOG': ProjectType.DOG,
   'CHILDREN': ProjectType.CHILDREN,
   'YOUTH': ProjectType.YOUTH,
