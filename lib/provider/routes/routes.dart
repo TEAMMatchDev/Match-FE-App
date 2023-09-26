@@ -16,6 +16,9 @@ abstract class _Paths {
   /// 홈 화면
   static const home = "/home";
 
+  ///불타는 매치 화면
+  static const burning_match = "/burning_match";
+
   /// 후원 화면
   static const donate = "/donate";
 
@@ -43,6 +46,9 @@ abstract class Routes {
 
   /// 홈 화면
   static const home = _Paths.home;
+
+  /// 홈 화면
+  static const burning_match = _Paths.burning_match;
 
   /// 후원 화면
   static const donate = _Paths.donate;
