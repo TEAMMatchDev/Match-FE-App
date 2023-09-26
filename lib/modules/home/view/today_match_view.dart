@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/home/controller/home_controller.dart';
+import 'package:match/modules/home/widget/home_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/const/global_variable.dart';
 
@@ -17,8 +19,22 @@ class TodayMatchScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonAppBar.basic("오늘의 후원"),
-      body: ListView(
-        children: [],
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
+        child: ListView(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TodayMatchList(
+                    count: 5,
+                    imgList: ["df", "fds"],
+                    isLike: controller.isLike),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

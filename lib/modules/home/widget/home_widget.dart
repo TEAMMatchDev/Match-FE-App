@@ -207,20 +207,7 @@ class TodayMatchItem extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                Obx(
-                  () => Positioned(
-                      right: 12.w,
-                      top: 12.h,
-                      child: isLike.value
-                          ? GestureDetector(
-                              onTap: onLikeTap(isLike: isLike),
-                              child: SvgPicture.asset(
-                                  iconDir + "ic_like_able_24.svg"))
-                          : GestureDetector(
-                              onTap: onLikeTap(isLike: isLike),
-                              child: SvgPicture.asset(
-                                  iconDir + "ic_like_disable_24.svg"))),
-                ),
+                LikeIcon(isLike: isLike),
                 Positioned(
                     bottom: 14.h,
                     left: 14.w,
@@ -260,6 +247,35 @@ class TodayMatchItem extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+///<h2>like Icon widget</h2>
+///*좋아요 api 연동 및 재사용성이 높아 위젯으로 분리
+class LikeIcon extends StatelessWidget {
+  final Rx<bool> isLike;
+  final int leftPosition;
+  final int topPosition;
+
+  const LikeIcon({
+    super.key,
+    required this.isLike,
+    this.leftPosition = 12,
+    this.topPosition = 17,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+        right: leftPosition.w,
+        top: topPosition.h,
+        child: isLike.value
+            ? GestureDetector(
+                onTap: onLikeTap(isLike: isLike),
+                child: SvgPicture.asset(iconDir + "ic_like_able_24.svg"))
+            : GestureDetector(
+                onTap: onLikeTap(isLike: isLike),
+                child: SvgPicture.asset(iconDir + "ic_like_disable_24.svg")));
   }
 }
 
@@ -342,4 +358,80 @@ Widget profileItem({String profileUrl = tmpProfileImg, double size = 22}) {
       ),
     ),
   );
+}
+
+///* 오늘의 후원에서 사용되는 listTile
+class TodayMatchList extends StatelessWidget {
+  final int count;
+  final List<String> imgList;
+  final String backgroundImg;
+  final Rx<bool> isLike;
+  const TodayMatchList(
+      {super.key,
+      required this.count,
+      required this.imgList,
+      this.backgroundImg = tmpBackgroundImg,
+      required this.isLike});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        //TODO: 유저 해당 매치 상세보기 page 연결
+      },
+      child: Container(
+        height: 180.h,
+        width: 280.w,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.5, 1],
+            colors: [
+              Color(0x00000099),
+              Color(0x0000001A),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(10.r),
+          image: DecorationImage(
+              fit: BoxFit.fill,
+              image: NetworkImage(backgroundImg),
+              colorFilter: ColorFilter.mode(
+                  //TODO: gradient 적용 detail 수정
+                  Colors.black.withOpacity(0.3),
+                  BlendMode.srcATop)),
+        ),
+        child: Stack(
+          children: [
+            LikeIcon(
+              isLike: isLike,
+              leftPosition: 25,
+              topPosition: 22,
+            ),
+            Positioned(
+              bottom: 17.h,
+              left: 20.w,
+              child:
+                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                Wrap(
+                  spacing: -4,
+                  children: imgList.map((e) => profileItem(size: 30)).toList(),
+                ),
+                SizedBox(
+                  width: 7.w,
+                ),
+                Text(
+                  "외 ${count}명 후원중",
+                  style: AppTextStyles.body2Regular13.copyWith(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ]),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }
