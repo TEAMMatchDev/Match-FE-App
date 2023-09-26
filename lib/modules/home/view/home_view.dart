@@ -73,12 +73,29 @@ class HomeScreen extends GetView<HomeController> {
               child: CarouselSlider.builder(
                 itemCount: 2,
                 options: CarouselOptions(
-                    autoPlay: true, viewportFraction: 320 / 186),
+                    autoPlay: true, viewportFraction: 320.w / 136.h),
                 itemBuilder: (context, index, realIndex) {
-                  //TODO: index 표시하는 container 추가
                   return Container(
-                      decoration: BoxDecoration(color: AppColors.black),
-                      child: Text("text"));
+                      decoration: BoxDecoration(
+                        //radius 수정
+                        borderRadius: BorderRadius.circular(10.r),
+                        image: DecorationImage(
+                            fit: BoxFit.fitWidth,
+                            image: NetworkImage(tmpBackgroundImg),
+                            colorFilter: ColorFilter.mode(
+                                //TODO: gradient 적용 detail 수정
+                                Colors.black.withOpacity(0.6),
+                                BlendMode.darken)),
+                      ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                              bottom: 16.h,
+                              right: 16.w,
+                              child:
+                                  adIndexItem(total: 2, currentIdx: index + 1))
+                        ],
+                      ));
                 },
               ),
             ),

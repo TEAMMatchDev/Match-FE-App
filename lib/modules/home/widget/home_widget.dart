@@ -35,6 +35,27 @@ const String tmpProfileImg =
 const String tmpBackgroundImg =
     "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
 
+Widget adIndexItem({required int total, required int currentIdx}) {
+  return Container(
+    padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4.r), color: Color(0x4D000000)),
+    child: RichText(
+        text: TextSpan(children: [
+      TextSpan(
+        text: "${currentIdx}",
+        style: AppTextStyles.body3Bold12
+            .copyWith(color: AppColors.white, letterSpacing: 0),
+      ),
+      TextSpan(
+        text: " / ${total}",
+        style: AppTextStyles.body3Bold12
+            .copyWith(color: AppColors.grey4, letterSpacing: 0),
+      )
+    ])),
+  );
+}
+
 ///* 나의 매치(불타는 매치) section
 class MyMatchItem extends StatelessWidget {
   final String title;
@@ -112,6 +133,15 @@ class MyMatchItem extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
