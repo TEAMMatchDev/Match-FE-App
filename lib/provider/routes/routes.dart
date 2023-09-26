@@ -4,6 +4,12 @@ abstract class _Paths {
   /// 스플래시 화면
   static const splash = "/splash";
 
+  /// 온보딩 화면
+  static const onboarding = "/onboarding";
+
+  /// 로그인 화면
+  static const login = "/login";
+
   /// 메인 화면
   static const main = "/main";
 
@@ -25,6 +31,12 @@ abstract class Routes {
 
   /// 스플래시 화면
   static const splash = _Paths.splash;
+
+  /// 온보딩 화면
+  static const onboarding = _Paths.onboarding;
+
+  /// 로그인 화면
+  static const login = _Paths.login;
 
   /// 메인 화면
   static const main = _Paths.main;
