@@ -75,19 +75,19 @@ class MyMatchItem extends StatelessWidget {
   final int count;
   final List<String> imgList;
   final String backgroundImg;
+  final Future<void> Function() destination;
   const MyMatchItem(
       {super.key,
       required this.title,
       required this.count,
       required this.imgList,
-      this.backgroundImg = tmpBackgroundImg});
+      this.backgroundImg = tmpBackgroundImg,
+      required this.destination});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        //TODO: 유저 해당 매치 상세보기 page 연결
-      },
+      onTap: destination,
       child: Container(
         height: 180.h,
         width: 280.w,

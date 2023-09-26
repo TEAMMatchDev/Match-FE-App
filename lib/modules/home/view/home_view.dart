@@ -116,7 +116,7 @@ class HomeScreen extends GetView<HomeController> {
                 CommonSectionHeader(
                     title: '박정은님의 불타는 매치',
                     destination: () async {
-                      await Get.toNamed(Routes.burning_match);
+                      await Get.toNamed(Routes.home + Routes.burning_match_pay);
                     }),
                 SizedBox(
                   height: 180.h,
@@ -125,6 +125,9 @@ class HomeScreen extends GetView<HomeController> {
                     itemCount: 2,
                     itemBuilder: (context, index) {
                       return MyMatchItem(
+                          destination: () async {
+                            Get.toNamed(Routes.home + Routes.burning_match);
+                          },
                           title: "후원 함께할 분, 들어와요!",
                           count: 15,
                           imgList: ["test", "test", "test"]);

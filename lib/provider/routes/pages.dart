@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/buring_match/binding/burning_match_binding.dart';
 import 'package:match/modules/buring_match/view/burning_match_pay_view.dart';
+import 'package:match/modules/buring_match/view/burning_match_view.dart';
 import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
@@ -60,23 +61,34 @@ class Pages {
       popGesture: false,
     ),
     GetPage(
-      title: "홈 화면",
-      name: Routes.home,
-      page: () => const HomeScreen(),
-      transition: Transition.noTransition,
-      binding: HomeBinding(),
-      curve: Curves.easeIn,
-      popGesture: false,
-    ),
-    GetPage(
-      title: "불타는 매치 화면",
-      name: Routes.burning_match,
-      page: () => const BurningMatchPayScreen(),
-      transition: Transition.noTransition,
-      binding: BurningMatchBinding(),
-      curve: Curves.easeIn,
-      popGesture: false,
-    ),
+        title: "홈 화면",
+        name: Routes.home,
+        page: () => const HomeScreen(),
+        transition: Transition.noTransition,
+        binding: HomeBinding(),
+        curve: Curves.easeIn,
+        popGesture: false,
+        children: [
+          GetPage(
+            title: "불타는 매치 결제내역 화면",
+            name: Routes.burning_match_pay,
+            page: () => const BurningMatchPayScreen(),
+            transition: Transition.noTransition,
+            //TODO:binding 교체
+            binding: BurningMatchBinding(),
+            curve: Curves.easeIn,
+            popGesture: false,
+          ),
+          GetPage(
+            title: "불타는 매치 화면",
+            name: Routes.burning_match,
+            page: () => const BurningMatchScreen(),
+            transition: Transition.noTransition,
+            binding: BurningMatchBinding(),
+            curve: Curves.easeIn,
+            popGesture: false,
+          ),
+        ]),
     GetPage(
       title: "이벤트 화면",
       name: Routes.event,
