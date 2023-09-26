@@ -33,8 +33,6 @@ class _CarouselExampleState extends State<OnboardingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isThirdCarousel = false;
-
     return Scaffold(
       body: Column(
         children: [
@@ -106,7 +104,6 @@ class _CarouselExampleState extends State<OnboardingWidget> {
                     textAlign: TextAlign.center, // 중앙 정렬 설정
                   ),
                 ),
-
               ],
             ),
           );
@@ -124,7 +121,6 @@ class _CarouselExampleState extends State<OnboardingWidget> {
       ),
     );
   }
-
 
 
   @override
