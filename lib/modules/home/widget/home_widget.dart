@@ -36,6 +36,7 @@ const String tmpProfileImg =
 const String tmpBackgroundImg =
     "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
 
+///*광고 section 순서 표시하는 위젯
 Widget adIndexItem({required int total, required int currentIdx}) {
   return Container(
     padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),

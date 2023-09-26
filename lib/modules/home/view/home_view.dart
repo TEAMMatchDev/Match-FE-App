@@ -72,28 +72,28 @@ class HomeScreen extends GetView<HomeController> {
                 ),
                 //3. 광고 section
                 SizedBox(
-                  height: 136.h,
                   child: CarouselSlider.builder(
                     itemCount: 2,
                     options: CarouselOptions(
-                        autoPlay: true, viewportFraction: 320.w / 136.h),
+                        autoPlay: true, viewportFraction: 300.w / 136.h),
                     itemBuilder: (context, index, realIndex) {
                       return Container(
+                          width: 300.w,
                           decoration: BoxDecoration(
                             //radius 수정
-                            borderRadius: BorderRadius.circular(10.r),
+                            borderRadius: BorderRadius.circular(20.r),
                             image: DecorationImage(
                                 fit: BoxFit.fitWidth,
                                 image: NetworkImage(tmpBackgroundImg),
                                 colorFilter: ColorFilter.mode(
                                     //TODO: gradient 적용 detail 수정
-                                    Colors.black.withOpacity(0.6),
+                                    Colors.black.withOpacity(0.1),
                                     BlendMode.darken)),
                           ),
                           child: Stack(
                             children: [
                               Positioned(
-                                  bottom: 16.h,
+                                  bottom: 25.h,
                                   right: 16.w,
                                   child: adIndexItem(
                                       total: 2, currentIdx: index + 1))
