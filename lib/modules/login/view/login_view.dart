@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //카카오 로그인
+
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../util/const/style/global_color.dart';
@@ -68,12 +70,7 @@ class LoginScreen extends GetView<LoginController> {
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '카카오 로그인',
-              style: TextStyle(
-                color: AppColors.black,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Apple SD Gothic Neo',
-              ),
+              style: AppTextStyles.subtitle2Bold14.copyWith(fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
           ],
@@ -102,12 +99,7 @@ class LoginScreen extends GetView<LoginController> {
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '네이버 로그인',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Apple SD Gothic Neo',
-              ),
+              style: AppTextStyles.subtitle2Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
               textAlign: TextAlign.center,
             ),
           ],
@@ -136,12 +128,7 @@ class LoginScreen extends GetView<LoginController> {
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '애플 로그인',
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Apple SD Gothic Neo',
-              ),
+              style: AppTextStyles.subtitle2Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
               textAlign: TextAlign.center,
             ),
           ],
@@ -164,22 +151,11 @@ class LoginScreen extends GetView<LoginController> {
               children: [
                 TextSpan(
                   text: '이미 계정이 있나요? ',
-                  style: TextStyle(
-                    color: AppColors.grey4,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Apple SD Gothic Neo',
-                  ),
+                  style: AppTextStyles.body3Bold12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grey4),
                 ),
                 TextSpan(
                   text: '이메일 로그인',
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Apple SD Gothic Neo',
-                    decoration: TextDecoration.underline,
-                  ),
+                  style: AppTextStyles.body3Bold12.copyWith(color: Colors.black)
                 ),
               ],
             ),

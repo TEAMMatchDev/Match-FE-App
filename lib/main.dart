@@ -6,12 +6,21 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
 
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //kakao SDK 전체추가
+import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
+
 import 'provider/routes/pages.dart';
 import 'util/const/style/global_color.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+
+  // runApp() 호출 전 Flutter SDK 초기화
+  KakaoSdk.init(
+    nativeAppKey: dotenv.env['nativeAppKey'],
+  );
+
   runApp(const MyApp());
 }
 
