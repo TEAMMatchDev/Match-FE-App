@@ -115,8 +115,9 @@ class HomeScreen extends GetView<HomeController> {
                 // 제목
                 CommonSectionHeader(
                     title: '박정은님의 불타는 매치',
-                    //TODO : destination 임시 처리
-                    destination: () async {}),
+                    destination: () async {
+                      await Get.toNamed(Routes.burning_match);
+                    }),
                 SizedBox(
                   height: 180.h,
                   child: ListView.separated(

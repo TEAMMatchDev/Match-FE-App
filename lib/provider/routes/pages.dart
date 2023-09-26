@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/buring_match/binding/burning_match_binding.dart';
-import 'package:match/modules/buring_match/view/burning_match_view.dart';
+import 'package:match/modules/buring_match/view/burning_match_detail_view.dart';
 import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
@@ -71,7 +71,7 @@ class Pages {
     GetPage(
       title: "불타는 매치 화면",
       name: Routes.burning_match,
-      page: () => const BurningMatchScreen(),
+      page: () => const BurningMatchTotalScreen(),
       transition: Transition.noTransition,
       binding: BurningMatchBinding(),
       curve: Curves.easeIn,
