@@ -15,11 +15,12 @@ class AppColors {
   static const Color grey9 = Color(0XFF2F3033);
   static const Color grey10 = Color(0XFF1D1F23);
   static const Color searchBackground = Color(0xFFF7F7F7);
-  static const Color primary100 = Color(0XFFFAE7E3);
+  static const Color searchIcon = Color(0xFF9B9C9F);
+  static const Color divider1 = Color(0XFFF2F2F2);
   static const Color primary300 = Color(0XFFFAA18C);
   static const Color primary500 = Color(0XFFD13F1D);
   static const Color secondary500 = Color(0XFF1F2329);
-  
+
   static const Color kakaoBtn = Color(0xFFFBD821);
   static const Color naverBtn = Color(0xFF03C75A);
   static const Color appleBtn = Color(0xFF000000);
