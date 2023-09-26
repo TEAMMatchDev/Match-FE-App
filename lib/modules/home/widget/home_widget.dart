@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -20,7 +21,7 @@ Widget CommonSectionHeader(
         ),
         GestureDetector(
             onTap: () async {
-              //상세페이지 구현전까지 주석처리
+              //TODO: 상세화면 라우팅 추후 설정
               // await Get.toNamed(destination);
             },
             child: SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"))
@@ -71,77 +72,81 @@ class MyMatchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 180.h,
-      width: 280.w,
-      decoration: BoxDecoration(
-        //radius 수정
-        borderRadius: BorderRadius.circular(10.r),
-        image: DecorationImage(
-            fit: BoxFit.fill,
-            image: NetworkImage(backgroundImg),
-            colorFilter: ColorFilter.mode(
-                //TODO: gradient 적용 detail 수정
-                Colors.black.withOpacity(0.6),
-                BlendMode.darken)),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-              top: 14.h,
-              right: 17.w,
-              child: GestureDetector(
-                  onTap: () {
-                    //TODO: share 기능 구현/ 저장,복사,공유하기 버튼
-                  },
-                  child: SvgPicture.asset(iconDir + "ic_share_16.svg"))),
-          Positioned(
-            bottom: 23.h,
-            left: 23.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: AppTextStyles.body1Regular15.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white,
-                  ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                  Wrap(
-                    spacing: -4,
-                    children:
-                        imgList.map((e) => profileItem(size: 16)).toList(),
-                  ),
-                  SizedBox(
-                    width: 7.w,
-                  ),
+    return GestureDetector(
+      onTap: () {
+        //TODO: 유저 해당 매치 상세보기 page 연결
+      },
+      child: Container(
+        height: 180.h,
+        width: 280.w,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.5, 1],
+            colors: [
+              Color(0x00000099),
+              Color(0x0000001A),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(10.r),
+          image: DecorationImage(
+              fit: BoxFit.fill,
+              image: NetworkImage(backgroundImg),
+              colorFilter: ColorFilter.mode(
+                  //TODO: gradient 적용 detail 수정
+                  Colors.black.withOpacity(0.3),
+                  BlendMode.srcATop)),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+                top: 14.h,
+                right: 17.w,
+                child: GestureDetector(
+                    onTap: () {
+                      //TODO: share 기능 구현/ 저장,복사,공유하기 버튼
+                    },
+                    child: SvgPicture.asset(iconDir + "ic_share_16.svg"))),
+            Positioned(
+              bottom: 23.h,
+              left: 23.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Text(
-                    "${count}명 후원중",
-                    style: AppTextStyles.body3Bold12.copyWith(
+                    title,
+                    style: AppTextStyles.body1Regular15.copyWith(
+                      fontWeight: FontWeight.bold,
                       color: AppColors.white,
                     ),
-                  )
-                ]),
-              ],
-            ),
-          )
-        ],
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                    Wrap(
+                      spacing: -4,
+                      children:
+                          imgList.map((e) => profileItem(size: 16)).toList(),
+                    ),
+                    SizedBox(
+                      width: 7.w,
+                    ),
+                    Text(
+                      "${count}명 후원중",
+                      style: AppTextStyles.body3Bold12.copyWith(
+                        color: AppColors.white,
+                      ),
+                    )
+                  ]),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
 
@@ -171,76 +176,89 @@ class TodayMatchItem extends StatelessWidget {
           fontSize: 12.sp);
       isLike.value = !isLike.value;
     };
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          height: 170.h,
-          width: 130.w,
-          decoration: BoxDecoration(
-            //radius 수정
-            borderRadius: BorderRadius.circular(10.r),
-            image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage(backgroundImg),
-                colorFilter: ColorFilter.mode(
-                    //TODO: gradient 적용 detail 수정
-                    Colors.black.withOpacity(0.6),
-                    BlendMode.darken)),
-          ),
-          child: Stack(
-            children: [
-              Obx(
-                () => Positioned(
-                    right: 12.w,
-                    top: 12.h,
-                    child: isLike.value
-                        ? GestureDetector(
-                            onTap: onLikeTap,
-                            child: SvgPicture.asset(
-                                iconDir + "ic_like_able_24.svg"))
-                        : GestureDetector(
-                            onTap: onLikeTap,
-                            child: SvgPicture.asset(
-                                iconDir + "ic_like_disable_24.svg"))),
+    return GestureDetector(
+      onTap: () {
+        //TODO: add route
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 170.h,
+            width: 130.w,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.5, 1],
+                colors: [
+                  Color(0x00000099),
+                  Color(0x0000001A),
+                ],
               ),
-              Positioned(
-                  bottom: 14.h,
-                  left: 14.w,
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          //TODO: boxfit.fill로 변경
-                          //TODO: 테두리 하얀색으로 변경
-                          profileItem(),
-                          Text(
-                            "+${count}",
-                            style: AppTextStyles.subtitle3Bold13
-                                .copyWith(color: AppColors.white),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Text(organization,
-                          style: AppTextStyles.subtitle3Bold13.copyWith(
-                            color: AppColors.white,
-                          )),
-                    ],
-                  ))
-            ],
+              borderRadius: BorderRadius.circular(10.r),
+              image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage(backgroundImg),
+                  colorFilter: ColorFilter.mode(
+                      //TODO: gradient 적용 detail 수정
+                      Colors.black.withOpacity(0.3),
+                      BlendMode.srcATop)),
+            ),
+            child: Stack(
+              children: [
+                Obx(
+                  () => Positioned(
+                      right: 12.w,
+                      top: 12.h,
+                      child: isLike.value
+                          ? GestureDetector(
+                              onTap: onLikeTap,
+                              child: SvgPicture.asset(
+                                  iconDir + "ic_like_able_24.svg"))
+                          : GestureDetector(
+                              onTap: onLikeTap,
+                              child: SvgPicture.asset(
+                                  iconDir + "ic_like_disable_24.svg"))),
+                ),
+                Positioned(
+                    bottom: 14.h,
+                    left: 14.w,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            //TODO: boxfit.fill로 변경
+                            //TODO: 테두리 하얀색으로 변경
+                            profileItem(),
+                            Text(
+                              "+${count}",
+                              style: AppTextStyles.subtitle3Bold13
+                                  .copyWith(color: AppColors.white),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(organization,
+                            style: AppTextStyles.subtitle3Bold13.copyWith(
+                              color: AppColors.white,
+                            )),
+                      ],
+                    ))
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 13.h,
-        ),
-        Text(
-          title,
-          style: AppTextStyles.subtitle3Bold13,
-        )
-      ],
+          SizedBox(
+            height: 13.h,
+          ),
+          Text(
+            title,
+            style: AppTextStyles.subtitle3Bold13,
+          )
+        ],
+      ),
     );
   }
 }
@@ -261,40 +279,47 @@ class OrganizationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 99.h,
-      width: 220.w,
-      padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 23.w),
-      decoration: BoxDecoration(
-        //radius 수정
-        borderRadius: BorderRadius.circular(10.r),
-        image: DecorationImage(
-          image: NetworkImage(backgroundImg),
-          colorFilter:
-              ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.darken),
+    return GestureDetector(
+      onTap: () {
+        //TODO: add route
+      },
+      child: Container(
+        height: 99.h,
+        width: 220.w,
+        padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 23.w),
+        decoration: BoxDecoration(
+          //radius 수정
+          borderRadius: BorderRadius.circular(10.r),
+          image: DecorationImage(
+            image: NetworkImage(backgroundImg),
+            colorFilter:
+                ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.src),
+          ),
         ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
+            title,
+            style:
+                AppTextStyles.subtitle1Bold15.copyWith(color: AppColors.white),
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+          Row(
+            children: [
+              SvgPicture.asset("${iconDir}ic_comment_16.svg"),
+              SizedBox(
+                width: 4.w,
+              ),
+              Text(
+                comment,
+                style:
+                    AppTextStyles.body3Bold12.copyWith(color: AppColors.white),
+              )
+            ],
+          )
+        ]),
       ),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          title,
-          style: AppTextStyles.subtitle1Bold15.copyWith(color: AppColors.white),
-        ),
-        SizedBox(
-          height: 12.h,
-        ),
-        Row(
-          children: [
-            SvgPicture.asset("${iconDir}ic_comment_16.svg"),
-            SizedBox(
-              width: 4.w,
-            ),
-            Text(
-              comment,
-              style: AppTextStyles.body3Bold12.copyWith(color: AppColors.white),
-            )
-          ],
-        )
-      ]),
     );
   }
 }
