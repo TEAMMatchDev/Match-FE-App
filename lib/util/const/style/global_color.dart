@@ -19,4 +19,8 @@ class AppColors {
   static const Color primary300 = Color(0XFFFAA18C);
   static const Color primary500 = Color(0XFFD13F1D);
   static const Color secondary500 = Color(0XFF1F2329);
+  
+  static const Color kakaoBtn = Color(0xFFFBD821);
+  static const Color naverBtn = Color(0xFF03C75A);
+  static const Color appleBtn = Color(0xFF000000);
 }
