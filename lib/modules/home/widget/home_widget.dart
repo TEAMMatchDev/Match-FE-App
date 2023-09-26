@@ -381,7 +381,7 @@ class TodayMatchList extends StatelessWidget {
       },
       child: Container(
         height: 180.h,
-        width: 280.w,
+        width: 320.w,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
             begin: Alignment.topCenter,
