@@ -86,6 +86,7 @@ class HomeScreen extends GetView<HomeController> {
               height: 4.h,
             ),
             //4. 자신의 매치 section
+            //TODO: 매치 내역이 없다면 해당 섹션을 보여주지 않음
             // 제목
             CommonSectionHeader(
                 title: '박정은님의 불타는 매치',

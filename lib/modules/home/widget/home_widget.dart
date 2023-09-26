@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
@@ -64,7 +65,11 @@ class MyMatchItem extends StatelessWidget {
           Positioned(
               top: 14.h,
               right: 17.w,
-              child: SvgPicture.asset(iconDir + "ic_share_16.svg")),
+              child: GestureDetector(
+                  onTap: () {
+                    //TODO: share 기능 구현/ 저장,복사,공유하기 버튼
+                  },
+                  child: SvgPicture.asset(iconDir + "ic_share_16.svg"))),
           Positioned(
             bottom: 23.h,
             left: 23.w,
@@ -122,6 +127,15 @@ class TodayMatchItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var onLikeTap = () {
+      var likeToastMsg = "매치를 찜하셨어요!";
+      var dislikeToastMsg = "찜 내역에서 삭제됩니다!";
+      Fluttertoast.showToast(
+          msg: isLike.value ? dislikeToastMsg : likeToastMsg,
+          //design 확인
+          fontSize: 12.sp);
+      isLike.value = !isLike.value;
+    };
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -148,15 +162,11 @@ class TodayMatchItem extends StatelessWidget {
                     top: 12.h,
                     child: isLike.value
                         ? GestureDetector(
-                            onTap: () {
-                              isLike.value = false;
-                            },
+                            onTap: onLikeTap,
                             child: SvgPicture.asset(
                                 iconDir + "ic_like_able_24.svg"))
                         : GestureDetector(
-                            onTap: () {
-                              isLike.value = true;
-                            },
+                            onTap: onLikeTap,
                             child: SvgPicture.asset(
                                 iconDir + "ic_like_disable_24.svg"))),
               ),
