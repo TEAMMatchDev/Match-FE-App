@@ -99,7 +99,9 @@ class HomeScreen extends GetView<HomeController> {
                 itemCount: 2,
                 itemBuilder: (context, index) {
                   return MyMatchItem(
-                      title: "후원 함께할 분, 들어와요!", count: 15, imgList: ["test"]);
+                      title: "후원 함께할 분, 들어와요!",
+                      count: 15,
+                      imgList: ["test", "test", "test"]);
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(

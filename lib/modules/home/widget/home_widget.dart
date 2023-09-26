@@ -29,7 +29,13 @@ Widget CommonSectionHeader(
   );
 }
 
-///* 나의 매치 section
+///*서버 통신 로직 구현전에 사용할 임시 프로필이미지
+const String tmpProfileImg =
+    "http://k.kakaocdn.net/dn/bq8XQY/btsjqweTr1J/c0kplPW8eo8iOCeoYTBGxK/img_640x640.jpg";
+const String tmpBackgroundImg =
+    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
+
+///* 나의 매치(불타는 매치) section
 class MyMatchItem extends StatelessWidget {
   final String title;
   final int count;
@@ -40,8 +46,7 @@ class MyMatchItem extends StatelessWidget {
       required this.title,
       required this.count,
       required this.imgList,
-      //TODO: NetworkImage(backgroundImg)로 변경
-      this.backgroundImg = imgDir + "iv_test_ad_320.png"});
+      this.backgroundImg = tmpBackgroundImg});
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +58,11 @@ class MyMatchItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.r),
         image: DecorationImage(
             fit: BoxFit.fill,
-            //TODO: NetworkImage(backgroundImg)로 변경
-            image: AssetImage(imgDir + "iv_test_ad_320.png"),
+            image: NetworkImage(backgroundImg),
             colorFilter: ColorFilter.mode(
                 //TODO: gradient 적용 detail 수정
                 Colors.black.withOpacity(0.6),
-                BlendMode.saturation)),
+                BlendMode.darken)),
       ),
       child: Stack(
         children: [
@@ -86,10 +90,11 @@ class MyMatchItem extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                Row(children: [
-                  //TODO: 프로필
-                  Stack(
-                    children: [],
+                Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                  Wrap(
+                    spacing: -4,
+                    children:
+                        imgList.map((e) => profileItem(size: 16)).toList(),
                   ),
                   SizedBox(
                     width: 7.w,
@@ -110,12 +115,12 @@ class MyMatchItem extends StatelessWidget {
   }
 }
 
+///*오늘의 매치 section
 class TodayMatchItem extends StatelessWidget {
   final String title;
   final String organization;
   final int count;
   final Rx<bool> isLike;
-  //TODO: NetworkImage(backgroundImg)로 변경
   final String backgroundImg;
   const TodayMatchItem(
       {super.key,
@@ -123,7 +128,7 @@ class TodayMatchItem extends StatelessWidget {
       required this.organization,
       required this.count,
       required this.isLike,
-      this.backgroundImg = imgDir + "iv_test_ad_320.png"});
+      this.backgroundImg = tmpBackgroundImg});
 
   @override
   Widget build(BuildContext context) {
@@ -147,12 +152,11 @@ class TodayMatchItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r),
             image: DecorationImage(
                 fit: BoxFit.fill,
-                //TODO: NetworkImage(backgroundImg)로 변경
-                image: AssetImage(imgDir + "iv_test_ad_320.png"),
+                image: NetworkImage(backgroundImg),
                 colorFilter: ColorFilter.mode(
                     //TODO: gradient 적용 detail 수정
                     Colors.black.withOpacity(0.6),
-                    BlendMode.saturation)),
+                    BlendMode.darken)),
           ),
           child: Stack(
             children: [
@@ -179,10 +183,7 @@ class TodayMatchItem extends StatelessWidget {
                         children: [
                           //TODO: boxfit.fill로 변경
                           //TODO: 테두리 하얀색으로 변경
-                          CircleAvatar(
-                            child: Image.asset(imgDir + "iv_test_ad_320.png"),
-                            radius: 11.r,
-                          ),
+                          profileItem(),
                           Text(
                             "+${count}",
                             style: AppTextStyles.subtitle3Bold13
@@ -214,6 +215,7 @@ class TodayMatchItem extends StatelessWidget {
   }
 }
 
+///*꼭 맞는 기부처 추천 section
 class OrganizationItem extends StatelessWidget {
   final String title;
   final String comment;
@@ -224,7 +226,8 @@ class OrganizationItem extends StatelessWidget {
       required this.title,
       required this.comment,
       //TODO: NetworkImage(backgroundImg)로 변경
-      this.backgroundImg = imgDir + "iv_test_ad_320.png"});
+      this.backgroundImg =
+          "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png"});
 
   @override
   Widget build(BuildContext context) {
@@ -236,9 +239,9 @@ class OrganizationItem extends StatelessWidget {
         //radius 수정
         borderRadius: BorderRadius.circular(10.r),
         image: DecorationImage(
-          image: AssetImage(imgDir + "iv_test_ad_320.png"),
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.3), BlendMode.srcOver),
+          image: NetworkImage(backgroundImg),
+          colorFilter:
+              ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.darken),
         ),
       ),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -264,4 +267,24 @@ class OrganizationItem extends StatelessWidget {
       ]),
     );
   }
+}
+
+Widget profileItem({String profileUrl = tmpProfileImg, double size = 22}) {
+  return Container(
+    width: size,
+    height: size,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(
+        color: AppColors.white,
+        width: 1.375,
+      ),
+    ),
+    child: ClipOval(
+      child: Image.network(
+        tmpProfileImg,
+        fit: BoxFit.fill,
+      ),
+    ),
+  );
 }
