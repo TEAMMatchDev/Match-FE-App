@@ -97,9 +97,8 @@ class HomeScreen extends GetView<HomeController> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 2,
                 itemBuilder: (context, index) {
-                  return Container(
-                      decoration: BoxDecoration(color: AppColors.black),
-                      child: Text("text"));
+                  return MyMatchItem(
+                      title: "후원 함께할 분, 들어와요!", count: 15, imgList: ["test"]);
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(
@@ -123,6 +122,7 @@ class HomeScreen extends GetView<HomeController> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 2,
                 itemBuilder: (context, index) {
+                  //TODO: 현재 같은 변수를 사용하여 좋아요가 동기화 됨
                   return TodayMatchItem(
                       title: "후원 함께할분!",
                       organization: "후원처명",

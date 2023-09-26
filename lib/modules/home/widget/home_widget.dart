@@ -28,6 +28,79 @@ Widget CommonSectionHeader(
   );
 }
 
+///* 나의 매치 section
+class MyMatchItem extends StatelessWidget {
+  final String title;
+  final int count;
+  final List<String> imgList;
+  const MyMatchItem(
+      {super.key,
+      required this.title,
+      required this.count,
+      required this.imgList});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 180.h,
+      width: 280.w,
+      decoration: BoxDecoration(
+        //radius 수정
+        borderRadius: BorderRadius.circular(10.r),
+        image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage(imgDir + "iv_test_ad_320.png"),
+            colorFilter: ColorFilter.mode(
+                //TODO: gradient 적용 detail 수정
+                Colors.black.withOpacity(0.6),
+                BlendMode.saturation)),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+              top: 14.h,
+              right: 17.w,
+              child: SvgPicture.asset(iconDir + "ic_share_16.svg")),
+          Positioned(
+            bottom: 23.h,
+            left: 23.w,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppTextStyles.body1Regular15.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.white,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(children: [
+                  //TODO: 프로필
+                  Stack(
+                    children: [],
+                  ),
+                  SizedBox(
+                    width: 7.w,
+                  ),
+                  Text(
+                    "${count}명 후원중",
+                    style: AppTextStyles.body3Bold12.copyWith(
+                      color: AppColors.white,
+                    ),
+                  )
+                ]),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class TodayMatchItem extends StatelessWidget {
   final String title;
   final String organization;
