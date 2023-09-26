@@ -29,27 +29,29 @@ class TodayMatchScreen extends GetView<HomeController> {
           separatorBuilder: (context, index) => SizedBox(height: 12.h),
           itemCount: 5,
           itemBuilder: (context, index) {
-            return Wrap(
-              direction: Axis.vertical,
-              spacing: 12.h,
-              children: [
-                TodayMatchList(
-                    count: 5,
-                    imgList: ["df", "fds"],
-                    isLike: controller.isLike),
-                TypeChip(type: "분야"),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("후원 함께할 분, 들어와요! 아직 따끈한 후원 중!",
-                        style: AppTextStyles.subtitle1Bold15),
-                    Text("후원처명",
-                        style: AppTextStyles.body2Regular13.copyWith(
-                          color: AppColors.grey7,
-                        )),
-                  ],
-                ),
-              ],
+            return Obx(
+              () => Wrap(
+                direction: Axis.vertical,
+                spacing: 12.h,
+                children: [
+                  TodayMatchList(
+                      count: 5,
+                      imgList: ["df", "fds"],
+                      isLike: controller.isLike),
+                  TypeChip(type: "분야"),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("후원 함께할 분, 들어와요! 아직 따끈한 후원 중!",
+                          style: AppTextStyles.subtitle1Bold15),
+                      Text("후원처명",
+                          style: AppTextStyles.body2Regular13.copyWith(
+                            color: AppColors.grey7,
+                          )),
+                    ],
+                  ),
+                ],
+              ),
             );
           },
         ),

@@ -33,15 +33,15 @@ const String tmpProfileImg =
 const String tmpBackgroundImg =
     "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
 var onLikeTap = ({
-  required Rx<bool> isLike,
+  required bool isLike,
 }) {
   var likeToastMsg = "매치를 찜하셨어요!";
   var dislikeToastMsg = "찜 내역에서 삭제됩니다!";
   Fluttertoast.showToast(
-      msg: isLike.value ? dislikeToastMsg : likeToastMsg,
+      msg: isLike ? dislikeToastMsg : likeToastMsg,
       //design 확인
       fontSize: 12.sp);
-  isLike.value = !isLike.value;
+  isLike = !isLike;
 };
 
 ///*광고 section 순서 표시하는 위젯
@@ -271,10 +271,10 @@ class LikeIcon extends StatelessWidget {
         top: topPosition.h,
         child: isLike.value
             ? GestureDetector(
-                onTap: onLikeTap(isLike: isLike),
+                onTap: onLikeTap(isLike: isLike.value),
                 child: SvgPicture.asset(iconDir + "ic_like_able_24.svg"))
             : GestureDetector(
-                onTap: onLikeTap(isLike: isLike),
+                onTap: onLikeTap(isLike: isLike.value),
                 child: SvgPicture.asset(iconDir + "ic_like_disable_24.svg")));
   }
 }
