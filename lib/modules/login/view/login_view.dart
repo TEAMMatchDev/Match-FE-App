@@ -15,9 +15,11 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center( // Center the Column
+      body: Center(
+        // Center the Column
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Center the children vertically
+          mainAxisAlignment:
+              MainAxisAlignment.center, // Center the children vertically
           children: [
             SizedBox(
               height: 150.h,
@@ -48,7 +50,8 @@ class LoginScreen extends GetView<LoginController> {
     );
   }
 
-  @override kakaoLogin() {
+  @override
+  kakaoLogin() {
     return GestureDetector(
       onTap: () {
         Get.toNamed(Routes.home);
@@ -64,7 +67,8 @@ class LoginScreen extends GetView<LoginController> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(width: 24.w), // Add some spacing between the icon and text
-            SvgPicture.asset(iconDir + "login/ic_kakao_19.svg"), // Include your SVG here
+            SvgPicture.asset(
+                iconDir + "login/ic_kakao_19.svg"), // Include your SVG here
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '카카오 로그인',
@@ -82,10 +86,11 @@ class LoginScreen extends GetView<LoginController> {
     );
   }
 
-  @override naverLogin() {
+  @override
+  naverLogin() {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(Routes.home);
+        Get.toNamed(Routes.main);
       },
       child: Container(
         width: 300.w,
@@ -98,7 +103,8 @@ class LoginScreen extends GetView<LoginController> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(width: 24.w), // Add some spacing between the icon and text
-            SvgPicture.asset(iconDir + "login/ic_naver_16.svg"), // Include your SVG here
+            SvgPicture.asset(
+                iconDir + "login/ic_naver_16.svg"), // Include your SVG here
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '네이버 로그인',
@@ -116,7 +122,8 @@ class LoginScreen extends GetView<LoginController> {
     );
   }
 
-  @override appleLogin() {
+  @override
+  appleLogin() {
     return GestureDetector(
       onTap: () {
         Get.toNamed(Routes.home);
@@ -132,7 +139,8 @@ class LoginScreen extends GetView<LoginController> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(width: 24.w), // Add some spacing between the icon and text
-            SvgPicture.asset(iconDir + "login/ic_apple_20.svg"), // Include your SVG here
+            SvgPicture.asset(
+                iconDir + "login/ic_apple_20.svg"), // Include your SVG here
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '애플 로그인',
@@ -150,7 +158,8 @@ class LoginScreen extends GetView<LoginController> {
     );
   }
 
-  @override mailLogin() {
+  @override
+  mailLogin() {
     return GestureDetector(
       onTap: () {
         Get.toNamed(Routes.home);
@@ -188,7 +197,6 @@ class LoginScreen extends GetView<LoginController> {
       ),
     );
   }
-
 }
 
 
