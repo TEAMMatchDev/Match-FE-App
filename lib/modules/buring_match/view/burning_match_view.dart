@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
+import 'package:match/model/match_history/match_history.dart';
 import 'package:match/modules/buring_match/controller/burning_match_controller.dart';
 import 'package:match/modules/buring_match/widget/burning_match_widget.dart';
+import 'package:match/modules/buring_match/widget/match_record_widget.dart';
 import 'package:match/modules/home/widget/home_widget.dart';
 import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/style/global_color.dart';
@@ -17,9 +20,14 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: 라우팅 수정전 임시 controller init
+    Get.put(BurningMatchController());
     return Scaffold(
       appBar: CommonAppBar.basic("후원타이틀"),
       body: ListView(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        physics: const BouncingScrollPhysics(),
         children: [
           //1. 후원타이틀
           Padding(
@@ -42,6 +50,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ///5-7-1. 매치 결제 정보
                 ///*[BurningMatchCredit]화면에서 사용된 결제내역 위젯 재사용
@@ -73,6 +82,34 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                     ],
                   ),
                 ),
+                //매치 기록 제목
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 30.h),
+                  child: Text(
+                    "매치 기록",
+                    style: AppTextStyles.subtitle1Bold15,
+                  ),
+                ),
+                // ListView.separated(
+                //     shrinkWrap: false,
+                //     itemBuilder: (context, index) {
+                //       final history = controller.matchHistories[index];
+                //       return MatchRecord(
+                //         isFinal: index == controller.matchHistories.length
+                //             ? true
+                //             : false,
+                //         title: history.histories,
+                //         date: history.historyDate,
+                //         imgList: history.donationHistoryImages,
+                //       );
+                //     },
+                //     separatorBuilder: (context, index) {
+                //       return SizedBox(
+                //         height: 12.h,
+                //       );
+                //     },
+                //     itemCount: controller.matchHistories.length),
+                // 매치기록
               ],
             ),
           ),
