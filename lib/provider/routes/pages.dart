@@ -9,6 +9,8 @@ import 'package:match/modules/mypage/binding/mypage_binding.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
+import 'package:match/modules/payment/binding/payment_binding.dart';
+import 'package:match/modules/payment/view/payment_view.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
 import 'package:match/modules/splash/view/splash_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
@@ -85,6 +87,15 @@ class Pages {
             page: () => const BurningMatchScreen(),
             transition: Transition.noTransition,
             binding: BurningMatchBinding(),
+            curve: Curves.easeIn,
+            popGesture: false,
+          ),
+          GetPage(
+            title: "결제 내역",
+            name: Routes.pay,
+            page: () => const PaymentScreen(),
+            transition: Transition.noTransition,
+            binding: PaymentBinding(),
             curve: Curves.easeIn,
             popGesture: false,
           ),

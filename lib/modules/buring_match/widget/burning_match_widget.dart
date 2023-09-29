@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:match/modules/payment/view/payment_view.dart';
 import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../provider/routes/routes.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/const/style/global_color.dart';
 
@@ -24,13 +27,18 @@ class MatchPayment extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("매치 결제 정보", style: AppTextStyles.subtitle1Bold15),
-            Row(
-              children: [
-                Text("결제 내역",
-                    style: AppTextStyles.subtitle2Bold14
-                        .copyWith(color: AppColors.grey6)),
-                SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"),
-              ],
+            GestureDetector(
+              onTap: () {
+                Get.to(() => PaymentScreen());
+              },
+              child: Row(
+                children: [
+                  Text("결제 내역",
+                      style: AppTextStyles.subtitle2Bold14
+                          .copyWith(color: AppColors.grey6)),
+                  SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"),
+                ],
+              ),
             ),
           ],
         ),
