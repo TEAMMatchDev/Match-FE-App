@@ -189,38 +189,39 @@ class HomeScreen extends GetView<HomeController> {
             height: 10.h,
           ),
           //6. 기부처 추천 section
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
-            child: Column(
-              children: [
-                CommonSectionHeader(
-                    title: '박레이님께 꼭 맞는 기부처 추천',
-                    //TODO : destination 임시 처리
-                    destination: () async {}),
-                SizedBox(
-                  height: 99.h,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 2,
-                    itemBuilder: (context, index) {
-                      return OrganizationItem(
-                        title: "test",
-                        comment: "testest",
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        width: 20.w,
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 25.h,
-                )
-              ],
-            ),
-          ),
+          //기획 변경으로 인해 임시로 주석 처리
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
+          //   child: Column(
+          //     children: [
+          //       CommonSectionHeader(
+          //           title: '박레이님께 꼭 맞는 기부처 추천',
+          //           //TODO : destination 임시 처리
+          //           destination: () async {}),
+          //       SizedBox(
+          //         height: 99.h,
+          //         child: ListView.separated(
+          //           scrollDirection: Axis.horizontal,
+          //           itemCount: 2,
+          //           itemBuilder: (context, index) {
+          //             return OrganizationItem(
+          //               title: "test",
+          //               comment: "testest",
+          //             );
+          //           },
+          //           separatorBuilder: (context, index) {
+          //             return SizedBox(
+          //               width: 20.w,
+          //             );
+          //           },
+          //         ),
+          //       ),
+          //       SizedBox(
+          //         height: 25.h,
+          //       )
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

@@ -8,6 +8,54 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/const/style/global_color.dart';
 
+///<h2>결제내역을 그리는 레이아웃 위젯</h2>
+///*[BurningMatchCredit], [BurningMatchScreen]에서 사용되는 위젯<br/>
+class MatchPayment extends StatelessWidget {
+  final int day;
+  final int price;
+  const MatchPayment({super.key, required this.day, required this.price});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("매치 결제 정보", style: AppTextStyles.subtitle1Bold15),
+            Row(
+              children: [
+                Text("결제 내역",
+                    style: AppTextStyles.subtitle2Bold14
+                        .copyWith(color: AppColors.grey6)),
+                SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text("후원 금액",
+                style: AppTextStyles.subtitle2Bold14
+                    .copyWith(color: AppColors.grey6)),
+            SizedBox(
+              width: 15.w,
+            ),
+            Text("매월 • ${day}일 • ${price}원",
+                style: AppTextStyles.subtitle2Bold14
+                    .copyWith(color: AppColors.grey7)),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
 ///<h2>불타는 진행중인 매치 목록 item </h2>
 ///[BurningMatchPayScreen]에서 사용되는 위젯<br/>
 ///* 5-8 api 사용
@@ -55,36 +103,9 @@ class BurningMatchCredit extends StatelessWidget {
             color: AppColors.divider1,
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("매치 결제 정보", style: AppTextStyles.subtitle1Bold15),
-            Row(
-              children: [
-                Text("결제 내역",
-                    style: AppTextStyles.subtitle2Bold14
-                        .copyWith(color: AppColors.grey6)),
-                SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 20.h,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text("후원 금액",
-                style: AppTextStyles.subtitle2Bold14
-                    .copyWith(color: AppColors.grey6)),
-            SizedBox(
-              width: 15.w,
-            ),
-            Text("매월 • ${day}일 ${price}원",
-                style: AppTextStyles.subtitle2Bold14
-                    .copyWith(color: AppColors.grey7)),
-          ],
+        MatchPayment(
+          day: day,
+          price: price,
         ),
         SizedBox(
           height: 20.h,
