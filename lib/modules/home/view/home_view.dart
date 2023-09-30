@@ -43,7 +43,7 @@ class HomeScreen extends GetView<HomeController> {
                 //2. 검색 section
                 GestureDetector(
                   onTap: () {
-                    //TODO: move search View
+                    Get.toNamed(Routes.home + Routes.search);
                   },
                   child: Container(
                     padding:

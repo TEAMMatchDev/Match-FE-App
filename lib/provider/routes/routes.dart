@@ -16,6 +16,9 @@ abstract class _Paths {
   /// 홈 화면
   static const home = "/home";
 
+  /// 검색 화면
+  static const search = "/search";
+
   ///불타는 매치 화면
   static const burning_match = "/burning_match";
 
@@ -51,6 +54,9 @@ abstract class Routes {
 
   /// 홈 화면
   static const home = _Paths.home;
+
+  /// 검색 화면
+  static const search = _Paths.search;
 
   /// 불타는 매치 화면
   static const burning_match = _Paths.burning_match;

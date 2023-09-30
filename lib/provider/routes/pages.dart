@@ -22,6 +22,8 @@ import '../../modules/home/binding/home_binding.dart';
 import '../../modules/home/view/home_view.dart';
 import '../../modules/main/binding/main_binding.dart';
 import '../../modules/main/view/main_view.dart';
+import '../../modules/search/binding/search_binding.dart';
+import '../../modules/search/view/search_view.dart';
 import 'routes.dart';
 
 class Pages {
@@ -78,6 +80,16 @@ class Pages {
             transition: Transition.noTransition,
             //TODO:binding 교체
             binding: BurningMatchBinding(),
+            curve: Curves.easeIn,
+            popGesture: false,
+          ),
+          GetPage(
+            title: "검색 화면",
+            name: Routes.search,
+            page: () => const SearchScreen(),
+            transition: Transition.noTransition,
+            //TODO:binding 교체
+            binding: SearchBinding(),
             curve: Curves.easeIn,
             popGesture: false,
           ),
