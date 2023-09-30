@@ -15,6 +15,21 @@ class PaymentController extends GetxController {
         payStatus: "결제완료",
         payMethod: "신용카드",
         amount: "1,000원"),
+    Pay(
+        payDate: "2023.8.31",
+        payStatus: "결제완료",
+        payMethod: "신용카드",
+        amount: "1,000원"),
+    Pay(
+        payDate: "2023.8.31",
+        payStatus: "결제완료",
+        payMethod: "신용카드",
+        amount: "1,000원"),
+    Pay(
+        payDate: "2023.8.31",
+        payStatus: "결제완료",
+        payMethod: "신용카드",
+        amount: "1,000원"),
   ].obs;
   @override
   void onInit() {

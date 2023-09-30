@@ -18,39 +18,38 @@ class PaymentScreen extends GetView<PaymentController> {
       appBar: CommonAppBar.basic("결제 내역"),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 30.h),
-        child: ListView(
-          shrinkWrap: true,
+        child: Column(
           children: [
-            ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: ((context, index) {
-                  return PaymentListTile(
-                    pay: controller.payList[index],
-                  );
-                }),
-                separatorBuilder: ((context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 22.h),
-                    child: Divider(
-                      color: AppColors.divider1,
-                      thickness: 1.h,
-                    ),
-                  );
-                }),
-                itemCount: controller.payList.length),
-            SizedBox(
-              height: 20.h,
+            Expanded(
+              child: ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: ((context, index) {
+                    return PaymentListTile(
+                      pay: controller.payList[index],
+                    );
+                  }),
+                  separatorBuilder: ((context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 22.h),
+                      child: Divider(
+                        color: AppColors.divider1,
+                        thickness: 1.h,
+                      ),
+                    );
+                  }),
+                  itemCount: controller.payList.length),
             ),
             //TODO: fix 0dp
-            Expanded(child: Container()),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ).copyWith(bottom: 24.h),
               child: CommonButton.payment(
                   onTap: (() async {
                     //TODO: 결제방법 변경
                   }),
                   text: "결제 방법 변경"),
-            )
+            ),
           ],
         ),
       ),

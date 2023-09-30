@@ -7,12 +7,14 @@ import '../const/style/global_text_styles.dart';
 class CommonButton extends StatelessWidget {
   final Future<void> Function() onTap;
   final String text;
+  final int textSize;
   final Color backgroundColor;
   final Color textColor;
   const CommonButton(
       {super.key,
       required this.onTap,
       required this.text,
+      this.textSize = 14,
       this.backgroundColor = AppColors.white,
       this.textColor = AppColors.grey9});
 
@@ -28,7 +30,8 @@ class CommonButton extends StatelessWidget {
               border: Border.all(color: AppColors.grey1),
               borderRadius: BorderRadius.circular(10.r)),
           child: Text(text,
-              style: AppTextStyles.subtitle2Bold14.copyWith(color: textColor)),
+              style: AppTextStyles.subtitle2Bold14
+                  .copyWith(color: textColor, fontSize: textSize.sp)),
         ));
   }
 
@@ -47,6 +50,7 @@ class CommonButton extends StatelessWidget {
       text: "결제 방법 변경",
       backgroundColor: AppColors.black,
       textColor: AppColors.white,
+      textSize: 16,
     );
   }
 }
