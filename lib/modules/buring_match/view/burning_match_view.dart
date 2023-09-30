@@ -11,6 +11,7 @@ import 'package:match/modules/home/widget/home_widget.dart';
 import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:timeline_tile_nic/timeline_tile.dart';
 
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/global_variable.dart';
@@ -90,25 +91,21 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                     style: AppTextStyles.subtitle1Bold15,
                   ),
                 ),
-                // ListView.separated(
-                //     shrinkWrap: false,
-                //     itemBuilder: (context, index) {
-                //       final history = controller.matchHistories[index];
-                //       return MatchRecord(
-                //         isFinal: index == controller.matchHistories.length
-                //             ? true
-                //             : false,
-                //         title: history.histories,
-                //         date: history.historyDate,
-                //         imgList: history.donationHistoryImages,
-                //       );
-                //     },
-                //     separatorBuilder: (context, index) {
-                //       return SizedBox(
-                //         height: 12.h,
-                //       );
-                //     },
-                //     itemCount: controller.matchHistories.length),
+                ListView.separated(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final history = controller.matchHistories[index];
+                      return MatchRecord(
+                          title: history.histories,
+                          date: history.historyDate,
+                          imgList: history.donationHistoryImages);
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        height: 12.h,
+                      );
+                    },
+                    itemCount: controller.matchHistories.length),
                 // 매치기록
               ],
             ),
