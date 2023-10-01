@@ -39,7 +39,6 @@ class PaymentScreen extends GetView<PaymentController> {
                   }),
                   itemCount: controller.payList.length),
             ),
-            //TODO: fix 0dp
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 10.w,
