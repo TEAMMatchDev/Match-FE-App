@@ -116,7 +116,7 @@ class Pages {
         ]),
     GetPage(
       title: "후원 상세내역",
-      name: Routes.burning_match_pay,
+      name: Routes.project,
       page: () => const ProjectScreen(),
       transition: Transition.noTransition,
       //TODO:binding 교체

@@ -26,13 +26,13 @@ class TodayMatchScreen extends GetView<HomeController> {
       appBar: CommonAppBar.basic("오늘의 후원"),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
-        child: ListView.separated(
-          separatorBuilder: (context, index) => SizedBox(height: 12.h),
-          itemCount: controller.projectList.length,
-          itemBuilder: (context, index) {
-            final project = controller.projectList[index];
-            return Obx(
-              () => Wrap(
+        child: Obx(
+          () => ListView.separated(
+            separatorBuilder: (context, index) => SizedBox(height: 12.h),
+            itemCount: controller.projectList.length,
+            itemBuilder: (context, index) {
+              final project = controller.projectList[index];
+              return Wrap(
                 direction: Axis.vertical,
                 spacing: 12.h,
                 children: [
@@ -40,6 +40,7 @@ class TodayMatchScreen extends GetView<HomeController> {
                     count: project.totalDonationCnt,
                     imgList: project.userProfileImages,
                     isLike: project.like ? true.obs : false.obs,
+                    projectId: project.projectId,
                   ),
                   TypeChip(
                       type: projectTypeMap[project.kind]?.stateName ?? "동물"),
@@ -54,9 +55,9 @@ class TodayMatchScreen extends GetView<HomeController> {
                     ],
                   ),
                 ],
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

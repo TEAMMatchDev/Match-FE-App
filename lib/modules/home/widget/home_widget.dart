@@ -36,6 +36,10 @@ const String tmpProfileImg =
 const String tmpBackgroundImg =
     "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
 
+///색상있는 버전
+const String tmpBackgroundImg2 =
+    "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png";
+
 ///*광고 section 순서 표시하는 위젯
 Widget adIndexItem({required int total, required int currentIdx}) {
   return Container(
@@ -152,6 +156,7 @@ class MyMatchItem extends StatelessWidget {
 }
 
 ///*오늘의 매치 section
+///[HomeScreen]에서 사용되는 위젯<br/>
 class TodayMatchItem extends StatelessWidget {
   final String title;
   final String organization;
@@ -252,66 +257,66 @@ class TodayMatchItem extends StatelessWidget {
   }
 }
 
-///*꼭 맞는 기부처 추천 section
-class OrganizationItem extends StatelessWidget {
-  final String title;
-  final String comment;
-  //TODO: NetworkImage(backgroundImg)로 변경
-  final String backgroundImg;
-  const OrganizationItem(
-      {super.key,
-      required this.title,
-      required this.comment,
-      //TODO: NetworkImage(backgroundImg)로 변경
-      this.backgroundImg =
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png"});
+// ///*꼭 맞는 기부처 추천 section
+// class OrganizationItem extends StatelessWidget {
+//   final String title;
+//   final String comment;
+//   //TODO: NetworkImage(backgroundImg)로 변경
+//   final String backgroundImg;
+//   const OrganizationItem(
+//       {super.key,
+//       required this.title,
+//       required this.comment,
+//       //TODO: NetworkImage(backgroundImg)로 변경
+//       this.backgroundImg =
+//           "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png"});
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        //TODO: add route
-      },
-      child: Container(
-        height: 99.h,
-        width: 220.w,
-        padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 23.w),
-        decoration: BoxDecoration(
-          //radius 수정
-          borderRadius: BorderRadius.circular(10.r),
-          image: DecorationImage(
-            image: NetworkImage(backgroundImg),
-            colorFilter:
-                ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.src),
-          ),
-        ),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(
-            title,
-            style:
-                AppTextStyles.subtitle1Bold15.copyWith(color: AppColors.white),
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          Row(
-            children: [
-              SvgPicture.asset("${iconDir}ic_comment_16.svg"),
-              SizedBox(
-                width: 4.w,
-              ),
-              Text(
-                comment,
-                style:
-                    AppTextStyles.body3Bold12.copyWith(color: AppColors.white),
-              )
-            ],
-          )
-        ]),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: () {
+//         //TODO: add route
+//       },
+//       child: Container(
+//         height: 99.h,
+//         width: 220.w,
+//         padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 23.w),
+//         decoration: BoxDecoration(
+//           //radius 수정
+//           borderRadius: BorderRadius.circular(10.r),
+//           image: DecorationImage(
+//             image: NetworkImage(backgroundImg),
+//             colorFilter:
+//                 ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.src),
+//           ),
+//         ),
+//         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+//           Text(
+//             title,
+//             style:
+//                 AppTextStyles.subtitle1Bold15.copyWith(color: AppColors.white),
+//           ),
+//           SizedBox(
+//             height: 12.h,
+//           ),
+//           Row(
+//             children: [
+//               SvgPicture.asset("${iconDir}ic_comment_16.svg"),
+//               SizedBox(
+//                 width: 4.w,
+//               ),
+//               Text(
+//                 comment,
+//                 style:
+//                     AppTextStyles.body3Bold12.copyWith(color: AppColors.white),
+//               )
+//             ],
+//           )
+//         ]),
+//       ),
+//     );
+//   }
+// }
 
 Widget profileItem({String profileUrl = tmpProfileImg, double size = 22}) {
   return Container(
@@ -334,23 +339,26 @@ Widget profileItem({String profileUrl = tmpProfileImg, double size = 22}) {
 }
 
 ///* 오늘의 후원에서 사용되는 listTile
+///[TodayMatchScreen]에서 사용되는 위젯<br/>
 class TodayMatchList extends StatelessWidget {
   final int count;
   final List<String> imgList;
   final String backgroundImg;
   final Rx<bool> isLike;
+  final int projectId;
   const TodayMatchList(
       {super.key,
       required this.count,
       required this.imgList,
       this.backgroundImg = tmpBackgroundImg,
-      required this.isLike});
+      required this.isLike,
+      required this.projectId});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        //TODO: 유저 해당 매치 상세보기 page 연결
+      onTap: () async {
+        await Get.toNamed(Routes.project, arguments: {"projectId": projectId});
       },
       child: Container(
         height: 180.h,
