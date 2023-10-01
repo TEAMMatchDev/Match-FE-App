@@ -40,6 +40,7 @@ class SearchScreen extends GetView<SearchViewController> {
                 ),
                 Expanded(
                   child: CupertinoTextField(
+                    controller: controller.searchTextController.value,
                     padding:
                         EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
                     decoration: BoxDecoration(
@@ -62,10 +63,16 @@ class SearchScreen extends GetView<SearchViewController> {
                         child: SvgPicture.asset(iconDir + "ic_search_16.svg")),
                     // clearButtonMode: OverlayVisibilityMode.editing,
                     suffixMode: OverlayVisibilityMode.editing,
-                    suffix: Padding(
-                        padding: EdgeInsets.only(right: 14.w),
-                        child: SvgPicture.asset(
-                            iconDir + "ic_search_cancel_22.svg")),
+                    suffix: GestureDetector(
+                      onTap: () {
+                        controller.searchTextController.value.clear();
+                        controller.searchStatus.value = SEARCH_STATUS.INIT;
+                      },
+                      child: Padding(
+                          padding: EdgeInsets.only(right: 14.w),
+                          child: SvgPicture.asset(
+                              iconDir + "ic_search_cancel_22.svg")),
+                    ),
                     onSubmitted: ((value) async {
                       controller.searchStatus.value = SEARCH_STATUS.SEARCH;
                       //TODO: api 연결
