@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/regular_status.dart';
 
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
+import '../../../util/const/style/global_text_styles.dart';
 import '../../home/widget/home_widget.dart';
 import '../controller/project_controller.dart';
 
@@ -59,6 +61,59 @@ class ProjectScreen extends GetView<ProjectController> {
                       height: 30.h,
                     ))),
           ]),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h)
+                .copyWith(bottom: 32.h),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              TypeChip(
+                  type: regularStatusMap[controller.projectDetail.value.kind]
+                          ?.stateName ??
+                      "동물"),
+              SizedBox(
+                height: 12.h,
+              ),
+              Text(
+                controller.projectDetail.value.title,
+                style: AppTextStyles.subtitle1Bold15,
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                controller.projectDetail.value.usages,
+                style: AppTextStyles.subtitle3Bold13.copyWith(
+                  color: AppColors.grey7,
+                ),
+              ),
+              SizedBox(
+                height: 22.h,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Wrap(
+                    spacing: -10.w,
+                    //TODO: 서버에서 보내주는 만큼 표시해야하는지 3개만 표시하는지 확인필요
+                    children: controller.projectDetail.value.projectImgList
+                        .map((e) => profileItem())
+                        .toList(),
+                  ),
+                  SizedBox(
+                    width: 8.w,
+                  ),
+                  Text(
+                    //TODO: 서버 api field 추가 필요
+                    "외 ${controller.projectDetail.value.projectImgList.length}명이 후원하고 있어요",
+                    style: AppTextStyles.body2Regular13.copyWith(
+                      color: AppColors.grey5,
+                    ),
+                  ),
+                ],
+              ),
+              //TODO : contained tabbar 추가
+            ]),
+          ),
         ],
       ),
     );

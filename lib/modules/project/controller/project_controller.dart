@@ -1,9 +1,50 @@
 import 'package:get/get.dart';
+import 'package:match/model/project_detail/project_detail.dart';
 
 class ProjectController extends GetxController {
   static ProjectController get to => Get.find();
   int projectId = Get.arguments["projectId"] ?? 0;
   Rx<bool> isLike = true.obs;
+  Rx<ProjectDetail> projectDetail = ProjectDetail(
+          projectId: 1,
+          projectImgList: [
+            ProjectImage(
+                imgId: 1,
+                imgUrl:
+                    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/ef29a128-b689-4ffc-a2f8-d67acf7298ca.png",
+                sequence: 1),
+            ProjectImage(
+                imgId: 2,
+                imgUrl:
+                    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/89e68cbb-c823-44f3-b9d2-71a670453ea2.png",
+                sequence: 2),
+            ProjectImage(
+                imgId: 3,
+                imgUrl:
+                    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/ca123e30-d9de-4ca1-8721-17b2a2044f68.png",
+                sequence: 3),
+            ProjectImage(
+                imgId: 4,
+                imgUrl:
+                    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/d8ffb3b0-edfe-44de-85a2-fcd5781a0d70.jpeg",
+                sequence: 4),
+            ProjectImage(
+                imgId: 5,
+                imgUrl:
+                    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/cb1bfdeb-97ef-4984-b3d3-a84d86e68223.png",
+                sequence: 5),
+            ProjectImage(
+                imgId: 6,
+                imgUrl:
+                    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/d83a35e3-d0fa-4857-baef-4b2ca2995391.png",
+                sequence: 6)
+          ],
+          title: "TBT 유기견 보호1",
+          usages: "The Better Tommorow",
+          donationAble: true,
+          kind: "DOG",
+          regularStatus: "REGULAR")
+      .obs;
   @override
   void onInit() {
     // TODO projectId로 서버에서 데이터 가져오기ㄴ
