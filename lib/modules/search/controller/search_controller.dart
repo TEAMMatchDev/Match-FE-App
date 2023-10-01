@@ -24,7 +24,7 @@ class SearchViewController extends GetxController {
         projectId: 2,
         imgUrl: tmpBackgroundImg,
         title: "TBT 유기견 보호",
-        usages: "THE BETTER Tommorrow",
+        usages: "후원 타이틀 일정이상 노출시 이렇게 개행됩니다.",
         kind: "ELDER",
         like: false)
   ].obs;

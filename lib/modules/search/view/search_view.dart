@@ -120,22 +120,18 @@ class SearchScreen extends GetView<SearchViewController> {
                 ? ListView.separated(
                     shrinkWrap: true,
                     itemBuilder: ((context, index) {
-                      final recentSearch;
                       //TODO: (기획 확인 필요) SEARCH_STATUS.EDIT중에 최근검색어 / 검색결과 여부
                       switch (controller.searchStatus.value) {
                         case SEARCH_STATUS.SEARCH:
-                          recentSearch = controller.searchResults[index];
+                          final search = controller.searchResults[index];
                           return SearchItem(
-                            imgUrl: recentSearch.imgUrl,
-                            name: recentSearch.title,
-                            title: recentSearch.usages,
-                          );
+                              imgUrl: search.imgUrl,
+                              name: search.title,
+                              title: search.usages,
+                              projectId: search.projectId);
                         default:
-                          recentSearch = controller.recentSearchList[index];
                           return RecentItem(
-                            name: recentSearch.name,
-                            title: recentSearch.title,
-                          );
+                              recentSearch: controller.recentSearchList[index]);
                       }
                     }),
                     separatorBuilder: ((context, index) {
