@@ -38,7 +38,7 @@ class HomeController extends GetxController {
           "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
           "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
         ],
-        totalDonationCnt: 7),
+        totalDonationCnt: 8),
   ].obs;
   @override
   void onInit() {

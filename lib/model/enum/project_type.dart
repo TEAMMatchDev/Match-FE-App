@@ -15,7 +15,7 @@ enum ProjectType {
   const ProjectType(this.stateName);
 }
 
-const _projectTypeMap = {
+Map<String, ProjectType> projectTypeMap = {
   'DOG': ProjectType.DOG,
   'CHILDREN': ProjectType.CHILDREN,
   'YOUTH': ProjectType.YOUTH,
