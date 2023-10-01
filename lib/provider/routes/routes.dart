@@ -25,7 +25,11 @@ abstract class _Paths {
   ///불타는 매치 결제내역 화면
   static const burning_match_pay = "/burning_match_pay";
 
+  ///결제내역
   static const pay = "/pay";
+
+  ///후원 상세내역
+  static const project = "/project";
 
   /// 후원 화면
   static const donate = "/donate";
@@ -66,6 +70,9 @@ abstract class Routes {
 
   /// 불타는 매치 결제 상세 화면
   static const pay = _Paths.pay;
+
+  ///후원 상세내역
+  static const project = _Paths.project;
 
   /// 후원 화면
   static const donate = _Paths.donate;

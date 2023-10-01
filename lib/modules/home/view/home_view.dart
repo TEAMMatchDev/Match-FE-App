@@ -166,12 +166,16 @@ class HomeScreen extends GetView<HomeController> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
                     itemBuilder: (context, index) {
+                      final project = controller.projectList[index];
                       //TODO: 현재 같은 변수를 사용하여 좋아요가 동기화 됨
                       return TodayMatchItem(
-                          title: "후원 함께할분!",
-                          organization: "후원처명",
-                          count: 14,
-                          isLike: controller.isLike);
+                        title: project.title,
+                        organization: project.usages,
+                        count: project.totalDonationCnt,
+                        backgroundImg: project.imgUrl,
+                        isLike: project.like ? true.obs : false.obs,
+                        projectId: project.projectId,
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(

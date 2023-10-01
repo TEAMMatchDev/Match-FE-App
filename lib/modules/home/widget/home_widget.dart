@@ -8,6 +8,9 @@ import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../provider/routes/routes.dart';
+import '../../../util/components/global_widget.dart';
+
 Widget CommonSectionHeader(
     {required String title, required Future<void> Function() destination}) {
   return Padding(
@@ -32,20 +35,6 @@ const String tmpProfileImg =
     "http://k.kakaocdn.net/dn/bq8XQY/btsjqweTr1J/c0kplPW8eo8iOCeoYTBGxK/img_640x640.jpg";
 const String tmpBackgroundImg =
     "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
-
-///API 연결이후에 테스트
-///* 현재 동작X
-void onLikeTap({
-  required Rx<bool> isLike,
-}) {
-  var likeToastMsg = "매치를 찜하셨어요!";
-  var dislikeToastMsg = "찜 내역에서 삭제됩니다!";
-  // Fluttertoast.showToast(
-  //     msg: isLike.value ? dislikeToastMsg : likeToastMsg,
-  //     //design 확인
-  //     fontSize: 12.sp);
-  isLike.value = !isLike.value;
-}
 
 ///*광고 section 순서 표시하는 위젯
 Widget adIndexItem({required int total, required int currentIdx}) {
@@ -168,6 +157,7 @@ class TodayMatchItem extends StatelessWidget {
   final String organization;
   final int count;
   final Rx<bool> isLike;
+  final int projectId;
   final String backgroundImg;
   const TodayMatchItem(
       {super.key,
@@ -175,13 +165,14 @@ class TodayMatchItem extends StatelessWidget {
       required this.organization,
       required this.count,
       required this.isLike,
-      this.backgroundImg = tmpBackgroundImg});
+      this.backgroundImg = tmpBackgroundImg,
+      required this.projectId});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        //TODO: add route
+      onTap: () async {
+        await Get.toNamed(Routes.project, arguments: {"projectId": projectId});
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,11 +201,13 @@ class TodayMatchItem extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                LikeIcon(isLike: isLike),
+                Positioned(
+                    left: 12.w, top: 17.h, child: LikeIcon(isLike: isLike)),
                 Positioned(
                     bottom: 14.h,
                     left: 14.w,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
@@ -231,10 +224,16 @@ class TodayMatchItem extends StatelessWidget {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Text(organization,
+                        SizedBox(
+                          width: 72.w,
+                          child: Text(
+                            organization,
                             style: AppTextStyles.subtitle3Bold13.copyWith(
                               color: AppColors.white,
-                            )),
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                       ],
                     ))
               ],
@@ -250,35 +249,6 @@ class TodayMatchItem extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-///<h2>like Icon widget</h2>
-///*좋아요 api 연동 및 재사용성이 높아 위젯으로 분리
-class LikeIcon extends StatelessWidget {
-  final Rx<bool> isLike;
-  final int leftPosition;
-  final int topPosition;
-
-  const LikeIcon({
-    super.key,
-    required this.isLike,
-    this.leftPosition = 12,
-    this.topPosition = 17,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-        right: leftPosition.w,
-        top: topPosition.h,
-        child: isLike.value
-            ? GestureDetector(
-                onTap: () => onLikeTap(isLike: isLike),
-                child: SvgPicture.asset(iconDir + "ic_like_able_24.svg"))
-            : GestureDetector(
-                onTap: () => onLikeTap(isLike: isLike),
-                child: SvgPicture.asset(iconDir + "ic_like_disable_24.svg")));
   }
 }
 
@@ -406,10 +376,12 @@ class TodayMatchList extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            LikeIcon(
-              isLike: isLike,
-              leftPosition: 25,
-              topPosition: 22,
+            Positioned(
+              right: 25.w,
+              top: 22.h,
+              child: LikeIcon(
+                isLike: isLike,
+              ),
             ),
             Positioned(
               bottom: 17.h,

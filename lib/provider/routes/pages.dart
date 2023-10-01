@@ -11,6 +11,8 @@ import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
 import 'package:match/modules/payment/view/payment_view.dart';
+import 'package:match/modules/project/binding/project_binding.dart';
+import 'package:match/modules/project/view/project_view.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
 import 'package:match/modules/splash/view/splash_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
@@ -112,6 +114,16 @@ class Pages {
             popGesture: false,
           ),
         ]),
+    GetPage(
+      title: "후원 상세내역",
+      name: Routes.burning_match_pay,
+      page: () => const ProjectScreen(),
+      transition: Transition.noTransition,
+      //TODO:binding 교체
+      binding: ProjectBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
     GetPage(
       title: "이벤트 화면",
       name: Routes.event,
