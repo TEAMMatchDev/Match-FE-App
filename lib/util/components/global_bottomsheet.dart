@@ -25,7 +25,7 @@ class ShareBottomSheet extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("매치 공유하기", style: AppTextStyles.heading2Bold18),
+                Text("매치 공유하기", style: AppTextStyles.T1Bold18),
                 GestureDetector(
                     onTap: () {
                       Get.back();
@@ -57,7 +57,7 @@ class ShareBottomSheet extends StatelessWidget {
           ),
           Text(
             text,
-            style: AppTextStyles.body1Regular15,
+            style: AppTextStyles.T1Bold15,
           ),
         ],
       ),

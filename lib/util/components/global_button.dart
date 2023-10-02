@@ -30,7 +30,7 @@ class CommonButton extends StatelessWidget {
               border: Border.all(color: AppColors.grey1),
               borderRadius: BorderRadius.circular(10.r)),
           child: Text(text,
-              style: AppTextStyles.subtitle2Bold14
+              style: AppTextStyles.T1Bold14
                   .copyWith(color: textColor, fontSize: textSize.sp)),
         ));
   }

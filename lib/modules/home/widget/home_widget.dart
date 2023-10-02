@@ -20,7 +20,7 @@ Widget CommonSectionHeader(
       children: [
         Text(
           title,
-          style: AppTextStyles.heading3Bold16,
+          style: AppTextStyles.T1Bold16,
         ),
         GestureDetector(
             onTap: destination,
@@ -50,12 +50,12 @@ Widget adIndexItem({required int total, required int currentIdx}) {
         text: TextSpan(children: [
       TextSpan(
         text: "${currentIdx}",
-        style: AppTextStyles.body3Bold12
+        style: AppTextStyles.T1Bold12
             .copyWith(color: AppColors.white, letterSpacing: 0),
       ),
       TextSpan(
         text: " / ${total}",
-        style: AppTextStyles.body3Bold12
+        style: AppTextStyles.T1Bold12
             .copyWith(color: AppColors.grey4, letterSpacing: 0),
       )
     ])),
@@ -121,8 +121,7 @@ class MyMatchItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTextStyles.body1Regular15.copyWith(
-                      fontWeight: FontWeight.bold,
+                    style: AppTextStyles.T1Bold15.copyWith(
                       color: AppColors.white,
                     ),
                   ),
@@ -140,7 +139,7 @@ class MyMatchItem extends StatelessWidget {
                     ),
                     Text(
                       "${count}명 후원중",
-                      style: AppTextStyles.body3Bold12.copyWith(
+                      style: AppTextStyles.T1Bold12.copyWith(
                         color: AppColors.white,
                       ),
                     )
@@ -221,7 +220,7 @@ class TodayMatchItem extends StatelessWidget {
                             profileItem(),
                             Text(
                               "+${count}",
-                              style: AppTextStyles.subtitle3Bold13
+                              style: AppTextStyles.T1Bold13
                                   .copyWith(color: AppColors.white),
                             )
                           ],
@@ -233,7 +232,7 @@ class TodayMatchItem extends StatelessWidget {
                           width: 72.w,
                           child: Text(
                             organization,
-                            style: AppTextStyles.subtitle3Bold13.copyWith(
+                            style: AppTextStyles.T1Bold13.copyWith(
                               color: AppColors.white,
                             ),
                             overflow: TextOverflow.ellipsis,
@@ -249,7 +248,7 @@ class TodayMatchItem extends StatelessWidget {
           ),
           Text(
             title,
-            style: AppTextStyles.subtitle3Bold13,
+            style: AppTextStyles.T1Bold13,
           )
         ],
       ),
@@ -405,7 +404,7 @@ class TodayMatchList extends StatelessWidget {
                 ),
                 Text(
                   "외 ${count}명 후원중",
-                  style: AppTextStyles.body2Regular13.copyWith(
+                  style: AppTextStyles.L1Medium13.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
                   ),

@@ -18,7 +18,7 @@ class PaymentListTile extends StatelessWidget {
           children: [
             Text(
               pay.payDate,
-              style: AppTextStyles.heading3Bold16,
+              style: AppTextStyles.T1Bold16,
             ),
             SizedBox(
               width: 13.w,
@@ -45,14 +45,14 @@ class PaymentListTile extends StatelessWidget {
       children: [
         Text(
           title,
-          style: AppTextStyles.body2Regular13.copyWith(
+          style: AppTextStyles.L1Medium13.copyWith(
             color: AppColors.grey8,
           ),
         ),
         SizedBox(
           width: 20.w,
         ),
-        Text(content, style: AppTextStyles.subtitle3Bold13),
+        Text(content, style: AppTextStyles.T1Bold13),
       ],
     );
   }

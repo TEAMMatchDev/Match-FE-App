@@ -75,14 +75,14 @@ class ProjectScreen extends GetView<ProjectController> {
               ),
               Text(
                 controller.projectDetail.value.title,
-                style: AppTextStyles.subtitle1Bold15,
+                style: AppTextStyles.T1Bold15,
               ),
               SizedBox(
                 height: 10.h,
               ),
               Text(
                 controller.projectDetail.value.usages,
-                style: AppTextStyles.subtitle3Bold13.copyWith(
+                style: AppTextStyles.T1Bold13.copyWith(
                   color: AppColors.grey7,
                 ),
               ),
@@ -105,7 +105,7 @@ class ProjectScreen extends GetView<ProjectController> {
                   Text(
                     //TODO: 서버 api field 추가 필요
                     "외 ${controller.projectDetail.value.projectImgList.length}명이 후원하고 있어요",
-                    style: AppTextStyles.body2Regular13.copyWith(
+                    style: AppTextStyles.L1Medium13.copyWith(
                       color: AppColors.grey5,
                     ),
                   ),

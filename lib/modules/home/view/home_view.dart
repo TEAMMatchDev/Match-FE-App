@@ -62,7 +62,7 @@ class HomeScreen extends GetView<HomeController> {
                         ),
                         Text(
                           "고유 이름을 입력해보세요.",
-                          style: AppTextStyles.body2Regular13
+                          style: AppTextStyles.L1Medium13
                               .copyWith(color: AppColors.grey4),
                           textHeightBehavior: TextHeightBehavior(
                               applyHeightToFirstAscent: false),

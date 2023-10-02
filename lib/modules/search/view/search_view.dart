@@ -50,12 +50,12 @@ class SearchScreen extends GetView<SearchViewController> {
                     keyboardType: TextInputType.text,
                     cursorColor: AppColors.black,
                     cursorHeight: 18.h,
-                    style: AppTextStyles.body2Regular13.copyWith(
+                    style: AppTextStyles.L1Medium13.copyWith(
                       color: AppColors.grey8,
                       height: 1.5,
                     ),
                     placeholder: "고유 이름을 입력해보세요.",
-                    placeholderStyle: AppTextStyles.body2Regular13
+                    placeholderStyle: AppTextStyles.L1Medium13
                         .copyWith(color: AppColors.grey4, height: 1.5),
                     prefixMode: OverlayVisibilityMode.notEditing,
                     prefix: Padding(
@@ -96,7 +96,7 @@ class SearchScreen extends GetView<SearchViewController> {
                     children: [
                       Text(
                         "최근 검색 고유이름",
-                        style: AppTextStyles.subtitle1Bold15,
+                        style: AppTextStyles.T1Bold15,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -104,7 +104,7 @@ class SearchScreen extends GetView<SearchViewController> {
                         },
                         child: Text(
                           "모두 삭제",
-                          style: AppTextStyles.body3Bold12
+                          style: AppTextStyles.T1Bold12
                               .copyWith(color: AppColors.grey6),
                         ),
                       ),
@@ -113,7 +113,7 @@ class SearchScreen extends GetView<SearchViewController> {
                 : controller.searchStatus.value == SEARCH_STATUS.SEARCH
                     ? Text(
                         "총 ${controller.searchResults.length}개의 검색결과",
-                        style: AppTextStyles.subtitle3Bold13.copyWith(
+                        style: AppTextStyles.T1Bold13.copyWith(
                             color: AppColors.grey5,
                             fontWeight: FontWeight.w600),
                       )
@@ -160,7 +160,7 @@ class SearchScreen extends GetView<SearchViewController> {
                     itemCount: controller.recentSearchList.length)
                 : Text(
                     "최근 검색어가 없습니다.",
-                    style: AppTextStyles.heading2Bold18,
+                    style: AppTextStyles.T1Bold18,
                   ),
           ],
         ),

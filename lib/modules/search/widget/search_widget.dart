@@ -22,12 +22,12 @@ Widget RecentItem({
       children: [
         Text(
           recentSearch.name,
-          style: AppTextStyles.subtitle3Bold13
+          style: AppTextStyles.T1Bold13
               .copyWith(fontWeight: FontWeight.w600),
         ),
         Text(
           recentSearch.title,
-          style: AppTextStyles.body3Bold12
+          style: AppTextStyles.T1Bold12
               .copyWith(fontWeight: FontWeight.w500, color: AppColors.grey6),
         ),
       ],
@@ -67,7 +67,7 @@ Widget SearchItem(
               Text(
                 //고유이름
                 name,
-                style: AppTextStyles.subtitle3Bold13
+                style: AppTextStyles.T1Bold13
                     .copyWith(fontWeight: FontWeight.w600),
               ),
               SizedBox(
@@ -76,7 +76,7 @@ Widget SearchItem(
               Text(
                 //후원타이틀
                 title,
-                style: AppTextStyles.body3Bold12.copyWith(
+                style: AppTextStyles.T1Bold12.copyWith(
                     fontWeight: FontWeight.w500, color: AppColors.grey6),
               ),
             ],

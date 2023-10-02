@@ -43,14 +43,14 @@ class MatchRecord extends StatelessWidget {
           children: [
             Text(
               title,
-              style: AppTextStyles.subtitle3Bold13,
+              style: AppTextStyles.T1Bold13,
             ),
             SizedBox(
               height: 6.h,
             ),
             Text(
               date,
-              style: AppTextStyles.body3Bold12.copyWith(
+              style: AppTextStyles.T1Bold12.copyWith(
                   fontWeight: FontWeight.w500, color: AppColors.grey6),
             ),
             SizedBox(

@@ -47,9 +47,9 @@ class TodayMatchScreen extends GetView<HomeController> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(project.title, style: AppTextStyles.subtitle1Bold15),
+                      Text(project.title, style: AppTextStyles.T1Bold15),
                       Text(project.usages,
-                          style: AppTextStyles.body2Regular13.copyWith(
+                          style: AppTextStyles.L1Medium13.copyWith(
                             color: AppColors.grey7,
                           )),
                     ],

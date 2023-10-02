@@ -16,7 +16,7 @@ Widget TypeChip({required String type}) {
       borderRadius: BorderRadius.circular(4.r),
     ),
     child: Text(type,
-        style: AppTextStyles.body3Bold12.copyWith(
+        style: AppTextStyles.T1Bold12.copyWith(
           color: AppColors.grey6,
         )),
   );

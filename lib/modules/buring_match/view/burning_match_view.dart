@@ -38,7 +38,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
               children: [
                 Text(
                   "후원 타이틀",
-                  style: AppTextStyles.heading2Bold18,
+                  style: AppTextStyles.T1Bold18,
                 ),
                 TypeChip(type: "매칭 진행 중")
               ],
@@ -88,7 +88,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                   padding: EdgeInsets.symmetric(vertical: 30.h),
                   child: Text(
                     "매치 기록",
-                    style: AppTextStyles.subtitle1Bold15,
+                    style: AppTextStyles.T1Bold15,
                   ),
                 ),
                 ListView.separated(

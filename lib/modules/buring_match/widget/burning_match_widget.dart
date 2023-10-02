@@ -26,7 +26,7 @@ class MatchPayment extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("매치 결제 정보", style: AppTextStyles.subtitle1Bold15),
+            Text("매치 결제 정보", style: AppTextStyles.T1Bold15),
             GestureDetector(
               onTap: () {
                 Get.to(() => PaymentScreen());
@@ -34,7 +34,7 @@ class MatchPayment extends StatelessWidget {
               child: Row(
                 children: [
                   Text("결제 내역",
-                      style: AppTextStyles.subtitle2Bold14
+                      style: AppTextStyles.T1Bold14
                           .copyWith(color: AppColors.grey6)),
                   SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"),
                 ],
@@ -49,13 +49,13 @@ class MatchPayment extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text("후원 금액",
-                style: AppTextStyles.subtitle2Bold14
+                style: AppTextStyles.T1Bold14
                     .copyWith(color: AppColors.grey6)),
             SizedBox(
               width: 15.w,
             ),
             Text("매월 • ${day}일 • ${price}원",
-                style: AppTextStyles.subtitle2Bold14
+                style: AppTextStyles.T1Bold14
                     .copyWith(color: AppColors.grey7)),
           ],
         ),
@@ -92,12 +92,12 @@ class BurningMatchCredit extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: AppTextStyles.heading2Bold18),
+                Text(title, style: AppTextStyles.T1Bold18),
                 SizedBox(
                   height: 7.h,
                 ),
                 Text(date,
-                    style: AppTextStyles.subtitle2Bold14
+                    style: AppTextStyles.T1Bold14
                         .copyWith(color: AppColors.grey6)),
               ],
             ),
