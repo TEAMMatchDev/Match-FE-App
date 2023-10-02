@@ -33,13 +33,6 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
     height: _regularHeight,
   );
-  static var body1Regular15 = TextStyle(
-    color: _defaultTextColor,
-    fontFamily: _defaultFontFamily,
-    fontSize: 15.sp,
-    fontWeight: FontWeight.w500,
-    height: 1.5,
-  );
   static var T1Bold14 = TextStyle(
     color: _defaultTextColor,
     fontFamily: _defaultFontFamily,

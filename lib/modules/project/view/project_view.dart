@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/regular_status.dart';
+import 'package:match/util/components/global_bottomsheet.dart';
 
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
@@ -29,6 +30,7 @@ class ProjectScreen extends GetView<ProjectController> {
             ),
             Positioned(
               top: 0,
+              left: 0,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
                 width: MediaQuery.of(context).size.width,
@@ -42,7 +44,7 @@ class ProjectScreen extends GetView<ProjectController> {
                         child: SvgPicture.asset(
                           iconDir + "ic_arrow_left_24.svg",
                           color: AppColors.white,
-                          width: 24.w,
+                          height: 24.h,
                         )),
                     LikeIcon(isLike: controller.isLike)
                   ],
@@ -53,8 +55,8 @@ class ProjectScreen extends GetView<ProjectController> {
                 bottom: 24.h,
                 right: 20.w,
                 child: GestureDetector(
-                    onTap: () {
-                      //TODO: share 기능 구현/ 저장,복사,공유하기 버튼
+                    onTap: () async {
+                      await Get.bottomSheet(ShareBottomSheet());
                     },
                     child: SvgPicture.asset(
                       iconDir + "ic_share_16.svg",
