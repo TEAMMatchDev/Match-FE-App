@@ -9,6 +9,8 @@ import 'package:match/modules/mypage/binding/mypage_binding.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
+import 'package:match/modules/payment/binding/payment_binding.dart';
+import 'package:match/modules/payment/view/payment_view.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
 import 'package:match/modules/splash/view/splash_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
@@ -20,6 +22,8 @@ import '../../modules/home/binding/home_binding.dart';
 import '../../modules/home/view/home_view.dart';
 import '../../modules/main/binding/main_binding.dart';
 import '../../modules/main/view/main_view.dart';
+import '../../modules/search/binding/search_binding.dart';
+import '../../modules/search/view/search_view.dart';
 import 'routes.dart';
 
 class Pages {
@@ -80,11 +84,30 @@ class Pages {
             popGesture: false,
           ),
           GetPage(
+            title: "검색 화면",
+            name: Routes.search,
+            page: () => const SearchScreen(),
+            transition: Transition.noTransition,
+            //TODO:binding 교체
+            binding: SearchBinding(),
+            curve: Curves.easeIn,
+            popGesture: false,
+          ),
+          GetPage(
             title: "불타는 매치 화면",
             name: Routes.burning_match,
             page: () => const BurningMatchScreen(),
             transition: Transition.noTransition,
             binding: BurningMatchBinding(),
+            curve: Curves.easeIn,
+            popGesture: false,
+          ),
+          GetPage(
+            title: "결제 내역",
+            name: Routes.pay,
+            page: () => const PaymentScreen(),
+            transition: Transition.noTransition,
+            binding: PaymentBinding(),
             curve: Curves.easeIn,
             popGesture: false,
           ),

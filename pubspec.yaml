@@ -25,6 +25,7 @@ dependencies:
   freezed: ^2.4.2
   carousel_slider: ^4.2.1
   json_annotation: ^4.8.1
+  timeline_tile_nic: ^2.0.1
 
 dev_dependencies:
   build_runner: ^2.3.3
