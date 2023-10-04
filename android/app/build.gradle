@@ -22,6 +22,18 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+// .env 파일에서 변수를 가져오기 위한 작업 추가
+def envFile = rootProject.file('.env')
+if (envFile.exists()) {
+    def envContent = envFile.text.trim()
+    ext.envProperties = [:]
+
+    envContent.eachLine { line ->
+        def (key, value) = line.split('=')
+        ext.envProperties[key] = value
+    }
+}
+
 android {
     namespace "com.dev.match"
     compileSdkVersion 33

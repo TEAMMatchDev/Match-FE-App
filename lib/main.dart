@@ -6,7 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
 
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //kakao SDK 전체추가
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 
 import 'provider/routes/pages.dart';
@@ -16,9 +16,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 
+  // 웹 환경에서 카카오 로그인을 정상적으로 완료하려면 runApp() 호출 전 아래 메서드 호출 필요
+  WidgetsFlutterBinding.ensureInitialized();
   // runApp() 호출 전 Flutter SDK 초기화
   KakaoSdk.init(
     nativeAppKey: dotenv.env['nativeAppKey'],
+    javaScriptAppKey: dotenv.env['javaScriptAppKey'],
   );
 
   runApp(const MyApp());

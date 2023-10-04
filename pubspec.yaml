@@ -16,8 +16,15 @@ dependencies:
   kakao_flutter_sdk_navi: ^1.5.0 # 카카오내비
   kakao_flutter_sdk_friend: ^1.5.0 # 카카오톡 소셜(피커: 친구 선택하기)
 
+  flutter_naver_login: ^1.6.0 # 네이버 로그인
+
   flutter:
     sdk: flutter
+
+  webview_flutter: ^4.0.7
+
+  http: ^0.13.3
+  retrofit: ^4.0.2
 
   cupertino_icons: ^1.0.2
   get: ^4.6.6
@@ -34,8 +41,10 @@ dependencies:
   carousel_slider: ^4.2.1
 
 dev_dependencies:
+  retrofit_generator: ^8.0.0
   build_runner: ^2.3.3
   freezed: ^2.3.2
+  json_annotation: ^4.8.1
   json_serializable: ^6.5.4
   flutter_test:
     sdk: flutter
