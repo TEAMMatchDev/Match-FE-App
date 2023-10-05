@@ -22,6 +22,8 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def kakaoApiKey = localProperties.getProperty('kakaoApiKey')
+
 android {
     namespace "com.dev.match"
     compileSdkVersion 33
