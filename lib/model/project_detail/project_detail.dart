@@ -8,12 +8,15 @@ part 'project_detail.g.dart';
 class ProjectDetail with _$ProjectDetail {
   const factory ProjectDetail({
     required int projectId,
+    required String thumbNail,
     required List<ProjectImage> projectImgList,
     required String title,
     required String usages,
-    required bool donationAble,
     required String kind,
     required String regularStatus,
+    required bool like,
+    required List<String> userProfileImages,
+    required int totalDonationCnt,
   }) = _ProjectDetail;
   factory ProjectDetail.fromJson(Map<String, dynamic> json) =>
       _$ProjectDetailFromJson(json);

@@ -7,6 +7,8 @@ class ProjectController extends GetxController {
   Rx<bool> isLike = true.obs;
   Rx<ProjectDetail> projectDetail = ProjectDetail(
           projectId: 1,
+          thumbNail:
+              "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png",
           projectImgList: [
             ProjectImage(
                 imgId: 1,
@@ -41,7 +43,13 @@ class ProjectController extends GetxController {
           ],
           title: "TBT 유기견 보호1",
           usages: "The Better Tommorow",
-          donationAble: true,
+          like: false,
+          userProfileImages: [
+            "http://k.kakaocdn.net/dn/bq8XQY/btsjqweTr1J/c0kplPW8eo8iOCeoYTBGxK/img_640x640.jpg",
+            "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
+            "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg"
+          ],
+          totalDonationCnt: 4,
           kind: "DOG",
           regularStatus: "REGULAR")
       .obs;

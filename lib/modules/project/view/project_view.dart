@@ -56,7 +56,12 @@ class ProjectScreen extends GetView<ProjectController> {
                 right: 20.w,
                 child: GestureDetector(
                     onTap: () async {
-                      await Get.bottomSheet(ShareBottomSheet());
+                      await Get.bottomSheet(ShareBottomSheet(
+                          imgUrl: controller.projectDetail.value.thumbNail,
+                          usages: controller.projectDetail.value.usages,
+                          title: controller.projectDetail.value.title,
+                          appLink:
+                              "https://github.com/TEAMMatchDev/Match-FE-App/issues"));
                     },
                     child: SvgPicture.asset(
                       iconDir + "ic_share_16.svg",

@@ -131,7 +131,7 @@ class ShareBottomSheet extends StatelessWidget {
             await WebSharerClient.instance.makeDefaultUrl(template: shareFeed);
         await launchBrowserTab(shareUrl, popupOpen: true);
       } catch (error) {
-        print('카카오톡 공유 실패 $error');
+        Logger().d('카카오톡 공유 실패 $error');
       }
     }
   }

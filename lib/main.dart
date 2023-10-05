@@ -4,15 +4,25 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
 
 import 'provider/routes/pages.dart';
 import 'util/const/style/global_color.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+  await initService();
   runApp(const MyApp());
+}
+
+//초기 구동
+Future<void> initService() async {
+  //* Widget Binding 초기화
+  WidgetsFlutterBinding.ensureInitialized();
+  //* 카카오  SDK 초기화
+  KakaoSdk.init(nativeAppKey: dotenv.env['kakaoApiKey']!);
 }
 
 class MyApp extends StatelessWidget {

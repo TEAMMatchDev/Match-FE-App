@@ -21,12 +21,15 @@ ProjectDetail _$ProjectDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ProjectDetail {
   int get projectId => throw _privateConstructorUsedError;
+  String get thumbNail => throw _privateConstructorUsedError;
   List<ProjectImage> get projectImgList => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get usages => throw _privateConstructorUsedError;
-  bool get donationAble => throw _privateConstructorUsedError;
   String get kind => throw _privateConstructorUsedError;
   String get regularStatus => throw _privateConstructorUsedError;
+  bool get like => throw _privateConstructorUsedError;
+  List<String> get userProfileImages => throw _privateConstructorUsedError;
+  int get totalDonationCnt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,12 +45,15 @@ abstract class $ProjectDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {int projectId,
+      String thumbNail,
       List<ProjectImage> projectImgList,
       String title,
       String usages,
-      bool donationAble,
       String kind,
-      String regularStatus});
+      String regularStatus,
+      bool like,
+      List<String> userProfileImages,
+      int totalDonationCnt});
 }
 
 /// @nodoc
@@ -64,18 +70,25 @@ class _$ProjectDetailCopyWithImpl<$Res, $Val extends ProjectDetail>
   @override
   $Res call({
     Object? projectId = null,
+    Object? thumbNail = null,
     Object? projectImgList = null,
     Object? title = null,
     Object? usages = null,
-    Object? donationAble = null,
     Object? kind = null,
     Object? regularStatus = null,
+    Object? like = null,
+    Object? userProfileImages = null,
+    Object? totalDonationCnt = null,
   }) {
     return _then(_value.copyWith(
       projectId: null == projectId
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
               as int,
+      thumbNail: null == thumbNail
+          ? _value.thumbNail
+          : thumbNail // ignore: cast_nullable_to_non_nullable
+              as String,
       projectImgList: null == projectImgList
           ? _value.projectImgList
           : projectImgList // ignore: cast_nullable_to_non_nullable
@@ -88,10 +101,6 @@ class _$ProjectDetailCopyWithImpl<$Res, $Val extends ProjectDetail>
           ? _value.usages
           : usages // ignore: cast_nullable_to_non_nullable
               as String,
-      donationAble: null == donationAble
-          ? _value.donationAble
-          : donationAble // ignore: cast_nullable_to_non_nullable
-              as bool,
       kind: null == kind
           ? _value.kind
           : kind // ignore: cast_nullable_to_non_nullable
@@ -100,6 +109,18 @@ class _$ProjectDetailCopyWithImpl<$Res, $Val extends ProjectDetail>
           ? _value.regularStatus
           : regularStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      like: null == like
+          ? _value.like
+          : like // ignore: cast_nullable_to_non_nullable
+              as bool,
+      userProfileImages: null == userProfileImages
+          ? _value.userProfileImages
+          : userProfileImages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      totalDonationCnt: null == totalDonationCnt
+          ? _value.totalDonationCnt
+          : totalDonationCnt // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -114,12 +135,15 @@ abstract class _$$_ProjectDetailCopyWith<$Res>
   @useResult
   $Res call(
       {int projectId,
+      String thumbNail,
       List<ProjectImage> projectImgList,
       String title,
       String usages,
-      bool donationAble,
       String kind,
-      String regularStatus});
+      String regularStatus,
+      bool like,
+      List<String> userProfileImages,
+      int totalDonationCnt});
 }
 
 /// @nodoc
@@ -134,18 +158,25 @@ class __$$_ProjectDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? projectId = null,
+    Object? thumbNail = null,
     Object? projectImgList = null,
     Object? title = null,
     Object? usages = null,
-    Object? donationAble = null,
     Object? kind = null,
     Object? regularStatus = null,
+    Object? like = null,
+    Object? userProfileImages = null,
+    Object? totalDonationCnt = null,
   }) {
     return _then(_$_ProjectDetail(
       projectId: null == projectId
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
               as int,
+      thumbNail: null == thumbNail
+          ? _value.thumbNail
+          : thumbNail // ignore: cast_nullable_to_non_nullable
+              as String,
       projectImgList: null == projectImgList
           ? _value._projectImgList
           : projectImgList // ignore: cast_nullable_to_non_nullable
@@ -158,10 +189,6 @@ class __$$_ProjectDetailCopyWithImpl<$Res>
           ? _value.usages
           : usages // ignore: cast_nullable_to_non_nullable
               as String,
-      donationAble: null == donationAble
-          ? _value.donationAble
-          : donationAble // ignore: cast_nullable_to_non_nullable
-              as bool,
       kind: null == kind
           ? _value.kind
           : kind // ignore: cast_nullable_to_non_nullable
@@ -170,6 +197,18 @@ class __$$_ProjectDetailCopyWithImpl<$Res>
           ? _value.regularStatus
           : regularStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      like: null == like
+          ? _value.like
+          : like // ignore: cast_nullable_to_non_nullable
+              as bool,
+      userProfileImages: null == userProfileImages
+          ? _value._userProfileImages
+          : userProfileImages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      totalDonationCnt: null == totalDonationCnt
+          ? _value.totalDonationCnt
+          : totalDonationCnt // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -179,19 +218,25 @@ class __$$_ProjectDetailCopyWithImpl<$Res>
 class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
   const _$_ProjectDetail(
       {required this.projectId,
+      required this.thumbNail,
       required final List<ProjectImage> projectImgList,
       required this.title,
       required this.usages,
-      required this.donationAble,
       required this.kind,
-      required this.regularStatus})
-      : _projectImgList = projectImgList;
+      required this.regularStatus,
+      required this.like,
+      required final List<String> userProfileImages,
+      required this.totalDonationCnt})
+      : _projectImgList = projectImgList,
+        _userProfileImages = userProfileImages;
 
   factory _$_ProjectDetail.fromJson(Map<String, dynamic> json) =>
       _$$_ProjectDetailFromJson(json);
 
   @override
   final int projectId;
+  @override
+  final String thumbNail;
   final List<ProjectImage> _projectImgList;
   @override
   List<ProjectImage> get projectImgList {
@@ -205,15 +250,26 @@ class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
   @override
   final String usages;
   @override
-  final bool donationAble;
-  @override
   final String kind;
   @override
   final String regularStatus;
+  @override
+  final bool like;
+  final List<String> _userProfileImages;
+  @override
+  List<String> get userProfileImages {
+    if (_userProfileImages is EqualUnmodifiableListView)
+      return _userProfileImages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userProfileImages);
+  }
+
+  @override
+  final int totalDonationCnt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProjectDetail(projectId: $projectId, projectImgList: $projectImgList, title: $title, usages: $usages, donationAble: $donationAble, kind: $kind, regularStatus: $regularStatus)';
+    return 'ProjectDetail(projectId: $projectId, thumbNail: $thumbNail, projectImgList: $projectImgList, title: $title, usages: $usages, kind: $kind, regularStatus: $regularStatus, like: $like, userProfileImages: $userProfileImages, totalDonationCnt: $totalDonationCnt)';
   }
 
   @override
@@ -222,12 +278,15 @@ class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
     properties
       ..add(DiagnosticsProperty('type', 'ProjectDetail'))
       ..add(DiagnosticsProperty('projectId', projectId))
+      ..add(DiagnosticsProperty('thumbNail', thumbNail))
       ..add(DiagnosticsProperty('projectImgList', projectImgList))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('usages', usages))
-      ..add(DiagnosticsProperty('donationAble', donationAble))
       ..add(DiagnosticsProperty('kind', kind))
-      ..add(DiagnosticsProperty('regularStatus', regularStatus));
+      ..add(DiagnosticsProperty('regularStatus', regularStatus))
+      ..add(DiagnosticsProperty('like', like))
+      ..add(DiagnosticsProperty('userProfileImages', userProfileImages))
+      ..add(DiagnosticsProperty('totalDonationCnt', totalDonationCnt));
   }
 
   @override
@@ -237,15 +296,20 @@ class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
             other is _$_ProjectDetail &&
             (identical(other.projectId, projectId) ||
                 other.projectId == projectId) &&
+            (identical(other.thumbNail, thumbNail) ||
+                other.thumbNail == thumbNail) &&
             const DeepCollectionEquality()
                 .equals(other._projectImgList, _projectImgList) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.usages, usages) || other.usages == usages) &&
-            (identical(other.donationAble, donationAble) ||
-                other.donationAble == donationAble) &&
             (identical(other.kind, kind) || other.kind == kind) &&
             (identical(other.regularStatus, regularStatus) ||
-                other.regularStatus == regularStatus));
+                other.regularStatus == regularStatus) &&
+            (identical(other.like, like) || other.like == like) &&
+            const DeepCollectionEquality()
+                .equals(other._userProfileImages, _userProfileImages) &&
+            (identical(other.totalDonationCnt, totalDonationCnt) ||
+                other.totalDonationCnt == totalDonationCnt));
   }
 
   @JsonKey(ignore: true)
@@ -253,12 +317,15 @@ class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
   int get hashCode => Object.hash(
       runtimeType,
       projectId,
+      thumbNail,
       const DeepCollectionEquality().hash(_projectImgList),
       title,
       usages,
-      donationAble,
       kind,
-      regularStatus);
+      regularStatus,
+      like,
+      const DeepCollectionEquality().hash(_userProfileImages),
+      totalDonationCnt);
 
   @JsonKey(ignore: true)
   @override
@@ -277,12 +344,15 @@ class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
 abstract class _ProjectDetail implements ProjectDetail {
   const factory _ProjectDetail(
       {required final int projectId,
+      required final String thumbNail,
       required final List<ProjectImage> projectImgList,
       required final String title,
       required final String usages,
-      required final bool donationAble,
       required final String kind,
-      required final String regularStatus}) = _$_ProjectDetail;
+      required final String regularStatus,
+      required final bool like,
+      required final List<String> userProfileImages,
+      required final int totalDonationCnt}) = _$_ProjectDetail;
 
   factory _ProjectDetail.fromJson(Map<String, dynamic> json) =
       _$_ProjectDetail.fromJson;
@@ -290,17 +360,23 @@ abstract class _ProjectDetail implements ProjectDetail {
   @override
   int get projectId;
   @override
+  String get thumbNail;
+  @override
   List<ProjectImage> get projectImgList;
   @override
   String get title;
   @override
   String get usages;
   @override
-  bool get donationAble;
-  @override
   String get kind;
   @override
   String get regularStatus;
+  @override
+  bool get like;
+  @override
+  List<String> get userProfileImages;
+  @override
+  int get totalDonationCnt;
   @override
   @JsonKey(ignore: true)
   _$$_ProjectDetailCopyWith<_$_ProjectDetail> get copyWith =>
