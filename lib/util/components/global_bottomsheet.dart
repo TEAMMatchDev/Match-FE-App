@@ -164,11 +164,17 @@ class ShareBottomSheet extends StatelessWidget {
         imageUrl: Uri.parse(imgUrl),
         link: Link(
           mobileWebUrl: Uri.parse(appLink),
-          // androidExecutionParams: ,
           // iosExecutionParams: ,
         ),
       ),
-      buttonTitle: "매치 보러가기",
+      buttons: [
+        Button(
+          title: "매치 보러가기",
+          link: Link(
+            mobileWebUrl: Uri.parse(appLink),
+          ),
+        ),
+      ],
     );
 
     if (isKakaoTalkSharingAvailable) {

@@ -26,7 +26,6 @@ class DynamicLink {
 
       if (dynamicLinkData != null) {
         _redirectScreen(dynamicLinkData);
-
         return true;
       }
     }
@@ -65,7 +64,7 @@ class DynamicLink {
     if (dynamicLinkData.link.queryParameters.containsKey('id')) {
       if (dynamicLinkData.link.queryParameters.containsKey('id')) {
         String link = dynamicLinkData.link.path.split('/').last;
-        String id = dynamicLinkData.link.queryParameters['id']!;
+        int id = dynamicLinkData.link.queryParameters['id'] as int;
 
         switch (link) {
           case "project":
