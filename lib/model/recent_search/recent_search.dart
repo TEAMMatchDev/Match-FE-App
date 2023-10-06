@@ -9,7 +9,7 @@ class RecentSearch with _$RecentSearch {
   const factory RecentSearch({
     required String name,
     required String title,
-    required int projectId,
+    required int donationId,
   }) = _RecentSearch;
   factory RecentSearch.fromJson(Map<String, dynamic> json) =>
       _$RecentSearchFromJson(json);

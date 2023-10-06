@@ -135,9 +135,9 @@ class SearchScreen extends GetView<SearchViewController> {
                           final search = controller.searchResults[index];
                           return SearchItem(
                               imgUrl: search.imgUrl,
-                              name: search.title,
-                              title: search.usages,
-                              projectId: search.projectId);
+                              name: search.flameName,
+                              title: search.projectName,
+                              projectId: search.donationId);
                         default:
                           return RecentItem(
                               recentSearch: controller.recentSearchList[index]);
