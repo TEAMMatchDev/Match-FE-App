@@ -10,28 +10,30 @@ class CommonButton extends StatelessWidget {
   final int textSize;
   final Color backgroundColor;
   final Color textColor;
+  final int verticalPadding;
   const CommonButton(
       {super.key,
       required this.onTap,
       required this.text,
       this.textSize = 14,
       this.backgroundColor = AppColors.white,
-      this.textColor = AppColors.grey9});
+      this.textColor = AppColors.grey9,
+      this.verticalPadding = 17});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 17.h),
+          padding: EdgeInsets.symmetric(vertical: verticalPadding.h),
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: backgroundColor,
               border: Border.all(color: AppColors.grey1),
               borderRadius: BorderRadius.circular(10.r)),
           child: Text(text,
-              style: AppTextStyles.T1Bold14
-                  .copyWith(color: textColor, fontSize: textSize.sp)),
+              style: AppTextStyles.T1Bold14.copyWith(
+                  color: textColor, fontSize: textSize.sp)),
         ));
   }
 

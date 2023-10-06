@@ -1,15 +1,19 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:logger/logger.dart';
+import 'package:match/util/components/global_modal.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:match/util/method/permission_handler.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../const/style/global_color.dart';
 
@@ -53,7 +57,11 @@ class ShareBottomSheet extends StatelessWidget {
             ),
             //TODO: 후원 상세 페이지에서는 매치 사진 저장하기 부분 삭제
             //TODO: 각 button 로직 추가
-            buttonTile(icon: "save_18", text: "매치 사진 저장하기", type: "PHOTO"),
+            buttonTile(
+                icon: "save_18",
+                text: "매치 사진 저장하기",
+                type: "PHOTO",
+                context: context),
             buttonTile(icon: "copy_18", text: "링크 복사하기", type: "LINK"),
             buttonTile(icon: "share_18", text: "카카오톡 공유하기", type: "KAKAO"),
           ],
@@ -64,18 +72,26 @@ class ShareBottomSheet extends StatelessWidget {
 
   /// bottomSheet button tile
   Widget buttonTile(
-      {required String icon, required String text, required type}) {
+      {required String icon,
+      required String text,
+      required String type,
+      BuildContext? context}) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         switch (type) {
           case "KAKAO":
-            kakoShare(
+            await kakoShare(
                 imgUrl: imgUrl, usages: usages, title: title, appLink: appLink);
             break;
           case "LINK":
-            launchDeepLink(appLink: appLink);
+            await launchDeepLink(appLink: appLink);
             break;
           case "PHOTO":
+            var result = await savePhoto(
+                imgUrl: imgUrl, title: title, context: context ?? Get.context!);
+            if (!result) {
+              Fluttertoast.showToast(msg: "사진이 저장이 되지 않았습니다. 다시 시도해주세요");
+            }
             break;
         }
       },
@@ -96,6 +112,33 @@ class ShareBottomSheet extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  ///*사진 저장하기
+  Future<bool> savePhoto(
+      {required String imgUrl,
+      required String title,
+      required BuildContext context}) async {
+    try {
+      if (await PermissionHandler.checkGalleryPermission()) {
+        var response = await Dio()
+            .get(imgUrl, options: Options(responseType: ResponseType.bytes));
+        final result = await ImageGallerySaver.saveImage(
+            Uint8List.fromList(response.data),
+            quality: 60,
+            name: title,
+            isReturnImagePathOfIOS: true);
+        // ${result["filePath"] + " 에" ?? " "} 사진이 저장되었어요!로 메세지 변경고려
+        Fluttertoast.showToast(msg: " 사진이 저장되었어요!");
+
+        return true;
+      } else {
+        await PermissionHandler.requestGallery(context);
+      }
+    } catch (e) {
+      Logger().d(e);
+    }
+    return false;
   }
 
   ///*카카오톡 공유하기 메소드
@@ -142,7 +185,7 @@ class ShareBottomSheet extends StatelessWidget {
     }
   }
 
-  ///*앱 내 딥링크 이동
+  ///*앱 내 딥링크 링크 복사
   Future<void> launchDeepLink({required String appLink}) async {
     // copy to clipboard
     await Clipboard.setData(ClipboardData(text: appLink));
