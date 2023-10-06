@@ -9,6 +9,7 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/routes/routes.dart';
+import '../../../util/components/global_bottomsheet.dart';
 import '../../../util/components/global_widget.dart';
 
 Widget CommonSectionHeader(
@@ -50,22 +51,25 @@ Widget adIndexItem({required int total, required int currentIdx}) {
         text: TextSpan(children: [
       TextSpan(
         text: "${currentIdx}",
-        style: AppTextStyles.T1Bold12
-            .copyWith(color: AppColors.white, letterSpacing: 0),
+        style: AppTextStyles.T1Bold12.copyWith(
+            color: AppColors.white, letterSpacing: 0),
       ),
       TextSpan(
         text: " / ${total}",
-        style: AppTextStyles.T1Bold12
-            .copyWith(color: AppColors.grey4, letterSpacing: 0),
+        style: AppTextStyles.T1Bold12.copyWith(
+            color: AppColors.grey4, letterSpacing: 0),
       )
     ])),
   );
 }
 
 ///* 나의 매치(불타는 매치) section
+///* [HomeScreen]에서 사용되는 위젯<br/>
 class MyMatchItem extends StatelessWidget {
   final String title;
   final int count;
+  final String usages;
+  final int matchId;
   final List<String> imgList;
   final String backgroundImg;
   final Future<void> Function() destination;
@@ -75,7 +79,9 @@ class MyMatchItem extends StatelessWidget {
       required this.count,
       required this.imgList,
       this.backgroundImg = tmpBackgroundImg,
-      required this.destination});
+      required this.destination,
+      required this.usages,
+      required this.matchId});
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +115,14 @@ class MyMatchItem extends StatelessWidget {
                 top: 14.h,
                 right: 17.w,
                 child: GestureDetector(
-                    onTap: () {
-                      //TODO: share 기능 구현/ 저장,복사,공유하기 버튼
+                    onTap: () async {
+                      await Get.bottomSheet(ShareBottomSheet(
+                          imgUrl: backgroundImg,
+                          //
+                          usages: usages,
+                          screenType: "burnMatch",
+                          title: title,
+                          id: matchId));
                     },
                     child: SvgPicture.asset(iconDir + "ic_share_16.svg"))),
             Positioned(
@@ -220,8 +232,8 @@ class TodayMatchItem extends StatelessWidget {
                             profileItem(),
                             Text(
                               "+${count}",
-                              style: AppTextStyles.T1Bold13
-                                  .copyWith(color: AppColors.white),
+                              style: AppTextStyles.T1Bold13.copyWith(
+                                  color: AppColors.white),
                             )
                           ],
                         ),
@@ -229,7 +241,7 @@ class TodayMatchItem extends StatelessWidget {
                           height: 10.h,
                         ),
                         SizedBox(
-                          width: 72.w,
+                          width: 102.w,
                           child: Text(
                             organization,
                             style: AppTextStyles.T1Bold13.copyWith(

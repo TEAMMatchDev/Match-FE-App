@@ -62,8 +62,8 @@ class HomeScreen extends GetView<HomeController> {
                         ),
                         Text(
                           "고유 이름을 입력해보세요.",
-                          style: AppTextStyles.L1Medium13
-                              .copyWith(color: AppColors.grey4),
+                          style: AppTextStyles.L1Medium13.copyWith(
+                              color: AppColors.grey4),
                           textHeightBehavior: TextHeightBehavior(
                               applyHeightToFirstAscent: false),
                         ),
@@ -129,6 +129,9 @@ class HomeScreen extends GetView<HomeController> {
                             Get.toNamed(Routes.home + Routes.burning_match);
                           },
                           title: "후원 함께할 분, 들어와요!",
+                          usages: "후원처",
+                          //TODO: 실데이터로 변경
+                          matchId: 1,
                           count: 15,
                           imgList: ["test", "test", "test"]);
                     },

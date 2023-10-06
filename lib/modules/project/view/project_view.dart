@@ -57,6 +57,7 @@ class ProjectScreen extends GetView<ProjectController> {
                 child: GestureDetector(
                     onTap: () async {
                       await Get.bottomSheet(ShareBottomSheet(
+                          screenType: "project",
                           imgUrl: controller.projectDetail.value.thumbNail,
                           usages: controller.projectDetail.value.usages,
                           title: controller.projectDetail.value.title,

@@ -70,6 +70,10 @@ class DynamicLink {
           case "project":
             Get.offAllNamed(Routes.project, arguments: {"projectId": id});
             break;
+          case "burnMatch":
+            Get.offAllNamed(Routes.home + Routes.burning_match,
+                arguments: {"regularPayId": id});
+            break;
         }
       }
     }

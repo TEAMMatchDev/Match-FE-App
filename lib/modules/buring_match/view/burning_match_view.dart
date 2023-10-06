@@ -14,6 +14,7 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import 'package:timeline_tile_nic/timeline_tile.dart';
 
 import '../../../util/components/global_app_bar.dart';
+import '../../../util/components/global_bottomsheet.dart';
 import '../../../util/const/global_variable.dart';
 
 class BurningMatchScreen extends GetView<BurningMatchController> {
@@ -75,8 +76,17 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                           top: 14.h,
                           right: 16.w,
                           child: GestureDetector(
-                              onTap: () {
-                                //TODO: share 기능 구현/ 저장,복사,공유하기 버튼
+                              onTap: () async {
+                                await Get.bottomSheet(ShareBottomSheet(
+                                    imgUrl: controller.matchPay.value.imgUrl,
+                                    //
+                                    usages:
+                                        controller.matchPay.value.projectTitle,
+                                    screenType: "burnMatch",
+                                    title:
+                                        controller.matchPay.value.projectTitle,
+                                    id: controller
+                                        .matchPay.value.regularPayId));
                               },
                               child: SvgPicture.asset(
                                   iconDir + "ic_share_16.svg"))),

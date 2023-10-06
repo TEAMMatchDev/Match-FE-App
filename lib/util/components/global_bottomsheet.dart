@@ -24,12 +24,14 @@ class ShareBottomSheet extends StatelessWidget {
   final String usages;
   final String title;
   final int id;
+  final String screenType;
   const ShareBottomSheet(
       {super.key,
       required this.imgUrl,
       required this.usages,
       required this.title,
-      required this.id});
+      required this.id,
+      required this.screenType});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +83,7 @@ class ShareBottomSheet extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         var appLink =
-            await DynamicLink.getShortLink(screenName: "project", id: id);
+            await DynamicLink.getShortLink(screenName: screenType, id: id);
         Logger().d(appLink);
         switch (type) {
           case "KAKAO":
