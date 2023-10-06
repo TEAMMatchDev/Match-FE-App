@@ -2,9 +2,13 @@ import 'dart:async';
 
 import 'package:get_storage/get_storage.dart';
 
+import '../../model/recent_search/recent_search.dart';
+
 enum StorageKey {
   SEARCH;
 }
+
+const MAX_ITEMS = 10;
 
 ///*GetStorage를 이용한 로컬 저장소
 ///[SearchScreen]에서 최근검색어 기능에 사용
@@ -12,15 +16,36 @@ class GetStorageUtil {
   ///* singleton 내부 저장소
   static final storage = GetStorage();
 
-  ///GetStorage에서 key에 해당하는 value를 가져옴
-  ///* [key] : [StorageKey] enum
-  static FutureOr<String> getValue(StorageKey key) async =>
-      await storage.read(key.name) ?? "";
+  //GetStorage에서 key에 해당하는 value를 가져옴
+  ///* return : [List<RecentSearch>]
+  static Future<List<RecentSearch>> getRecentSearches() async {
+    final List<dynamic>? jsonList =
+        storage.read<List<dynamic>>(StorageKey.SEARCH.name);
+    if (jsonList == null) {
+      return [];
+    }
+    final List<RecentSearch> recentSearches =
+        jsonList.map((json) => RecentSearch.fromJson(json)).toList();
+    return recentSearches;
+  }
 
   ///GetStorage에서 key에 해당하는 value를 설정해줌
-  ///* [key] : [StorageKey] enum, [value] : 저장할 값
-  static Future<void> setValue(StorageKey key, String value) async =>
-      await storage.write(key.name, value);
+  ///* [recentSearch] : [RecentSearch]
+  static Future<void> addRecentSearch(RecentSearch recentSearch) async {
+    List<RecentSearch> recentSearches = await getRecentSearches();
+
+    // 리스트 길이를 관리하여 최대 maxItems만큼 유지
+    if (recentSearches.length >= MAX_ITEMS) {
+      recentSearches.removeAt(0); // 가장 오래된 항목 제거
+    }
+
+    // 새 항목 추가
+    recentSearches.add(recentSearch);
+
+    // 저장
+    storage.write(
+        StorageKey.SEARCH.name, recentSearches.map((e) => e.toJson()).toList());
+  }
 
   ///GetStorage에서 key에 해당하는 value를 제거
   ///* [key] : [StorageKey] enum
