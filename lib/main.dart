@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -5,7 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
+import 'package:logger/logger.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
+import 'package:match/util/method/dynamic_link.dart';
 
 import 'provider/routes/pages.dart';
 import 'util/const/style/global_color.dart';
@@ -23,7 +27,12 @@ Future<void> initService() async {
   WidgetsFlutterBinding.ensureInitialized();
   //* 카카오  SDK 초기화
   KakaoSdk.init(nativeAppKey: dotenv.env['kakaoApiKey']!);
+  //* firebase dynamic link 초기화
+  await Firebase.initializeApp();
+  await DynamicLink.setUp();
 }
+
+Future<void> initialDynamicLink(BuildContext context) async {}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

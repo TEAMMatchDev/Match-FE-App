@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ import 'package:logger/logger.dart';
 import 'package:match/util/components/global_modal.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:match/util/method/dynamic_link.dart';
 import 'package:match/util/method/permission_handler.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../const/style/global_color.dart';
@@ -21,13 +23,13 @@ class ShareBottomSheet extends StatelessWidget {
   final String imgUrl;
   final String usages;
   final String title;
-  final String appLink;
+  final int id;
   const ShareBottomSheet(
       {super.key,
       required this.imgUrl,
       required this.usages,
       required this.title,
-      required this.appLink});
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +80,9 @@ class ShareBottomSheet extends StatelessWidget {
       BuildContext? context}) {
     return GestureDetector(
       onTap: () async {
+        var appLink =
+            await DynamicLink.getShortLink(screenName: "project", id: id);
+        Logger().d(appLink);
         switch (type) {
           case "KAKAO":
             await kakoShare(

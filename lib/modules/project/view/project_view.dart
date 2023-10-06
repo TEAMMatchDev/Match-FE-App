@@ -60,8 +60,7 @@ class ProjectScreen extends GetView<ProjectController> {
                           imgUrl: controller.projectDetail.value.thumbNail,
                           usages: controller.projectDetail.value.usages,
                           title: controller.projectDetail.value.title,
-                          appLink:
-                              "https://github.com/TEAMMatchDev/Match-FE-App/issues"));
+                          id: controller.projectDetail.value.projectId));
                     },
                     child: SvgPicture.asset(
                       iconDir + "ic_share_16.svg",
