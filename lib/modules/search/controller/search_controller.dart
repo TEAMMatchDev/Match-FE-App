@@ -3,18 +3,26 @@ import 'package:get/get.dart';
 import 'package:match/model/project/project.dart';
 import 'package:match/model/recent_search/recent_search.dart';
 import 'package:match/modules/home/widget/home_widget.dart';
+import 'package:match/util/method/get_storage.dart';
 
 import '../../../model/search/search.dart';
+
+//* [SearchScreen]에서 사용되는 검색 상태
+enum SEARCH_STATUS {
+  //진행중
+  INIT,
+  //시작 전
+  EDIT,
+  //마감
+  SEARCH
+}
 
 //SearchController class가 있어서 해당 이름으로 수정
 class SearchViewController extends GetxController {
   //검색 필드 controller
   Rx<TextEditingController> searchTextController = TextEditingController().obs;
   //최근 검색어 list
-  RxList<RecentSearch> recentSearchList = <RecentSearch>[
-    RecentSearch(name: "ㄹㅇㄴㄹㄴ", title: "후원처 이름", donationId: 1),
-    RecentSearch(name: "ㄹㅇㄴㄹㄴ", title: "후원처 이름", donationId: 1)
-  ].obs;
+  RxList<RecentSearch> recentSearchList = <RecentSearch>[].obs;
   RxList<Search> searchResults = <Search>[
     Search(
         donationId: 157,
@@ -33,13 +41,10 @@ class SearchViewController extends GetxController {
   ].obs;
   //최근 검색어 위젯 활성화 여부
   Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
-}
 
-enum SEARCH_STATUS {
-  //진행중
-  INIT,
-  //시작 전
-  EDIT,
-  //마감
-  SEARCH
+  @override
+  void onInit() async {
+    super.onInit();
+    recentSearchList.value = await GetStorageUtil.getRecentSearches();
+  }
 }

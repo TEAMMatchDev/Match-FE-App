@@ -49,6 +49,6 @@ class GetStorageUtil {
 
   ///GetStorage에서 key에 해당하는 value를 제거
   ///* [key] : [StorageKey] enum
-  static Future<void> delValue(StorageKey key) async =>
-      await storage.remove(key.name);
+  static Future<void> delAllSearch() async =>
+      await storage.remove(StorageKey.SEARCH.name);
 }
