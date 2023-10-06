@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:logger/logger.dart';
@@ -51,7 +53,7 @@ class ShareBottomSheet extends StatelessWidget {
             ),
             //TODO: 후원 상세 페이지에서는 매치 사진 저장하기 부분 삭제
             //TODO: 각 button 로직 추가
-            buttonTile(icon: "save_18", text: "매치 사진 저장하기", type: "SAVE"),
+            buttonTile(icon: "save_18", text: "매치 사진 저장하기", type: "PHOTO"),
             buttonTile(icon: "copy_18", text: "링크 복사하기", type: "LINK"),
             buttonTile(icon: "share_18", text: "카카오톡 공유하기", type: "KAKAO"),
           ],
@@ -71,6 +73,10 @@ class ShareBottomSheet extends StatelessWidget {
                 imgUrl: imgUrl, usages: usages, title: title, appLink: appLink);
             break;
           case "LINK":
+            launchDeepLink(appLink: appLink);
+            break;
+          case "PHOTO":
+            break;
         }
       },
       child: Padding(
@@ -138,6 +144,8 @@ class ShareBottomSheet extends StatelessWidget {
 
   ///*앱 내 딥링크 이동
   Future<void> launchDeepLink({required String appLink}) async {
-    //TODO:해당 앱 link 복사
+    // copy to clipboard
+    await Clipboard.setData(ClipboardData(text: appLink));
+    Fluttertoast.showToast(msg: "링크가 복사되었어요! 공유해 주세요.");
   }
 }
