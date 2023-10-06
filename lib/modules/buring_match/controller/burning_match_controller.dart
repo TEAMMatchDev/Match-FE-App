@@ -2,9 +2,18 @@ import 'package:get/get.dart';
 import 'package:match/model/match_history/match_history.dart';
 import 'package:match/model/match_pay/match_pay.dart';
 
+enum MATCH_STATUS {
+  //검색에서 접근
+  DONAITON,
+  //시작 전
+  REGULAR_PAY,
+}
+
 class BurningMatchController extends GetxController {
   static BurningMatchController get to => Get.find();
-  int projectId = Get.arguments["regularPayId"] ?? 0;
+  int id = Get.arguments["id"] ?? 0;
+  int projectId = Get.arguments["projectId"] ?? -1;
+  String type = Get.arguments["type"] ?? 0;
 
   ///*5-7-1 상단 매치 결제 정보
   Rx<MatchPay> matchPay = MatchPay(

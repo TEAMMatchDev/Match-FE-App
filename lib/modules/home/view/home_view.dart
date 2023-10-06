@@ -9,6 +9,7 @@ import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../buring_match/controller/burning_match_controller.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
 
@@ -126,11 +127,17 @@ class HomeScreen extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       return MyMatchItem(
                           destination: () async {
-                            Get.toNamed(Routes.home + Routes.burning_match);
+                            Get.toNamed(Routes.home + Routes.burning_match,
+                                arguments: {
+                                  "id": 1, // TODO: regularPayId로 적용해야함
+                                  //TODO: projectId로 적용해야함
+                                  "projectId": 1,
+                                  "type": MATCH_STATUS.REGULAR_PAY
+                                });
                           },
                           title: "후원 함께할 분, 들어와요!",
                           usages: "후원처",
-                          //TODO: 실데이터로 변경
+                          //TODO: projectId로 적용해야함
                           matchId: 1,
                           count: 15,
                           imgList: ["test", "test", "test"]);

@@ -92,9 +92,7 @@ class SearchScreen extends GetView<SearchViewController> {
                     }),
                     onChanged: ((value) async {
                       controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                      //TODO:연관검색어 widget visible
                     }),
-                    onTap: () {},
                   ),
                 )
               ],
@@ -149,11 +147,7 @@ class SearchScreen extends GetView<SearchViewController> {
                 switch (controller.searchStatus.value) {
                   case SEARCH_STATUS.SEARCH:
                     final search = controller.searchResults[index];
-                    return SearchItem(
-                        imgUrl: search.imgUrl,
-                        name: search.flameName,
-                        title: search.projectName,
-                        projectId: search.donationId);
+                    return SearchItem(search: search);
                   default:
                     return RecentItem(
                       recentSearch: controller.recentSearchList[index],

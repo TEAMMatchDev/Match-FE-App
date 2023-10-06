@@ -71,8 +71,8 @@ class DynamicLink {
             Get.offAllNamed(Routes.project, arguments: {"projectId": id});
             break;
           case "burnMatch":
-            Get.offAllNamed(Routes.home + Routes.burning_match,
-                arguments: {"regularPayId": id});
+            //기획 변경으로 프로젝트로 이동
+            Get.offAllNamed(Routes.project, arguments: {"projectId": id});
             break;
         }
       }

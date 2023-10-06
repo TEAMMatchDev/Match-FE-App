@@ -2,12 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:match/model/recent_search/recent_search.dart';
+import 'package:match/model/search/search.dart';
 import 'package:match/modules/home/widget/home_widget.dart';
 import 'package:match/util/const/global_variable.dart';
 
+import '../../../provider/routes/routes.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
+import '../../buring_match/controller/burning_match_controller.dart';
 
 Widget RecentItem(
     {required RecentSearch recentSearch,
@@ -36,15 +40,15 @@ Widget RecentItem(
 }
 
 ///* 검색 결과 ListTile Item
-Widget SearchItem(
-    {required String imgUrl,
-    required String name,
-    required String title,
-    required int projectId}) {
+Widget SearchItem({required Search search}) {
   return GestureDetector(
-    onTap: () {
-      //TODO: projectID로 후원 상세페이지 이동
-      //research.projectId
+    onTap: () async {
+      await Get.toNamed(Routes.home + Routes.burning_match, arguments: {
+        "id": search.donationId, // TODO: regularPayId로 적용해야함
+        //TODO: projectId로 적용해야함
+        "projectId": search.projectId,
+        "type": MATCH_STATUS.DONAITON
+      });
     },
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -55,7 +59,7 @@ Widget SearchItem(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6.r),
           ),
-          child: Image.network(imgUrl),
+          child: Image.network(search.imgUrl),
         ),
         SizedBox(
           width: 12.w,
@@ -66,7 +70,7 @@ Widget SearchItem(
             children: [
               Text(
                 //고유이름
-                name,
+                search.flameName,
                 style: AppTextStyles.T1Bold13.copyWith(
                     fontWeight: FontWeight.w600),
               ),
@@ -75,7 +79,7 @@ Widget SearchItem(
               ),
               Text(
                 //후원타이틀
-                title,
+                search.projectName,
                 style: AppTextStyles.T1Bold12.copyWith(
                     fontWeight: FontWeight.w500, color: AppColors.grey6),
               ),

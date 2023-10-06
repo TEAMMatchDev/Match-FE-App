@@ -85,8 +85,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                                     screenType: "burnMatch",
                                     title:
                                         controller.matchPay.value.projectTitle,
-                                    id: controller
-                                        .matchPay.value.regularPayId));
+                                    id: controller.projectId));
                               },
                               child: SvgPicture.asset(
                                   iconDir + "ic_share_16.svg"))),
