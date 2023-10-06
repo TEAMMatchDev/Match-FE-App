@@ -156,7 +156,14 @@ class SearchScreen extends GetView<SearchViewController> {
                         projectId: search.donationId);
                   default:
                     return RecentItem(
-                        recentSearch: controller.recentSearchList[index]);
+                      recentSearch: controller.recentSearchList[index],
+                      onTap: () async {
+                        controller.searchTextController.value.text =
+                            controller.recentSearchList[index].name;
+                        controller.searchStatus.value = SEARCH_STATUS.SEARCH;
+                        //TODO api 호출
+                      },
+                    );
                 }
               }),
               separatorBuilder: ((context, index) {

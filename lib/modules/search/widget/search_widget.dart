@@ -9,26 +9,26 @@ import 'package:match/util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
 
-Widget RecentItem({
-  required RecentSearch recentSearch,
-}) {
+Widget RecentItem(
+    {required RecentSearch recentSearch,
+    required Future<void> Function() onTap}) {
   return GestureDetector(
-    onTap: () {
-      //TODO: projectID로 후원 상세페이지 이동
-      //research.projectId
-    },
+    onTap: onTap,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          recentSearch.name,
-          style: AppTextStyles.T1Bold13
-              .copyWith(fontWeight: FontWeight.w600),
+        SizedBox(
+          width: 120.w,
+          child: Text(
+            recentSearch.name,
+            style: AppTextStyles.T1Bold13.copyWith(fontWeight: FontWeight.w600),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
         Text(
           recentSearch.title,
-          style: AppTextStyles.T1Bold12
-              .copyWith(fontWeight: FontWeight.w500, color: AppColors.grey6),
+          style: AppTextStyles.T1Bold12.copyWith(
+              fontWeight: FontWeight.w500, color: AppColors.grey6),
         ),
       ],
     ),
@@ -67,8 +67,8 @@ Widget SearchItem(
               Text(
                 //고유이름
                 name,
-                style: AppTextStyles.T1Bold13
-                    .copyWith(fontWeight: FontWeight.w600),
+                style: AppTextStyles.T1Bold13.copyWith(
+                    fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: 6.h,
