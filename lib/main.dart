@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:logger/logger.dart';
 import 'package:match/modules/splash/binding/splash_binding.dart';
@@ -30,6 +31,9 @@ Future<void> initService() async {
   //* firebase dynamic link 초기화
   await Firebase.initializeApp();
   await DynamicLink.setUp();
+
+  /// * GetStorage 초기화
+  await GetStorage.init();
 }
 
 Future<void> initialDynamicLink(BuildContext context) async {}

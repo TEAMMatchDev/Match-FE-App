@@ -55,8 +55,8 @@ class SearchScreen extends GetView<SearchViewController> {
                       height: 1.5,
                     ),
                     placeholder: "고유 이름을 입력해보세요.",
-                    placeholderStyle: AppTextStyles.L1Medium13
-                        .copyWith(color: AppColors.grey4, height: 1.5),
+                    placeholderStyle: AppTextStyles.L1Medium13.copyWith(
+                        color: AppColors.grey4, height: 1.5),
                     prefixMode: OverlayVisibilityMode.notEditing,
                     prefix: Padding(
                         padding: EdgeInsets.only(left: 14.w),
@@ -73,6 +73,8 @@ class SearchScreen extends GetView<SearchViewController> {
                           child: SvgPicture.asset(
                               iconDir + "ic_search_cancel_22.svg")),
                     ),
+                    //자동 키보드 활성화
+                    autofocus: true,
                     onSubmitted: ((value) async {
                       controller.searchStatus.value = SEARCH_STATUS.SEARCH;
                       //TODO: api 연결
@@ -104,8 +106,8 @@ class SearchScreen extends GetView<SearchViewController> {
                         },
                         child: Text(
                           "모두 삭제",
-                          style: AppTextStyles.T1Bold12
-                              .copyWith(color: AppColors.grey6),
+                          style: AppTextStyles.T1Bold12.copyWith(
+                              color: AppColors.grey6),
                         ),
                       ),
                     ],
