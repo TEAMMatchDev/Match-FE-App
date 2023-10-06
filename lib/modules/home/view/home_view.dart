@@ -132,7 +132,7 @@ class HomeScreen extends GetView<HomeController> {
                                   "id": 1, // TODO: regularPayId로 적용해야함
                                   //TODO: projectId로 적용해야함
                                   "projectId": 1,
-                                  "type": MATCH_STATUS.REGULAR_PAY
+                                  "type": MATCH_STATUS.REGULAR_PAY.name
                                 });
                           },
                           title: "후원 함께할 분, 들어와요!",
