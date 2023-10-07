@@ -329,14 +329,17 @@ class TodayMatchItem extends StatelessWidget {
 //   }
 // }
 
-Widget profileItem({String profileUrl = tmpProfileImg, double size = 22}) {
+Widget profileItem(
+    {String profileUrl = tmpProfileImg,
+    double size = 22,
+    bool isBorder = true}) {
   return Container(
     width: size,
     height: size,
     decoration: BoxDecoration(
       shape: BoxShape.circle,
       border: Border.all(
-        color: AppColors.white,
+        color: isBorder ? AppColors.white : Colors.transparent,
         width: 1.375,
       ),
     ),

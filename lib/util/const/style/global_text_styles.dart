@@ -71,5 +71,5 @@ class AppTextStyles {
     height: _regularHeight,
   );
   static var S1SemiBold10 = T1Bold10.copyWith(fontWeight: FontWeight.w600);
-  static var L1Medium120 = T1Bold10.copyWith(fontWeight: FontWeight.w500);
+  static var L1Medium10 = T1Bold10.copyWith(fontWeight: FontWeight.w500);
 }
