@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -56,9 +58,51 @@ class ProjectComment extends StatelessWidget {
           ),
         ),
         isEdit
-            ? SvgPicture.asset(iconDir + "ic_more_18.svg")
+            ? GestureDetector(
+                onTap: () {
+                  Get.bottomSheet(AlertBottomSheet());
+                },
+                child: SvgPicture.asset(iconDir + "ic_more_18.svg"))
             : SizedBox.shrink()
       ],
+    );
+  }
+}
+
+class AlertBottomSheet extends StatelessWidget {
+  const AlertBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(),
+      child: Column(
+        children: [
+          _bottomSheetItem(icon: "ic_alert_18.svg", text: "신고하기", onTap: () {}),
+          _bottomSheetItem(icon: "ic_block_18.svg", text: "차단하기", onTap: () {}),
+          CommonButton.payment(
+              text: "취소",
+              onTap: () async {
+                Get.back();
+              })
+        ],
+      ),
+    );
+  }
+
+  Widget _bottomSheetItem(
+      {required String icon, required String text, required Function onTap}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
+      child: Row(
+        children: [
+          SvgPicture.asset(iconDir + icon),
+          SizedBox(
+            width: 12.w,
+          ),
+          Text(text, style: AppTextStyles.T1Bold15),
+        ],
+      ),
     );
   }
 }
