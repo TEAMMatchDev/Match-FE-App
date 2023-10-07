@@ -1,9 +1,29 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:match/model/project_detail/project_detail.dart';
+
+class MatchTabBar extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  late TabController controller;
+
+  @override
+  void onInit() {
+    super.onInit();
+    controller = TabController(vsync: this, length: 3);
+  }
+
+  @override
+  void onClose() {
+    controller.dispose();
+    super.onClose();
+  }
+}
 
 class ProjectController extends GetxController {
   static ProjectController get to => Get.find();
   int projectId = Get.arguments["projectId"] ?? 0;
+  RxInt tabIndex = 0.obs;
+  late final MatchTabBar matchTabBar;
   Rx<bool> isLike = true.obs;
   Rx<ProjectDetail> projectDetail = ProjectDetail(
           projectId: 1,
@@ -56,6 +76,7 @@ class ProjectController extends GetxController {
   @override
   void onInit() {
     // TODO projectId로 서버에서 데이터 가져오기ㄴ
+    matchTabBar = Get.put(MatchTabBar());
     super.onInit();
   }
 }
