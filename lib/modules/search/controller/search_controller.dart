@@ -8,17 +8,8 @@ import 'package:match/model/recent_search/recent_search.dart';
 import 'package:match/modules/home/widget/home_widget.dart';
 import 'package:match/util/method/get_storage.dart';
 
+import '../../../model/enum/search_statu.dart';
 import '../../../model/search/search.dart';
-
-//* [SearchScreen]에서 사용되는 검색 상태
-enum SEARCH_STATUS {
-  //진행중
-  INIT,
-  //시작 전
-  EDIT,
-  //마감
-  SEARCH
-}
 
 //SearchController class가 있어서 해당 이름으로 수정
 class SearchViewController extends GetxController {
@@ -58,7 +49,8 @@ class SearchViewController extends GetxController {
   ///textFieldController에 listener를 등록하는 함수
   Future<void> addTimerListenr() async {
     searchTextController.value.addListener(() async {
-      if (searchTextController.value.text.isNotEmpty && searchStatus.value == SEARCH_STATUS.EDIT) {
+      if (searchTextController.value.text.isNotEmpty &&
+          searchStatus.value == SEARCH_STATUS.EDIT) {
         // 입력이 없을 때 타이머 시작
         if (_timer == null) {
           _timer = Timer(Duration(seconds: 1), () {

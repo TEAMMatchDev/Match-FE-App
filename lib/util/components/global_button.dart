@@ -46,13 +46,16 @@ class CommonButton extends StatelessWidget {
   //       text: text);
   // }
   factory CommonButton.payment(
-      {required String text, required Future<void> Function() onTap}) {
+      {String text = "결제 방법 변경",
+      int verticalPadding = 17,
+      required Future<void> Function() onTap}) {
     return CommonButton(
       onTap: onTap,
-      text: "결제 방법 변경",
+      text: text,
       backgroundColor: AppColors.black,
       textColor: AppColors.white,
       textSize: 16,
+      verticalPadding: verticalPadding,
     );
   }
 }

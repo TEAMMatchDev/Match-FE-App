@@ -10,13 +10,15 @@ import 'package:permission_handler/permission_handler.dart';
 
 class CommonDialog extends StatelessWidget {
   final String title;
-  final String subtitle;
+  final String? subtitle;
   final Future<void> Function() onGrant;
+  final String grantText;
   const CommonDialog(
       {super.key,
       required this.title,
       required this.subtitle,
-      required this.onGrant});
+      required this.onGrant,
+      this.grantText = "설정하기"});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,11 @@ class CommonDialog extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(subtitle,
-                  style: AppTextStyles.S1SemiBold13.copyWith(
-                      color: AppColors.grey6)),
+              subtitle != null
+                  ? Text(subtitle!,
+                      style: AppTextStyles.S1SemiBold13.copyWith(
+                          color: AppColors.grey6))
+                  : SizedBox.shrink(),
               SizedBox(
                 height: 10.h,
               ),
@@ -54,7 +58,7 @@ class CommonDialog extends StatelessWidget {
                       child: CommonButton(
                     verticalPadding: 10,
                     onTap: onGrant,
-                    text: "설정하기",
+                    text: grantText,
                     textColor: AppColors.black,
                   ))
                 ],
@@ -68,6 +72,26 @@ class CommonDialog extends StatelessWidget {
     return CommonDialog(
       title: "갤러리 권한 설정",
       subtitle: "갤러리 권한을 설정해야\n이미지를 업로드할 수 있습니다.",
+      onGrant: () async {
+        await openAppSettings();
+      },
+    );
+  }
+  factory CommonDialog.delete({required BuildContext context}) {
+    return CommonDialog(
+      title: "댓글을 삭제하시겠어요?",
+      subtitle: null,
+      grantText: "삭제하기",
+      onGrant: () async {
+        await openAppSettings();
+      },
+    );
+  }
+  factory CommonDialog.alert({required BuildContext context}) {
+    return CommonDialog(
+      title: "정말 댓글을 신고하시겠어요?",
+      subtitle: null,
+      grantText: "신고하기",
       onGrant: () async {
         await openAppSettings();
       },

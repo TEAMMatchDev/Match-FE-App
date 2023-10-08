@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/util/method/get_storage.dart';
 
+import '../../../model/enum/search_statu.dart';
 import '../../../model/recent_search/recent_search.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';

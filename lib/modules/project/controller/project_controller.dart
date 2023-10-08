@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/search_statu.dart';
 import 'package:match/model/project_detail/project_detail.dart';
 import 'package:match/model/project_history.dart/project_history.dart';
 
@@ -94,6 +95,10 @@ class ProjectController extends GetxController {
             "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
         nickname: "임현우"),
   ].obs;
+
+  //* 댓글
+  Rx<TextEditingController> commentTextController = TextEditingController().obs;
+  Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
   RxList<Comment> tmpProjectComment = <Comment>[
     Comment(
         commentId: 1,

@@ -80,24 +80,44 @@ class AlertBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(),
-      child: Column(
-        children: [
-          _bottomSheetItem(icon: "ic_alert_18.svg", text: "신고하기", onTap: () {}),
-          _bottomSheetItem(icon: "ic_block_18.svg", text: "차단하기", onTap: () {}),
-          CommonButton.payment(
-              text: "취소",
-              onTap: () async {
-                Get.back();
-              })
-        ],
+    return IntrinsicHeight(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 27.h),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r)),
+        ),
+        child: Column(
+          children: [
+            _bottomSheetItem(
+                icon: "ic_alert_18.svg",
+                text: "신고하기",
+                onTap: () async {
+                  //TODO: 신고하기 api 호출
+                }),
+            _bottomSheetItem(
+                icon: "ic_block_18.svg",
+                text: "차단하기",
+                onTap: () async {
+                  //TODO: 삭제하기 api 호출
+                }),
+            CommonButton.payment(
+                text: "취소",
+                verticalPadding: 13,
+                onTap: () async {
+                  Get.back();
+                })
+          ],
+        ),
       ),
     );
   }
 
   Widget _bottomSheetItem(
-      {required String icon, required String text, required Function onTap}) {
+      {required String icon,
+      required String text,
+      required Future<void> Function() onTap}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
       child: Row(

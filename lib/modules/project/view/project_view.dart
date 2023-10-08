@@ -9,6 +9,7 @@ import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
 import 'package:match/util/components/global_bottomsheet.dart';
 
+import '../../../model/enum/search_statu.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
@@ -23,11 +24,11 @@ class ProjectScreen extends GetView<ProjectController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Obx(
-              () => ListView(
+      body: Obx(
+        () => Column(
+          children: [
+            Expanded(
+              child: ListView(
                 children: [
                   Stack(children: [
                     Image.network(
@@ -199,18 +200,56 @@ class ProjectScreen extends GetView<ProjectController> {
                 ],
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 10.w,
-            ).copyWith(bottom: 24.h),
-            child: CommonButton.payment(
-                text: "매치 켜기",
-                onTap: (() async {
-                  //TODO: 매치 결제 페이지로 이동
-                })),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ).copyWith(bottom: 24.h),
+              child: controller.tabIndex.value == 2
+                  ? CupertinoTextField(
+                      controller: controller.commentTextController.value,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.h, horizontal: 12.w),
+                      decoration: BoxDecoration(
+                        color: AppColors.searchBackground,
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      keyboardType: TextInputType.text,
+                      cursorColor: AppColors.black,
+                      cursorHeight: 18.h,
+                      style: AppTextStyles.T1Bold13.copyWith(
+                        color: AppColors.grey8,
+                        height: 1.5,
+                      ),
+                      placeholder: "댓글을 남겨 응원해주세요.",
+                      placeholderStyle: AppTextStyles.L1Medium13.copyWith(
+                          color: AppColors.grey4, height: 1.5),
+                      // clearButtonMode: OverlayVisibilityMode.editing,
+                      suffixMode: OverlayVisibilityMode.always,
+                      suffix: GestureDetector(
+                        onTap: () async {},
+                        child: Padding(
+                            padding: EdgeInsets.only(right: 14.w),
+                            child: SvgPicture.asset(iconDir +
+                                (controller.searchStatus.value !=
+                                        SEARCH_STATUS.INIT
+                                    ? "ic_comment_send_30.svg"
+                                    : "ic_comment_send_active_30.svg"))),
+                      ),
+                      onSubmitted: ((value) async {
+                        controller.searchStatus.value = SEARCH_STATUS.SEARCH;
+                      }),
+                      onChanged: ((value) async {
+                        controller.searchStatus.value = SEARCH_STATUS.EDIT;
+                      }),
+                    )
+                  : CommonButton.payment(
+                      text: "매치 켜기",
+                      onTap: (() async {
+                        //TODO: 매치 결제 페이지로 이동
+                      })),
+            )
+          ],
+        ),
       ),
     );
   }
