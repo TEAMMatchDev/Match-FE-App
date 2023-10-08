@@ -10,6 +10,7 @@ import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../home/widget/home_widget.dart';
 
+//*댓글, 기록 Widget
 class ProjectComment extends StatelessWidget {
   final String profileUrl;
   final String profile;

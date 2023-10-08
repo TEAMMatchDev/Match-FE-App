@@ -2,11 +2,51 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../model/enum/project_type.dart';
+import '../../../model/today_project/today_project.dart';
+import '../../../util/components/global_widget.dart';
 import '../../../util/const/style/global_color.dart';
+import '../../home/widget/home_widget.dart';
+
+///*[TodayMatchScreen], [DonateScreen]에서 사용
+class ProjectWidget extends StatelessWidget {
+  final TodayProject project;
+  const ProjectWidget({super.key, required this.project});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TodayMatchList(
+          count: project.totalDonationCnt,
+          imgList: project.userProfileImages,
+          isLike: project.like ? true.obs : false.obs,
+          projectId: project.projectId,
+        ),
+        SizedBox(
+          height: 12.h,
+        ),
+        TypeChip(type: projectTypeMap[project.kind]?.stateName ?? "동물"),
+        SizedBox(
+          height: 8.h,
+        ),
+        Text(project.title, style: AppTextStyles.T1Bold15),
+        SizedBox(
+          height: 4.h,
+        ),
+        Text(project.usages,
+            style: AppTextStyles.L1Medium13.copyWith(
+              color: AppColors.grey7,
+            ))
+      ],
+    );
+  }
+}
 
 //* 후원 카테고리 선택 위젯
 //*[ProjectType]
@@ -15,10 +55,7 @@ class CircleType extends StatelessWidget {
   final ProjectType? type;
   final bool isAll;
   const CircleType(
-      {super.key,
-      required this.isSelect,
-      this.type = ProjectType.ANIMAL,
-      this.isAll = false});
+      {super.key, required this.isSelect, this.type, this.isAll = false});
 
   @override
   Widget build(BuildContext context) {

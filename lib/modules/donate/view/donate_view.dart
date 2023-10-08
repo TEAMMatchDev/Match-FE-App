@@ -7,6 +7,7 @@ import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../model/enum/project_type.dart';
 import '../../../util/const/global_variable.dart';
+import '../../../util/const/style/global_color.dart';
 import '../controller/donate_controller.dart';
 
 class DonateScreen extends GetView<DonateController> {
@@ -69,8 +70,60 @@ class DonateScreen extends GetView<DonateController> {
                   }),
                 ),
               ),
-              //obx 에러 임시처리
+              //TODO: obx 에러 임시처리
               Text(controller.selectIdx.value.toString()),
+              //*3.정렬기준
+              Padding(
+                padding: EdgeInsets.only(top: 26.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        controller.isRecent.value = !controller.isRecent.value;
+                      },
+                      child: Text("• 추천순",
+                          style: AppTextStyles.T1Bold12.copyWith(
+                            color: !controller.isRecent.value
+                                ? AppColors.grey9
+                                : AppColors.grey3,
+                          )),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        controller.isRecent.value = !controller.isRecent.value;
+                      },
+                      //위젯화하여 중복코드 제거
+                      child: Text("• 최신순",
+                          style: AppTextStyles.T1Bold12.copyWith(
+                            color: controller.isRecent.value
+                                ? AppColors.grey9
+                                : AppColors.grey3,
+                          )),
+                    )
+                  ],
+                ),
+              ),
+              //*4.프로젝트 리스트
+              Expanded(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) => SizedBox(height: 14.h),
+                  itemCount: controller.projectList.length,
+                  itemBuilder: (context, index) {
+                    final project = controller.projectList[index];
+                    if (index == 0) {
+                      return Column(
+                        children: [
+                          SizedBox(height: 12.h),
+                          ProjectWidget(project: project)
+                        ],
+                      );
+                    }
+                    return ProjectWidget(project: project);
+                  },
+                ),
+              ),
             ],
           ),
         ),
