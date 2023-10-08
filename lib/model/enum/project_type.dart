@@ -1,18 +1,19 @@
 enum ProjectType {
-  DOG("강아지"),
-  CHILDREN("어린이"),
-  YOUTH("청년"),
-  WOMEN("여성"),
-  ELDER("어르신"),
-  DISABLED("장애인"),
-  SOCIAL("우리 사회"),
-  EARTH("지구촌"),
-  NEIGHBOR("이웃"),
-  ANIMAL("동물"),
-  ENVIRONMENT("환경");
+  DOG("강아지", "dog"),
+  CHILDREN("어린이", "children"),
+  YOUTH("청년", "youth"),
+  WOMEN("여성", "women"),
+  ELDER("어르신", "elder"),
+  DISABLED("장애인", "disabled"),
+  SOCIAL("우리 사회", "social"),
+  EARTH("지구촌", "earth"),
+  NEIGHBOR("이웃", "neighbor"),
+  ANIMAL("동물", "animal"),
+  ENVIRONMENT("환경", "environment");
 
   final String stateName;
-  const ProjectType(this.stateName);
+  final String engName;
+  const ProjectType(this.stateName, this.engName);
 }
 
 Map<String, ProjectType> projectTypeMap = {
