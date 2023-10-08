@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:match/model/project_detail/project_detail.dart';
+import 'package:match/model/project_history.dart/project_history.dart';
 
 class MatchTabBar extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -73,6 +74,24 @@ class ProjectController extends GetxController {
           kind: "DOG",
           regularStatus: "REGULAR")
       .obs;
+  RxList<ProjectHistory> tmpProjectHistories = <ProjectHistory>[
+    ProjectHistory(
+        historyId: 18,
+        historyStatus: "CREATE",
+        histories: "임현우님의 불꽃이 탄생했습니다.",
+        historyDate: "2023.10.5 10:42",
+        profileImageUrl:
+            "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
+        nickname: "임현우"),
+    ProjectHistory(
+        historyId: 19,
+        historyStatus: "CREATE",
+        histories: "임현우님의 불꽃이 탄생했습니다.",
+        historyDate: "2023.10.5 10:43",
+        profileImageUrl:
+            "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
+        nickname: "임현우"),
+  ].obs;
   @override
   void onInit() {
     // TODO projectId로 서버에서 데이터 가져오기ㄴ

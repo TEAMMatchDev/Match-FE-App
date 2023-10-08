@@ -22,16 +22,19 @@ class ProjectComment extends StatelessWidget {
       required this.profile,
       required this.comment,
       required this.timeStamp,
-      required this.isEdit});
+      this.isEdit = false});
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         profileItem(profileUrl: profileUrl, isBorder: false),
         SizedBox(width: 11.w),
         Expanded(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 profile,
