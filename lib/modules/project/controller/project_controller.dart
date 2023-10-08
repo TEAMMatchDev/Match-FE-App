@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:match/model/project_detail/project_detail.dart';
 import 'package:match/model/project_history.dart/project_history.dart';
 
+import '../../../model/comment/comment.dart';
+
 class MatchTabBar extends GetxController
     with GetSingleTickerProviderStateMixin {
   late TabController controller;
@@ -91,6 +93,24 @@ class ProjectController extends GetxController {
         profileImageUrl:
             "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
         nickname: "임현우"),
+  ].obs;
+  RxList<Comment> tmpProjectComment = <Comment>[
+    Comment(
+        commentId: 1,
+        comment: "매치 화이팅",
+        commentDate: "2023.9.26 15:30",
+        profileImgUrl: null,
+        nickname: "이메누",
+        userId: 1,
+        my: true),
+    Comment(
+        commentId: 2,
+        comment: "매치 화이팅",
+        commentDate: "2023.9.26 15:30",
+        profileImgUrl: null,
+        nickname: "이메누",
+        userId: 1,
+        my: true),
   ].obs;
   @override
   void onInit() {

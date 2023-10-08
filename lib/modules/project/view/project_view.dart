@@ -168,7 +168,6 @@ class ProjectScreen extends GetView<ProjectController> {
                               .toList()),
                       //2. 매치 기록
                       Wrap(
-                        spacing: 15.h,
                         children: controller.tmpProjectHistories
                             .map(
                               (history) => ProjectComment(
@@ -180,6 +179,21 @@ class ProjectScreen extends GetView<ProjectController> {
                             )
                             .toList(),
                       ),
+                      //3. 매치 응원
+                      Wrap(
+                        children: controller.tmpProjectComment
+                            .map(
+                              (comment) => ProjectComment(
+                                profileUrl:
+                                    comment.profileImgUrl ?? tmpBackgroundImg,
+                                profile: comment.nickname,
+                                comment: comment.comment,
+                                timeStamp: comment.commentDate,
+                                isEdit: true,
+                              ),
+                            )
+                            .toList(),
+                      )
                     ][controller.tabIndex.value],
                   ),
                 ],

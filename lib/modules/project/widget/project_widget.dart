@@ -26,48 +26,51 @@ class ProjectComment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        profileItem(profileUrl: profileUrl, isBorder: false),
-        SizedBox(width: 11.w),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                profile,
-                style: AppTextStyles.T1Bold13,
-              ),
-              SizedBox(height: 6.h),
-              Text(
-                comment,
-                style:
-                    AppTextStyles.S1SemiBold12.copyWith(color: AppColors.grey7),
-              ),
-              SizedBox(height: 6.h),
-              SizedBox(
-                width: 251.w,
-                child: Text(
-                  timeStamp,
-                  style:
-                      AppTextStyles.L1Medium10.copyWith(color: AppColors.grey4),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+    return Padding(
+      padding: EdgeInsets.only(bottom: 15.h),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          profileItem(profileUrl: profileUrl, isBorder: false),
+          SizedBox(width: 11.w),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  profile,
+                  style: AppTextStyles.T1Bold13,
                 ),
-              ),
-            ],
+                SizedBox(height: 6.h),
+                Text(
+                  comment,
+                  style: AppTextStyles.S1SemiBold12.copyWith(
+                      color: AppColors.grey7),
+                ),
+                SizedBox(height: 6.h),
+                SizedBox(
+                  width: 251.w,
+                  child: Text(
+                    timeStamp,
+                    style: AppTextStyles.L1Medium10.copyWith(
+                        color: AppColors.grey4),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        isEdit
-            ? GestureDetector(
-                onTap: () {
-                  Get.bottomSheet(AlertBottomSheet());
-                },
-                child: SvgPicture.asset(iconDir + "ic_more_18.svg"))
-            : SizedBox.shrink()
-      ],
+          isEdit
+              ? GestureDetector(
+                  onTap: () {
+                    Get.bottomSheet(AlertBottomSheet());
+                  },
+                  child: SvgPicture.asset(iconDir + "ic_more_18.svg"))
+              : SizedBox.shrink()
+        ],
+      ),
     );
   }
 }
