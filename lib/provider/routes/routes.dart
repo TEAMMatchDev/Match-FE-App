@@ -34,6 +34,9 @@ abstract class _Paths {
   /// 후원 화면
   static const donate = "/donate";
 
+  /// 후원 검색 화면
+  static const donation_search = "/donate_search";
+
   /// 이벤트 화면
   static const event = "/event";
 
@@ -76,6 +79,9 @@ abstract class Routes {
 
   /// 후원 화면
   static const donate = _Paths.donate;
+
+  /// 후원 검색 화면
+  static const donation_search = _Paths.donation_search;
 
   /// 이벤트 화면
   static const event = _Paths.event;

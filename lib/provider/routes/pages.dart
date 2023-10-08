@@ -5,6 +5,8 @@ import 'package:match/modules/buring_match/view/burning_match_pay_view.dart';
 import 'package:match/modules/buring_match/view/burning_match_view.dart';
 import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
+import 'package:match/modules/donation_search/binding/donation_search_binding.dart';
+import 'package:match/modules/donation_search/view/donation_search_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
@@ -148,6 +150,15 @@ class Pages {
       page: () => const DonateScreen(),
       transition: Transition.noTransition,
       binding: DonateBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "검색 화면",
+      name: Routes.donation_search,
+      page: () => const DonationSearchScreen(),
+      transition: Transition.noTransition,
+      binding: DonationSearchBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

@@ -6,6 +6,7 @@ import 'package:match/modules/donate/widget/donate_widget.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../model/enum/project_type.dart';
+import '../../../provider/routes/routes.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
 import '../controller/donate_controller.dart';
@@ -23,7 +24,8 @@ class DonateScreen extends GetView<DonateController> {
             children: [
               //*1.제목 header
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.h),
+                padding:
+                    EdgeInsets.symmetric(vertical: 8.h).copyWith(bottom: 25.h),
                 child: Row(
                   children: [
                     Expanded(
@@ -32,11 +34,23 @@ class DonateScreen extends GetView<DonateController> {
                         style: AppTextStyles.T1Bold16,
                       ),
                     ),
-                    SvgPicture.asset(iconDir + "ic_search_16.svg"),
+                    GestureDetector(
+                      onTap: () async {
+                        await Get.toNamed(Routes.donation_search);
+                      },
+                      child: SvgPicture.asset(
+                        iconDir + "ic_search_16.svg",
+                        color: AppColors.grey9,
+                        height: 20.h,
+                      ),
+                    ),
                     SizedBox(
                       width: 14.w,
                     ),
-                    SvgPicture.asset(iconDir + "ic_alarm_20.svg")
+                    SvgPicture.asset(
+                      iconDir + "ic_alarm_20.svg",
+                      height: 20.h,
+                    )
                   ],
                 ),
               ),
@@ -70,8 +84,6 @@ class DonateScreen extends GetView<DonateController> {
                   }),
                 ),
               ),
-              //TODO: obx 에러 임시처리
-              Text(controller.selectIdx.value.toString()),
               //*3.정렬기준
               Padding(
                 padding: EdgeInsets.only(top: 26.h),
@@ -112,15 +124,13 @@ class DonateScreen extends GetView<DonateController> {
                   itemCount: controller.projectList.length,
                   itemBuilder: (context, index) {
                     final project = controller.projectList[index];
-                    if (index == 0) {
-                      return Column(
-                        children: [
-                          SizedBox(height: 12.h),
-                          ProjectWidget(project: project)
-                        ],
-                      );
-                    }
-                    return ProjectWidget(project: project);
+                    return Container(
+                        margin: EdgeInsets.only(
+                            top: index == 0 ? 14.h : 0.h,
+                            bottom: index == controller.projectList.length - 1
+                                ? 14.h
+                                : 0.h),
+                        child: ProjectWidget(project: project));
                   },
                 ),
               ),
