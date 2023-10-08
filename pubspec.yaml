@@ -53,6 +53,7 @@ flutter:
     - asset/image/icon/bottomNavi/
     - asset/image/icon/login/
     - asset/image/icon/
+    - asset/image/icon/project/
     - asset/image/logo/
 
   fonts:

@@ -1,5 +1,4 @@
 enum ProjectType {
-  DOG("강아지", "dog"),
   CHILDREN("어린이", "children"),
   YOUTH("청년", "youth"),
   WOMEN("여성", "women"),
@@ -7,7 +6,7 @@ enum ProjectType {
   DISABLED("장애인", "disabled"),
   SOCIAL("우리 사회", "social"),
   EARTH("지구촌", "earth"),
-  NEIGHBOR("이웃", "neighbor"),
+  NEIGHBOR("어려운 이웃", "neighbor"),
   ANIMAL("동물", "animal"),
   ENVIRONMENT("환경", "environment");
 
@@ -17,7 +16,6 @@ enum ProjectType {
 }
 
 Map<String, ProjectType> projectTypeMap = {
-  'DOG': ProjectType.DOG,
   'CHILDREN': ProjectType.CHILDREN,
   'YOUTH': ProjectType.YOUTH,
   'WOMEN': ProjectType.WOMEN,

@@ -12,7 +12,7 @@ import '../../../util/const/style/global_color.dart';
 //*[ProjectType]
 class CircleType extends StatelessWidget {
   final bool isSelect;
-  final ProjectType type;
+  final ProjectType? type;
   final bool isAll;
   const CircleType(
       {super.key,
@@ -22,11 +22,12 @@ class CircleType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
         Container(
           width: 50.h,
           height: 50.h,
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
@@ -40,14 +41,14 @@ class CircleType extends StatelessWidget {
                     height: 1.4,
                   ))
               : SvgPicture.asset(iconDir +
-                  "ic_${type.engName}" +
+                  "project/ic_${type?.engName}" +
                   (!isSelect ? "_unable" : "") +
                   ".svg"),
         ),
         SizedBox(
           height: 6.h,
         ),
-        Text(type.stateName,
+        Text(type?.stateName ?? "전체",
             style: AppTextStyles.T1Bold13.copyWith(
               color: isSelect ? AppColors.grey9 : AppColors.grey3,
             )),
