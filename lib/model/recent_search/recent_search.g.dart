@@ -10,12 +10,12 @@ _$_RecentSearch _$$_RecentSearchFromJson(Map<String, dynamic> json) =>
     _$_RecentSearch(
       name: json['name'] as String,
       title: json['title'] as String,
-      projectId: json['projectId'] as int,
+      donationId: json['donationId'] as int,
     );
 
 Map<String, dynamic> _$$_RecentSearchToJson(_$_RecentSearch instance) =>
     <String, dynamic>{
       'name': instance.name,
       'title': instance.title,
-      'projectId': instance.projectId,
+      'donationId': instance.donationId,
     };

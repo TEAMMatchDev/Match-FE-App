@@ -33,7 +33,7 @@ class CommonAppBar extends AppBar {
     return CommonAppBar(
       title: Text(
         title,
-        style: AppTextStyles.heading3Bold16,
+        style: AppTextStyles.T1Bold16,
       ),
       leading: GestureDetector(
           onTap: () {

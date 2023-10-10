@@ -22,7 +22,7 @@ RecentSearch _$RecentSearchFromJson(Map<String, dynamic> json) {
 mixin _$RecentSearch {
   String get name => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  int get projectId => throw _privateConstructorUsedError;
+  int get donationId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $RecentSearchCopyWith<$Res> {
           RecentSearch value, $Res Function(RecentSearch) then) =
       _$RecentSearchCopyWithImpl<$Res, RecentSearch>;
   @useResult
-  $Res call({String name, String title, int projectId});
+  $Res call({String name, String title, int donationId});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$RecentSearchCopyWithImpl<$Res, $Val extends RecentSearch>
   $Res call({
     Object? name = null,
     Object? title = null,
-    Object? projectId = null,
+    Object? donationId = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -65,9 +65,9 @@ class _$RecentSearchCopyWithImpl<$Res, $Val extends RecentSearch>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      projectId: null == projectId
-          ? _value.projectId
-          : projectId // ignore: cast_nullable_to_non_nullable
+      donationId: null == donationId
+          ? _value.donationId
+          : donationId // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -81,7 +81,7 @@ abstract class _$$_RecentSearchCopyWith<$Res>
       __$$_RecentSearchCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String title, int projectId});
+  $Res call({String name, String title, int donationId});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$_RecentSearchCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? title = null,
-    Object? projectId = null,
+    Object? donationId = null,
   }) {
     return _then(_$_RecentSearch(
       name: null == name
@@ -108,9 +108,9 @@ class __$$_RecentSearchCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      projectId: null == projectId
-          ? _value.projectId
-          : projectId // ignore: cast_nullable_to_non_nullable
+      donationId: null == donationId
+          ? _value.donationId
+          : donationId // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -120,7 +120,7 @@ class __$$_RecentSearchCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RecentSearch with DiagnosticableTreeMixin implements _RecentSearch {
   const _$_RecentSearch(
-      {required this.name, required this.title, required this.projectId});
+      {required this.name, required this.title, required this.donationId});
 
   factory _$_RecentSearch.fromJson(Map<String, dynamic> json) =>
       _$$_RecentSearchFromJson(json);
@@ -130,11 +130,11 @@ class _$_RecentSearch with DiagnosticableTreeMixin implements _RecentSearch {
   @override
   final String title;
   @override
-  final int projectId;
+  final int donationId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecentSearch(name: $name, title: $title, projectId: $projectId)';
+    return 'RecentSearch(name: $name, title: $title, donationId: $donationId)';
   }
 
   @override
@@ -144,7 +144,7 @@ class _$_RecentSearch with DiagnosticableTreeMixin implements _RecentSearch {
       ..add(DiagnosticsProperty('type', 'RecentSearch'))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('projectId', projectId));
+      ..add(DiagnosticsProperty('donationId', donationId));
   }
 
   @override
@@ -154,13 +154,13 @@ class _$_RecentSearch with DiagnosticableTreeMixin implements _RecentSearch {
             other is _$_RecentSearch &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.projectId, projectId) ||
-                other.projectId == projectId));
+            (identical(other.donationId, donationId) ||
+                other.donationId == donationId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, title, projectId);
+  int get hashCode => Object.hash(runtimeType, name, title, donationId);
 
   @JsonKey(ignore: true)
   @override
@@ -180,7 +180,7 @@ abstract class _RecentSearch implements RecentSearch {
   const factory _RecentSearch(
       {required final String name,
       required final String title,
-      required final int projectId}) = _$_RecentSearch;
+      required final int donationId}) = _$_RecentSearch;
 
   factory _RecentSearch.fromJson(Map<String, dynamic> json) =
       _$_RecentSearch.fromJson;
@@ -190,7 +190,7 @@ abstract class _RecentSearch implements RecentSearch {
   @override
   String get title;
   @override
-  int get projectId;
+  int get donationId;
   @override
   @JsonKey(ignore: true)
   _$$_RecentSearchCopyWith<_$_RecentSearch> get copyWith =>

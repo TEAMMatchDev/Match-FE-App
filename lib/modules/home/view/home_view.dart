@@ -9,6 +9,7 @@ import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../buring_match/controller/burning_match_controller.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
 
@@ -62,8 +63,8 @@ class HomeScreen extends GetView<HomeController> {
                         ),
                         Text(
                           "고유 이름을 입력해보세요.",
-                          style: AppTextStyles.body2Regular13
-                              .copyWith(color: AppColors.grey4),
+                          style: AppTextStyles.L1Medium13.copyWith(
+                              color: AppColors.grey4),
                           textHeightBehavior: TextHeightBehavior(
                               applyHeightToFirstAscent: false),
                         ),
@@ -126,9 +127,18 @@ class HomeScreen extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       return MyMatchItem(
                           destination: () async {
-                            Get.toNamed(Routes.home + Routes.burning_match);
+                            Get.toNamed(Routes.home + Routes.burning_match,
+                                arguments: {
+                                  "id": 1, // TODO: regularPayId로 적용해야함
+                                  //TODO: projectId로 적용해야함
+                                  "projectId": 1,
+                                  "type": MATCH_STATUS.REGULAR_PAY.name
+                                });
                           },
                           title: "후원 함께할 분, 들어와요!",
+                          usages: "후원처",
+                          //TODO: projectId로 적용해야함
+                          matchId: 1,
                           count: 15,
                           imgList: ["test", "test", "test"]);
                     },
@@ -166,12 +176,16 @@ class HomeScreen extends GetView<HomeController> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
                     itemBuilder: (context, index) {
+                      final project = controller.projectList[index];
                       //TODO: 현재 같은 변수를 사용하여 좋아요가 동기화 됨
                       return TodayMatchItem(
-                          title: "후원 함께할분!",
-                          organization: "후원처명",
-                          count: 14,
-                          isLike: controller.isLike);
+                        title: project.title,
+                        organization: project.usages,
+                        count: project.totalDonationCnt,
+                        backgroundImg: project.imgUrl,
+                        isLike: project.like ? true.obs : false.obs,
+                        projectId: project.projectId,
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(
