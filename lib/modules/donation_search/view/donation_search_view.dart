@@ -34,6 +34,7 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                 textController: controller.searchTextController.value,
                 placeHolder: "후원명, 후원사, 후원분야 검색",
                 textStatus: controller.searchStatus,
+                suffixOnTap: () async {},
                 onSubmitted: (value) async {},
                 onChanged: (value) async {}),
             SizedBox(

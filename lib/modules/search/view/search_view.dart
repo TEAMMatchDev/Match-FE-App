@@ -10,6 +10,7 @@ import 'package:match/util/method/get_storage.dart';
 
 import '../../../model/enum/search_statu.dart';
 import '../../../model/recent_search/recent_search.dart';
+import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
@@ -30,79 +31,27 @@ class SearchScreen extends GetView<SearchViewController> {
           shrinkWrap: true,
           children: [
             //1. 뒤로가기 아이콘 + 검색 필드
-            Row(
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: SvgPicture.asset(
-                      iconDir + "ic_arrow_left_24.svg",
-                      width: 24.w,
-                    )),
-                SizedBox(
-                  width: 14.w,
-                ),
-                Expanded(
-                  child: CupertinoTextField(
-                    controller: controller.searchTextController.value,
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
-                    decoration: BoxDecoration(
-                      color: AppColors.searchBackground,
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    keyboardType: TextInputType.text,
-                    cursorColor: AppColors.black,
-                    cursorHeight: 18.h,
-                    style: AppTextStyles.L1Medium13.copyWith(
-                      color: AppColors.grey8,
-                      height: 1.5,
-                    ),
-                    placeholder: "고유 이름을 입력해보세요.",
-                    placeholderStyle: AppTextStyles.L1Medium13.copyWith(
-                        color: AppColors.grey4, height: 1.5),
-                    prefixMode: OverlayVisibilityMode.notEditing,
-                    prefix: Padding(
-                        padding: EdgeInsets.only(left: 14.w),
-                        child: SvgPicture.asset(iconDir + "ic_search_16.svg")),
-                    // clearButtonMode: OverlayVisibilityMode.editing,
-                    suffixMode: OverlayVisibilityMode.editing,
-                    suffix: GestureDetector(
-                      onTap: () async {
-                        controller.searchTextController.value.clear();
-                        controller.searchStatus.value = SEARCH_STATUS.INIT;
-                        controller.recentSearchList.value =
-                            await GetStorageUtil.getRecentSearches(
-                                StorageKey.NAME_SEARCH);
-                      },
-                      child: Padding(
-                          padding: EdgeInsets.only(right: 14.w),
-                          child: SvgPicture.asset(
-                              iconDir + "ic_search_cancel_22.svg")),
-                    ),
-                    //자동 키보드 활성화
-                    autofocus: true,
-                    onSubmitted: ((value) async {
-                      controller.searchStatus.value = SEARCH_STATUS.SEARCH;
-                      //TODO: api 연결
-                      if (controller.searchResults.isNotEmpty) {
-                        await GetStorageUtil.addRecentSearch(
-                            StorageKey.NAME_SEARCH,
-                            RecentSearch(
-                                name: value,
-                                title: controller.searchResults[0].projectName,
-                                donationId:
-                                    controller.searchResults[0].donationId));
-                      }
-                    }),
-                    onChanged: ((value) async {
-                      controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                    }),
-                  ),
-                )
-              ],
-            ),
+            CommonTextField(
+                textController: controller.searchTextController.value,
+                placeHolder: "고유 이름을 입력해보세요.",
+                textStatus: controller.searchStatus,
+                suffixOnTap: () async {
+                  //저장된 최근검색어가 있을 경우 다시 불러온다
+                  controller.recentSearchList.value =
+                      await GetStorageUtil.getRecentSearches(
+                          StorageKey.NAME_SEARCH);
+                },
+                onSubmitted: (value) async {
+                  //TODO: api 연결
+                  //검색결과가 없어도 최근검색 결과에 추가
+                  await GetStorageUtil.addRecentSearch(
+                      StorageKey.NAME_SEARCH,
+                      RecentSearch(
+                          name: value,
+                          title: controller.searchResults[0].projectName,
+                          donationId: controller.searchResults[0].donationId));
+                },
+                onChanged: (value) async {}),
             SizedBox(
               height: 30.h,
             ),
