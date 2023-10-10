@@ -10,6 +10,7 @@ import '../const/style/global_text_styles.dart';
 
 /// <h2>CupertinoTextField를 이용한 TextField</h2>
 ///* [SearchScreen], [DonationSearchScreen], [ProjectScreen](댓글)에서 사용
+/// @param textController: 텍스트 컨트롤러
 class CommonTextField extends StatelessWidget {
   final TextEditingController textController;
   final String placeHolder;
@@ -62,12 +63,12 @@ class CommonTextField extends StatelessWidget {
             keyboardType: TextInputType.text,
             cursorColor: AppColors.black,
             cursorHeight: 18.h,
-            style: AppTextStyles.L1Medium13.copyWith(
+            style: AppTextStyles.T1Bold13.copyWith(
               color: AppColors.grey8,
               height: 1.5,
             ),
             placeholder: placeHolder,
-            placeholderStyle: AppTextStyles.L1Medium13.copyWith(
+            placeholderStyle: AppTextStyles.T1Bold13.copyWith(
                 color: AppColors.grey4, height: 1.5),
             prefixMode: OverlayVisibilityMode.notEditing,
             prefix: hasPrefix

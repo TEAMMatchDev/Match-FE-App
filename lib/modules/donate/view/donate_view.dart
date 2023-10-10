@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:match/modules/donate/widget/donate_widget.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
@@ -62,19 +63,25 @@ class DonateScreen extends GetView<DonateController> {
                   shrinkWrap: true,
                   itemCount: ProjectType.values.length + 1,
                   itemBuilder: ((context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        controller.selectIdx.value = index;
-                      },
-                      child: index == 0
-                          ? CircleType(
-                              isSelect: controller.selectIdx.value == index,
-                              isAll: true,
-                            )
-                          : CircleType(
-                              isSelect: controller.selectIdx.value == index,
-                              type: ProjectType.values[index - 1],
-                            ),
+                    //obx 작동 오류로 한번더 감싸줌
+                    return Obx(
+                      () => GestureDetector(
+                        onTap: () {
+                          controller.selectIdx.value = index;
+                          //TODO: api 호출
+                        },
+                        child: index == 0
+                            ? CircleType(
+                                isSelect:
+                                    (controller.selectIdx.value == index).obs,
+                                isAll: true,
+                              )
+                            : CircleType(
+                                isSelect:
+                                    (controller.selectIdx.value == index).obs,
+                                type: ProjectType.values[index - 1],
+                              ),
+                      ),
                     );
                   }),
                   separatorBuilder: ((context, index) {
@@ -100,6 +107,9 @@ class DonateScreen extends GetView<DonateController> {
                                 ? AppColors.grey9
                                 : AppColors.grey3,
                           )),
+                    ),
+                    SizedBox(
+                      width: 10.w,
                     ),
                     GestureDetector(
                       onTap: () {

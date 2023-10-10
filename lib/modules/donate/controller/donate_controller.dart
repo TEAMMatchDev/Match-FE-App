@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../../model/today_project/today_project.dart';
 
 class DonateController extends GetxController {
-  Rx<int> selectIdx = 0.obs;
+  RxInt selectIdx = 0.obs;
   Rx<bool> isRecent = false.obs;
 
   RxList<TodayProject> projectList = <TodayProject>[

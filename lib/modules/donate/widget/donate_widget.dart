@@ -51,7 +51,7 @@ class ProjectWidget extends StatelessWidget {
 //* 후원 카테고리 선택 위젯
 //*[ProjectType]
 class CircleType extends StatelessWidget {
-  final bool isSelect;
+  final RxBool isSelect;
   final ProjectType? type;
   final bool isAll;
   const CircleType(
@@ -68,18 +68,18 @@ class CircleType extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-                color: isSelect ? AppColors.grey9 : AppColors.grey0,
-                width: isSelect ? 2 : 1),
+                color: isSelect.value ? AppColors.grey9 : AppColors.grey0,
+                width: isSelect.value ? 2 : 1),
           ),
           child: isAll
               ? Text("ALL",
                   style: AppTextStyles.T1Bold15.copyWith(
-                    color: isSelect ? AppColors.grey9 : AppColors.grey3,
+                    color: isSelect.value ? AppColors.grey9 : AppColors.grey3,
                     height: 1.4,
                   ))
               : SvgPicture.asset(iconDir +
                   "project/ic_${type?.engName}" +
-                  (!isSelect ? "_unable" : "") +
+                  (!isSelect.value ? "_unable" : "") +
                   ".svg"),
         ),
         SizedBox(
@@ -87,7 +87,7 @@ class CircleType extends StatelessWidget {
         ),
         Text(type?.stateName ?? "전체",
             style: AppTextStyles.T1Bold13.copyWith(
-              color: isSelect ? AppColors.grey9 : AppColors.grey3,
+              color: isSelect.value ? AppColors.grey9 : AppColors.grey3,
             )),
       ],
     );
