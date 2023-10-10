@@ -38,7 +38,7 @@ class DonationSearchController extends GetxController {
         // 입력이 없을 때 타이머 시작
         if (_timer == null) {
           _timer = Timer(Duration(seconds: 1), () {
-            Logger().d('1초가 경과했습니다.');
+            logger.d('1초가 경과했습니다.');
             //TODO: api 호출
             searchStatus.value = SEARCH_STATUS.SEARCH;
           });
