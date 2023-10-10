@@ -6,7 +6,9 @@ import 'dio_interceptor.dart';
 /// <h2> dioService singleton service </h2>
 ///* DioServices().to()로 사용
 class DioServices {
-  String tmpToken = "";
+  ///*임시 jwt 토큰
+  String tmpToken =
+      "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFM1MTIifQ.eyJ1c2VySWQiOjEsImlhdCI6MTY5NjkzMTk2MSwiZXhwIjoxNjk2OTYzNDk3fQ.xqAECA89BkoU6NGgSfHZJNj-wz-Zoqr0MLo8aX7l7kQ2kaj6IP-GbrSxAT8tstfSUor5vOemJx7nP12g03GJoA";
   static final DioServices _dioServices = DioServices._internal();
   //dioService singleton
   factory DioServices() => _dioServices;
@@ -22,7 +24,7 @@ class DioServices {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': tmpToken
+        'X-AUTH-TOKEN': tmpToken
       },
     );
     _dio = Dio(_baseOptions);

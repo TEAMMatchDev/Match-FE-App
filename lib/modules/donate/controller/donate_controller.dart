@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:match/model/enum/project_type.dart';
+import 'package:match/model/project/project.dart';
+import 'package:match/provider/api/project_api.dart';
 
 import '../../../model/today_project/today_project.dart';
 
@@ -53,5 +56,6 @@ class DonateController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    ProjectApi.getProjectList(type: ProjectType.ANIMAL);
   }
 }

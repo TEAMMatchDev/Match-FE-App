@@ -8,9 +8,18 @@ class CustomDioInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     logger.i("[REQ] ${options.method} Url ${options.uri} ");
-    options.queryParameters.forEach((key, value) {
-      logger.i('?$key=$value');
+    String header = "";
+    options.headers.forEach((key, value) {
+      header += '$key:$value\n';
     });
+    logger.i("[Header] ${header} ");
+
+    String queryParam = "";
+    options.queryParameters.forEach((key, value) {
+      queryParam += '$key : $value\n';
+    });
+    logger.i(queryParam);
+
     logger.i("Data ${options.data} >>");
     options.connectTimeout != null
         ? ((timeout) => logger.e("Connect Timeout $timeout"))

@@ -6,14 +6,13 @@ abstract class ApiResult<T> {
   static const String IS_SUCCESS = "isSuccess";
 
   ///*에러, 성공 여부를 판별해주는 GenericType function
-  static ApiResult<T> fromResponse<T>(
-      Response response, T Function(Map<String, dynamic>) mapper) {
+  static ApiResult fromResponse(Response response) {
     final responseData = response.data;
 
     if (!responseData[IS_SUCCESS]) {
       return ServerError.fromResponse(response);
     } else if (responseData[RESULT] != null) {
-      return Success(mapper(response.data[RESULT]));
+      return Success(response.data[RESULT]);
     } else {
       return InternalError();
     }

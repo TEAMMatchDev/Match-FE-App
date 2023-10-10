@@ -4,8 +4,7 @@ import '../../../model/util/common/api_error/api_error.dart';
 import '../../../model/util/common/common.dart';
 
 extension DioExtensions on Dio {
-  Future<ApiResult<T>> safePost<T>(
-      String path, T Function(Map<String, dynamic>) mapper,
+  Future<ApiResult<dynamic>> safePost(String path,
       {data,
       Map<String, dynamic>? queryParameters,
       Options? options,
@@ -21,7 +20,7 @@ extension DioExtensions on Dio {
           onSendProgress: onSendProgress,
           onReceiveProgress: onReceiveProgress);
 
-      return ApiResult.fromResponse(response, mapper);
+      return ApiResult.fromResponse(response);
     } on DioException catch (exception) {
       return NetworkError(
         ApiError(
@@ -32,8 +31,7 @@ extension DioExtensions on Dio {
     }
   }
 
-  Future<ApiResult<T>> safeGet<T>(
-      String path, T Function(Map<String, dynamic>) mapper,
+  Future<ApiResult<dynamic>> safeGet(String path,
       {data,
       Map<String, dynamic>? queryParameters,
       Options? options,
@@ -48,7 +46,7 @@ extension DioExtensions on Dio {
           cancelToken: cancelToken,
           onReceiveProgress: onReceiveProgress);
 
-      return ApiResult.fromResponse(response, mapper);
+      return ApiResult.fromResponse(response);
     } on DioException catch (exception) {
       return NetworkError(
         ApiError(
