@@ -7,6 +7,7 @@ import 'package:match/model/enum/search_statu.dart';
 import '../const/global_variable.dart';
 import '../const/style/global_color.dart';
 import '../const/style/global_text_styles.dart';
+import '../method/get_storage.dart';
 
 /// <h2>CupertinoTextField를 이용한 TextField</h2>
 ///* [SearchScreen], [DonationSearchScreen], [ProjectScreen](댓글)에서 사용

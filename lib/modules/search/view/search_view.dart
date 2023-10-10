@@ -73,7 +73,8 @@ class SearchScreen extends GetView<SearchViewController> {
                         controller.searchTextController.value.clear();
                         controller.searchStatus.value = SEARCH_STATUS.INIT;
                         controller.recentSearchList.value =
-                            await GetStorageUtil.getRecentSearches();
+                            await GetStorageUtil.getRecentSearches(
+                                StorageKey.NAME_SEARCH);
                       },
                       child: Padding(
                           padding: EdgeInsets.only(right: 14.w),
@@ -86,11 +87,13 @@ class SearchScreen extends GetView<SearchViewController> {
                       controller.searchStatus.value = SEARCH_STATUS.SEARCH;
                       //TODO: api 연결
                       if (controller.searchResults.isNotEmpty) {
-                        await GetStorageUtil.addRecentSearch(RecentSearch(
-                            name: value,
-                            title: controller.searchResults[0].projectName,
-                            donationId:
-                                controller.searchResults[0].donationId));
+                        await GetStorageUtil.addRecentSearch(
+                            StorageKey.NAME_SEARCH,
+                            RecentSearch(
+                                name: value,
+                                title: controller.searchResults[0].projectName,
+                                donationId:
+                                    controller.searchResults[0].donationId));
                       }
                     }),
                     onChanged: ((value) async {
@@ -115,9 +118,11 @@ class SearchScreen extends GetView<SearchViewController> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          await GetStorageUtil.delAllSearch();
+                          await GetStorageUtil.delAllSearch(
+                              StorageKey.NAME_SEARCH);
                           controller.recentSearchList.value =
-                              await GetStorageUtil.getRecentSearches();
+                              await GetStorageUtil.getRecentSearches(
+                                  StorageKey.NAME_SEARCH);
                         },
                         child: Text(
                           "모두 삭제",

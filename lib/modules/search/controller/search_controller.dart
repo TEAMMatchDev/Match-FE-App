@@ -76,7 +76,8 @@ class SearchViewController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    recentSearchList.value = await GetStorageUtil.getRecentSearches();
+    recentSearchList.value =
+        await GetStorageUtil.getRecentSearches(StorageKey.NAME_SEARCH);
     await addTimerListenr();
   }
 }

@@ -10,7 +10,7 @@ import 'package:match/util/method/get_storage.dart';
 
 import '../../../model/enum/search_statu.dart';
 import '../../../model/recent_search/recent_search.dart';
-import '../../../util/components/gloabl_search.dart';
+import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
@@ -46,14 +46,16 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "최근 검색 고유이름",
+                        "최근 검색어",
                         style: AppTextStyles.T1Bold15,
                       ),
                       GestureDetector(
                         onTap: () async {
-                          await GetStorageUtil.delAllSearch();
+                          await GetStorageUtil.delAllSearch(
+                              StorageKey.PROJECT_SEARCH);
                           controller.recentSearchList.value =
-                              await GetStorageUtil.getRecentSearches();
+                              await GetStorageUtil.getRecentSearches(
+                                  StorageKey.PROJECT_SEARCH);
                         },
                         child: Text(
                           "모두 삭제",
