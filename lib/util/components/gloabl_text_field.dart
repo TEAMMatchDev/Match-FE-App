@@ -7,6 +7,7 @@ import 'package:match/model/enum/search_statu.dart';
 import '../const/global_variable.dart';
 import '../const/style/global_color.dart';
 import '../const/style/global_text_styles.dart';
+import '../method/get_storage.dart';
 
 /// <h2>CupertinoTextField를 이용한 TextField</h2>
 ///* [SearchScreen], [DonationSearchScreen], [ProjectScreen](댓글)에서 사용
@@ -18,9 +19,9 @@ class CommonTextField extends StatelessWidget {
   final Rx<SEARCH_STATUS> textStatus;
   final bool hasPrefix;
   final bool alwaysSuffix;
-  final Widget? suffix;
   final Future<void> Function(String) onSubmitted;
   final Future<void> Function(String) onChanged;
+  final Future<void> Function()? suffixOnTap;
 
   const CommonTextField(
       {super.key,
@@ -30,9 +31,9 @@ class CommonTextField extends StatelessWidget {
       required this.textStatus,
       this.hasPrefix = true,
       this.alwaysSuffix = false,
-      this.suffix,
       required this.onSubmitted,
-      required this.onChanged});
+      required this.onChanged,
+      required this.suffixOnTap});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,19 @@ class CommonTextField extends StatelessWidget {
             suffixMode: !alwaysSuffix
                 ? OverlayVisibilityMode.editing
                 : OverlayVisibilityMode.always,
-            suffix: suffix,
+            suffix: GestureDetector(
+              onTap: () async {
+                textController.clear();
+                textStatus.value = SEARCH_STATUS.INIT;
+                if (suffixOnTap != null) {
+                  await suffixOnTap!();
+                }
+              },
+              child: Padding(
+                  padding: EdgeInsets.only(right: 14.w),
+                  //TODO 추후 다른 아이콘 추가시 변수 추가
+                  child: SvgPicture.asset(iconDir + "ic_search_cancel_22.svg")),
+            ),
             //자동 키보드 활성화
             autofocus: isSearchScreen ? true : false,
             onSubmitted: ((value) async {

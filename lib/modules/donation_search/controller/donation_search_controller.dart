@@ -60,7 +60,8 @@ class DonationSearchController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    recentSearchList.value = await GetStorageUtil.getRecentSearches();
+    recentSearchList.value =
+        await GetStorageUtil.getRecentSearches(StorageKey.PROJECT_SEARCH);
     await addTimerListenr();
   }
 }
