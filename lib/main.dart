@@ -20,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // runApp() 호출 전 Flutter SDK 초기화
   KakaoSdk.init(
-    nativeAppKey: dotenv.env['nativeAppKey'],
+    kakaoApiKey: dotenv.env['kakaoApiKey'],
     javaScriptAppKey: dotenv.env['javaScriptAppKey'],
   );
 

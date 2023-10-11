@@ -29,7 +29,8 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginState extends State<LoginWidget> {
   LoginPlatform _loginPlatform = LoginPlatform.none;
-
+  NaverLoginUserState accessToken = NaverLoginUserState.accessToken;
+  NaverLoginUserState tokenType = NaverLoginUserState.tokenType;
 
   bool _isKakaoTalkInstalled = false;
   var validateToken;
@@ -81,8 +82,25 @@ class _LoginState extends State<LoginWidget> {
   }
 
   void signInWithNaver() async {
+    final String nickname;
+    final String id;
+    final String name;
+    final String email;
+    final String gender;
+    final String age;
+    final String birthday;
+    final String birthyear;
+    final String profileImage;
+    final String mobile;
+    final String mobileE164;
+
+
     final NaverLoginResult result = await FlutterNaverLogin.logIn();
     NaverAccessToken res = await FlutterNaverLogin.currentAccessToken;
+    // setState(() {
+    //   accessToken = res.accessToken;
+    //   tokenType = res.tokenType;
+    // });
 
     if (result.status == NaverLoginStatus.loggedIn) {
       print('accessToken = ${result.accessToken}');

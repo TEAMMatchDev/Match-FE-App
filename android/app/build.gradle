@@ -22,6 +22,10 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+//앱키
+def kakaoApiKey = localProperties.getProperty('kakaoApiKey')
+
+
 // .env 파일에서 변수를 가져오기 위한 작업 추가
 def envFile = rootProject.file('.env')
 if (envFile.exists()) {
@@ -33,6 +37,7 @@ if (envFile.exists()) {
         ext.envProperties[key] = value
     }
 }
+
 
 android {
     namespace "com.dev.match"

@@ -16,7 +16,7 @@ dependencies:
   kakao_flutter_sdk_navi: ^1.5.0 # 카카오내비
   kakao_flutter_sdk_friend: ^1.5.0 # 카카오톡 소셜(피커: 친구 선택하기)
 
-  flutter_naver_login: ^1.6.0 # 네이버 로그인
+  flutter_naver_login: ^1.8.0 # 네이버 로그인
 
   flutter:
     sdk: flutter
