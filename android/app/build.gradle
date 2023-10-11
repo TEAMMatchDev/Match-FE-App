@@ -2,6 +2,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
 }
 
 def localProperties = new Properties()
@@ -22,6 +23,7 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+
 //앱키
 def kakaoApiKey = localProperties.getProperty('kakaoApiKey')
 
@@ -37,7 +39,6 @@ if (envFile.exists()) {
         ext.envProperties[key] = value
     }
 }
-
 
 android {
     namespace "com.dev.match"
@@ -81,4 +82,7 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation platform("com.google.firebase:firebase-bom:32.3.1")
+    implementation "com.google.firebase:firebase-analytics-ktx"
+}

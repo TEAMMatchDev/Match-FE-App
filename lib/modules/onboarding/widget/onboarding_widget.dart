@@ -56,7 +56,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
         },
         child: Text(
           '건너뛰기',
-          style: AppTextStyles.body2Regular13.copyWith(color: AppColors.grey6, decoration: TextDecoration.underline),
+          style: AppTextStyles.T1Bold13.copyWith(color: AppColors.grey6, decoration: TextDecoration.underline),
           textAlign: TextAlign.center, // 중앙 정렬 설정
         ),
       ),
@@ -92,7 +92,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
                   width: 225.w, // Set your desired width
                   child: Text(
                     description,
-                    style: AppTextStyles.heading3Bold16,
+                    style: AppTextStyles.T1Bold16,
                     textAlign: TextAlign.center, // 중앙 정렬 설정
                   ),
                 ),
@@ -160,7 +160,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
         child: Center(
           child: Text(
             '시작하기',
-            style: AppTextStyles.heading3Bold16.copyWith(color: AppColors.white),
+            style: AppTextStyles.T1Bold16.copyWith(color: AppColors.white),
             textAlign: TextAlign.center, // 중앙 정렬 설정
           ),
           ),

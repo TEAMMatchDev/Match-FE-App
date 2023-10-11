@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -34,10 +32,10 @@ class MainScren extends GetView<MainController> {
             controller.selectIdx.value = value;
           }),
           selectedItemColor: AppColors.grey9,
-          selectedLabelStyle: AppTextStyles.body3Bold12,
+          selectedLabelStyle: AppTextStyles.T1Bold12,
           unselectedItemColor: AppColors.grey3,
           unselectedLabelStyle:
-              AppTextStyles.body3Bold12.copyWith(color: AppColors.grey3),
+              AppTextStyles.T1Bold12.copyWith(color: AppColors.grey3),
           items: [
             bottomNaviItem(iconUrl: 'home', naviText: '홈'),
             bottomNaviItem(iconUrl: 'donate', naviText: '후원'),

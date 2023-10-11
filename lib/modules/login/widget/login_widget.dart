@@ -271,7 +271,7 @@ class _LoginState extends State<LoginWidget> {
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '카카오 로그인',
-              style: AppTextStyles.subtitle2Bold14.copyWith(fontWeight: FontWeight.w600),
+              style: AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
           ],
@@ -306,7 +306,7 @@ class _LoginState extends State<LoginWidget> {
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '네이버 로그인',
-              style: AppTextStyles.subtitle2Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
+              style: AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
               textAlign: TextAlign.center,
             ),
           ],
@@ -336,7 +336,7 @@ class _LoginState extends State<LoginWidget> {
             SizedBox(width: 80.w), // Add some spacing between the icon and text
             Text(
               '애플 로그인',
-              style: AppTextStyles.subtitle2Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
+              style: AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
               textAlign: TextAlign.center,
             ),
           ],
@@ -360,11 +360,11 @@ class _LoginState extends State<LoginWidget> {
               children: [
                 TextSpan(
                   text: '이미 계정이 있나요? ',
-                  style: AppTextStyles.body3Bold12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grey4),
+                  style: AppTextStyles.T1Bold12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grey4),
                 ),
                 TextSpan(
                     text: '이메일 로그인',
-                    style: AppTextStyles.body3Bold12.copyWith(color: Colors.black)
+                    style: AppTextStyles.T1Bold12.copyWith(color: Colors.black)
                 ),
               ],
             ),

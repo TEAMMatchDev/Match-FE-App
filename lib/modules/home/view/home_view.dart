@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/home/view/today_match_view.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../buring_match/controller/burning_match_controller.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
 
@@ -42,7 +44,7 @@ class HomeScreen extends GetView<HomeController> {
                 //2. 검색 section
                 GestureDetector(
                   onTap: () {
-                    //TODO: move search View
+                    Get.toNamed(Routes.home + Routes.search);
                   },
                   child: Container(
                     padding:
@@ -61,8 +63,8 @@ class HomeScreen extends GetView<HomeController> {
                         ),
                         Text(
                           "고유 이름을 입력해보세요.",
-                          style: AppTextStyles.body2Regular13
-                              .copyWith(color: AppColors.grey4),
+                          style: AppTextStyles.L1Medium13.copyWith(
+                              color: AppColors.grey4),
                           textHeightBehavior: TextHeightBehavior(
                               applyHeightToFirstAscent: false),
                         ),
@@ -114,8 +116,9 @@ class HomeScreen extends GetView<HomeController> {
                 // 제목
                 CommonSectionHeader(
                     title: '박정은님의 불타는 매치',
-                    //TODO : destination 임시 처리
-                    destination: Routes.donate),
+                    destination: () async {
+                      await Get.toNamed(Routes.home + Routes.burning_match_pay);
+                    }),
                 SizedBox(
                   height: 180.h,
                   child: ListView.separated(
@@ -123,7 +126,19 @@ class HomeScreen extends GetView<HomeController> {
                     itemCount: 2,
                     itemBuilder: (context, index) {
                       return MyMatchItem(
+                          destination: () async {
+                            Get.toNamed(Routes.home + Routes.burning_match,
+                                arguments: {
+                                  "id": 1, // TODO: regularPayId로 적용해야함
+                                  //TODO: projectId로 적용해야함
+                                  "projectId": 1,
+                                  "type": MATCH_STATUS.REGULAR_PAY.name
+                                });
+                          },
                           title: "후원 함께할 분, 들어와요!",
+                          usages: "후원처",
+                          //TODO: projectId로 적용해야함
+                          matchId: 1,
                           count: 15,
                           imgList: ["test", "test", "test"]);
                     },
@@ -149,21 +164,28 @@ class HomeScreen extends GetView<HomeController> {
             child: Column(
               children: [
                 CommonSectionHeader(
-                    title: '오늘 이 매치는 어때요?',
-                    //TODO : destination 임시 처리
-                    destination: Routes.donate),
+                  title: '오늘 이 매치는 어때요?',
+                  //TODO : destination 임시 처리
+                  destination: () async {
+                    Get.to(TodayMatchScreen());
+                  },
+                ),
                 SizedBox(
                   height: 223.h,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
                     itemBuilder: (context, index) {
+                      final project = controller.projectList[index];
                       //TODO: 현재 같은 변수를 사용하여 좋아요가 동기화 됨
                       return TodayMatchItem(
-                          title: "후원 함께할분!",
-                          organization: "후원처명",
-                          count: 14,
-                          isLike: controller.isLike);
+                        title: project.title,
+                        organization: project.usages,
+                        count: project.totalDonationCnt,
+                        backgroundImg: project.imgUrl,
+                        isLike: project.like ? true.obs : false.obs,
+                        projectId: project.projectId,
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(
@@ -181,38 +203,39 @@ class HomeScreen extends GetView<HomeController> {
             height: 10.h,
           ),
           //6. 기부처 추천 section
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
-            child: Column(
-              children: [
-                CommonSectionHeader(
-                    title: '박레이님께 꼭 맞는 기부처 추천',
-                    //TODO : destination 임시 처리
-                    destination: Routes.donate),
-                SizedBox(
-                  height: 99.h,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 2,
-                    itemBuilder: (context, index) {
-                      return OrganizationItem(
-                        title: "test",
-                        comment: "testest",
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        width: 20.w,
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 25.h,
-                )
-              ],
-            ),
-          ),
+          //기획 변경으로 인해 임시로 주석 처리
+          // Padding(
+          //   padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
+          //   child: Column(
+          //     children: [
+          //       CommonSectionHeader(
+          //           title: '박레이님께 꼭 맞는 기부처 추천',
+          //           //TODO : destination 임시 처리
+          //           destination: () async {}),
+          //       SizedBox(
+          //         height: 99.h,
+          //         child: ListView.separated(
+          //           scrollDirection: Axis.horizontal,
+          //           itemCount: 2,
+          //           itemBuilder: (context, index) {
+          //             return OrganizationItem(
+          //               title: "test",
+          //               comment: "testest",
+          //             );
+          //           },
+          //           separatorBuilder: (context, index) {
+          //             return SizedBox(
+          //               width: 20.w,
+          //             );
+          //           },
+          //         ),
+          //       ),
+          //       SizedBox(
+          //         height: 25.h,
+          //       )
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
