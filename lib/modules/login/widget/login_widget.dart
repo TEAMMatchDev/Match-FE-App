@@ -82,25 +82,8 @@ class _LoginState extends State<LoginWidget> {
   }
 
   void signInWithNaver() async {
-    final String nickname;
-    final String id;
-    final String name;
-    final String email;
-    final String gender;
-    final String age;
-    final String birthday;
-    final String birthyear;
-    final String profileImage;
-    final String mobile;
-    final String mobileE164;
-
-
+    //로그인 성공하면 NaverLoginStatus를 받을 수 있고, NaverAccountResult를 통해 유저 정보 받을 수 ㅇ
     final NaverLoginResult result = await FlutterNaverLogin.logIn();
-    NaverAccessToken res = await FlutterNaverLogin.currentAccessToken;
-    // setState(() {
-    //   accessToken = res.accessToken;
-    //   tokenType = res.tokenType;
-    // });
 
     if (result.status == NaverLoginStatus.loggedIn) {
       print('accessToken = ${result.accessToken}');
@@ -192,7 +175,7 @@ class _LoginState extends State<LoginWidget> {
             SizedBox(
               height: 12.h,
             ),
-            naverLogin(),
+            naverLogin(signInWithNaver),
             SizedBox(
               height: 12.h,
             ),
@@ -260,15 +243,15 @@ class _LoginState extends State<LoginWidget> {
         width: 300.w,
         height: 46.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0), // Set border radius to 10px
-          color: AppColors.kakaoBtn, // Button's background color
+          borderRadius: BorderRadius.circular(5.0),
+          color: AppColors.kakaoBtn,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: 24.w), // Add some spacing between the icon and text
-            SvgPicture.asset(iconDir + "login/ic_kakao_19.svg"), // Include your SVG here
-            SizedBox(width: 80.w), // Add some spacing between the icon and text
+            SizedBox(width: 24.w),
+            SvgPicture.asset(iconDir + "login/ic_kakao_19.svg"),
+            SizedBox(width: 80.w),
             Text(
               '카카오 로그인',
               style: AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600),
@@ -282,28 +265,29 @@ class _LoginState extends State<LoginWidget> {
 
 
   @override
-  Widget naverLogin() {
+  Widget naverLogin(VoidCallback onTap) {
     return GestureDetector(
-        onTap: () async {
-          try {
-            signInWithNaver();
-          } catch (error) {
-            print('Naver 로그인 실패: $error');
-          }
-      },
+      onTap: onTap,
+      //   onTap: () async {
+      //     try {
+      //       signInWithNaver();
+      //     } catch (error) {
+      //       print('Naver 로그인 실패: $error');
+      //     }
+      // },
       child: Container(
         width: 300.w,
         height: 46.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0), // Set border radius to 10px
-          color: AppColors.naverBtn, // Button's background color
+          borderRadius: BorderRadius.circular(5.0),
+          color: AppColors.naverBtn,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: 24.w), // Add some spacing between the icon and text
-            SvgPicture.asset(iconDir + "login/ic_naver_16.svg"), // Include your SVG here
-            SizedBox(width: 80.w), // Add some spacing between the icon and text
+            SizedBox(width: 24.w),
+            SvgPicture.asset(iconDir + "login/ic_naver_16.svg"),
+            SizedBox(width: 80.w),
             Text(
               '네이버 로그인',
               style: AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
