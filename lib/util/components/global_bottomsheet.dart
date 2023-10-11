@@ -10,7 +10,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
-import 'package:logger/logger.dart';
 import 'package:match/util/components/global_modal.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -18,6 +17,7 @@ import 'package:match/util/method/dynamic_link.dart';
 import 'package:match/util/method/permission_handler.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../const/style/global_color.dart';
+import '../const/style/global_logger.dart';
 
 class ShareBottomSheet extends StatelessWidget {
   final String imgUrl;
@@ -84,7 +84,7 @@ class ShareBottomSheet extends StatelessWidget {
       onTap: () async {
         var appLink =
             await DynamicLink.getShortLink(screenName: screenType, id: id);
-        Logger().d(appLink);
+        logger.d(appLink);
         switch (type) {
           case "KAKAO":
             await kakoShare(
@@ -143,7 +143,7 @@ class ShareBottomSheet extends StatelessWidget {
         await PermissionHandler.requestGallery(context);
       }
     } catch (e) {
-      Logger().d(e);
+      logger.d(e);
     }
     return false;
   }
@@ -183,9 +183,9 @@ class ShareBottomSheet extends StatelessWidget {
       try {
         Uri uri = await shareClient.shareDefault(template: shareFeed);
         await shareClient.launchKakaoTalk(uri);
-        Logger().d('카카오톡 공유 완료');
+        logger.d('카카오톡 공유 완료');
       } catch (error) {
-        Logger().d('카카오톡 공유 실패 $error');
+        logger.d('카카오톡 공유 실패 $error');
       }
     } else {
       try {
@@ -193,7 +193,7 @@ class ShareBottomSheet extends StatelessWidget {
             await WebSharerClient.instance.makeDefaultUrl(template: shareFeed);
         await launchBrowserTab(shareUrl, popupOpen: true);
       } catch (error) {
-        Logger().d('카카오톡 공유 실패 $error');
+        logger.d('카카오톡 공유 실패 $error');
       }
     }
   }

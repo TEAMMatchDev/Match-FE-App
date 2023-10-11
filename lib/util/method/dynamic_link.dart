@@ -7,6 +7,7 @@ import 'package:uni_links/uni_links.dart';
 
 import '../../provider/routes/routes.dart';
 import '../const/global_variable.dart';
+import '../const/style/global_logger.dart';
 
 class DynamicLink {
   static Future<bool> setUp() async {
@@ -56,7 +57,7 @@ class DynamicLink {
     ) {
       _redirectScreen(dynamicLinkData);
     }).onError((error) {
-      Logger().d(error);
+      logger.e(error);
     });
   }
 

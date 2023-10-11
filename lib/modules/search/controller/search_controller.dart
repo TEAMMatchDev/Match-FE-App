@@ -10,6 +10,7 @@ import 'package:match/util/method/get_storage.dart';
 
 import '../../../model/enum/search_statu.dart';
 import '../../../model/search/search.dart';
+import '../../../util/const/style/global_logger.dart';
 
 //SearchController class가 있어서 해당 이름으로 수정
 class SearchViewController extends GetxController {
@@ -54,7 +55,7 @@ class SearchViewController extends GetxController {
         // 입력이 없을 때 타이머 시작
         if (_timer == null) {
           _timer = Timer(Duration(seconds: 1), () {
-            Logger().d('1초가 경과했습니다.');
+            logger.d('1초가 경과했습니다.');
             //TODO: api 호출
             searchStatus.value = SEARCH_STATUS.SEARCH;
           });
