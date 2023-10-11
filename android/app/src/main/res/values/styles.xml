@@ -15,8 +15,4 @@
     <style name="NormalTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
-
-    <string name="client_id">8SFlnjHGk9S71HcRtHpg</string>
-    <string name="client_secret">AX2RitUnq3</string>
-    <string name="client_name">match</string>
 </resources>

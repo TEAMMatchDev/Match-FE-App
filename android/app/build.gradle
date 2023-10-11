@@ -26,19 +26,9 @@ if (flutterVersionName == null) {
 
 //앱키
 def kakaoApiKey = localProperties.getProperty('kakaoApiKey')
-
-
-// .env 파일에서 변수를 가져오기 위한 작업 추가
-def envFile = rootProject.file('.env')
-if (envFile.exists()) {
-    def envContent = envFile.text.trim()
-    ext.envProperties = [:]
-
-    envContent.eachLine { line ->
-        def (key, value) = line.split('=')
-        ext.envProperties[key] = value
-    }
-}
+def naverClientId = localProperties.getProperty('naverClientId')
+def naverClientSecret = localProperties.getProperty('naverClientSecret')
+def naverClientName = localProperties.getProperty('naverClientName')
 
 android {
     namespace "com.dev.match"
