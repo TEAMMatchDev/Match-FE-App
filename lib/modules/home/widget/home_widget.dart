@@ -12,25 +12,6 @@ import '../../../provider/routes/routes.dart';
 import '../../../util/components/global_bottomsheet.dart';
 import '../../../util/components/global_widget.dart';
 
-Widget CommonSectionHeader(
-    {required String title, required Future<void> Function() destination}) {
-  return Padding(
-    padding: EdgeInsets.only(top: 31.h, bottom: 17.5.h),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: AppTextStyles.T1Bold16,
-        ),
-        GestureDetector(
-            onTap: destination,
-            child: SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"))
-      ],
-    ),
-  );
-}
-
 ///*서버 통신 로직 구현전에 사용할 임시 프로필이미지
 const String tmpProfileImg =
     "http://k.kakaocdn.net/dn/bq8XQY/btsjqweTr1J/c0kplPW8eo8iOCeoYTBGxK/img_640x640.jpg";

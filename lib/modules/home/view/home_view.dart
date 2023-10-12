@@ -24,11 +24,12 @@ class HomeScreen extends GetView<HomeController> {
         scrollDirection: Axis.vertical,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h)
+                .copyWith(bottom: 0.h),
             child: Column(
               children: [
+                //*1.제목 header
                 Row(
-                  //1.제목 header
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Image.asset(
@@ -39,54 +40,23 @@ class HomeScreen extends GetView<HomeController> {
                   ],
                 ),
                 SizedBox(
-                  height: 27.h,
+                  height: 16.h,
                 ),
-                //2. 검색 section
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(Routes.home + Routes.search);
-                  },
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 12.h, horizontal: 14.w),
-                    decoration: BoxDecoration(
-                      color: AppColors.searchBackground,
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(iconDir + "ic_search_16.svg"),
-                        SizedBox(
-                          width: 6.w,
-                        ),
-                        Text(
-                          "고유 이름을 입력해보세요.",
-                          style: AppTextStyles.L1Medium13.copyWith(
-                              color: AppColors.grey4),
-                          textHeightBehavior: TextHeightBehavior(
-                              applyHeightToFirstAscent: false),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                //*2. 광고 section
                 SizedBox(
-                  height: 20.h,
-                ),
-                //3. 광고 section
-                SizedBox(
+                  width: 300.w,
+                  height: 60.h,
                   child: CarouselSlider.builder(
                     itemCount: controller.adCount.value,
                     options: CarouselOptions(
-                        autoPlay: true, viewportFraction: 300.w / 136.h),
+                        autoPlay: true, viewportFraction: 300.w / 50.h),
                     itemBuilder: (context, index, realIndex) {
                       return Container(
                           width: 300.w,
+                          height: 50.h,
                           decoration: BoxDecoration(
                             //radius 수정
-                            borderRadius: BorderRadius.circular(20.r),
+                            borderRadius: BorderRadius.circular(5.r),
                             image: DecorationImage(
                                 fit: BoxFit.fitWidth,
                                 image: NetworkImage(tmpBackgroundImg),
@@ -98,8 +68,8 @@ class HomeScreen extends GetView<HomeController> {
                           child: Stack(
                             children: [
                               Positioned(
-                                  bottom: 25.h,
-                                  right: 16.w,
+                                  bottom: 6.h,
+                                  right: 11.w,
                                   child: adIndexItem(
                                       total: controller.adCount.value,
                                       currentIdx: index + 1))
@@ -109,66 +79,31 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                 ),
                 SizedBox(
-                  height: 4.h,
-                ),
-                //4. 자신의 매치 section
-                //TODO: 매치 내역이 없다면 해당 섹션을 보여주지 않음
-                // 제목
-                CommonSectionHeader(
-                    title: '박정은님의 불타는 매치',
-                    destination: () async {
-                      await Get.toNamed(Routes.home + Routes.burning_match_pay);
-                    }),
-                SizedBox(
-                  height: 180.h,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 2,
-                    itemBuilder: (context, index) {
-                      return MyMatchItem(
-                          destination: () async {
-                            Get.toNamed(Routes.home + Routes.burning_match,
-                                arguments: {
-                                  "id": 1, // TODO: regularPayId로 적용해야함
-                                  //TODO: projectId로 적용해야함
-                                  "projectId": 1,
-                                  "type": MATCH_STATUS.REGULAR_PAY.name
-                                });
-                          },
-                          title: "후원 함께할 분, 들어와요!",
-                          usages: "후원처",
-                          //TODO: projectId로 적용해야함
-                          matchId: 1,
-                          count: 15,
-                          imgList: ["test", "test", "test"]);
-                    },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        width: 20.w,
-                      );
-                    },
-                  ),
+                  height: 13.h,
                 ),
               ],
             ),
           ),
-
+          //구분선
           Container(
-            margin: EdgeInsets.symmetric(vertical: 29.h).copyWith(bottom: 0.h),
             color: AppColors.searchBackground,
             height: 10.h,
           ),
           //5. 매치 추천 section
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               children: [
-                CommonSectionHeader(
-                  title: '오늘 이 매치는 어때요?',
-                  //TODO : destination 임시 처리
-                  destination: () async {
-                    Get.to(TodayMatchScreen());
-                  },
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(top: 11.h, bottom: 15.h),
+                  child: Text(
+                    //TODO: username 적용
+                    "박정은님의 타오르는 불꽃이",
+                    style: AppTextStyles.T1Bold18.copyWith(
+                      fontSize: 20.sp,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 223.h,
@@ -177,7 +112,6 @@ class HomeScreen extends GetView<HomeController> {
                     itemCount: 2,
                     itemBuilder: (context, index) {
                       final project = controller.projectList[index];
-                      //TODO: 현재 같은 변수를 사용하여 좋아요가 동기화 됨
                       return TodayMatchItem(
                         title: project.title,
                         organization: project.usages,
@@ -197,45 +131,6 @@ class HomeScreen extends GetView<HomeController> {
               ],
             ),
           ),
-
-          Container(
-            color: AppColors.searchBackground,
-            height: 10.h,
-          ),
-          //6. 기부처 추천 section
-          //기획 변경으로 인해 임시로 주석 처리
-          // Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
-          //   child: Column(
-          //     children: [
-          //       CommonSectionHeader(
-          //           title: '박레이님께 꼭 맞는 기부처 추천',
-          //           //TODO : destination 임시 처리
-          //           destination: () async {}),
-          //       SizedBox(
-          //         height: 99.h,
-          //         child: ListView.separated(
-          //           scrollDirection: Axis.horizontal,
-          //           itemCount: 2,
-          //           itemBuilder: (context, index) {
-          //             return OrganizationItem(
-          //               title: "test",
-          //               comment: "testest",
-          //             );
-          //           },
-          //           separatorBuilder: (context, index) {
-          //             return SizedBox(
-          //               width: 20.w,
-          //             );
-          //           },
-          //         ),
-          //       ),
-          //       SizedBox(
-          //         height: 25.h,
-          //       )
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
