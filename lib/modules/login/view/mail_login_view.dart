@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_statu.dart';
-import 'package:match/modules/login/view/signup_view.dart';
+import 'package:match/modules/login/view/signup_user_mail_view.dart';
 import 'package:match/modules/login/widget/login_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
@@ -80,7 +80,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Get.to(SignUpScreen());
+                          Get.to(SignUpMailScreen());
                         },
                         child: Text(
                           "회원가입",

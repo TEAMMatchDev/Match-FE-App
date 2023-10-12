@@ -51,6 +51,8 @@ dependencies:
   uni_links: ^0.5.1
   get_storage: ^2.1.1
 
+  syncfusion_flutter_datepicker: ^23.1.40
+
 dev_dependencies:
   retrofit_generator: ^8.0.0
   build_runner: ^2.3.3

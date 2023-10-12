@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart'; //Date Format 사용
 import 'package:match/model/enum/search_statu.dart';
+import 'package:match/modules/login/widget/date_picker.dart';
 import 'package:match/modules/login/widget/login_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
@@ -21,8 +23,8 @@ import 'dart:io';
 import '../../../provider/routes/routes.dart';
 import '../controller/login_controller.dart';
 
-class SignUpScreen extends GetView<LoginController> {
-  const SignUpScreen({super.key});
+class SignUpInfoScreen extends GetView<LoginController> {
+  const SignUpInfoScreen({super.key});
 
   @override
   Widget build(BuildContext context){
@@ -38,55 +40,53 @@ class SignUpScreen extends GetView<LoginController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '로그인할 이메일과\n비밀번호를 입력해주세요.',
+                  '후원에 필요한\n정보를 입력해주세요.',
                   style: AppTextStyles.T1Bold18,
                 ),
                 SizedBox(height: 30.h),
                 Text(
-                  '이메일',
-                  style: AppTextStyles.T1Bold14,
-                ),
-                SizedBox(height: 10.h),
-
-                Row(
-                  children: [
-                    Expanded(
-                      child: CommonTextField(
-                        textController: controller.idTextController.value,
-                        isSearchScreen: false, //뒤로가기
-                        hasPrefix: false, //검색 아이콘
-                        placeHolder: "이메일을 입력해주세요.",
-                        textStatus: controller.searchStatus,
-                        suffixOnTap: () async {},
-                        onSubmitted: (value) async {},
-                        onChanged: ((value) async {
-                          controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                        }),
-                        isPlain: true,
-                      ),
-                    ),
-                    SizedBox(width: 10.w),
-                    certinumButton(),
-                  ],
-                ),
-
-                SizedBox(height: 20.h),
-                Text(
-                  '비밀번호',
+                  '이름',
                   style: AppTextStyles.T1Bold14,
                 ),
                 SizedBox(height: 10.h),
                 CommonTextField(
-                    textController: controller.pwTextController.value,
-                    isSearchScreen: false, //뒤로가기
-                    hasPrefix: false, //검색 아이콘
-                    placeHolder: "비밀번호를 입력해주세요.",
-                    textStatus: controller.searchStatus,
-                    suffixOnTap: () async {},
-                    onSubmitted: (value) async {},
-                    onChanged: (value) async {},
-                    isPlain: true,
+                  textController: controller.idTextController.value,
+                  isSearchScreen: false, //뒤로가기
+                  hasPrefix: false, //검색 아이콘
+                  placeHolder: "이름을 입력해주세요.",
+                  textStatus: controller.searchStatus,
+                  suffixOnTap: () async {},
+                  onSubmitted: (value) async {},
+                  onChanged: ((value) async {
+                    controller.searchStatus.value = SEARCH_STATUS.EDIT;
+                  }),
+                  isPlain: true,
                 ),
+                SizedBox(height: 20.h),
+                Text(
+                  '성별',
+                  style: AppTextStyles.T1Bold14,
+                ),
+                Row(
+                  children: [
+                    certinumButton(),
+                    certinumButton(),
+                    certinumButton(),
+                  ],
+                ),
+                SizedBox(height: 10.h),
+                Text(
+                  '생년월일',
+                  style: AppTextStyles.T1Bold14,
+                ),
+
+                /*DatePickerButton.login(
+                  text: "생년월일",
+                  onTap: () async {
+                    Get.back();
+                  },
+                ),*/
+
                 SizedBox(height: 27.h),
                 Text(
                   '비밀번호 확인',
@@ -104,7 +104,7 @@ class SignUpScreen extends GetView<LoginController> {
                   onChanged: (value) async {},
                   isPlain: true,
                 ),
-                SizedBox(height: 150.h),
+                SizedBox(height: 50.h),
                 CommonButton.login(
                   text: "확인",
                   onTap: () async {
