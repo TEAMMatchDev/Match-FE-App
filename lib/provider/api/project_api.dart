@@ -14,12 +14,13 @@ class ProjectApi {
     required ProjectType type,
     String? content,
   }) async {
-    Response response =
-        await DioServices().to().get("/projects/list", queryParameters: {
-      "page": 0,
-      "size": 10,
-      "projectKind": type.name,
-    });
+    Response response = await DioServices().to().get("/projects/list",
+        queryParameters: {
+          "page": 0,
+          "size": 10,
+          "projectKind": type.name,
+          "filter": "LATEST"
+        });
     // logger.d(response.data);
     return List.generate(
       response.data[RESULT][CONTENTS].length,

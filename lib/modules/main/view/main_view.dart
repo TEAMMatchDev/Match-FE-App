@@ -38,7 +38,7 @@ class MainScren extends GetView<MainController> {
               AppTextStyles.T1Bold12.copyWith(color: AppColors.grey3),
           items: [
             bottomNaviItem(iconUrl: 'home', naviText: '홈'),
-            bottomNaviItem(iconUrl: 'donate', naviText: '후원'),
+            bottomNaviItem(iconUrl: 'search', naviText: '검색'),
             bottomNaviItem(iconUrl: 'event', naviText: '이벤트'),
             bottomNaviItem(iconUrl: 'mypage', naviText: 'MY'),
           ],
