@@ -96,24 +96,32 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
           // 검색 field 밑의 contents
           //*4.프로젝트 리스트
           controller.searchStatus.value == SEARCH_STATUS.SEARCH
-              ? Expanded(
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (context, index) =>
-                        SizedBox(height: 14.h),
-                    itemCount: controller.projectList.length,
-                    itemBuilder: (context, index) {
-                      final project = controller.projectList[index];
-                      return Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
-                          margin: EdgeInsets.only(
-                              bottom: index == controller.projectList.length - 1
-                                  ? 14.h
-                                  : 0.h),
-                          child: ProjectWidget(project: project));
-                    },
-                  ),
-                )
+              ? controller.searchStatus.value == SEARCH_STATUS.SEARCH
+                  ? Expanded(
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 14.h),
+                        itemCount: controller.projectList.length,
+                        itemBuilder: (context, index) {
+                          final project = controller.projectList[index];
+                          return Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              margin: EdgeInsets.only(
+                                  bottom:
+                                      index == controller.projectList.length - 1
+                                          ? 14.h
+                                          : 0.h),
+                              child: ProjectWidget(project: project));
+                        },
+                      ),
+                    )
+                  : Center(
+                      child: Text(
+                        "최근 검색 결과가 없습니다",
+                        style: AppTextStyles.T1Bold18,
+                      ),
+                    )
               : SizedBox.shrink(),
         ],
       ),

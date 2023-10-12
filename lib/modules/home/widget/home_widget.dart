@@ -44,20 +44,22 @@ Widget adIndexItem({required int total, required int currentIdx}) {
 }
 
 ///*타오로는 불꽃이 위젯
-///[HomeScreen]에서 사용
-class HomeFlame extends StatelessWidget {
+///[HomeScreen], [BurningMathScreen]에서 사용
+class FlameWidget extends StatelessWidget {
   final String flameName;
   final String flameImg;
   final String flameTalk;
   final String usages;
   final int id;
-  const HomeFlame(
+  final bool isHome;
+  const FlameWidget(
       {super.key,
       required this.flameName,
       required this.flameImg,
       required this.flameTalk,
       required this.usages,
-      required this.id});
+      required this.id,
+      this.isHome = true});
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +74,16 @@ class HomeFlame extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 283.h,
-              width: 255.w,
+              height: isHome ? 283.h : 229.h,
+              width: isHome ? 255.w : 255.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.r),
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage(imgDir + "iv_home_background_553.png"),
+                  image: AssetImage(imgDir +
+                      (isHome
+                          ? "iv_home_background_553.png"
+                          : "iv_detail_background_553.png")),
                 ),
               ),
               child: Column(
@@ -90,30 +95,32 @@ class HomeFlame extends StatelessWidget {
                   SizedBox(
                     height: 28.h,
                   ),
-                  Container(
-                    width: 232.w,
-                    height: 57.h,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image:
-                            AssetImage(imgDir + "ic_speech_background_232.png"),
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Positioned(
-                          top: 13.h,
-                          child: Text(
-                            flameTalk,
-                            style: AppTextStyles.L1Medium12,
+                  isHome
+                      ? Container(
+                          width: 232.w,
+                          height: 57.h,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                  imgDir + "ic_speech_background_232.png"),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
+                          alignment: Alignment.center,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Positioned(
+                                top: 13.h,
+                                child: Text(
+                                  flameTalk,
+                                  style: AppTextStyles.L1Medium12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox.shrink(),
                   SizedBox(
                     height: 20.h,
                   ),
@@ -121,10 +128,16 @@ class HomeFlame extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Text(flameName, style: AppTextStyles.T1Bold20)
+            isHome
+                ? Column(
+                    children: [
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(flameName, style: AppTextStyles.T1Bold20)
+                    ],
+                  )
+                : SizedBox.shrink()
           ],
         ),
       ),
