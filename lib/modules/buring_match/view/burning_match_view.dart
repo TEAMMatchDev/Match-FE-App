@@ -14,7 +14,6 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import 'package:timeline_tile_nic/timeline_tile.dart';
 
 import '../../../util/components/global_app_bar.dart';
-import '../../../util/components/global_bottomsheet.dart';
 import '../../../util/const/global_variable.dart';
 
 class BurningMatchScreen extends GetView<BurningMatchController> {

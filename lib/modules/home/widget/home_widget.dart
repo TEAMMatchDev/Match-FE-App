@@ -9,7 +9,6 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/routes/routes.dart';
-import '../../../util/components/global_bottomsheet.dart';
 import '../../../util/components/global_widget.dart';
 
 ///*서버 통신 로직 구현전에 사용할 임시 프로필이미지
@@ -44,109 +43,6 @@ Widget adIndexItem({required int total, required int currentIdx}) {
   );
 }
 
-///* 나의 매치(불타는 매치) section
-///* [HomeScreen]에서 사용되는 위젯<br/>
-class MyMatchItem extends StatelessWidget {
-  final String title;
-  final int count;
-  final String usages;
-  final int matchId;
-  final List<String> imgList;
-  final String backgroundImg;
-  final Future<void> Function() destination;
-  const MyMatchItem(
-      {super.key,
-      required this.title,
-      required this.count,
-      required this.imgList,
-      this.backgroundImg = tmpBackgroundImg,
-      required this.destination,
-      required this.usages,
-      required this.matchId});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: destination,
-      child: Container(
-        height: 180.h,
-        width: 280.w,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.5, 1],
-            colors: [
-              Color(0x00000099),
-              Color(0x0000001A),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(10.r),
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(backgroundImg),
-              colorFilter: ColorFilter.mode(
-                  //TODO: gradient 적용 detail 수정
-                  Colors.black.withOpacity(0.3),
-                  BlendMode.srcATop)),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-                top: 14.h,
-                right: 17.w,
-                child: GestureDetector(
-                    onTap: () async {
-                      await Get.bottomSheet(ShareBottomSheet(
-                          imgUrl: backgroundImg,
-                          //
-                          usages: usages,
-                          screenType: "burnMatch",
-                          title: title,
-                          id: matchId));
-                    },
-                    child: SvgPicture.asset(iconDir + "ic_share_16.svg"))),
-            Positioned(
-              bottom: 23.h,
-              left: 23.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: AppTextStyles.T1Bold15.copyWith(
-                      color: AppColors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                    Wrap(
-                      spacing: -4,
-                      children:
-                          imgList.map((e) => profileItem(size: 16)).toList(),
-                    ),
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Text(
-                      "${count}명 후원중",
-                      style: AppTextStyles.T1Bold12.copyWith(
-                        color: AppColors.white,
-                      ),
-                    )
-                  ]),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 ///*타오로는 불꽃이 위젯
 ///[HomeScreen]에서 사용
 class HomeFlame extends StatelessWidget {
@@ -167,7 +63,8 @@ class HomeFlame extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await Get.toNamed(Routes.burning_match, arguments: {"donaionId": 1});
+        await Get.toNamed(Routes.home + Routes.burning_match,
+            arguments: {"donaionId": 1});
       },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),

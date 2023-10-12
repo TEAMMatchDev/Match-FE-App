@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
-import 'package:match/util/components/global_bottomsheet.dart';
 
 import '../../../model/enum/search_statu.dart';
 import '../../../util/components/global_button.dart';
@@ -58,24 +57,6 @@ class ProjectScreen extends GetView<ProjectController> {
                         ),
                       ),
                     ),
-                    Positioned(
-                        bottom: 24.h,
-                        right: 20.w,
-                        child: GestureDetector(
-                            onTap: () async {
-                              await Get.bottomSheet(ShareBottomSheet(
-                                  screenType: "project",
-                                  imgUrl:
-                                      controller.projectDetail.value.thumbNail,
-                                  usages: controller.projectDetail.value.usages,
-                                  title: controller.projectDetail.value.title,
-                                  id: controller
-                                      .projectDetail.value.projectId));
-                            },
-                            child: SvgPicture.asset(
-                              iconDir + "ic_share_16.svg",
-                              height: 30.h,
-                            ))),
                   ]),
                   Padding(
                     padding:
