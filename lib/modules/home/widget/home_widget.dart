@@ -154,17 +154,21 @@ class HomeFlame extends StatelessWidget {
   final String flameImg;
   final String flameTalk;
   final String usages;
+  final int id;
   const HomeFlame(
       {super.key,
       required this.flameName,
       required this.flameImg,
       required this.flameTalk,
-      required this.usages});
+      required this.usages,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {},
+      onTap: () async {
+        await Get.toNamed(Routes.burning_match, arguments: {"donaionId": 1});
+      },
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w),
         child: Column(

@@ -70,27 +70,6 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                       image: NetworkImage(tmpBackgroundImg),
                     ),
                   ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                          top: 14.h,
-                          right: 16.w,
-                          child: GestureDetector(
-                              onTap: () async {
-                                await Get.bottomSheet(ShareBottomSheet(
-                                    imgUrl: controller.matchPay.value.imgUrl,
-                                    //
-                                    usages:
-                                        controller.matchPay.value.projectTitle,
-                                    screenType: "burnMatch",
-                                    title:
-                                        controller.matchPay.value.projectTitle,
-                                    id: controller.projectId));
-                              },
-                              child: SvgPicture.asset(
-                                  iconDir + "ic_share_16.svg"))),
-                    ],
-                  ),
                 ),
                 //매치 기록 제목
                 Padding(

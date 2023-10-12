@@ -11,9 +11,9 @@ enum MATCH_STATUS {
 
 class BurningMatchController extends GetxController {
   static BurningMatchController get to => Get.find();
-  int id = Get.arguments["id"] ?? 0;
-  int projectId = Get.arguments["projectId"] ?? -1;
-  String type = Get.arguments["type"] ?? 0;
+  int id = Get.arguments["donaionId"] ?? 0;
+  // 공유하기 로직때문에 추가했던 변수<- 임시 삭제
+  // int projectId = Get.arguments["projectId"] ?? -1;
 
   ///*5-7-1 상단 매치 결제 정보
   Rx<MatchPay> matchPay = MatchPay(

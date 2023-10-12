@@ -54,7 +54,6 @@ class ProjectScreen extends GetView<ProjectController> {
                                   color: AppColors.white,
                                   height: 24.h,
                                 )),
-                            LikeIcon(isLike: controller.isLike)
                           ],
                         ),
                       ),

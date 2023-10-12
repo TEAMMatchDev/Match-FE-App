@@ -112,10 +112,12 @@ class HomeScreen extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       // final project = controller.projectList[index];
                       return HomeFlame(
-                          flameName: "순두부찌개 먹은 불꽃이",
-                          flameImg: tmpBackgroundImg,
-                          flameTalk: "말을 겁니다 후원집행시, 생성시, ",
-                          usages: "T.B.T 레스큐");
+                        flameName: "순두부찌개 먹은 불꽃이",
+                        flameImg: tmpBackgroundImg,
+                        flameTalk: "말을 겁니다 후원집행시, 생성시, ",
+                        usages: "T.B.T 레스큐",
+                        id: 1,
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(
