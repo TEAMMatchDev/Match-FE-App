@@ -12,6 +12,14 @@ class AppTextStyles {
   //design system 명시대로 나머지는 행간 auto로 설정
   static const _regularHeight = 1.5;
 
+  static var T1Bold20 = TextStyle(
+    color: _defaultTextColor,
+    fontFamily: _defaultFontFamily,
+    fontSize: 20.sp,
+    height: _regularHeight,
+    fontWeight: FontWeight.w400,
+  );
+
   static var T1Bold18 = TextStyle(
     color: _defaultTextColor,
     fontFamily: _defaultFontFamily,

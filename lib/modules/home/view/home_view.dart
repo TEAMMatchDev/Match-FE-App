@@ -89,37 +89,33 @@ class HomeScreen extends GetView<HomeController> {
             color: AppColors.searchBackground,
             height: 10.h,
           ),
-          //5. 매치 추천 section
+          //*3. 타오르는 불꽃이 section
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               children: [
+                //*제목
                 Container(
                   alignment: Alignment.centerLeft,
                   padding: EdgeInsets.only(top: 11.h, bottom: 15.h),
                   child: Text(
-                    //TODO: username 적용
-                    "박정은님의 타오르는 불꽃이",
-                    style: AppTextStyles.T1Bold18.copyWith(
-                      fontSize: 20.sp,
-                    ),
-                  ),
+                      //TODO: username 적용
+                      "박정은님의 타오르는 불꽃이",
+                      style: AppTextStyles.T1Bold20),
                 ),
+                //*불꽃이 ListView
                 SizedBox(
-                  height: 223.h,
+                  height: 320.h,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
                     itemBuilder: (context, index) {
-                      final project = controller.projectList[index];
-                      return TodayMatchItem(
-                        title: project.title,
-                        organization: project.usages,
-                        count: project.totalDonationCnt,
-                        backgroundImg: project.imgUrl,
-                        isLike: project.like ? true.obs : false.obs,
-                        projectId: project.projectId,
-                      );
+                      // final project = controller.projectList[index];
+                      return HomeFlame(
+                          flameName: "순두부찌개 먹은 불꽃이",
+                          flameImg: tmpBackgroundImg,
+                          flameTalk: "말을 겁니다 후원집행시, 생성시, ",
+                          usages: "T.B.T 레스큐");
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(
