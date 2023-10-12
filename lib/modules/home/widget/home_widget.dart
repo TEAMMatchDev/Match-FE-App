@@ -313,13 +313,6 @@ class TodayMatchList extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              right: 25.w,
-              top: 22.h,
-              child: LikeIcon(
-                isLike: isLike,
-              ),
-            ),
-            Positioned(
               bottom: 17.h,
               left: 20.w,
               child:
@@ -332,7 +325,7 @@ class TodayMatchList extends StatelessWidget {
                   width: 7.w,
                 ),
                 Text(
-                  "외 ${count}명 후원중",
+                  "외 ${count}마리의 불꽃이 함께하고 있어요.",
                   style: AppTextStyles.L1Medium13.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,

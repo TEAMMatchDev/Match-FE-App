@@ -31,7 +31,7 @@ class DonateScreen extends GetView<DonateController> {
                   children: [
                     Expanded(
                       child: Text(
-                        "후원",
+                        "기부처 탐색",
                         style: AppTextStyles.T1Bold16,
                       ),
                     ),
@@ -89,41 +89,6 @@ class DonateScreen extends GetView<DonateController> {
                       width: 16.w,
                     );
                   }),
-                ),
-              ),
-              //*3.정렬기준
-              Padding(
-                padding: EdgeInsets.only(top: 26.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        controller.isRecent.value = !controller.isRecent.value;
-                      },
-                      child: Text("• 추천순",
-                          style: AppTextStyles.T1Bold12.copyWith(
-                            color: !controller.isRecent.value
-                                ? AppColors.grey9
-                                : AppColors.grey3,
-                          )),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        controller.isRecent.value = !controller.isRecent.value;
-                      },
-                      //위젯화하여 중복코드 제거
-                      child: Text("• 최신순",
-                          style: AppTextStyles.T1Bold12.copyWith(
-                            color: controller.isRecent.value
-                                ? AppColors.grey9
-                                : AppColors.grey3,
-                          )),
-                    )
-                  ],
                 ),
               ),
               //*4.프로젝트 리스트

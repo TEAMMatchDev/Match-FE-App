@@ -119,7 +119,7 @@ class HomeScreen extends GetView<HomeController> {
                     },
                     separatorBuilder: (context, index) {
                       return SizedBox(
-                        width: 20.w,
+                        width: 30.w,
                       );
                     },
                   ),
