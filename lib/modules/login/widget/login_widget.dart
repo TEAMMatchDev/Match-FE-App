@@ -19,6 +19,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../../../model/enum/login_type.dart';
+import '../view/mail_login_view.dart';
 
 void main() => runApp(LoginWidget());
 
@@ -333,7 +334,7 @@ class _LoginState extends State<LoginWidget> {
   Widget mailLogin() {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(Routes.home);
+        Get.to(EmailLoginScreen());
       },
       child: Container(
         width: 300.w,

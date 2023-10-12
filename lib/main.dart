@@ -10,7 +10,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:logger/logger.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
-import 'package:match/modules/splash/binding/splash_binding.dart';
 import 'package:match/util/method/dynamic_link.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
