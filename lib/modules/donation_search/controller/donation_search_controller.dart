@@ -21,36 +21,7 @@ class DonationSearchController extends GetxController {
 
   //최근 검색어 위젯 활성화 여부
   Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
-  RxList<TodayProject> projectList = <TodayProject>[
-    TodayProject(
-        projectId: 2,
-        imgUrl:
-            "https://match-image.s3.ap-northeast-2.amazonaws.com/project/2/61519f9b-4741-4fdc-82ad-fccf3217d6c1.png",
-        title: "TBT 유기견 보호",
-        usages: "The Better Tommorow",
-        kind: "ELDER",
-        like: true,
-        userProfileImages: [
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
-        ],
-        totalDonationCnt: 7),
-    TodayProject(
-        projectId: 2,
-        imgUrl:
-            "https://match-image.s3.ap-northeast-2.amazonaws.com/project/2/61519f9b-4741-4fdc-82ad-fccf3217d6c1.png",
-        title: "TBT 유기견 보호",
-        usages: "The Better Tommorow",
-        kind: "ELDER",
-        like: true,
-        userProfileImages: [
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
-        ],
-        totalDonationCnt: 7),
-  ].obs;
+  RxList<TodayProject> projectList = <TodayProject>[].obs;
 
   ///* 아래 함수에서 사용하는 1초를 측정하는 Timer
   Timer? _timer;

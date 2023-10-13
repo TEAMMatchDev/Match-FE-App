@@ -25,7 +25,6 @@ class ProjectWidget extends StatelessWidget {
         TodayMatchList(
           count: project.totalDonationCnt,
           imgList: project.userProfileImages,
-          isLike: project.like ? true.obs : false.obs,
           projectId: project.projectId,
         ),
         SizedBox(

@@ -186,14 +186,12 @@ class TodayMatchList extends StatelessWidget {
   final int count;
   final List<String> imgList;
   final String backgroundImg;
-  final Rx<bool> isLike;
   final int projectId;
   const TodayMatchList(
       {super.key,
       required this.count,
       required this.imgList,
       this.backgroundImg = tmpBackgroundImg,
-      required this.isLike,
       required this.projectId});
 
   @override

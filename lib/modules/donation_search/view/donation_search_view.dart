@@ -10,6 +10,7 @@ import 'package:match/util/method/get_storage.dart';
 
 import '../../../model/enum/search_statu.dart';
 import '../../../model/recent_search/recent_search.dart';
+import '../../../provider/api/search_api.dart';
 import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
@@ -37,7 +38,10 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                 placeHolder: "후원명, 후원사, 후원분야 검색",
                 textStatus: controller.searchStatus,
                 suffixOnTap: () async {},
-                onSubmitted: (value) async {},
+                onSubmitted: (value) async {
+                  // controller.projectList.addAll(
+                  // await SearchApi.getSearchResult(content: value));
+                },
                 onChanged: (value) async {}),
           ),
           SizedBox(
