@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
+import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
 
 import '../../../model/enum/search_statu.dart';
@@ -26,24 +27,41 @@ class ProjectScreen extends GetView<ProjectController> {
     return Scaffold(
       body: Obx(
         () => NestedScrollView(
+          controller: controller.scrollController.value,
           floatHeaderSlivers: true,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             logger.d(innerBoxIsScrolled);
             return <Widget>[
               SliverAppBar(
-                leading: Padding(
-                  padding: EdgeInsets.only(left: 20.w),
-                  child: SvgPicture.asset(
-                    iconDir + "ic_arrow_left_24.svg",
+                leading: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20.w),
+                    child: SvgPicture.asset(
+                      iconDir + "ic_arrow_left_24.svg",
+                    ),
                   ),
                 ),
+                onStretchTrigger: () async {
+                  logger.d("fdsf");
+                  controller.isStretched.value = false;
+                },
+                title: !controller.isStretched.value
+                    ? Text(
+                        controller.projectDetail.value.title,
+                        style:
+                            AppTextStyles.L1Medium14.copyWith(fontSize: 14.sp),
+                      )
+                    : null,
                 leadingWidth: 44.w,
                 automaticallyImplyLeading: false,
                 backgroundColor: Colors.white,
                 elevation: 0.0,
                 //*Sliver Attributes
                 expandedHeight: 390.h,
-                floating: true,
+                floating: false,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
@@ -52,13 +70,6 @@ class ProjectScreen extends GetView<ProjectController> {
                     StretchMode.blurBackground,
                     StretchMode.fadeTitle,
                   ],
-                  title: innerBoxIsScrolled
-                      ? Text(
-                          controller.projectDetail.value.title,
-                          style: AppTextStyles.L1Medium14.copyWith(
-                              fontSize: 14.sp),
-                        )
-                      : null,
                   background: Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 32.h)
@@ -123,37 +134,38 @@ class ProjectScreen extends GetView<ProjectController> {
                         ]),
                   ),
                 ),
-              ),
-              SliverPersistentHeader(
-                delegate: _SliverAppBarDelegate(
-                  TabBar(
-                    controller: controller.matchTabBar.controller,
-                    onTap: (index) {
-                      controller.tabIndex.value = index;
-                    },
-                    labelColor: AppColors.grey9,
-                    labelStyle: AppTextStyles.L1Medium14,
-                    unselectedLabelColor: AppColors.grey4,
-                    indicatorColor: AppColors.grey9,
-                    tabs: [
-                      Tab(
-                        text: "기부처 이야기",
-                      ),
-                      Tab(text: "불꽃이 기록"),
-                    ],
-                  ),
+                bottom: TabBar(
+                  controller: controller.matchTabBar.controller,
+                  onTap: (index) async {
+                    controller.tabIndex.value = index;
+                    if (controller.projectHistories.isEmpty && index == 1) {
+                      await ProjectApi.getProjectHistory(
+                          projectId: controller.projectId);
+                    }
+                  },
+                  labelColor: AppColors.grey9,
+                  labelStyle: AppTextStyles.L1Medium14,
+                  unselectedLabelColor: AppColors.grey4,
+                  indicatorColor: AppColors.grey9,
+                  tabs: [
+                    Tab(
+                      text: "기부처 이야기",
+                    ),
+                    Tab(text: "불꽃이 기록"),
+                  ],
                 ),
-                pinned: true,
-              )
+              ),
             ];
           },
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h)
+                .copyWith(bottom: 0),
             child: [
               //TODO sequence 반영
 
               //1. 매칭 정보
               ListView.separated(
+                controller: controller.scrollController.value,
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: controller.projectDetail.value.projectImgList.length,
@@ -169,13 +181,14 @@ class ProjectScreen extends GetView<ProjectController> {
 
               //2. 매치 기록
               ListView.separated(
+                controller: controller.scrollController.value,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: controller.tmpProjectHistories.length,
+                itemCount: controller.projectHistories.length,
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
                 },
                 itemBuilder: (context, index) {
-                  final history = controller.tmpProjectHistories[index];
+                  final history = controller.projectHistories[index];
                   return ProjectComment(
                     profileUrl: history.profileImageUrl,
                     profile: history.nickname,
