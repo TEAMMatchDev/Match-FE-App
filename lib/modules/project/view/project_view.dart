@@ -24,29 +24,49 @@ class ProjectScreen extends GetView<ProjectController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-        () => Column(
-          children: [
-            Expanded(
-              child: ListView(
-                children: [
-                  Container(
-                    padding:
-                        EdgeInsets.only(top: 12.h, bottom: 9.h, left: 20.w),
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: SvgPicture.asset(
-                          iconDir + "ic_arrow_left_24.svg",
-                          width: 24.w,
-                        )),
+        () => NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                leading: Padding(
+                  padding: EdgeInsets.only(left: 20.w),
+                  child: SvgPicture.asset(
+                    iconDir + "ic_arrow_left_24.svg",
                   ),
-
-                  Padding(
+                ),
+                leadingWidth: 44.w,
+                automaticallyImplyLeading: false,
+                backgroundColor: Colors.white,
+                //*Sliver Attributes
+                expandedHeight: 400.h,
+                floating: true,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.none,
+                  centerTitle: true,
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: SvgPicture.asset(
+                            iconDir + "ic_arrow_left_24.svg",
+                            width: 24.w,
+                          )),
+                      Text(
+                        controller.projectDetail.value.title,
+                        style:
+                            AppTextStyles.L1Medium14.copyWith(fontSize: 14.sp),
+                      ),
+                    ],
+                  ),
+                  background: Container(
+                    height: 300.h,
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 32.h)
-                            .copyWith(top: 0.h),
+                            .copyWith(top: 36.h),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -106,6 +126,10 @@ class ProjectScreen extends GetView<ProjectController> {
                           ),
                         ]),
                   ),
+                ),
+              ),
+              SliverPersistentHeader(
+                delegate: _SliverAppBarDelegate(
                   TabBar(
                     controller: controller.matchTabBar.controller,
                     onTap: (index) {
@@ -125,47 +149,35 @@ class ProjectScreen extends GetView<ProjectController> {
                       tabWidget("불꽃이 기록", 1),
                     ],
                   ),
-                  //*TabBarView
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h),
-                    child: [
-                      //TODO sequence 반영
-                      //1. 매칭 정보
-                      Wrap(
-                          children: controller
-                              .projectDetail.value.projectImgList
-                              .map((e) => Image.network(e.imgUrl))
-                              .toList()),
-                      //2. 매치 기록
-                      Wrap(
-                        children: controller.tmpProjectHistories
-                            .map(
-                              (history) => ProjectComment(
-                                profileUrl: history.profileImageUrl,
-                                profile: history.nickname,
-                                comment: history.histories,
-                                timeStamp: history.historyDate,
-                              ),
-                            )
-                            .toList(),
+                ),
+                pinned: true,
+              )
+            ];
+          },
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h),
+            child: [
+              //TODO sequence 반영
+              //1. 매칭 정보
+              Wrap(
+                  children: controller.projectDetail.value.projectImgList
+                      .map((e) => Image.network(e.imgUrl))
+                      .toList()),
+              //2. 매치 기록
+              Wrap(
+                children: controller.tmpProjectHistories
+                    .map(
+                      (history) => ProjectComment(
+                        profileUrl: history.profileImageUrl,
+                        profile: history.nickname,
+                        comment: history.histories,
+                        timeStamp: history.historyDate,
                       ),
-                    ][controller.tabIndex.value],
-                  ),
-                ],
+                    )
+                    .toList(),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 10.w,
-              ).copyWith(bottom: 24.h),
-              child: CommonButton.payment(
-                  text: "기부하기",
-                  onTap: (() async {
-                    //TODO: 매치 결제 페이지로 이동
-                  })),
-            )
-          ],
+            ][controller.tabIndex.value],
+          ),
         ),
       ),
     );
@@ -183,5 +195,30 @@ class ProjectScreen extends GetView<ProjectController> {
             ),
           ),
         ));
+  }
+}
+
+//*SliverDelegate
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  _SliverAppBarDelegate(this._tabBar);
+
+  final TabBar _tabBar;
+
+  @override
+  double get minExtent => _tabBar.preferredSize.height;
+  @override
+  double get maxExtent => _tabBar.preferredSize.height;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      child: _tabBar,
+    );
+  }
+
+  @override
+  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+    return false;
   }
 }
