@@ -25,6 +25,7 @@ class ProjectScreen extends GetView<ProjectController> {
     return Scaffold(
       body: Obx(
         () => NestedScrollView(
+          floatHeaderSlivers: true,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
@@ -37,95 +38,87 @@ class ProjectScreen extends GetView<ProjectController> {
                 leadingWidth: 44.w,
                 automaticallyImplyLeading: false,
                 backgroundColor: Colors.white,
+                elevation: 0.0,
                 //*Sliver Attributes
                 expandedHeight: 400.h,
                 floating: true,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.none,
-                  centerTitle: true,
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: SvgPicture.asset(
-                            iconDir + "ic_arrow_left_24.svg",
-                            width: 24.w,
-                          )),
-                      Text(
-                        controller.projectDetail.value.title,
-                        style:
-                            AppTextStyles.L1Medium14.copyWith(fontSize: 14.sp),
-                      ),
-                    ],
+                  collapseMode: CollapseMode.pin,
+                  stretchModes: [
+                    StretchMode.zoomBackground,
+                    StretchMode.blurBackground,
+                    StretchMode.fadeTitle,
+                  ],
+                  title: Text(
+                    controller.projectDetail.value.title,
+                    style: AppTextStyles.L1Medium14.copyWith(fontSize: 14.sp),
                   ),
-                  background: Container(
-                    height: 300.h,
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 32.h)
-                            .copyWith(top: 36.h),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.network(
-                            tmpBackgroundImg2,
-                            fit: BoxFit.fitWidth,
-                            width: MediaQuery.of(context).size.width,
-                            height: 180.h,
-                          ),
-                          SizedBox(
-                            height: 21.h,
-                          ),
-                          TypeChip(
-                              type: regularStatusMap[
-                                          controller.projectDetail.value.kind]
-                                      ?.stateName ??
-                                  "동물"),
-                          SizedBox(
-                            height: 12.h,
-                          ),
-                          Text(
-                            controller.projectDetail.value.title,
-                            style: AppTextStyles.T1Bold15,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Text(
-                            controller.projectDetail.value.usages,
-                            style: AppTextStyles.T1Bold13.copyWith(
-                              color: AppColors.grey7,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Wrap(
-                                spacing: -10.w,
-                                //TODO: 서버에서 보내주는 만큼 표시해야하는지 3개만 표시하는지 확인필요
-                                children: controller
-                                    .projectDetail.value.userProfileImages
-                                    .map((e) => profileItem(size: 40))
-                                    .toList(),
-                              ),
-                              SizedBox(
-                                width: 8.w,
-                              ),
-                              Text(
-                                //TODO: 서버 api field 추가 필요
-                                "외 ${controller.projectDetail.value.totalDonationCnt - 3}마리의 불꽃이 함께하고 있어요",
-                                style: AppTextStyles.L1Medium13,
-                              ),
-                            ],
-                          ),
-                        ]),
-                  ),
+                  background: !innerBoxIsScrolled
+                      ? Padding(
+                          padding: EdgeInsets.symmetric(
+                                  horizontal: 20.w, vertical: 32.h)
+                              .copyWith(top: 36.h),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.network(
+                                  tmpBackgroundImg2,
+                                  fit: BoxFit.fitWidth,
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 180.h,
+                                ),
+                                SizedBox(
+                                  height: 21.h,
+                                ),
+                                TypeChip(
+                                    type: regularStatusMap[controller
+                                                .projectDetail.value.kind]
+                                            ?.stateName ??
+                                        "동물"),
+                                SizedBox(
+                                  height: 12.h,
+                                ),
+                                Text(
+                                  controller.projectDetail.value.title,
+                                  style: AppTextStyles.T1Bold15,
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Text(
+                                  controller.projectDetail.value.usages,
+                                  style: AppTextStyles.T1Bold13.copyWith(
+                                    color: AppColors.grey7,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Wrap(
+                                      spacing: -10.w,
+                                      //TODO: 서버에서 보내주는 만큼 표시해야하는지 3개만 표시하는지 확인필요
+                                      children: controller
+                                          .projectDetail.value.userProfileImages
+                                          .map((e) => profileItem(size: 40))
+                                          .toList(),
+                                    ),
+                                    SizedBox(
+                                      width: 8.w,
+                                    ),
+                                    Text(
+                                      //TODO: 서버 api field 추가 필요
+                                      "외 ${controller.projectDetail.value.totalDonationCnt - 3}마리의 불꽃이 함께하고 있어요",
+                                      style: AppTextStyles.L1Medium13,
+                                    ),
+                                  ],
+                                ),
+                              ]),
+                        )
+                      : SizedBox.shrink(),
                 ),
               ),
               SliverPersistentHeader(
@@ -135,18 +128,11 @@ class ProjectScreen extends GetView<ProjectController> {
                     onTap: (index) {
                       controller.tabIndex.value = index;
                     },
-                    isScrollable: true,
-                    indicatorColor: AppColors.grey9,
-                    unselectedLabelColor: AppColors.grey2,
-                    labelColor: AppColors.grey9,
-                    labelStyle: AppTextStyles.L1Medium14,
-                    unselectedLabelStyle: AppTextStyles.L1Medium14.copyWith(
-                      color: AppColors.grey7,
-                    ),
+                    labelColor: Colors.black87,
+                    unselectedLabelColor: Colors.grey,
                     tabs: [
-                      // Tab(text: "매칭 정보"), Tab(text: "매칭 기록"),
-                      tabWidget("기부처 이야기", 0),
-                      tabWidget("불꽃이 기록", 1),
+                      Tab(text: "Tab 1"),
+                      Tab(text: "Tab 2"),
                     ],
                   ),
                 ),
@@ -155,27 +141,40 @@ class ProjectScreen extends GetView<ProjectController> {
             ];
           },
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h)
+                .copyWith(top: 120.h),
             child: [
               //TODO sequence 반영
+
               //1. 매칭 정보
-              Wrap(
-                  children: controller.projectDetail.value.projectImgList
-                      .map((e) => Image.network(e.imgUrl))
-                      .toList()),
-              //2. 매치 기록
-              Wrap(
-                children: controller.tmpProjectHistories
-                    .map(
-                      (history) => ProjectComment(
-                        profileUrl: history.profileImageUrl,
-                        profile: history.nickname,
-                        comment: history.histories,
-                        timeStamp: history.historyDate,
-                      ),
-                    )
-                    .toList(),
+              ListView.separated(
+                itemCount: controller.projectDetail.value.projectImgList.length,
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
+                },
+                itemBuilder: (context, index) {
+                  final imageUrl = controller
+                      .projectDetail.value.projectImgList[index].imgUrl;
+                  return Image.network(imageUrl);
+                },
               ),
+
+              //2. 매치 기록
+              ListView.separated(
+                itemCount: controller.tmpProjectHistories.length,
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
+                },
+                itemBuilder: (context, index) {
+                  final history = controller.tmpProjectHistories[index];
+                  return ProjectComment(
+                    profileUrl: history.profileImageUrl,
+                    profile: history.nickname,
+                    comment: history.histories,
+                    timeStamp: history.historyDate,
+                  );
+                },
+              )
             ][controller.tabIndex.value],
           ),
         ),
