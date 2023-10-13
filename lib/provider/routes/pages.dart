@@ -78,40 +78,11 @@ class Pages {
         popGesture: false,
         children: [
           GetPage(
-            title: "불타는 매치 결제내역 화면",
-            name: Routes.burning_match_pay,
-            page: () => const BurningMatchPayScreen(),
-            transition: Transition.noTransition,
-            //TODO:binding 교체
-            binding: BurningMatchBinding(),
-            curve: Curves.easeIn,
-            popGesture: false,
-          ),
-          GetPage(
-            title: "검색 화면",
-            name: Routes.search,
-            page: () => const SearchScreen(),
-            transition: Transition.noTransition,
-            //TODO:binding 교체
-            binding: SearchBinding(),
-            curve: Curves.easeIn,
-            popGesture: false,
-          ),
-          GetPage(
             title: "불타는 매치 화면",
             name: Routes.burning_match,
             page: () => const BurningMatchScreen(),
             transition: Transition.noTransition,
             binding: BurningMatchBinding(),
-            curve: Curves.easeIn,
-            popGesture: false,
-          ),
-          GetPage(
-            title: "결제 내역",
-            name: Routes.pay,
-            page: () => const PaymentScreen(),
-            transition: Transition.noTransition,
-            binding: PaymentBinding(),
             curve: Curves.easeIn,
             popGesture: false,
           ),

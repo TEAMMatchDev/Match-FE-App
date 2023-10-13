@@ -16,17 +16,17 @@ abstract class _Paths {
   /// 홈 화면
   static const home = "/home";
 
-  /// 검색 화면
-  static const search = "/search";
+  // /// 검색 화면
+  // static const search = "/search";
 
   ///불타는 매치 화면
   static const burning_match = "/burning_match";
 
-  ///불타는 매치 결제내역 화면
-  static const burning_match_pay = "/burning_match_pay";
+  // ///불타는 매치 결제내역 화면
+  // static const burning_match_pay = "/burning_match_pay";
 
-  ///결제내역
-  static const pay = "/pay";
+  // ///결제내역
+  // static const pay = "/pay";
 
   ///후원 상세내역
   static const project = "/project";
@@ -62,17 +62,17 @@ abstract class Routes {
   /// 홈 화면
   static const home = _Paths.home;
 
-  /// 검색 화면
-  static const search = _Paths.search;
+  // /// 검색 화면
+  // static const search = _Paths.search;
 
   /// 불타는 매치 화면
   static const burning_match = _Paths.burning_match;
 
-  /// 불타는 매치 전체 결제내역 화면
-  static const burning_match_pay = _Paths.burning_match_pay;
+  // /// 불타는 매치 전체 결제내역 화면
+  // static const burning_match_pay = _Paths.burning_match_pay;
 
-  /// 불타는 매치 결제 상세 화면
-  static const pay = _Paths.pay;
+  // /// 불타는 매치 결제 상세 화면
+  // static const pay = _Paths.pay;
 
   ///후원 상세내역
   static const project = _Paths.project;

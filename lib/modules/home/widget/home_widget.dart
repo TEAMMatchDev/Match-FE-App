@@ -9,27 +9,7 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/routes/routes.dart';
-import '../../../util/components/global_bottomsheet.dart';
 import '../../../util/components/global_widget.dart';
-
-Widget CommonSectionHeader(
-    {required String title, required Future<void> Function() destination}) {
-  return Padding(
-    padding: EdgeInsets.only(top: 31.h, bottom: 17.5.h),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: AppTextStyles.T1Bold16,
-        ),
-        GestureDetector(
-            onTap: destination,
-            child: SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"))
-      ],
-    ),
-  );
-}
 
 ///*서버 통신 로직 구현전에 사용할 임시 프로필이미지
 const String tmpProfileImg =
@@ -63,271 +43,119 @@ Widget adIndexItem({required int total, required int currentIdx}) {
   );
 }
 
-///* 나의 매치(불타는 매치) section
-///* [HomeScreen]에서 사용되는 위젯<br/>
-class MyMatchItem extends StatelessWidget {
-  final String title;
-  final int count;
+///*타오로는 불꽃이 위젯
+///[HomeScreen], [BurningMathScreen]에서 사용
+class FlameWidget extends StatelessWidget {
+  final String flameName;
+  final String flameImg;
+  final String flameTalk;
   final String usages;
-  final int matchId;
-  final List<String> imgList;
-  final String backgroundImg;
-  final Future<void> Function() destination;
-  const MyMatchItem(
+  final int id;
+  final bool isHome;
+  const FlameWidget(
       {super.key,
-      required this.title,
-      required this.count,
-      required this.imgList,
-      this.backgroundImg = tmpBackgroundImg,
-      required this.destination,
+      required this.flameName,
+      required this.flameImg,
+      required this.flameTalk,
       required this.usages,
-      required this.matchId});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: destination,
-      child: Container(
-        height: 180.h,
-        width: 280.w,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.5, 1],
-            colors: [
-              Color(0x00000099),
-              Color(0x0000001A),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(10.r),
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(backgroundImg),
-              colorFilter: ColorFilter.mode(
-                  //TODO: gradient 적용 detail 수정
-                  Colors.black.withOpacity(0.3),
-                  BlendMode.srcATop)),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-                top: 14.h,
-                right: 17.w,
-                child: GestureDetector(
-                    onTap: () async {
-                      await Get.bottomSheet(ShareBottomSheet(
-                          imgUrl: backgroundImg,
-                          //
-                          usages: usages,
-                          screenType: "burnMatch",
-                          title: title,
-                          id: matchId));
-                    },
-                    child: SvgPicture.asset(iconDir + "ic_share_16.svg"))),
-            Positioned(
-              bottom: 23.h,
-              left: 23.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: AppTextStyles.T1Bold15.copyWith(
-                      color: AppColors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                    Wrap(
-                      spacing: -4,
-                      children:
-                          imgList.map((e) => profileItem(size: 16)).toList(),
-                    ),
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Text(
-                      "${count}명 후원중",
-                      style: AppTextStyles.T1Bold12.copyWith(
-                        color: AppColors.white,
-                      ),
-                    )
-                  ]),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-///*오늘의 매치 section
-///[HomeScreen]에서 사용되는 위젯<br/>
-class TodayMatchItem extends StatelessWidget {
-  final String title;
-  final String organization;
-  final int count;
-  final Rx<bool> isLike;
-  final int projectId;
-  final String backgroundImg;
-  const TodayMatchItem(
-      {super.key,
-      required this.title,
-      required this.organization,
-      required this.count,
-      required this.isLike,
-      this.backgroundImg = tmpBackgroundImg,
-      required this.projectId});
+      required this.id,
+      this.isHome = true});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await Get.toNamed(Routes.project, arguments: {"projectId": projectId});
+        await Get.toNamed(Routes.home + Routes.burning_match,
+            arguments: {"donaionId": 1});
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 170.h,
-            width: 130.w,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.5, 1],
-                colors: [
-                  Color(0x00000099),
-                  Color(0x0000001A),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: isHome ? 283.h : 229.h,
+              width: isHome ? 255.w : 255.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage(imgDir +
+                      (isHome
+                          ? "iv_home_background_553.png"
+                          : "iv_detail_background_553.png")),
+                ),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  UsagesChip(),
+                  SizedBox(
+                    height: 28.h,
+                  ),
+                  isHome
+                      ? Container(
+                          width: 232.w,
+                          height: 57.h,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                  imgDir + "ic_speech_background_232.png"),
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Positioned(
+                                top: 13.h,
+                                child: Text(
+                                  flameTalk,
+                                  style: AppTextStyles.L1Medium12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox.shrink(),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Image.network(height: 122.h, width: 182.w, flameImg)
                 ],
               ),
-              borderRadius: BorderRadius.circular(10.r),
-              image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(backgroundImg),
-                  colorFilter: ColorFilter.mode(
-                      //TODO: gradient 적용 detail 수정
-                      Colors.black.withOpacity(0.3),
-                      BlendMode.srcATop)),
             ),
-            child: Stack(
-              children: [
-                Positioned(
-                    left: 12.w, top: 17.h, child: LikeIcon(isLike: isLike)),
-                Positioned(
-                    bottom: 14.h,
-                    left: 14.w,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            //TODO: boxfit.fill로 변경
-                            //TODO: 테두리 하얀색으로 변경
-                            profileItem(),
-                            Text(
-                              "+${count}",
-                              style: AppTextStyles.T1Bold13.copyWith(
-                                  color: AppColors.white),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        SizedBox(
-                          width: 102.w,
-                          child: Text(
-                            organization,
-                            style: AppTextStyles.T1Bold13.copyWith(
-                              color: AppColors.white,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ))
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 13.h,
-          ),
-          Text(
-            title,
-            style: AppTextStyles.T1Bold13,
-          )
-        ],
+            isHome
+                ? Column(
+                    children: [
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(flameName, style: AppTextStyles.T1Bold20)
+                    ],
+                  )
+                : SizedBox.shrink()
+          ],
+        ),
       ),
     );
   }
+
+  Widget UsagesChip() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+      decoration: BoxDecoration(
+        color: AppColors.grey0,
+        border: Border.all(width: 1, color: AppColors.grey7),
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Text(usages, style: AppTextStyles.T1Bold12),
+    );
+  }
 }
-
-// ///*꼭 맞는 기부처 추천 section
-// class OrganizationItem extends StatelessWidget {
-//   final String title;
-//   final String comment;
-//   //TODO: NetworkImage(backgroundImg)로 변경
-//   final String backgroundImg;
-//   const OrganizationItem(
-//       {super.key,
-//       required this.title,
-//       required this.comment,
-//       //TODO: NetworkImage(backgroundImg)로 변경
-//       this.backgroundImg =
-//           "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png"});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         //TODO: add route
-//       },
-//       child: Container(
-//         height: 99.h,
-//         width: 220.w,
-//         padding: EdgeInsets.symmetric(vertical: 26.h, horizontal: 23.w),
-//         decoration: BoxDecoration(
-//           //radius 수정
-//           borderRadius: BorderRadius.circular(10.r),
-//           image: DecorationImage(
-//             image: NetworkImage(backgroundImg),
-//             colorFilter:
-//                 ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.src),
-//           ),
-//         ),
-//         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-//           Text(
-//             title,
-//             style:
-//                 AppTextStyles.subtitle1Bold15.copyWith(color: AppColors.white),
-//           ),
-//           SizedBox(
-//             height: 12.h,
-//           ),
-//           Row(
-//             children: [
-//               SvgPicture.asset("${iconDir}ic_comment_16.svg"),
-//               SizedBox(
-//                 width: 4.w,
-//               ),
-//               Text(
-//                 comment,
-//                 style:
-//                     AppTextStyles.body3Bold12.copyWith(color: AppColors.white),
-//               )
-//             ],
-//           )
-//         ]),
-//       ),
-//     );
-//   }
-// }
 
 Widget profileItem(
     {String profileUrl = tmpProfileImg,
@@ -358,14 +186,12 @@ class TodayMatchList extends StatelessWidget {
   final int count;
   final List<String> imgList;
   final String backgroundImg;
-  final Rx<bool> isLike;
   final int projectId;
   const TodayMatchList(
       {super.key,
       required this.count,
       required this.imgList,
       this.backgroundImg = tmpBackgroundImg,
-      required this.isLike,
       required this.projectId});
 
   @override
@@ -399,13 +225,6 @@ class TodayMatchList extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              right: 25.w,
-              top: 22.h,
-              child: LikeIcon(
-                isLike: isLike,
-              ),
-            ),
-            Positioned(
               bottom: 17.h,
               left: 20.w,
               child:
@@ -418,7 +237,7 @@ class TodayMatchList extends StatelessWidget {
                   width: 7.w,
                 ),
                 Text(
-                  "외 ${count}명 후원중",
+                  "외 ${count}마리의 불꽃이 함께하고 있어요.",
                   style: AppTextStyles.L1Medium13.copyWith(
                     color: AppColors.white,
                     fontWeight: FontWeight.bold,
