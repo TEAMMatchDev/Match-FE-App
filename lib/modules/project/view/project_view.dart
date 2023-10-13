@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
+import 'package:match/util/const/style/global_logger.dart';
 
 import '../../../model/enum/search_statu.dart';
 import '../../../util/components/global_button.dart';
@@ -27,6 +28,7 @@ class ProjectScreen extends GetView<ProjectController> {
         () => NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            logger.d(innerBoxIsScrolled);
             return <Widget>[
               SliverAppBar(
                 leading: Padding(
@@ -40,7 +42,7 @@ class ProjectScreen extends GetView<ProjectController> {
                 backgroundColor: Colors.white,
                 elevation: 0.0,
                 //*Sliver Attributes
-                expandedHeight: 400.h,
+                expandedHeight: 390.h,
                 floating: true,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
@@ -50,75 +52,76 @@ class ProjectScreen extends GetView<ProjectController> {
                     StretchMode.blurBackground,
                     StretchMode.fadeTitle,
                   ],
-                  title: Text(
-                    controller.projectDetail.value.title,
-                    style: AppTextStyles.L1Medium14.copyWith(fontSize: 14.sp),
-                  ),
-                  background: !innerBoxIsScrolled
-                      ? Padding(
-                          padding: EdgeInsets.symmetric(
-                                  horizontal: 20.w, vertical: 32.h)
-                              .copyWith(top: 36.h),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.network(
-                                  tmpBackgroundImg2,
-                                  fit: BoxFit.fitWidth,
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 180.h,
-                                ),
-                                SizedBox(
-                                  height: 21.h,
-                                ),
-                                TypeChip(
-                                    type: regularStatusMap[controller
-                                                .projectDetail.value.kind]
-                                            ?.stateName ??
-                                        "동물"),
-                                SizedBox(
-                                  height: 12.h,
-                                ),
-                                Text(
-                                  controller.projectDetail.value.title,
-                                  style: AppTextStyles.T1Bold15,
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Text(
-                                  controller.projectDetail.value.usages,
-                                  style: AppTextStyles.T1Bold13.copyWith(
-                                    color: AppColors.grey7,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5.h,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Wrap(
-                                      spacing: -10.w,
-                                      //TODO: 서버에서 보내주는 만큼 표시해야하는지 3개만 표시하는지 확인필요
-                                      children: controller
-                                          .projectDetail.value.userProfileImages
-                                          .map((e) => profileItem(size: 40))
-                                          .toList(),
-                                    ),
-                                    SizedBox(
-                                      width: 8.w,
-                                    ),
-                                    Text(
-                                      //TODO: 서버 api field 추가 필요
-                                      "외 ${controller.projectDetail.value.totalDonationCnt - 3}마리의 불꽃이 함께하고 있어요",
-                                      style: AppTextStyles.L1Medium13,
-                                    ),
-                                  ],
-                                ),
-                              ]),
+                  title: innerBoxIsScrolled
+                      ? Text(
+                          controller.projectDetail.value.title,
+                          style: AppTextStyles.L1Medium14.copyWith(
+                              fontSize: 14.sp),
                         )
-                      : SizedBox.shrink(),
+                      : null,
+                  background: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 32.h)
+                            .copyWith(top: 36.h),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.network(
+                            tmpBackgroundImg2,
+                            fit: BoxFit.fitWidth,
+                            width: MediaQuery.of(context).size.width,
+                            height: 180.h,
+                          ),
+                          SizedBox(
+                            height: 21.h,
+                          ),
+                          TypeChip(
+                              type: regularStatusMap[
+                                          controller.projectDetail.value.kind]
+                                      ?.stateName ??
+                                  "동물"),
+                          SizedBox(
+                            height: 12.h,
+                          ),
+                          Text(
+                            controller.projectDetail.value.title,
+                            style: AppTextStyles.T1Bold15,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Text(
+                            controller.projectDetail.value.usages,
+                            style: AppTextStyles.T1Bold13.copyWith(
+                              color: AppColors.grey7,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Wrap(
+                                spacing: -10.w,
+                                //TODO: 서버에서 보내주는 만큼 표시해야하는지 3개만 표시하는지 확인필요
+                                children: controller
+                                    .projectDetail.value.userProfileImages
+                                    .map((e) => profileItem(size: 40))
+                                    .toList(),
+                              ),
+                              SizedBox(
+                                width: 8.w,
+                              ),
+                              Text(
+                                //TODO: 서버 api field 추가 필요
+                                "외 ${controller.projectDetail.value.totalDonationCnt - 3}마리의 불꽃이 함께하고 있어요",
+                                style: AppTextStyles.L1Medium13,
+                              ),
+                            ],
+                          ),
+                        ]),
+                  ),
                 ),
               ),
               SliverPersistentHeader(
@@ -128,11 +131,15 @@ class ProjectScreen extends GetView<ProjectController> {
                     onTap: (index) {
                       controller.tabIndex.value = index;
                     },
-                    labelColor: Colors.black87,
-                    unselectedLabelColor: Colors.grey,
+                    labelColor: AppColors.grey9,
+                    labelStyle: AppTextStyles.L1Medium14,
+                    unselectedLabelColor: AppColors.grey4,
+                    indicatorColor: AppColors.grey9,
                     tabs: [
-                      Tab(text: "Tab 1"),
-                      Tab(text: "Tab 2"),
+                      Tab(
+                        text: "기부처 이야기",
+                      ),
+                      Tab(text: "불꽃이 기록"),
                     ],
                   ),
                 ),
@@ -141,13 +148,14 @@ class ProjectScreen extends GetView<ProjectController> {
             ];
           },
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h)
-                .copyWith(top: 120.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h),
             child: [
               //TODO sequence 반영
 
               //1. 매칭 정보
               ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
                 itemCount: controller.projectDetail.value.projectImgList.length,
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
@@ -161,6 +169,7 @@ class ProjectScreen extends GetView<ProjectController> {
 
               //2. 매치 기록
               ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: controller.tmpProjectHistories.length,
                 separatorBuilder: (context, index) {
                   return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
@@ -212,6 +221,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
+      color: Colors.white,
       child: _tabBar,
     );
   }
