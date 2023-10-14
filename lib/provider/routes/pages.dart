@@ -119,7 +119,7 @@ class Pages {
     ),
     GetPage(
       title: "알람 화면",
-      name: Routes.mypage,
+      name: Routes.alarm,
       page: () => const AlarmScreen(),
       transition: Transition.noTransition,
       binding: AlarmBinding(),
