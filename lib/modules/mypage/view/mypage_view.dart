@@ -17,7 +17,7 @@ class MypageScreen extends GetView<MypageController> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 10.h),
             child: Column(
               children: [
                 Row(
@@ -56,13 +56,22 @@ class MypageScreen extends GetView<MypageController> {
                 SizedBox(
                   height: 9.h,
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  SvgPicture.asset(iconDir + "ic_kakao_19.svg"),
-                  Text("abcdefg@abcdefg",
-                      style: AppTextStyles.S1SemiBold14.copyWith(
-                        color: AppColors.grey6,
-                      ))
-                ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(iconDir + "login/ic_kakao_19.svg"),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Text("abcdefg@abcdefg",
+                          style: AppTextStyles.S1SemiBold14.copyWith(
+                            color: AppColors.grey6,
+                          ))
+                    ]),
+                SizedBox(
+                  height: 23.h,
+                ),
               ],
             ),
           ),
@@ -70,6 +79,36 @@ class MypageScreen extends GetView<MypageController> {
             color: AppColors.searchBackground,
             height: 10.h,
           ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 8.h),
+            child: ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: ((context, index) {
+                  final menu = controller.menuList[index];
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SvgPicture.asset(
+                          iconDir + "mypage/" + "ic_${menu.menuIcon}_18.svg",
+                          width: 18.w,
+                        ),
+                        SizedBox(
+                          width: 14.w,
+                        ),
+                        Text(menu.title, style: AppTextStyles.T1Bold14),
+                      ],
+                    ),
+                  );
+                }),
+                separatorBuilder: (context, index) => const Divider(
+                      thickness: 1,
+                      color: AppColors.divider1,
+                    ),
+                itemCount: controller.menuList.length),
+          )
         ],
       ),
     );
