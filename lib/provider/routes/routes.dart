@@ -42,6 +42,9 @@ abstract class _Paths {
 
   /// 마이페이지 화면
   static const mypage = "/mypage";
+
+  ///알람 화면
+  static const alarm = "/alarm";
 }
 
 abstract class Routes {
@@ -88,4 +91,7 @@ abstract class Routes {
 
   /// 마이페이지 화면
   static const mypage = _Paths.mypage;
+
+  /// 알람 화면
+  static const alarm = _Paths.alarm;
 }

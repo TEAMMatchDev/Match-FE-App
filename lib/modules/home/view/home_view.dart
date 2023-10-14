@@ -36,7 +36,11 @@ class HomeScreen extends GetView<HomeController> {
                       imgDir + "logo/iv_home_logo.png",
                       width: 75.w,
                     ),
-                    SvgPicture.asset(iconDir + "ic_alarm_20.svg")
+                    GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.alarm);
+                        },
+                        child: SvgPicture.asset(iconDir + "ic_alarm_20.svg"))
                   ],
                 ),
                 SizedBox(

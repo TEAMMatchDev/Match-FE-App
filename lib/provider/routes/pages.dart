@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/alarm/binding/alarm_binding.dart';
+import 'package:match/modules/alarm/view/alarm_view.dart';
 import 'package:match/modules/buring_match/binding/burning_match_binding.dart';
 import 'package:match/modules/buring_match/view/burning_match_pay_view.dart';
 import 'package:match/modules/buring_match/view/burning_match_view.dart';
@@ -112,6 +114,15 @@ class Pages {
       page: () => const MypageScreen(),
       transition: Transition.noTransition,
       binding: MypageBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "알람 화면",
+      name: Routes.mypage,
+      page: () => const AlarmScreen(),
+      transition: Transition.noTransition,
+      binding: AlarmBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

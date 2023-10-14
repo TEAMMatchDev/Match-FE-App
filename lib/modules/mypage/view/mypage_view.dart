@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../provider/routes/routes.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
 import '../controller/mypage_controller.dart';
@@ -27,7 +28,11 @@ class MypageScreen extends GetView<MypageController> {
                         "내 정보",
                         style: AppTextStyles.T1Bold16,
                       ),
-                      SvgPicture.asset(iconDir + "ic_alarm_20.svg")
+                      GestureDetector(
+                          onTap: () {
+                            Get.toNamed(Routes.alarm);
+                          },
+                          child: SvgPicture.asset(iconDir + "ic_alarm_20.svg"))
                     ]),
                 SizedBox(
                   height: 25.h,
