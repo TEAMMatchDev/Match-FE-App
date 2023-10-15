@@ -100,6 +100,7 @@ class CommonDialog extends StatelessWidget {
       subtitle: null,
       grantText: "해지하기",
       onGrant: () async {
+        //TODO: delete api 호출
         await Get.to(() => const PaymentExpireScreen());
       },
     );

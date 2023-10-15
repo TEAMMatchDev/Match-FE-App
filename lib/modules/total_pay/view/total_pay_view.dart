@@ -18,7 +18,7 @@ class TotalPayScreen extends GetView<TotalPayController> {
             itemBuilder: ((context, index) {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
-                child: MatchCredit(
+                child: MatchPayItem(
                   title: "불타는 매치",
                   date: "2021.09.01",
                   type: "매치 진행중",

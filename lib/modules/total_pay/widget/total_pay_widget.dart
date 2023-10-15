@@ -14,13 +14,13 @@ import '../../../util/const/style/global_text_styles.dart';
 ///<h2>불타는 진행중인 매치 목록 item </h2>
 ///*[PaymentScreen]]에서 사용되는 위젯<br/>
 ///* 5-8 api 사용
-class MatchCredit extends StatelessWidget {
+class MatchPayItem extends StatelessWidget {
   final String title;
   final String date;
   final String type;
   final int day;
   final int price;
-  const MatchCredit(
+  const MatchPayItem(
       {super.key,
       required this.title,
       required this.date,
@@ -100,6 +100,7 @@ class MatchCredit extends StatelessWidget {
 }
 
 ///<h2>결제내역을 그리는 레이아웃 위젯</h2>
+///*5-5 api
 ///*[PaymentScreen]에서 사용되는 위젯<br/>
 class MatchPayment extends StatelessWidget {
   final int day;

@@ -44,6 +44,7 @@ class PaymentExpireScreen extends StatelessWidget {
                 text: "확인",
                 onTap: (() async {
                   Get.back();
+                  Get.back();
                 })),
           )
         ],
