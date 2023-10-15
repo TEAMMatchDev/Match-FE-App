@@ -9,20 +9,29 @@ import '../../model/today_project/today_project.dart';
 import '../../util/const/style/global_logger.dart';
 
 class ProjectApi {
+  static bool getProjectListIsLast = false;
+  static bool getProjectHistoryIsLast = false;
+
   ///<h2>3-5 API | 프로젝트 리스트</h2>
-  //TODO: pagination 적용
   static Future<List<TodayProject>> getProjectList({
-    required ProjectType type,
+    int page = 0,
+    int size = 10,
+    ProjectType? type = null,
     String? content,
   }) async {
+    var queryParameters = {
+      "page": page,
+      "size": size,
+      "filter": "LATEST",
+    };
+    if (type != null) {
+      queryParameters['projectKind'] = type.name;
+    }
     try {
-      Response response = await DioServices().to().get("/projects/list",
-          queryParameters: {
-            "page": 0,
-            "size": 10,
-            "projectKind": type.name,
-            "filter": "LATEST"
-          });
+      Response response = await DioServices()
+          .to()
+          .get("/projects/list", queryParameters: queryParameters);
+      getProjectListIsLast = response.data[RESULT][LAST];
       // logger.d(response.data);
       return List.generate(
         response.data[RESULT][CONTENTS].length,
@@ -51,16 +60,16 @@ class ProjectApi {
   }
 
   ///<h2>3-9 API | 프로젝트 매치 기록 조회</h2>
-  //TODO: type nullable
-  //TODO: pagination 적용
   static Future<List<ProjectHistory>> getProjectHistory({
+    int page = 0,
+    int size = 10,
     required int projectId,
   }) async {
     try {
       Response response = await DioServices().to().get(
           "/projects/match/${projectId}",
           queryParameters: {"page": 0, "size": 10});
-      // logger.d(response.data);
+      getProjectListIsLast = response.data[RESULT][LAST];
       return List.generate(
           response.data[RESULT][CONTENTS].length,
           (index) =>

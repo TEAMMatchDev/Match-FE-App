@@ -129,7 +129,7 @@ class ProjectScreen extends GetView<ProjectController> {
                                 controller.projectDetail.value
                                             .totalDonationCnt >
                                         0
-                                    ? "외 ${controller.projectDetail.value.totalDonationCnt > 3 ? controller.projectDetail.value.totalDonationCnt - 3 : controller.projectDetail.value.totalDonationCnt}마리의 불꽃이 함께하고 있어요"
+                                    ? "외 ${controller.projectDetail.value.totalDonationCnt >= 3 ? controller.projectDetail.value.totalDonationCnt - 3 : controller.projectDetail.value.totalDonationCnt}마리의 불꽃이 함께하고 있어요"
                                     : "아직 후원하는 사람이 없어요",
                                 style: AppTextStyles.L1Medium13,
                               ),

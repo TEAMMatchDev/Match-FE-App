@@ -7,9 +7,12 @@ import 'util/dio_services.dart';
 import 'util/global_api_field.dart';
 
 class PaymentApi {
-  ///<h2>5-5-2 API | 기부 리스트 조회</h2>
   //TODO: pagination 적용
-  static Future<List<TotalPay>> getProjectList() async {
+  ///<h2>5-5-2 API | 기부 리스트 조회</h2>
+  static Future<List<TotalPay>> getProjectPayments({
+    int page = 0,
+    int size = 10,
+  }) async {
     try {
       Response response = await DioServices().to().get("/donations",
           queryParameters: {"page": 0, "size": 10, "filter": 0});
@@ -24,9 +27,13 @@ class PaymentApi {
     }
   }
 
-  ///<h2>5-8 API | 기부 리스트 조회</h2>
   //TODO: pagination 적용
-  static Future<List<Pay>> getPaymentDetail({required int regularPayId}) async {
+  ///<h2>5-8 API | 기부 리스트 조회</h2>
+  static Future<List<Pay>> getPaymentDetail({
+    required int regularPayId,
+    int page = 0,
+    int size = 10,
+  }) async {
     try {
       Response response = await DioServices().to().get(
           "/donations/pay/${regularPayId}",

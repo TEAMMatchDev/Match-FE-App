@@ -57,11 +57,14 @@ class DonateScreen extends GetView<DonateController> {
               //*2.프로젝트 카테고리
               SizedBox(
                 height: 76.h,
-                child: ListView.separated(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: ProjectType.values.length + 1,
                   itemBuilder: ((context, index) {
+                    if (index % 9 == 0 && index != 0) {
+                      controller.getMoreProject(index);
+                    }
                     //obx 작동 오류로 한번더 감싸줌
                     return Obx(
                       () => GestureDetector(
@@ -88,11 +91,6 @@ class DonateScreen extends GetView<DonateController> {
                                 type: ProjectType.values[index - 1],
                               ),
                       ),
-                    );
-                  }),
-                  separatorBuilder: ((context, index) {
-                    return SizedBox(
-                      width: 16.w,
                     );
                   }),
                 ),
