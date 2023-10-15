@@ -39,16 +39,6 @@ class PaymentScreen extends GetView<PaymentController> {
                   }),
                   itemCount: controller.payList.length),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 10.w,
-              ).copyWith(bottom: 24.h),
-              child: CommonButton.payment(
-                  onTap: (() async {
-                    //TODO: 결제방법 변경
-                  }),
-                  text: "결제 방법 변경"),
-            ),
           ],
         ),
       ),

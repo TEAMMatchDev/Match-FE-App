@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:match/model/menu/menu.dart';
+import 'package:match/modules/mypage/view/notice_view.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/routes/routes.dart';
@@ -90,8 +90,15 @@ class MypageScreen extends GetView<MypageController> {
                   MypageListTile(
                       icon: "donation",
                       title: "기부내역 / 해지하기",
-                      onTap: (() async {})),
-                  MypageListTile(icon: "notice", title: "공지사항"),
+                      onTap: (() async {
+                        await Get.toNamed(Routes.total_pay);
+                      })),
+                  MypageListTile(
+                      icon: "notice",
+                      title: "공지사항",
+                      onTap: (() async {
+                        await Get.to(() => const NoticeScreen());
+                      })),
                   MypageListTile(icon: "setting", title: "환경설정"),
                   MypageListTile(icon: "policy", title: "운영정책 및 약관"),
                   MypageListTile(icon: "client", title: "고객센터"),

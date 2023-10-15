@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:match/model/match_history/match_history.dart';
 import 'package:match/modules/buring_match/controller/burning_match_controller.dart';
-import 'package:match/modules/buring_match/widget/burning_match_widget.dart';
 import 'package:match/modules/buring_match/widget/match_record_widget.dart';
 import 'package:match/modules/home/widget/home_widget.dart';
 import 'package:match/util/components/global_widget.dart';
