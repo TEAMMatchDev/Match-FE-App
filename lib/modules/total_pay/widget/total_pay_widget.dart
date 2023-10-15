@@ -68,9 +68,9 @@ class MatchCredit extends StatelessWidget {
           children: [
             Expanded(
               child: CommonButton(
-                text: "매치 기록",
+                text: "상세정보",
                 onTap: () async {
-                  //TODO: 매치 기록 페이지로 이동
+                  Get.toNamed(Routes.pay);
                 },
               ),
             ),
@@ -79,9 +79,9 @@ class MatchCredit extends StatelessWidget {
             ),
             Expanded(
               child: CommonButton(
-                text: "매치 해지",
+                text: "해지하기",
                 onTap: () async {
-                  //TODO: 매치 해지 로직 추가
+                  //TODO: 해지 dialog 로직 추가
                 },
               ),
             ),
@@ -108,19 +108,6 @@ class MatchPayment extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text("매치 결제 정보", style: AppTextStyles.T1Bold15),
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(Routes.pay);
-              },
-              child: Row(
-                children: [
-                  Text("결제 내역",
-                      style: AppTextStyles.T1Bold14.copyWith(
-                          color: AppColors.grey6)),
-                  SvgPicture.asset(iconDir + "ic_arrow_right_22.svg"),
-                ],
-              ),
-            ),
           ],
         ),
         SizedBox(

@@ -13,7 +13,7 @@ class TotalPayScreen extends GetView<TotalPayController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CommonAppBar.basic("진행중인 매치"),
+        appBar: CommonAppBar.basic("기부 내역"),
         body: ListView.separated(
             itemBuilder: ((context, index) {
               return Padding(
@@ -21,7 +21,7 @@ class TotalPayScreen extends GetView<TotalPayController> {
                 child: MatchCredit(
                   title: "불타는 매치",
                   date: "2021.09.01",
-                  type: "불타는 매치",
+                  type: "매치 진행중",
                   day: 30,
                   price: 10000,
                 ),

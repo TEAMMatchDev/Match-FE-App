@@ -14,27 +14,32 @@ class NoticeScreen extends GetView<MypageController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CommonAppBar.basic("공지사항"),
-        body: Column(
-          children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "총 공지사항",
-                    style: AppTextStyles.L1Medium14.copyWith(
-                        color: AppColors.grey8),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 30.h),
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "총 공지사항",
+                        style: AppTextStyles.T1Bold14.copyWith(
+                            color: AppColors.grey8),
+                      ),
+                      TextSpan(
+                        text: " 22",
+                        style: AppTextStyles.T1Bold14.copyWith(
+                            color: AppColors.primary500),
+                      ),
+                    ],
                   ),
-                  TextSpan(
-                    text: " 22",
-                    style: AppTextStyles.L1Medium14.copyWith(
-                        color: AppColors.primary500),
-                  ),
-                ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: ListView.separated(
+              ListView.separated(
+                shrinkWrap: true,
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return CommonListItem(
@@ -50,8 +55,8 @@ class NoticeScreen extends GetView<MypageController> {
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }
