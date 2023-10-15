@@ -19,13 +19,13 @@ class TotalPayScreen extends GetView<TotalPayController> {
             itemCount: controller.totalPayList.length,
             itemBuilder: ((context, index) {
               final pay = controller.totalPayList[index];
-              final regular = pay.regularStatus.replaceAll(" ", " • ");
+              final regular = pay.regularDate.replaceAll(" ", " • ");
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
                 child: MatchPayItem(
                   title: pay.projectName,
                   date: pay.donationDate,
-                  type: pay.donationStatus,
+                  type: pay.regularStatus,
                   regular: regular,
                   regularPayId: pay.donationId,
                 ),

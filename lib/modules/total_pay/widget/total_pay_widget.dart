@@ -70,7 +70,8 @@ class MatchPayItem extends StatelessWidget {
               child: CommonButton(
                 text: "상세정보",
                 onTap: () async {
-                  Get.toNamed(Routes.pay);
+                  Get.toNamed(Routes.pay,
+                      arguments: {"regularPayId": regularPayId});
                 },
               ),
             ),
