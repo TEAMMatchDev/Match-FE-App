@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:match/modules/donate/widget/donate_widget.dart';
+import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../model/enum/project_type.dart';
@@ -48,10 +49,7 @@ class DonateScreen extends GetView<DonateController> {
                     SizedBox(
                       width: 14.w,
                     ),
-                    SvgPicture.asset(
-                      iconDir + "ic_alarm_20.svg",
-                      height: 20.h,
-                    )
+                    alarmButton()
                   ],
                 ),
               ),

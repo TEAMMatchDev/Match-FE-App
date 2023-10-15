@@ -21,6 +21,7 @@ import 'package:match/modules/splash/binding/splash_binding.dart';
 import 'package:match/modules/splash/view/splash_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
 import 'package:match/modules/login/view/login_view.dart';
+import 'package:match/modules/total_pay/view/total_pay_view.dart';
 
 import '../../modules/event/binding/event_binding.dart';
 import '../../modules/event/view/event_view.dart';
@@ -30,6 +31,7 @@ import '../../modules/main/binding/main_binding.dart';
 import '../../modules/main/view/main_view.dart';
 import '../../modules/search/binding/search_binding.dart';
 import '../../modules/search/view/search_view.dart';
+import '../../modules/total_pay/binding/total_pay_binding.dart';
 import 'routes.dart';
 
 class Pages {
@@ -114,6 +116,26 @@ class Pages {
       page: () => const MypageScreen(),
       transition: Transition.noTransition,
       binding: MypageBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "기부 결제 내역",
+      name: Routes.total_pay,
+      page: () => const TotalPayScreen(),
+      transition: Transition.noTransition,
+      //TODO:binding 교체
+      binding: TotalPayBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "결제 상세내역",
+      name: Routes.pay,
+      page: () => const PaymentScreen(),
+      transition: Transition.noTransition,
+      //TODO:binding 교체
+      binding: PaymentBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

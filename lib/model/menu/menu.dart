@@ -10,6 +10,7 @@ class Menu with _$Menu {
   const factory Menu({
     required String menuIcon,
     required String title,
+    required String route,
   }) = _Menu;
   factory Menu.fromJson(Map<String, dynamic> json) => _$MenuFromJson(json);
 }

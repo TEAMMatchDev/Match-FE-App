@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../provider/routes/routes.dart';
 import '../const/global_variable.dart';
 
 Widget TypeChip({required String type}) {
@@ -20,6 +21,14 @@ Widget TypeChip({required String type}) {
           color: AppColors.grey6,
         )),
   );
+}
+
+Widget alarmButton() {
+  return GestureDetector(
+      onTap: () {
+        Get.toNamed(Routes.alarm);
+      },
+      child: SvgPicture.asset(iconDir + "ic_alarm_20.svg"));
 }
 
 Widget CommonListItem({

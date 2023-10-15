@@ -22,6 +22,7 @@ Menu _$MenuFromJson(Map<String, dynamic> json) {
 mixin _$Menu {
   String get menuIcon => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  String get route => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $MenuCopyWith<$Res> {
   factory $MenuCopyWith(Menu value, $Res Function(Menu) then) =
       _$MenuCopyWithImpl<$Res, Menu>;
   @useResult
-  $Res call({String menuIcon, String title});
+  $Res call({String menuIcon, String title, String route});
 }
 
 /// @nodoc
@@ -51,6 +52,7 @@ class _$MenuCopyWithImpl<$Res, $Val extends Menu>
   $Res call({
     Object? menuIcon = null,
     Object? title = null,
+    Object? route = null,
   }) {
     return _then(_value.copyWith(
       menuIcon: null == menuIcon
@@ -60,6 +62,10 @@ class _$MenuCopyWithImpl<$Res, $Val extends Menu>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      route: null == route
+          ? _value.route
+          : route // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -71,7 +77,7 @@ abstract class _$$_MenuCopyWith<$Res> implements $MenuCopyWith<$Res> {
       __$$_MenuCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String menuIcon, String title});
+  $Res call({String menuIcon, String title, String route});
 }
 
 /// @nodoc
@@ -85,6 +91,7 @@ class __$$_MenuCopyWithImpl<$Res> extends _$MenuCopyWithImpl<$Res, _$_Menu>
   $Res call({
     Object? menuIcon = null,
     Object? title = null,
+    Object? route = null,
   }) {
     return _then(_$_Menu(
       menuIcon: null == menuIcon
@@ -95,6 +102,10 @@ class __$$_MenuCopyWithImpl<$Res> extends _$MenuCopyWithImpl<$Res, _$_Menu>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      route: null == route
+          ? _value.route
+          : route // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -102,7 +113,8 @@ class __$$_MenuCopyWithImpl<$Res> extends _$MenuCopyWithImpl<$Res, _$_Menu>
 /// @nodoc
 @JsonSerializable()
 class _$_Menu with DiagnosticableTreeMixin implements _Menu {
-  const _$_Menu({required this.menuIcon, required this.title});
+  const _$_Menu(
+      {required this.menuIcon, required this.title, required this.route});
 
   factory _$_Menu.fromJson(Map<String, dynamic> json) => _$$_MenuFromJson(json);
 
@@ -110,10 +122,12 @@ class _$_Menu with DiagnosticableTreeMixin implements _Menu {
   final String menuIcon;
   @override
   final String title;
+  @override
+  final String route;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Menu(menuIcon: $menuIcon, title: $title)';
+    return 'Menu(menuIcon: $menuIcon, title: $title, route: $route)';
   }
 
   @override
@@ -122,7 +136,8 @@ class _$_Menu with DiagnosticableTreeMixin implements _Menu {
     properties
       ..add(DiagnosticsProperty('type', 'Menu'))
       ..add(DiagnosticsProperty('menuIcon', menuIcon))
-      ..add(DiagnosticsProperty('title', title));
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('route', route));
   }
 
   @override
@@ -132,12 +147,13 @@ class _$_Menu with DiagnosticableTreeMixin implements _Menu {
             other is _$_Menu &&
             (identical(other.menuIcon, menuIcon) ||
                 other.menuIcon == menuIcon) &&
-            (identical(other.title, title) || other.title == title));
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.route, route) || other.route == route));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, menuIcon, title);
+  int get hashCode => Object.hash(runtimeType, menuIcon, title, route);
 
   @JsonKey(ignore: true)
   @override
@@ -155,7 +171,9 @@ class _$_Menu with DiagnosticableTreeMixin implements _Menu {
 
 abstract class _Menu implements Menu {
   const factory _Menu(
-      {required final String menuIcon, required final String title}) = _$_Menu;
+      {required final String menuIcon,
+      required final String title,
+      required final String route}) = _$_Menu;
 
   factory _Menu.fromJson(Map<String, dynamic> json) = _$_Menu.fromJson;
 
@@ -163,6 +181,8 @@ abstract class _Menu implements Menu {
   String get menuIcon;
   @override
   String get title;
+  @override
+  String get route;
   @override
   @JsonKey(ignore: true)
   _$$_MenuCopyWith<_$_Menu> get copyWith => throw _privateConstructorUsedError;
