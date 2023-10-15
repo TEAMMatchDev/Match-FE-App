@@ -32,30 +32,34 @@ Widget alarmButton() {
 }
 
 Widget CommonListItem({
+  required Future<void> Function() onTap,
   required String category,
   required String title,
   required String date,
 }) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        category,
-        style: AppTextStyles.S1SemiBold13.copyWith(color: AppColors.grey5),
-      ),
-      SizedBox(
-        height: 10.h,
-      ),
-      Text(title, style: AppTextStyles.T1Bold15),
-      SizedBox(
-        height: 6.h,
-      ),
-      Text(
-        date,
-        style: AppTextStyles.S1SemiBold12.copyWith(
-          color: AppColors.grey3,
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          category,
+          style: AppTextStyles.S1SemiBold13.copyWith(color: AppColors.grey5),
         ),
-      ),
-    ],
+        SizedBox(
+          height: 10.h,
+        ),
+        Text(title, style: AppTextStyles.T1Bold15),
+        SizedBox(
+          height: 6.h,
+        ),
+        Text(
+          date,
+          style: AppTextStyles.S1SemiBold12.copyWith(
+            color: AppColors.grey3,
+          ),
+        ),
+      ],
+    ),
   );
 }

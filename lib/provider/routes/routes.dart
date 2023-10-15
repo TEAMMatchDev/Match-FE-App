@@ -45,6 +45,9 @@ abstract class _Paths {
 
   ///알람 화면
   static const alarm = "/alarm";
+
+  ///알람 화면
+  static const alarm_detail = "/alarm_detail";
 }
 
 abstract class Routes {
@@ -94,4 +97,7 @@ abstract class Routes {
 
   /// 알람 화면
   static const alarm = _Paths.alarm;
+
+  /// 알람 화면
+  static const alarm_detail = _Paths.alarm_detail;
 }

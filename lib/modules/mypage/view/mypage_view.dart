@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:match/modules/mypage/view/notice_view.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/routes/routes.dart';
@@ -97,7 +96,7 @@ class MypageScreen extends GetView<MypageController> {
                       icon: "notice",
                       title: "공지사항",
                       onTap: (() async {
-                        await Get.to(() => const NoticeScreen());
+                        // await Get.toNamed(page);
                       })),
                   MypageListTile(icon: "setting", title: "환경설정"),
                   MypageListTile(icon: "policy", title: "운영정책 및 약관"),

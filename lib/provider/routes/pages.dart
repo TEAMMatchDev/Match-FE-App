@@ -22,12 +22,18 @@ import 'package:match/modules/login/binding/login_binding.dart';
 import 'package:match/modules/login/view/login_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
 
+import '../../modules/alarm/binding/alarm_detail_binding.dart';
+import '../../modules/alarm/view/alarm_detail_view.dart';
 import '../../modules/event/binding/event_binding.dart';
 import '../../modules/event/view/event_view.dart';
 import '../../modules/home/binding/home_binding.dart';
 import '../../modules/home/view/home_view.dart';
 import '../../modules/main/binding/main_binding.dart';
 import '../../modules/main/view/main_view.dart';
+import '../../modules/notice/binding/notice_binding.dart';
+import '../../modules/notice/binding/notice_detail_binding.dart';
+import '../../modules/notice/view/notice_detail_view.dart';
+import '../../modules/notice/view/notice_view.dart';
 import '../../modules/search/binding/search_binding.dart';
 import '../../modules/search/view/search_view.dart';
 import '../../modules/total_pay/binding/total_pay_binding.dart';
@@ -123,7 +129,6 @@ class Pages {
       name: Routes.total_pay,
       page: () => const TotalPayScreen(),
       transition: Transition.noTransition,
-      //TODO:binding 교체
       binding: TotalPayBinding(),
       curve: Curves.easeIn,
       popGesture: false,
@@ -133,8 +138,25 @@ class Pages {
       name: Routes.pay,
       page: () => const PaymentScreen(),
       transition: Transition.noTransition,
-      //TODO:binding 교체
       binding: PaymentBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "공지사항 화면",
+      name: Routes.alarm,
+      page: () => const NoticeScreen(),
+      transition: Transition.noTransition,
+      binding: NoticeBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "공지사항 상세 화면",
+      name: Routes.alarm,
+      page: () => const NoticeDetailScreen(),
+      transition: Transition.noTransition,
+      binding: NoticeDetailBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
@@ -144,6 +166,15 @@ class Pages {
       page: () => const AlarmScreen(),
       transition: Transition.noTransition,
       binding: AlarmBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "알람 상세 화면",
+      name: Routes.alarm,
+      page: () => const AlarmDetailScreen(),
+      transition: Transition.noTransition,
+      binding: AlarmDetailBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

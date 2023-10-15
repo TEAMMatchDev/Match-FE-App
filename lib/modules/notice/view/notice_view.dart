@@ -5,9 +5,9 @@ import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_widget.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
-import '../controller/mypage_controller.dart';
+import '../controller/notice_controller.dart';
 
-class NoticeScreen extends GetView<MypageController> {
+class NoticeScreen extends GetView<NoticeController> {
   const NoticeScreen({super.key});
 
   @override
@@ -43,7 +43,11 @@ class NoticeScreen extends GetView<MypageController> {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return CommonListItem(
-                      category: "공지사항 소분류", title: "알림 제목", date: "2023.04.13");
+                    category: "공지사항 소분류",
+                    title: "알림 제목",
+                    date: "2023.04.13",
+                    onTap: () async {},
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return Padding(
