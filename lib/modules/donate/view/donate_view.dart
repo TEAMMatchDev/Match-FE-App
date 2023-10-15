@@ -57,14 +57,16 @@ class DonateScreen extends GetView<DonateController> {
               //*2.프로젝트 카테고리
               SizedBox(
                 height: 76.h,
-                child: ListView.builder(
+                child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: ProjectType.values.length + 1,
+                  separatorBuilder: ((context, index) {
+                    return SizedBox(
+                      width: 16.w,
+                    );
+                  }),
                   itemBuilder: ((context, index) {
-                    if (index % 9 == 0 && index != 0) {
-                      controller.getMoreProject(index);
-                    }
                     //obx 작동 오류로 한번더 감싸줌
                     return Obx(
                       () => GestureDetector(
@@ -97,13 +99,16 @@ class DonateScreen extends GetView<DonateController> {
               ),
               //*4.프로젝트 리스트
               Expanded(
-                child: ListView.separated(
+                child: ListView.builder(
                   shrinkWrap: true,
-                  separatorBuilder: (context, index) => SizedBox(height: 14.h),
                   itemCount: controller.projectList.length,
                   itemBuilder: (context, index) {
+                    if (index % 9 == 0 && index != 0) {
+                      controller.getMoreProject(index);
+                    }
                     final project = controller.projectList[index];
                     return Container(
+                        padding: EdgeInsets.symmetric(vertical: 8.h),
                         margin: EdgeInsets.only(
                             top: index == 0 ? 14.h : 0.h,
                             bottom: index == controller.projectList.length - 1
