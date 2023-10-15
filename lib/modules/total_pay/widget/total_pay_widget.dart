@@ -18,15 +18,15 @@ class MatchPayItem extends StatelessWidget {
   final String title;
   final String date;
   final String type;
-  final int day;
-  final int price;
+  final String regular;
+  final int regularPayId;
   const MatchPayItem(
       {super.key,
       required this.title,
       required this.date,
       required this.type,
-      required this.day,
-      required this.price});
+      required this.regularPayId,
+      required this.regular});
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +59,7 @@ class MatchPayItem extends StatelessWidget {
           ),
         ),
         MatchPayment(
-          day: day,
-          price: price,
+          regular: regular,
         ),
         SizedBox(
           height: 20.h,
@@ -103,9 +102,11 @@ class MatchPayItem extends StatelessWidget {
 ///*5-5 api
 ///*[PaymentScreen]에서 사용되는 위젯<br/>
 class MatchPayment extends StatelessWidget {
-  final int day;
-  final int price;
-  const MatchPayment({super.key, required this.day, required this.price});
+  final String regular;
+  const MatchPayment({
+    super.key,
+    required this.regular,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,7 @@ class MatchPayment extends StatelessWidget {
             SizedBox(
               width: 15.w,
             ),
-            Text("매월 • ${day}일 • ${price}원",
+            Text(regular,
                 style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7)),
           ],
         ),

@@ -10,9 +10,9 @@ class PaymentApi {
   //TODO: pagination 적용
   static Future<List<TotalPay>> getProjectList() async {
     try {
-      Response response = await DioServices().to().get("/projects/list",
+      Response response = await DioServices().to().get("/donations",
           queryParameters: {"page": 0, "size": 10, "filter": 0});
-      // logger.d(response.data);
+      logger.d(response.data);
       return List.generate(
         response.data[RESULT][CONTENTS].length,
         (index) => TotalPay.fromJson(response.data[RESULT][CONTENTS][index]),

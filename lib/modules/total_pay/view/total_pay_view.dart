@@ -14,16 +14,20 @@ class TotalPayScreen extends GetView<TotalPayController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CommonAppBar.basic("기부 내역"),
-        body: ListView.separated(
+        body: Obx(
+          () => ListView.separated(
+            itemCount: controller.totalPayList.length,
             itemBuilder: ((context, index) {
+              final pay = controller.totalPayList[index];
+              final regular = pay.regularStatus.replaceAll(" ", " • ");
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
                 child: MatchPayItem(
-                  title: "불타는 매치",
-                  date: "2021.09.01",
-                  type: "매치 진행중",
-                  day: 30,
-                  price: 10000,
+                  title: pay.projectName,
+                  date: pay.donationDate,
+                  type: pay.donationStatus,
+                  regular: regular,
+                  regularPayId: pay.donationId,
                 ),
               );
             }),
@@ -35,6 +39,7 @@ class TotalPayScreen extends GetView<TotalPayController> {
                 height: 10.h,
               );
             }),
-            itemCount: 3));
+          ),
+        ));
   }
 }
