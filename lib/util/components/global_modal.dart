@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/payment/view/payment_expire_view.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -99,7 +100,7 @@ class CommonDialog extends StatelessWidget {
       subtitle: null,
       grantText: "해지하기",
       onGrant: () async {
-        // await openAppSettings();
+        await Get.to(() => const PaymentExpireScreen());
       },
     );
   }
