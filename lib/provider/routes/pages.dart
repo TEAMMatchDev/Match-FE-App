@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:match/modules/alarm/binding/alarm_binding.dart';
 import 'package:match/modules/alarm/view/alarm_view.dart';
 import 'package:match/modules/buring_match/binding/burning_match_binding.dart';
-import 'package:match/modules/buring_match/view/burning_match_pay_view.dart';
 import 'package:match/modules/buring_match/view/burning_match_view.dart';
 import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';

@@ -30,7 +30,7 @@ class TotalPayScreen extends GetView<TotalPayController> {
             separatorBuilder: ((context, index) {
               return Container(
                 margin:
-                    EdgeInsets.symmetric(vertical: 29.h).copyWith(bottom: 0.h),
+                    EdgeInsets.symmetric(vertical: 20.h).copyWith(bottom: 0.h),
                 color: AppColors.searchBackground,
                 height: 10.h,
               );

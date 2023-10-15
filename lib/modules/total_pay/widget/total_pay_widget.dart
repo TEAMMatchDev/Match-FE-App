@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../provider/routes/routes.dart';
 import '../../../util/components/global_button.dart';
+import '../../../util/components/global_modal.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
@@ -79,11 +80,17 @@ class MatchCredit extends StatelessWidget {
             ),
             Expanded(
               child: CommonButton(
-                text: "해지하기",
-                onTap: () async {
-                  //TODO: 해지 dialog 로직 추가
-                },
-              ),
+                  text: "해지하기",
+                  onTap: () async {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return CommonDialog.payDelete(
+                          context: context,
+                        );
+                      },
+                    );
+                  }),
             ),
           ],
         )
@@ -111,7 +118,7 @@ class MatchPayment extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 20.h,
+          height: 7.h,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
