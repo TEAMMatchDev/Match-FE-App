@@ -45,7 +45,6 @@ class ProjectScreen extends GetView<ProjectController> {
                   ),
                 ),
                 onStretchTrigger: () async {
-                  logger.d("fdsf");
                   controller.isStretched.value = false;
                 },
                 title: !controller.isStretched.value
@@ -115,18 +114,23 @@ class ProjectScreen extends GetView<ProjectController> {
                             children: [
                               Wrap(
                                 spacing: -10.w,
-                                //TODO: 서버에서 보내주는 만큼 표시해야하는지 3개만 표시하는지 확인필요
                                 children: controller
                                     .projectDetail.value.userProfileImages
                                     .map((e) => profileItem(size: 40))
                                     .toList(),
                               ),
-                              SizedBox(
-                                width: 8.w,
-                              ),
+                              controller.projectDetail.value.totalDonationCnt >
+                                      0
+                                  ? SizedBox(
+                                      width: 8.w,
+                                    )
+                                  : SizedBox.shrink(),
                               Text(
-                                //TODO: 서버 api field 추가 필요
-                                "외 ${controller.projectDetail.value.totalDonationCnt - 3}마리의 불꽃이 함께하고 있어요",
+                                controller.projectDetail.value
+                                            .totalDonationCnt >
+                                        0
+                                    ? "외 ${controller.projectDetail.value.totalDonationCnt > 3 ? controller.projectDetail.value.totalDonationCnt - 3 : controller.projectDetail.value.totalDonationCnt}마리의 불꽃이 함께하고 있어요"
+                                    : "아직 후원하는 사람이 없어요",
                                 style: AppTextStyles.L1Medium13,
                               ),
                             ],
@@ -134,27 +138,28 @@ class ProjectScreen extends GetView<ProjectController> {
                         ]),
                   ),
                 ),
-                bottom: TabBar(
-                  controller: controller.matchTabBar.controller,
-                  onTap: (index) async {
-                    controller.tabIndex.value = index;
-                    if (controller.projectHistories.isEmpty && index == 1) {
-                      await ProjectApi.getProjectHistory(
-                          projectId: controller.projectId);
-                    }
-                  },
-                  labelColor: AppColors.grey9,
-                  labelStyle: AppTextStyles.L1Medium14,
-                  unselectedLabelColor: AppColors.grey4,
-                  indicatorColor: AppColors.grey9,
-                  tabs: [
-                    Tab(
-                      text: "기부처 이야기",
-                    ),
-                    Tab(text: "불꽃이 기록"),
-                  ],
-                ),
               ),
+              SliverPersistentHeader(
+                delegate: _SliverAppBarDelegate(
+                  TabBar(
+                    controller: controller.matchTabBar.controller,
+                    onTap: (index) {
+                      controller.tabIndex.value = index;
+                    },
+                    labelColor: AppColors.grey9,
+                    labelStyle: AppTextStyles.L1Medium14,
+                    unselectedLabelColor: AppColors.grey4,
+                    indicatorColor: AppColors.grey9,
+                    tabs: [
+                      Tab(
+                        text: "기부처 이야기",
+                      ),
+                      Tab(text: "불꽃이 기록"),
+                    ],
+                  ),
+                ),
+                pinned: true,
+              )
             ];
           },
           body: Padding(
@@ -165,7 +170,7 @@ class ProjectScreen extends GetView<ProjectController> {
 
               //1. 매칭 정보
               ListView.separated(
-                controller: controller.scrollController.value,
+                // controller: controller.scrollController.value,
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: controller.projectDetail.value.projectImgList.length,

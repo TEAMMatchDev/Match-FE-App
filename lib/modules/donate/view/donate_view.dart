@@ -8,6 +8,7 @@ import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../model/enum/project_type.dart';
+import '../../../provider/api/project_api.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
@@ -64,8 +65,15 @@ class DonateScreen extends GetView<DonateController> {
                     //obx 작동 오류로 한번더 감싸줌
                     return Obx(
                       () => GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           controller.selectIdx.value = index;
+                          index != 0
+                              ? controller.projectList.assignAll(
+                                  await ProjectApi.getProjectList(
+                                      type: ProjectType.values[index - 1]))
+                              : controller.projectList.assignAll(
+                                  await ProjectApi.getProjectList(
+                                      type: ProjectType.ANIMAL));
                           //TODO: api 호출
                         },
                         child: index == 0
