@@ -17,7 +17,8 @@ class AlarmDetailScreen extends GetView<AlarmDetailController> {
         appBar: CommonAppBar.basic("알림"),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Column(children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CommonListItem(
               category: "알림 소분류",
               title: "알림 제목",

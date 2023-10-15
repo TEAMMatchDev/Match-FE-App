@@ -96,7 +96,7 @@ class MypageScreen extends GetView<MypageController> {
                       icon: "notice",
                       title: "공지사항",
                       onTap: (() async {
-                        // await Get.toNamed(page);
+                        await Get.toNamed(Routes.notice);
                       })),
                   MypageListTile(icon: "setting", title: "환경설정"),
                   MypageListTile(icon: "policy", title: "운영정책 및 약관"),

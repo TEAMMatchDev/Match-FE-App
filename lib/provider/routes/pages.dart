@@ -144,7 +144,7 @@ class Pages {
     ),
     GetPage(
       title: "공지사항 화면",
-      name: Routes.alarm,
+      name: Routes.notice,
       page: () => const NoticeScreen(),
       transition: Transition.noTransition,
       binding: NoticeBinding(),
@@ -153,7 +153,7 @@ class Pages {
     ),
     GetPage(
       title: "공지사항 상세 화면",
-      name: Routes.alarm,
+      name: Routes.notice_detail,
       page: () => const NoticeDetailScreen(),
       transition: Transition.noTransition,
       binding: NoticeDetailBinding(),
@@ -171,7 +171,7 @@ class Pages {
     ),
     GetPage(
       title: "알람 상세 화면",
-      name: Routes.alarm,
+      name: Routes.alarm_detail,
       page: () => const AlarmDetailScreen(),
       transition: Transition.noTransition,
       binding: AlarmDetailBinding(),

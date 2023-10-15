@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:match/modules/alarm/view/alarm_detail_view.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_widget.dart';
+import '../../../provider/routes/routes.dart';
 import '../controller/alarm_controller.dart';
 
 class AlarmScreen extends GetView<AlarmController> {
@@ -14,7 +15,7 @@ class AlarmScreen extends GetView<AlarmController> {
     return Scaffold(
         appBar: CommonAppBar.basic("알림"),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 30.h),
           child: ListView.separated(
             itemCount: 3,
             itemBuilder: (context, index) {
@@ -23,9 +24,7 @@ class AlarmScreen extends GetView<AlarmController> {
                 title: "알림 제목",
                 date: "2023.04.13",
                 onTap: () async {
-                  Get.to(() => AlarmDetailScreen(
-                        alarmId: 1,
-                      ));
+                  Get.toNamed(Routes.alarm_detail, arguments: {"id": 1});
                 },
               );
             },

@@ -48,6 +48,12 @@ abstract class _Paths {
 
   ///알람 화면
   static const alarm_detail = "/alarm_detail";
+
+  ///알람 화면
+  static const notice = "/notice";
+
+  ///알람 화면
+  static const notice_detail = "/notice_detail";
 }
 
 abstract class Routes {
@@ -95,9 +101,15 @@ abstract class Routes {
   /// 마이페이지 화면
   static const mypage = _Paths.mypage;
 
+  /// 공지사항 화면
+  static const notice = _Paths.notice;
+
+  /// 공지사항 상세화면
+  static const notice_detail = _Paths.notice_detail;
+
   /// 알람 화면
   static const alarm = _Paths.alarm;
 
-  /// 알람 화면
+  /// 알람 상세화면
   static const alarm_detail = _Paths.alarm_detail;
 }

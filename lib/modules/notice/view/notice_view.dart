@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_widget.dart';
+import '../../../provider/routes/routes.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
 import '../controller/notice_controller.dart';
@@ -46,7 +47,9 @@ class NoticeScreen extends GetView<NoticeController> {
                     category: "공지사항 소분류",
                     title: "알림 제목",
                     date: "2023.04.13",
-                    onTap: () async {},
+                    onTap: () async {
+                      Get.toNamed(Routes.notice_detail, arguments: {"id": 1});
+                    },
                   );
                 },
                 separatorBuilder: (context, index) {
