@@ -9,6 +9,7 @@ import 'package:match/modules/login/widget/date_picker.dart';
 import 'package:match/modules/login/widget/login_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
+import 'package:match/util/components/global_date_picker.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../util/components/global_app_bar.dart';
@@ -86,6 +87,18 @@ class SignUpInfoScreen extends GetView<LoginController> {
                     Get.back();
                   },
                 ),*/
+
+
+                // Container(
+                //   height: getHeightByPercentOfScreen(33.0, context),
+                //   child: CuDatePicker(
+                //     onDateChange: (DateTime selectedDate) {
+                //       // 예시: 선택한 날짜를 문자열로 포맷하여 표시
+                //       final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
+                //       print('>> Selected Date: $formattedDate');
+                //     },
+                //   ),
+                // ),
 
                 SizedBox(height: 27.h),
                 Text(

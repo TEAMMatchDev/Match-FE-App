@@ -24,6 +24,8 @@ dependencies:
 
   webview_flutter: ^4.0.7
 
+  intl: ^0.18.1 # Date Picker
+
   http: ^0.13.3
   retrofit: ^4.0.2
 

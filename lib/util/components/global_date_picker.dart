@@ -6,28 +6,74 @@ import 'package:flutter/cupertino.dart';
 import 'package:match/util/const/style/global_color.dart';
 import '../const/style/global_text_styles.dart';
 
-class CuDatePicker extends StatelessWidget {
-  const CuDatePicker({
-    Key key,
-    this.onDateChange,
+import 'package:flutter/cupertino.dart';
+
+class ToggleDatePicker extends StatelessWidget {
+  const ToggleDatePicker({
+    Key? key,
+    this.showPicker,
   }) : super(key: key);
 
-  final Function(DateTime value) onDateChange;
+  final void Function(BuildContext context)? showPicker;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(
-        maxWidth: 400.0,
+    return CupertinoButton(
+      child: Text(
+        'OPEN DATE PICKER',
+        textAlign: TextAlign.center,
       ),
-      child: CupertinoDatePicker(
-        initialDateTime: DateTime.now(),
-        maximumDate: new DateTime.now(),
-        minimumYear: 1900,
-        maximumYear: 2023,
-        mode: CupertinoDatePickerMode.date,
-        onDateTimeChanged: onDateChange ?? (DateTime value) {},
-      ),
+      onPressed: () {
+        showPicker?.call(context);
+      },
     );
   }
+}
+
+class HandlePickerButton extends StatelessWidget {
+  const HandlePickerButton({
+    Key? key,
+    this.onPressCancel,
+    this.onPressDone,
+  }) : super(key: key);
+
+  final void Function()? onPressCancel;
+  final void Function()? onPressDone;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CupertinoButton(
+          child: Text(
+            'Cancel',
+            style: TextStyle(
+              color: Colors.red,
+            ),
+          ),
+          onPressed: onPressCancel ??
+                  () {
+                Navigator.pop(context);
+              },
+        ),
+        CupertinoButton(
+          child: Text(
+            'Done',
+          ),
+          onPressed: onPressDone ??
+                  () {
+                Navigator.pop(context);
+              },
+        ),
+      ],
+    );
+  }
+}
+
+
+
+double getHeightByPercentOfScreen(double percent,  BuildContext context) {
+  return MediaQuery.of(context).size.height * percent / 100;
 }
