@@ -1,16 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:match/modules/home/view/today_match_view.dart';
-import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../util/components/global_widget.dart';
-import '../../buring_match/controller/burning_match_controller.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
 
@@ -109,15 +105,15 @@ class HomeScreen extends GetView<HomeController> {
                   height: 320.h,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 2,
+                    itemCount: controller.flameList.length,
                     itemBuilder: (context, index) {
-                      // final project = controller.projectList[index];
+                      final flame = controller.flameList[index];
                       return FlameWidget(
-                        flameName: "순두부찌개 먹은 불꽃이",
-                        flameImg: tmpBackgroundImg,
-                        flameTalk: "말을 겁니다 후원집행시, 생성시, ",
-                        usages: "T.B.T 레스큐",
-                        id: 1,
+                        flameName: flame.inherenceName,
+                        flameImg: flame.image,
+                        flameTalk: flame.randomMessage,
+                        usages: flame.usages,
+                        id: flame.donationId,
                       );
                     },
                     separatorBuilder: (context, index) {
