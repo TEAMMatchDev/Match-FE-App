@@ -8,12 +8,28 @@ import '../const/style/global_text_styles.dart';
 
 import 'package:flutter/cupertino.dart';
 
-class CallBottomSheet extends StatelessWidget { //생년월일 버튼
+class CallBottomSheet extends StatefulWidget {
+  @override
+  _CallBottomSheetState createState() => _CallBottomSheetState();
+}
+
+class _CallBottomSheetState extends State<CallBottomSheet> {
+  DateTime selectedDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    // 여기에서 이전에 선택한 값을 초기화하거나 로드합니다.
+    selectedDate = DateTime.now(); // 예를 들어 현재 시간으로 초기화
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
       child: Text(
-        '생년월일',
+        selectedDate != null
+            ? DateFormat('yyyy-MM-dd').format(selectedDate)
+            : '생년월일',
         style: AppTextStyles.T1Bold14,
       ),
       onPressed: () {
@@ -33,11 +49,13 @@ class CallBottomSheet extends StatelessWidget { //생년월일 버튼
                     flex: 7,
                     child: BirthDatePicker(
                       onDateTimeChanged: (dateTime) {
-                        // Process selected date
-                        // Example: setState(() { selectedDate = dateTime; });
+                        setState(() {
+                          selectedDate = dateTime;
+                        });
                       },
+                      initDateStr: DateFormat('yyyy-MM-dd').format(selectedDate),
                     ),
-                  )
+                  ),
                 ],
               ),
             );
@@ -47,6 +65,8 @@ class CallBottomSheet extends StatelessWidget { //생년월일 버튼
     );
   }
 }
+
+
 
 class BirthDatePicker extends StatelessWidget { //DatePicker 위젯
   final void Function(DateTime) onDateTimeChanged;
@@ -59,8 +79,7 @@ class BirthDatePicker extends StatelessWidget { //DatePicker 위젯
 
   @override
   Widget build(BuildContext context) {
-    final initDate =
-    DateFormat('yyyy-MM-dd').parse(initDateStr ?? '2000-01-01');
+    final initDate = DateFormat('yyyy-MM-dd').parse(initDateStr ?? '2000-01-01');
     return SizedBox(
       height: 150.h,
       child: CupertinoDatePicker(
