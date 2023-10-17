@@ -12,7 +12,7 @@ class MatchHistory with _$MatchHistory {
     required String histories,
     required String historyDate,
     String? flameImage,
-    required List<String> donationHistoryImages,
+    List<String>? donationHistoryImages,
   }) = _MatchHistory;
   factory MatchHistory.fromJson(Map<String, dynamic> json) =>
       _$MatchHistoryFromJson(json);

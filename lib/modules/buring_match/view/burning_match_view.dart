@@ -90,19 +90,20 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                   ListView.separated(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
+                      itemCount: controller.flameHistories.length,
                       itemBuilder: (context, index) {
-                        final history = controller.matchHistories[index];
+                        final history = controller.flameHistories[index];
                         return MatchRecord(
                             title: history.histories,
                             date: history.historyDate,
-                            imgList: history.donationHistoryImages);
+                            imgList: history.donationHistoryImages ?? []);
                       },
                       separatorBuilder: (context, index) {
                         return SizedBox(
                           height: 12.h,
                         );
                       },
-                      itemCount: controller.matchHistories.length),
+                      ),
                   // 매치기록
                 ],
               ),

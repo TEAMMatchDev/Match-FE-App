@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:match/model/match_history/match_history.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
 
 import '../../model/api/pagination.dart';
@@ -50,6 +51,34 @@ class FlameApi {
       return FlameDetail.fromJson(response.data[RESULT]);
     } catch (e) {
       logger.e(e.toString());
+    }
+  }
+
+  ///<h2>5-10-2 API | 상세 - 불타는 매치 상세 - 하단조회</h2>
+  ///* pagination
+  static Future<List<MatchHistory>> getFlameDetailBottom(
+      {required int donationId, bool getMore = false}) async {
+    try {
+      logger.d("api호출 성공");
+      if (!getMore) {
+        detailFlameBottom.currentpage = 0;
+      }
+      Response response = await DioServices()
+          .to()
+          .get("/donations/flame/bottom/$donationId", queryParameters: {
+        "page": detailFlameBottom.currentpage,
+        "size": PAGINATION_SIZE
+      });
+
+      detailFlameBottom.totalCnt = response.data[RESULT][TOTAL];
+      detailFlameBottom.isLast = response.data[RESULT][LAST];
+      logger.d(
+          "pagination 정보: totalCnt:${detailFlameBottom.totalCnt}, currentPage:${detailFlameBottom.currentpage} isLast:${detailFlameBottom.isLast}");
+      return List.generate(response.data[RESULT][CONTENTS].length,
+          (index) => MatchHistory.fromJson(response.data[RESULT][CONTENTS][index]));
+    } catch (e) {
+      logger.e(e.toString());
+      return [];
     }
   }
 }

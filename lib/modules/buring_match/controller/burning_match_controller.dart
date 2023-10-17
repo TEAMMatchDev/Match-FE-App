@@ -25,7 +25,7 @@ class BurningMatchController extends GetxController {
   Rx<FlameDetail> flameDetail = tmpFlameDetail.obs;
 
   ///* mapIndexed 사용불가로 index 대체 변수
-  RxList<MatchHistory> matchHistories = <MatchHistory>[].obs;
+  RxList<MatchHistory> flameHistories = <MatchHistory>[].obs;
 
   // Future<void> getMoreProject(int index) async {
   //   if (!DonationApi.getDonationHistoryIsLast) {
@@ -37,7 +37,10 @@ class BurningMatchController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    ///*상단 데이터 init
     flameDetail.value =
         await FlameApi.getDetailFlameTop(donationId: id) ?? tmpFlameDetail;
+    ///*하단 데이터 init
+    flameHistories.assignAll( await FlameApi.getFlameDetailBottom(donationId: id));
   }
 }
