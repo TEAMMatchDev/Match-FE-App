@@ -8,33 +8,35 @@ import '../const/style/global_text_styles.dart';
 
 import 'package:flutter/cupertino.dart';
 
-class _BuildButton extends StatelessWidget {
-  const _BuildButton({
-    Key? key,
-    required this.showPicker,
-  }) : super(key: key);
-
-  final Function(BuildContext context) showPicker;
+class CallBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        showPicker(context);
-      },
-      child: CupertinoButton(
-        child: Text(
-          '생년월일',
-          style: AppTextStyles.T1Bold14,
-        ),
-        onPressed: () {
-
-        },
+    return CupertinoButton(
+      child: Text(
+        '생년월일',
+        style: AppTextStyles.T1Bold14,
       ),
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            return Container(
+              height: 150.h,
+              child: BirthDatePicker(
+                onDateTimeChanged: (dateTime) {
+                  // Process selected date
+                  // Example: setState(() { selectedDate = dateTime; });
+                },
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
-
 
 class BirthDatePicker extends StatelessWidget {
   final void Function(DateTime) onDateTimeChanged;

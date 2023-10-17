@@ -69,6 +69,7 @@ class SignUpInfoScreen extends GetView<LoginController> {
                   '성별',
                   style: AppTextStyles.T1Bold14,
                 ),
+                SizedBox(height: 10.h),
                 Row(
                   children: [
                     certinumButton(),
@@ -81,38 +82,20 @@ class SignUpInfoScreen extends GetView<LoginController> {
                   '생년월일',
                   style: AppTextStyles.T1Bold14,
                 ),
+                SizedBox(height: 10.h),
 
-                CupertinoButton(
-                  child: Text(
-                    '생년월일',
-                    style: AppTextStyles.T1Bold14,
+                SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.grey1),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: CallBottomSheet(),
                   ),
-                  onPressed: () {
-                    print('tab birth btn');
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true, // 하단 시트가 화면을 오버하지 않도록 설정
-                      builder: (context) {
-                        return Container(
-                          height: 150.h,
-                          child: BirthDatePicker(
-                            onDateTimeChanged: (dateTime) {
-                              // 선택한 날짜 처리
-                              // 예: setState(() { selectedDate = dateTime; });
-                            },
-                          ),
-                        );
-                      },
-                    );
-                  },
                 ),
 
-                // BirthDatePicker(
-                //   onDateTimeChanged: (dateTime) {
-                //     // 선택한 날짜 처리
-                //     // 예: setState(() { selectedDate = dateTime; });
-                //   },
-                // ),
+
 
                 SizedBox(height: 27.h),
                 Text(
