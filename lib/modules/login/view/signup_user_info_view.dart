@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart'; //Date Format 사용
 import 'package:match/model/enum/search_statu.dart';
-import 'package:match/modules/login/widget/date_picker.dart';
 import 'package:match/modules/login/widget/login_widget.dart';
+import 'package:match/modules/login/widget/select_sex_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_date_picker.dart';
@@ -70,13 +70,7 @@ class SignUpInfoScreen extends GetView<LoginController> {
                   style: AppTextStyles.T1Bold14,
                 ),
                 SizedBox(height: 10.h),
-                Row(
-                  children: [
-                    certinumButton(),
-                    certinumButton(),
-                    certinumButton(),
-                  ],
-                ),
+                SelectSexRadioButtons(),
                 SizedBox(height: 10.h),
                 Text(
                   '생년월일',
@@ -94,8 +88,6 @@ class SignUpInfoScreen extends GetView<LoginController> {
                     child: CallBottomSheet(),
                   ),
                 ),
-
-
 
                 SizedBox(height: 27.h),
                 Text(
