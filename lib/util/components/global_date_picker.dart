@@ -8,8 +8,7 @@ import '../const/style/global_text_styles.dart';
 
 import 'package:flutter/cupertino.dart';
 
-class CallBottomSheet extends StatelessWidget {
-
+class CallBottomSheet extends StatelessWidget { //생년월일 버튼
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
@@ -23,12 +22,23 @@ class CallBottomSheet extends StatelessWidget {
           isScrollControlled: true,
           builder: (context) {
             return Container(
-              height: 150.h,
-              child: BirthDatePicker(
-                onDateTimeChanged: (dateTime) {
-                  // Process selected date
-                  // Example: setState(() { selectedDate = dateTime; });
-                },
+              height: getHeightByPercentOfScreen(33.0, context),
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: _BuildButtonSet(),
+                  ),
+                  Expanded(
+                    flex: 7,
+                    child: BirthDatePicker(
+                      onDateTimeChanged: (dateTime) {
+                        // Process selected date
+                        // Example: setState(() { selectedDate = dateTime; });
+                      },
+                    ),
+                  )
+                ],
               ),
             );
           },
@@ -38,7 +48,7 @@ class CallBottomSheet extends StatelessWidget {
   }
 }
 
-class BirthDatePicker extends StatelessWidget {
+class BirthDatePicker extends StatelessWidget { //DatePicker 위젯
   final void Function(DateTime) onDateTimeChanged;
   final String ?initDateStr;
 
@@ -64,6 +74,49 @@ class BirthDatePicker extends StatelessWidget {
     );
   }
 }
+
+class _BuildButtonSet extends StatelessWidget {
+  const _BuildButtonSet({
+    Key? key,
+    this.onPressCancel,
+    this.onPressDone,
+  }) : super(key: key);
+
+  final void Function()? onPressCancel;
+  final void Function()? onPressDone;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CupertinoButton(
+          child: Text(
+            'Cancel',
+            style: TextStyle(
+              color: Colors.red,
+            ),
+          ),
+          onPressed: onPressCancel ??
+                  () {
+                Navigator.pop(context);
+              },
+        ),
+        CupertinoButton(
+          child: Text(
+            'Done',
+          ),
+          onPressed: onPressDone ??
+                  () {
+                Navigator.pop(context);
+              },
+        ),
+      ],
+    );
+  }
+}
+
 
 
 double getHeightByPercentOfScreen(double percent,  BuildContext context) {
