@@ -4,9 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:match/modules/donate/widget/donate_widget.dart';
+import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../model/enum/project_type.dart';
+import '../../../provider/api/project_api.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
@@ -48,10 +50,7 @@ class DonateScreen extends GetView<DonateController> {
                     SizedBox(
                       width: 14.w,
                     ),
-                    SvgPicture.asset(
-                      iconDir + "ic_alarm_20.svg",
-                      height: 20.h,
-                    )
+                    alarmButton()
                   ],
                 ),
               ),
@@ -62,12 +61,24 @@ class DonateScreen extends GetView<DonateController> {
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: ProjectType.values.length + 1,
+                  separatorBuilder: ((context, index) {
+                    return SizedBox(
+                      width: 16.w,
+                    );
+                  }),
                   itemBuilder: ((context, index) {
                     //obx 작동 오류로 한번더 감싸줌
                     return Obx(
                       () => GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           controller.selectIdx.value = index;
+                          index != 0
+                              ? controller.projectList.assignAll(
+                                  await ProjectApi.getProjectList(
+                                      type: ProjectType.values[index - 1]))
+                              : controller.projectList.assignAll(
+                                  await ProjectApi.getProjectList(
+                                      type: ProjectType.ANIMAL));
                           //TODO: api 호출
                         },
                         child: index == 0
@@ -84,22 +95,20 @@ class DonateScreen extends GetView<DonateController> {
                       ),
                     );
                   }),
-                  separatorBuilder: ((context, index) {
-                    return SizedBox(
-                      width: 16.w,
-                    );
-                  }),
                 ),
               ),
               //*4.프로젝트 리스트
               Expanded(
-                child: ListView.separated(
+                child: ListView.builder(
                   shrinkWrap: true,
-                  separatorBuilder: (context, index) => SizedBox(height: 14.h),
                   itemCount: controller.projectList.length,
                   itemBuilder: (context, index) {
+                    if (index % 9 == 0 && index != 0) {
+                      controller.getMoreProject(index);
+                    }
                     final project = controller.projectList[index];
                     return Container(
+                        padding: EdgeInsets.symmetric(vertical: 8.h),
                         margin: EdgeInsets.only(
                             top: index == 0 ? 14.h : 0.h,
                             bottom: index == controller.projectList.length - 1

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/alarm/binding/alarm_binding.dart';
+import 'package:match/modules/alarm/view/alarm_view.dart';
 import 'package:match/modules/buring_match/binding/burning_match_binding.dart';
-import 'package:match/modules/buring_match/view/burning_match_pay_view.dart';
 import 'package:match/modules/buring_match/view/burning_match_view.dart';
 import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
@@ -19,15 +20,23 @@ import 'package:match/modules/splash/binding/splash_binding.dart';
 import 'package:match/modules/splash/view/splash_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
 import 'package:match/modules/login/view/login_view.dart';
+import 'package:match/modules/total_pay/view/total_pay_view.dart';
 
+import '../../modules/alarm/binding/alarm_detail_binding.dart';
+import '../../modules/alarm/view/alarm_detail_view.dart';
 import '../../modules/event/binding/event_binding.dart';
 import '../../modules/event/view/event_view.dart';
 import '../../modules/home/binding/home_binding.dart';
 import '../../modules/home/view/home_view.dart';
 import '../../modules/main/binding/main_binding.dart';
 import '../../modules/main/view/main_view.dart';
+import '../../modules/notice/binding/notice_binding.dart';
+import '../../modules/notice/binding/notice_detail_binding.dart';
+import '../../modules/notice/view/notice_detail_view.dart';
+import '../../modules/notice/view/notice_view.dart';
 import '../../modules/search/binding/search_binding.dart';
 import '../../modules/search/view/search_view.dart';
+import '../../modules/total_pay/binding/total_pay_binding.dart';
 import 'routes.dart';
 
 class Pages {
@@ -112,6 +121,60 @@ class Pages {
       page: () => const MypageScreen(),
       transition: Transition.noTransition,
       binding: MypageBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "기부 결제 내역",
+      name: Routes.total_pay,
+      page: () => const TotalPayScreen(),
+      transition: Transition.noTransition,
+      binding: TotalPayBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "결제 상세내역",
+      name: Routes.pay,
+      page: () => const PaymentScreen(),
+      transition: Transition.noTransition,
+      binding: PaymentBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "공지사항 화면",
+      name: Routes.notice,
+      page: () => const NoticeScreen(),
+      transition: Transition.noTransition,
+      binding: NoticeBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "공지사항 상세 화면",
+      name: Routes.notice_detail,
+      page: () => const NoticeDetailScreen(),
+      transition: Transition.noTransition,
+      binding: NoticeDetailBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "알람 화면",
+      name: Routes.alarm,
+      page: () => const AlarmScreen(),
+      transition: Transition.noTransition,
+      binding: AlarmBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "알람 상세 화면",
+      name: Routes.alarm_detail,
+      page: () => const AlarmDetailScreen(),
+      transition: Transition.noTransition,
+      binding: AlarmDetailBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

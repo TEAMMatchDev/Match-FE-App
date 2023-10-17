@@ -227,23 +227,33 @@ class TodayMatchList extends StatelessWidget {
             Positioned(
               bottom: 17.h,
               left: 20.w,
-              child:
-                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                Wrap(
-                  spacing: -4,
-                  children: imgList.map((e) => profileItem(size: 30)).toList(),
-                ),
-                SizedBox(
-                  width: 7.w,
-                ),
-                Text(
-                  "외 ${count}마리의 불꽃이 함께하고 있어요.",
-                  style: AppTextStyles.L1Medium13.copyWith(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              ]),
+              child: count == 0
+                  ? Text(
+                      "아직 후원하는 사람이 없어요.",
+                      style: AppTextStyles.T1Bold12.copyWith(
+                        color: AppColors.white,
+                      ),
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                          Wrap(
+                            spacing: -4,
+                            children: imgList
+                                .map((e) => profileItem(size: 30))
+                                .toList(),
+                          ),
+                          SizedBox(
+                            width: 7.w,
+                          ),
+                          Text(
+                            "외 ${count}마리의 불꽃이 함께하고 있어요.",
+                            style: AppTextStyles.L1Medium13.copyWith(
+                              color: AppColors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ]),
             )
           ],
         ),

@@ -6,9 +6,10 @@ import '../../util/const/style/global_logger.dart';
 
 class SearchApi {
   ///<h2>3-5 API;프로젝트 리스트</h2>
-  //TODO: type nullable
   //TODO: pagination 적용
   static Future<List<Project>> getSearchResult({
+    int page = 0,
+    int size = 10,
     String? content,
   }) async {
     try {

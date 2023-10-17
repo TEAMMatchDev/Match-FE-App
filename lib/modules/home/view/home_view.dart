@@ -9,6 +9,7 @@ import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../util/components/global_widget.dart';
 import '../../buring_match/controller/burning_match_controller.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
@@ -36,7 +37,7 @@ class HomeScreen extends GetView<HomeController> {
                       imgDir + "logo/iv_home_logo.png",
                       width: 75.w,
                     ),
-                    SvgPicture.asset(iconDir + "ic_alarm_20.svg")
+                    alarmButton()
                   ],
                 ),
                 SizedBox(

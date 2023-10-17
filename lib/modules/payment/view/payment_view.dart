@@ -15,7 +15,7 @@ class PaymentScreen extends GetView<PaymentController> {
   Widget build(BuildContext context) {
     Get.put(PaymentController());
     return Scaffold(
-      appBar: CommonAppBar.basic("결제 내역"),
+      appBar: CommonAppBar.basic("상세 정보"),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 30.h),
         child: Column(
@@ -38,16 +38,6 @@ class PaymentScreen extends GetView<PaymentController> {
                     );
                   }),
                   itemCount: controller.payList.length),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 10.w,
-              ).copyWith(bottom: 24.h),
-              child: CommonButton.payment(
-                  onTap: (() async {
-                    //TODO: 결제방법 변경
-                  }),
-                  text: "결제 방법 변경"),
             ),
           ],
         ),

@@ -1,38 +1,15 @@
 import 'package:get/get.dart';
 import 'package:match/model/match_history/match_history.dart';
+import 'package:match/provider/api/payment_api.dart';
 
 import '../../../model/pay/pay.dart';
 
 class PaymentController extends GetxController {
-  RxList<Pay> payList = <Pay>[
-    Pay(
-        payDate: "2023.8.31",
-        payStatus: "결제완료",
-        payMethod: "신용카드",
-        amount: "1,000원"),
-    Pay(
-        payDate: "2023.8.31",
-        payStatus: "결제완료",
-        payMethod: "신용카드",
-        amount: "1,000원"),
-    Pay(
-        payDate: "2023.8.31",
-        payStatus: "결제완료",
-        payMethod: "신용카드",
-        amount: "1,000원"),
-    Pay(
-        payDate: "2023.8.31",
-        payStatus: "결제완료",
-        payMethod: "신용카드",
-        amount: "1,000원"),
-    Pay(
-        payDate: "2023.8.31",
-        payStatus: "결제완료",
-        payMethod: "신용카드",
-        amount: "1,000원"),
-  ].obs;
+  int id = Get.arguments["regulaPayId"] ?? -1;
+  RxList<Pay> payList = <Pay>[].obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
   }
 }
