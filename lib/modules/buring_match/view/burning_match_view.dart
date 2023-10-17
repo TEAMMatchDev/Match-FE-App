@@ -12,8 +12,10 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import 'package:timeline_tile_nic/timeline_tile.dart';
 
+import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/global_variable.dart';
+import '../../../util/const/style/global_logger.dart';
 
 class BurningMatchScreen extends GetView<BurningMatchController> {
   const BurningMatchScreen({super.key});
@@ -37,7 +39,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width:255.w,
+                    width: 255.w,
                     child: Text(
                       controller.flameDetail.value.inherenceName,
                       style: AppTextStyles.T1Bold18,
@@ -81,24 +83,33 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
 
                   //매치 기록 제목
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 17.h).copyWith(bottom: 0.h),
+                    padding: EdgeInsets.symmetric(vertical: 17.h)
+                        .copyWith(bottom: 0.h),
                     child: Text(
                       "매치 기록",
                       style: AppTextStyles.T1Bold15,
                     ),
                   ),
                   ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: controller.flameHistories.length,
-                      itemBuilder: (context, index) {
-                        final history = controller.flameHistories[index];
-                        return MatchRecord(
-                            title: history.histories,
-                            date: history.historyDate,
-                            imgList: history.donationHistoryImages ?? []);
-                      },
-                      ),
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: controller.flameHistories.length,
+                    itemBuilder: (context, index) {
+                      logger.d(index);
+                      if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
+                        logger.d("1. getMoreFlame 호출!");
+                        Future.wait({
+                          controller.getMoreFlameHistory(
+                              index ~/ (PAGINATION_SIZE - 1))
+                        });
+                      }
+                      final history = controller.flameHistories[index];
+                      return MatchRecord(
+                          title: history.histories,
+                          date: history.historyDate,
+                          imgList: history.donationHistoryImages ?? []);
+                    },
+                  ),
                   // 매치기록
                 ],
               ),

@@ -56,7 +56,7 @@ class FlameApi {
 
   ///<h2>5-10-2 API | 상세 - 불타는 매치 상세 - 하단조회</h2>
   ///* pagination
-  static Future<List<MatchHistory>> getFlameDetailBottom(
+  static Future<List<MatchHistory>> getFlameDetailBottomList(
       {required int donationId, bool getMore = false}) async {
     try {
       logger.d("api호출 성공");

@@ -16,11 +16,12 @@ class HomeController extends GetxController {
   ///* 총 데이터 수와 비교하여, 페이지를 더 늘릴수있다면 api 호출, 그렇지 않다면 호출 X
   Future<void> getMoreFlame(int index) async {
     logger.d(
-        "2:  총 페이지수 : ${FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${FlameApi.burningFlame.currentpage + 1}");
+        "2:  총 페이지수 : ${FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
     if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE >=
             FlameApi.burningFlame.currentpage + 1) &&
         !FlameApi.burningFlame.isLast) {
-      FlameApi.burningFlame.currentpage++;
+      FlameApi.burningFlame.currentpage = index;
+
       flameList.addAll(await FlameApi.getBurningFlameList(getMore: true));
     }
   }
