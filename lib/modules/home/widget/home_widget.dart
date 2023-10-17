@@ -52,6 +52,7 @@ class FlameWidget extends StatelessWidget {
   final String usages;
   final int id;
   final bool isHome;
+
   const FlameWidget(
       {super.key,
       required this.flameName,
@@ -68,78 +69,75 @@ class FlameWidget extends StatelessWidget {
         await Get.toNamed(Routes.home + Routes.burning_match,
             arguments: {"donaionId": 1});
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: isHome ? 283.h : 229.h,
-              width: isHome ? 255.w : 255.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(imgDir +
-                      (isHome
-                          ? "iv_home_background_553.png"
-                          : "iv_detail_background_553.png")),
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  UsagesChip(),
-                  SizedBox(
-                    height: 28.h,
-                  ),
-                  isHome
-                      ? Container(
-                          width: 232.w,
-                          height: 57.h,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(
-                                  imgDir + "ic_speech_background_232.png"),
-                            ),
-                          ),
-                          alignment: Alignment.center,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Positioned(
-                                top: 13.h,
-                                child: Text(
-                                  flameTalk,
-                                  style: AppTextStyles.L1Medium12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      : SizedBox.shrink(),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Image.network(height: 122.h, width: 182.w, flameImg)
-                ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: isHome ? 283.h : 229.h,
+            width: isHome ? 255.w : 255.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.r),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(imgDir +
+                    (isHome
+                        ? "iv_home_background_553.png"
+                        : "iv_detail_background_553.png")),
               ),
             ),
-            isHome
-                ? Column(
-                    children: [
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Text(flameName, style: AppTextStyles.T1Bold20)
-                    ],
-                  )
-                : SizedBox.shrink()
-          ],
-        ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 16.h,
+                ),
+                UsagesChip(),
+                SizedBox(
+                  height: 28.h,
+                ),
+                isHome
+                    ? Container(
+                        width: 232.w,
+                        height: 57.h,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(
+                                imgDir + "ic_speech_background_232.png"),
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Positioned(
+                              top: 13.h,
+                              child: Text(
+                                flameTalk,
+                                style: AppTextStyles.L1Medium12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : SizedBox.shrink(),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Image.network(height: 122.h, width: 182.w, flameImg)
+              ],
+            ),
+          ),
+          isHome
+              ? Column(
+                  children: [
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Text(flameName, style: AppTextStyles.T1Bold20)
+                  ],
+                )
+              : SizedBox.shrink()
+        ],
       ),
     );
   }
@@ -187,6 +185,7 @@ class TodayMatchList extends StatelessWidget {
   final List<String> imgList;
   final String backgroundImg;
   final int projectId;
+
   const TodayMatchList(
       {super.key,
       required this.count,
