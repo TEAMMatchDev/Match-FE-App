@@ -12,6 +12,18 @@ import '../../../util/components/global_widget.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../home/widget/home_widget.dart';
 
+///*검색결과 없는 경우 나오는 페이지
+Widget emptyWidget(){
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisSize: MainAxisSize.max,
+    children: [
+      SvgPicture.asset(imgDir + "iv_tmp_empty.svg"),
+      SizedBox(height: 24.h,),
+      Text("검색 결과가 없습니다.",style: AppTextStyles.T1Bold18,)
+    ],
+  );
+}
 ///* [DonateScreen]에서 사용
 class ProjectWidget extends StatelessWidget {
   final TodayProject project;

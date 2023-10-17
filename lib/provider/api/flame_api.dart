@@ -9,7 +9,7 @@ import '../../util/const/style/global_logger.dart';
 import 'util/dio_services.dart';
 
 class FlameApi {
-  ///* flameList pagination 추가 호출 판별 함수
+  ///* flameList pagination 추가 호출 판별 변수
   static Pagination burningFlame = Pagination(isLast: false, totalCnt: 0);
   static Pagination detailFlameBottom = Pagination(isLast: false, totalCnt: 0);
 

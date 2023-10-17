@@ -9,9 +9,11 @@ import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../model/enum/project_type.dart';
 import '../../../provider/api/project_api.dart';
+import '../../../provider/api/util/global_api_field.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
+import '../../../util/const/style/global_logger.dart';
 import '../controller/donate_controller.dart';
 
 class DonateScreen extends GetView<DonateController> {
@@ -99,12 +101,15 @@ class DonateScreen extends GetView<DonateController> {
               ),
               //*4.프로젝트 리스트
               Expanded(
-                child: ListView.builder(
+                child: controller.projectList.isNotEmpty?ListView.builder(
                   shrinkWrap: true,
                   itemCount: controller.projectList.length,
                   itemBuilder: (context, index) {
-                    if (index % 9 == 0 && index != 0) {
-                      controller.getMoreProject(index);
+                    if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
+                      logger.d("1. getMoreFlame 호출!");
+                      Future.wait({
+                        controller.getMoreProject(index ~/ (PAGINATION_SIZE - 1))
+                      });
                     }
                     final project = controller.projectList[index];
                     return Container(
@@ -116,7 +121,7 @@ class DonateScreen extends GetView<DonateController> {
                                 : 0.h),
                         child: ProjectWidget(project: project));
                   },
-                ),
+                ):emptyWidget(),
               ),
             ],
           ),
