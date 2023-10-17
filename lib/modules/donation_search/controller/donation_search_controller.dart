@@ -11,17 +11,20 @@ import 'package:match/util/method/get_storage.dart';
 import '../../../model/enum/search_statu.dart';
 import '../../../model/search/search.dart';
 import '../../../model/today_project/today_project.dart';
+import '../../../provider/api/search_api.dart';
 import '../../../util/const/style/global_logger.dart';
 
 class DonationSearchController extends GetxController {
   //검색 필드 controller
   Rx<TextEditingController> searchTextController = TextEditingController().obs;
-  //최근 검색어 list
-  RxList<RecentSearch> recentSearchList = <RecentSearch>[].obs;
+
 
   //최근 검색어 위젯 활성화 여부
   Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
   RxList<TodayProject> projectList = <TodayProject>[].obs;
+
+  ///* 추천 검색어 리스트
+  RxList<String> recommendSearchList = <String>[].obs;
 
   ///* 아래 함수에서 사용하는 1초를 측정하는 Timer
   Timer? _timer;
@@ -63,8 +66,7 @@ class DonationSearchController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    recentSearchList.value =
-        await GetStorageUtil.getRecentSearches(StorageKey.PROJECT_SEARCH);
     await addTimerListenr();
+    recommendSearchList.assignAll(await SearchApi.getRecommendSearchList());
   }
 }

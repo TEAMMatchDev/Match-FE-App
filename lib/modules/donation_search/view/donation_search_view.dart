@@ -39,6 +39,7 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                 textStatus: controller.searchStatus,
                 suffixOnTap: () async {},
                 onSubmitted: (value) async {
+                  //TODO: add search api
                   // controller.projectList.addAll(
                   // await SearchApi.getSearchResult(content: value));
                 },
@@ -75,8 +76,8 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                recentSearchList(startIdx: 1),
-                                recentSearchList(startIdx: 6),
+                                recentSearchList(startIdx: 1,keywords: controller.recommendSearchList.sublist(0,5)),
+                                recentSearchList(startIdx: 6,keywords: controller.recommendSearchList.sublist(5,10)),
                               ],
                             ),
                           ],
@@ -132,7 +133,7 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
     ));
   }
 
-  Widget recentSearchList({required int startIdx}) {
+  Widget recentSearchList({required int startIdx, required List<String> keywords }) {
     return Wrap(
         direction: Axis.vertical,
         spacing: 12.h,
@@ -140,23 +141,34 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
           return _recentSearchItem(
               priority: startIdx + index,
               //임시 하드코딩
-              keyword: "후원명, 후원사");
+              keyword: keywords[index]);
         }));
   }
 
   Widget _recentSearchItem({required int priority, required String keyword}) {
-    return Row(children: [
-      Text(
-        "${priority}",
-        style: AppTextStyles.T1Bold13.copyWith(color: AppColors.primary500),
+    return GestureDetector(
+      onTap: (){
+        controller.searchTextController.value.text = keyword;
+        //TODO: add search api
+        controller.searchStatus.value = SEARCH_STATUS.SEARCH;
+      },
+      child: SizedBox(
+        width: 120.w,
+        child: Row(children: [
+          Text(
+            "${priority}",
+            style: AppTextStyles.T1Bold13.copyWith(color: AppColors.primary500),
+          ),
+          SizedBox(
+            width: 19.w,
+          ),
+          Text(
+            keyword,
+            style: AppTextStyles.S1SemiBold14,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ]),
       ),
-      SizedBox(
-        width: 19.w,
-      ),
-      Text(
-        keyword,
-        style: AppTextStyles.S1SemiBold14,
-      ),
-    ]);
+    );
   }
 }
