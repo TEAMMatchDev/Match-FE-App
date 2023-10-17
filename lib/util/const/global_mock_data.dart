@@ -1,9 +1,18 @@
 import '../../model/comment/comment.dart';
+import '../../model/flame_detail/flame_detail.dart';
 import '../../model/match_history/match_history.dart';
 import '../../model/match_pay/match_pay.dart';
 import '../../model/project_detail/project_detail.dart';
 import '../../model/project_history.dart/project_history.dart';
 
+var tmpFlameDetail = FlameDetail(
+  imgUrl: "",
+  flameType: "",
+  inherenceName: "",
+  usages: "",
+  amount: 0,
+  sequence: 0,
+);
 var tmpProjectDetail = ProjectDetail(
     projectId: 1,
     thumbNail:

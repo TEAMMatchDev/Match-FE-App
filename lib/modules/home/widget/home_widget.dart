@@ -48,26 +48,28 @@ Widget adIndexItem({required int total, required int currentIdx}) {
 class FlameWidget extends StatelessWidget {
   final String flameName;
   final String flameImg;
-  final String flameTalk;
+  final String? flameTalk;
   final String usages;
-  final int id;
+  final int? id;
   final bool isHome;
 
   const FlameWidget(
       {super.key,
       required this.flameName,
       required this.flameImg,
-      required this.flameTalk,
+      this.flameTalk,
       required this.usages,
-      required this.id,
+      this.id,
       this.isHome = true});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await Get.toNamed(Routes.home + Routes.burning_match,
-            arguments: {"donaionId": 1});
+        isHome
+            ? await Get.toNamed(Routes.home + Routes.burning_match,
+                arguments: {"donaionId": id})
+            : null;
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,18 +108,20 @@ class FlameWidget extends StatelessWidget {
                           ),
                         ),
                         alignment: Alignment.center,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Positioned(
-                              top: 13.h,
-                              child: Text(
-                                flameTalk,
-                                style: AppTextStyles.L1Medium12,
-                              ),
-                            ),
-                          ],
-                        ),
+                        child: flameTalk != null
+                            ? Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Positioned(
+                                    top: 13.h,
+                                    child: Text(
+                                      flameTalk!,
+                                      style: AppTextStyles.L1Medium12,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : null,
                       )
                     : SizedBox.shrink(),
                 SizedBox(
