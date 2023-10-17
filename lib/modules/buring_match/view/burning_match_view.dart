@@ -81,13 +81,13 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
 
                   //매치 기록 제목
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 30.h),
+                    padding: EdgeInsets.symmetric(vertical: 17.h).copyWith(bottom: 0.h),
                     child: Text(
                       "매치 기록",
                       style: AppTextStyles.T1Bold15,
                     ),
                   ),
-                  ListView.separated(
+                  ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: controller.flameHistories.length,
@@ -97,11 +97,6 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                             title: history.histories,
                             date: history.historyDate,
                             imgList: history.donationHistoryImages ?? []);
-                      },
-                      separatorBuilder: (context, index) {
-                        return SizedBox(
-                          height: 12.h,
-                        );
                       },
                       ),
                   // 매치기록
@@ -131,7 +126,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
           width: 70.w,
           child: Text(
             "${value} ${valueMsg ?? ""}",
-            style: AppTextStyles.L1Medium14.copyWith(color: AppColors.grey7),
+            style: AppTextStyles.S1SemiBold14.copyWith(color: AppColors.grey7),
             textAlign: TextAlign.end,
           ),
         ),
