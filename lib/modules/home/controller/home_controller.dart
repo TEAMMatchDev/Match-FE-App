@@ -7,6 +7,7 @@ import 'package:match/provider/api/util/global_api_field.dart';
 
 import '../../../model/flame/flame.dart';
 import '../../../model/today_project/today_project.dart';
+import '../../../util/const/style/global_logger.dart';
 
 class HomeController extends GetxController {
   //임시 변순
@@ -14,12 +15,14 @@ class HomeController extends GetxController {
   Rx<int> adCount = 2.obs;
   Rx<String> tmpText = ProjectType.ANIMAL.stateName.obs;
   RxList<Flame> flameList = <Flame>[].obs;
-  Rx<int> currentPage = 0.obs;
 
   Future<void> getMoreFlame(int index) async {
-    currentPage.value++;
-    if (!(FlameApi.burningFlame.totalPage > currentPage.value) &&
+    logger.d(
+        "2:  총 페이지수 : ${FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${FlameApi.burningFlame.currentpage + 1}");
+    if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE >=
+            FlameApi.burningFlame.currentpage + 1) &&
         !FlameApi.burningFlame.isLast) {
+      FlameApi.burningFlame.currentpage++;
       flameList.addAll(await FlameApi.getBurningFlameList(getMore: true));
     }
   }
@@ -28,6 +31,5 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     flameList.assignAll(await FlameApi.getBurningFlameList());
-    currentPage.value = FlameApi.burningFlame.currentpage;
   }
 }

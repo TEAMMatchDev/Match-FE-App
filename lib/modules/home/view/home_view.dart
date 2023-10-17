@@ -8,6 +8,7 @@ import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_widget.dart';
+import '../../../util/const/style/global_logger.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
 
@@ -113,8 +114,13 @@ class HomeScreen extends GetView<HomeController> {
                           aspectRatio: 255.w / 320.h,
                           viewportFraction: 1),
                       itemBuilder: (context, index, realIndex) {
-                        if (index % PAGINATION_SIZE-1 == 0 && index != 0) {
-                          controller.getMoreFlame(index);
+                        logger.d(index);
+                        if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
+                          logger.d("1. getMoreFlame 호출!");
+                          Future.wait({
+                            controller
+                                .getMoreFlame(index ~/ (PAGINATION_SIZE - 1))
+                          });
                         }
                         //TODO: pagination 처리
                         final flame = controller.flameList[index];
