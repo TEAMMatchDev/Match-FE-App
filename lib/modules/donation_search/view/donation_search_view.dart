@@ -11,9 +11,11 @@ import 'package:match/util/method/get_storage.dart';
 import '../../../model/enum/search_statu.dart';
 import '../../../model/recent_search/recent_search.dart';
 import '../../../provider/api/search_api.dart';
+import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
+import '../../../util/const/style/global_logger.dart';
 import '../../../util/const/style/global_text_styles.dart';
 import '../../donate/widget/donate_widget.dart';
 import '../controller/donation_search_controller.dart';
@@ -39,9 +41,7 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                 textStatus: controller.searchStatus,
                 suffixOnTap: () async {},
                 onSubmitted: (value) async {
-                  //TODO: add search api
-                  // controller.projectList.addAll(
-                  // await SearchApi.getSearchResult(content: value));
+                  await controller.getSearchList(content: value);
                 },
                 onChanged: (value) async {}),
           ),
@@ -76,8 +76,14 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                recentSearchList(startIdx: 1,keywords: controller.recommendSearchList.sublist(0,5)),
-                                recentSearchList(startIdx: 6,keywords: controller.recommendSearchList.sublist(5,10)),
+                                recentSearchList(
+                                    startIdx: 1,
+                                    keywords: controller.recommendSearchList
+                                        .sublist(0, 5)),
+                                recentSearchList(
+                                    startIdx: 6,
+                                    keywords: controller.recommendSearchList
+                                        .sublist(5, 10)),
                               ],
                             ),
                           ],
@@ -88,7 +94,7 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                   ? Padding(
                       padding: EdgeInsets.only(left: 33.w),
                       child: Text(
-                        "총 ${controller.projectList.length}개의 검색결과",
+                        "총 ${controller.totalSearchLength.value}개의 검색결과",
                         style: AppTextStyles.T1Bold13.copyWith(
                             color: AppColors.grey5,
                             fontWeight: FontWeight.w600),
@@ -98,42 +104,48 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
           SizedBox(
             height: 20.h,
           ),
-          // 검색 field 밑의 contents
-          //*4.프로젝트 리스트
-          controller.searchStatus.value == SEARCH_STATUS.SEARCH
-              ? controller.searchStatus.value == SEARCH_STATUS.SEARCH
-                  ? Expanded(
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: 14.h),
-                        itemCount: controller.projectList.length,
-                        itemBuilder: (context, index) {
-                          final project = controller.projectList[index];
-                          return Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20.w),
-                              margin: EdgeInsets.only(
-                                  bottom:
-                                      index == controller.projectList.length - 1
+
+          Expanded(
+            child: // 검색 field 밑의 contents
+                //*4.프로젝트 리스트
+                controller.searchStatus.value == SEARCH_STATUS.SEARCH
+                    ? controller.projectList.isNotEmpty
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: controller.projectList.length,
+                            itemBuilder: (context, index) {
+                              if (index % (PAGINATION_SIZE - 1) == 0 &&
+                                  index != 0) {
+                                logger.d("1. getMoreFlame 호출!");
+                                Future.wait({
+                                  controller.getMoreSearchList(
+                                      content: controller
+                                          .searchTextController.value.text,
+                                      index: index ~/ (PAGINATION_SIZE - 1))
+                                });
+                              }
+                              final project = controller.projectList[index];
+                              return Container(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 20.w,vertical: 8.h).copyWith(top: 0),
+                                  margin: EdgeInsets.only(
+                                      bottom: index ==
+                                              controller.projectList.length - 1
                                           ? 14.h
                                           : 0.h),
-                              child: ProjectWidget(project: project));
-                        },
-                      ),
-                    )
-                  : Center(
-                      child: Text(
-                        "최근 검색 결과가 없습니다",
-                        style: AppTextStyles.T1Bold18,
-                      ),
-                    )
-              : SizedBox.shrink(),
+                                  child: ProjectWidget(project: project));
+                            },
+                          )
+                        : Center(child: emptyWidget())
+                    : const SizedBox.shrink(),
+          )
         ],
       ),
     ));
   }
 
-  Widget recentSearchList({required int startIdx, required List<String> keywords }) {
+  Widget recentSearchList(
+      {required int startIdx, required List<String> keywords}) {
     return Wrap(
         direction: Axis.vertical,
         spacing: 12.h,
@@ -147,10 +159,9 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
 
   Widget _recentSearchItem({required int priority, required String keyword}) {
     return GestureDetector(
-      onTap: (){
+      onTap: () async {
         controller.searchTextController.value.text = keyword;
-        //TODO: add search api
-        controller.searchStatus.value = SEARCH_STATUS.SEARCH;
+        await controller.getSearchList(content: keyword);
       },
       child: SizedBox(
         width: 120.w,

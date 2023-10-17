@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:match/model/enum/project_type.dart';
 import 'package:match/model/project_detail/project_detail.dart';
 import 'package:match/model/project_history.dart/project_history.dart';
+import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/provider/api/util/dio_services.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
 
@@ -15,6 +16,8 @@ class ProjectApi {
   static Pagination projectHistory = Pagination(isLast: false, totalCnt: 0);
 
   ///<h2>3-5 API | 프로젝트 리스트</h2>
+  ///* search탭에서 공통으로 사용
+  ///* [DonateScreen] , [DonationSearchScreen] 에서 사용
   ///* pagination
   static Future<List<TodayProject>> getProjectList({
     ProjectType? type,
@@ -23,7 +26,6 @@ class ProjectApi {
   }) async {
     if (!getMore) {
       project.currentpage = 0;
-
     }
     var queryParameters = {
       "page": project.currentpage,
@@ -32,6 +34,9 @@ class ProjectApi {
     };
     if (type != null) {
       queryParameters['projectKind'] = type.name;
+    }
+    if (content != null) {
+      queryParameters['content'] = content;
     }
     try {
       Response response = await DioServices()
