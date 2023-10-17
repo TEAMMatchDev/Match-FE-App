@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -81,23 +82,36 @@ class SignUpInfoScreen extends GetView<LoginController> {
                   style: AppTextStyles.T1Bold14,
                 ),
 
-                /*DatePickerButton.login(
-                  text: "생년월일",
-                  onTap: () async {
-                    Get.back();
+                CupertinoButton(
+                  child: Text(
+                    '생년월일',
+                    style: AppTextStyles.T1Bold14,
+                  ),
+                  onPressed: () {
+                    print('tab birth btn');
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true, // 하단 시트가 화면을 오버하지 않도록 설정
+                      builder: (context) {
+                        return Container(
+                          height: 150.h,
+                          child: BirthDatePicker(
+                            onDateTimeChanged: (dateTime) {
+                              // 선택한 날짜 처리
+                              // 예: setState(() { selectedDate = dateTime; });
+                            },
+                          ),
+                        );
+                      },
+                    );
                   },
-                ),*/
+                ),
 
-
-                // Container(
-                //   height: getHeightByPercentOfScreen(33.0, context),
-                //   child: CuDatePicker(
-                //     onDateChange: (DateTime selectedDate) {
-                //       // 예시: 선택한 날짜를 문자열로 포맷하여 표시
-                //       final formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
-                //       print('>> Selected Date: $formattedDate');
-                //     },
-                //   ),
+                // BirthDatePicker(
+                //   onDateTimeChanged: (dateTime) {
+                //     // 선택한 날짜 처리
+                //     // 예: setState(() { selectedDate = dateTime; });
+                //   },
                 // ),
 
                 SizedBox(height: 27.h),

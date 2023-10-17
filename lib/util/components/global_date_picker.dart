@@ -8,70 +8,60 @@ import '../const/style/global_text_styles.dart';
 
 import 'package:flutter/cupertino.dart';
 
-class ToggleDatePicker extends StatelessWidget {
-  const ToggleDatePicker({
+class _BuildButton extends StatelessWidget {
+  const _BuildButton({
     Key? key,
-    this.showPicker,
+    required this.showPicker,
   }) : super(key: key);
 
-  final void Function(BuildContext context)? showPicker;
+  final Function(BuildContext context) showPicker;
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      child: Text(
-        'OPEN DATE PICKER',
-        textAlign: TextAlign.center,
-      ),
-      onPressed: () {
-        showPicker?.call(context);
+    return GestureDetector(
+      onTap: () {
+        showPicker(context);
       },
+      child: CupertinoButton(
+        child: Text(
+          '생년월일',
+          style: AppTextStyles.T1Bold14,
+        ),
+        onPressed: () {
+
+        },
+      ),
     );
   }
 }
 
-class HandlePickerButton extends StatelessWidget {
-  const HandlePickerButton({
-    Key? key,
-    this.onPressCancel,
-    this.onPressDone,
-  }) : super(key: key);
 
-  final void Function()? onPressCancel;
-  final void Function()? onPressDone;
+class BirthDatePicker extends StatelessWidget {
+  final void Function(DateTime) onDateTimeChanged;
+  final String ?initDateStr;
+
+  BirthDatePicker({
+    required this.onDateTimeChanged,
+    this.initDateStr,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CupertinoButton(
-          child: Text(
-            'Cancel',
-            style: TextStyle(
-              color: Colors.red,
-            ),
-          ),
-          onPressed: onPressCancel ??
-                  () {
-                Navigator.pop(context);
-              },
-        ),
-        CupertinoButton(
-          child: Text(
-            'Done',
-          ),
-          onPressed: onPressDone ??
-                  () {
-                Navigator.pop(context);
-              },
-        ),
-      ],
+    final initDate =
+    DateFormat('yyyy-MM-dd').parse(initDateStr ?? '2000-01-01');
+    return SizedBox(
+      height: 150.h,
+      child: CupertinoDatePicker(
+        minimumYear: 1900,
+        maximumYear: DateTime.now().year,
+        initialDateTime: initDate,
+        maximumDate: DateTime.now(),
+        onDateTimeChanged: onDateTimeChanged,
+        mode: CupertinoDatePickerMode.date,
+      ),
     );
   }
 }
-
 
 
 double getHeightByPercentOfScreen(double percent,  BuildContext context) {
