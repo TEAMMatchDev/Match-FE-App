@@ -67,7 +67,7 @@ class ProjectApi {
     try {
       Response response =
           await DioServices().to().get("/projects/detail/${projectId}");
-      // logger.d(response.data);
+
       return ProjectDetail.fromJson(response.data[RESULT]);
     } catch (e) {
       logger.e(e.toString());
@@ -77,16 +77,18 @@ class ProjectApi {
 
   ///<h2>3-9 API | 프로젝트 매치 기록 조회</h2>
   ///* pagination
-  static Future<List<ProjectHistory>> getProjectHistoryList({
-    required int projectId,bool getMore = false
-  }) async {
+  static Future<List<ProjectHistory>> getProjectHistoryList(
+      {required int projectId, bool getMore = false}) async {
     try {
       if (!getMore) {
         projectHistory.currentpage = 0;
       }
-      Response response = await DioServices().to().get(
-          "/projects/match/${projectId}",
-          queryParameters: {"page": 0, "size": 10});
+      Response response = await DioServices()
+          .to()
+          .get("/projects/match/${projectId}", queryParameters: {
+        "page": projectHistory.currentpage,
+        "size": PAGINATION_SIZE
+      });
       projectHistory.totalCnt = response.data[RESULT][TOTAL];
       projectHistory.isLast = response.data[RESULT][LAST];
 

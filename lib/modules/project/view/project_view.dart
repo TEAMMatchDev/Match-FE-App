@@ -11,6 +11,7 @@ import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
 
 import '../../../model/enum/search_statu.dart';
+import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
@@ -77,7 +78,7 @@ class ProjectScreen extends GetView<ProjectController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.network(
-                            tmpBackgroundImg2,
+                            controller.projectDetail.value.thumbNail,
                             fit: BoxFit.fitWidth,
                             width: MediaQuery.of(context).size.width,
                             height: 180.h,
@@ -143,8 +144,11 @@ class ProjectScreen extends GetView<ProjectController> {
                 delegate: _SliverAppBarDelegate(
                   TabBar(
                     controller: controller.matchTabBar.controller,
-                    onTap: (index) {
+                    onTap: (index) async{
                       controller.tabIndex.value = index;
+                      if(index ==1 && controller.projectHistories.isEmpty){
+                        await controller.getProjectHistory();
+                      }
                     },
                     labelColor: AppColors.grey9,
                     labelStyle: AppTextStyles.L1Medium14,
@@ -178,6 +182,14 @@ class ProjectScreen extends GetView<ProjectController> {
                   return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
                 },
                 itemBuilder: (context, index) {
+                  if (controller.tabIndex ==1 && index % (PAGINATION_SIZE - 1) == 0 &&
+                      index != 0) {
+                    logger.d("1. getMoreFlame 호출!");
+                    Future.wait({
+                      controller.getMoreProjectHistory(
+                          index: index ~/ (PAGINATION_SIZE - 1))
+                    });
+                  }
                   final imageUrl = controller
                       .projectDetail.value.projectImgList[index].imgUrl;
                   return Image.network(imageUrl);
