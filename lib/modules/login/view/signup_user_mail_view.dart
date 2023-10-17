@@ -31,95 +31,107 @@ class SignUpMailScreen extends GetView<LoginController> {
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
       body: Column(
-        children: [
-          SizedBox(height: 35.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '로그인할 이메일과\n비밀번호를 입력해주세요.',
-                  style: AppTextStyles.T1Bold18,
-                ),
-                SizedBox(height: 30.h),
-                Text(
-                  '이메일',
-                  style: AppTextStyles.T1Bold14,
-                ),
-                SizedBox(height: 10.h),
+          children: <Widget>[
+            Expanded(
+              child: Column(
+                children: [
+                  SizedBox(height: 35.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '로그인할 이메일과\n비밀번호를 입력해주세요.',
+                          style: AppTextStyles.T1Bold18,
+                        ),
+                        SizedBox(height: 30.h),
+                        Text(
+                          '이메일',
+                          style: AppTextStyles.T1Bold14,
+                        ),
+                        SizedBox(height: 10.h),
 
-                Row(
-                  children: [
-                    Expanded(
-                      child: CommonTextField(
-                        textController: controller.idTextController.value,
-                        isSearchScreen: false, //뒤로가기
-                        hasPrefix: false, //검색 아이콘
-                        placeHolder: "이메일을 입력해주세요.",
-                        textStatus: controller.searchStatus,
-                        suffixOnTap: () async {},
-                        onSubmitted: (value) async {},
-                        onChanged: ((value) async {
-                          controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                        }),
-                        isPlain: true,
-                      ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CommonTextField(
+                                textController: controller.idTextController.value,
+                                isSearchScreen: false, //뒤로가기
+                                hasPrefix: false, //검색 아이콘
+                                placeHolder: "이메일을 입력해주세요.",
+                                textStatus: controller.searchStatus,
+                                suffixOnTap: () async {},
+                                onSubmitted: (value) async {},
+                                onChanged: ((value) async {
+                                  controller.searchStatus.value = SEARCH_STATUS.EDIT;
+                                }),
+                                isPlain: true,
+                              ),
+                            ),
+                            SizedBox(width: 10.w),
+                            certinumButton(),
+                          ],
+                        ),
+
+                        SizedBox(height: 20.h),
+                        Text(
+                          '비밀번호',
+                          style: AppTextStyles.T1Bold14,
+                        ),
+                        SizedBox(height: 10.h),
+                        CommonTextField(
+                            textController: controller.pwTextController.value,
+                            isSearchScreen: false, //뒤로가기
+                            hasPrefix: false, //검색 아이콘
+                            placeHolder: "비밀번호를 입력해주세요.",
+                            textStatus: controller.searchStatus,
+                            suffixOnTap: () async {},
+                            onSubmitted: (value) async {},
+                            onChanged: (value) async {},
+                            isPlain: true,
+                        ),
+                        SizedBox(height: 27.h),
+                        Text(
+                          '비밀번호 확인',
+                          style: AppTextStyles.T1Bold14,
+                        ),
+                        SizedBox(height: 10.h),
+                        CommonTextField(
+                          textController: controller.pwConfirmTextController.value,
+                          isSearchScreen: false, //뒤로가기
+                          hasPrefix: false, //검색 아이콘
+                          placeHolder: "비밀번호를 입력해주세요.",
+                          textStatus: controller.searchStatus,
+                          suffixOnTap: () async {},
+                          onSubmitted: (value) async {},
+                          onChanged: (value) async {},
+                          isPlain: true,
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 10.w),
-                    certinumButton(),
-                  ],
-                ),
-
-                SizedBox(height: 20.h),
-                Text(
-                  '비밀번호',
-                  style: AppTextStyles.T1Bold14,
-                ),
-                SizedBox(height: 10.h),
-                CommonTextField(
-                    textController: controller.pwTextController.value,
-                    isSearchScreen: false, //뒤로가기
-                    hasPrefix: false, //검색 아이콘
-                    placeHolder: "비밀번호를 입력해주세요.",
-                    textStatus: controller.searchStatus,
-                    suffixOnTap: () async {},
-                    onSubmitted: (value) async {},
-                    onChanged: (value) async {},
-                    isPlain: true,
-                ),
-                SizedBox(height: 27.h),
-                Text(
-                  '비밀번호 확인',
-                  style: AppTextStyles.T1Bold14,
-                ),
-                SizedBox(height: 10.h),
-                CommonTextField(
-                  textController: controller.pwConfirmTextController.value,
-                  isSearchScreen: false, //뒤로가기
-                  hasPrefix: false, //검색 아이콘
-                  placeHolder: "비밀번호를 입력해주세요.",
-                  textStatus: controller.searchStatus,
-                  suffixOnTap: () async {},
-                  onSubmitted: (value) async {},
-                  onChanged: (value) async {},
-                  isPlain: true,
-                ),
-                SizedBox(height: 150.h),
-                CommonButton.login(
-                  text: "확인",
-                  onTap: () async {
-                    Get.to(SignUpInfoScreen());
-                  },
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
-          )
-        ],
+            SizedBox(height: 8.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: CommonButton.login(
+                text: "확인",
+                onTap: () async {
+                  Get.to(SignUpInfoScreen());
+                },
+              ),
+            ),
+            SizedBox(height: 24.h),
+          ],
       ),
     );
   }
+
 }
+
 
 @override
 Widget certinumButton() {

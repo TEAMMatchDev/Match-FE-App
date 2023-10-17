@@ -46,7 +46,7 @@ class SignUpInfoScreen extends GetView<LoginController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '후원에 필요한\n정보를 입력해주세요.',
+                          '기부에 필요한\n정보를 입력해주세요.',
                           style: AppTextStyles.T1Bold18,
                         ),
                         SizedBox(height: 30.h),
