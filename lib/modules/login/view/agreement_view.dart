@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_statu.dart';
+import 'package:match/modules/login/view/auth_able_view.dart';
 import 'package:match/modules/login/view/signup_user_mail_view.dart';
 import 'package:match/modules/login/widget/checkbox_widget.dart';
 import 'package:match/modules/login/widget/login_widget.dart';
@@ -70,7 +71,7 @@ class AgreementScreen extends GetView<LoginController> {
             child: CommonButton.login(
               text: "확인",
               onTap: () async {
-                Get.back();
+                Get.to(AuthAbleScreen());
               },
             ),
           ),
