@@ -12,7 +12,7 @@ import '../../../util/components/global_widget.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../home/widget/home_widget.dart';
 
-///*[TodayMatchScreen], [DonateScreen]에서 사용
+///* [DonateScreen]에서 사용
 class ProjectWidget extends StatelessWidget {
   final TodayProject project;
   const ProjectWidget({super.key, required this.project});
@@ -25,7 +25,6 @@ class ProjectWidget extends StatelessWidget {
         TodayMatchList(
           count: project.totalDonationCnt,
           imgList: project.userProfileImages,
-          isLike: project.like ? true.obs : false.obs,
           projectId: project.projectId,
         ),
         SizedBox(
@@ -62,8 +61,8 @@ class CircleType extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 50.h,
-          height: 50.h,
+          width: 50.w,
+          height: 50.w,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,

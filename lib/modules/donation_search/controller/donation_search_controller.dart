@@ -10,6 +10,8 @@ import 'package:match/util/method/get_storage.dart';
 
 import '../../../model/enum/search_statu.dart';
 import '../../../model/search/search.dart';
+import '../../../model/today_project/today_project.dart';
+import '../../../util/const/style/global_logger.dart';
 
 class DonationSearchController extends GetxController {
   //검색 필드 controller
@@ -19,6 +21,7 @@ class DonationSearchController extends GetxController {
 
   //최근 검색어 위젯 활성화 여부
   Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
+  RxList<TodayProject> projectList = <TodayProject>[].obs;
 
   ///* 아래 함수에서 사용하는 1초를 측정하는 Timer
   Timer? _timer;
@@ -38,7 +41,7 @@ class DonationSearchController extends GetxController {
         // 입력이 없을 때 타이머 시작
         if (_timer == null) {
           _timer = Timer(Duration(seconds: 1), () {
-            Logger().d('1초가 경과했습니다.');
+            logger.d('1초가 경과했습니다.');
             //TODO: api 호출
             searchStatus.value = SEARCH_STATUS.SEARCH;
           });

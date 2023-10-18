@@ -1,6 +1,9 @@
 abstract class _Paths {
   _Paths._();
 
+  /// 스플래시 화면
+  static const splash = "/splash";
+
   /// 온보딩 화면
   static const onboarding = "/onboarding";
 
@@ -13,14 +16,14 @@ abstract class _Paths {
   /// 홈 화면
   static const home = "/home";
 
-  /// 검색 화면
-  static const search = "/search";
+  // /// 검색 화면
+  // static const search = "/search";
 
   ///불타는 매치 화면
   static const burning_match = "/burning_match";
 
   ///불타는 매치 결제내역 화면
-  static const burning_match_pay = "/burning_match_pay";
+  static const total_pay = "/total_pay";
 
   ///결제내역
   static const pay = "/pay";
@@ -39,10 +42,25 @@ abstract class _Paths {
 
   /// 마이페이지 화면
   static const mypage = "/mypage";
+
+  ///알람 화면
+  static const alarm = "/alarm";
+
+  ///알람 화면
+  static const alarm_detail = "/alarm_detail";
+
+  ///알람 화면
+  static const notice = "/notice";
+
+  ///알람 화면
+  static const notice_detail = "/notice_detail";
 }
 
 abstract class Routes {
   Routes._();
+
+  /// 스플래시 화면
+  static const splash = _Paths.splash;
 
   /// 온보딩 화면
   static const onboarding = _Paths.onboarding;
@@ -56,14 +74,14 @@ abstract class Routes {
   /// 홈 화면
   static const home = _Paths.home;
 
-  /// 검색 화면
-  static const search = _Paths.search;
+  // /// 검색 화면
+  // static const search = _Paths.search;
 
   /// 불타는 매치 화면
   static const burning_match = _Paths.burning_match;
 
   /// 불타는 매치 전체 결제내역 화면
-  static const burning_match_pay = _Paths.burning_match_pay;
+  static const total_pay = _Paths.total_pay;
 
   /// 불타는 매치 결제 상세 화면
   static const pay = _Paths.pay;
@@ -82,4 +100,16 @@ abstract class Routes {
 
   /// 마이페이지 화면
   static const mypage = _Paths.mypage;
+
+  /// 공지사항 화면
+  static const notice = _Paths.notice;
+
+  /// 공지사항 상세화면
+  static const notice_detail = _Paths.notice_detail;
+
+  /// 알람 화면
+  static const alarm = _Paths.alarm;
+
+  /// 알람 상세화면
+  static const alarm_detail = _Paths.alarm_detail;
 }

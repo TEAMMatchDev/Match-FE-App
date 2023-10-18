@@ -1,57 +1,29 @@
 import 'package:get/get.dart';
+import 'package:match/model/enum/project_type.dart';
+import 'package:match/model/project/project.dart';
+import 'package:match/provider/api/project_api.dart';
 
 import '../../../model/today_project/today_project.dart';
 
 class DonateController extends GetxController {
   RxInt selectIdx = 0.obs;
+  Rx<ProjectType?> selectType = null.obs;
   Rx<bool> isRecent = false.obs;
+  Rx<int> startIdx = 0.obs;
+  RxList<TodayProject> projectList = <TodayProject>[].obs;
 
-  RxList<TodayProject> projectList = <TodayProject>[
-    TodayProject(
-        projectId: 2,
-        imgUrl:
-            "https://match-image.s3.ap-northeast-2.amazonaws.com/project/2/61519f9b-4741-4fdc-82ad-fccf3217d6c1.png",
-        title: "TBT 유기견 보호",
-        usages: "The Better Tommorow",
-        kind: "ELDER",
-        like: true,
-        userProfileImages: [
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
-        ],
-        totalDonationCnt: 7),
-    TodayProject(
-        projectId: 1,
-        imgUrl:
-            "https://match-image.s3.ap-northeast-2.amazonaws.com/project/2/61519f9b-4741-4fdc-82ad-fccf3217d6c1.png",
-        title: "TBT 유기견 보호1",
-        usages: "The Better Tommorow",
-        kind: "ELDER",
-        like: true,
-        userProfileImages: [
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
-        ],
-        totalDonationCnt: 8),
-    TodayProject(
-        projectId: 1,
-        imgUrl:
-            "https://match-image.s3.ap-northeast-2.amazonaws.com/project/2/61519f9b-4741-4fdc-82ad-fccf3217d6c1.png",
-        title: "TBT 유기견 보호1",
-        usages: "The Better Tommorow",
-        kind: "ELDER",
-        like: true,
-        userProfileImages: [
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
-        ],
-        totalDonationCnt: 8),
-  ].obs;
+  Future<void> getMoreProject(int index) async {
+    if (!ProjectApi.getProjectListIsLast) {
+      projectList.addAll(await ProjectApi.getProjectList(
+        type: selectType.value,
+        page: startIdx.value,
+      ));
+    }
+  }
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    projectList.assignAll(await ProjectApi.getProjectList());
   }
 }

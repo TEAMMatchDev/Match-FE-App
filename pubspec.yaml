@@ -76,6 +76,7 @@ flutter:
     - asset/image/icon/login/
     - asset/image/icon/
     - asset/image/icon/project/
+    - asset/image/icon/mypage/
     - asset/image/logo/
 
   fonts:

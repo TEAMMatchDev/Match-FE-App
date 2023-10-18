@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:match/util/components/global_modal.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../const/style/global_logger.dart';
 
 class PermissionHandler {
   static Future<void> requestGallery(BuildContext context) async {
@@ -14,7 +15,7 @@ class PermissionHandler {
 
   static Future<bool> checkGalleryPermission() async {
     PermissionStatus status = await Permission.storage.request();
-    Logger().d(status);
+    logger.d(status);
     if (status.isDenied) {
       final result = await Permission.storage.request();
       return false;

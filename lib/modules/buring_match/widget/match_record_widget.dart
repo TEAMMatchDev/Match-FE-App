@@ -27,8 +27,8 @@ class MatchRecord extends StatelessWidget {
       indicatorStyle: IndicatorStyle(
         indicator: Container(
           margin: EdgeInsets.symmetric(vertical: 5.h),
-          height: isChange ? 8.h : 14.h,
-          width: isChange ? 8.h : 14.h,
+          height: isChange ? 8.h : 20.w,
+          width: isChange ? 8.h : 20.w,
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: isChange ? AppColors.grey5 : AppColors.primary500),
@@ -37,41 +37,43 @@ class MatchRecord extends StatelessWidget {
       beforeLineStyle: LineStyle(color: AppColors.grey1, thickness: 2.w),
       // endChild: Padding(
       // padding: EdgeInsets.only(left: 8.w, bottom: 30.h),
-      endChild: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              title,
-              style: AppTextStyles.T1Bold13,
-            ),
-            SizedBox(
-              height: 6.h,
-            ),
-            Text(
-              date,
-              style: AppTextStyles.T1Bold12.copyWith(
-                  fontWeight: FontWeight.w500, color: AppColors.grey6),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Wrap(
-                direction: Axis.horizontal,
-                spacing: 10.w,
-                children: imgList
-                    .map((e) => Container(
-                        height: 60.h,
-                        width: 60.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(tmpBackgroundImg),
-                          ),
-                        )))
-                    .toList())
-          ]),
+      endChild: IntrinsicHeight(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                style: AppTextStyles.T1Bold13,
+              ),
+              SizedBox(
+                height: 6.h,
+              ),
+              Text(
+                date,
+                style: AppTextStyles.T1Bold12.copyWith(
+                    fontWeight: FontWeight.w500, color: AppColors.grey6),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Wrap(
+                  direction: Axis.horizontal,
+                  spacing: 10.w,
+                  children: imgList
+                      .map((e) => Container(
+                          height: 60.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(tmpBackgroundImg),
+                            ),
+                          )))
+                      .toList())
+            ]),
+      ),
       // ),
     );
   }
