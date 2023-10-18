@@ -28,7 +28,7 @@ class _CallBottomSheetState extends State<CallBottomSheet> {
     return CupertinoButton(
       child: Text(
         selectedDate != null
-            ? DateFormat('yyyy-MM-dd').format(selectedDate)
+            ? DateFormat('yyyy.MM.dd').format(selectedDate)
             : '생년월일',
         style: AppTextStyles.T1Bold14,
       ),
@@ -53,7 +53,7 @@ class _CallBottomSheetState extends State<CallBottomSheet> {
                           selectedDate = dateTime;
                         });
                       },
-                      initDateStr: DateFormat('yyyy-MM-dd').format(selectedDate),
+                      initDateStr: DateFormat('yyyy.MM.dd').format(selectedDate),
                     ),
                   ),
                 ],
@@ -79,7 +79,7 @@ class BirthDatePicker extends StatelessWidget { //DatePicker 위젯
 
   @override
   Widget build(BuildContext context) {
-    final initDate = DateFormat('yyyy-MM-dd').parse(initDateStr ?? '2000-01-01');
+    final initDate = DateFormat('yyyy.MM.dd').parse(initDateStr ?? '2000.01.01');
     return SizedBox(
       height: 150.h,
       child: CupertinoDatePicker(

@@ -20,6 +20,7 @@ class AppColors {
   static const Color divider1 = Color(0XFFF2F2F2);
   static const Color primary300 = Color(0XFFFAA18C);
   static const Color primary500 = Color(0XFFD13F1D);
+  static const Color primaryRed = Color(0xFFD15347);
   static const Color secondary500 = Color(0XFF1F2329);
 
   static const Color kakaoBtn = Color(0xFFFBD821);
