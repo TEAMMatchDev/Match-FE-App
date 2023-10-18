@@ -11,8 +11,8 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../util/const/style/global_color.dart';
 import '../controller/main_controller.dart';
 
-class MainScren extends GetView<MainController> {
-  const MainScren({super.key});
+class MainScreen extends GetView<MainController> {
+  const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -27,7 +27,6 @@ class FindPWScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context){
-    Get.put(LoginController());
     return  Scaffold(
       appBar: CommonAppBar.basic("비밀번호 찾기"),
       body: Column(

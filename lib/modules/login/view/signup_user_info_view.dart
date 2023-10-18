@@ -31,7 +31,6 @@ class SignUpInfoScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context){
-    Get.put(LoginController());
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
       body: Column(

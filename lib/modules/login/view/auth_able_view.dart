@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_statu.dart';
+import 'package:match/modules/login/view/login_view.dart';
 import 'package:match/modules/login/view/signup_user_mail_view.dart';
 import 'package:match/modules/login/widget/login_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
@@ -27,7 +28,6 @@ class AuthAbleScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context){
-    Get.put(LoginController());
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
       body: Column(
@@ -106,7 +106,7 @@ class AuthAbleScreen extends GetView<LoginController> {
             child: CommonButton.login(
               text: "확인",
               onTap: () async {
-                Get.back();
+                Get.to(LoginScreen());
               },
             ),
           ),

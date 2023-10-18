@@ -60,7 +60,7 @@ class Pages {
     GetPage(
       title: "유저 메인 화면",
       name: Routes.main,
-      page: () => const MainScren(),
+      page: () => const MainScreen(),
       transition: Transition.noTransition,
       binding: MainBiding(),
       curve: Curves.easeIn,

@@ -5,8 +5,10 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_statu.dart';
 import 'package:match/modules/login/view/find_pw_view.dart';
+import 'package:match/modules/login/view/login_view.dart';
 import 'package:match/modules/login/view/signup_user_mail_view.dart';
 import 'package:match/modules/login/widget/login_widget.dart';
+import 'package:match/modules/main/view/main_view.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -28,7 +30,6 @@ class EmailLoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context){
-    Get.put(LoginController());
     return  Scaffold(
       appBar: CommonAppBar.basic("로그인"),
       body: Column(
@@ -120,7 +121,7 @@ class EmailLoginScreen extends GetView<LoginController> {
               child: CommonButton.login(
                 text: "로그인",
                 onTap: () async {
-                  Get.back();
+                  Get.to(MainScreen());
                 },
               ),
             ),

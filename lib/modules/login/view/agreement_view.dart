@@ -27,7 +27,6 @@ class AgreementScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context){
-    Get.put(LoginController());
     return  Scaffold(
       appBar: CommonAppBar.basic("이용약관"),
       body: Column(
