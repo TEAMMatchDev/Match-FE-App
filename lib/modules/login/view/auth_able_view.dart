@@ -51,46 +51,50 @@ class AuthAbleScreen extends GetView<LoginController> {
                           style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey4)
                       ),
                       SizedBox(height: 30.h),
-                      RichText(
-                        text:
-                        TextSpan(
-                          style: AppTextStyles.T1Bold14, // Default text style for the entire text
-                          children: [
-                            TextSpan(
-                              text: '알림',
-                              style: TextStyle(
-                                color: AppColors.grey8,
-                              ),
+                      Row(
+                        children: [
+                          Container(
+                            width: 24.w,
+                            height: 24.h,
+                            child: SvgPicture.asset(
+                              iconDir + "login/ic_bell_24.svg",
+                              width: 24.w,
                             ),
-                            TextSpan(
-                              text: '후원 진행사항, 이벤트 푸시 알림 수신',
-                              style: TextStyle(
-                                color: AppColors.grey6,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(width: 10.w),
+                          Text(
+                              '알림',
+                              style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8)
+                          ),
+                          SizedBox(width: 10.w),
+                          Text(
+                              '후원 진행사항, 이벤트 푸시 알림 수신',
+                              style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey6)
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 30.h),
-                      RichText(
-                        text:
-                        TextSpan(
-                          style: AppTextStyles.T1Bold14, // Default text style for the entire text
-                          children: [
-                            TextSpan(
-                              text: '사진',
-                              style: TextStyle(
-                                color: AppColors.grey8,
-                              ),
+                      SizedBox(height: 20.h),
+                      Row(
+                        children: [
+                          Container(
+                            width: 24.w,
+                            height: 24.h,
+                            child: SvgPicture.asset(
+                              iconDir + "login/ic_camera_24.svg",
+                              width: 24.w,
                             ),
-                            TextSpan(
-                              text: '프로필 사진 등록',
-                              style: TextStyle(
-                                color: AppColors.grey6,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(width: 10.w),
+                          Text(
+                              '사진',
+                              style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8)
+                          ),
+                          SizedBox(width: 10.w),
+                          Text(
+                              '프로필 사진 등록',
+                              style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey6)
+                          ),
+                        ],
                       ),
                     ],
                   ),
