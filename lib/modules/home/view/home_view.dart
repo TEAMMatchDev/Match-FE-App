@@ -51,30 +51,11 @@ class HomeScreen extends GetView<HomeController> {
                       options: CarouselOptions(
                           autoPlay: true, viewportFraction: 300.w / 50.h),
                       itemBuilder: (context, index, realIndex) {
-                        return Container(
-                            width: 300.w,
-                            height: 50.h,
-                            decoration: BoxDecoration(
-                              //radius 수정
-                              borderRadius: BorderRadius.circular(5.r),
-                              image: DecorationImage(
-                                  fit: BoxFit.fitWidth,
-                                  image: NetworkImage(tmpBackgroundImg),
-                                  colorFilter: ColorFilter.mode(
-                                      //TODO: gradient 적용 detail 수정
-                                      Colors.black.withOpacity(0.1),
-                                      BlendMode.darken)),
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                    bottom: 6.h,
-                                    right: 11.w,
-                                    child: adIndexItem(
-                                        total: controller.adCount.value,
-                                        currentIdx: index + 1))
-                              ],
-                            ));
+                        return BannerWidget(
+                          totalItem: controller.adCount.value,
+                          currentIdx: index + 1,
+                          banner:controller.bannerList[index],
+                        );
                       },
                     ),
                   ),

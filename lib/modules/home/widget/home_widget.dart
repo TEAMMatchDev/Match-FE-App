@@ -8,6 +8,7 @@ import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../model/banner/banners.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../util/components/global_widget.dart';
 
@@ -41,6 +42,45 @@ Widget adIndexItem({required int total, required int currentIdx}) {
       )
     ])),
   );
+}
+
+///<h2> 광고 section widget</h2>
+class BannerWidget extends StatelessWidget {
+  final int totalItem;
+  final int currentIdx;
+  final Banners banner;
+
+  const BannerWidget(
+      {super.key, required this.totalItem, required this.currentIdx, required this.banner});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+
+      },
+      child: Container(
+          width: 300.w,
+          height: 50.h,
+          decoration: BoxDecoration(
+            //radius 수정
+            borderRadius: BorderRadius.circular(5.r),
+            image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                image: NetworkImage(banner.bannerImg),
+                colorFilter: ColorFilter.mode(
+                    //TODO: gradient 적용 detail 수정
+                    Colors.black.withOpacity(0.1),
+                    BlendMode.darken)),
+          ),
+          child: Stack(children: [
+            Positioned(
+                bottom: 6.h,
+                right: 11.w,
+                child: adIndexItem(total: totalItem, currentIdx: currentIdx ))
+          ])),
+    );
+  }
 }
 
 ///*타오로는 불꽃이 위젯
