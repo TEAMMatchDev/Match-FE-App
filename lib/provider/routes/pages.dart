@@ -13,11 +13,11 @@ import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
-import 'package:match/modules/payment/view/payment_view.dart';
+import 'package:match/modules/payment/view/payment_detail_view.dart';
 import 'package:match/modules/project/binding/project_binding.dart';
 import 'package:match/modules/project/view/project_view.dart';
-import 'package:match/modules/login/binding/login_binding.dart';
-import 'package:match/modules/login/view/login_view.dart';
+import 'package:match/modules/signIn/binding/login_binding.dart';
+import 'package:match/modules/signIn/view/login_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
 
 import '../../modules/alarm/binding/alarm_detail_binding.dart';
