@@ -11,7 +11,7 @@ _$BannersImpl _$$BannersImplFromJson(Map<String, dynamic> json) =>
       bannerId: json['bannerId'] as int,
       bannerType: json['bannerType'] as String,
       bannerImg: json['bannerImg'] as String,
-      eventId: json['eventId'] as String?,
+      eventId: json['eventId'] as int?,
       contentsUrl: json['contentsUrl'] as String,
     );
 

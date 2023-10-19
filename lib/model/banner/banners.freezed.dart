@@ -23,7 +23,7 @@ mixin _$Banners {
   int get bannerId => throw _privateConstructorUsedError;
   String get bannerType => throw _privateConstructorUsedError;
   String get bannerImg => throw _privateConstructorUsedError;
-  String? get eventId => throw _privateConstructorUsedError;
+  int? get eventId => throw _privateConstructorUsedError;
   String get contentsUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $BannersCopyWith<$Res> {
       {int bannerId,
       String bannerType,
       String bannerImg,
-      String? eventId,
+      int? eventId,
       String contentsUrl});
 }
 
@@ -79,7 +79,7 @@ class _$BannersCopyWithImpl<$Res, $Val extends Banners>
       eventId: freezed == eventId
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       contentsUrl: null == contentsUrl
           ? _value.contentsUrl
           : contentsUrl // ignore: cast_nullable_to_non_nullable
@@ -99,7 +99,7 @@ abstract class _$$BannersImplCopyWith<$Res> implements $BannersCopyWith<$Res> {
       {int bannerId,
       String bannerType,
       String bannerImg,
-      String? eventId,
+      int? eventId,
       String contentsUrl});
 }
 
@@ -136,7 +136,7 @@ class __$$BannersImplCopyWithImpl<$Res>
       eventId: freezed == eventId
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       contentsUrl: null == contentsUrl
           ? _value.contentsUrl
           : contentsUrl // ignore: cast_nullable_to_non_nullable
@@ -165,7 +165,7 @@ class _$BannersImpl with DiagnosticableTreeMixin implements _Banners {
   @override
   final String bannerImg;
   @override
-  final String? eventId;
+  final int? eventId;
   @override
   final String contentsUrl;
 
@@ -226,7 +226,7 @@ abstract class _Banners implements Banners {
       {required final int bannerId,
       required final String bannerType,
       required final String bannerImg,
-      final String? eventId,
+      final int? eventId,
       required final String contentsUrl}) = _$BannersImpl;
 
   factory _Banners.fromJson(Map<String, dynamic> json) = _$BannersImpl.fromJson;
@@ -238,7 +238,7 @@ abstract class _Banners implements Banners {
   @override
   String get bannerImg;
   @override
-  String? get eventId;
+  int? get eventId;
   @override
   String get contentsUrl;
   @override

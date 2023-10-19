@@ -44,7 +44,7 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                   //*2. 광고 section
                   SizedBox(
-                    width: 300.w,
+                    width: 320.w,
                     height: 60.h,
                     child: CarouselSlider.builder(
                       itemCount: controller.adCount.value,

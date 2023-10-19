@@ -10,8 +10,9 @@ class BannerApi {
   static Future<List<Banners>> getBannerList() async {
     try {
       Response response = await DioServices().to().get("/banners");
+
       return List.generate(response.data[RESULT].length,
-          (index) => Banners.fromJson(response.data[RESULT]));
+          (index) => Banners.fromJson(response.data[RESULT][index]));
     } catch (e) {
       logger.e(e.toString());
       return [];

@@ -10,7 +10,7 @@ class Banners with _$Banners {
     required int bannerId,
     required String bannerType,
     required String bannerImg,
-    String? eventId,
+    int? eventId,
     required String contentsUrl,
   }) = _Banners;
   factory Banners.fromJson(Map<String, dynamic> json) =>

@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:match/model/enum/banner_type.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../model/banner/banners.dart';
 import '../../../provider/routes/routes.dart';
@@ -51,33 +55,55 @@ class BannerWidget extends StatelessWidget {
   final Banners banner;
 
   const BannerWidget(
-      {super.key, required this.totalItem, required this.currentIdx, required this.banner});
+      {super.key,
+      required this.totalItem,
+      required this.currentIdx,
+      required this.banner});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-
+      onTap: () {
+        if (banner.bannerType == BannerType.CONTENTS.name) {
+          if (banner.contentsUrl == null) {
+            Fluttertoast.showToast(msg: "해당 배너는 링크가 없습니다.");
+          } else {
+            if (Platform.isAndroid) {
+              launchUrlString(
+                      mode: LaunchMode.externalApplication, banner.contentsUrl)
+                  .catchError((err) {
+                launchUrlString(
+                    mode: LaunchMode.externalApplication,
+                    'https://www.official-match.kr');
+              });
+            }
+            //IOS
+            else if (Platform.isIOS) {
+              launchUrlString(banner.contentsUrl).catchError((err) {
+                launchUrlString('https://www.official-match.kr');
+              });
+            }
+          }
+        } else {
+          //event일 경우; 해당 버전에서는 해당 데이터및 화면 X
+        }
       },
       child: Container(
-          width: 300.w,
+          width: 310.w,
           height: 50.h,
           decoration: BoxDecoration(
             //radius 수정
             borderRadius: BorderRadius.circular(5.r),
             image: DecorationImage(
-                fit: BoxFit.fitWidth,
-                image: NetworkImage(banner.bannerImg),
-                colorFilter: ColorFilter.mode(
-                    //TODO: gradient 적용 detail 수정
-                    Colors.black.withOpacity(0.1),
-                    BlendMode.darken)),
+              fit: BoxFit.fitWidth,
+              image: NetworkImage(banner.bannerImg),
+            ),
           ),
           child: Stack(children: [
             Positioned(
                 bottom: 6.h,
                 right: 11.w,
-                child: adIndexItem(total: totalItem, currentIdx: currentIdx ))
+                child: adIndexItem(total: totalItem, currentIdx: currentIdx))
           ])),
     );
   }
@@ -177,7 +203,10 @@ class FlameWidget extends StatelessWidget {
                     SizedBox(
                       height: 10.h,
                     ),
-                    Text(flameName, style: AppTextStyles.T1Bold20)
+                    Row(children: [
+                      SizedBox(width:220.w, child: Text( flameName.substring(0,flameName.length-3), style: AppTextStyles.T1Bold20,overflow: TextOverflow.ellipsis,)),
+                      Text("불꽃이", style: AppTextStyles.T1Bold20)
+                    ],)
                   ],
                 )
               : SizedBox.shrink()
