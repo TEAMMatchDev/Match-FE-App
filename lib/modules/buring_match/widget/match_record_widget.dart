@@ -52,15 +52,10 @@ class MatchRecord extends StatelessWidget {
                 SizedBox(
                   height: 6.h,
                 ),
-                GestureDetector(
-                  onTap: (){
-                      Get.to(()=>PictureDetailScreen());
-                  },
-                  child: Text(
-                    date,
-                    style: AppTextStyles.T1Bold12.copyWith(
-                        fontWeight: FontWeight.w500, color: AppColors.grey6),
-                  ),
+                Text(
+                  date,
+                  style: AppTextStyles.T1Bold12.copyWith(
+                      fontWeight: FontWeight.w500, color: AppColors.grey6),
                 ),
                 SizedBox(
                   height: 10.h,
