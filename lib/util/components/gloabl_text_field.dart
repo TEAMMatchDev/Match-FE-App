@@ -22,6 +22,7 @@ class CommonTextField extends StatelessWidget {
   final Future<void> Function(String) onSubmitted;
   final Future<void> Function(String) onChanged;
   final Future<void> Function()? suffixOnTap;
+  final bool isPlain;
 
   const CommonTextField(
       {super.key,
@@ -33,10 +34,14 @@ class CommonTextField extends StatelessWidget {
       this.alwaysSuffix = false,
       required this.onSubmitted,
       required this.onChanged,
-      required this.suffixOnTap});
+      required this.suffixOnTap,
+      this.isPlain = false,
+      });
+
 
   @override
   Widget build(BuildContext context) {
+
     return //1. 뒤로가기 아이콘 + 검색 필드
         Row(
       children: [
@@ -58,8 +63,13 @@ class CommonTextField extends StatelessWidget {
             controller: textController,
             padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
             decoration: BoxDecoration(
-              color: AppColors.searchBackground,
+              color: isPlain ? AppColors.white : AppColors.searchBackground,
               borderRadius: BorderRadius.circular(8.r),
+              border: isPlain
+                  ? (textController.text.isNotEmpty && textController.value.text != null)
+                    ? Border.all(color: AppColors.grey8)
+                    : Border.all(color: AppColors.grey1)
+                  : null,
             ),
             keyboardType: TextInputType.text,
             cursorColor: AppColors.black,

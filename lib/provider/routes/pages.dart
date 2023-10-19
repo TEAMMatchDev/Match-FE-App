@@ -16,8 +16,6 @@ import 'package:match/modules/payment/binding/payment_binding.dart';
 import 'package:match/modules/payment/view/payment_view.dart';
 import 'package:match/modules/project/binding/project_binding.dart';
 import 'package:match/modules/project/view/project_view.dart';
-import 'package:match/modules/splash/binding/splash_binding.dart';
-import 'package:match/modules/splash/view/splash_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
 import 'package:match/modules/login/view/login_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
@@ -51,15 +49,6 @@ class Pages {
       popGesture: false,
     ),
     GetPage(
-      title: "스플래시 화면",
-      name: Routes.splash,
-      page: () => const SplashScreen(),
-      transition: Transition.noTransition,
-      binding: SplashBinding(),
-      curve: Curves.easeIn,
-      popGesture: false,
-    ),
-    GetPage(
       title: "로그인 화면",
       name: Routes.login,
       page: () => const LoginScreen(),
@@ -71,7 +60,7 @@ class Pages {
     GetPage(
       title: "유저 메인 화면",
       name: Routes.main,
-      page: () => const MainScren(),
+      page: () => const MainScreen(),
       transition: Transition.noTransition,
       binding: MainBiding(),
       curve: Curves.easeIn,

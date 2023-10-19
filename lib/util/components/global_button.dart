@@ -11,30 +11,33 @@ class CommonButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final int verticalPadding;
+  final bool isBottom;
   const CommonButton(
-      {super.key,
-      required this.onTap,
-      required this.text,
-      this.textSize = 14,
-      this.backgroundColor = AppColors.white,
-      this.textColor = AppColors.grey9,
-      this.verticalPadding = 17});
+  {super.key,
+  required this.onTap,
+  required this.text,
+  this.textSize = 14,
+  this.backgroundColor = AppColors.white,
+  this.textColor = AppColors.grey9,
+  this.verticalPadding = 17,
+  this.isBottom = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: verticalPadding.h),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: backgroundColor,
-              border: Border.all(color: AppColors.grey1),
-              borderRadius: BorderRadius.circular(10.r)),
-          child: Text(text,
-              style: AppTextStyles.T1Bold14.copyWith(
-                  color: textColor, fontSize: textSize.sp)),
-        ));
+  return GestureDetector(
+  onTap: onTap,
+  child: Container(
+  padding: EdgeInsets.symmetric(vertical: verticalPadding.h),
+  alignment: isBottom ? Alignment.bottomCenter : Alignment.center,
+  decoration: BoxDecoration(
+  color: backgroundColor,
+  border: Border.all(color: AppColors.grey1),
+  borderRadius: BorderRadius.circular(10.r)),
+  child: Text(text,
+  style: AppTextStyles.T1Bold14.copyWith(
+  color: textColor, fontSize: textSize.sp)),
+  ));
   }
 
   // //TODO: 추후 버튼 종류 추가될 경우 해당 주석 해제하여 color 변경
@@ -45,6 +48,23 @@ class CommonButton extends StatelessWidget {
   //       }),
   //       text: text);
   // }
+  factory CommonButton.login(
+  {String text = "로그인",
+  int verticalPadding = 13,
+  int textSize = 16,
+  required Future<void> Function() onTap,
+  bool isBottom = true}) {
+  return CommonButton(
+  text: text,
+  verticalPadding: verticalPadding,
+  onTap: onTap,
+  backgroundColor: AppColors.black,
+  textColor: AppColors.white,
+  textSize: textSize,
+  isBottom: isBottom,
+  );
+  }
+
   factory CommonButton.payment(
       {String text = "결제 방법 변경",
       int verticalPadding = 17,

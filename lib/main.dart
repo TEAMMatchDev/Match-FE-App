@@ -9,15 +9,32 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:logger/logger.dart';
-import 'package:match/modules/splash/binding/splash_binding.dart';
+import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/util/method/dynamic_link.dart';
+
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'provider/routes/pages.dart';
 import 'util/const/style/global_color.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //splash 안없어지게 : preserve / 없어지게 : remove
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.remove(); //preserve(widgetsBinding: widgetsBinding);
+
   await dotenv.load(fileName: ".env");
+/*
+  // 웹 환경에서 카카오 로그인을 정상적으로 완료하려면 runApp() 호출 전 아래 메서드 호출 필요
+  WidgetsFlutterBinding.ensureInitialized();
+  // runApp() 호출 전 Flutter SDK 초기화
+  KakaoSdk.init(
+    kakaoApiKey: dotenv.env['kakaoApiKey'],
+    javaScriptAppKey: dotenv.env['javaScriptAppKey'],
+  );
+*/
   await initService();
   runApp(const MyApp());
 }
@@ -67,8 +84,8 @@ class MyApp extends StatelessWidget {
               GlobalMaterialLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate
             ],
-            initialRoute: "/splash",
-            initialBinding: SplashBinding(),
+            initialRoute: "/onboarding",
+            initialBinding: OnboardingBiding(),
             smartManagement: SmartManagement.full,
             navigatorKey: Get.key,
           );
