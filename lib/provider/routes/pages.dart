@@ -21,6 +21,8 @@ import 'package:match/modules/project/view/project_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
 import 'package:match/modules/login/view/login_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
+import 'package:match/modules/user_phone/binding/user_phone_binding.dart';
+import 'package:match/modules/user_phone/view/user_phone_view.dart';
 
 import '../../modules/alarm/binding/alarm_detail_binding.dart';
 import '../../modules/alarm/view/alarm_detail_view.dart';
@@ -145,9 +147,18 @@ class Pages {
     GetPage(
       title: "닉네임 화면",
       name: Routes.nickname,
-      page: () => const NicknameEditScreen(),
+      page: () => NicknameEditScreen(),
       transition: Transition.noTransition,
       binding: MypageBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "핸드폰 번호 변경화면",
+      name: Routes.phone,
+      page: () => const UserPhoneScreen(),
+      transition: Transition.noTransition,
+      binding: UserPhoneBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

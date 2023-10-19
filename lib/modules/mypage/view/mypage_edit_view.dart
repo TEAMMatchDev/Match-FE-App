@@ -73,7 +73,9 @@ class MypageEditScreen extends StatelessWidget {
                 title: "휴대폰번호",
                 value: AuthService.to.myProfile.value.phone,
                 icon: "phone_edit",
-                onTap: () async{},
+                onTap: () async{
+                  Get.toNamed(Routes.phone);
+                },
               ),
             ],
           ),

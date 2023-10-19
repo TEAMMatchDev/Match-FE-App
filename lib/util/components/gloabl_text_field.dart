@@ -194,4 +194,16 @@ class CommonInputField extends StatelessWidget {
         onChanged: (value) async {},
         autoFocus: true);
   }
+
+  factory CommonInputField.phone({
+    required TextEditingController textController,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "변경할 휴대폰 번호를 입력",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: (value) async {},
+        autoFocus: false);
+  }
 }

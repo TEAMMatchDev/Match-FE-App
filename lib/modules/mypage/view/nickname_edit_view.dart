@@ -6,8 +6,13 @@ import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 
-class NicknameEditScreen extends GetView<NickNameController> {
-  const NicknameEditScreen({super.key});
+import '../../../provider/service/auth_service.dart';
+
+class NicknameEditScreen extends StatelessWidget {
+  TextEditingController nicknameController =
+      TextEditingController(text: AuthService.to.myProfile.value.name);
+
+  NicknameEditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +23,14 @@ class NicknameEditScreen extends GetView<NickNameController> {
           Expanded(
             child: Center(
               child: CommonInputField.nickName(
-                textController: controller.nicknameController.value,
+                textController: nicknameController,
               ),
             ),
           ),
           CommonButton.edit(
             onTap: () async {
               await MypageApi.setNickname(
-                  nickName: controller.nicknameController.value.text);
+                  nickName: nicknameController.text);
             },
           )
         ],

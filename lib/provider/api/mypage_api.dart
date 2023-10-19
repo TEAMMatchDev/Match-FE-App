@@ -18,16 +18,33 @@ class MypageApi {
     }
   }
 
-  ///<h2>6-2API | 프로필 편집 조회</h2>
+  ///<h2>6-2API | 닉네임 변경 </h2>
   static Future<bool> setNickname({required String nickName}) async {
     try {
       Response response = await DioServices()
           .to()
-          .patch("/users/profile", data: {"name": nickName},options: Options(contentType: 'multipart/form-data'));
+          .patch("/users/profile", data: {"name": nickName},
+          options: Options(contentType: 'multipart/form-data'));
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
       return false;
     }
   }
-}
+
+  ///<h2> 2-8 2API |  핸드폰 번호 변경 </h2>
+  static Future<bool> setPhone(
+      {required String oldPhone, required String newPhone,}) async {
+    try {
+      Response response = await DioServices()
+          .to()
+          .patch(
+          "/users/phone", data: {"oldPhone": oldPhone,"newPhone": newPhone});
+      return response.data[SUCCESS];
+      } catch (e)
+      {
+        logger.e(e.toString());
+        return false;
+      }
+    }
+  }

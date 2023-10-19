@@ -45,16 +45,20 @@ abstract class _Paths {
 
   /// 닉네임 화면
   static const nickname = "/nickname";
+
+  // 핸드폰 변경화면
+  static const phone = "/phone";
+
   ///알람 화면
   static const alarm = "/alarm";
 
-  ///알람 화면
+  ///알람 상세 화면
   static const alarm_detail = "/alarm_detail";
 
-  ///알람 화면
+  ///공지사항 화면
   static const notice = "/notice";
 
-  ///알람 화면
+  ///공지사항 상세 화면
   static const notice_detail = "/notice_detail";
 }
 
@@ -105,6 +109,10 @@ abstract class Routes {
 
   /// 닉네임 화면
   static const nickname = _Paths.nickname;
+
+  /// 핸드폰 변경화면
+  static const phone = _Paths.phone;
+
   /// 공지사항 화면
   static const notice = _Paths.notice;
 
