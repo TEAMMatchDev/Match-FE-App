@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/social_type.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/routes/routes.dart';
+import '../../../provider/service/auth_service.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
@@ -36,7 +38,7 @@ class MypageScreen extends GetView<MypageController> {
                 ),
                 Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                   Text(
-                    "박레이님",
+                    "${AuthService.to.myProfile.value.name}님",
                     style: AppTextStyles.T1Bold18,
                   ),
                   SizedBox(
@@ -62,11 +64,15 @@ class MypageScreen extends GetView<MypageController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SvgPicture.asset(iconDir + "login/ic_kakao_19.svg"),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      Text("abcdefg@abcdefg",
+                      AuthService.to.myProfile.value.socialType !=
+                              SocialType.NORMAL.name
+                          ? Padding(
+                              padding: EdgeInsets.only(right: 5.w),
+                              child: SvgPicture.asset(
+                                  "${iconDir}login/ic_${socialTypeToIcon[AuthService.to.myProfile.value.socialType]}.svg"),
+                            )
+                          : const SizedBox.shrink(),
+                      Text(AuthService.to.myProfile.value.email,
                           style: AppTextStyles.S1SemiBold14.copyWith(
                             color: AppColors.grey6,
                           ))
@@ -114,6 +120,7 @@ class MypageListTile extends StatelessWidget {
   final String title;
   final String icon;
   final bool isLast;
+
   const MypageListTile({
     super.key,
     this.onTap,

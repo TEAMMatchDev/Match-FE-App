@@ -2,6 +2,7 @@ import '../../model/comment/comment.dart';
 import '../../model/flame_detail/flame_detail.dart';
 import '../../model/match_history/match_history.dart';
 import '../../model/match_pay/match_pay.dart';
+import '../../model/profile/profile.dart';
 import '../../model/project_detail/project_detail.dart';
 import '../../model/project_history.dart/project_history.dart';
 
@@ -92,3 +93,10 @@ var tmpMatchPay = MatchPay(
     amount: 3000,
     regularPayId: 4,
     payDate: 18);
+var tmpProfile  = Profile(
+    profileImgUrl: "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
+    name: "임현우",
+    socialType: "NORMAL",
+    email: "gusdn8926@naver.com",
+    phone: "01049177672"
+);
