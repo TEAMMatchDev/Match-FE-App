@@ -22,10 +22,7 @@ class OnboardingScreen extends GetView<OnboardingController> {
       body: Center(
         /// splash~login -> main~후원 디테일 작업 영역 분리를 위해
         /// 라우팅 설정
-        child: SizedBox(
-
-            child: OnboardingWidget(),
-          )
+        child: OnboardingWidget(),
       ),
     );
   }

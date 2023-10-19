@@ -56,13 +56,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
         },
         child: Text(
           '건너뛰기',
-          style: TextStyle(
-            color: AppColors.grey6, // 색상 설정
-            fontSize: 13.sp, // 폰트 크기 설정
-            fontWeight: FontWeight.w500, // 폰트 굵기 설정
-            decoration: TextDecoration.underline, // 밑줄 설정
-            fontFamily: 'Apple SD Gothic Neo', // 폰트 설정
-          ),
+          style: AppTextStyles.T1Bold13.copyWith(color: AppColors.grey6, decoration: TextDecoration.underline),
           textAlign: TextAlign.center, // 중앙 정렬 설정
         ),
       ),
@@ -98,9 +92,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
                   width: 225.w, // Set your desired width
                   child: Text(
                     description,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                    ),
+                    style: AppTextStyles.T1Bold16,
                     textAlign: TextAlign.center, // 중앙 정렬 설정
                   ),
                 ),
@@ -168,12 +160,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
         child: Center(
           child: Text(
             '시작하기',
-            style: TextStyle(
-              color: AppColors.white, // 색상 설정
-              fontSize: 16.sp, // 폰트 크기 설정
-              fontWeight: FontWeight.w700, // 폰트 굵기 설정
-              fontFamily: 'Apple SD Gothic Neo', // 폰트 설정
-            ),
+            style: AppTextStyles.T1Bold16.copyWith(color: AppColors.white),
             textAlign: TextAlign.center, // 중앙 정렬 설정
           ),
           ),

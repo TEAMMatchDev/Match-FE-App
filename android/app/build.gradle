@@ -23,7 +23,12 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+
+//앱키
 def kakaoApiKey = localProperties.getProperty('kakaoApiKey')
+def naverClientId = localProperties.getProperty('naverClientId')
+def naverClientSecret = localProperties.getProperty('naverClientSecret')
+def naverClientName = localProperties.getProperty('naverClientName')
 
 android {
     namespace "com.dev.match"
