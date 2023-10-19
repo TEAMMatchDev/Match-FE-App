@@ -11,6 +11,8 @@ import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
 import '../controller/mypage_controller.dart';
+import '../widget/mypage_widget.dart';
+import 'mypage_edit_view.dart';
 
 class MypageScreen extends GetView<MypageController> {
   const MypageScreen({super.key});
@@ -44,39 +46,28 @@ class MypageScreen extends GetView<MypageController> {
                   SizedBox(
                     width: 5.w,
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.grey6),
-                      borderRadius: BorderRadius.circular(7.r),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(MypageEditScreen());
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.grey6),
+                        borderRadius: BorderRadius.circular(7.r),
+                      ),
+                      child: Text("회원 정보 수정",
+                          style: AppTextStyles.L1Medium10.copyWith(
+                            color: AppColors.grey6,
+                          )),
                     ),
-                    child: Text("회원 정보 수정",
-                        style: AppTextStyles.L1Medium10.copyWith(
-                          color: AppColors.grey6,
-                        )),
                   )
                 ]),
                 SizedBox(
                   height: 9.h,
                 ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      AuthService.to.myProfile.value.socialType !=
-                              SocialType.NORMAL.name
-                          ? Padding(
-                              padding: EdgeInsets.only(right: 5.w),
-                              child: SvgPicture.asset(
-                                  "${iconDir}login/ic_${socialTypeToIcon[AuthService.to.myProfile.value.socialType]}.svg"),
-                            )
-                          : const SizedBox.shrink(),
-                      Text(AuthService.to.myProfile.value.email,
-                          style: AppTextStyles.S1SemiBold14.copyWith(
-                            color: AppColors.grey6,
-                          ))
-                    ]),
+                SocialTypeEmailWidget(),
                 SizedBox(
                   height: 23.h,
                 ),
@@ -118,14 +109,14 @@ class MypageScreen extends GetView<MypageController> {
 class MypageListTile extends StatelessWidget {
   final Future<void> Function()? onTap;
   final String title;
-  final String icon;
+  final String? icon;
   final bool isLast;
 
   const MypageListTile({
     super.key,
     this.onTap,
     required this.title,
-    required this.icon,
+    this.icon,
     this.isLast = false,
   });
 
@@ -144,10 +135,10 @@ class MypageListTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SvgPicture.asset(
-              iconDir + "mypage/" + "ic_${icon}_18.svg",
+            icon != null ?SvgPicture.asset(
+              "${iconDir}mypage/ic_${icon}_18.svg",
               width: 18.w,
-            ),
+            ):SizedBox.shrink(),
             SizedBox(
               width: 14.w,
             ),
