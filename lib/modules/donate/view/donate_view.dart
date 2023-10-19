@@ -46,7 +46,7 @@ class DonateScreen extends GetView<DonateController> {
                       child: SvgPicture.asset(
                         iconDir + "ic_search_16.svg",
                         color: AppColors.grey9,
-                        height: 20.h,
+                        height: 20.w,
                       ),
                     ),
                     SizedBox(

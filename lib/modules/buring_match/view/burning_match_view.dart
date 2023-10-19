@@ -51,7 +51,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                 ],
               ),
             ),
-            Divider(
+            const Divider(
               thickness: 1,
               color: AppColors.divider1,
             ),
