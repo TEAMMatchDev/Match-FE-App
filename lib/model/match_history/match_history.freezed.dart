@@ -25,7 +25,7 @@ mixin _$MatchHistory {
   String get histories => throw _privateConstructorUsedError;
   String get historyDate => throw _privateConstructorUsedError;
   String? get flameImage => throw _privateConstructorUsedError;
-  List<String> get donationHistoryImages => throw _privateConstructorUsedError;
+  List<String>? get donationHistoryImages => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +45,7 @@ abstract class $MatchHistoryCopyWith<$Res> {
       String histories,
       String historyDate,
       String? flameImage,
-      List<String> donationHistoryImages});
+      List<String>? donationHistoryImages});
 }
 
 /// @nodoc
@@ -66,7 +66,7 @@ class _$MatchHistoryCopyWithImpl<$Res, $Val extends MatchHistory>
     Object? histories = null,
     Object? historyDate = null,
     Object? flameImage = freezed,
-    Object? donationHistoryImages = null,
+    Object? donationHistoryImages = freezed,
   }) {
     return _then(_value.copyWith(
       historyId: null == historyId
@@ -89,10 +89,10 @@ class _$MatchHistoryCopyWithImpl<$Res, $Val extends MatchHistory>
           ? _value.flameImage
           : flameImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      donationHistoryImages: null == donationHistoryImages
+      donationHistoryImages: freezed == donationHistoryImages
           ? _value.donationHistoryImages
           : donationHistoryImages // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
     ) as $Val);
   }
 }
@@ -111,7 +111,7 @@ abstract class _$$_MatchHistoryCopyWith<$Res>
       String histories,
       String historyDate,
       String? flameImage,
-      List<String> donationHistoryImages});
+      List<String>? donationHistoryImages});
 }
 
 /// @nodoc
@@ -130,7 +130,7 @@ class __$$_MatchHistoryCopyWithImpl<$Res>
     Object? histories = null,
     Object? historyDate = null,
     Object? flameImage = freezed,
-    Object? donationHistoryImages = null,
+    Object? donationHistoryImages = freezed,
   }) {
     return _then(_$_MatchHistory(
       historyId: null == historyId
@@ -153,10 +153,10 @@ class __$$_MatchHistoryCopyWithImpl<$Res>
           ? _value.flameImage
           : flameImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      donationHistoryImages: null == donationHistoryImages
+      donationHistoryImages: freezed == donationHistoryImages
           ? _value._donationHistoryImages
           : donationHistoryImages // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
     ));
   }
 }
@@ -170,7 +170,7 @@ class _$_MatchHistory with DiagnosticableTreeMixin implements _MatchHistory {
       required this.histories,
       required this.historyDate,
       this.flameImage,
-      required final List<String> donationHistoryImages})
+      final List<String>? donationHistoryImages})
       : _donationHistoryImages = donationHistoryImages;
 
   factory _$_MatchHistory.fromJson(Map<String, dynamic> json) =>
@@ -186,13 +186,15 @@ class _$_MatchHistory with DiagnosticableTreeMixin implements _MatchHistory {
   final String historyDate;
   @override
   final String? flameImage;
-  final List<String> _donationHistoryImages;
+  final List<String>? _donationHistoryImages;
   @override
-  List<String> get donationHistoryImages {
+  List<String>? get donationHistoryImages {
+    final value = _donationHistoryImages;
+    if (value == null) return null;
     if (_donationHistoryImages is EqualUnmodifiableListView)
       return _donationHistoryImages;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_donationHistoryImages);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -265,7 +267,7 @@ abstract class _MatchHistory implements MatchHistory {
       required final String histories,
       required final String historyDate,
       final String? flameImage,
-      required final List<String> donationHistoryImages}) = _$_MatchHistory;
+      final List<String>? donationHistoryImages}) = _$_MatchHistory;
 
   factory _MatchHistory.fromJson(Map<String, dynamic> json) =
       _$_MatchHistory.fromJson;
@@ -281,7 +283,7 @@ abstract class _MatchHistory implements MatchHistory {
   @override
   String? get flameImage;
   @override
-  List<String> get donationHistoryImages;
+  List<String>? get donationHistoryImages;
   @override
   @JsonKey(ignore: true)
   _$$_MatchHistoryCopyWith<_$_MatchHistory> get copyWith =>

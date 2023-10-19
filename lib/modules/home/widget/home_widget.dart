@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:match/model/enum/banner_type.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../../model/banner/banners.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../util/components/global_widget.dart';
 
@@ -43,103 +48,169 @@ Widget adIndexItem({required int total, required int currentIdx}) {
   );
 }
 
+///<h2> 광고 section widget</h2>
+class BannerWidget extends StatelessWidget {
+  final int totalItem;
+  final int currentIdx;
+  final Banners banner;
+
+  const BannerWidget(
+      {super.key,
+      required this.totalItem,
+      required this.currentIdx,
+      required this.banner});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        if (banner.bannerType == BannerType.CONTENTS.name) {
+          if (banner.contentsUrl == null) {
+            Fluttertoast.showToast(msg: "해당 배너는 링크가 없습니다.");
+          } else {
+            if (Platform.isAndroid) {
+              launchUrlString(
+                      mode: LaunchMode.externalApplication, banner.contentsUrl)
+                  .catchError((err) {
+                launchUrlString(
+                    mode: LaunchMode.externalApplication,
+                    'https://www.official-match.kr');
+              });
+            }
+            //IOS
+            else if (Platform.isIOS) {
+              launchUrlString(banner.contentsUrl).catchError((err) {
+                launchUrlString('https://www.official-match.kr');
+              });
+            }
+          }
+        } else {
+          //event일 경우; 해당 버전에서는 해당 데이터및 화면 X
+        }
+      },
+      child: Container(
+          width: 310.w,
+          height: 50.h,
+          decoration: BoxDecoration(
+            //radius 수정
+            borderRadius: BorderRadius.circular(5.r),
+            image: DecorationImage(
+              fit: BoxFit.fitWidth,
+              image: NetworkImage(banner.bannerImg),
+            ),
+          ),
+          child: Stack(children: [
+            Positioned(
+                bottom: 6.h,
+                right: 11.w,
+                child: adIndexItem(total: totalItem, currentIdx: currentIdx))
+          ])),
+    );
+  }
+}
+
 ///*타오로는 불꽃이 위젯
 ///[HomeScreen], [BurningMathScreen]에서 사용
 class FlameWidget extends StatelessWidget {
   final String flameName;
   final String flameImg;
-  final String flameTalk;
+  final String? flameTalk;
   final String usages;
-  final int id;
+  final int? id;
   final bool isHome;
+
   const FlameWidget(
       {super.key,
       required this.flameName,
       required this.flameImg,
-      required this.flameTalk,
+      this.flameTalk,
       required this.usages,
-      required this.id,
+      this.id,
       this.isHome = true});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await Get.toNamed(Routes.home + Routes.burning_match,
-            arguments: {"donaionId": 1});
+        isHome
+            ? await Get.toNamed(Routes.home + Routes.burning_match,
+                arguments: {"donaionId": id})
+            : null;
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              height: isHome ? 283.h : 229.h,
-              width: isHome ? 255.w : 255.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(imgDir +
-                      (isHome
-                          ? "iv_home_background_553.png"
-                          : "iv_detail_background_553.png")),
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  UsagesChip(),
-                  SizedBox(
-                    height: 28.h,
-                  ),
-                  isHome
-                      ? Container(
-                          width: 232.w,
-                          height: 57.h,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(
-                                  imgDir + "ic_speech_background_232.png"),
-                            ),
-                          ),
-                          alignment: Alignment.center,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Positioned(
-                                top: 13.h,
-                                child: Text(
-                                  flameTalk,
-                                  style: AppTextStyles.L1Medium12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      : SizedBox.shrink(),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Image.network(height: 122.h, width: 182.w, flameImg)
-                ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: isHome ? 283.h : 229.h,
+            width: isHome ? 255.w : 255.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.r),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(imgDir +
+                    (isHome
+                        ? "iv_home_background_553.png"
+                        : "iv_detail_background_553.png")),
               ),
             ),
-            isHome
-                ? Column(
-                    children: [
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Text(flameName, style: AppTextStyles.T1Bold20)
-                    ],
-                  )
-                : SizedBox.shrink()
-          ],
-        ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 16.h,
+                ),
+                UsagesChip(),
+                SizedBox(
+                  height: 28.h,
+                ),
+                isHome
+                    ? Container(
+                        width: 232.w,
+                        height: 57.h,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage(
+                                imgDir + "ic_speech_background_232.png"),
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        child: flameTalk != null
+                            ? Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Positioned(
+                                    top: 13.h,
+                                    child: Text(
+                                      flameTalk!,
+                                      style: AppTextStyles.L1Medium12,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : null,
+                      )
+                    : SizedBox.shrink(),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Image.network(height: 122.h, width: 182.w, flameImg)
+              ],
+            ),
+          ),
+          isHome
+              ? Column(
+                  children: [
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Row(children: [
+                      SizedBox(width:220.w, child: Text( flameName.substring(0,flameName.length-3), style: AppTextStyles.T1Bold20,overflow: TextOverflow.ellipsis,)),
+                      Text("불꽃이", style: AppTextStyles.T1Bold20)
+                    ],)
+                  ],
+                )
+              : SizedBox.shrink()
+        ],
       ),
     );
   }
@@ -187,6 +258,7 @@ class TodayMatchList extends StatelessWidget {
   final List<String> imgList;
   final String backgroundImg;
   final int projectId;
+
   const TodayMatchList(
       {super.key,
       required this.count,

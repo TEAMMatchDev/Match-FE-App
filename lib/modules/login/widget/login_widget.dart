@@ -70,13 +70,12 @@ class _LoginState extends State<LoginWidget> {
       final profileInfo = json.decode(response.body);
       print(profileInfo.toString());
 
-      print('>> accessToken: '+token.accessToken);
+      print('>> accessToken: ' + token.accessToken);
 
       setState(() {
         _loginPlatform = LoginPlatform.kakao;
       });
       Get.toNamed(Routes.main);
-
     } catch (error) {
       print('카카오톡으로 로그인 실패 $error');
     }
@@ -122,7 +121,6 @@ class _LoginState extends State<LoginWidget> {
     });
   }
 
-
   Widget _loginButton(String path, VoidCallback onTap) {
     return Card(
       elevation: 5.0,
@@ -141,6 +139,7 @@ class _LoginState extends State<LoginWidget> {
       ),
     );
   }
+
   Widget _logoutButton() {
     return ElevatedButton(
       onPressed: signOut,
@@ -156,47 +155,50 @@ class _LoginState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center( // Center the Column
+      body: Center(
+        // Center the Column
         child: _loginPlatform != LoginPlatform.none
             ? _logoutButton()
             : Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Center the children vertically
-          children: [
-            SizedBox(
-              height: 150.h,
-            ),
-            Image.asset(
-              imgDir + "logo/iv_home_logo.png",
-              width: 120.w,
-            ),
-            SizedBox(
-              height: 150.h,
-            ),
-            kakaoLogin(),
-            SizedBox(
-              height: 12.h,
-            ),
-            naverLogin(signInWithNaver),
-            SizedBox(
-              height: 12.h,
-            ),
-            appleLogin(),
-            SizedBox(
-              height: 30.h,
-            ),
-            mailLogin(),],
-        ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                // Center the children vertically
+                children: [
+                  SizedBox(
+                    height: 150.h,
+                  ),
+                  Image.asset(
+                    imgDir + "logo/iv_home_logo.png",
+                    width: 120.w,
+                  ),
+                  SizedBox(
+                    height: 150.h,
+                  ),
+                  kakaoLogin(),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  naverLogin(signInWithNaver),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  appleLogin(),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  mailLogin(),
+                ],
+              ),
       ),
     );
   }
-
 
   @override
   Widget kakaoLogin() {
     return GestureDetector(
       onTap: () async {
         try {
-          if (await isKakaoTalkInstalled()) { /// 카카오톡이 설치 되어있는 경우
+          if (await isKakaoTalkInstalled()) {
+            /// 카카오톡이 설치 되어있는 경우
             try {
               await UserApi.instance.loginWithKakaoTalk();
               print('카카오톡으로 로그인 성공');
@@ -220,8 +222,8 @@ class _LoginState extends State<LoginWidget> {
                 print('카카오계정으로 로그인 실패 $error');
               }
             }
-          }
-          else { /// 카카오톡 미설치 경우
+          } else {
+            /// 카카오톡 미설치 경우
             try {
               await UserApi.instance.loginWithKakaoAccount();
               print('카카오계정으로 로그인 성공');
@@ -255,7 +257,8 @@ class _LoginState extends State<LoginWidget> {
             SizedBox(width: 80.w),
             Text(
               '카카오 로그인',
-              style: AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600),
+              style:
+                  AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
           ],
@@ -263,7 +266,6 @@ class _LoginState extends State<LoginWidget> {
       ),
     );
   }
-
 
   @override
   Widget naverLogin(VoidCallback onTap) {
@@ -291,7 +293,8 @@ class _LoginState extends State<LoginWidget> {
             SizedBox(width: 80.w),
             Text(
               '네이버 로그인',
-              style: AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
+              style: AppTextStyles.T1Bold14.copyWith(
+                  fontWeight: FontWeight.w600, color: AppColors.white),
               textAlign: TextAlign.center,
             ),
           ],
@@ -316,12 +319,16 @@ class _LoginState extends State<LoginWidget> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(width: 24.w), // Add some spacing between the icon and text
-            SvgPicture.asset(iconDir + "login/ic_apple_20.svg"), // Include your SVG here
-            SizedBox(width: 80.w), // Add some spacing between the icon and text
+            SizedBox(width: 24.w),
+            // Add some spacing between the icon and text
+            SvgPicture.asset(iconDir + "login/ic_apple_20.svg"),
+            // Include your SVG here
+            SizedBox(width: 80.w),
+            // Add some spacing between the icon and text
             Text(
               '애플 로그인',
-              style: AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600, color: AppColors.white),
+              style: AppTextStyles.T1Bold14.copyWith(
+                  fontWeight: FontWeight.w600, color: AppColors.white),
               textAlign: TextAlign.center,
             ),
           ],
@@ -333,7 +340,9 @@ class _LoginState extends State<LoginWidget> {
   @override
   Widget mailLogin() {
     return GestureDetector(
-      onTap: () {
+      onTap: () async{
+        // 홈-후원처 개발을 위한 임시 라우팅
+        // await Get.offAllNamed(Routes.main);
         Get.to(EmailLoginScreen());
       },
       child: Container(
@@ -345,12 +354,13 @@ class _LoginState extends State<LoginWidget> {
               children: [
                 TextSpan(
                   text: '이미 계정이 있나요? ',
-                  style: AppTextStyles.T1Bold12.copyWith(fontWeight: FontWeight.w500, color: AppColors.grey4),
+                  style: AppTextStyles.T1Bold12.copyWith(
+                      fontWeight: FontWeight.w500, color: AppColors.grey4),
                 ),
                 TextSpan(
                     text: '이메일 로그인',
-                    style: AppTextStyles.T1Bold12.copyWith(color: Colors.black)
-                ),
+                    style:
+                        AppTextStyles.T1Bold12.copyWith(color: Colors.black)),
               ],
             ),
           ),
@@ -358,6 +368,4 @@ class _LoginState extends State<LoginWidget> {
       ),
     );
   }
-
-
 }

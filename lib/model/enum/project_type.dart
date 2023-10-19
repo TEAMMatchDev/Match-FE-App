@@ -19,6 +19,7 @@ Map<String, ProjectType> projectTypeMap = {
   'CHILDREN': ProjectType.CHILDREN,
   'YOUTH': ProjectType.YOUTH,
   'WOMEN': ProjectType.WOMEN,
+  'ELDER': ProjectType.ELDER,
   'DISABLED': ProjectType.DISABLED,
   'SOCIAL': ProjectType.SOCIAL,
   'EARTH': ProjectType.EARTH,

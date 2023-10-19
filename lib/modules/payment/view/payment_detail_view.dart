@@ -8,8 +8,8 @@ import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
-class PaymentScreen extends GetView<PaymentController> {
-  const PaymentScreen({super.key});
+class PaymentDetailScreen extends GetView<PaymentController> {
+  const PaymentDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

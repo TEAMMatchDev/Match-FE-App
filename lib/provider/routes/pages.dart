@@ -13,7 +13,7 @@ import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
-import 'package:match/modules/payment/view/payment_view.dart';
+import 'package:match/modules/payment/view/payment_detail_view.dart';
 import 'package:match/modules/project/binding/project_binding.dart';
 import 'package:match/modules/project/view/project_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
@@ -125,7 +125,7 @@ class Pages {
     GetPage(
       title: "결제 상세내역",
       name: Routes.pay,
-      page: () => const PaymentScreen(),
+      page: () => const PaymentDetailScreen(),
       transition: Transition.noTransition,
       binding: PaymentBinding(),
       curve: Curves.easeIn,

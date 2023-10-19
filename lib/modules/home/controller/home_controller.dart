@@ -1,69 +1,41 @@
 import 'package:get/get.dart';
 import 'package:match/model/enum/project_type.dart';
-import 'package:match/model/project/project.dart';
-
-import '../../../model/today_project/today_project.dart';
+import 'package:match/provider/api/banner_api.dart';
+import 'package:match/provider/api/flame_api.dart';
+import 'package:match/provider/api/util/global_api_field.dart';
+import '../../../model/banner/banners.dart';
+import '../../../model/flame/flame.dart';
+import '../../../util/const/style/global_logger.dart';
 
 class HomeController extends GetxController {
   //임시 변순
   Rx<bool> isLike = false.obs;
+  RxInt currentIdx = 1.obs;
+  Rx<int> totalCnt = 0.obs;
   Rx<int> adCount = 2.obs;
   Rx<String> tmpText = ProjectType.ANIMAL.stateName.obs;
+  RxList<Flame> flameList = <Flame>[].obs;
+  RxList<Banners> bannerList = <Banners>[].obs;
 
-  RxList<TodayProject> projectList = <TodayProject>[
-    TodayProject(
-        projectId: 2,
-        imgUrl:
-            "https://match-image.s3.ap-northeast-2.amazonaws.com/project/2/61519f9b-4741-4fdc-82ad-fccf3217d6c1.png",
-        title: "TBT 유기견 보호",
-        usages: "The Better Tommorow",
-        kind: "ELDER",
-        like: true,
-        userProfileImages: [
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
-        ],
-        totalDonationCnt: 7),
-    TodayProject(
-        projectId: 1,
-        imgUrl:
-            "https://match-image.s3.ap-northeast-2.amazonaws.com/project/2/61519f9b-4741-4fdc-82ad-fccf3217d6c1.png",
-        title: "TBT 유기견 보호1",
-        usages: "The Better Tommorow",
-        kind: "ELDER",
-        like: true,
-        userProfileImages: [
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
-        ],
-        totalDonationCnt: 8),
-    TodayProject(
-        projectId: 1,
-        imgUrl:
-            "https://match-image.s3.ap-northeast-2.amazonaws.com/project/2/61519f9b-4741-4fdc-82ad-fccf3217d6c1.png",
-        title: "TBT 유기견 보호1",
-        usages: "The Better Tommorow",
-        kind: "ELDER",
-        like: true,
-        userProfileImages: [
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-          "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png"
-        ],
-        totalDonationCnt: 8),
-  ].obs;
+  ///<h2> Carousel builder에서 호출하는 pagination 추가 호출 함수 </h2>
+  ///* 총 데이터 수와 비교하여, 페이지를 더 늘릴수있다면 api 호출, 그렇지 않다면 호출 X
+  Future<void> getMoreFlame(int index) async {
+    logger.d(
+        "2:  총 페이지수 : ${FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
+    if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE <
+            FlameApi.burningFlame.currentpage + 1) &&
+        !FlameApi.burningFlame.isLast) {
+      FlameApi.burningFlame.currentpage = index;
+
+      flameList.addAll(await FlameApi.getBurningFlameList(getMore: true));
+    }
+  }
+
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    Project testProject = Project(
-        projectId: 1,
-        imgUrl:
-            "https//match-image.s3.ap-northeast-2.amazonaws.com/project/1/ef29a128-b689-4ffc-a2f8-d67acf7298ca.png",
-        title: "TBT 유기견 보호1",
-        usages: "The Better Tommorow",
-        kind: ProjectType.ANIMAL.toString(),
-        like: false);
+    bannerList.assignAll(await BannerApi.getBannerList());
+    flameList.assignAll(await FlameApi.getBurningFlameList());
+    totalCnt = FlameApi.burningFlame.totalCnt.obs;
   }
 }
