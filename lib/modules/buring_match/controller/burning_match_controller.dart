@@ -34,7 +34,7 @@ class BurningMatchController extends GetxController {
   Future<void> getMoreFlameHistory(int index) async {
     logger.d(
         "2:  총 페이지수 : ${FlameApi.detailFlameBottom.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE >=
+    if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE <
         index) &&
         !FlameApi.burningFlame.isLast) {
       FlameApi.burningFlame.currentpage = index;

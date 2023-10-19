@@ -17,7 +17,7 @@ class DonateController extends GetxController {
   Future<void> getMoreProject(int index) async {
     logger.d(
         "2:  총 페이지수 : ${ProjectApi.project.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (!(ProjectApi.project.totalCnt ~/ PAGINATION_SIZE >=
+    if (!(ProjectApi.project.totalCnt ~/ PAGINATION_SIZE <
         index) &&
         !ProjectApi.project.isLast) {
       ProjectApi.project.currentpage = index;

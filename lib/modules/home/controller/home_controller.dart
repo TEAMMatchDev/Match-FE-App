@@ -10,6 +10,8 @@ import '../../../util/const/style/global_logger.dart';
 class HomeController extends GetxController {
   //임시 변순
   Rx<bool> isLike = false.obs;
+  RxInt currentIdx = 1.obs;
+  Rx<int> totalCnt = 0.obs;
   Rx<int> adCount = 2.obs;
   Rx<String> tmpText = ProjectType.ANIMAL.stateName.obs;
   RxList<Flame> flameList = <Flame>[].obs;
@@ -20,7 +22,7 @@ class HomeController extends GetxController {
   Future<void> getMoreFlame(int index) async {
     logger.d(
         "2:  총 페이지수 : ${FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE >=
+    if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE <
             FlameApi.burningFlame.currentpage + 1) &&
         !FlameApi.burningFlame.isLast) {
       FlameApi.burningFlame.currentpage = index;
@@ -34,5 +36,6 @@ class HomeController extends GetxController {
     super.onInit();
     bannerList.assignAll(await BannerApi.getBannerList());
     flameList.assignAll(await FlameApi.getBurningFlameList());
+    totalCnt = FlameApi.burningFlame.totalCnt.obs;
   }
 }
