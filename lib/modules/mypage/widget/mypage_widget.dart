@@ -9,20 +9,21 @@ import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
 
 Widget SocialTypeEmailWidget() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        AuthService.to.myProfile.value.socialType != SocialType.NORMAL.name
-            ? Padding(
-                padding: EdgeInsets.only(right: 5.w),
-                child: SvgPicture.asset(
-                    "${iconDir}login/ic_${socialTypeToIcon[AuthService.to.myProfile.value.socialType]}.svg"),
-              )
-            : const SizedBox.shrink(),
-        Text(AuthService.to.myProfile.value.email,
-            style: AppTextStyles.S1SemiBold14.copyWith(
-              color: AppColors.grey6,
-            )),
-      ]);
+  return IntrinsicWidth(
+    child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          AuthService.to.myProfile.value.socialType != SocialType.NORMAL.name
+              ? Padding(
+                  padding: EdgeInsets.only(right: 5.w),
+                  child: SvgPicture.asset(
+                      "${iconDir}login/ic_${socialTypeToIcon[AuthService.to.myProfile.value.socialType]}.svg"),
+                )
+              : const SizedBox.shrink(),
+          Text(AuthService.to.myProfile.value.email,
+              style: AppTextStyles.S1SemiBold14.copyWith(
+                color: AppColors.grey6,
+              )),
+        ]),
+  );
 }

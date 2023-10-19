@@ -1,4 +1,5 @@
 const String RESULT = "result";
+const String SUCCESS = "isSuccess";
 const String LAST = "isLast";
 const String TOTAL = "totalCnt";
 const String CONTENTS = "contents";

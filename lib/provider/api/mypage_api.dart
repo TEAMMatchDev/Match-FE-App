@@ -17,4 +17,17 @@ class MypageApi {
       logger.e(e.toString());
     }
   }
+
+  ///<h2>6-2API | 프로필 편집 조회</h2>
+  static Future<bool> setNickname({required String nickName}) async {
+    try {
+      Response response = await DioServices()
+          .to()
+          .patch("/users/profile", data: {"name": nickName},options: Options(contentType: 'multipart/form-data'));
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
 }

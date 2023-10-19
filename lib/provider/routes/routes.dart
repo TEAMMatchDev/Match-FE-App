@@ -43,6 +43,8 @@ abstract class _Paths {
   /// 마이페이지 화면
   static const mypage = "/mypage";
 
+  /// 닉네임 화면
+  static const nickname = "/nickname";
   ///알람 화면
   static const alarm = "/alarm";
 
@@ -101,6 +103,8 @@ abstract class Routes {
   /// 마이페이지 화면
   static const mypage = _Paths.mypage;
 
+  /// 닉네임 화면
+  static const nickname = _Paths.nickname;
   /// 공지사항 화면
   static const notice = _Paths.notice;
 

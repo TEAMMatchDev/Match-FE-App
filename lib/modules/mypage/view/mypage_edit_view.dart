@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/util/components/global_app_bar.dart';
 
+import '../../../provider/routes/routes.dart';
 import '../../../provider/service/auth_service.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
@@ -34,7 +36,11 @@ class MypageEditScreen extends StatelessWidget {
                   SizedBox(
                     width: 5.w,
                   ),
-                  SvgPicture.asset("${iconDir}ic_edit_16.svg")
+                  GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.nickname);
+                      },
+                      child: SvgPicture.asset("${iconDir}ic_edit_16.svg"))
                 ],
               ),
               SocialTypeEmailWidget(),
@@ -52,15 +58,23 @@ class MypageEditScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "개인 정보",style: AppTextStyles.T1Bold15,),
-              SizedBox(height: 20.h,),
+                "개인 정보",
+                style: AppTextStyles.T1Bold15,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
               PrivacyInfo(
                   title: "이름", value: AuthService.to.myProfile.value.name),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
               PrivacyInfo(
-                  title: "휴대폰번호",
-                  value: AuthService.to.myProfile.value.phone,
-                  icon: "phone_edit"),
+                title: "휴대폰번호",
+                value: AuthService.to.myProfile.value.phone,
+                icon: "phone_edit",
+                onTap: () async{},
+              ),
             ],
           ),
         ),
@@ -77,11 +91,11 @@ class MypageEditScreen extends StatelessWidget {
   }
 }
 
-Widget PrivacyInfo({
-  required String title,
-  required String value,
-  String? icon,
-}) {
+Widget PrivacyInfo(
+    {required String title,
+    required String value,
+    String? icon,
+    Future<void> Function()? onTap}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
@@ -97,7 +111,9 @@ Widget PrivacyInfo({
       icon != null
           ? SizedBox(
               width: 40.w,
-              child: SvgPicture.asset("${iconDir}ic_${icon}_16.svg"))
+              child: GestureDetector(
+                  onTap: onTap,
+                  child: SvgPicture.asset("${iconDir}ic_${icon}_16.svg")))
           : SizedBox(width: 40.w),
       Text(
         value,

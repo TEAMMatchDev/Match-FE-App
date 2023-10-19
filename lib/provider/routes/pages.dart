@@ -9,7 +9,9 @@ import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/donation_search/binding/donation_search_binding.dart';
 import 'package:match/modules/donation_search/view/donation_search_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
+import 'package:match/modules/mypage/controller/nickname_controller.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
+import 'package:match/modules/mypage/view/nickname_edit_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
@@ -137,6 +139,15 @@ class Pages {
       page: () => const NoticeScreen(),
       transition: Transition.noTransition,
       binding: NoticeBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "닉네임 화면",
+      name: Routes.nickname,
+      page: () => const NicknameEditScreen(),
+      transition: Transition.noTransition,
+      binding: MypageBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

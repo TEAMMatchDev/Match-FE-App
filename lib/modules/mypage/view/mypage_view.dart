@@ -25,6 +25,7 @@ class MypageScreen extends GetView<MypageController> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 10.h),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
