@@ -8,6 +8,7 @@ import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/donation_search/binding/donation_search_binding.dart';
 import 'package:match/modules/donation_search/view/donation_search_view.dart';
+import 'package:match/modules/event_detail/view/event_detail_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
 import 'package:match/modules/mypage/controller/nickname_controller.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
@@ -103,6 +104,15 @@ class Pages {
       title: "이벤트 화면",
       name: Routes.event,
       page: () => const EventScreen(),
+      transition: Transition.noTransition,
+      binding: EventBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "이벤트 상세화면",
+      name: Routes.event_detail,
+      page: () => const EventDetailScreen(),
       transition: Transition.noTransition,
       binding: EventBinding(),
       curve: Curves.easeIn,

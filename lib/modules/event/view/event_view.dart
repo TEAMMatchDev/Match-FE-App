@@ -38,14 +38,14 @@ class EventScreen extends GetView<EventController> {
         ),
         Expanded(
           child: Container(
-            padding:
-                EdgeInsets.symmetric(horizontal: 30.w,vertical: 8.h).copyWith(bottom: 17.h),
+            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 8.h)
+                .copyWith(bottom: 17.h),
             width: double.infinity,
             height: double.infinity,
             child: CarouselSlider.builder(
               itemCount: 2,
               itemBuilder: (context, index, realIndex) {
-                return EventWidget();
+                return EventWidget(eventId: 1);
               },
               options: CarouselOptions(
                   autoPlay: false,

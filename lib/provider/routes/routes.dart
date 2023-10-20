@@ -40,6 +40,9 @@ abstract class _Paths {
   /// 이벤트 화면
   static const event = "/event";
 
+  /// 이벤트 상세 화면
+  static const event_detail = "/event_detail";
+
   /// 마이페이지 화면
   static const mypage = "/mypage";
 
@@ -103,6 +106,9 @@ abstract class Routes {
 
   /// 이벤트 화면
   static const event = _Paths.event;
+
+  /// 이벤트 상세 화면
+  static const event_detail = _Paths.event_detail;
 
   /// 마이페이지 화면
   static const mypage = _Paths.mypage;
