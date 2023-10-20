@@ -11,6 +11,7 @@ class CommonButton extends StatelessWidget {
   final Color backgroundColor;
   final Color textColor;
   final int verticalPadding;
+  final int horizonatlPadding;
   final bool isBottom;
 
   const CommonButton({
@@ -21,6 +22,7 @@ class CommonButton extends StatelessWidget {
     this.backgroundColor = AppColors.white,
     this.textColor = AppColors.grey9,
     this.verticalPadding = 17,
+    this.horizonatlPadding=0,
     this.isBottom = false,
   });
 
@@ -29,7 +31,7 @@ class CommonButton extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: verticalPadding.h),
+          padding: EdgeInsets.symmetric(vertical: verticalPadding.h,horizontal: horizonatlPadding.w),
           alignment: isBottom ? Alignment.bottomCenter : Alignment.center,
           decoration: BoxDecoration(
               color: backgroundColor,
@@ -89,6 +91,21 @@ class CommonButton extends StatelessWidget {
       backgroundColor: AppColors.black,
       textColor: AppColors.white,
       textSize: 16,
+      verticalPadding: verticalPadding,
+    );
+  }
+  factory CommonButton.phone(
+      {String text = "인증번호 확인",
+        int verticalPadding = 15,
+        bool isActive = false,
+        required Future<void> Function() onTap}) {
+    return CommonButton(
+      onTap: onTap,
+      text: text,
+      backgroundColor: AppColors.black,
+      textColor: AppColors.white,
+      textSize: 16,
+      horizonatlPadding: 10,
       verticalPadding: verticalPadding,
     );
   }
