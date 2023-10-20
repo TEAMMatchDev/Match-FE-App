@@ -22,7 +22,7 @@ class CommonButton extends StatelessWidget {
     this.backgroundColor = AppColors.white,
     this.textColor = AppColors.grey9,
     this.verticalPadding = 17,
-    this.horizonatlPadding=0,
+    this.horizonatlPadding = 0,
     this.isBottom = false,
   });
 
@@ -31,7 +31,8 @@ class CommonButton extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: verticalPadding.h,horizontal: horizonatlPadding.w),
+          padding: EdgeInsets.symmetric(
+              vertical: verticalPadding.h, horizontal: horizonatlPadding.w),
           alignment: isBottom ? Alignment.bottomCenter : Alignment.center,
           decoration: BoxDecoration(
               color: backgroundColor,
@@ -71,6 +72,7 @@ class CommonButton extends StatelessWidget {
   factory CommonButton.payment(
       {String text = "결제 방법 변경",
       int verticalPadding = 17,
+      bool isActive = false,
       required Future<void> Function() onTap}) {
     return CommonButton(
       onTap: onTap,
@@ -81,29 +83,32 @@ class CommonButton extends StatelessWidget {
       verticalPadding: verticalPadding,
     );
   }
+
   factory CommonButton.edit(
       {String text = "변경 완료",
-        int verticalPadding = 13,
-        required Future<void> Function() onTap}) {
+      int verticalPadding = 13,
+      bool isActive = false,
+      required Future<void> Function() onTap}) {
     return CommonButton(
       onTap: onTap,
       text: text,
-      backgroundColor: AppColors.black,
-      textColor: AppColors.white,
+      backgroundColor: isActive ? AppColors.black : AppColors.grey0,
+      textColor: isActive ? AppColors.white : AppColors.grey2,
       textSize: 16,
       verticalPadding: verticalPadding,
     );
   }
+
   factory CommonButton.phone(
-      {String text = "인증번호 확인",
-        int verticalPadding = 15,
-        bool isActive = false,
-        required Future<void> Function() onTap}) {
+      {String text = "인증번호 발송",
+      int verticalPadding = 15,
+      bool isActive = false,
+      required Future<void> Function() onTap}) {
     return CommonButton(
       onTap: onTap,
       text: text,
-      backgroundColor: AppColors.black,
-      textColor: AppColors.white,
+      backgroundColor: isActive ? AppColors.black : AppColors.grey0,
+      textColor: isActive ? AppColors.white : AppColors.grey2,
       textSize: 16,
       horizonatlPadding: 10,
       verticalPadding: verticalPadding,

@@ -51,6 +51,43 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  !controller.isPhoneValid.value
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "인증번호 확인",
+                              style: AppTextStyles.S1SemiBold14,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            SizedBox(
+                              height: 50.h,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Expanded(
+                                    child: CommonInputField.phone(
+                                        textController: controller
+                                            .authCodeController.value),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  CommonButton.phone(
+                                    text: "인증번호 확인",
+                                    onTap: () async {},
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      : SizedBox.shrink(),
                 ],
               ),
             ),
