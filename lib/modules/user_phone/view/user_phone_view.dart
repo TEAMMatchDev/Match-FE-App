@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:match/modules/user_phone/controller/user_phone_controller.dart';
 import 'package:match/provider/api/mypage_api.dart';
 import 'package:match/util/components/global_app_bar.dart';
@@ -47,12 +48,6 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                                 textController:
                                     controller.phoneController.value,
                                 onChange: (text) async {
-                                  //else if (text ==
-                                  //     AuthService.to.myProfile.value.phone) {
-                                  //   Fluttertoast.showToast(msg: "변경된 번호가 아닙니다");
-                                  // } else {
-                                  //   Fluttertoast.showToast(msg: "올바른 번호를 입력해주세요");
-                                  // }
                                   if (text !=
                                           AuthService
                                               .to.myProfile.value.phone &&
@@ -61,7 +56,8 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                                           .hasMatch(text)) {
                                     controller.phoneChange.value = true;
                                   }
-                                  // controller.phoneChange.value = false;
+
+                                  controller.phoneChange.value = false;
                                 }),
                           ),
                           SizedBox(
@@ -70,10 +66,11 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                           CommonButton.phone(
                             isActive: controller.phoneChange.value,
                             onTap: () async {
+                              controller.newPhone.value =
+                                  controller.phoneController.value.text;
                               controller.isPhoneValid.value =
                                   await MypageApi.getPhoneValidCode(
-                                      phone: controller
-                                          .phoneController.value.text);
+                                      phone: controller.newPhone.value);
                               if (controller.isPhoneValid.value) {
                                 Fluttertoast.showToast(msg: "인증번호가 발송되었습니다");
                               }
@@ -151,12 +148,21 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
               CommonButton.edit(
                 isActive: controller.isValidCode.value,
                 onTap: () async {
-                  var result = await MypageApi.setPhone(
-                      oldPhone: AuthService.to.myProfile.value.phone,
-                      newPhone: controller.phoneController.value.text);
-                  if(result){
-                    //TODO: change phone number in AuthService
-                    Get.back();
+                  if (controller.newPhone.value != "") {
+                    if (controller.newPhone.value !=
+                        controller.phoneController.value.text) {
+                      Fluttertoast.showToast(
+                          msg: "인증된 번호와 다른 번호입니다. 인증 후에 등록해주세요");
+                    } else {
+                      var result = await MypageApi.setPhone(
+                          //TODO: 코드 안정성을 위해, 인증번호 발송후 변수에 저장한값으로 통신
+                          oldPhone: AuthService.to.myProfile.value.phone,
+                          newPhone: controller.newPhone.value);
+                      if (result) {
+                        AuthService.to.setPhone(controller.newPhone.value);
+                        Get.back();
+                      }
+                    }
                   }
                 },
               ),

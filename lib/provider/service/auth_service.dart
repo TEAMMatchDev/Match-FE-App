@@ -8,7 +8,9 @@ class AuthService extends GetxService{
   static AuthService get to => Get.find();
   Rx<Profile> myProfile = tmpProfile.obs;
 
-
+  void setPhone(String phone) {
+    myProfile.value = myProfile.value.copyWith(phone: phone);
+  }
   @override
   void onInit() async {
     super.onInit();

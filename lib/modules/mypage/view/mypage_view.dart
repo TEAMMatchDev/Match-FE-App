@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/social_type.dart';
+import 'package:match/modules/mypage/view/setting_view.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/routes/routes.dart';
@@ -75,10 +76,7 @@ class MypageScreen extends GetView<MypageController> {
               ],
             ),
           ),
-          Container(
-            color: AppColors.searchBackground,
-            height: 10.h,
-          ),
+          GreySizedBox(),
           Padding(
               padding:
                   EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 8.h),
@@ -96,7 +94,13 @@ class MypageScreen extends GetView<MypageController> {
                       onTap: (() async {
                         await Get.toNamed(Routes.notice);
                       })),
-                  MypageListTile(icon: "setting", title: "환경설정"),
+                  MypageListTile(
+                    icon: "setting",
+                    title: "환경설정",
+                    onTap: () async {
+                      Get.to(() => SettingScreen());
+                    },
+                  ),
                   MypageListTile(icon: "policy", title: "운영정책 및 약관"),
                   MypageListTile(icon: "client", title: "고객센터"),
                 ],
@@ -136,10 +140,12 @@ class MypageListTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            icon != null ?SvgPicture.asset(
-              "${iconDir}mypage/ic_${icon}_18.svg",
-              width: 18.w,
-            ):SizedBox.shrink(),
+            icon != null
+                ? SvgPicture.asset(
+                    "${iconDir}mypage/ic_${icon}_18.svg",
+                    width: 18.w,
+                  )
+                : SizedBox.shrink(),
             SizedBox(
               width: 14.w,
             ),

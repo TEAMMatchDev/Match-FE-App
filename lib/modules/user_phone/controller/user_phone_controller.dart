@@ -11,6 +11,7 @@ class UserPhoneController extends GetxController {
 
   ///*인증번호 입력 field 활성화 여부
   Rx<bool> isPhoneValid = false.obs;
+  Rx<String> newPhone = "".obs;
 
   ///* 인증 번호 textField 옆 버튼 활성화 여부
   Rx<bool> validNumChange = false.obs;
