@@ -5,6 +5,7 @@ import 'package:match/modules/user_phone/controller/user_phone_controller.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../provider/service/auth_service.dart';
 import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
 
@@ -34,13 +35,22 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                     height: 10.h,
                   ),
                   SizedBox(
-                    height: 50.h,
+                    height: 48.h,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Expanded(
                           child: CommonInputField.phone(
-                              textController: controller.phoneController.value),
+                              textController: controller.phoneController.value,
+                              onChange: (text) async {
+                                if (text !=
+                                        AuthService.to.myProfile.value.phone &&
+                                    text != "") {
+                                  controller.validNumChange.value = true;
+                                } else {
+                                  controller.validNumChange.value = false;
+                                }
+                              }),
                         ),
                         SizedBox(
                           width: 10.w,
@@ -54,7 +64,7 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  !controller.isPhoneValid.value
+                  controller.isSendValidNum.value
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -66,14 +76,23 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                               height: 10.h,
                             ),
                             SizedBox(
-                              height: 50.h,
+                              height: 48.h,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Expanded(
                                     child: CommonInputField.phone(
-                                        textController: controller
-                                            .authCodeController.value),
+                                        textController:
+                                            controller.authCodeController.value,
+                                        onChange: (text) async {
+                                          if (text != "") {
+                                            controller.validNumChange.value =
+                                                true;
+                                          } else {
+                                            controller.validNumChange.value =
+                                                false;
+                                          }
+                                        }),
                                   ),
                                   SizedBox(
                                     width: 10.w,
@@ -92,6 +111,7 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
               ),
             ),
             CommonButton.edit(
+              isActive: controller.canChange.value,
               onTap: () async {
                 // await MypageApi.setPhone(
                 //     oldPho: nicknameController.text);

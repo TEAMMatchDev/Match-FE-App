@@ -109,7 +109,7 @@ class CommonButton extends StatelessWidget {
       text: text,
       backgroundColor: isActive ? AppColors.black : AppColors.grey0,
       textColor: isActive ? AppColors.white : AppColors.grey2,
-      textSize: 16,
+      textSize: 14,
       horizonatlPadding: 10,
       verticalPadding: verticalPadding,
     );

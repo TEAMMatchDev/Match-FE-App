@@ -8,32 +8,39 @@ import 'package:match/util/components/global_button.dart';
 
 import '../../../provider/service/auth_service.dart';
 
-class NicknameEditScreen extends StatelessWidget {
-  TextEditingController nicknameController =
-      TextEditingController(text: AuthService.to.myProfile.value.name);
-
+class NicknameEditScreen extends GetView<NickNameController> {
   NicknameEditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonAppBar.basic("닉네임 변경"),
-      body: Column(
-        children: [
-          Expanded(
-            child: Center(
-              child: CommonInputField.nickName(
-                textController: nicknameController,
+      body: Obx(
+        () => Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: CommonInputField.nickName(
+                  textController: controller.nicknameController.value,
+                  onChange: (text) async {
+                    if (text != AuthService.to.myProfile.value.name && text != "") {
+                      controller.canChange.value = true;
+                    }else{
+                      controller.canChange.value = false;
+                    }
+                  },
+                ),
               ),
             ),
-          ),
-          CommonButton.edit(
-            onTap: () async {
-              await MypageApi.setNickname(
-                  nickName: nicknameController.text);
-            },
-          )
-        ],
+            CommonButton.edit(
+              isActive: controller.canChange.value,
+              onTap: () async {
+                await MypageApi.setNickname(
+                    nickName: controller.nicknameController.value.text);
+              },
+            )
+          ],
+        ),
       ),
     );
   }

@@ -183,27 +183,27 @@ class CommonInputField extends StatelessWidget {
     );
   }
 
-  factory CommonInputField.nickName({
-    required TextEditingController textController,
-  }) {
+  factory CommonInputField.nickName(
+      {required TextEditingController textController,
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "닉네임을 입력해주세요",
         alwaysSuffix: false,
         onSubmitted: (value) async {},
-        onChanged: (value) async {},
+        onChanged: onChange,
         autoFocus: true);
   }
 
-  factory CommonInputField.phone({
-    required TextEditingController textController,
-  }) {
+  factory CommonInputField.phone(
+      {required TextEditingController textController,
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "변경할 휴대폰 번호를 입력",
         alwaysSuffix: false,
         onSubmitted: (value) async {},
-        onChanged: (value) async {},
+        onChanged: onChange,
         autoFocus: false);
   }
 }
