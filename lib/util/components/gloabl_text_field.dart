@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/search_statu.dart';
 
@@ -125,6 +127,7 @@ class CommonInputField extends StatelessWidget {
   final String placeHolder;
   final bool autoFocus;
   final bool alwaysSuffix;
+  final TextInputType inputType;
   final Future<void> Function(String) onSubmitted;
   final Future<void> Function(String) onChanged;
   final Future<void> Function()? suffixOnTap;
@@ -136,6 +139,7 @@ class CommonInputField extends StatelessWidget {
       required this.alwaysSuffix,
       required this.onSubmitted,
       required this.onChanged,
+      this.inputType = TextInputType.text,
       this.suffixOnTap,
       required this.autoFocus});
 
@@ -150,7 +154,7 @@ class CommonInputField extends StatelessWidget {
           border: textController.text.isNotEmpty
               ? Border.all(color: AppColors.grey8)
               : Border.all(color: AppColors.grey1)),
-      keyboardType: TextInputType.text,
+      keyboardType: inputType,
       cursorColor: AppColors.black,
       cursorHeight: 18.h,
       style: AppTextStyles.T1Bold13.copyWith(
@@ -195,15 +199,17 @@ class CommonInputField extends StatelessWidget {
         autoFocus: true);
   }
 
-  factory CommonInputField.phone(
-      {required TextEditingController textController,
-      required Future<void> Function(String) onChange}) {
+  factory CommonInputField.phone({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
     return CommonInputField(
         textController: textController,
         placeHolder: "변경할 휴대폰 번호를 입력",
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.phone,
         autoFocus: false);
   }
 }
