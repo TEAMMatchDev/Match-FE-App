@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/payment/widget/select_amount_widget.dart';
+import 'package:match/modules/payment/widget/select_paydate_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_number_field.dart';
@@ -97,22 +98,8 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
                   ),
                   SizedBox(height: 16.h),
-                  Row(
-                    children: [
-                      Text(
-                        '기부 금액',
-                        style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
-                      ),
-                      Text(
-                        '기부 금액',
-                        style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
-                      ),
-                      Expanded(
-                        child: NumberInputFieldExample(),
-                      ),
-                    ],
-                  ),
-
+                  PayDateButtonRadioButtons(),
+                  SizedBox(height: 56.h),
                 ],
               ),
             ),
