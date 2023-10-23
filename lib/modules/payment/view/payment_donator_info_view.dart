@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/payment/view/payment_donation_info_view.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -11,8 +12,8 @@ import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
-class PaymentDonationScreen extends GetView<PaymentController> {
-  const PaymentDonationScreen({super.key});
+class PaymentDonatorScreen extends GetView<PaymentController> {
+  const PaymentDonatorScreen({super.key});
 
   @override
   Widget build(BuildContext context){
@@ -177,7 +178,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                   child: CommonButton.login(
                     text: "확인",
                     onTap: () async {
-                      Get.back();
+                      Get.to(PaymentDonationScreen());
                     },
                   ),
                 ),

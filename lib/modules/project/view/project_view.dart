@@ -211,7 +211,7 @@ class ProjectScreen extends GetView<ProjectController> {
                   child: CommonButton.login(
                     text: "기부하기",
                     onTap: () async {
-                      Get.to(PaymentDonationScreen());
+                      Get.to(PaymentDonatorScreen());
                     },
                   ),
                 ),
