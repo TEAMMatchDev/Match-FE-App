@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:match/modules/payment/widget/select_amount_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
+import 'package:match/util/components/global_number_field.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
@@ -95,7 +96,23 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                     '기부 결제일',
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
                   ),
-                  SizedBox(height: 30.h),
+                  SizedBox(height: 16.h),
+                  Row(
+                    children: [
+                      Text(
+                        '기부 금액',
+                        style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                      ),
+                      Text(
+                        '기부 금액',
+                        style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                      ),
+                      Expanded(
+                        child: NumberInputFieldExample(),
+                      ),
+                    ],
+                  ),
+
                 ],
               ),
             ),
