@@ -6,8 +6,8 @@ part of 'project_detail.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProjectDetail _$$_ProjectDetailFromJson(Map<String, dynamic> json) =>
-    _$_ProjectDetail(
+_$ProjectDetailImpl _$$ProjectDetailImplFromJson(Map<String, dynamic> json) =>
+    _$ProjectDetailImpl(
       projectId: json['projectId'] as int,
       thumbNail: json['thumbNail'] as String,
       projectImgList: (json['projectImgList'] as List<dynamic>)
@@ -24,7 +24,7 @@ _$_ProjectDetail _$$_ProjectDetailFromJson(Map<String, dynamic> json) =>
       totalDonationCnt: json['totalDonationCnt'] as int,
     );
 
-Map<String, dynamic> _$$_ProjectDetailToJson(_$_ProjectDetail instance) =>
+Map<String, dynamic> _$$ProjectDetailImplToJson(_$ProjectDetailImpl instance) =>
     <String, dynamic>{
       'projectId': instance.projectId,
       'thumbNail': instance.thumbNail,
@@ -38,14 +38,14 @@ Map<String, dynamic> _$$_ProjectDetailToJson(_$_ProjectDetail instance) =>
       'totalDonationCnt': instance.totalDonationCnt,
     };
 
-_$_ProjectImage _$$_ProjectImageFromJson(Map<String, dynamic> json) =>
-    _$_ProjectImage(
+_$ProjectImageImpl _$$ProjectImageImplFromJson(Map<String, dynamic> json) =>
+    _$ProjectImageImpl(
       imgId: json['imgId'] as int,
       imgUrl: json['imgUrl'] as String,
       sequence: json['sequence'] as int,
     );
 
-Map<String, dynamic> _$$_ProjectImageToJson(_$_ProjectImage instance) =>
+Map<String, dynamic> _$$ProjectImageImplToJson(_$ProjectImageImpl instance) =>
     <String, dynamic>{
       'imgId': instance.imgId,
       'imgUrl': instance.imgUrl,

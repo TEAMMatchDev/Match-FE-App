@@ -8,6 +8,7 @@ import '../../model/event_detail/event_detail.dart';
 import '../../model/flame_detail/flame_detail.dart';
 import '../../model/match_history/match_history.dart';
 import '../../model/match_pay/match_pay.dart';
+import '../../model/notification_permission/notification_permission.dart';
 import '../../model/profile/profile.dart';
 import '../../model/project_detail/project_detail.dart';
 import '../../model/project_history.dart/project_history.dart';
@@ -125,3 +126,5 @@ var tmpEventDetail = const EventDetail(
     eventContents: [
       Contents(contentId: 1, contentsType: "CONTENTS", cotents: "fds")
     ]);
+var tmpNotificationPermission= const NotificationPermission(
+serviceAlarm: false, eventAlarm: false);

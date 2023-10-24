@@ -98,11 +98,11 @@ class _$ProjectHistoryCopyWithImpl<$Res, $Val extends ProjectHistory>
 }
 
 /// @nodoc
-abstract class _$$_ProjectHistoryCopyWith<$Res>
+abstract class _$$ProjectHistoryImplCopyWith<$Res>
     implements $ProjectHistoryCopyWith<$Res> {
-  factory _$$_ProjectHistoryCopyWith(
-          _$_ProjectHistory value, $Res Function(_$_ProjectHistory) then) =
-      __$$_ProjectHistoryCopyWithImpl<$Res>;
+  factory _$$ProjectHistoryImplCopyWith(_$ProjectHistoryImpl value,
+          $Res Function(_$ProjectHistoryImpl) then) =
+      __$$ProjectHistoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_ProjectHistoryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProjectHistoryCopyWithImpl<$Res>
-    extends _$ProjectHistoryCopyWithImpl<$Res, _$_ProjectHistory>
-    implements _$$_ProjectHistoryCopyWith<$Res> {
-  __$$_ProjectHistoryCopyWithImpl(
-      _$_ProjectHistory _value, $Res Function(_$_ProjectHistory) _then)
+class __$$ProjectHistoryImplCopyWithImpl<$Res>
+    extends _$ProjectHistoryCopyWithImpl<$Res, _$ProjectHistoryImpl>
+    implements _$$ProjectHistoryImplCopyWith<$Res> {
+  __$$ProjectHistoryImplCopyWithImpl(
+      _$ProjectHistoryImpl _value, $Res Function(_$ProjectHistoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_ProjectHistoryCopyWithImpl<$Res>
     Object? profileImageUrl = null,
     Object? nickname = null,
   }) {
-    return _then(_$_ProjectHistory(
+    return _then(_$ProjectHistoryImpl(
       historyId: null == historyId
           ? _value.historyId
           : historyId // ignore: cast_nullable_to_non_nullable
@@ -163,10 +163,10 @@ class __$$_ProjectHistoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProjectHistory
+class _$ProjectHistoryImpl
     with DiagnosticableTreeMixin
     implements _ProjectHistory {
-  const _$_ProjectHistory(
+  const _$ProjectHistoryImpl(
       {required this.historyId,
       required this.historyStatus,
       required this.histories,
@@ -174,8 +174,8 @@ class _$_ProjectHistory
       required this.profileImageUrl,
       required this.nickname});
 
-  factory _$_ProjectHistory.fromJson(Map<String, dynamic> json) =>
-      _$$_ProjectHistoryFromJson(json);
+  factory _$ProjectHistoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProjectHistoryImplFromJson(json);
 
   @override
   final int historyId;
@@ -212,7 +212,7 @@ class _$_ProjectHistory
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProjectHistory &&
+            other is _$ProjectHistoryImpl &&
             (identical(other.historyId, historyId) ||
                 other.historyId == historyId) &&
             (identical(other.historyStatus, historyStatus) ||
@@ -235,12 +235,13 @@ class _$_ProjectHistory
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProjectHistoryCopyWith<_$_ProjectHistory> get copyWith =>
-      __$$_ProjectHistoryCopyWithImpl<_$_ProjectHistory>(this, _$identity);
+  _$$ProjectHistoryImplCopyWith<_$ProjectHistoryImpl> get copyWith =>
+      __$$ProjectHistoryImplCopyWithImpl<_$ProjectHistoryImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProjectHistoryToJson(
+    return _$$ProjectHistoryImplToJson(
       this,
     );
   }
@@ -253,10 +254,10 @@ abstract class _ProjectHistory implements ProjectHistory {
       required final String histories,
       required final String historyDate,
       required final String profileImageUrl,
-      required final String nickname}) = _$_ProjectHistory;
+      required final String nickname}) = _$ProjectHistoryImpl;
 
   factory _ProjectHistory.fromJson(Map<String, dynamic> json) =
-      _$_ProjectHistory.fromJson;
+      _$ProjectHistoryImpl.fromJson;
 
   @override
   int get historyId;
@@ -272,6 +273,6 @@ abstract class _ProjectHistory implements ProjectHistory {
   String get nickname;
   @override
   @JsonKey(ignore: true)
-  _$$_ProjectHistoryCopyWith<_$_ProjectHistory> get copyWith =>
+  _$$ProjectHistoryImplCopyWith<_$ProjectHistoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

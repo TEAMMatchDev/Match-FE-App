@@ -3,13 +3,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/mypage/controller/setting_controller.dart';
+import 'package:match/provider/api/notification_api.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../model/enum/alarm_type.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/style/global_color.dart';
 
-class SettingScreen extends StatelessWidget {
+class SettingScreen extends GetView<SettingController> {
   const SettingScreen({super.key});
 
   @override
@@ -31,10 +34,16 @@ class SettingScreen extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                   SwitchListTile(
-                      isSwitch: Rx<bool>(true), title: "서비스 알림받기"),
-                  Divider(thickness: 1.h,height:1.h,color: AppColors.divider1,),
+                      isSwitch: controller.servicePermission,
+                      alarmType: AlarmType.SERVICE),
+                  Divider(
+                    thickness: 1.h,
+                    height: 1.h,
+                    color: AppColors.divider1,
+                  ),
                   SwitchListTile(
-                      isSwitch: Rx<bool>(true), title: "이벤트 알림받기"),
+                      isSwitch: controller.eventPermission,
+                      alarmType: AlarmType.EVENT),
                 ],
               )),
           GreySizedBox()
@@ -43,24 +52,27 @@ class SettingScreen extends StatelessWidget {
     );
   }
 
-  Widget SwitchListTile({required Rx<bool> isSwitch, required String title}) {
-    return Obx(
-      ()=> Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.h),
-        child: Row(
+  Widget SwitchListTile(
+      {required Rx<bool> isSwitch, required AlarmType alarmType}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      child: Obx(
+        () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              title,
-              style: AppTextStyles.S1SemiBold14.copyWith(color: AppColors.grey7),
+              "${alarmType.stateName} 알림받기",
+              style:
+                  AppTextStyles.S1SemiBold14.copyWith(color: AppColors.grey7),
             ),
             //TODO: GetStorage 저장 및 서버 연결(기획 확인 필요)
             CupertinoSwitch(
                 activeColor: AppColors.grey9,
                 dragStartBehavior: DragStartBehavior.start,
                 value: isSwitch.value,
-                onChanged: (bool isOn) {
+                onChanged: (bool isOn) async {
                   isSwitch.value = isOn;
+                  await NotificationApi.setAlarmPermission(type: alarmType);
                 })
           ],
         ),

@@ -103,10 +103,10 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
 }
 
 /// @nodoc
-abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
-  factory _$$_CommentCopyWith(
-          _$_Comment value, $Res Function(_$_Comment) then) =
-      __$$_CommentCopyWithImpl<$Res>;
+abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
+  factory _$$CommentImplCopyWith(
+          _$CommentImpl value, $Res Function(_$CommentImpl) then) =
+      __$$CommentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -120,10 +120,11 @@ abstract class _$$_CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_CommentCopyWithImpl<$Res>
-    extends _$CommentCopyWithImpl<$Res, _$_Comment>
-    implements _$$_CommentCopyWith<$Res> {
-  __$$_CommentCopyWithImpl(_$_Comment _value, $Res Function(_$_Comment) _then)
+class __$$CommentImplCopyWithImpl<$Res>
+    extends _$CommentCopyWithImpl<$Res, _$CommentImpl>
+    implements _$$CommentImplCopyWith<$Res> {
+  __$$CommentImplCopyWithImpl(
+      _$CommentImpl _value, $Res Function(_$CommentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -137,7 +138,7 @@ class __$$_CommentCopyWithImpl<$Res>
     Object? userId = null,
     Object? my = null,
   }) {
-    return _then(_$_Comment(
+    return _then(_$CommentImpl(
       commentId: null == commentId
           ? _value.commentId
           : commentId // ignore: cast_nullable_to_non_nullable
@@ -172,8 +173,8 @@ class __$$_CommentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Comment with DiagnosticableTreeMixin implements _Comment {
-  const _$_Comment(
+class _$CommentImpl with DiagnosticableTreeMixin implements _Comment {
+  const _$CommentImpl(
       {required this.commentId,
       required this.comment,
       required this.commentDate,
@@ -182,8 +183,8 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
       required this.userId,
       required this.my});
 
-  factory _$_Comment.fromJson(Map<String, dynamic> json) =>
-      _$$_CommentFromJson(json);
+  factory _$CommentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CommentImplFromJson(json);
 
   @override
   final int commentId;
@@ -223,7 +224,7 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Comment &&
+            other is _$CommentImpl &&
             (identical(other.commentId, commentId) ||
                 other.commentId == commentId) &&
             (identical(other.comment, comment) || other.comment == comment) &&
@@ -245,12 +246,12 @@ class _$_Comment with DiagnosticableTreeMixin implements _Comment {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CommentCopyWith<_$_Comment> get copyWith =>
-      __$$_CommentCopyWithImpl<_$_Comment>(this, _$identity);
+  _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
+      __$$CommentImplCopyWithImpl<_$CommentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CommentToJson(
+    return _$$CommentImplToJson(
       this,
     );
   }
@@ -264,9 +265,9 @@ abstract class _Comment implements Comment {
       final String? profileImgUrl,
       required final String nickname,
       required final int userId,
-      required final bool my}) = _$_Comment;
+      required final bool my}) = _$CommentImpl;
 
-  factory _Comment.fromJson(Map<String, dynamic> json) = _$_Comment.fromJson;
+  factory _Comment.fromJson(Map<String, dynamic> json) = _$CommentImpl.fromJson;
 
   @override
   int get commentId;
@@ -284,6 +285,6 @@ abstract class _Comment implements Comment {
   bool get my;
   @override
   @JsonKey(ignore: true)
-  _$$_CommentCopyWith<_$_Comment> get copyWith =>
+  _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

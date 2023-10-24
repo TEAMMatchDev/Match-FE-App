@@ -6,8 +6,8 @@ part of 'today_project.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TodayProject _$$_TodayProjectFromJson(Map<String, dynamic> json) =>
-    _$_TodayProject(
+_$TodayProjectImpl _$$TodayProjectImplFromJson(Map<String, dynamic> json) =>
+    _$TodayProjectImpl(
       projectId: json['projectId'] as int,
       imgUrl: json['imgUrl'] as String,
       title: json['title'] as String,
@@ -20,7 +20,7 @@ _$_TodayProject _$$_TodayProjectFromJson(Map<String, dynamic> json) =>
       totalDonationCnt: json['totalDonationCnt'] as int,
     );
 
-Map<String, dynamic> _$$_TodayProjectToJson(_$_TodayProject instance) =>
+Map<String, dynamic> _$$TodayProjectImplToJson(_$TodayProjectImpl instance) =>
     <String, dynamic>{
       'projectId': instance.projectId,
       'imgUrl': instance.imgUrl,

@@ -6,8 +6,8 @@ part of 'project_history.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ProjectHistory _$$_ProjectHistoryFromJson(Map<String, dynamic> json) =>
-    _$_ProjectHistory(
+_$ProjectHistoryImpl _$$ProjectHistoryImplFromJson(Map<String, dynamic> json) =>
+    _$ProjectHistoryImpl(
       historyId: json['historyId'] as int,
       historyStatus: json['historyStatus'] as String,
       histories: json['histories'] as String,
@@ -16,7 +16,8 @@ _$_ProjectHistory _$$_ProjectHistoryFromJson(Map<String, dynamic> json) =>
       nickname: json['nickname'] as String,
     );
 
-Map<String, dynamic> _$$_ProjectHistoryToJson(_$_ProjectHistory instance) =>
+Map<String, dynamic> _$$ProjectHistoryImplToJson(
+        _$ProjectHistoryImpl instance) =>
     <String, dynamic>{
       'historyId': instance.historyId,
       'historyStatus': instance.historyStatus,

@@ -98,11 +98,11 @@ class _$FlameDetailCopyWithImpl<$Res, $Val extends FlameDetail>
 }
 
 /// @nodoc
-abstract class _$$_FlameDetailCopyWith<$Res>
+abstract class _$$FlameDetailImplCopyWith<$Res>
     implements $FlameDetailCopyWith<$Res> {
-  factory _$$_FlameDetailCopyWith(
-          _$_FlameDetail value, $Res Function(_$_FlameDetail) then) =
-      __$$_FlameDetailCopyWithImpl<$Res>;
+  factory _$$FlameDetailImplCopyWith(
+          _$FlameDetailImpl value, $Res Function(_$FlameDetailImpl) then) =
+      __$$FlameDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_FlameDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FlameDetailCopyWithImpl<$Res>
-    extends _$FlameDetailCopyWithImpl<$Res, _$_FlameDetail>
-    implements _$$_FlameDetailCopyWith<$Res> {
-  __$$_FlameDetailCopyWithImpl(
-      _$_FlameDetail _value, $Res Function(_$_FlameDetail) _then)
+class __$$FlameDetailImplCopyWithImpl<$Res>
+    extends _$FlameDetailCopyWithImpl<$Res, _$FlameDetailImpl>
+    implements _$$FlameDetailImplCopyWith<$Res> {
+  __$$FlameDetailImplCopyWithImpl(
+      _$FlameDetailImpl _value, $Res Function(_$FlameDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_FlameDetailCopyWithImpl<$Res>
     Object? amount = null,
     Object? sequence = null,
   }) {
-    return _then(_$_FlameDetail(
+    return _then(_$FlameDetailImpl(
       imgUrl: null == imgUrl
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_FlameDetailCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FlameDetail with DiagnosticableTreeMixin implements _FlameDetail {
-  const _$_FlameDetail(
+class _$FlameDetailImpl with DiagnosticableTreeMixin implements _FlameDetail {
+  const _$FlameDetailImpl(
       {required this.imgUrl,
       required this.flameType,
       required this.inherenceName,
@@ -172,8 +172,8 @@ class _$_FlameDetail with DiagnosticableTreeMixin implements _FlameDetail {
       required this.amount,
       required this.sequence});
 
-  factory _$_FlameDetail.fromJson(Map<String, dynamic> json) =>
-      _$$_FlameDetailFromJson(json);
+  factory _$FlameDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FlameDetailImplFromJson(json);
 
   @override
   final String imgUrl;
@@ -210,7 +210,7 @@ class _$_FlameDetail with DiagnosticableTreeMixin implements _FlameDetail {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FlameDetail &&
+            other is _$FlameDetailImpl &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
             (identical(other.flameType, flameType) ||
                 other.flameType == flameType) &&
@@ -230,12 +230,12 @@ class _$_FlameDetail with DiagnosticableTreeMixin implements _FlameDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FlameDetailCopyWith<_$_FlameDetail> get copyWith =>
-      __$$_FlameDetailCopyWithImpl<_$_FlameDetail>(this, _$identity);
+  _$$FlameDetailImplCopyWith<_$FlameDetailImpl> get copyWith =>
+      __$$FlameDetailImplCopyWithImpl<_$FlameDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FlameDetailToJson(
+    return _$$FlameDetailImplToJson(
       this,
     );
   }
@@ -248,10 +248,10 @@ abstract class _FlameDetail implements FlameDetail {
       required final String inherenceName,
       required final String usages,
       required final int amount,
-      required final int sequence}) = _$_FlameDetail;
+      required final int sequence}) = _$FlameDetailImpl;
 
   factory _FlameDetail.fromJson(Map<String, dynamic> json) =
-      _$_FlameDetail.fromJson;
+      _$FlameDetailImpl.fromJson;
 
   @override
   String get imgUrl;
@@ -267,6 +267,6 @@ abstract class _FlameDetail implements FlameDetail {
   int get sequence;
   @override
   @JsonKey(ignore: true)
-  _$$_FlameDetailCopyWith<_$_FlameDetail> get copyWith =>
+  _$$FlameDetailImplCopyWith<_$FlameDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

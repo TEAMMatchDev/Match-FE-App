@@ -6,8 +6,8 @@ part of 'match_history.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MatchHistory _$$_MatchHistoryFromJson(Map<String, dynamic> json) =>
-    _$_MatchHistory(
+_$MatchHistoryImpl _$$MatchHistoryImplFromJson(Map<String, dynamic> json) =>
+    _$MatchHistoryImpl(
       historyId: json['historyId'] as int,
       historyStatus: json['historyStatus'] as String,
       histories: json['histories'] as String,
@@ -18,7 +18,7 @@ _$_MatchHistory _$$_MatchHistoryFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_MatchHistoryToJson(_$_MatchHistory instance) =>
+Map<String, dynamic> _$$MatchHistoryImplToJson(_$MatchHistoryImpl instance) =>
     <String, dynamic>{
       'historyId': instance.historyId,
       'historyStatus': instance.historyStatus,

@@ -78,9 +78,9 @@ class _$PayCopyWithImpl<$Res, $Val extends Pay> implements $PayCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_PayCopyWith<$Res> implements $PayCopyWith<$Res> {
-  factory _$$_PayCopyWith(_$_Pay value, $Res Function(_$_Pay) then) =
-      __$$_PayCopyWithImpl<$Res>;
+abstract class _$$PayImplCopyWith<$Res> implements $PayCopyWith<$Res> {
+  factory _$$PayImplCopyWith(_$PayImpl value, $Res Function(_$PayImpl) then) =
+      __$$PayImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,9 +88,9 @@ abstract class _$$_PayCopyWith<$Res> implements $PayCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PayCopyWithImpl<$Res> extends _$PayCopyWithImpl<$Res, _$_Pay>
-    implements _$$_PayCopyWith<$Res> {
-  __$$_PayCopyWithImpl(_$_Pay _value, $Res Function(_$_Pay) _then)
+class __$$PayImplCopyWithImpl<$Res> extends _$PayCopyWithImpl<$Res, _$PayImpl>
+    implements _$$PayImplCopyWith<$Res> {
+  __$$PayImplCopyWithImpl(_$PayImpl _value, $Res Function(_$PayImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_PayCopyWithImpl<$Res> extends _$PayCopyWithImpl<$Res, _$_Pay>
     Object? payMethod = null,
     Object? amount = null,
   }) {
-    return _then(_$_Pay(
+    return _then(_$PayImpl(
       payDate: null == payDate
           ? _value.payDate
           : payDate // ignore: cast_nullable_to_non_nullable
@@ -124,14 +124,15 @@ class __$$_PayCopyWithImpl<$Res> extends _$PayCopyWithImpl<$Res, _$_Pay>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Pay with DiagnosticableTreeMixin implements _Pay {
-  const _$_Pay(
+class _$PayImpl with DiagnosticableTreeMixin implements _Pay {
+  const _$PayImpl(
       {required this.payDate,
       required this.payStatus,
       required this.payMethod,
       required this.amount});
 
-  factory _$_Pay.fromJson(Map<String, dynamic> json) => _$$_PayFromJson(json);
+  factory _$PayImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PayImplFromJson(json);
 
   @override
   final String payDate;
@@ -162,7 +163,7 @@ class _$_Pay with DiagnosticableTreeMixin implements _Pay {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Pay &&
+            other is _$PayImpl &&
             (identical(other.payDate, payDate) || other.payDate == payDate) &&
             (identical(other.payStatus, payStatus) ||
                 other.payStatus == payStatus) &&
@@ -179,12 +180,12 @@ class _$_Pay with DiagnosticableTreeMixin implements _Pay {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PayCopyWith<_$_Pay> get copyWith =>
-      __$$_PayCopyWithImpl<_$_Pay>(this, _$identity);
+  _$$PayImplCopyWith<_$PayImpl> get copyWith =>
+      __$$PayImplCopyWithImpl<_$PayImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PayToJson(
+    return _$$PayImplToJson(
       this,
     );
   }
@@ -195,9 +196,9 @@ abstract class _Pay implements Pay {
       {required final String payDate,
       required final String payStatus,
       required final String payMethod,
-      required final String amount}) = _$_Pay;
+      required final String amount}) = _$PayImpl;
 
-  factory _Pay.fromJson(Map<String, dynamic> json) = _$_Pay.fromJson;
+  factory _Pay.fromJson(Map<String, dynamic> json) = _$PayImpl.fromJson;
 
   @override
   String get payDate;
@@ -209,5 +210,6 @@ abstract class _Pay implements Pay {
   String get amount;
   @override
   @JsonKey(ignore: true)
-  _$$_PayCopyWith<_$_Pay> get copyWith => throw _privateConstructorUsedError;
+  _$$PayImplCopyWith<_$PayImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

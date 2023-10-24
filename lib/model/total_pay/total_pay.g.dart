@@ -6,7 +6,8 @@ part of 'total_pay.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TotalPay _$$_TotalPayFromJson(Map<String, dynamic> json) => _$_TotalPay(
+_$TotalPayImpl _$$TotalPayImplFromJson(Map<String, dynamic> json) =>
+    _$TotalPayImpl(
       donationId: json['donationId'] as int,
       donationDate: json['donationDate'] as String,
       projectName: json['projectName'] as String,
@@ -15,7 +16,7 @@ _$_TotalPay _$$_TotalPayFromJson(Map<String, dynamic> json) => _$_TotalPay(
       regularStatus: json['regularStatus'] as String,
     );
 
-Map<String, dynamic> _$$_TotalPayToJson(_$_TotalPay instance) =>
+Map<String, dynamic> _$$TotalPayImplToJson(_$TotalPayImpl instance) =>
     <String, dynamic>{
       'donationId': instance.donationId,
       'donationDate': instance.donationDate,
