@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:match/model/notice/notice.dart';
 
 import '../../model/api/pagination.dart';
+import '../../model/notice_detail/notice_detail.dart';
 import '../../util/const/style/global_logger.dart';
 import 'util/dio_services.dart';
 import 'util/global_api_field.dart';
@@ -32,6 +33,18 @@ class NoticeApi {
     } catch (e) {
       logger.e(e.toString());
       return [];
+    }
+  }
+
+  ///<h2>11-2API | 공지사항 세부 내용 조회</h2>
+  static Future<NoticeDetail?> getNoticeDetail({required int noticeId}) async {
+    try {
+      Response response = await DioServices().to().get("/notices/${noticeId}");
+
+      return NoticeDetail.fromJson(response.data[RESULT]);
+    } catch (e) {
+      logger.e(e.toString());
+      return null;
     }
   }
 }

@@ -11,6 +11,7 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../provider/service/auth_service.dart';
 import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
+import '../../../util/const/style/global_logger.dart';
 
 class UserPhoneScreen extends GetView<UserPhoneController> {
   const UserPhoneScreen({super.key});
@@ -48,33 +49,39 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                                 textController:
                                     controller.phoneController.value,
                                 onChange: (text) async {
-                                  if (text !=
-                                          AuthService
-                                              .to.myProfile.value.phone &&
-                                      text != "" &&
+                                  if (text != "" &&
                                       RegExp(r'^01[016789]?\d{3,4}\d{4}$')
                                           .hasMatch(text)) {
                                     controller.phoneChange.value = true;
+                                    logger.d(
+                                        "변경할 번호: $text  ${controller.phoneChange.value}");
                                   }
-
                                   controller.phoneChange.value = false;
                                 }),
                           ),
                           SizedBox(
                             width: 10.w,
                           ),
-                          CommonButton.phone(
-                            isActive: controller.phoneChange.value,
-                            onTap: () async {
-                              controller.newPhone.value =
-                                  controller.phoneController.value.text;
-                              controller.isPhoneValid.value =
-                                  await MypageApi.getPhoneValidCode(
-                                      phone: controller.newPhone.value);
-                              if (controller.isPhoneValid.value) {
-                                Fluttertoast.showToast(msg: "인증번호가 발송되었습니다");
-                              }
-                            },
+                          Obx(
+                            ()=> CommonButton.phone(
+                              isActive: controller.phoneChange.value,
+                              onTap: () async {
+                                controller.newPhone.value =
+                                    controller.phoneController.value.text;
+                                if (controller.newPhone.value ==
+                                    AuthService.to.myProfile.value.phone) {
+                                  Fluttertoast.showToast(
+                                      msg: "등록된 핸드폰과 같은 번호입니다");
+                                } else {
+                                  controller.isPhoneValid.value =
+                                      await MypageApi.getPhoneValidCode(
+                                          phone: controller.newPhone.value);
+                                  if (controller.isPhoneValid.value) {
+                                    Fluttertoast.showToast(msg: "인증번호가 발송되었습니다");
+                                  }
+                                }
+                              },
+                            ),
                           ),
                         ],
                       ),

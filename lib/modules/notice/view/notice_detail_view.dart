@@ -21,9 +21,9 @@ class NoticeDetailScreen extends GetView<NoticeDetailController> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CommonListItem(
-              category: "알림 소분류",
-              title: "알림 제목",
-              date: "2023.04.13",
+              category: controller.noticeDetail.value.notifcieInfo.noticeType,
+              title: controller.noticeDetail.value.notifcieInfo.title,
+              date: controller.noticeDetail.value.notifcieInfo.noticeDate,
               onTap: () async {
                 // Get.toNamed(Routes.notice_detail);
               },
@@ -35,6 +35,7 @@ class NoticeDetailScreen extends GetView<NoticeDetailController> {
                 color: Colors.grey,
               ),
             ),
+            //TODO: controller.noticeDetail.value.noticeType에 따라 이미지, 텍스트
             Text("텍스트")
           ]),
         ));

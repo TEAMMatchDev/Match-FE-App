@@ -1,3 +1,6 @@
+import 'package:match/model/notice/notice.dart';
+import 'package:match/model/notice_detail/notice_detail.dart';
+
 import '../../model/comment/comment.dart';
 import '../../model/flame_detail/flame_detail.dart';
 import '../../model/match_history/match_history.dart';
@@ -93,10 +96,17 @@ var tmpMatchPay = MatchPay(
     amount: 3000,
     regularPayId: 4,
     payDate: 18);
-var tmpProfile  = Profile(
-    profileImgUrl: "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
+var tmpProfile = Profile(
+    profileImgUrl:
+        "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
     name: "임현우",
+    nickname: "test",
     socialType: "NORMAL",
     email: "gusdn8926@naver.com",
-    phone: "01049177672"
-);
+    phone: "01049177672");
+var tmpNoticeDetail = NoticeDetail(
+    notifcieInfo: Notice(
+        noticeId: 1, noticeType: '소분류', noticeDate: "2023.10.20", title: "fds"),
+    noticeContents: [
+      NoticeContent(contentId: 1, contentsType: "CONTENTS", cotents: "fds")
+    ]);

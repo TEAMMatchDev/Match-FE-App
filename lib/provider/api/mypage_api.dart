@@ -22,9 +22,10 @@ class MypageApi {
   ///<h2>6-2API | 닉네임 변경 </h2>
   static Future<bool> setNickname({required String nickName}) async {
     try {
-      Response response = await DioServices().to().patch("/users/profile",
-          data: {"name": nickName},
-          options: Options(contentType: 'multipart/form-data'));
+      Response response = await DioServices().to().patch(
+        "/users/profile",
+        data: {"name": nickName, "multipart": null},
+      );
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
@@ -51,9 +52,10 @@ class MypageApi {
     required String phone,
   }) async {
     try {
-      Response response = await DioServices().to().post("/auth/check/phone",
-          data: {"phone": phone, "code": code});
-      if(!response.data[SUCCESS]){
+      Response response = await DioServices()
+          .to()
+          .post("/auth/check/phone", data: {"phone": phone, "code": code});
+      if (!response.data[SUCCESS]) {
         Fluttertoast.showToast(msg: response.data[MSG]);
         logger.e(response.data[CODE]);
       }
@@ -72,7 +74,7 @@ class MypageApi {
     try {
       Response response = await DioServices().to().post("/users/phone",
           data: {"oldPhone": oldPhone, "newPhone": newPhone});
-      if(!response.data[SUCCESS]){
+      if (!response.data[SUCCESS]) {
         Fluttertoast.showToast(msg: response.data[MSG]);
         logger.e(response.data[CODE]);
       }
