@@ -99,7 +99,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
                   ),
                   SizedBox(height: 16.h),
-                  PayDateButtonRadioButtons(),
+                  PayDateRadioButtons(),
                   SizedBox(height: 56.h),
                 ],
               ),
