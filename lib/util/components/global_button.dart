@@ -75,7 +75,7 @@ class CommonButton extends StatelessWidget {
       bool isActive = false,
       required Future<void> Function() onTap}) {
     return CommonButton(
-      onTap: onTap,
+      onTap: isActive ? onTap : () async {},
       text: text,
       backgroundColor: AppColors.black,
       textColor: AppColors.white,
@@ -90,7 +90,7 @@ class CommonButton extends StatelessWidget {
       bool isActive = false,
       required Future<void> Function() onTap}) {
     return CommonButton(
-      onTap: onTap,
+      onTap: isActive ? onTap : () async {},
       text: text,
       backgroundColor: isActive ? AppColors.black : AppColors.grey0,
       textColor: isActive ? AppColors.white : AppColors.grey2,
@@ -105,7 +105,7 @@ class CommonButton extends StatelessWidget {
       bool isActive = false,
       required Future<void> Function() onTap}) {
     return CommonButton(
-      onTap: onTap,
+      onTap: isActive ? onTap : () async {},
       text: text,
       backgroundColor: isActive ? AppColors.black : AppColors.grey0,
       textColor: isActive ? AppColors.white : AppColors.grey2,

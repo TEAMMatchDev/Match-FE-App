@@ -31,7 +31,7 @@ class NoticeScreen extends GetView<NoticeController> {
                             color: AppColors.grey8),
                       ),
                       TextSpan(
-                        text: " 22",
+                        text: " ${controller.totalNotice.value}",
                         style: AppTextStyles.T1Bold14.copyWith(
                             color: AppColors.primary500),
                       ),
@@ -41,21 +41,23 @@ class NoticeScreen extends GetView<NoticeController> {
               ),
               ListView.separated(
                 shrinkWrap: true,
-                itemCount: 3,
+                itemCount: controller.noticeList.length,
                 itemBuilder: (context, index) {
+                  final notice = controller.noticeList[index];
                   return CommonListItem(
-                    category: "공지사항 소분류",
-                    title: "알림 제목",
-                    date: "2023.04.13",
+                    category: notice.noticeType,
+                    title: notice.title,
+                    date: notice.noticeDate,
                     onTap: () async {
-                      Get.toNamed(Routes.notice_detail, arguments: {"id": 1});
+                      Get.toNamed(Routes.notice_detail,
+                          arguments: {"id": notice.noticeId});
                     },
                   );
                 },
                 separatorBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: 12.h),
-                    child: Divider(
+                    child: const Divider(
                       height: 1,
                       color: Colors.grey,
                     ),
