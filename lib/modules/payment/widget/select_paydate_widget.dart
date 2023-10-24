@@ -32,16 +32,16 @@ class PayDateButton extends StatelessWidget {
         height: 46.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: isSelected ? AppColors.grey10 : AppColors.white,
+          color: isSelected ? AppColors.grey9 : AppColors.white,
           border: Border.all(
-            color: isSelected ? AppColors.grey10 : AppColors.grey1,
+            color: isSelected ? AppColors.grey9 : AppColors.grey1,
           ),
         ),
         child: Center(
           child: Text(
             text,
-            style: AppTextStyles.T1Bold13.copyWith(
-              color: isSelected ? AppColors.white : AppColors.grey10,
+            style: AppTextStyles.T1Bold16.copyWith(
+              color: isSelected ? AppColors.white : AppColors.grey9,
             ),
             textAlign: TextAlign.center,
           ),

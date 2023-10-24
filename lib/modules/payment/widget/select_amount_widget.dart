@@ -37,7 +37,7 @@ class AmountButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: AppTextStyles.T1Bold13.copyWith(
+            style: AppTextStyles.T1Bold16.copyWith(
               color: isSelected ? AppColors.white : AppColors.grey10,
             ),
             textAlign: TextAlign.center,
