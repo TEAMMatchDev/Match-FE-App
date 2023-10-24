@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
+import 'package:match/util/components/global_checkbox.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
@@ -17,6 +18,12 @@ class PaymentMethodScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context){
+    List<String> payAgreeStringList = [
+      '결제대행 서비스 이용약관 동의',
+      '개인 정보 제 3자 정보 제공 동의',
+    ];
+
+
     return  Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -96,6 +103,8 @@ class PaymentMethodScreen extends GetView<PaymentController> {
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                 ),
                 SizedBox(height: 16.h),
+
+                CheckBoxExample(stringList: payAgreeStringList),
 
 
 

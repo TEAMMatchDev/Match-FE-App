@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_statu.dart';
 import 'package:match/modules/signIn/view/auth_able_view.dart';
 import 'package:match/modules/signIn/view/signup_user_mail_view.dart';
-import 'package:match/modules/signIn/widget/checkbox_widget.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
+import 'package:match/util/components/global_checkbox.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../util/components/global_app_bar.dart';
@@ -27,6 +27,14 @@ class AgreementScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context){
+    List<String> agreementStringList = [
+      '[필수] MATCH 이용약관 동의',
+      '[필수] 개인정보 수집 및 이용 동의',
+      '[필수] 만 14세 이상',
+      '[선택] 마케팅 목적의 개인정보 수집 및 이용 동의',
+      '[선택] 기부 진행사항 등 광고성 앱 푸시 알림 수신 동의',
+    ];
+
     return  Scaffold(
       appBar: CommonAppBar.basic("이용약관"),
       body: Column(
@@ -57,7 +65,7 @@ class AgreementScreen extends GetView<LoginController> {
                       ),
                       SizedBox(height: 40.h),
 
-                      CheckBoxExample(),
+                      CheckBoxExample(stringList: agreementStringList), //agreementStringList
                     ],
                   ),
                 )
