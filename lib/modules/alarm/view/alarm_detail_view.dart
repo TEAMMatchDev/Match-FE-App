@@ -24,7 +24,6 @@ class AlarmDetailScreen extends GetView<AlarmDetailController> {
               title: "알림 제목",
               date: "2023.04.13",
               onTap: () async {
-                Get.to(() => AlarmDetailScreen());
               },
             ),
             Padding(

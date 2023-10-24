@@ -9,7 +9,7 @@ class Profile with _$Profile {
   const factory Profile({
     required String profileImgUrl,
     required String name,
-    required String nickname,
+    required String nickName,
     required String socialType,
     required String email,
     required String phone,

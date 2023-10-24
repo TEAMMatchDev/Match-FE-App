@@ -103,7 +103,7 @@ var tmpProfile = const Profile(
     profileImgUrl:
         "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
     name: "임현우",
-    nickname: "test",
+    nickName: "test",
     socialType: "NORMAL",
     email: "gusdn8926@naver.com",
     phone: "01049177672");

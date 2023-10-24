@@ -16,7 +16,7 @@ class NotificationApi {
       if (!getMore) {
         notification.currentpage = 0;
       }
-      Response response = await DioServices().to().get("/events",
+      Response response = await DioServices().to().get("/notifications",
           queryParameters: {
             "page": notification.currentpage,
             "size": PAGINATION_SIZE
@@ -25,10 +25,10 @@ class NotificationApi {
       notification.isLast = response.data[RESULT][LAST];
 
       logger.d(
-          "Notification pagination 정보: totalCnt:${notification.totalCnt}, currentPage:${event.currentpage} isLast:${event.isLast}");
+          "Notification pagination 정보: totalCnt:${notification.totalCnt}, currentPage:${notification.currentpage} isLast:${notification.isLast}");
 
       return List.generate(
-          response.data[RESULT][CONTENTS].length,
+          response.data[RESULT][CONTENTS][NOTIFICATIONS].length,
           (index) =>
               Notification.fromJson(response.data[RESULT][CONTENTS][NOTIFICATIONS][index]));
     } catch (e) {

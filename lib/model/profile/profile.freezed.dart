@@ -22,7 +22,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 mixin _$Profile {
   String get profileImgUrl => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get nickname => throw _privateConstructorUsedError;
+  String get nickName => throw _privateConstructorUsedError;
   String get socialType => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $ProfileCopyWith<$Res> {
   $Res call(
       {String profileImgUrl,
       String name,
-      String nickname,
+      String nickName,
       String socialType,
       String email,
       String phone});
@@ -61,7 +61,7 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   $Res call({
     Object? profileImgUrl = null,
     Object? name = null,
-    Object? nickname = null,
+    Object? nickName = null,
     Object? socialType = null,
     Object? email = null,
     Object? phone = null,
@@ -75,9 +75,9 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      nickname: null == nickname
-          ? _value.nickname
-          : nickname // ignore: cast_nullable_to_non_nullable
+      nickName: null == nickName
+          ? _value.nickName
+          : nickName // ignore: cast_nullable_to_non_nullable
               as String,
       socialType: null == socialType
           ? _value.socialType
@@ -105,7 +105,7 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   $Res call(
       {String profileImgUrl,
       String name,
-      String nickname,
+      String nickName,
       String socialType,
       String email,
       String phone});
@@ -124,7 +124,7 @@ class __$$ProfileImplCopyWithImpl<$Res>
   $Res call({
     Object? profileImgUrl = null,
     Object? name = null,
-    Object? nickname = null,
+    Object? nickName = null,
     Object? socialType = null,
     Object? email = null,
     Object? phone = null,
@@ -138,9 +138,9 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      nickname: null == nickname
-          ? _value.nickname
-          : nickname // ignore: cast_nullable_to_non_nullable
+      nickName: null == nickName
+          ? _value.nickName
+          : nickName // ignore: cast_nullable_to_non_nullable
               as String,
       socialType: null == socialType
           ? _value.socialType
@@ -164,7 +164,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
   const _$ProfileImpl(
       {required this.profileImgUrl,
       required this.name,
-      required this.nickname,
+      required this.nickName,
       required this.socialType,
       required this.email,
       required this.phone});
@@ -177,7 +177,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
   @override
   final String name;
   @override
-  final String nickname;
+  final String nickName;
   @override
   final String socialType;
   @override
@@ -187,7 +187,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Profile(profileImgUrl: $profileImgUrl, name: $name, nickname: $nickname, socialType: $socialType, email: $email, phone: $phone)';
+    return 'Profile(profileImgUrl: $profileImgUrl, name: $name, nickName: $nickName, socialType: $socialType, email: $email, phone: $phone)';
   }
 
   @override
@@ -197,7 +197,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
       ..add(DiagnosticsProperty('type', 'Profile'))
       ..add(DiagnosticsProperty('profileImgUrl', profileImgUrl))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('nickname', nickname))
+      ..add(DiagnosticsProperty('nickName', nickName))
       ..add(DiagnosticsProperty('socialType', socialType))
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('phone', phone));
@@ -211,8 +211,8 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
             (identical(other.profileImgUrl, profileImgUrl) ||
                 other.profileImgUrl == profileImgUrl) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.nickname, nickname) ||
-                other.nickname == nickname) &&
+            (identical(other.nickName, nickName) ||
+                other.nickName == nickName) &&
             (identical(other.socialType, socialType) ||
                 other.socialType == socialType) &&
             (identical(other.email, email) || other.email == email) &&
@@ -222,7 +222,7 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, profileImgUrl, name, nickname, socialType, email, phone);
+      runtimeType, profileImgUrl, name, nickName, socialType, email, phone);
 
   @JsonKey(ignore: true)
   @override
@@ -242,7 +242,7 @@ abstract class _Profile implements Profile {
   const factory _Profile(
       {required final String profileImgUrl,
       required final String name,
-      required final String nickname,
+      required final String nickName,
       required final String socialType,
       required final String email,
       required final String phone}) = _$ProfileImpl;
@@ -254,7 +254,7 @@ abstract class _Profile implements Profile {
   @override
   String get name;
   @override
-  String get nickname;
+  String get nickName;
   @override
   String get socialType;
   @override
