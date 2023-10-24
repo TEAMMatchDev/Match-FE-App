@@ -22,6 +22,7 @@ class PaymentMethodScreen extends GetView<PaymentController> {
       '결제대행 서비스 이용약관 동의',
       '개인 정보 제 3자 정보 제공 동의',
     ];
+    String title = '결제 내용에 모두 동의합니다.';
 
 
     return  Scaffold(
@@ -104,7 +105,7 @@ class PaymentMethodScreen extends GetView<PaymentController> {
                 ),
                 SizedBox(height: 16.h),
 
-                CheckBoxExample(stringList: payAgreeStringList),
+                CheckBoxExample(stringList: payAgreeStringList, title: title),
 
 
 

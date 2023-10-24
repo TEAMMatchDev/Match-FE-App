@@ -14,19 +14,21 @@ class CheckBoxItem {
 
 class CheckBoxExample extends StatefulWidget {
   final List<String> stringList;
+  final String title;
 
-  CheckBoxExample({required this.stringList});
+  CheckBoxExample({required this.stringList, required this.title});
 
   @override
-  _CheckBoxExampleState createState() => _CheckBoxExampleState(stringList: stringList);
+  _CheckBoxExampleState createState() => _CheckBoxExampleState(stringList: stringList, title: title);
 }
 
 class _CheckBoxExampleState extends State<CheckBoxExample> {
   bool selectAllValue = false;
   List<bool> checkBoxValues = [false, false, false, false, false];
   List<String> stringList;
+  String title;
 
-  _CheckBoxExampleState({required this.stringList}) {
+  _CheckBoxExampleState({required this.stringList, required this.title}) {
     checkBoxValues = List.filled(stringList.length, false);
   }
 
@@ -54,6 +56,7 @@ class _CheckBoxExampleState extends State<CheckBoxExample> {
           onSelectAllChanged: onSelectAllChanged,
           onSingleCheckBoxChanged: onSingleCheckBoxChanged,
           stringList: stringList,
+          title: title,
         ),
         // TODO - 선택된 항목 확인하는 버튼 ElevatedButton
         // ElevatedButton(
@@ -79,6 +82,7 @@ class CheckBoxWidget extends StatefulWidget {
   final ValueChanged<bool?> onSelectAllChanged;
   final ValueChanged<CheckBoxItem> onSingleCheckBoxChanged;
   final List<String> stringList; // 동의 리스트
+  final String title; //동의 항목 제목
 
   CheckBoxWidget({
     required this.selectAllValue,
@@ -86,6 +90,7 @@ class CheckBoxWidget extends StatefulWidget {
     required this.onSelectAllChanged,
     required this.onSingleCheckBoxChanged,
     required this.stringList, // 동의 리스트
+    required this.title, //동의 항목 제목
   });
 
   @override
@@ -100,6 +105,7 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
         SelectAllCheckBox(
           value: widget.selectAllValue,
           onChanged: widget.onSelectAllChanged,
+          title: widget.title,
         ),
         SizedBox(height: 21.5.h),
         Divider(
@@ -177,10 +183,12 @@ class _SingleCheckBoxState extends State<SingleCheckBox> {
 class SelectAllCheckBox extends StatefulWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
+  final String title;
 
   SelectAllCheckBox({
     required this.value,
     required this.onChanged,
+    required this.title,
   });
 
   @override
@@ -208,7 +216,7 @@ class _SelectAllCheckBoxState extends State<SelectAllCheckBox> {
           ),
           SizedBox(width: 6.w),
           Text(
-            '모두 동의',
+            widget.title,
             style: AppTextStyles.T1Bold14,
           ),
         ],

@@ -34,6 +34,7 @@ class AgreementScreen extends GetView<LoginController> {
       '[선택] 마케팅 목적의 개인정보 수집 및 이용 동의',
       '[선택] 기부 진행사항 등 광고성 앱 푸시 알림 수신 동의',
     ];
+    String title = '모두 동의';
 
     return  Scaffold(
       appBar: CommonAppBar.basic("이용약관"),
@@ -65,7 +66,7 @@ class AgreementScreen extends GetView<LoginController> {
                       ),
                       SizedBox(height: 40.h),
 
-                      CheckBoxExample(stringList: agreementStringList), //agreementStringList
+                      CheckBoxExample(stringList: agreementStringList, title: title), //agreementStringList
                     ],
                   ),
                 )
