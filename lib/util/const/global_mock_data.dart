@@ -2,6 +2,9 @@ import 'package:match/model/notice/notice.dart';
 import 'package:match/model/notice_detail/notice_detail.dart';
 
 import '../../model/comment/comment.dart';
+import '../../model/content/content.dart';
+import '../../model/event/event.dart';
+import '../../model/event_detail/event_detail.dart';
 import '../../model/flame_detail/flame_detail.dart';
 import '../../model/match_history/match_history.dart';
 import '../../model/match_pay/match_pay.dart';
@@ -9,7 +12,7 @@ import '../../model/profile/profile.dart';
 import '../../model/project_detail/project_detail.dart';
 import '../../model/project_history.dart/project_history.dart';
 
-var tmpFlameDetail = FlameDetail(
+var tmpFlameDetail = const FlameDetail(
   imgUrl: "",
   flameType: "",
   inherenceName: "",
@@ -17,7 +20,7 @@ var tmpFlameDetail = FlameDetail(
   amount: 0,
   sequence: 0,
 );
-var tmpProjectDetail = ProjectDetail(
+var tmpProjectDetail = const ProjectDetail(
     projectId: 1,
     thumbNail:
         "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png",
@@ -64,7 +67,7 @@ var tmpProjectDetail = ProjectDetail(
     totalDonationCnt: 4,
     kind: "DOG",
     regularStatus: "REGULAR");
-var tmpProjectHistory = ProjectHistory(
+var tmpProjectHistory = const ProjectHistory(
     historyId: 18,
     historyStatus: "CREATE",
     histories: "임현우님의 불꽃이 탄생했습니다.",
@@ -74,14 +77,14 @@ var tmpProjectHistory = ProjectHistory(
     nickname: "임현우");
 var tmpMatchHistory = <MatchHistory>[
   //TODO: 테스트용 데이터 | API 연결 이후 삭제
-  MatchHistory(
+  const MatchHistory(
       historyId: 2,
       historyStatus: "CREATE",
       histories: "임현우님의 불꽃이 탄생했습니다.",
       historyDate: "2023.9.18",
       flameImage: null,
       donationHistoryImages: []),
-  MatchHistory(
+  const MatchHistory(
       historyId: 7,
       historyStatus: "CREATE",
       histories: "임현우님의 불꽃이 탄생했습니다.",
@@ -89,14 +92,14 @@ var tmpMatchHistory = <MatchHistory>[
       flameImage: null,
       donationHistoryImages: [])
 ];
-var tmpMatchPay = MatchPay(
+var tmpMatchPay = const MatchPay(
     imgUrl:
         "https://match-image.s3.ap-northeast-2.amazonaws.com/project/3/f33573ca-ed8e-4c50-ad35-cfb4e18899bf.png",
     projectTitle: "프로젝트 타이틀",
     amount: 3000,
     regularPayId: 4,
     payDate: 18);
-var tmpProfile = Profile(
+var tmpProfile = const Profile(
     profileImgUrl:
         "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
     name: "임현우",
@@ -104,9 +107,21 @@ var tmpProfile = Profile(
     socialType: "NORMAL",
     email: "gusdn8926@naver.com",
     phone: "01049177672");
-var tmpNoticeDetail = NoticeDetail(
-    notifcieInfo: Notice(
+var tmpNoticeDetail = const NoticeDetail(
+    noticeInfo: Notice(
         noticeId: 1, noticeType: '소분류', noticeDate: "2023.10.20", title: "fds"),
     noticeContents: [
-      NoticeContent(contentId: 1, contentsType: "CONTENTS", cotents: "fds")
+      Contents(contentId: 1, contentsType: "CONTENTS", cotents: "fds")
+    ]);
+
+var tmpEventDetail = const EventDetail(
+    eventInfo: EventInfo(
+      eventId: 1,
+      startDate: "2023.10.02",
+      endDate: "2023.10.20",
+      title: "fds",
+      smallTitle: "fds",
+    ),
+    eventContents: [
+      Contents(contentId: 1, contentsType: "CONTENTS", cotents: "fds")
     ]);

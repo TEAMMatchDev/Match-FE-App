@@ -43,9 +43,9 @@ class EventScreen extends GetView<EventController> {
             width: double.infinity,
             height: double.infinity,
             child: CarouselSlider.builder(
-              itemCount: 2,
+              itemCount: controller.eventList.length,
               itemBuilder: (context, index, realIndex) {
-                return EventWidget(eventId: 1);
+                return EventWidget(event: controller.eventList[index]);
               },
               options: CarouselOptions(
                   autoPlay: false,

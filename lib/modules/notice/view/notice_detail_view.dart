@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../provider/routes/routes.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/components/global_widget.dart';
 import '../controller/notice_detail_controller.dart';
@@ -21,9 +20,9 @@ class NoticeDetailScreen extends GetView<NoticeDetailController> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CommonListItem(
-              category: controller.noticeDetail.value.notifcieInfo.noticeType,
-              title: controller.noticeDetail.value.notifcieInfo.title,
-              date: controller.noticeDetail.value.notifcieInfo.noticeDate,
+              category: controller.noticeDetail.value.noticeInfo.noticeType,
+              title: controller.noticeDetail.value.noticeInfo.title,
+              date: controller.noticeDetail.value.noticeInfo.noticeDate,
               onTap: () async {
                 // Get.toNamed(Routes.notice_detail);
               },
