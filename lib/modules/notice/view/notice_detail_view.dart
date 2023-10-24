@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/components/global_widget.dart';
+import '../../../util/const/style/global_text_styles.dart';
 import '../controller/notice_detail_controller.dart';
 
 class NoticeDetailScreen extends GetView<NoticeDetailController> {
@@ -34,8 +35,17 @@ class NoticeDetailScreen extends GetView<NoticeDetailController> {
                 color: Colors.grey,
               ),
             ),
-            //TODO: controller.noticeDetail.value.noticeType에 따라 이미지, 텍스트
-            Text("텍스트")
+            ...controller.noticeDetail.value.noticeContents.map((content) {
+              return content.contentsType == "IMG"
+                  ? Image.network(
+                      content.contents,
+                      width: double.infinity,
+                    )
+                  : Text(
+                      content.contents,
+                      style: AppTextStyles.S1SemiBold14,
+                    );
+            }).toList(),
           ]),
         ));
   }

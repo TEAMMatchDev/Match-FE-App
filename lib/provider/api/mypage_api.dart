@@ -24,8 +24,11 @@ class MypageApi {
     try {
       Response response = await DioServices().to().patch(
         "/users/profile",
-        data: {"name": nickName, "multipart": null},
+        data: {"name": nickName},
       );
+      if (!response.data[SUCCESS]) {
+        Fluttertoast.showToast(msg: response.data[MSG]);
+      }
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
@@ -39,9 +42,11 @@ class MypageApi {
       Response response = await DioServices()
           .to()
           .get("/auth/phone", queryParameters: {"phone": phone});
+      if(!response.data[SUCCESS]){
+        Fluttertoast.showToast(msg: response.data[MSG]);
+      }
       return response.data[SUCCESS];
     } catch (e) {
-      logger.e(e.toString());
       return false;
     }
   }

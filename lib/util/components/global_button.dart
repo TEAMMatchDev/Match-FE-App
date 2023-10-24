@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/util/const/style/global_color.dart';
 
+import '../const/style/global_logger.dart';
 import '../const/style/global_text_styles.dart';
 
 class CommonButton extends StatelessWidget {

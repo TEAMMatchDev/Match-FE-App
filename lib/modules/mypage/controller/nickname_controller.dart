@@ -5,6 +5,8 @@ import '../../../provider/service/auth_service.dart';
 
 class NickNameController extends GetxController {
   Rx<TextEditingController> nicknameController =
-  TextEditingController(text: AuthService.to.myProfile.value.name).obs;
+  TextEditingController(text: AuthService.to.myProfile.value.nickName).obs;
+
+  Rx<String> newNickname = "".obs;
   Rx<bool> canChange = false.obs;
 }
