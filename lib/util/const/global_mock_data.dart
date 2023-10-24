@@ -112,7 +112,7 @@ var tmpNoticeDetail = const NoticeDetail(
     noticeInfo: Notice(
         noticeId: 1, noticeType: '소분류', noticeDate: "2023.10.20", title: "fds"),
     noticeContents: [
-      Contents(contentId: 1, contentsType: "CONTENTS", cotents: "fds")
+      Contents(contentId: 1, contentsType: "CONTENTS", contents: "fds")
     ]);
 
 var tmpEventDetail = const EventDetail(
@@ -124,7 +124,7 @@ var tmpEventDetail = const EventDetail(
       smallTitle: "fds",
     ),
     eventContents: [
-      Contents(contentId: 1, contentsType: "CONTENTS", cotents: "fds")
+      Contents(contentId: 1, contentsType: "CONTENTS", contents: "fds")
     ]);
 var tmpNotificationPermission= const NotificationPermission(
 serviceAlarm: false, eventAlarm: false);

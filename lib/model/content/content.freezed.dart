@@ -22,7 +22,7 @@ Contents _$ContentsFromJson(Map<String, dynamic> json) {
 mixin _$Contents {
   int get contentId => throw _privateConstructorUsedError;
   String get contentsType => throw _privateConstructorUsedError;
-  String get cotents => throw _privateConstructorUsedError;
+  String get contents => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $ContentsCopyWith<$Res> {
   factory $ContentsCopyWith(Contents value, $Res Function(Contents) then) =
       _$ContentsCopyWithImpl<$Res, Contents>;
   @useResult
-  $Res call({int contentId, String contentsType, String cotents});
+  $Res call({int contentId, String contentsType, String contents});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$ContentsCopyWithImpl<$Res, $Val extends Contents>
   $Res call({
     Object? contentId = null,
     Object? contentsType = null,
-    Object? cotents = null,
+    Object? contents = null,
   }) {
     return _then(_value.copyWith(
       contentId: null == contentId
@@ -64,9 +64,9 @@ class _$ContentsCopyWithImpl<$Res, $Val extends Contents>
           ? _value.contentsType
           : contentsType // ignore: cast_nullable_to_non_nullable
               as String,
-      cotents: null == cotents
-          ? _value.cotents
-          : cotents // ignore: cast_nullable_to_non_nullable
+      contents: null == contents
+          ? _value.contents
+          : contents // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -80,7 +80,7 @@ abstract class _$$ContentsImplCopyWith<$Res>
       __$$ContentsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int contentId, String contentsType, String cotents});
+  $Res call({int contentId, String contentsType, String contents});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$$ContentsImplCopyWithImpl<$Res>
   $Res call({
     Object? contentId = null,
     Object? contentsType = null,
-    Object? cotents = null,
+    Object? contents = null,
   }) {
     return _then(_$ContentsImpl(
       contentId: null == contentId
@@ -107,9 +107,9 @@ class __$$ContentsImplCopyWithImpl<$Res>
           ? _value.contentsType
           : contentsType // ignore: cast_nullable_to_non_nullable
               as String,
-      cotents: null == cotents
-          ? _value.cotents
-          : cotents // ignore: cast_nullable_to_non_nullable
+      contents: null == contents
+          ? _value.contents
+          : contents // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -121,7 +121,7 @@ class _$ContentsImpl with DiagnosticableTreeMixin implements _Contents {
   const _$ContentsImpl(
       {required this.contentId,
       required this.contentsType,
-      required this.cotents});
+      required this.contents});
 
   factory _$ContentsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContentsImplFromJson(json);
@@ -131,11 +131,11 @@ class _$ContentsImpl with DiagnosticableTreeMixin implements _Contents {
   @override
   final String contentsType;
   @override
-  final String cotents;
+  final String contents;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Contents(contentId: $contentId, contentsType: $contentsType, cotents: $cotents)';
+    return 'Contents(contentId: $contentId, contentsType: $contentsType, contents: $contents)';
   }
 
   @override
@@ -145,7 +145,7 @@ class _$ContentsImpl with DiagnosticableTreeMixin implements _Contents {
       ..add(DiagnosticsProperty('type', 'Contents'))
       ..add(DiagnosticsProperty('contentId', contentId))
       ..add(DiagnosticsProperty('contentsType', contentsType))
-      ..add(DiagnosticsProperty('cotents', cotents));
+      ..add(DiagnosticsProperty('contents', contents));
   }
 
   @override
@@ -157,13 +157,14 @@ class _$ContentsImpl with DiagnosticableTreeMixin implements _Contents {
                 other.contentId == contentId) &&
             (identical(other.contentsType, contentsType) ||
                 other.contentsType == contentsType) &&
-            (identical(other.cotents, cotents) || other.cotents == cotents));
+            (identical(other.contents, contents) ||
+                other.contents == contents));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, contentId, contentsType, cotents);
+      Object.hash(runtimeType, contentId, contentsType, contents);
 
   @JsonKey(ignore: true)
   @override
@@ -183,7 +184,7 @@ abstract class _Contents implements Contents {
   const factory _Contents(
       {required final int contentId,
       required final String contentsType,
-      required final String cotents}) = _$ContentsImpl;
+      required final String contents}) = _$ContentsImpl;
 
   factory _Contents.fromJson(Map<String, dynamic> json) =
       _$ContentsImpl.fromJson;
@@ -193,7 +194,7 @@ abstract class _Contents implements Contents {
   @override
   String get contentsType;
   @override
-  String get cotents;
+  String get contents;
   @override
   @JsonKey(ignore: true)
   _$$ContentsImplCopyWith<_$ContentsImpl> get copyWith =>

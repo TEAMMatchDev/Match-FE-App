@@ -44,24 +44,26 @@ class EventScreen extends GetView<EventController> {
                 .copyWith(bottom: 17.h),
             width: double.infinity,
             height: double.infinity,
-            child: CarouselSlider.builder(
-              itemCount: controller.eventList.length,
-              itemBuilder: (context, index, realIndex) {
-                if (index % (PAGINATION_SIZE - 1) == 0 &&
-                    index != 0) {
-                  logger.d("1. getMore 호출!");
-                  Future.wait({
-                    controller.getMoreNotice(
-                        index: index ~/ (PAGINATION_SIZE - 1))
-                  });
-                }
-                return EventWidget(event: controller.eventList[index]);
-              },
-              options: CarouselOptions(
-                  autoPlay: false,
-                  aspectRatio: 299.w / 445.h,
-                  viewportFraction: 1,
-                  scrollDirection: Axis.vertical),
+            child: Obx(
+              ()=> CarouselSlider.builder(
+                itemCount: controller.eventList.length,
+                itemBuilder: (context, index, realIndex) {
+                  if (index % (PAGINATION_SIZE - 1) == 0 &&
+                      index != 0) {
+                    logger.d("1. getMore 호출!");
+                    Future.wait({
+                      controller.getMoreNotice(
+                          index: index ~/ (PAGINATION_SIZE - 1))
+                    });
+                  }
+                  return EventWidget(event: controller.eventList[index]);
+                },
+                options: CarouselOptions(
+                    autoPlay: false,
+                    aspectRatio: 299.w / 445.h,
+                    viewportFraction: 1,
+                    scrollDirection: Axis.vertical),
+              ),
             ),
           ),
         ),

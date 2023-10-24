@@ -18,7 +18,7 @@ class EventWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.toNamed(Routes.event_detail,
-            arguments: {"event_id": event.eventId});
+            arguments: {"eventId": event.eventId});
       },
       child: Container(
           width: double.infinity,
@@ -26,7 +26,7 @@ class EventWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.r),
             image: DecorationImage(
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               image: NetworkImage(event.thumbnail),
             ),
           ),

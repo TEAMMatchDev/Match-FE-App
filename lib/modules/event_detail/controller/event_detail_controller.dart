@@ -7,7 +7,6 @@ import '../../../model/event_detail/event_detail.dart';
 class EventDetailController extends GetxController {
   int eventId = Get.arguments['eventId'] ?? 0;
   Rx<EventDetail> eventDetail = tmpEventDetail.obs;
-
   @override
   void onInit() async {
     super.onInit();

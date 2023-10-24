@@ -9,7 +9,7 @@ class Contents with _$Contents {
   const factory Contents({
     required int contentId,
     required String contentsType,
-    required String cotents,
+    required String contents,
   }) = _Contents;
   factory Contents.fromJson(Map<String, dynamic> json) =>
       _$ContentsFromJson(json);
