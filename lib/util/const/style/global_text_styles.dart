@@ -24,7 +24,7 @@ class AppTextStyles {
     fontFamily: _defaultFontFamily,
     fontSize: 20.sp,
     height: _regularHeight,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
   );
 
   static var T1Bold18 = TextStyle(

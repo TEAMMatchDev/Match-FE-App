@@ -23,6 +23,13 @@ Widget TypeChip({required String type}) {
   );
 }
 
+Widget GreySizedBox() {
+  return Container(
+    color: AppColors.searchBackground,
+    height: 10.h,
+  );
+}
+
 Widget alarmButton() {
   return GestureDetector(
       onTap: () {

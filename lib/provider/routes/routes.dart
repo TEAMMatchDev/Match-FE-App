@@ -40,19 +40,28 @@ abstract class _Paths {
   /// 이벤트 화면
   static const event = "/event";
 
+  /// 이벤트 상세 화면
+  static const event_detail = "/event_detail";
+
   /// 마이페이지 화면
   static const mypage = "/mypage";
+
+  /// 닉네임 화면
+  static const nickname = "/nickname";
+
+  // 핸드폰 변경화면
+  static const phone = "/phone";
 
   ///알람 화면
   static const alarm = "/alarm";
 
-  ///알람 화면
+  ///알람 상세 화면
   static const alarm_detail = "/alarm_detail";
 
-  ///알람 화면
+  ///공지사항 화면
   static const notice = "/notice";
 
-  ///알람 화면
+  ///공지사항 상세 화면
   static const notice_detail = "/notice_detail";
 }
 
@@ -98,8 +107,17 @@ abstract class Routes {
   /// 이벤트 화면
   static const event = _Paths.event;
 
+  /// 이벤트 상세 화면
+  static const event_detail = _Paths.event_detail;
+
   /// 마이페이지 화면
   static const mypage = _Paths.mypage;
+
+  /// 닉네임 화면
+  static const nickname = _Paths.nickname;
+
+  /// 핸드폰 변경화면
+  static const phone = _Paths.phone;
 
   /// 공지사항 화면
   static const notice = _Paths.notice;

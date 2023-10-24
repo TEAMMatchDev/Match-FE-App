@@ -8,8 +8,11 @@ import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/donation_search/binding/donation_search_binding.dart';
 import 'package:match/modules/donation_search/view/donation_search_view.dart';
+import 'package:match/modules/event_detail/view/event_detail_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
+import 'package:match/modules/mypage/controller/nickname_controller.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
+import 'package:match/modules/mypage/view/nickname_edit_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
@@ -19,6 +22,8 @@ import 'package:match/modules/project/view/project_view.dart';
 import 'package:match/modules/login/binding/login_binding.dart';
 import 'package:match/modules/login/view/login_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
+import 'package:match/modules/user_phone/binding/user_phone_binding.dart';
+import 'package:match/modules/user_phone/view/user_phone_view.dart';
 
 import '../../modules/alarm/binding/alarm_detail_binding.dart';
 import '../../modules/alarm/view/alarm_detail_view.dart';
@@ -105,6 +110,15 @@ class Pages {
       popGesture: false,
     ),
     GetPage(
+      title: "이벤트 상세화면",
+      name: Routes.event_detail,
+      page: () => const EventDetailScreen(),
+      transition: Transition.noTransition,
+      binding: EventBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
       title: "마이페이지 화면",
       name: Routes.mypage,
       page: () => const MypageScreen(),
@@ -137,6 +151,24 @@ class Pages {
       page: () => const NoticeScreen(),
       transition: Transition.noTransition,
       binding: NoticeBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "닉네임 화면",
+      name: Routes.nickname,
+      page: () => NicknameEditScreen(),
+      transition: Transition.noTransition,
+      binding: MypageBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "핸드폰 번호 변경화면",
+      name: Routes.phone,
+      page: () => const UserPhoneScreen(),
+      transition: Transition.noTransition,
+      binding: UserPhoneBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
