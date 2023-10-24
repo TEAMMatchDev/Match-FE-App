@@ -22,9 +22,6 @@ class NumberInputFieldExample extends GetView {
           },
           isPlain: true,
         ),
-        Obx(() {
-          return Text("Input Value: ${inputValue.value}");
-        }),
       ],
     );
   }
@@ -46,9 +43,9 @@ class NumberInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 100.w, // GetX의 w 확장을 사용하여 가로 크기 설정
-      height: 46.h, // GetX의 h 확장을 사용하여 세로 크기 설정
+    return Container(
+      width: 100.w,
+      height: 46.h,
       child: TextField(
         controller: textController,
         decoration: InputDecoration(
@@ -58,7 +55,7 @@ class NumberInputField extends StatelessWidget {
           ),
           filled: isPlain,
           fillColor: isPlain ? AppColors.grey9 : AppColors.white, // 선택되어 활성화되면 배경색을 AppColors.grey9로, 비활성화면 white로 설정
-          contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide(

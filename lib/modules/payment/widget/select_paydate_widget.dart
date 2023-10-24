@@ -20,7 +20,6 @@ class PayDateButton extends StatelessWidget {
     required this.isSelected,
     required this.onPressed,
     this.isDirectInput = false, //기본적으로 직접입력 버튼 비활성화
-    required EdgeInsets margin,
   });
 
   @override
@@ -66,13 +65,12 @@ class _RadioButtonsState extends State<PayDateRadioButtons> {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         Container(
           margin: EdgeInsets.only(bottom: 16.h),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               for (var row in (selectedDateInt == 1 || selectedDateInt == 15) ? payDates : payDatesNew)
                 Column(
@@ -93,18 +91,18 @@ class _RadioButtonsState extends State<PayDateRadioButtons> {
                           print('선택된 날짜: ' + selectedDateInt.toString());
                         });
                       },
-                      margin: EdgeInsets.only(right: 10.w),
                     ),
                   ],
+                ),
+              if (selectedDateInt != 1 && selectedDateInt != 15)
+                Container(
+                  width: 100.w,
+                  height: 46.h,
+                  child: NumberInputFieldExample(),
                 ),
             ],
           ),
         ),
-        if (selectedDateInt != 1 && selectedDateInt != 15)
-          Container(
-            width: 200.0, // 원하는 너비 설정
-            child: NumberInputFieldExample(),
-          ),
         SizedBox(height: 16.h),
       ],
     );
