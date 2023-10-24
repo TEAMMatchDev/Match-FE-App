@@ -22,6 +22,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:match/util/method/get_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'provider/routes/pages.dart';
 import 'util/const/style/global_color.dart';
@@ -50,6 +51,13 @@ Future<void> initService() async {
 
   /// * GetStorage 초기화
   await GetStorage.init();
+  await setAlarm();
+  await DynamicLink.setUp();
+
+}
+
+///* fcm(알람) 관련 권한, 기기 등록 api, listener 등록
+Future<void> setAlarm()async{
 
   ///* alarm 관련 토큰 및 api
   if (GetStorageUtil.getToken(StorageKey.FCM_TOKEN) != null &&
@@ -64,10 +72,30 @@ Future<void> initService() async {
     logger.d(tmpResult);
   }
 
-  await DynamicLink.setUp();
-
+  ///* alarm 관련 permission 체크
+  if (await Permission.notification.isDenied) {
+    await Permission.notification.request();
+  }
+  ///* alarm listener 등록
+  FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
+    if (message != null) {
+      if (message.notification != null) {
+        logger.d(message.notification!.title);
+        logger.d(message.notification!.body);
+        logger.d(message.data["click_action"]);
+      }
+    }
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) {
+    if (message != null) {
+      if (message.notification != null) {
+        logger.d(message.notification!.title);
+        logger.d(message.notification!.body);
+        logger.d(message.data["click_action"]);
+      }
+    }
+  });
 }
-
 Future<String?> initFirebaseMsg() async {
   // FirebaseMessaging 인스턴스 초기화
   FirebaseMessaging messaging = FirebaseMessaging.instance;
