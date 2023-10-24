@@ -8,7 +8,7 @@ import '../../../util/const/style/global_logger.dart';
 class EventController extends GetxController {
   RxList<Event> eventList = <Event>[].obs;
 
-  Future<void> getMoreNotice(int index) async {
+  Future<void> getMoreNotice({required int index}) async {
     logger.d(
         "2:  총 페이지수 : ${EventApi.event.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
     if (!(EventApi.event.totalCnt ~/ PAGINATION_SIZE < index) &&

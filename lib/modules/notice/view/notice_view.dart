@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_widget.dart';
+import '../../../provider/api/util/global_api_field.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../util/const/style/global_color.dart';
+import '../../../util/const/style/global_logger.dart';
 import '../../../util/const/style/global_text_styles.dart';
 import '../controller/notice_controller.dart';
 
@@ -43,6 +45,13 @@ class NoticeScreen extends GetView<NoticeController> {
                 shrinkWrap: true,
                 itemCount: controller.noticeList.length,
                 itemBuilder: (context, index) {
+                  if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
+                    logger.d("1. getMore 호출!");
+                    Future.wait({
+                      controller.getMoreNotice(
+                          index: index ~/ (PAGINATION_SIZE - 1))
+                    });
+                  }
                   final notice = controller.noticeList[index];
                   return CommonListItem(
                     category: notice.noticeType,
