@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:match/modules/payment/view/payment_card_register_view.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -59,12 +61,14 @@ class _DualRadioButtonsState extends State<DualRadioButtons> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Material(
-              type: MaterialType.transparency,
-              child: Radio<String>(
+        InkWell(
+          onTap: () {
+            widget.onChanged(widget.option1);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Radio<String>(
                 value: widget.option1,
                 groupValue: widget.selectedOption,
                 onChanged: (value) {
@@ -73,16 +77,20 @@ class _DualRadioButtonsState extends State<DualRadioButtons> {
                 activeColor: AppColors.grey9,
                 visualDensity: VisualDensity(horizontal: -4.0),
               ),
-            ),
-            SvgPicture.asset(
-              iconDir + "payment/ic_rating_stick_1.svg",
-              width: 40.w,
-            ),
-            SizedBox(width: 8.w),
-            Text(widget.option1),
-          ],
+              SvgPicture.asset(
+                iconDir + "payment/ic_rating_stick_1.svg",
+                width: 40.w,
+              ),
+              SizedBox(width: 8.w),
+              Text(widget.option1),
+            ],
+          ),
         ),
-        Row(
+        InkWell(
+          onTap: () {
+            widget.onChanged(widget.option2);
+          },
+          child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Material( // Material 위젯으로 래핑
@@ -97,17 +105,24 @@ class _DualRadioButtonsState extends State<DualRadioButtons> {
                 visualDensity: VisualDensity(horizontal: -4.0),
               ),
             ),
-            Text(widget.option2),
-          ],
+              Text(widget.option2),
+            ],
+          ),
         ),
         if (widget.selectedOption == widget.option2)
           Column(
             children: [
               SizedBox(height: 23.h),
-              SvgPicture.asset(
-                iconDir + "payment/ic_card_reg.svg",
-                width: 263.w,
+              GestureDetector(
+                  onTap: () {
+                    Get.to(PaymentCardRegScreen());
+                  },
+                  child:SvgPicture.asset(
+                    iconDir + "payment/ic_card_reg.svg",
+                    width: 263.w,
+                  ),
               ),
+
               SizedBox(height: 20.h),
               Text(
                   '최초 1회 계좌 등록시 3초 만에 간편결제 가능',

@@ -13,8 +13,8 @@ import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
-class PaymentMethodScreen extends GetView<PaymentController> {
-  const PaymentMethodScreen({super.key});
+class PaymentCardRegScreen extends GetView<PaymentController> {
+  const PaymentCardRegScreen({super.key});
 
   @override
   Widget build(BuildContext context){
@@ -54,58 +54,16 @@ class PaymentMethodScreen extends GetView<PaymentController> {
               children: [
                 SizedBox(height: 24.h),
                 Text(
-                  '기부금 결제하기',
+                  '등록할 카드 선택하기',
                   style: AppTextStyles.T1Bold18,
                 ),
-                SizedBox(height: 23.h),
-                SvgPicture.asset(
-                  iconDir + "payment/ic_rating_stick_3.svg",
-                  width: 330.w,
-                ),
-                SizedBox(height: 30.h),
-                Text(
-                    '3. 결제 수단을 선택해주세요.',
-                    style: AppTextStyles.T1Bold15.copyWith(color: AppColors.grey9)
-                ),
-                SizedBox(height: 20.h),
-                Divider( // 수평선 추가
-                  height: 1, // 선의 높이
-                  color: AppColors.grey1, // 선의 색상
-                  thickness: 1, // 선의 두께
-                ),
-                SizedBox(height: 20.h),
-                Text(
-                    '기부 금액',
-                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                ),
                 SizedBox(height: 10.h),
-                Text(
-                    '매월 • 1일 • N,000원',
-                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8)
-                ),
-                SizedBox(height: 30.h),
-                Text(
-                    '기부  수단',
-                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                ),
-                //SizedBox(height: 16.h),
-
-                PayMethodRadioButtons(),
-
-                SizedBox(height: 23.h),
                 Divider( // 수평선 추가
                   height: 1, // 선의 높이
                   color: AppColors.grey1, // 선의 색상
                   thickness: 1, // 선의 두께
                 ),
-                SizedBox(height: 30.h),
-                Text(
-                    '결제 내용 확인 및 동의',
-                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                ),
-                SizedBox(height: 16.h),
-
-                CheckBoxExample(stringList: payAgreeStringList, title: title),
+                SizedBox(height: 20.h),
 
 
 
