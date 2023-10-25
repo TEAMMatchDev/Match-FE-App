@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/search_statu.dart';
+import 'package:match/modules/payment/widget/select_card_widget.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
+import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_checkbox.dart';
@@ -18,24 +21,6 @@ class PaymentCardInfoScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context){
-
-    final cardNames = [
-      ['토스카드','카카오뱅크','국민카드'],
-      ['농협카드','우리카드','현대카드'],
-      ['하나카드','신한카드','롯데카드'],
-      ['BC카드','삼성카드','K뱅크카드'],
-      ['씨티카드','수협카드','우체국카드'],
-      ['신협카드','기타'],
-    ];
-    final cardIcons = [
-      ['ic_toss.svg','ic_kakao.svg','ic_kbb.svg'],
-      ['ic_nh.svg','ic_woori.svg','ic_hyundai.svg'],
-      ['ic_hana.svg','ic_shinhan.svg','ic_lotte.svg'],
-      ['ic_bc.svg','ic_samsung.svg','ic_kbank.svg'],
-      ['ic_citi.svg','ic_suhyup.svg','ic_postoffice.svg'],
-      ['ic_sinhyup.svg','ic_etc.svg',],
-    ];
-
 
     return  Scaffold(
       body: SingleChildScrollView(
@@ -93,10 +78,8 @@ class PaymentCardInfoScreen extends GetView<PaymentController> {
                         style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                     ),
                     SizedBox(height: 12.h),
-                    Text(
-                        '카드번호 input',
-                        style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                    ),
+                    CardNumberInputField(),
+
                     SizedBox(height: 37.h),
 
                     Row(
@@ -109,10 +92,7 @@ class PaymentCardInfoScreen extends GetView<PaymentController> {
                                 style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                             ),
                             SizedBox(height: 14.h),
-                            Text(
-                                '유효기간 input',
-                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                            ),
+                            //CardNumberInputField(),
                           ],
                         ),
                         SizedBox(width: 15.w),
@@ -132,10 +112,7 @@ class PaymentCardInfoScreen extends GetView<PaymentController> {
                               ],
                             ),
                             SizedBox(height: 14.h),
-                            Text(
-                                'CVC input',
-                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                            ),
+                            //CardNumberInputField(),
                           ],
                         )
                       ],
@@ -160,10 +137,7 @@ class PaymentCardInfoScreen extends GetView<PaymentController> {
                               ],
                             ),
                             SizedBox(height: 14.h),
-                            Text(
-                                '생년월일 input',
-                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                            ),
+                            //CardNumberInputField(),
                           ],
                         ),
                         SizedBox(width: 15.w),
@@ -183,10 +157,7 @@ class PaymentCardInfoScreen extends GetView<PaymentController> {
                               ],
                             ),
                             SizedBox(height: 14.h),
-                            Text(
-                                '카드 비밀번호 input',
-                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                            ),
+                            //CardNumberInputField(),
                           ],
                         )
                       ],

@@ -212,4 +212,38 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+
+  /// 카드번호 입력창
+  factory CommonInputField.cardNumber({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+      textController: textController,
+      placeHolder: "NNNN - NNNN - NNNN - NNNN",
+      alwaysSuffix: false,
+      onSubmitted: (value) async {},
+      onChanged: onChange,
+      inputType: TextInputType.number,
+      autoFocus: false,
+    );
+  }
+
+  /// 유효기간 입력창
+  factory CommonInputField.cardExp({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+      textController: textController,
+      placeHolder: "MM / YY",
+      alwaysSuffix: false,
+      onSubmitted: (value) async {},
+      onChanged: onChange,
+      inputType: TextInputType.number,
+      autoFocus: false,
+    );
+  }
+
+
 }

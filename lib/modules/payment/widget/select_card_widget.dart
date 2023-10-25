@@ -1,10 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:match/modules/payment/controller/payment_controller.dart';
+import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+/// 카드 선택화면
 class SelectableCards extends StatefulWidget {
   @override
   _SelectableCardsState createState() => _SelectableCardsState();
@@ -87,3 +93,57 @@ class _SelectableCardsState extends State<SelectableCards> {
     );
   }
 }
+
+/// 카드 정보 입력화면
+class CardNumberInputField extends StatefulWidget {
+  @override
+  _CardNumberInputFieldState createState() => _CardNumberInputFieldState();
+}
+
+class _CardNumberInputFieldState extends State<CardNumberInputField> {
+  final TextEditingController _cardNumberController = TextEditingController();
+
+  @override
+  void dispose() {
+    // 위젯이 dispose되면, 컨트롤러도 함께 dispose
+    _cardNumberController.dispose();
+    super.dispose();
+  }
+
+  // 사용자의 입력을 받아 처리할 메서드
+  Future<void> handleCardNumberChange(String value) async {
+    print("입력한 카드 번호: $value");
+    // TODO) 다음 버튼 클릭 -> 서버로 값 전달
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // CommonInputField의 cardNumber 팩토리 생성자를 사용하여 카드 번호 필드 구성
+    final cardNumberField = CommonInputField.cardNumber(
+      textController: _cardNumberController,
+      onChange: handleCardNumberChange, // 사용자의 입력을 처리할 메서드 지정
+    );
+
+    return cardNumberField;
+  }
+}
+
+
+
+/// GetX로 상태관리 .ver
+//
+// class CardExpInputField extends StatelessWidget {
+//
+//   final PaymentController controller = Get.find();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//
+//     return CommonInputField.cardExp(
+//       textController: controller.cardNumController.value,
+//       onChange: (String value) async {
+//         controller.onCardNumberChanged(value);
+//       },
+//     );
+//   }
+// }
