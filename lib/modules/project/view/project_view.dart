@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/regular_status.dart';
+import 'package:match/modules/payment/view/payment_donator_info_view.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
 import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
@@ -216,6 +217,7 @@ class ProjectScreen extends GetView<ProjectController> {
               )
             ][controller.tabIndex.value],
           ),
+
         ),
       ),
     );
@@ -234,6 +236,7 @@ class ProjectScreen extends GetView<ProjectController> {
           ),
         ));
   }
+
 }
 
 //*SliverDelegate

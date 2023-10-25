@@ -53,17 +53,31 @@ class CommonButton extends StatelessWidget {
   //       text: text);
   // }
   factory CommonButton.login(
-      {String text = "로그인",
-      int verticalPadding = 13,
-      int textSize = 16,
-      required Future<void> Function() onTap,
-      bool isBottom = true}) {
+    {String text = "로그인",
+    int verticalPadding = 13,
+    int textSize = 16,
+    required Future<void> Function() onTap, bool isBottom = true}) {
     return CommonButton(
       text: text,
       verticalPadding: verticalPadding,
       onTap: onTap,
       backgroundColor: AppColors.black,
       textColor: AppColors.white,
+      textSize: textSize,
+      isBottom: isBottom,
+    );
+  }
+  factory CommonButton.back(
+      {String text = "이전 돌아가기",
+        int verticalPadding = 13,
+        int textSize = 16,
+        required Future<void> Function() onTap, bool isBottom = true}) {
+    return CommonButton(
+      text: text,
+      verticalPadding: verticalPadding,
+      onTap: onTap,
+      backgroundColor: AppColors.white,
+      textColor: AppColors.grey7,
       textSize: textSize,
       isBottom: isBottom,
     );

@@ -1,9 +1,6 @@
 abstract class _Paths {
   _Paths._();
 
-  /// 스플래시 화면
-  static const splash = "/splash";
-
   /// 온보딩 화면
   static const onboarding = "/onboarding";
 
@@ -67,9 +64,6 @@ abstract class _Paths {
 
 abstract class Routes {
   Routes._();
-
-  /// 스플래시 화면
-  static const splash = _Paths.splash;
 
   /// 온보딩 화면
   static const onboarding = _Paths.onboarding;

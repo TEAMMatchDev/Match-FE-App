@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart'; //Date Format 사용
 import 'package:match/model/enum/search_statu.dart';
-import 'package:match/modules/login/view/agreement_view.dart';
-import 'package:match/modules/login/widget/login_widget.dart';
-import 'package:match/modules/login/widget/select_sex_widget.dart';
+import 'package:match/modules/signIn/view/agreement_view.dart';
+import 'package:match/modules/signIn/widget/login_widget.dart';
+import 'package:match/modules/signIn/widget/select_sex_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_date_picker.dart';
