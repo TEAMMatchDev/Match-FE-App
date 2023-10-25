@@ -31,16 +31,16 @@ class PayDateButton extends StatelessWidget {
         height: 46.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: isSelected ? AppColors.grey9 : AppColors.white,
+          color: isSelected ? AppColors.grey10 : AppColors.white,
           border: Border.all(
-            color: isSelected ? AppColors.grey9 : AppColors.grey1,
+            color: isSelected ? AppColors.grey10 : AppColors.grey1,
           ),
         ),
         child: Center(
           child: Text(
             text,
             style: AppTextStyles.T1Bold16.copyWith(
-              color: isSelected ? AppColors.white : AppColors.grey9,
+              color: isSelected ? AppColors.white : AppColors.grey10,
             ),
             textAlign: TextAlign.center,
           ),
@@ -65,6 +65,7 @@ class _RadioButtonsState extends State<PayDateRadioButtons> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> activeDates = (selectedDateInt == 1 || selectedDateInt == 15) ? payDates : payDatesNew;
 
     return Column(
       children: [
@@ -73,33 +74,40 @@ class _RadioButtonsState extends State<PayDateRadioButtons> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              for (var row in (selectedDateInt == 1 || selectedDateInt == 15) ? payDates : payDatesNew)
-                Column(
-                  children: [
-                    PayDateButton(
-                      text: row,
-                      isSelected: selectedDate == row,
-                      onPressed: () {
-                        setState(() {
-                          selectedDate = row;
-                          if (row == '1일') {
-                            selectedDateInt = 1;
-                          } else if (row == '15일') {
-                            selectedDateInt = 15;
-                          } else {
-                            selectedDateInt = 0;
-                          }
-                          print('선택된 날짜: ' + selectedDateInt.toString());
-                        });
-                      },
-                    ),
-                  ],
+              // 리스트의 각 항목에 대해 반복합니다.
+              for (int i = 0; i < activeDates.length; i++)
+              // 마지막 항목이 아닌 경우에만 오른쪽 마진을 추가합니다.
+                Container(
+                  margin: EdgeInsets.only(right: (i < activeDates.length - 1) ? 10.w : 0),
+                  child: Column(
+                    children: [
+                      PayDateButton(
+                        text: activeDates[i],
+                        isSelected: selectedDate == activeDates[i],
+                        onPressed: () {
+                          setState(() {
+                            selectedDate = activeDates[i];
+                            if (activeDates[i] == '1일') {
+                              selectedDateInt = 1;
+                            } else if (activeDates[i] == '15일') {
+                              selectedDateInt = 15;
+                            } else {
+                              selectedDateInt = 0;
+                            }
+                            print('선택된 날짜: ' + selectedDateInt.toString());
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
+              // '직접 입력' 필드가 필요한 경우 추가합니다.
               if (selectedDateInt != 1 && selectedDateInt != 15)
                 Container(
                   width: 100.w,
                   height: 46.h,
-                  child: NumberInputFieldExample(),
+                  margin: EdgeInsets.only(left: 10.w),
+                  child: NumberInputFieldExample(), // 이 부분은 해당 입력 필드 위젯으로 교체하시면 됩니다.
                 ),
             ],
           ),

@@ -17,7 +17,6 @@ class AmountButton extends StatelessWidget {
     required this.text,
     required this.isSelected,
     required this.onPressed,
-    required EdgeInsets margin,
   });
 
   @override
@@ -27,6 +26,7 @@ class AmountButton extends StatelessWidget {
       child: Container(
         width: 100.w,
         height: 46.h,
+
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: isSelected ? AppColors.grey10 : AppColors.white,
@@ -117,7 +117,6 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                         print('선택된 금액: '+selectedAmountInt.toString());
                       });
                     },
-                    margin: EdgeInsets.only(right: i < row.length - 1 ? 10.w : 0),
                   ),
               ],
             ),

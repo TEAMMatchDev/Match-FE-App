@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:match/modules/payment/view/payment_card_register_view.dart';
+import 'package:match/modules/payment/view/payment_select_card_view.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -115,7 +115,7 @@ class _DualRadioButtonsState extends State<DualRadioButtons> {
               SizedBox(height: 23.h),
               GestureDetector(
                   onTap: () {
-                    Get.to(PaymentCardRegScreen());
+                    Get.to(PaymentSelectCardScreen());
                   },
                   child:SvgPicture.asset(
                     iconDir + "payment/ic_card_reg.svg",

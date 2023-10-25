@@ -51,15 +51,15 @@ class NumberInputField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: placeHolder,
           labelStyle: TextStyle(
-            color: isPlain ? AppColors.white : AppColors.grey9, // placeholder 텍스트 색상 설정
+            color: isPlain ? AppColors.white : AppColors.grey10, // placeholder 텍스트 색상 설정
           ),
           filled: isPlain,
-          fillColor: isPlain ? AppColors.grey9 : AppColors.white, // 선택되어 활성화되면 배경색을 AppColors.grey9로, 비활성화면 white로 설정
+          fillColor: isPlain ? AppColors.grey10 : AppColors.white, // 선택되어 활성화되면 배경색을 AppColors.grey9로, 비활성화면 white로 설정
           contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide(
-              color: isPlain ? AppColors.grey9 : AppColors.grey1, // 미활성 상태에서는 Colors.grey 사용
+              color: isPlain ? AppColors.grey10 : AppColors.grey1, // 미활성 상태에서는 Colors.grey 사용
             ),
           ),
           focusedBorder: OutlineInputBorder(
