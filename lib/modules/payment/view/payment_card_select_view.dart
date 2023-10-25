@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/payment/view/payment_card_info_view.dart';
+import 'package:match/modules/payment/widget/select_card_widget.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
@@ -78,46 +79,8 @@ class PaymentSelectCardScreen extends GetView<PaymentController> {
                 ),
                 SizedBox(height: 40.h),
 
-                Column(
-                  children: [
-                    for (var rowIndex = 0; rowIndex < cardIcons.length; rowIndex++) // 각 행에 대한 반복
-                      Row(
-                        children: [
-                          for (var itemIndex = 0; itemIndex < cardIcons[rowIndex].length; itemIndex++) // 각 행에 있는 항목에 대한 반복
-                            Container(
-                              margin: EdgeInsets.only(
-                                bottom: 20.h,
-                                right: (itemIndex < cardIcons[rowIndex].length - 1) ? 17.w : 0, // 가장 오른쪽 요소에 대한 마진 제거
-                              ),
-                              width: 95.w,
-                              height: 62.h,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppColors.grey1,
-                                  width: 1.0,
-                                ),
-                                borderRadius: BorderRadius.circular(8), // 모서리의 반경을 설정합니다. 여기서는 각 모서리가 10.0의 반경을 가진다고 가정합니다.
-                              ),
-                              child: Column( // 카드 아이콘과 이름을 포함하는 새로운 Column
-                                children: [
-                                  SizedBox(height: 9.h),
-                                  SvgPicture.asset(
-                                    iconDir + "card/" + cardIcons[rowIndex][itemIndex],
-                                    width: 24.w,
-                                    height: 24.h,
-                                  ),
-                                  SizedBox(height: 3.h),
-                                  Text(
-                                    cardNames[rowIndex][itemIndex],
-                                    style: AppTextStyles.T1Bold12.copyWith(color: AppColors.grey8)
-                                  ),
-                                ],
-                              ),
-                            ),
-                        ],
-                      ),
-                  ],
-                ),
+                SelectableCards(), //카드사 선택
+
               ],
             ),
           ),
