@@ -13,8 +13,8 @@ _$_MatchHistory _$$_MatchHistoryFromJson(Map<String, dynamic> json) =>
       histories: json['histories'] as String,
       historyDate: json['historyDate'] as String,
       flameImage: json['flameImage'] as String?,
-      donationHistoryImages: (json['donationHistoryImages'] as List<dynamic>)
-          .map((e) => e as String)
+      donationHistoryImages: (json['donationHistoryImages'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
     );
 

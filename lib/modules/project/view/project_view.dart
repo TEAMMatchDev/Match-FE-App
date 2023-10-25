@@ -12,6 +12,7 @@ import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
 
 import '../../../model/enum/search_statu.dart';
+import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
@@ -78,7 +79,7 @@ class ProjectScreen extends GetView<ProjectController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.network(
-                            tmpBackgroundImg2,
+                            controller.projectDetail.value.thumbNail,
                             fit: BoxFit.fitWidth,
                             width: MediaQuery.of(context).size.width,
                             height: 180.h,
@@ -144,8 +145,11 @@ class ProjectScreen extends GetView<ProjectController> {
                 delegate: _SliverAppBarDelegate(
                   TabBar(
                     controller: controller.matchTabBar.controller,
-                    onTap: (index) {
+                    onTap: (index) async{
                       controller.tabIndex.value = index;
+                      if(index ==1 && controller.projectHistories.isEmpty){
+                        await controller.getProjectHistory();
+                      }
                     },
                     labelColor: AppColors.grey9,
                     labelStyle: AppTextStyles.L1Medium14,
@@ -160,63 +164,58 @@ class ProjectScreen extends GetView<ProjectController> {
                   ),
                 ),
                 pinned: true,
-              ),
+              )
             ];
           },
-          body: Column(
-            children: [
-              Expanded(
-                child: TabBarView(
-                  controller: controller.matchTabBar.controller,
-                  children: [
-                    // 첫 번째 탭 (기부처 이야기)
-                    ListView.separated(
-                      // controller: controller.scrollController.value,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: controller.projectDetail.value.projectImgList.length,
-                      separatorBuilder: (context, index) {
-                        return SizedBox(height: 10.0);
-                      },
-                      itemBuilder: (context, index) {
-                        final imageUrl = controller.projectDetail.value.projectImgList[index].imgUrl;
-                        return Image.network(imageUrl);
-                      },
-                    ),
-                    // 두 번째 탭 (불꽃이 기록)
-                    ListView.separated(
-                      controller: controller.scrollController.value,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: controller.projectHistories.length,
-                      separatorBuilder: (context, index) {
-                        return SizedBox(height: 10.0);
-                      },
-                      itemBuilder: (context, index) {
-                        final history = controller.projectHistories[index];
-                        return ProjectComment(
-                          profileUrl: history.profileImageUrl,
-                          profile: history.nickname,
-                          comment: history.histories,
-                          timeStamp: history.historyDate,
-                        );
-                      },
-                    ),
-                  ],
-                ),
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h)
+                .copyWith(bottom: 0),
+            child: [
+              //TODO sequence 반영
+
+              //1. 매칭 정보
+              ListView.separated(
+                // controller: controller.scrollController.value,
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: controller.projectDetail.value.projectImgList.length,
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
+                },
+                itemBuilder: (context, index) {
+                  if (controller.tabIndex ==1 && index % (PAGINATION_SIZE - 1) == 0 &&
+                      index != 0) {
+                    logger.d("1. getMoreFlame 호출!");
+                    Future.wait({
+                      controller.getMoreProjectHistory(
+                          index: index ~/ (PAGINATION_SIZE - 1))
+                    });
+                  }
+                  final imageUrl = controller
+                      .projectDetail.value.projectImgList[index].imgUrl;
+                  return Image.network(imageUrl);
+                },
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 28.h, top: 9.h), // 하단 padding 추가
-                  child: CommonButton.login(
-                    text: "기부하기",
-                    onTap: () async {
-                      Get.to(PaymentDonatorScreen());
-                    },
-                  ),
-                ),
-              ),
-            ],
+
+              //2. 매치 기록
+              ListView.separated(
+                controller: controller.scrollController.value,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: controller.projectHistories.length,
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
+                },
+                itemBuilder: (context, index) {
+                  final history = controller.projectHistories[index];
+                  return ProjectComment(
+                    profileUrl: history.profileImageUrl,
+                    profile: history.nickname,
+                    comment: history.histories,
+                    timeStamp: history.historyDate,
+                  );
+                },
+              )
+            ][controller.tabIndex.value],
           ),
 
         ),

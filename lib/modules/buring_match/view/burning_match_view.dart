@@ -12,8 +12,10 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import 'package:timeline_tile_nic/timeline_tile.dart';
 
+import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/global_variable.dart';
+import '../../../util/const/style/global_logger.dart';
 
 class BurningMatchScreen extends GetView<BurningMatchController> {
   const BurningMatchScreen({super.key});
@@ -24,79 +26,96 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
     Get.put(BurningMatchController());
     return Scaffold(
       appBar: CommonAppBar.basic("불꽃이 스토리"),
-      body: ListView(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        physics: const BouncingScrollPhysics(),
-        children: [
-          //1. 후원타이틀
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "후원 타이틀",
-                  style: AppTextStyles.T1Bold18,
-                ),
-                //TODO:임시 하드코딩
-                TypeChip(type: "매칭 진행 중")
-              ],
-            ),
-          ),
-          Divider(
-            thickness: 1,
-            color: AppColors.divider1,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //*매치 정보
-                FlameWidget(
-                  flameName: "순두부찌개 먹은 불꽃이",
-                  flameImg: tmpBackgroundImg,
-                  flameTalk: "말을 겁니다 후원집행시, 생성시, ",
-                  usages: "T.B.T 레스큐",
-                  id: 1,
-                  isHome: false,
-                ),
-                SizedBox(
-                  height: 19.h,
-                ),
-                flameInfo(title: "생성 횟수", value: 1, valueMsg: " 번째 생성"),
-                flameInfo(title: "전달된 온도", value: 5000, valueMsg: "°C"),
-
-                //매치 기록 제목
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 30.h),
-                  child: Text(
-                    "매치 기록",
-                    style: AppTextStyles.T1Bold15,
+      body: Obx(
+        () => ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          physics: const BouncingScrollPhysics(),
+          children: [
+            ///*1. 후원타이틀
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 255.w,
+                    child: Text(
+                      controller.flameDetail.value.inherenceName,
+                      style: AppTextStyles.T1Bold18,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-                ListView.separated(
+                  //TODO:임시 하드코딩
+                  TypeChip(type: controller.flameDetail.value.flameType)
+                ],
+              ),
+            ),
+            const Divider(
+              thickness: 1,
+              color: AppColors.divider1,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ///*. 상단 flame 정보
+                  Center(
+                    child: FlameWidget(
+                      flameName: controller.flameDetail.value.inherenceName,
+                      flameImg: controller.flameDetail.value.imgUrl,
+                      usages: controller.flameDetail.value.usages,
+                      isHome: false,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 19.h,
+                  ),
+                  flameInfo(
+                      title: "생성 횟수",
+                      value: controller.flameDetail.value.sequence,
+                      valueMsg: " 번째"),
+                  flameInfo(
+                      title: "전달된 온도",
+                      value: controller.flameDetail.value.amount,
+                      valueMsg: "°C"),
+
+                  //매치 기록 제목
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 17.h)
+                        .copyWith(bottom: 0.h),
+                    child: Text(
+                      "매치 기록",
+                      style: AppTextStyles.T1Bold15,
+                    ),
+                  ),
+                  ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
+                    itemCount: controller.flameHistories.length,
                     itemBuilder: (context, index) {
-                      final history = controller.matchHistories[index];
+                      logger.d(index);
+                      if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
+                        logger.d("1. getMoreFlame 호출!");
+                        Future.wait({
+                          controller.getMoreFlameHistory(
+                              index ~/ (PAGINATION_SIZE - 1))
+                        });
+                      }
+                      final history = controller.flameHistories[index];
                       return MatchRecord(
                           title: history.histories,
                           date: history.historyDate,
-                          imgList: history.donationHistoryImages);
+                          imgList: history.donationHistoryImages ?? []);
                     },
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        height: 12.h,
-                      );
-                    },
-                    itemCount: controller.matchHistories.length),
-                // 매치기록
-              ],
+                  ),
+                  // 매치기록
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -106,13 +125,21 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Text(
-          title + "= ",
-          style: AppTextStyles.L1Medium14.copyWith(color: AppColors.grey6),
+        SizedBox(
+          width: 80.w,
+          child: Text(
+            title + " = ",
+            style: AppTextStyles.L1Medium14.copyWith(color: AppColors.grey6),
+            textAlign: TextAlign.end,
+          ),
         ),
-        Text(
-          "${value} ${valueMsg ?? ""}",
-          style: AppTextStyles.L1Medium14.copyWith(color: AppColors.grey7),
+        SizedBox(
+          width: 70.w,
+          child: Text(
+            "${value} ${valueMsg ?? ""}",
+            style: AppTextStyles.S1SemiBold14.copyWith(color: AppColors.grey7),
+            textAlign: TextAlign.end,
+          ),
         ),
       ],
     );

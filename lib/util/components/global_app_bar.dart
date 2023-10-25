@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
@@ -11,7 +12,7 @@ import '../const/global_variable.dart';
 class CommonAppBar extends AppBar {
   CommonAppBar({
     Key? key,
-    required Widget title,
+    Widget? title,
     required Widget leading,
     List<Widget>? actions,
     double? elevation,
@@ -49,4 +50,5 @@ class CommonAppBar extends AppBar {
       centerTitle: true,
     );
   }
+
 }
