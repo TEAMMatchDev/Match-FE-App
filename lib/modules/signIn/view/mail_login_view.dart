@@ -48,6 +48,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
+                        //TODO) 컨트롤러 & api 연동
                         CommonTextField(
                             textController: controller.idTextController.value,
                             isSearchScreen: false, //뒤로가기
