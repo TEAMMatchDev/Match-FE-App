@@ -8,11 +8,13 @@ import 'package:match/modules/donate/binding/donate_binding.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/donation_search/binding/donation_search_binding.dart';
 import 'package:match/modules/donation_search/view/donation_search_view.dart';
+import 'package:match/modules/event_detail/binding/event_detail_binding.dart';
 import 'package:match/modules/event_detail/view/event_detail_view.dart';
 import 'package:match/modules/mypage/binding/mypage_binding.dart';
 import 'package:match/modules/mypage/controller/nickname_controller.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/mypage/view/nickname_edit_view.dart';
+import 'package:match/modules/mypage/view/setting_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
@@ -33,6 +35,7 @@ import '../../modules/home/binding/home_binding.dart';
 import '../../modules/home/view/home_view.dart';
 import '../../modules/main/binding/main_binding.dart';
 import '../../modules/main/view/main_view.dart';
+import '../../modules/mypage/binding/setting_binding.dart';
 import '../../modules/notice/binding/notice_binding.dart';
 import '../../modules/notice/binding/notice_detail_binding.dart';
 import '../../modules/notice/view/notice_detail_view.dart';
@@ -114,7 +117,7 @@ class Pages {
       name: Routes.event_detail,
       page: () => const EventDetailScreen(),
       transition: Transition.noTransition,
-      binding: EventBinding(),
+      binding: EventDetailBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
@@ -187,6 +190,15 @@ class Pages {
       page: () => const AlarmScreen(),
       transition: Transition.noTransition,
       binding: AlarmBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "알람 상세 화면",
+      name: Routes.setting,
+      page: () => const SettingScreen(),
+      transition: Transition.noTransition,
+      binding: SettingBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

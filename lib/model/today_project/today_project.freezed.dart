@@ -112,11 +112,11 @@ class _$TodayProjectCopyWithImpl<$Res, $Val extends TodayProject>
 }
 
 /// @nodoc
-abstract class _$$_TodayProjectCopyWith<$Res>
+abstract class _$$TodayProjectImplCopyWith<$Res>
     implements $TodayProjectCopyWith<$Res> {
-  factory _$$_TodayProjectCopyWith(
-          _$_TodayProject value, $Res Function(_$_TodayProject) then) =
-      __$$_TodayProjectCopyWithImpl<$Res>;
+  factory _$$TodayProjectImplCopyWith(
+          _$TodayProjectImpl value, $Res Function(_$TodayProjectImpl) then) =
+      __$$TodayProjectImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -131,11 +131,11 @@ abstract class _$$_TodayProjectCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TodayProjectCopyWithImpl<$Res>
-    extends _$TodayProjectCopyWithImpl<$Res, _$_TodayProject>
-    implements _$$_TodayProjectCopyWith<$Res> {
-  __$$_TodayProjectCopyWithImpl(
-      _$_TodayProject _value, $Res Function(_$_TodayProject) _then)
+class __$$TodayProjectImplCopyWithImpl<$Res>
+    extends _$TodayProjectCopyWithImpl<$Res, _$TodayProjectImpl>
+    implements _$$TodayProjectImplCopyWith<$Res> {
+  __$$TodayProjectImplCopyWithImpl(
+      _$TodayProjectImpl _value, $Res Function(_$TodayProjectImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -150,7 +150,7 @@ class __$$_TodayProjectCopyWithImpl<$Res>
     Object? userProfileImages = null,
     Object? totalDonationCnt = null,
   }) {
-    return _then(_$_TodayProject(
+    return _then(_$TodayProjectImpl(
       projectId: null == projectId
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
@@ -189,8 +189,8 @@ class __$$_TodayProjectCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TodayProject with DiagnosticableTreeMixin implements _TodayProject {
-  const _$_TodayProject(
+class _$TodayProjectImpl with DiagnosticableTreeMixin implements _TodayProject {
+  const _$TodayProjectImpl(
       {required this.projectId,
       required this.imgUrl,
       required this.title,
@@ -201,8 +201,8 @@ class _$_TodayProject with DiagnosticableTreeMixin implements _TodayProject {
       required this.totalDonationCnt})
       : _userProfileImages = userProfileImages;
 
-  factory _$_TodayProject.fromJson(Map<String, dynamic> json) =>
-      _$$_TodayProjectFromJson(json);
+  factory _$TodayProjectImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TodayProjectImplFromJson(json);
 
   @override
   final int projectId;
@@ -252,7 +252,7 @@ class _$_TodayProject with DiagnosticableTreeMixin implements _TodayProject {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TodayProject &&
+            other is _$TodayProjectImpl &&
             (identical(other.projectId, projectId) ||
                 other.projectId == projectId) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
@@ -282,12 +282,12 @@ class _$_TodayProject with DiagnosticableTreeMixin implements _TodayProject {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TodayProjectCopyWith<_$_TodayProject> get copyWith =>
-      __$$_TodayProjectCopyWithImpl<_$_TodayProject>(this, _$identity);
+  _$$TodayProjectImplCopyWith<_$TodayProjectImpl> get copyWith =>
+      __$$TodayProjectImplCopyWithImpl<_$TodayProjectImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TodayProjectToJson(
+    return _$$TodayProjectImplToJson(
       this,
     );
   }
@@ -302,10 +302,10 @@ abstract class _TodayProject implements TodayProject {
       required final String kind,
       required final bool like,
       required final List<String> userProfileImages,
-      required final int totalDonationCnt}) = _$_TodayProject;
+      required final int totalDonationCnt}) = _$TodayProjectImpl;
 
   factory _TodayProject.fromJson(Map<String, dynamic> json) =
-      _$_TodayProject.fromJson;
+      _$TodayProjectImpl.fromJson;
 
   @override
   int get projectId;
@@ -325,6 +325,6 @@ abstract class _TodayProject implements TodayProject {
   int get totalDonationCnt;
   @override
   @JsonKey(ignore: true)
-  _$$_TodayProjectCopyWith<_$_TodayProject> get copyWith =>
+  _$$TodayProjectImplCopyWith<_$TodayProjectImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -90,10 +90,11 @@ class _$MatchPayCopyWithImpl<$Res, $Val extends MatchPay>
 }
 
 /// @nodoc
-abstract class _$$_MatchPayCopyWith<$Res> implements $MatchPayCopyWith<$Res> {
-  factory _$$_MatchPayCopyWith(
-          _$_MatchPay value, $Res Function(_$_MatchPay) then) =
-      __$$_MatchPayCopyWithImpl<$Res>;
+abstract class _$$MatchPayImplCopyWith<$Res>
+    implements $MatchPayCopyWith<$Res> {
+  factory _$$MatchPayImplCopyWith(
+          _$MatchPayImpl value, $Res Function(_$MatchPayImpl) then) =
+      __$$MatchPayImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,11 +106,11 @@ abstract class _$$_MatchPayCopyWith<$Res> implements $MatchPayCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MatchPayCopyWithImpl<$Res>
-    extends _$MatchPayCopyWithImpl<$Res, _$_MatchPay>
-    implements _$$_MatchPayCopyWith<$Res> {
-  __$$_MatchPayCopyWithImpl(
-      _$_MatchPay _value, $Res Function(_$_MatchPay) _then)
+class __$$MatchPayImplCopyWithImpl<$Res>
+    extends _$MatchPayCopyWithImpl<$Res, _$MatchPayImpl>
+    implements _$$MatchPayImplCopyWith<$Res> {
+  __$$MatchPayImplCopyWithImpl(
+      _$MatchPayImpl _value, $Res Function(_$MatchPayImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -121,7 +122,7 @@ class __$$_MatchPayCopyWithImpl<$Res>
     Object? regularPayId = null,
     Object? payDate = null,
   }) {
-    return _then(_$_MatchPay(
+    return _then(_$MatchPayImpl(
       imgUrl: null == imgUrl
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
@@ -148,16 +149,16 @@ class __$$_MatchPayCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MatchPay with DiagnosticableTreeMixin implements _MatchPay {
-  const _$_MatchPay(
+class _$MatchPayImpl with DiagnosticableTreeMixin implements _MatchPay {
+  const _$MatchPayImpl(
       {required this.imgUrl,
       required this.projectTitle,
       required this.amount,
       required this.regularPayId,
       required this.payDate});
 
-  factory _$_MatchPay.fromJson(Map<String, dynamic> json) =>
-      _$$_MatchPayFromJson(json);
+  factory _$MatchPayImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MatchPayImplFromJson(json);
 
   @override
   final String imgUrl;
@@ -191,7 +192,7 @@ class _$_MatchPay with DiagnosticableTreeMixin implements _MatchPay {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MatchPay &&
+            other is _$MatchPayImpl &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
             (identical(other.projectTitle, projectTitle) ||
                 other.projectTitle == projectTitle) &&
@@ -209,12 +210,12 @@ class _$_MatchPay with DiagnosticableTreeMixin implements _MatchPay {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MatchPayCopyWith<_$_MatchPay> get copyWith =>
-      __$$_MatchPayCopyWithImpl<_$_MatchPay>(this, _$identity);
+  _$$MatchPayImplCopyWith<_$MatchPayImpl> get copyWith =>
+      __$$MatchPayImplCopyWithImpl<_$MatchPayImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MatchPayToJson(
+    return _$$MatchPayImplToJson(
       this,
     );
   }
@@ -226,9 +227,10 @@ abstract class _MatchPay implements MatchPay {
       required final String projectTitle,
       required final int amount,
       required final int regularPayId,
-      required final int payDate}) = _$_MatchPay;
+      required final int payDate}) = _$MatchPayImpl;
 
-  factory _MatchPay.fromJson(Map<String, dynamic> json) = _$_MatchPay.fromJson;
+  factory _MatchPay.fromJson(Map<String, dynamic> json) =
+      _$MatchPayImpl.fromJson;
 
   @override
   String get imgUrl;
@@ -242,6 +244,6 @@ abstract class _MatchPay implements MatchPay {
   int get payDate;
   @override
   @JsonKey(ignore: true)
-  _$$_MatchPayCopyWith<_$_MatchPay> get copyWith =>
+  _$$MatchPayImplCopyWith<_$MatchPayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

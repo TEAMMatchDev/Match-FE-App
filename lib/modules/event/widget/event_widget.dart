@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../model/event/event.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
 import '../../home/widget/home_widget.dart';
 
 class EventWidget extends StatelessWidget {
-  final int eventId;
+  final Event event;
 
-  const EventWidget({super.key, required this.eventId});
+  const EventWidget({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(Routes.event_detail, arguments: {"event_id": eventId});
+        Get.toNamed(Routes.event_detail,
+            arguments: {"eventId": event.eventId});
       },
       child: Container(
           width: double.infinity,
@@ -24,8 +26,8 @@ class EventWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.r),
             image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(tmpBackgroundImg2),
+              fit: BoxFit.cover,
+              image: NetworkImage(event.thumbnail),
             ),
           ),
           child: Stack(
@@ -38,13 +40,13 @@ class EventWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "이벤트 제목",
+                        event.title,
                         style: AppTextStyles.T1Bold14.copyWith(
                             color: AppColors.black),
                       ),
                       SizedBox(height: 11.h),
                       Text(
-                        "이벤트 소제목",
+                        event.smallTitle,
                         style: AppTextStyles.T1Bold12.copyWith(
                             color: Color(0xFF3B3B3B)),
                       ),
@@ -57,7 +59,7 @@ class EventWidget extends StatelessWidget {
                             color: AppColors.grey2,
                           ),
                           child: Text(
-                            "진행중 YY.MM.DD - YY.MM.DD ",
+                            "진행중 ${event.startDate} - ${event.endDate}",
                             style: AppTextStyles.T1Bold10.copyWith(
                                 color: Color(0xFF3B3B3B)),
                           )),

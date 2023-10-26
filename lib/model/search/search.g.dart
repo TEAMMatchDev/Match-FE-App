@@ -6,7 +6,7 @@ part of 'search.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Search _$$_SearchFromJson(Map<String, dynamic> json) => _$_Search(
+_$SearchImpl _$$SearchImplFromJson(Map<String, dynamic> json) => _$SearchImpl(
       donationId: json['donationId'] as int,
       projectId: json['projectId'] as int,
       flameName: json['flameName'] as String,
@@ -14,7 +14,8 @@ _$_Search _$$_SearchFromJson(Map<String, dynamic> json) => _$_Search(
       imgUrl: json['imgUrl'] as String,
     );
 
-Map<String, dynamic> _$$_SearchToJson(_$_Search instance) => <String, dynamic>{
+Map<String, dynamic> _$$SearchImplToJson(_$SearchImpl instance) =>
+    <String, dynamic>{
       'donationId': instance.donationId,
       'projectId': instance.projectId,
       'flameName': instance.flameName,

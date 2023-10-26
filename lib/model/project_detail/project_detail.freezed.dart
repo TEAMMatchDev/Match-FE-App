@@ -126,11 +126,11 @@ class _$ProjectDetailCopyWithImpl<$Res, $Val extends ProjectDetail>
 }
 
 /// @nodoc
-abstract class _$$_ProjectDetailCopyWith<$Res>
+abstract class _$$ProjectDetailImplCopyWith<$Res>
     implements $ProjectDetailCopyWith<$Res> {
-  factory _$$_ProjectDetailCopyWith(
-          _$_ProjectDetail value, $Res Function(_$_ProjectDetail) then) =
-      __$$_ProjectDetailCopyWithImpl<$Res>;
+  factory _$$ProjectDetailImplCopyWith(
+          _$ProjectDetailImpl value, $Res Function(_$ProjectDetailImpl) then) =
+      __$$ProjectDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,11 +147,11 @@ abstract class _$$_ProjectDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ProjectDetailCopyWithImpl<$Res>
-    extends _$ProjectDetailCopyWithImpl<$Res, _$_ProjectDetail>
-    implements _$$_ProjectDetailCopyWith<$Res> {
-  __$$_ProjectDetailCopyWithImpl(
-      _$_ProjectDetail _value, $Res Function(_$_ProjectDetail) _then)
+class __$$ProjectDetailImplCopyWithImpl<$Res>
+    extends _$ProjectDetailCopyWithImpl<$Res, _$ProjectDetailImpl>
+    implements _$$ProjectDetailImplCopyWith<$Res> {
+  __$$ProjectDetailImplCopyWithImpl(
+      _$ProjectDetailImpl _value, $Res Function(_$ProjectDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -168,7 +168,7 @@ class __$$_ProjectDetailCopyWithImpl<$Res>
     Object? userProfileImages = null,
     Object? totalDonationCnt = null,
   }) {
-    return _then(_$_ProjectDetail(
+    return _then(_$ProjectDetailImpl(
       projectId: null == projectId
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
@@ -215,8 +215,10 @@ class __$$_ProjectDetailCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
-  const _$_ProjectDetail(
+class _$ProjectDetailImpl
+    with DiagnosticableTreeMixin
+    implements _ProjectDetail {
+  const _$ProjectDetailImpl(
       {required this.projectId,
       required this.thumbNail,
       required final List<ProjectImage> projectImgList,
@@ -230,8 +232,8 @@ class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
       : _projectImgList = projectImgList,
         _userProfileImages = userProfileImages;
 
-  factory _$_ProjectDetail.fromJson(Map<String, dynamic> json) =>
-      _$$_ProjectDetailFromJson(json);
+  factory _$ProjectDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProjectDetailImplFromJson(json);
 
   @override
   final int projectId;
@@ -293,7 +295,7 @@ class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProjectDetail &&
+            other is _$ProjectDetailImpl &&
             (identical(other.projectId, projectId) ||
                 other.projectId == projectId) &&
             (identical(other.thumbNail, thumbNail) ||
@@ -330,12 +332,12 @@ class _$_ProjectDetail with DiagnosticableTreeMixin implements _ProjectDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProjectDetailCopyWith<_$_ProjectDetail> get copyWith =>
-      __$$_ProjectDetailCopyWithImpl<_$_ProjectDetail>(this, _$identity);
+  _$$ProjectDetailImplCopyWith<_$ProjectDetailImpl> get copyWith =>
+      __$$ProjectDetailImplCopyWithImpl<_$ProjectDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProjectDetailToJson(
+    return _$$ProjectDetailImplToJson(
       this,
     );
   }
@@ -352,10 +354,10 @@ abstract class _ProjectDetail implements ProjectDetail {
       required final String regularStatus,
       required final bool like,
       required final List<String> userProfileImages,
-      required final int totalDonationCnt}) = _$_ProjectDetail;
+      required final int totalDonationCnt}) = _$ProjectDetailImpl;
 
   factory _ProjectDetail.fromJson(Map<String, dynamic> json) =
-      _$_ProjectDetail.fromJson;
+      _$ProjectDetailImpl.fromJson;
 
   @override
   int get projectId;
@@ -379,7 +381,7 @@ abstract class _ProjectDetail implements ProjectDetail {
   int get totalDonationCnt;
   @override
   @JsonKey(ignore: true)
-  _$$_ProjectDetailCopyWith<_$_ProjectDetail> get copyWith =>
+  _$$ProjectDetailImplCopyWith<_$ProjectDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -443,22 +445,22 @@ class _$ProjectImageCopyWithImpl<$Res, $Val extends ProjectImage>
 }
 
 /// @nodoc
-abstract class _$$_ProjectImageCopyWith<$Res>
+abstract class _$$ProjectImageImplCopyWith<$Res>
     implements $ProjectImageCopyWith<$Res> {
-  factory _$$_ProjectImageCopyWith(
-          _$_ProjectImage value, $Res Function(_$_ProjectImage) then) =
-      __$$_ProjectImageCopyWithImpl<$Res>;
+  factory _$$ProjectImageImplCopyWith(
+          _$ProjectImageImpl value, $Res Function(_$ProjectImageImpl) then) =
+      __$$ProjectImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int imgId, String imgUrl, int sequence});
 }
 
 /// @nodoc
-class __$$_ProjectImageCopyWithImpl<$Res>
-    extends _$ProjectImageCopyWithImpl<$Res, _$_ProjectImage>
-    implements _$$_ProjectImageCopyWith<$Res> {
-  __$$_ProjectImageCopyWithImpl(
-      _$_ProjectImage _value, $Res Function(_$_ProjectImage) _then)
+class __$$ProjectImageImplCopyWithImpl<$Res>
+    extends _$ProjectImageCopyWithImpl<$Res, _$ProjectImageImpl>
+    implements _$$ProjectImageImplCopyWith<$Res> {
+  __$$ProjectImageImplCopyWithImpl(
+      _$ProjectImageImpl _value, $Res Function(_$ProjectImageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -468,7 +470,7 @@ class __$$_ProjectImageCopyWithImpl<$Res>
     Object? imgUrl = null,
     Object? sequence = null,
   }) {
-    return _then(_$_ProjectImage(
+    return _then(_$ProjectImageImpl(
       imgId: null == imgId
           ? _value.imgId
           : imgId // ignore: cast_nullable_to_non_nullable
@@ -487,12 +489,12 @@ class __$$_ProjectImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ProjectImage with DiagnosticableTreeMixin implements _ProjectImage {
-  const _$_ProjectImage(
+class _$ProjectImageImpl with DiagnosticableTreeMixin implements _ProjectImage {
+  const _$ProjectImageImpl(
       {required this.imgId, required this.imgUrl, required this.sequence});
 
-  factory _$_ProjectImage.fromJson(Map<String, dynamic> json) =>
-      _$$_ProjectImageFromJson(json);
+  factory _$ProjectImageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProjectImageImplFromJson(json);
 
   @override
   final int imgId;
@@ -520,7 +522,7 @@ class _$_ProjectImage with DiagnosticableTreeMixin implements _ProjectImage {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ProjectImage &&
+            other is _$ProjectImageImpl &&
             (identical(other.imgId, imgId) || other.imgId == imgId) &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
             (identical(other.sequence, sequence) ||
@@ -534,12 +536,12 @@ class _$_ProjectImage with DiagnosticableTreeMixin implements _ProjectImage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ProjectImageCopyWith<_$_ProjectImage> get copyWith =>
-      __$$_ProjectImageCopyWithImpl<_$_ProjectImage>(this, _$identity);
+  _$$ProjectImageImplCopyWith<_$ProjectImageImpl> get copyWith =>
+      __$$ProjectImageImplCopyWithImpl<_$ProjectImageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProjectImageToJson(
+    return _$$ProjectImageImplToJson(
       this,
     );
   }
@@ -549,10 +551,10 @@ abstract class _ProjectImage implements ProjectImage {
   const factory _ProjectImage(
       {required final int imgId,
       required final String imgUrl,
-      required final int sequence}) = _$_ProjectImage;
+      required final int sequence}) = _$ProjectImageImpl;
 
   factory _ProjectImage.fromJson(Map<String, dynamic> json) =
-      _$_ProjectImage.fromJson;
+      _$ProjectImageImpl.fromJson;
 
   @override
   int get imgId;
@@ -562,6 +564,6 @@ abstract class _ProjectImage implements ProjectImage {
   int get sequence;
   @override
   @JsonKey(ignore: true)
-  _$$_ProjectImageCopyWith<_$_ProjectImage> get copyWith =>
+  _$$ProjectImageImplCopyWith<_$ProjectImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

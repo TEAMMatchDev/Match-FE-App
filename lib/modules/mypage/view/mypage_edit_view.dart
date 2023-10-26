@@ -30,7 +30,7 @@ class MypageEditScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${AuthService.to.myProfile.value.name}님",
+                    "${AuthService.to.myProfile.value.nickName}님",
                     style: AppTextStyles.T1Bold20,
                   ),
                   SizedBox(

@@ -342,8 +342,8 @@ class _LoginState extends State<LoginWidget> {
     return GestureDetector(
       onTap: () async{
         // 홈-후원처 개발을 위한 임시 라우팅
-        await Get.offAllNamed(Routes.main);
-        // Get.to(EmailLoginScreen());
+        // await Get.offAllNamed(Routes.main);
+        Get.to(EmailLoginScreen());
       },
       child: Container(
         width: 300.w,

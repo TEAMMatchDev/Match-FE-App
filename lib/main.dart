@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:device_info/device_info.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -10,50 +14,109 @@ import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:logger/logger.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
+import 'package:match/provider/api/notification_api.dart';
+import 'package:match/util/const/style/global_logger.dart';
 import 'package:match/util/method/dynamic_link.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:match/util/method/get_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'provider/routes/pages.dart';
 import 'util/const/style/global_color.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  //splash 안없어지게 : preserve / 없어지게 : remove
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.remove(); //preserve(widgetsBinding: widgetsBinding);
-
-  await dotenv.load(fileName: ".env");
-/*
-  // 웹 환경에서 카카오 로그인을 정상적으로 완료하려면 runApp() 호출 전 아래 메서드 호출 필요
-  WidgetsFlutterBinding.ensureInitialized();
-  // runApp() 호출 전 Flutter SDK 초기화
-  KakaoSdk.init(
-    kakaoApiKey: dotenv.env['kakaoApiKey'],
-    javaScriptAppKey: dotenv.env['javaScriptAppKey'],
-  );
-*/
   await initService();
+
   runApp(const MyApp());
+
+  /// * Splash 화면 해제
+  FlutterNativeSplash.remove();
 }
 
 //초기 구동
 Future<void> initService() async {
-  //* Widget Binding 초기화
-  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+
+  //* Widget Binding 초기화및 splash 화면
+  var widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   //* 카카오  SDK 초기화
   KakaoSdk.init(nativeAppKey: dotenv.env['kakaoApiKey']!);
   //* firebase dynamic link 초기화
   await Firebase.initializeApp();
-  await DynamicLink.setUp();
 
   /// * GetStorage 초기화
   await GetStorage.init();
+  await setAlarm();
+  await DynamicLink.setUp();
+
 }
 
-Future<void> initialDynamicLink(BuildContext context) async {}
+///* fcm(알람) 관련 권한, 기기 등록 api, listener 등록
+Future<void> setAlarm()async{
+
+  ///* alarm 관련 토큰 및 api
+  if (GetStorageUtil.getToken(StorageKey.FCM_TOKEN) != null &&
+      GetStorageUtil.getToken(StorageKey.DEVICE_ID) != null) {
+  } else {
+    var fcmToken = await initFirebaseMsg();
+    GetStorageUtil.addToken(StorageKey.FCM_TOKEN, fcmToken ?? "");
+    var deviceId = await getDeviceId();
+    GetStorageUtil.addToken(StorageKey.DEVICE_ID, deviceId);
+    var tmpResult = await NotificationApi.setAlarmToken(
+        fcmToken: fcmToken!, deviceId: deviceId);
+    logger.d(tmpResult);
+  }
+
+  ///* alarm 관련 permission 체크
+  if (await Permission.notification.isDenied) {
+    await Permission.notification.request();
+  }
+  ///* alarm listener 등록
+  FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
+    if (message != null) {
+      if (message.notification != null) {
+        logger.d(message.notification!.title);
+        logger.d(message.notification!.body);
+        logger.d(message.data["click_action"]);
+      }
+    }
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) {
+    if (message != null) {
+      if (message.notification != null) {
+        logger.d(message.notification!.title);
+        logger.d(message.notification!.body);
+        logger.d(message.data["click_action"]);
+      }
+    }
+  });
+}
+Future<String?> initFirebaseMsg() async {
+  // FirebaseMessaging 인스턴스 초기화
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  // 토큰 얻기
+  String? token = await messaging.getToken();
+  logger.d('FCM 토큰: $token');
+  return token;
+}
+
+Future<String> getDeviceId() async {
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  if (Platform.isAndroid) {
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    return androidInfo.androidId;
+  } else if (Platform.isIOS) {
+    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    return iosInfo.identifierForVendor;
+  }
+  return '';
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

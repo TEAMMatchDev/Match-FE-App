@@ -89,9 +89,10 @@ class _$FlameCopyWithImpl<$Res, $Val extends Flame>
 }
 
 /// @nodoc
-abstract class _$$_FlameCopyWith<$Res> implements $FlameCopyWith<$Res> {
-  factory _$$_FlameCopyWith(_$_Flame value, $Res Function(_$_Flame) then) =
-      __$$_FlameCopyWithImpl<$Res>;
+abstract class _$$FlameImplCopyWith<$Res> implements $FlameCopyWith<$Res> {
+  factory _$$FlameImplCopyWith(
+          _$FlameImpl value, $Res Function(_$FlameImpl) then) =
+      __$$FlameImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,9 +104,11 @@ abstract class _$$_FlameCopyWith<$Res> implements $FlameCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_FlameCopyWithImpl<$Res> extends _$FlameCopyWithImpl<$Res, _$_Flame>
-    implements _$$_FlameCopyWith<$Res> {
-  __$$_FlameCopyWithImpl(_$_Flame _value, $Res Function(_$_Flame) _then)
+class __$$FlameImplCopyWithImpl<$Res>
+    extends _$FlameCopyWithImpl<$Res, _$FlameImpl>
+    implements _$$FlameImplCopyWith<$Res> {
+  __$$FlameImplCopyWithImpl(
+      _$FlameImpl _value, $Res Function(_$FlameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +120,7 @@ class __$$_FlameCopyWithImpl<$Res> extends _$FlameCopyWithImpl<$Res, _$_Flame>
     Object? image = null,
     Object? randomMessage = null,
   }) {
-    return _then(_$_Flame(
+    return _then(_$FlameImpl(
       donationId: null == donationId
           ? _value.donationId
           : donationId // ignore: cast_nullable_to_non_nullable
@@ -144,16 +147,16 @@ class __$$_FlameCopyWithImpl<$Res> extends _$FlameCopyWithImpl<$Res, _$_Flame>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Flame with DiagnosticableTreeMixin implements _Flame {
-  const _$_Flame(
+class _$FlameImpl with DiagnosticableTreeMixin implements _Flame {
+  const _$FlameImpl(
       {required this.donationId,
       required this.usages,
       required this.inherenceName,
       required this.image,
       required this.randomMessage});
 
-  factory _$_Flame.fromJson(Map<String, dynamic> json) =>
-      _$$_FlameFromJson(json);
+  factory _$FlameImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FlameImplFromJson(json);
 
   @override
   final int donationId;
@@ -187,7 +190,7 @@ class _$_Flame with DiagnosticableTreeMixin implements _Flame {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Flame &&
+            other is _$FlameImpl &&
             (identical(other.donationId, donationId) ||
                 other.donationId == donationId) &&
             (identical(other.usages, usages) || other.usages == usages) &&
@@ -206,12 +209,12 @@ class _$_Flame with DiagnosticableTreeMixin implements _Flame {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FlameCopyWith<_$_Flame> get copyWith =>
-      __$$_FlameCopyWithImpl<_$_Flame>(this, _$identity);
+  _$$FlameImplCopyWith<_$FlameImpl> get copyWith =>
+      __$$FlameImplCopyWithImpl<_$FlameImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FlameToJson(
+    return _$$FlameImplToJson(
       this,
     );
   }
@@ -223,9 +226,9 @@ abstract class _Flame implements Flame {
       required final String usages,
       required final String inherenceName,
       required final String image,
-      required final String randomMessage}) = _$_Flame;
+      required final String randomMessage}) = _$FlameImpl;
 
-  factory _Flame.fromJson(Map<String, dynamic> json) = _$_Flame.fromJson;
+  factory _Flame.fromJson(Map<String, dynamic> json) = _$FlameImpl.fromJson;
 
   @override
   int get donationId;
@@ -239,6 +242,6 @@ abstract class _Flame implements Flame {
   String get randomMessage;
   @override
   @JsonKey(ignore: true)
-  _$$_FlameCopyWith<_$_Flame> get copyWith =>
+  _$$FlameImplCopyWith<_$FlameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

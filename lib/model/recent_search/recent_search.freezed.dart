@@ -74,22 +74,22 @@ class _$RecentSearchCopyWithImpl<$Res, $Val extends RecentSearch>
 }
 
 /// @nodoc
-abstract class _$$_RecentSearchCopyWith<$Res>
+abstract class _$$RecentSearchImplCopyWith<$Res>
     implements $RecentSearchCopyWith<$Res> {
-  factory _$$_RecentSearchCopyWith(
-          _$_RecentSearch value, $Res Function(_$_RecentSearch) then) =
-      __$$_RecentSearchCopyWithImpl<$Res>;
+  factory _$$RecentSearchImplCopyWith(
+          _$RecentSearchImpl value, $Res Function(_$RecentSearchImpl) then) =
+      __$$RecentSearchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String title, int donationId});
 }
 
 /// @nodoc
-class __$$_RecentSearchCopyWithImpl<$Res>
-    extends _$RecentSearchCopyWithImpl<$Res, _$_RecentSearch>
-    implements _$$_RecentSearchCopyWith<$Res> {
-  __$$_RecentSearchCopyWithImpl(
-      _$_RecentSearch _value, $Res Function(_$_RecentSearch) _then)
+class __$$RecentSearchImplCopyWithImpl<$Res>
+    extends _$RecentSearchCopyWithImpl<$Res, _$RecentSearchImpl>
+    implements _$$RecentSearchImplCopyWith<$Res> {
+  __$$RecentSearchImplCopyWithImpl(
+      _$RecentSearchImpl _value, $Res Function(_$RecentSearchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_RecentSearchCopyWithImpl<$Res>
     Object? title = null,
     Object? donationId = null,
   }) {
-    return _then(_$_RecentSearch(
+    return _then(_$RecentSearchImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -118,12 +118,12 @@ class __$$_RecentSearchCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RecentSearch with DiagnosticableTreeMixin implements _RecentSearch {
-  const _$_RecentSearch(
+class _$RecentSearchImpl with DiagnosticableTreeMixin implements _RecentSearch {
+  const _$RecentSearchImpl(
       {required this.name, required this.title, required this.donationId});
 
-  factory _$_RecentSearch.fromJson(Map<String, dynamic> json) =>
-      _$$_RecentSearchFromJson(json);
+  factory _$RecentSearchImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RecentSearchImplFromJson(json);
 
   @override
   final String name;
@@ -151,7 +151,7 @@ class _$_RecentSearch with DiagnosticableTreeMixin implements _RecentSearch {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RecentSearch &&
+            other is _$RecentSearchImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.donationId, donationId) ||
@@ -165,12 +165,12 @@ class _$_RecentSearch with DiagnosticableTreeMixin implements _RecentSearch {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RecentSearchCopyWith<_$_RecentSearch> get copyWith =>
-      __$$_RecentSearchCopyWithImpl<_$_RecentSearch>(this, _$identity);
+  _$$RecentSearchImplCopyWith<_$RecentSearchImpl> get copyWith =>
+      __$$RecentSearchImplCopyWithImpl<_$RecentSearchImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RecentSearchToJson(
+    return _$$RecentSearchImplToJson(
       this,
     );
   }
@@ -180,10 +180,10 @@ abstract class _RecentSearch implements RecentSearch {
   const factory _RecentSearch(
       {required final String name,
       required final String title,
-      required final int donationId}) = _$_RecentSearch;
+      required final int donationId}) = _$RecentSearchImpl;
 
   factory _RecentSearch.fromJson(Map<String, dynamic> json) =
-      _$_RecentSearch.fromJson;
+      _$RecentSearchImpl.fromJson;
 
   @override
   String get name;
@@ -193,6 +193,6 @@ abstract class _RecentSearch implements RecentSearch {
   int get donationId;
   @override
   @JsonKey(ignore: true)
-  _$$_RecentSearchCopyWith<_$_RecentSearch> get copyWith =>
+  _$$RecentSearchImplCopyWith<_$RecentSearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

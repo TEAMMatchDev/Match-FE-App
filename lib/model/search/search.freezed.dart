@@ -89,9 +89,10 @@ class _$SearchCopyWithImpl<$Res, $Val extends Search>
 }
 
 /// @nodoc
-abstract class _$$_SearchCopyWith<$Res> implements $SearchCopyWith<$Res> {
-  factory _$$_SearchCopyWith(_$_Search value, $Res Function(_$_Search) then) =
-      __$$_SearchCopyWithImpl<$Res>;
+abstract class _$$SearchImplCopyWith<$Res> implements $SearchCopyWith<$Res> {
+  factory _$$SearchImplCopyWith(
+          _$SearchImpl value, $Res Function(_$SearchImpl) then) =
+      __$$SearchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,10 +104,11 @@ abstract class _$$_SearchCopyWith<$Res> implements $SearchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SearchCopyWithImpl<$Res>
-    extends _$SearchCopyWithImpl<$Res, _$_Search>
-    implements _$$_SearchCopyWith<$Res> {
-  __$$_SearchCopyWithImpl(_$_Search _value, $Res Function(_$_Search) _then)
+class __$$SearchImplCopyWithImpl<$Res>
+    extends _$SearchCopyWithImpl<$Res, _$SearchImpl>
+    implements _$$SearchImplCopyWith<$Res> {
+  __$$SearchImplCopyWithImpl(
+      _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +120,7 @@ class __$$_SearchCopyWithImpl<$Res>
     Object? projectName = null,
     Object? imgUrl = null,
   }) {
-    return _then(_$_Search(
+    return _then(_$SearchImpl(
       donationId: null == donationId
           ? _value.donationId
           : donationId // ignore: cast_nullable_to_non_nullable
@@ -145,16 +147,16 @@ class __$$_SearchCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Search with DiagnosticableTreeMixin implements _Search {
-  const _$_Search(
+class _$SearchImpl with DiagnosticableTreeMixin implements _Search {
+  const _$SearchImpl(
       {required this.donationId,
       required this.projectId,
       required this.flameName,
       required this.projectName,
       required this.imgUrl});
 
-  factory _$_Search.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchFromJson(json);
+  factory _$SearchImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchImplFromJson(json);
 
   @override
   final int donationId;
@@ -188,7 +190,7 @@ class _$_Search with DiagnosticableTreeMixin implements _Search {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Search &&
+            other is _$SearchImpl &&
             (identical(other.donationId, donationId) ||
                 other.donationId == donationId) &&
             (identical(other.projectId, projectId) ||
@@ -208,12 +210,12 @@ class _$_Search with DiagnosticableTreeMixin implements _Search {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
-      __$$_SearchCopyWithImpl<_$_Search>(this, _$identity);
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
+      __$$SearchImplCopyWithImpl<_$SearchImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchToJson(
+    return _$$SearchImplToJson(
       this,
     );
   }
@@ -225,9 +227,9 @@ abstract class _Search implements Search {
       required final int projectId,
       required final String flameName,
       required final String projectName,
-      required final String imgUrl}) = _$_Search;
+      required final String imgUrl}) = _$SearchImpl;
 
-  factory _Search.fromJson(Map<String, dynamic> json) = _$_Search.fromJson;
+  factory _Search.fromJson(Map<String, dynamic> json) = _$SearchImpl.fromJson;
 
   @override
   int get donationId;
@@ -241,6 +243,6 @@ abstract class _Search implements Search {
   String get imgUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,7 +6,7 @@ part of 'flame.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Flame _$$_FlameFromJson(Map<String, dynamic> json) => _$_Flame(
+_$FlameImpl _$$FlameImplFromJson(Map<String, dynamic> json) => _$FlameImpl(
       donationId: json['donationId'] as int,
       usages: json['usages'] as String,
       inherenceName: json['inherenceName'] as String,
@@ -14,7 +14,8 @@ _$_Flame _$$_FlameFromJson(Map<String, dynamic> json) => _$_Flame(
       randomMessage: json['randomMessage'] as String,
     );
 
-Map<String, dynamic> _$$_FlameToJson(_$_Flame instance) => <String, dynamic>{
+Map<String, dynamic> _$$FlameImplToJson(_$FlameImpl instance) =>
+    <String, dynamic>{
       'donationId': instance.donationId,
       'usages': instance.usages,
       'inherenceName': instance.inherenceName,

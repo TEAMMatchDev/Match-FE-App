@@ -26,6 +26,7 @@ mixin _$FlameDetail {
   String get usages => throw _privateConstructorUsedError;
   int get amount => throw _privateConstructorUsedError;
   int get sequence => throw _privateConstructorUsedError;
+  String get randomMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $FlameDetailCopyWith<$Res> {
       String inherenceName,
       String usages,
       int amount,
-      int sequence});
+      int sequence,
+      String randomMessage});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$FlameDetailCopyWithImpl<$Res, $Val extends FlameDetail>
     Object? usages = null,
     Object? amount = null,
     Object? sequence = null,
+    Object? randomMessage = null,
   }) {
     return _then(_value.copyWith(
       imgUrl: null == imgUrl
@@ -93,16 +96,20 @@ class _$FlameDetailCopyWithImpl<$Res, $Val extends FlameDetail>
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
+      randomMessage: null == randomMessage
+          ? _value.randomMessage
+          : randomMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_FlameDetailCopyWith<$Res>
+abstract class _$$FlameDetailImplCopyWith<$Res>
     implements $FlameDetailCopyWith<$Res> {
-  factory _$$_FlameDetailCopyWith(
-          _$_FlameDetail value, $Res Function(_$_FlameDetail) then) =
-      __$$_FlameDetailCopyWithImpl<$Res>;
+  factory _$$FlameDetailImplCopyWith(
+          _$FlameDetailImpl value, $Res Function(_$FlameDetailImpl) then) =
+      __$$FlameDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -111,15 +118,16 @@ abstract class _$$_FlameDetailCopyWith<$Res>
       String inherenceName,
       String usages,
       int amount,
-      int sequence});
+      int sequence,
+      String randomMessage});
 }
 
 /// @nodoc
-class __$$_FlameDetailCopyWithImpl<$Res>
-    extends _$FlameDetailCopyWithImpl<$Res, _$_FlameDetail>
-    implements _$$_FlameDetailCopyWith<$Res> {
-  __$$_FlameDetailCopyWithImpl(
-      _$_FlameDetail _value, $Res Function(_$_FlameDetail) _then)
+class __$$FlameDetailImplCopyWithImpl<$Res>
+    extends _$FlameDetailCopyWithImpl<$Res, _$FlameDetailImpl>
+    implements _$$FlameDetailImplCopyWith<$Res> {
+  __$$FlameDetailImplCopyWithImpl(
+      _$FlameDetailImpl _value, $Res Function(_$FlameDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -131,8 +139,9 @@ class __$$_FlameDetailCopyWithImpl<$Res>
     Object? usages = null,
     Object? amount = null,
     Object? sequence = null,
+    Object? randomMessage = null,
   }) {
-    return _then(_$_FlameDetail(
+    return _then(_$FlameDetailImpl(
       imgUrl: null == imgUrl
           ? _value.imgUrl
           : imgUrl // ignore: cast_nullable_to_non_nullable
@@ -157,23 +166,28 @@ class __$$_FlameDetailCopyWithImpl<$Res>
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
+      randomMessage: null == randomMessage
+          ? _value.randomMessage
+          : randomMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_FlameDetail with DiagnosticableTreeMixin implements _FlameDetail {
-  const _$_FlameDetail(
+class _$FlameDetailImpl with DiagnosticableTreeMixin implements _FlameDetail {
+  const _$FlameDetailImpl(
       {required this.imgUrl,
       required this.flameType,
       required this.inherenceName,
       required this.usages,
       required this.amount,
-      required this.sequence});
+      required this.sequence,
+      required this.randomMessage});
 
-  factory _$_FlameDetail.fromJson(Map<String, dynamic> json) =>
-      _$$_FlameDetailFromJson(json);
+  factory _$FlameDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$FlameDetailImplFromJson(json);
 
   @override
   final String imgUrl;
@@ -187,10 +201,12 @@ class _$_FlameDetail with DiagnosticableTreeMixin implements _FlameDetail {
   final int amount;
   @override
   final int sequence;
+  @override
+  final String randomMessage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FlameDetail(imgUrl: $imgUrl, flameType: $flameType, inherenceName: $inherenceName, usages: $usages, amount: $amount, sequence: $sequence)';
+    return 'FlameDetail(imgUrl: $imgUrl, flameType: $flameType, inherenceName: $inherenceName, usages: $usages, amount: $amount, sequence: $sequence, randomMessage: $randomMessage)';
   }
 
   @override
@@ -203,14 +219,15 @@ class _$_FlameDetail with DiagnosticableTreeMixin implements _FlameDetail {
       ..add(DiagnosticsProperty('inherenceName', inherenceName))
       ..add(DiagnosticsProperty('usages', usages))
       ..add(DiagnosticsProperty('amount', amount))
-      ..add(DiagnosticsProperty('sequence', sequence));
+      ..add(DiagnosticsProperty('sequence', sequence))
+      ..add(DiagnosticsProperty('randomMessage', randomMessage));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FlameDetail &&
+            other is _$FlameDetailImpl &&
             (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl) &&
             (identical(other.flameType, flameType) ||
                 other.flameType == flameType) &&
@@ -219,23 +236,25 @@ class _$_FlameDetail with DiagnosticableTreeMixin implements _FlameDetail {
             (identical(other.usages, usages) || other.usages == usages) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.sequence, sequence) ||
-                other.sequence == sequence));
+                other.sequence == sequence) &&
+            (identical(other.randomMessage, randomMessage) ||
+                other.randomMessage == randomMessage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, imgUrl, flameType, inherenceName, usages, amount, sequence);
+  int get hashCode => Object.hash(runtimeType, imgUrl, flameType, inherenceName,
+      usages, amount, sequence, randomMessage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FlameDetailCopyWith<_$_FlameDetail> get copyWith =>
-      __$$_FlameDetailCopyWithImpl<_$_FlameDetail>(this, _$identity);
+  _$$FlameDetailImplCopyWith<_$FlameDetailImpl> get copyWith =>
+      __$$FlameDetailImplCopyWithImpl<_$FlameDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FlameDetailToJson(
+    return _$$FlameDetailImplToJson(
       this,
     );
   }
@@ -248,10 +267,11 @@ abstract class _FlameDetail implements FlameDetail {
       required final String inherenceName,
       required final String usages,
       required final int amount,
-      required final int sequence}) = _$_FlameDetail;
+      required final int sequence,
+      required final String randomMessage}) = _$FlameDetailImpl;
 
   factory _FlameDetail.fromJson(Map<String, dynamic> json) =
-      _$_FlameDetail.fromJson;
+      _$FlameDetailImpl.fromJson;
 
   @override
   String get imgUrl;
@@ -266,7 +286,9 @@ abstract class _FlameDetail implements FlameDetail {
   @override
   int get sequence;
   @override
+  String get randomMessage;
+  @override
   @JsonKey(ignore: true)
-  _$$_FlameDetailCopyWith<_$_FlameDetail> get copyWith =>
+  _$$FlameDetailImplCopyWith<_$FlameDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

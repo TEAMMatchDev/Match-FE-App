@@ -6,6 +6,8 @@ import '../../model/recent_search/recent_search.dart';
 
 enum StorageKey {
   NAME_SEARCH,
+  FCM_TOKEN,
+  DEVICE_ID,
   PROJECT_SEARCH;
 }
 
@@ -18,6 +20,14 @@ class GetStorageUtil {
   static final storage = GetStorage();
 
   //GetStorage에서 key에 해당하는 value를 가져옴
+  ///* return : String
+  static Future<String?> getToken(StorageKey key) async {
+    final String? token = storage.read(key.name);
+    if (token == null) {
+      return null;
+    }
+    return token;
+  }
   ///* return : [List<RecentSearch>]
   static Future<List<RecentSearch>> getRecentSearches(StorageKey key) async {
     final List<dynamic>? jsonList = storage.read<List<dynamic>>(key.name);
@@ -29,6 +39,10 @@ class GetStorageUtil {
     return recentSearches;
   }
 
+  ///* return : String
+  static Future<void> addToken(StorageKey key, String token) async {
+    await storage.write(key.name,token);
+  }
   ///GetStorage에서 key에 해당하는 value를 설정해줌
   ///* [recentSearch] : [RecentSearch]
   static Future<void> addRecentSearch(

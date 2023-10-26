@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:match/modules/user_phone/controller/user_phone_controller.dart';
 import 'package:match/provider/api/mypage_api.dart';
 import 'package:match/util/components/global_app_bar.dart';
@@ -11,6 +10,7 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../provider/service/auth_service.dart';
 import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
+import '../../../util/const/style/global_logger.dart';
 
 class UserPhoneScreen extends GetView<UserPhoneController> {
   const UserPhoneScreen({super.key});
@@ -21,11 +21,11 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
       appBar: CommonAppBar.basic("휴대폰 번호 변경"),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Obx(
-          () => Column(
-            children: [
-              Expanded(
-                child: Column(
+        child: Column(
+          children: [
+            Expanded(
+              child: Obx(
+                () => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
@@ -44,21 +44,22 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Expanded(
-                            child: CommonInputField.phone(
-                                textController:
-                                    controller.phoneController.value,
-                                onChange: (text) async {
-                                  if (text !=
-                                          AuthService
-                                              .to.myProfile.value.phone &&
-                                      text != "" &&
-                                      RegExp(r'^01[016789]?\d{3,4}\d{4}$')
-                                          .hasMatch(text)) {
-                                    controller.phoneChange.value = true;
-                                  }
-
-                                  controller.phoneChange.value = false;
-                                }),
+                            child: Obx(
+                              () => CommonInputField.phone(
+                                  textController:
+                                      controller.phoneController.value,
+                                  onChange: (text) async {
+                                    if (text != "" &&
+                                        RegExp(r'^01[016789]?\d{3,4}\d{4}$')
+                                            .hasMatch(text)) {
+                                      controller.phoneChange.value = true;
+                                      logger.d(
+                                          "변경할 번호: $text  ${controller.phoneChange.value}");
+                                    } else {
+                                      controller.phoneChange.value = false;
+                                    }
+                                  }),
+                            ),
                           ),
                           SizedBox(
                             width: 10.w,
@@ -68,11 +69,20 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                             onTap: () async {
                               controller.newPhone.value =
                                   controller.phoneController.value.text;
-                              controller.isPhoneValid.value =
-                                  await MypageApi.getPhoneValidCode(
-                                      phone: controller.newPhone.value);
-                              if (controller.isPhoneValid.value) {
-                                Fluttertoast.showToast(msg: "인증번호가 발송되었습니다");
+                              if (controller.newPhone.value ==
+                                  AuthService.to.myProfile.value.phone) {
+                                Fluttertoast.showToast(
+                                    msg: "등록된 핸드폰과 같은 번호입니다");
+                              } else {
+                                controller.isPhoneValid.value =
+                                    await MypageApi.getPhoneValidCode(
+                                        phone: controller.newPhone.value);
+                                if (controller.isPhoneValid.value) {
+                                  Fluttertoast.showToast(msg: "인증번호가 발송되었습니다");
+                                }else{
+                                  Fluttertoast.showToast(msg: "인증번호 발송에 실패하였습니다. 전화번호를 다시 확인해주세요");
+                                  
+                                }
                               }
                             },
                           ),
@@ -145,7 +155,9 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                   ],
                 ),
               ),
-              CommonButton.edit(
+            ),
+            Obx(
+              () => CommonButton.edit(
                 isActive: controller.isValidCode.value,
                 onTap: () async {
                   if (controller.newPhone.value != "") {
@@ -155,7 +167,6 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                           msg: "인증된 번호와 다른 번호입니다. 인증 후에 등록해주세요");
                     } else {
                       var result = await MypageApi.setPhone(
-                          //TODO: 코드 안정성을 위해, 인증번호 발송후 변수에 저장한값으로 통신
                           oldPhone: AuthService.to.myProfile.value.phone,
                           newPhone: controller.newPhone.value);
                       if (result) {
@@ -166,11 +177,11 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                   }
                 },
               ),
-              SizedBox(
-                height: 30.h,
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 30.h,
+            ),
+          ],
         ),
       ),
     );

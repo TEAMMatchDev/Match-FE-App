@@ -100,7 +100,7 @@ class MypageScreen extends GetView<MypageController> {
                 icon: "setting",
                 title: "환경설정",
                 onTap: () async {
-                  Get.to(() => SettingScreen());
+                  await Get.toNamed(Routes.setting);
                 },
               ),
               MypageListTile(icon: "policy", title: "운영정책 및 약관"

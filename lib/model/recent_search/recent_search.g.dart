@@ -6,14 +6,14 @@ part of 'recent_search.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RecentSearch _$$_RecentSearchFromJson(Map<String, dynamic> json) =>
-    _$_RecentSearch(
+_$RecentSearchImpl _$$RecentSearchImplFromJson(Map<String, dynamic> json) =>
+    _$RecentSearchImpl(
       name: json['name'] as String,
       title: json['title'] as String,
       donationId: json['donationId'] as int,
     );
 
-Map<String, dynamic> _$$_RecentSearchToJson(_$_RecentSearch instance) =>
+Map<String, dynamic> _$$RecentSearchImplToJson(_$RecentSearchImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'title': instance.title,

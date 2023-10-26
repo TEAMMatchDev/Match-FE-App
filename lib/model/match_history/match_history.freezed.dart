@@ -98,11 +98,11 @@ class _$MatchHistoryCopyWithImpl<$Res, $Val extends MatchHistory>
 }
 
 /// @nodoc
-abstract class _$$_MatchHistoryCopyWith<$Res>
+abstract class _$$MatchHistoryImplCopyWith<$Res>
     implements $MatchHistoryCopyWith<$Res> {
-  factory _$$_MatchHistoryCopyWith(
-          _$_MatchHistory value, $Res Function(_$_MatchHistory) then) =
-      __$$_MatchHistoryCopyWithImpl<$Res>;
+  factory _$$MatchHistoryImplCopyWith(
+          _$MatchHistoryImpl value, $Res Function(_$MatchHistoryImpl) then) =
+      __$$MatchHistoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_MatchHistoryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MatchHistoryCopyWithImpl<$Res>
-    extends _$MatchHistoryCopyWithImpl<$Res, _$_MatchHistory>
-    implements _$$_MatchHistoryCopyWith<$Res> {
-  __$$_MatchHistoryCopyWithImpl(
-      _$_MatchHistory _value, $Res Function(_$_MatchHistory) _then)
+class __$$MatchHistoryImplCopyWithImpl<$Res>
+    extends _$MatchHistoryCopyWithImpl<$Res, _$MatchHistoryImpl>
+    implements _$$MatchHistoryImplCopyWith<$Res> {
+  __$$MatchHistoryImplCopyWithImpl(
+      _$MatchHistoryImpl _value, $Res Function(_$MatchHistoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_MatchHistoryCopyWithImpl<$Res>
     Object? flameImage = freezed,
     Object? donationHistoryImages = freezed,
   }) {
-    return _then(_$_MatchHistory(
+    return _then(_$MatchHistoryImpl(
       historyId: null == historyId
           ? _value.historyId
           : historyId // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_MatchHistoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MatchHistory with DiagnosticableTreeMixin implements _MatchHistory {
-  const _$_MatchHistory(
+class _$MatchHistoryImpl with DiagnosticableTreeMixin implements _MatchHistory {
+  const _$MatchHistoryImpl(
       {required this.historyId,
       required this.historyStatus,
       required this.histories,
@@ -173,8 +173,8 @@ class _$_MatchHistory with DiagnosticableTreeMixin implements _MatchHistory {
       final List<String>? donationHistoryImages})
       : _donationHistoryImages = donationHistoryImages;
 
-  factory _$_MatchHistory.fromJson(Map<String, dynamic> json) =>
-      _$$_MatchHistoryFromJson(json);
+  factory _$MatchHistoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MatchHistoryImplFromJson(json);
 
   @override
   final int historyId;
@@ -220,7 +220,7 @@ class _$_MatchHistory with DiagnosticableTreeMixin implements _MatchHistory {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MatchHistory &&
+            other is _$MatchHistoryImpl &&
             (identical(other.historyId, historyId) ||
                 other.historyId == historyId) &&
             (identical(other.historyStatus, historyStatus) ||
@@ -249,12 +249,12 @@ class _$_MatchHistory with DiagnosticableTreeMixin implements _MatchHistory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MatchHistoryCopyWith<_$_MatchHistory> get copyWith =>
-      __$$_MatchHistoryCopyWithImpl<_$_MatchHistory>(this, _$identity);
+  _$$MatchHistoryImplCopyWith<_$MatchHistoryImpl> get copyWith =>
+      __$$MatchHistoryImplCopyWithImpl<_$MatchHistoryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MatchHistoryToJson(
+    return _$$MatchHistoryImplToJson(
       this,
     );
   }
@@ -267,10 +267,10 @@ abstract class _MatchHistory implements MatchHistory {
       required final String histories,
       required final String historyDate,
       final String? flameImage,
-      final List<String>? donationHistoryImages}) = _$_MatchHistory;
+      final List<String>? donationHistoryImages}) = _$MatchHistoryImpl;
 
   factory _MatchHistory.fromJson(Map<String, dynamic> json) =
-      _$_MatchHistory.fromJson;
+      _$MatchHistoryImpl.fromJson;
 
   @override
   int get historyId;
@@ -286,6 +286,6 @@ abstract class _MatchHistory implements MatchHistory {
   List<String>? get donationHistoryImages;
   @override
   @JsonKey(ignore: true)
-  _$$_MatchHistoryCopyWith<_$_MatchHistory> get copyWith =>
+  _$$MatchHistoryImplCopyWith<_$MatchHistoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

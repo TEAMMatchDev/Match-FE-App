@@ -74,22 +74,22 @@ class _$RecommendSearchCopyWithImpl<$Res, $Val extends RecommendSearch>
 }
 
 /// @nodoc
-abstract class _$$_RecommendSearchCopyWith<$Res>
+abstract class _$$RecommendSearchImplCopyWith<$Res>
     implements $RecommendSearchCopyWith<$Res> {
-  factory _$$_RecommendSearchCopyWith(
-          _$_RecommendSearch value, $Res Function(_$_RecommendSearch) then) =
-      __$$_RecommendSearchCopyWithImpl<$Res>;
+  factory _$$RecommendSearchImplCopyWith(_$RecommendSearchImpl value,
+          $Res Function(_$RecommendSearchImpl) then) =
+      __$$RecommendSearchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int keywordId, int priority, String keyword});
 }
 
 /// @nodoc
-class __$$_RecommendSearchCopyWithImpl<$Res>
-    extends _$RecommendSearchCopyWithImpl<$Res, _$_RecommendSearch>
-    implements _$$_RecommendSearchCopyWith<$Res> {
-  __$$_RecommendSearchCopyWithImpl(
-      _$_RecommendSearch _value, $Res Function(_$_RecommendSearch) _then)
+class __$$RecommendSearchImplCopyWithImpl<$Res>
+    extends _$RecommendSearchCopyWithImpl<$Res, _$RecommendSearchImpl>
+    implements _$$RecommendSearchImplCopyWith<$Res> {
+  __$$RecommendSearchImplCopyWithImpl(
+      _$RecommendSearchImpl _value, $Res Function(_$RecommendSearchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_RecommendSearchCopyWithImpl<$Res>
     Object? priority = null,
     Object? keyword = null,
   }) {
-    return _then(_$_RecommendSearch(
+    return _then(_$RecommendSearchImpl(
       keywordId: null == keywordId
           ? _value.keywordId
           : keywordId // ignore: cast_nullable_to_non_nullable
@@ -118,14 +118,14 @@ class __$$_RecommendSearchCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RecommendSearch
+class _$RecommendSearchImpl
     with DiagnosticableTreeMixin
     implements _RecommendSearch {
-  const _$_RecommendSearch(
+  const _$RecommendSearchImpl(
       {required this.keywordId, required this.priority, required this.keyword});
 
-  factory _$_RecommendSearch.fromJson(Map<String, dynamic> json) =>
-      _$$_RecommendSearchFromJson(json);
+  factory _$RecommendSearchImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RecommendSearchImplFromJson(json);
 
   @override
   final int keywordId;
@@ -153,7 +153,7 @@ class _$_RecommendSearch
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RecommendSearch &&
+            other is _$RecommendSearchImpl &&
             (identical(other.keywordId, keywordId) ||
                 other.keywordId == keywordId) &&
             (identical(other.priority, priority) ||
@@ -168,12 +168,13 @@ class _$_RecommendSearch
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RecommendSearchCopyWith<_$_RecommendSearch> get copyWith =>
-      __$$_RecommendSearchCopyWithImpl<_$_RecommendSearch>(this, _$identity);
+  _$$RecommendSearchImplCopyWith<_$RecommendSearchImpl> get copyWith =>
+      __$$RecommendSearchImplCopyWithImpl<_$RecommendSearchImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RecommendSearchToJson(
+    return _$$RecommendSearchImplToJson(
       this,
     );
   }
@@ -183,10 +184,10 @@ abstract class _RecommendSearch implements RecommendSearch {
   const factory _RecommendSearch(
       {required final int keywordId,
       required final int priority,
-      required final String keyword}) = _$_RecommendSearch;
+      required final String keyword}) = _$RecommendSearchImpl;
 
   factory _RecommendSearch.fromJson(Map<String, dynamic> json) =
-      _$_RecommendSearch.fromJson;
+      _$RecommendSearchImpl.fromJson;
 
   @override
   int get keywordId;
@@ -196,6 +197,6 @@ abstract class _RecommendSearch implements RecommendSearch {
   String get keyword;
   @override
   @JsonKey(ignore: true)
-  _$$_RecommendSearchCopyWith<_$_RecommendSearch> get copyWith =>
+  _$$RecommendSearchImplCopyWith<_$RecommendSearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

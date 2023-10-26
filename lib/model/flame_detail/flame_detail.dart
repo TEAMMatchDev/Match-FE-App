@@ -13,6 +13,7 @@ class FlameDetail with _$FlameDetail {
     required String usages,
     required int amount,
     required int sequence,
+    required String randomMessage
   }) = _FlameDetail;
 
   factory FlameDetail.fromJson(Map<String, dynamic> json) =>

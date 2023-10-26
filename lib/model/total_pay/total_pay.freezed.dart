@@ -97,10 +97,11 @@ class _$TotalPayCopyWithImpl<$Res, $Val extends TotalPay>
 }
 
 /// @nodoc
-abstract class _$$_TotalPayCopyWith<$Res> implements $TotalPayCopyWith<$Res> {
-  factory _$$_TotalPayCopyWith(
-          _$_TotalPay value, $Res Function(_$_TotalPay) then) =
-      __$$_TotalPayCopyWithImpl<$Res>;
+abstract class _$$TotalPayImplCopyWith<$Res>
+    implements $TotalPayCopyWith<$Res> {
+  factory _$$TotalPayImplCopyWith(
+          _$TotalPayImpl value, $Res Function(_$TotalPayImpl) then) =
+      __$$TotalPayImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -113,11 +114,11 @@ abstract class _$$_TotalPayCopyWith<$Res> implements $TotalPayCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TotalPayCopyWithImpl<$Res>
-    extends _$TotalPayCopyWithImpl<$Res, _$_TotalPay>
-    implements _$$_TotalPayCopyWith<$Res> {
-  __$$_TotalPayCopyWithImpl(
-      _$_TotalPay _value, $Res Function(_$_TotalPay) _then)
+class __$$TotalPayImplCopyWithImpl<$Res>
+    extends _$TotalPayCopyWithImpl<$Res, _$TotalPayImpl>
+    implements _$$TotalPayImplCopyWith<$Res> {
+  __$$TotalPayImplCopyWithImpl(
+      _$TotalPayImpl _value, $Res Function(_$TotalPayImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -130,7 +131,7 @@ class __$$_TotalPayCopyWithImpl<$Res>
     Object? donationStatus = null,
     Object? regularStatus = null,
   }) {
-    return _then(_$_TotalPay(
+    return _then(_$TotalPayImpl(
       donationId: null == donationId
           ? _value.donationId
           : donationId // ignore: cast_nullable_to_non_nullable
@@ -161,8 +162,8 @@ class __$$_TotalPayCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TotalPay with DiagnosticableTreeMixin implements _TotalPay {
-  const _$_TotalPay(
+class _$TotalPayImpl with DiagnosticableTreeMixin implements _TotalPay {
+  const _$TotalPayImpl(
       {required this.donationId,
       required this.donationDate,
       required this.projectName,
@@ -170,8 +171,8 @@ class _$_TotalPay with DiagnosticableTreeMixin implements _TotalPay {
       required this.donationStatus,
       required this.regularStatus});
 
-  factory _$_TotalPay.fromJson(Map<String, dynamic> json) =>
-      _$$_TotalPayFromJson(json);
+  factory _$TotalPayImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TotalPayImplFromJson(json);
 
   @override
   final int donationId;
@@ -208,7 +209,7 @@ class _$_TotalPay with DiagnosticableTreeMixin implements _TotalPay {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TotalPay &&
+            other is _$TotalPayImpl &&
             (identical(other.donationId, donationId) ||
                 other.donationId == donationId) &&
             (identical(other.donationDate, donationDate) ||
@@ -231,12 +232,12 @@ class _$_TotalPay with DiagnosticableTreeMixin implements _TotalPay {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TotalPayCopyWith<_$_TotalPay> get copyWith =>
-      __$$_TotalPayCopyWithImpl<_$_TotalPay>(this, _$identity);
+  _$$TotalPayImplCopyWith<_$TotalPayImpl> get copyWith =>
+      __$$TotalPayImplCopyWithImpl<_$TotalPayImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TotalPayToJson(
+    return _$$TotalPayImplToJson(
       this,
     );
   }
@@ -249,9 +250,10 @@ abstract class _TotalPay implements TotalPay {
       required final String projectName,
       required final String regularDate,
       required final String donationStatus,
-      required final String regularStatus}) = _$_TotalPay;
+      required final String regularStatus}) = _$TotalPayImpl;
 
-  factory _TotalPay.fromJson(Map<String, dynamic> json) = _$_TotalPay.fromJson;
+  factory _TotalPay.fromJson(Map<String, dynamic> json) =
+      _$TotalPayImpl.fromJson;
 
   @override
   int get donationId;
@@ -267,6 +269,6 @@ abstract class _TotalPay implements TotalPay {
   String get regularStatus;
   @override
   @JsonKey(ignore: true)
-  _$$_TotalPayCopyWith<_$_TotalPay> get copyWith =>
+  _$$TotalPayImplCopyWith<_$TotalPayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
