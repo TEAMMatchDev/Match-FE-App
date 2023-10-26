@@ -10,10 +10,10 @@ PODS:
   - Firebase/DynamicLinks (10.15.0):
     - Firebase/CoreOnly
     - FirebaseDynamicLinks (~> 10.15.0)
-  - firebase_core (2.17.0):
+  - firebase_core (2.18.0):
     - Firebase/CoreOnly (= 10.15.0)
     - Flutter
-  - firebase_dynamic_links (5.3.7):
+  - firebase_dynamic_links (5.4.0):
     - Firebase/DynamicLinks (= 10.15.0)
     - firebase_core
     - Flutter
@@ -43,7 +43,7 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.11.5)"
   - image_gallery_saver (2.0.2):
     - Flutter
-  - kakao_flutter_sdk_common (1.6.0):
+  - kakao_flutter_sdk_common (1.6.1):
     - Flutter
   - naveridlogin-sdk-ios (4.1.6)
   - path_provider_foundation (0.0.1):
@@ -131,8 +131,8 @@ SPEC CHECKSUMS:
   appsflyer_sdk: beae2edc91c51ca92cad637534b45b22ff35d287
   AppsFlyerFramework: 6eb4d89d2eb9a6632317f1055b359d9fd85fd5ff
   Firebase: 66043bd4579e5b73811f96829c694c7af8d67435
-  firebase_core: 28e84c2a4fcf6a50ef83f47b145ded8c1fa331e4
-  firebase_dynamic_links: 52f5d054c676061cf17f4390f3bad9cc964cfdeb
+  firebase_core: 49fd2395e3fbbf63f453888c8e9f42f541f4c11c
+  firebase_dynamic_links: 1f6b75bfeb1623a3a338af9a09ab320c0a72d24c
   FirebaseCore: 2cec518b43635f96afe7ac3a9c513e47558abd2e
   FirebaseCoreInternal: 26233f705cc4531236818a07ac84d20c333e505a
   FirebaseDynamicLinks: 206d4ed3efd2b722822598017f3980d9fda89815
@@ -143,7 +143,7 @@ SPEC CHECKSUMS:
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   image_gallery_saver: cb43cc43141711190510e92c460eb1655cd343cb
-  kakao_flutter_sdk_common: c5f97a0a5657fe16ffb87de96964bb2f99dcdd29
+  kakao_flutter_sdk_common: 7167cfbf5725acf75252af46bb045b9ad99ed6ce
   naveridlogin-sdk-ios: cdd34e3585a3d5aaf37c1d84c1f41faba4a25d1a
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   permission_handler_apple: e76247795d700c14ea09e3a2d8855d41ee80a2e6
@@ -154,6 +154,6 @@ SPEC CHECKSUMS:
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
   webview_flutter_wkwebview: 2e2d318f21a5e036e2c3f26171342e95908bd60a
 
-PODFILE CHECKSUM: a57f30d18f102dd3ce366b1d62a55ecbef2158e5
+PODFILE CHECKSUM: 6b9eb94e9f98a329f2ef624b852a6e42d090af2b
 
 COCOAPODS: 1.13.0
