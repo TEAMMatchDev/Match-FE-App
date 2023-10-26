@@ -141,29 +141,26 @@ class FlameWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: isHome ? 283.h : 229.h,
-            width: isHome ? 255.w : 255.w,
+            height: 298.h ,
+            width: 270.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
               image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage(imgDir +
-                    (isHome
-                        ? "iv_home_background_553.png"
-                        : "iv_detail_background_553.png")),
+                    "iv_home_background.png"),
               ),
             ),
             child: Column(
               children: [
                 SizedBox(
-                  height: 16.h,
+                  height: 18.h,
                 ),
                 UsagesChip(),
                 SizedBox(
-                  height: 28.h,
+                  height: 20.h,
                 ),
-                isHome
-                    ? Container(
+                Container(
                         width: 232.w,
                         height: 57.h,
                         decoration: const BoxDecoration(
@@ -188,28 +185,31 @@ class FlameWidget extends StatelessWidget {
                                 ],
                               )
                             : null,
-                      )
-                    : SizedBox.shrink(),
+                      ),
                 SizedBox(
-                  height: 20.h,
+                  height: 11.h,
                 ),
-                Image.network(height: 122.h, width: 182.w, flameImg)
+                Image.network(height: 114.h, width: 102.w, flameImg),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 200.w,
+                      child: Text(
+                        flameName.substring(0, flameName.length - 3),
+                        style: AppTextStyles.T1Bold18,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text("불꽃이", style: AppTextStyles.T1Bold18)
+                  ],
+                )
               ],
             ),
           ),
-          isHome
-              ? Column(
-                  children: [
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Row(children: [
-                      SizedBox(width:220.w, child: Text( flameName.substring(0,flameName.length-3), style: AppTextStyles.T1Bold20,overflow: TextOverflow.ellipsis,)),
-                      Text("불꽃이", style: AppTextStyles.T1Bold20)
-                    ],)
-                  ],
-                )
-              : SizedBox.shrink()
         ],
       ),
     );
@@ -219,7 +219,7 @@ class FlameWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
       decoration: BoxDecoration(
-        color: AppColors.grey0,
+        color: AppColors.white,
         border: Border.all(width: 1, color: AppColors.grey7),
         borderRadius: BorderRadius.circular(12.r),
       ),

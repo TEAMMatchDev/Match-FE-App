@@ -102,7 +102,7 @@ class HomeScreen extends GetView<HomeController> {
                       options: CarouselOptions(
                           enableInfiniteScroll: false,
                           autoPlay: false,
-                          aspectRatio: 255.w / 320.h,
+                          aspectRatio: 270.w / 298.h,
                           viewportFraction: 1),
                       itemBuilder: (context, index, realIndex) {
                         logger.d(index);

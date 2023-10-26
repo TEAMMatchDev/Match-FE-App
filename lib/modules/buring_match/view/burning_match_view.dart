@@ -32,31 +32,12 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
           scrollDirection: Axis.vertical,
           physics: const BouncingScrollPhysics(),
           children: [
-            ///*1. 후원타이틀
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: 255.w,
-                    child: Text(
-                      controller.flameDetail.value.inherenceName,
-                      style: AppTextStyles.T1Bold18,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  //TODO:임시 하드코딩
-                  TypeChip(type: controller.flameDetail.value.flameType)
-                ],
-              ),
-            ),
             const Divider(
               thickness: 1,
               color: AppColors.divider1,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w).copyWith(bottom: 8.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -66,6 +47,8 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                       flameName: controller.flameDetail.value.inherenceName,
                       flameImg: controller.flameDetail.value.imgUrl,
                       usages: controller.flameDetail.value.usages,
+                      flameTalk: controller.flameDetail.value.randomMessage,
+                      // flameTalk: controller.flameDetail.value.fl,
                       isHome: false,
                     ),
                   ),

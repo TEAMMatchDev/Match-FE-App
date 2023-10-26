@@ -26,6 +26,7 @@ mixin _$FlameDetail {
   String get usages => throw _privateConstructorUsedError;
   int get amount => throw _privateConstructorUsedError;
   int get sequence => throw _privateConstructorUsedError;
+  String get randomMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,8 @@ abstract class $FlameDetailCopyWith<$Res> {
       String inherenceName,
       String usages,
       int amount,
-      int sequence});
+      int sequence,
+      String randomMessage});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$FlameDetailCopyWithImpl<$Res, $Val extends FlameDetail>
     Object? usages = null,
     Object? amount = null,
     Object? sequence = null,
+    Object? randomMessage = null,
   }) {
     return _then(_value.copyWith(
       imgUrl: null == imgUrl
@@ -93,6 +96,10 @@ class _$FlameDetailCopyWithImpl<$Res, $Val extends FlameDetail>
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
+      randomMessage: null == randomMessage
+          ? _value.randomMessage
+          : randomMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -111,7 +118,8 @@ abstract class _$$FlameDetailImplCopyWith<$Res>
       String inherenceName,
       String usages,
       int amount,
-      int sequence});
+      int sequence,
+      String randomMessage});
 }
 
 /// @nodoc
@@ -131,6 +139,7 @@ class __$$FlameDetailImplCopyWithImpl<$Res>
     Object? usages = null,
     Object? amount = null,
     Object? sequence = null,
+    Object? randomMessage = null,
   }) {
     return _then(_$FlameDetailImpl(
       imgUrl: null == imgUrl
@@ -157,6 +166,10 @@ class __$$FlameDetailImplCopyWithImpl<$Res>
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
               as int,
+      randomMessage: null == randomMessage
+          ? _value.randomMessage
+          : randomMessage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -170,7 +183,8 @@ class _$FlameDetailImpl with DiagnosticableTreeMixin implements _FlameDetail {
       required this.inherenceName,
       required this.usages,
       required this.amount,
-      required this.sequence});
+      required this.sequence,
+      required this.randomMessage});
 
   factory _$FlameDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$FlameDetailImplFromJson(json);
@@ -187,10 +201,12 @@ class _$FlameDetailImpl with DiagnosticableTreeMixin implements _FlameDetail {
   final int amount;
   @override
   final int sequence;
+  @override
+  final String randomMessage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FlameDetail(imgUrl: $imgUrl, flameType: $flameType, inherenceName: $inherenceName, usages: $usages, amount: $amount, sequence: $sequence)';
+    return 'FlameDetail(imgUrl: $imgUrl, flameType: $flameType, inherenceName: $inherenceName, usages: $usages, amount: $amount, sequence: $sequence, randomMessage: $randomMessage)';
   }
 
   @override
@@ -203,7 +219,8 @@ class _$FlameDetailImpl with DiagnosticableTreeMixin implements _FlameDetail {
       ..add(DiagnosticsProperty('inherenceName', inherenceName))
       ..add(DiagnosticsProperty('usages', usages))
       ..add(DiagnosticsProperty('amount', amount))
-      ..add(DiagnosticsProperty('sequence', sequence));
+      ..add(DiagnosticsProperty('sequence', sequence))
+      ..add(DiagnosticsProperty('randomMessage', randomMessage));
   }
 
   @override
@@ -219,13 +236,15 @@ class _$FlameDetailImpl with DiagnosticableTreeMixin implements _FlameDetail {
             (identical(other.usages, usages) || other.usages == usages) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.sequence, sequence) ||
-                other.sequence == sequence));
+                other.sequence == sequence) &&
+            (identical(other.randomMessage, randomMessage) ||
+                other.randomMessage == randomMessage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, imgUrl, flameType, inherenceName, usages, amount, sequence);
+  int get hashCode => Object.hash(runtimeType, imgUrl, flameType, inherenceName,
+      usages, amount, sequence, randomMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -248,7 +267,8 @@ abstract class _FlameDetail implements FlameDetail {
       required final String inherenceName,
       required final String usages,
       required final int amount,
-      required final int sequence}) = _$FlameDetailImpl;
+      required final int sequence,
+      required final String randomMessage}) = _$FlameDetailImpl;
 
   factory _FlameDetail.fromJson(Map<String, dynamic> json) =
       _$FlameDetailImpl.fromJson;
@@ -265,6 +285,8 @@ abstract class _FlameDetail implements FlameDetail {
   int get amount;
   @override
   int get sequence;
+  @override
+  String get randomMessage;
   @override
   @JsonKey(ignore: true)
   _$$FlameDetailImplCopyWith<_$FlameDetailImpl> get copyWith =>

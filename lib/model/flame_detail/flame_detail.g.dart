@@ -14,6 +14,7 @@ _$FlameDetailImpl _$$FlameDetailImplFromJson(Map<String, dynamic> json) =>
       usages: json['usages'] as String,
       amount: json['amount'] as int,
       sequence: json['sequence'] as int,
+      randomMessage: json['randomMessage'] as String,
     );
 
 Map<String, dynamic> _$$FlameDetailImplToJson(_$FlameDetailImpl instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$FlameDetailImplToJson(_$FlameDetailImpl instance) =>
       'usages': instance.usages,
       'amount': instance.amount,
       'sequence': instance.sequence,
+      'randomMessage': instance.randomMessage,
     };
