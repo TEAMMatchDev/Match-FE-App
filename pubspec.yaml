@@ -77,6 +77,8 @@ flutter:
     - asset/image/
     - asset/image/icon/bottomNavi/
     - asset/image/icon/login/
+    - asset/image/icon/card/
+    - asset/image/icon/payment/
     - asset/image/icon/
     - asset/image/icon/project/
     - asset/image/icon/mypage/

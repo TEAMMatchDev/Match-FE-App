@@ -14,6 +14,7 @@ class AppColors {
   static const Color grey8 = Color(0XFF494A4E);
   static const Color grey9 = Color(0XFF2F3033);
   static const Color grey10 = Color(0XFF1D1F23);
+  static const Color grey11 = Color(0xFFFAFAFA);
   static const Color searchBackground = Color(0xFFF7F7F7);
   static const Color plainBackground = Color(0xFFE9E9EA);
   static const Color searchIcon = Color(0xFF9B9C9F);

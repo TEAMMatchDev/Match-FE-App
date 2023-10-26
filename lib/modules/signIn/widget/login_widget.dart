@@ -3,7 +3,7 @@ import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/naver_login_state.dart';
-import 'package:match/modules/login/view/login_view.dart';
+import 'package:match/modules/signIn/view/login_view.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';

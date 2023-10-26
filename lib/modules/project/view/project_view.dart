@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/regular_status.dart';
+import 'package:match/modules/payment/view/payment_donator_info_view.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
 import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
@@ -166,55 +167,60 @@ class ProjectScreen extends GetView<ProjectController> {
               )
             ];
           },
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 31.h)
-                .copyWith(bottom: 0),
-            child: [
-              //TODO sequence 반영
-
-              //1. 매칭 정보
-              ListView.separated(
-                // controller: controller.scrollController.value,
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: controller.projectDetail.value.projectImgList.length,
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
-                },
-                itemBuilder: (context, index) {
-                  if (controller.tabIndex ==1 && index % (PAGINATION_SIZE - 1) == 0 &&
-                      index != 0) {
-                    logger.d("1. getMoreFlame 호출!");
-                    Future.wait({
-                      controller.getMoreProjectHistory(
-                          index: index ~/ (PAGINATION_SIZE - 1))
-                    });
-                  }
-                  final imageUrl = controller
-                      .projectDetail.value.projectImgList[index].imgUrl;
-                  return Image.network(imageUrl);
-                },
+          body: Column(
+            children: [
+              Expanded(
+                child: TabBarView(
+                  controller: controller.matchTabBar.controller,
+                  children: [
+                    // 첫 번째 탭 (기부처 이야기)
+                    ListView.separated(
+                      // controller: controller.scrollController.value,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: controller.projectDetail.value.projectImgList.length,
+                      separatorBuilder: (context, index) {
+                        return SizedBox(height: 10.0);
+                      },
+                      itemBuilder: (context, index) {
+                        final imageUrl = controller.projectDetail.value.projectImgList[index].imgUrl;
+                        return Image.network(imageUrl);
+                      },
+                    ),
+                    // 두 번째 탭 (불꽃이 기록)
+                    ListView.separated(
+                      controller: controller.scrollController.value,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: controller.projectHistories.length,
+                      separatorBuilder: (context, index) {
+                        return SizedBox(height: 10.0);
+                      },
+                      itemBuilder: (context, index) {
+                        final history = controller.projectHistories[index];
+                        return ProjectComment(
+                          profileUrl: history.profileImageUrl,
+                          profile: history.nickname,
+                          comment: history.histories,
+                          timeStamp: history.historyDate,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
-
-              //2. 매치 기록
-              ListView.separated(
-                controller: controller.scrollController.value,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: controller.projectHistories.length,
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 10.0); // 구분선으로 사용할 위젯을 추가
-                },
-                itemBuilder: (context, index) {
-                  final history = controller.projectHistories[index];
-                  return ProjectComment(
-                    profileUrl: history.profileImageUrl,
-                    profile: history.nickname,
-                    comment: history.histories,
-                    timeStamp: history.historyDate,
-                  );
-                },
-              )
-            ][controller.tabIndex.value],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 28.h, top: 9.h), // 하단 padding 추가
+                  child: CommonButton.login(
+                    text: "기부하기",
+                    onTap: () async {
+                      Get.to(PaymentDonatorScreen());
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -234,6 +240,7 @@ class ProjectScreen extends GetView<ProjectController> {
           ),
         ));
   }
+
 }
 
 //*SliverDelegate
