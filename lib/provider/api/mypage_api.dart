@@ -22,9 +22,13 @@ class MypageApi {
   ///<h2>6-2API | 닉네임 변경 </h2>
   static Future<bool> setNickname({required String nickName}) async {
     try {
+      FormData formData = FormData.fromMap({
+        "name": nickName,
+      });
+
       Response response = await DioServices().to().patch("/users/profile",
-          queryParameters: {"name": nickName},
-          options: Options(contentType: 'multipart/form-data'),);
+          data: formData);
+
       if (!response.data[SUCCESS]) {
         Fluttertoast.showToast(msg: response.data[MSG]);
       }
