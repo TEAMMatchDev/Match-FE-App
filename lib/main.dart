@@ -53,49 +53,8 @@ Future<void> initService() async {
   await GetStorage.init();
   await setAlarm();
   await DynamicLink.setUp();
-
 }
 
-///* fcm(알람) 관련 권한, 기기 등록 api, listener 등록
-Future<void> setAlarm()async{
-
-  ///* alarm 관련 토큰 및 api
-  if (GetStorageUtil.getToken(StorageKey.FCM_TOKEN) != null &&
-      GetStorageUtil.getToken(StorageKey.DEVICE_ID) != null) {
-  } else {
-    var fcmToken = await initFirebaseMsg();
-    GetStorageUtil.addToken(StorageKey.FCM_TOKEN, fcmToken ?? "");
-    var deviceId = await getDeviceId();
-    GetStorageUtil.addToken(StorageKey.DEVICE_ID, deviceId);
-    var tmpResult = await NotificationApi.setAlarmToken(
-        fcmToken: fcmToken!, deviceId: deviceId);
-    logger.d(tmpResult);
-  }
-
-  ///* alarm 관련 permission 체크
-  if (await Permission.notification.isDenied) {
-    await Permission.notification.request();
-  }
-  ///* alarm listener 등록
-  FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
-    if (message != null) {
-      if (message.notification != null) {
-        logger.d(message.notification!.title);
-        logger.d(message.notification!.body);
-        logger.d(message.data["click_action"]);
-      }
-    }
-  });
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) {
-    if (message != null) {
-      if (message.notification != null) {
-        logger.d(message.notification!.title);
-        logger.d(message.notification!.body);
-        logger.d(message.data["click_action"]);
-      }
-    }
-  });
-}
 Future<String?> initFirebaseMsg() async {
   // FirebaseMessaging 인스턴스 초기화
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -116,6 +75,49 @@ Future<String> getDeviceId() async {
     return iosInfo.identifierForVendor;
   }
   return '';
+}
+
+///* fcm(알람) 관련 권한, 기기 등록 api, listener 등록
+Future<void> setAlarm() async {
+  ///* alarm 관련 토큰 및 api
+  // if (GetStorageUtil.getToken(StorageKey.FCM_TOKEN) != null &&
+  //     GetStorageUtil.getToken(StorageKey.DEVICE_ID) != null) {
+  // } else {
+
+  ///* alarm 관련 permission 체크
+  if (await Permission.notification.isDenied) {
+    await Permission.notification.request();
+  }
+
+  var fcmToken = await initFirebaseMsg();
+  GetStorageUtil.addToken(StorageKey.FCM_TOKEN, fcmToken ?? "");
+  var deviceId = await getDeviceId();
+  GetStorageUtil.addToken(StorageKey.DEVICE_ID, deviceId);
+  var tmpResult = await NotificationApi.setAlarmToken(
+      fcmToken: fcmToken!, deviceId: deviceId);
+  logger.d(tmpResult);
+  // }
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+
+  ///* alarm listener 등록
+  FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
+    if (message != null) {
+      if (message.notification != null) {
+        logger.d(message.notification!.title);
+        logger.d(message.notification!.body);
+        logger.d(message.data["click_action"]);
+      }
+    }
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) {
+    if (message != null) {
+      if (message.notification != null) {
+        logger.d(message.notification!.title);
+        logger.d(message.notification!.body);
+        logger.d(message.data["click_action"]);
+      }
+    }
+  });
 }
 
 class MyApp extends StatelessWidget {

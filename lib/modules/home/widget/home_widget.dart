@@ -112,19 +112,19 @@ class BannerWidget extends StatelessWidget {
 ///*타오로는 불꽃이 위젯
 ///[HomeScreen], [BurningMathScreen]에서 사용
 class FlameWidget extends StatelessWidget {
-  final String flameName;
-  final String flameImg;
+  final String? flameName;
+  final String? flameImg;
   final String? flameTalk;
-  final String usages;
+  final String? usages;
   final int? id;
   final bool isHome;
 
   const FlameWidget(
       {super.key,
-      required this.flameName,
-      required this.flameImg,
-      this.flameTalk,
-      required this.usages,
+      this.flameName,
+      this.flameImg,
+      this.flameTalk = "이곳에 불꽃이를 생성해보세요!",
+      this.usages,
       this.id,
       this.isHome = true});
 
@@ -141,14 +141,16 @@ class FlameWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            height: 298.h ,
+            height: 298.h,
             width: 270.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
               image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage(imgDir +
-                    "iv_home_background.png"),
+                    (flameName != null
+                        ? "iv_home_background_blank.png"
+                        : "iv_home_background.png")),
               ),
             ),
             child: Column(
@@ -156,57 +158,67 @@ class FlameWidget extends StatelessWidget {
                 SizedBox(
                   height: 18.h,
                 ),
-                UsagesChip(),
+                usages != null ? UsagesChip() : SizedBox.shrink(),
                 SizedBox(
                   height: 20.h,
                 ),
                 Container(
-                        width: 232.w,
-                        height: 57.h,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(
-                                imgDir + "ic_speech_background_232.png"),
-                          ),
-                        ),
-                        alignment: Alignment.center,
-                        child: flameTalk != null
-                            ? Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Positioned(
-                                    top: 13.h,
-                                    child: Text(
-                                      flameTalk!,
-                                      style: AppTextStyles.L1Medium12,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : null,
-                      ),
+                  width: 250.w,
+                  height: 57.h,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image:
+                          AssetImage(imgDir + "ic_speech_background_232.png"),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: flameTalk != null
+                      ? Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Positioned(
+                              top: 13.h,
+                              child: SizedBox(
+                                width: 240.w,
+                                height: 30.h,
+                                child: Text(
+                                  flameTalk!,
+                                  style: AppTextStyles.L1Medium12,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : null,
+                ),
                 SizedBox(
                   height: 11.h,
                 ),
-                Image.network(height: 114.h, width: 102.w, flameImg),
+                flameImg != null
+                    ? Image.network(height: 114.h, width: 102.w, flameImg!)
+                    : SizedBox.shrink(),
                 SizedBox(
                   height: 10.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 200.w,
-                      child: Text(
-                        flameName.substring(0, flameName.length - 3),
-                        style: AppTextStyles.T1Bold18,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text("불꽃이", style: AppTextStyles.T1Bold18)
-                  ],
-                )
+                flameName != null
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 200.w,
+                            child: Text(
+                              flameName!.substring(0, flameName!.length - 3),
+                              style: AppTextStyles.T1Bold18,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Text("불꽃이", style: AppTextStyles.T1Bold18)
+                        ],
+                      )
+                    : SizedBox.shrink()
               ],
             ),
           ),
@@ -223,7 +235,7 @@ class FlameWidget extends StatelessWidget {
         border: Border.all(width: 1, color: AppColors.grey7),
         borderRadius: BorderRadius.circular(12.r),
       ),
-      child: Text(usages, style: AppTextStyles.T1Bold12),
+      child: Text(usages!, style: AppTextStyles.T1Bold12),
     );
   }
 }

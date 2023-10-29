@@ -14,7 +14,7 @@ _$MatchHistoryImpl _$$MatchHistoryImplFromJson(Map<String, dynamic> json) =>
       historyDate: json['historyDate'] as String,
       flameImage: json['flameImage'] as String?,
       donationHistoryImages: (json['donationHistoryImages'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => HistoryImages.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -26,4 +26,16 @@ Map<String, dynamic> _$$MatchHistoryImplToJson(_$MatchHistoryImpl instance) =>
       'historyDate': instance.historyDate,
       'flameImage': instance.flameImage,
       'donationHistoryImages': instance.donationHistoryImages,
+    };
+
+_$HistoryImagesImpl _$$HistoryImagesImplFromJson(Map<String, dynamic> json) =>
+    _$HistoryImagesImpl(
+      imageId: json['imageId'] as int,
+      imageUrl: json['imageUrl'] as String,
+    );
+
+Map<String, dynamic> _$$HistoryImagesImplToJson(_$HistoryImagesImpl instance) =>
+    <String, dynamic>{
+      'imageId': instance.imageId,
+      'imageUrl': instance.imageUrl,
     };

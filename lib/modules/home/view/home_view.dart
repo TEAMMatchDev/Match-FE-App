@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:match/provider/service/auth_service.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -86,7 +87,7 @@ class HomeScreen extends GetView<HomeController> {
                         padding: EdgeInsets.only(top: 11.h, bottom: 15.h),
                         child: Text(
                             //TODO: username 적용
-                            "박정은님의 타오르는 불꽃이",
+                            "${AuthService.to.myProfile.value.nickName}님의 타오르는 불꽃이",
                             style: AppTextStyles.T1Bold20),
                       ),
                       Text(
@@ -95,6 +96,7 @@ class HomeScreen extends GetView<HomeController> {
                     ],
                   ),
                   //*불꽃이 ListView
+                  controller.flameList.isEmpty?FlameWidget():
                   SizedBox(
                     height: 350.h,
                     child: CarouselSlider.builder(

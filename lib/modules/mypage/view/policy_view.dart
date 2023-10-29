@@ -23,7 +23,7 @@ class PolicyScreen extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: (){
-                Get.to(PolicyDetailView(webUrl: "/terms/service"));
+                Get.to(PolicyDetailView(webUrl: "/terms/service",title: "개인정보 처리 방침",));
               },
                 child: Text("이용약관",style: AppTextStyles.T1Bold15,)),
             Padding(
@@ -36,7 +36,7 @@ class PolicyScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (){
-                Get.to(PolicyDetailView(webUrl: "/terms/policy"));
+                Get.to(PolicyDetailView(webUrl: "/terms/policy",title: "개인정보 처리 방침",));
               },
                 child: Text("개인정보 처리 방침",style: AppTextStyles.T1Bold15)),
             Padding(

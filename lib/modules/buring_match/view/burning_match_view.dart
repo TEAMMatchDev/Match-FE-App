@@ -37,7 +37,8 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
               color: AppColors.divider1,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w).copyWith(bottom: 8.h),
+              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w)
+                  .copyWith(bottom: 8.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -90,7 +91,10 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                       return MatchRecord(
                           title: history.histories,
                           date: history.historyDate,
-                          imgList: history.donationHistoryImages ?? []);
+                          imgList: history.donationHistoryImages
+                                  ?.map((e) => e.imageUrl)
+                                  .toList() ??
+                              []);
                     },
                   ),
                   // 매치기록
