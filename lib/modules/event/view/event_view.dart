@@ -12,6 +12,7 @@ import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_logger.dart';
+import '../../../util/const/style/global_skeleton.dart';
 import '../controller/event_controller.dart';
 
 class EventScreen extends GetView<EventController> {
@@ -45,7 +46,8 @@ class EventScreen extends GetView<EventController> {
             width: double.infinity,
             height: double.infinity,
             child: Obx(
-              ()=> CarouselSlider.builder(
+              ()=>controller.eventList.isEmpty?CommonSkeleton.event():
+                  CarouselSlider.builder(
                 itemCount: controller.eventList.length,
                 itemBuilder: (context, index, realIndex) {
                   if (index % (PAGINATION_SIZE - 1) == 0 &&

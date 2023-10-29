@@ -27,17 +27,13 @@ class PaymentApi {
     }
   }
 
-  //TODO: pagination 적용
   ///<h2>5-8 API | 기부 리스트 조회</h2>
   static Future<List<Pay>> getPaymentDetail({
     required int regularPayId,
-    int page = 0,
-    int size = 10,
   }) async {
     try {
       Response response = await DioServices().to().get(
-          "/donations/pay/${regularPayId}",
-          queryParameters: {"page": 0, "size": 10, "filter": 0});
+          "/donations/pay/${regularPayId}",);
       // logger.d(response.data);
       return List.generate(
         response.data[RESULT].length,

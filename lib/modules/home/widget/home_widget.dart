@@ -10,6 +10,7 @@ import 'package:match/model/enum/banner_type.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../model/banner/banners.dart';
@@ -47,6 +48,7 @@ Widget adIndexItem({required int total, required int currentIdx}) {
     ])),
   );
 }
+
 
 ///<h2> 광고 section widget</h2>
 class BannerWidget extends StatelessWidget {
@@ -148,7 +150,7 @@ class FlameWidget extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage(imgDir +
-                    (flameName != null
+                    (flameName == null
                         ? "iv_home_background_blank.png"
                         : "iv_home_background.png")),
               ),
@@ -203,7 +205,7 @@ class FlameWidget extends StatelessWidget {
                 SizedBox(
                   height: 10.h,
                 ),
-                flameName != null
+                flameName != null && flameName!.length > 3
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

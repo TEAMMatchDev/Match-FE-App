@@ -197,11 +197,14 @@ class ProjectScreen extends GetView<ProjectController> {
                       },
                       itemBuilder: (context, index) {
                         final history = controller.projectHistories[index];
-                        return ProjectComment(
-                          profileUrl: history.profileImageUrl,
-                          profile: history.nickname,
-                          comment: history.histories,
-                          timeStamp: history.historyDate,
+                        return Padding(
+                          padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                          child: ProjectComment(
+                            profileUrl: history.profileImageUrl,
+                            profile: history.nickname,
+                            comment: history.histories,
+                            timeStamp: history.historyDate,
+                          ),
                         );
                       },
                     ),

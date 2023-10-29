@@ -12,7 +12,7 @@ class HomeController extends GetxController {
   Rx<bool> isLike = false.obs;
   RxInt currentIdx = 1.obs;
   Rx<int> totalCnt = 0.obs;
-  Rx<int> adCount = 2.obs;
+  Rx<int> adCount = 0.obs;
   Rx<String> tmpText = ProjectType.ANIMAL.stateName.obs;
   RxList<Flame> flameList = <Flame>[].obs;
   RxList<Banners> bannerList = <Banners>[].obs;
@@ -35,6 +35,7 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     bannerList.assignAll(await BannerApi.getBannerList());
+    adCount.value = bannerList.length;
     flameList.assignAll(await FlameApi.getBurningFlameList());
     totalCnt = FlameApi.burningFlame.totalCnt.obs;
   }

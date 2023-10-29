@@ -11,6 +11,7 @@ class Pay with _$Pay {
     required String payStatus,
     required String payMethod,
     required String amount,
+    required String inherenceNumber,
   }) = _Pay;
   factory Pay.fromJson(Map<String, dynamic> json) => _$PayFromJson(json);
 }

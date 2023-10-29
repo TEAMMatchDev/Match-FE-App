@@ -11,6 +11,7 @@ _$PayImpl _$$PayImplFromJson(Map<String, dynamic> json) => _$PayImpl(
       payStatus: json['payStatus'] as String,
       payMethod: json['payMethod'] as String,
       amount: json['amount'] as String,
+      inherenceNumber: json['inherenceNumber'] as String,
     );
 
 Map<String, dynamic> _$$PayImplToJson(_$PayImpl instance) => <String, dynamic>{
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$PayImplToJson(_$PayImpl instance) => <String, dynamic>{
       'payStatus': instance.payStatus,
       'payMethod': instance.payMethod,
       'amount': instance.amount,
+      'inherenceNumber': instance.inherenceNumber,
     };
