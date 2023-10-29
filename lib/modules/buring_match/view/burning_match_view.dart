@@ -94,7 +94,8 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                           imgList: history.donationHistoryImages
                                   ?.map((e) => e.imageUrl)
                                   .toList() ??
-                              []);
+                              [],
+                      isChange: history.historyStatus == "CHANGE"?true:false,);
                     },
                   ),
                   // 매치기록
