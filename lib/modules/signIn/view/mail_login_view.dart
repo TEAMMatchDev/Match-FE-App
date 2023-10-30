@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_statu.dart';
 import 'package:match/modules/signIn/view/find_pw_view.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
-import 'package:match/modules/signIn/view/signup_user_mail_view.dart';
+import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
 import 'package:match/modules/main/view/main_view.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
@@ -48,6 +48,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
+                        //TODO) 컨트롤러 & api 연동
                         CommonTextField(
                             textController: controller.idTextController.value,
                             isSearchScreen: false, //뒤로가기

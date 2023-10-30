@@ -7,6 +7,9 @@ abstract class _Paths {
   /// 로그인 화면
   static const login = "/login";
 
+  /// 회원가입 화면
+  static const sign_up = "/sign_up";
+
   /// 메인 화면
   static const main = "/main";
 
@@ -73,6 +76,9 @@ abstract class Routes {
 
   /// 로그인 화면
   static const login = _Paths.login;
+
+  /// 회원가입 화면
+  static const sign_up = _Paths.sign_up;
 
   /// 메인 화면
   static const main = _Paths.main;
