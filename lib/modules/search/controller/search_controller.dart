@@ -8,7 +8,7 @@ import 'package:match/model/recent_search/recent_search.dart';
 import 'package:match/modules/home/widget/home_widget.dart';
 import 'package:match/util/method/get_storage.dart';
 
-import '../../../model/enum/search_statu.dart';
+import '../../../model/enum/search_status.dart';
 import '../../../model/search/search.dart';
 import '../../../util/const/style/global_logger.dart';
 

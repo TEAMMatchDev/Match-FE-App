@@ -11,7 +11,7 @@ import 'package:match/modules/project/widget/project_widget.dart';
 import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
 
-import '../../../model/enum/search_statu.dart';
+import '../../../model/enum/search_status.dart';
 import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';

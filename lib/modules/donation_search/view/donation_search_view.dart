@@ -8,7 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/util/method/get_storage.dart';
 
-import '../../../model/enum/search_statu.dart';
+import '../../../model/enum/search_status.dart';
 import '../../../model/recent_search/recent_search.dart';
 import '../../../provider/api/search_api.dart';
 import '../../../provider/api/util/global_api_field.dart';

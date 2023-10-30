@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../model/enum/search_statu.dart';
+import '../../../model/enum/search_status.dart';
 
 class SignUpController extends GetxController {
   //TODO) signUp controller
