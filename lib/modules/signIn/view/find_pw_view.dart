@@ -50,19 +50,12 @@ class FindPWScreen extends GetView<LoginController> {
                         style: AppTextStyles.T1Bold14,
                       ),
                       SizedBox(height: 10.h),
-                      CommonTextField(
-                        textController: controller.idTextController.value,
-                        isSearchScreen: false, //뒤로가기
-                        hasPrefix: false, //검색 아이콘
-                        placeHolder: "이메일을 입력해주세요.",
-                        textStatus: controller.searchStatus,
-                        suffixOnTap: () async {},
-                        onSubmitted: (value) async {},
-                        onChanged: ((value) async {
-                          controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                        }),
-                        isPlain: true,
-                      ),
+                      //TODO) 01-08 api 연결 & 입력 float 메시지
+                      CommonInputField.signInID(
+                          textController : controller.findPwTextController.value,
+                          onChange: (value) async {
+                            print(">>> 입력한 이메일: $value");
+                          }),
                     ],
                   ),
                 )

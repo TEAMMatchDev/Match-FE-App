@@ -186,7 +186,9 @@ class CommonInputField extends StatelessWidget {
       }),
     );
   }
-  /// 로그인
+
+  /// signIn 로그인
+  //TODO) id 입력
   factory CommonInputField.signInID(
       {required TextEditingController textController,
         required Future<void> Function(String) onChange}) {
@@ -198,7 +200,7 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
-  /// 회원가입
+  //TODO) pw 입력
   factory CommonInputField.signInPW(
       {required TextEditingController textController,
         required Future<void> Function(String) onChange}) {
@@ -210,6 +212,20 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
+  //TODO) 비밀번호 찾기
+  factory CommonInputField.findPW(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "이메일을 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+
+
 
   factory CommonInputField.nickName(
       {required TextEditingController textController,
