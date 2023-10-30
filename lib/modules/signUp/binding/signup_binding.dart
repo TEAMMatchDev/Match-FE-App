@@ -4,17 +4,16 @@ import 'package:match/modules/event/controller/event_controller.dart';
 import 'package:match/modules/home/controller/home_controller.dart';
 import 'package:match/modules/main/controller/main_controller.dart';
 import 'package:match/modules/mypage/controller/mypage_controller.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 
-import '../controller/login_controller.dart';
-
-class LoginBinding implements Bindings {
+class SignUpBinding implements Bindings {
   @override
   void dependencies() {
     Get.put(MainController());
+    Get.put(SignUpController());
     Get.put(LoginController());
     Get.put(HomeController());
-    Get.put(SignUpController());
 
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => DonateController());

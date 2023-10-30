@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_statu.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
-import 'package:match/modules/signIn/view/signup_user_mail_view.dart';
+import 'package:match/modules/signUp/controller/signup_controller.dart';
+import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
@@ -21,9 +22,8 @@ import 'dart:io';
 
 
 import '../../../provider/routes/routes.dart';
-import '../controller/login_controller.dart';
 
-class AuthAbleScreen extends GetView<LoginController> {
+class AuthAbleScreen extends GetView<SignUpController> {
   const AuthAbleScreen({super.key});
 
   @override
