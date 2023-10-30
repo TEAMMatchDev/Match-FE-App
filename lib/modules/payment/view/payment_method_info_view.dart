@@ -105,8 +105,14 @@ class PaymentMethodScreen extends GetView<PaymentController> {
                 ),
                 SizedBox(height: 16.h),
 
-                CheckBoxExample(stringList: payAgreeStringList, title: title),
-
+                CheckBoxExample(
+                  stringList: payAgreeStringList,
+                  title: title,
+                  onAgreementSelected: (value) {
+                    print(">>> 선택한 체크박스: $value");
+                    controller.selectedItems.value = value;
+                  },
+                ),
 
 
                 SizedBox(height: 60.h),

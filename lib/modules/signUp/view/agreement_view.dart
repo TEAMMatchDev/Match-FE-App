@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/modules/signUp/view/auth_able_view.dart';
@@ -36,41 +37,43 @@ class AgreementScreen extends GetView<SignUpController> {
     ];
     String title = '모두 동의';
 
-    return  Scaffold(
+    return Scaffold(
       appBar: CommonAppBar.basic("이용약관"),
       body: Column(
         children: <Widget>[
           Expanded(
-            child: Column(
-              children: [
-                SizedBox(height: 35.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          style: AppTextStyles.T1Bold18, // Default text style for the entire text
-                          children: [
-                            TextSpan(
-                              text: 'M',
-                              style: TextStyle(
-                                color: AppColors.primaryRed, // Set the color to #D15347
-                                fontWeight: FontWeight.bold, // You can apply other styles as needed
-                              ),
-                            ),
-                            TextSpan(text: 'ATCH 서비스 이용약관에\n동의해주세요.'),
-                          ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 35.h),
+                  RichText(
+                    text: TextSpan(
+                      style: AppTextStyles.T1Bold18, // Default text style for the entire text
+                      children: [
+                        TextSpan(
+                          text: 'M',
+                          style: TextStyle(
+                            color: AppColors.primaryRed, // Set the color to #D15347
+                            fontWeight: FontWeight.bold, // You can apply other styles as needed
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 40.h),
-
-                      CheckBoxExample(stringList: agreementStringList, title: title), //agreementStringList
-                    ],
+                        TextSpan(text: 'ATCH 서비스 이용약관에\n동의해주세요.'),
+                      ],
+                    ),
                   ),
-                )
-              ],
+                  SizedBox(height: 40.h),
+                  CheckBoxExample(
+                    stringList: agreementStringList,
+                    title: title,
+                    onAgreementSelected: (value) {
+                      print(">>> 선택한 체크박스: $value");
+                      controller.selectedItems.value = value;
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(height: 8.h),
@@ -87,6 +90,7 @@ class AgreementScreen extends GetView<SignUpController> {
         ],
       ),
     );
+
   }
 
 }

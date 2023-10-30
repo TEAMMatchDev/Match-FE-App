@@ -69,7 +69,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                         SelectGenderRadioButtons(
                           onGenderSelected: (gender) {
                             print(">>> 선택한 성별: $gender");
-                            controller.gendrState.value = gender;
+                            controller.selectedItemsgendrState.value = gender;
                           },
                         ),
                         SizedBox(height: 20.h),
