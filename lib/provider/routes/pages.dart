@@ -23,6 +23,8 @@ import 'package:match/modules/project/binding/project_binding.dart';
 import 'package:match/modules/project/view/project_view.dart';
 import 'package:match/modules/signIn/binding/login_binding.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
+import 'package:match/modules/signUp/binding/signup_binding.dart';
+import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
 import 'package:match/modules/user_phone/binding/user_phone_binding.dart';
 import 'package:match/modules/user_phone/view/user_phone_view.dart';
@@ -62,6 +64,15 @@ class Pages {
       page: () => const LoginScreen(),
       transition: Transition.noTransition,
       binding: LoginBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "회원가입 화면",
+      name: Routes.sign_up,
+      page: () => const SignUpMailScreen(),
+      transition: Transition.noTransition,
+      binding: SignUpBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
