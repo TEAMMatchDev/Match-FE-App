@@ -56,19 +56,11 @@ class SignUpMailScreen extends GetView<SignUpController> {
                         Row(
                           children: [
                             Expanded(
-                              child: CommonTextField(
-                                textController: controller.idTextController.value,
-                                isSearchScreen: false, //뒤로가기
-                                hasPrefix: false, //검색 아이콘
-                                placeHolder: "이메일을 입력해주세요.",
-                                textStatus: controller.searchStatus,
-                                suffixOnTap: () async {},
-                                onSubmitted: (value) async {},
-                                onChanged: ((value) async {
-                                  controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                                }),
-                                isPlain: true,
-                              ),
+                              child: CommonInputField.signInID(
+                                  textController : controller.idTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 회원가입 이메일: $value");
+                                  }),
                             ),
                             SizedBox(width: 10.w),
                             certinumButton(),
@@ -81,34 +73,22 @@ class SignUpMailScreen extends GetView<SignUpController> {
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        CommonTextField(
-                            textController: controller.pwTextController.value,
-                            isSearchScreen: false, //뒤로가기
-                            hasPrefix: false, //검색 아이콘
-                            placeHolder: "비밀번호를 입력해주세요.",
-                            textStatus: controller.searchStatus,
-                            suffixOnTap: () async {},
-                            onSubmitted: (value) async {},
-                            onChanged: (value) async {},
-                            isPlain: true,
-                        ),
+                        CommonInputField.signInPW(
+                            textController : controller.pwTextController.value,
+                            onChange: (value) async {
+                              print(">>> 입력한 회원가입 pw: $value");
+                            }),
                         SizedBox(height: 27.h),
                         Text(
                           '비밀번호 확인',
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        CommonTextField(
-                          textController: controller.pwConfirmTextController.value,
-                          isSearchScreen: false, //뒤로가기
-                          hasPrefix: false, //검색 아이콘
-                          placeHolder: "비밀번호를 입력해주세요.",
-                          textStatus: controller.searchStatus,
-                          suffixOnTap: () async {},
-                          onSubmitted: (value) async {},
-                          onChanged: (value) async {},
-                          isPlain: true,
-                        ),
+                        CommonInputField.signInPW(
+                            textController : controller.pwConfirmTextController.value,
+                            onChange: (value) async {
+                              print(">>> 입력한 회원가입 확인pw: $value");
+                            }),
                       ],
                     ),
                   )
@@ -118,6 +98,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
             SizedBox(height: 8.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
+              //TODO) 01-06 api 연결
               child: CommonButton.login(
                 text: "확인",
                 onTap: () async {

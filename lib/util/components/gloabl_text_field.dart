@@ -187,8 +187,8 @@ class CommonInputField extends StatelessWidget {
     );
   }
 
-  /// signIn 로그인
-  //TODO) id 입력
+  //TODO) signIn 로그인
+  /// id 입력
   factory CommonInputField.signInID(
       {required TextEditingController textController,
         required Future<void> Function(String) onChange}) {
@@ -200,7 +200,7 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
-  //TODO) pw 입력
+  /// pw 입력
   factory CommonInputField.signInPW(
       {required TextEditingController textController,
         required Future<void> Function(String) onChange}) {
@@ -212,7 +212,7 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
-  //TODO) 비밀번호 찾기
+  /// 비밀번호 찾기
   factory CommonInputField.findPW(
       {required TextEditingController textController,
         required Future<void> Function(String) onChange}) {
@@ -224,8 +224,47 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
-
-
+  //TODO) signUp 회원가입
+  /// 이름 입력
+  factory CommonInputField.userName(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "이름을 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+  /// 전화번호
+  factory CommonInputField.userPhone({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "-없이 번호만 입력해주세요",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
+  /// 전화번호 인증
+  factory CommonInputField.userPhoneConfirm({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "인증번호를 입력해주세요",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
 
   factory CommonInputField.nickName(
       {required TextEditingController textController,
