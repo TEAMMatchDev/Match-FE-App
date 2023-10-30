@@ -23,20 +23,25 @@ import 'dart:io';
 
 import '../../../provider/routes/routes.dart';
 
-class AgreementScreen extends GetView<SignUpController> {
-  const AgreementScreen({super.key});
+class AgreementScreen extends StatefulWidget {
+  @override
+  _AgreementScreenState createState() => _AgreementScreenState();
+}
+
+class _AgreementScreenState extends State<AgreementScreen> with WidgetsBindingObserver {
+  final SignUpController controller = Get.find();
+  List<String> agreementStringList = [
+    '[필수] MATCH 이용약관 동의',
+    '[필수] 개인정보 수집 및 이용 동의',
+    '[필수] 만 14세 이상',
+    '[선택] 마케팅 목적의 개인정보 수집 및 이용 동의',
+    '[선택] 기부 진행사항 등 광고성 앱 푸시 알림 수신 동의',
+  ];
+  String title = '모두 동의';
+  bool isAuthAble = false; //필수 항목을 모두 동의 했는지
 
   @override
-  Widget build(BuildContext context){
-    List<String> agreementStringList = [
-      '[필수] MATCH 이용약관 동의',
-      '[필수] 개인정보 수집 및 이용 동의',
-      '[필수] 만 14세 이상',
-      '[선택] 마케팅 목적의 개인정보 수집 및 이용 동의',
-      '[선택] 기부 진행사항 등 광고성 앱 푸시 알림 수신 동의',
-    ];
-    String title = '모두 동의';
-
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonAppBar.basic("이용약관"),
       body: Column(
@@ -70,6 +75,10 @@ class AgreementScreen extends GetView<SignUpController> {
                     onAgreementSelected: (value) {
                       print(">>> 선택한 체크박스: $value");
                       controller.selectedItems.value = value;
+                      int mandatoryCount = value.where((item) => item.contains('[필수]')).length; // 선택한 항목 중에서 [필수] 문자열을 포함하는 항목의 개수를 확인
+                      setState(() {
+                        isAuthAble = mandatoryCount >= 2;
+                      });
                     },
                   ),
                 ],
@@ -79,18 +88,21 @@ class AgreementScreen extends GetView<SignUpController> {
           SizedBox(height: 8.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: CommonButton.login(
-              text: "확인",
-              onTap: () async {
-                Get.to(AuthAbleScreen());
-              },
-            ),
+            child: isAuthAble
+                ? CommonButton.login(
+                    text: "확인",
+                    onTap: () async {
+                      Get.to(AuthAbleScreen());
+                    },
+                  )
+                : CommonButton.loginDis(
+                    text: "확인",
+                    onTap: () async {},
+                  ),
           ),
           SizedBox(height: 24.h),
         ],
       ),
     );
-
   }
-
 }
