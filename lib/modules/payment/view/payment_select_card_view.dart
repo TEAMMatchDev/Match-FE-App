@@ -14,8 +14,15 @@ import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
-class PaymentSelectCardScreen extends GetView<PaymentController> {
-  const PaymentSelectCardScreen({super.key});
+class PaymentRegisterCardScreen extends StatefulWidget {
+  const PaymentRegisterCardScreen({super.key});
+
+  @override
+  _PaymentRegisterCardScreenState createState() => _PaymentRegisterCardScreenState();
+}
+
+class _PaymentRegisterCardScreenState extends State<PaymentRegisterCardScreen> {
+  int? _selectedCardIndex; // 선택된 카드의 인덱스
 
   @override
   Widget build(BuildContext context){
@@ -80,38 +87,45 @@ class PaymentSelectCardScreen extends GetView<PaymentController> {
 
                 Column(
                   children: [
-                    for (var rowIndex = 0; rowIndex < cardIcons.length; rowIndex++) // 각 행에 대한 반복
+                    for (var rowIndex = 0; rowIndex < cardIcons.length; rowIndex++)
                       Row(
                         children: [
-                          for (var itemIndex = 0; itemIndex < cardIcons[rowIndex].length; itemIndex++) // 각 행에 있는 항목에 대한 반복
-                            Container(
-                              margin: EdgeInsets.only(
-                                bottom: 20.h,
-                                right: (itemIndex < cardIcons[rowIndex].length - 1) ? 17.w : 0, // 가장 오른쪽 요소에 대한 마진 제거
-                              ),
-                              width: 95.w,
-                              height: 62.h,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppColors.grey1,
-                                  width: 1.0,
+                          for (var itemIndex = 0; itemIndex < cardIcons[rowIndex].length; itemIndex++)
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _selectedCardIndex = rowIndex * cardIcons[0].length + itemIndex; // 카드 인덱스를 업데이트합니다.
+                                });
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  bottom: 20.h,
+                                  right: (itemIndex < cardIcons[rowIndex].length - 1) ? 17.w : 0,
                                 ),
-                                borderRadius: BorderRadius.circular(8), // 모서리의 반경을 설정합니다. 여기서는 각 모서리가 10.0의 반경을 가진다고 가정합니다.
-                              ),
-                              child: Column( // 카드 아이콘과 이름을 포함하는 새로운 Column
-                                children: [
-                                  SizedBox(height: 9.h),
-                                  SvgPicture.asset(
-                                    iconDir + "card/" + cardIcons[rowIndex][itemIndex],
-                                    width: 24.w,
-                                    height: 24.h,
+                                width: 95.w,
+                                height: 62.h,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: (_selectedCardIndex == rowIndex * cardIcons[0].length + itemIndex) ? AppColors.grey9 : AppColors.grey1, // 선택된 카드의 경우 테두리 색상 변경
+                                    width: 1.0,
                                   ),
-                                  SizedBox(height: 3.h),
-                                  Text(
-                                    cardNames[rowIndex][itemIndex],
-                                    style: AppTextStyles.T1Bold12.copyWith(color: AppColors.grey8)
-                                  ),
-                                ],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 9.h),
+                                    SvgPicture.asset(
+                                      iconDir + "card/" + cardIcons[rowIndex][itemIndex],
+                                      width: 24.w,
+                                      height: 24.h,
+                                    ),
+                                    SizedBox(height: 3.h),
+                                    Text(
+                                      cardNames[rowIndex][itemIndex],
+                                      style: AppTextStyles.T1Bold12.copyWith(color: AppColors.grey8),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                         ],
@@ -142,7 +156,7 @@ class PaymentSelectCardScreen extends GetView<PaymentController> {
                   child: CommonButton.login(
                     text: "다음",
                     onTap: () async {
-                      Get.to(PaymentCardInfoScreen());
+                      Get.to(PaymentRegisterCardInfoScreen());
                     },
                   ),
                 ),

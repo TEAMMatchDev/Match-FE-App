@@ -13,29 +13,11 @@ import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
-class PaymentCardInfoScreen extends GetView<PaymentController> {
-  const PaymentCardInfoScreen({super.key});
+class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
+  const PaymentRegisterCardInfoScreen({super.key});
 
   @override
   Widget build(BuildContext context){
-
-    final cardNames = [
-      ['토스카드','카카오뱅크','국민카드'],
-      ['농협카드','우리카드','현대카드'],
-      ['하나카드','신한카드','롯데카드'],
-      ['BC카드','삼성카드','K뱅크카드'],
-      ['씨티카드','수협카드','우체국카드'],
-      ['신협카드','기타'],
-    ];
-    final cardIcons = [
-      ['ic_toss.svg','ic_kakao.svg','ic_kbb.svg'],
-      ['ic_nh.svg','ic_woori.svg','ic_hyundai.svg'],
-      ['ic_hana.svg','ic_shinhan.svg','ic_lotte.svg'],
-      ['ic_bc.svg','ic_samsung.svg','ic_kbank.svg'],
-      ['ic_citi.svg','ic_suhyup.svg','ic_postoffice.svg'],
-      ['ic_sinhyup.svg','ic_etc.svg',],
-    ];
-
 
     return  Scaffold(
       body: SingleChildScrollView(

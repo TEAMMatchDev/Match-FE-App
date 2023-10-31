@@ -13,6 +13,13 @@ class PaymentController extends GetxController {
   /// 동의항목
   var selectedItems = <String>[].obs;
 
+  // 현재 선택된 카드사의 인덱스를 저장합니다.
+  RxInt selectedCardIndex = (-1).obs;
+
+  void selectCard(int index) {
+    selectedCardIndex.value = index;
+  }
+
   @override
   void onInit() async {
     super.onInit();

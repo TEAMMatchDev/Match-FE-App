@@ -97,6 +97,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
 
                 PayMethodRadioButtons(),
 
+
                 SizedBox(height: 23.h),
                 Divider( // 수평선 추가
                   height: 1, // 선의 높이
