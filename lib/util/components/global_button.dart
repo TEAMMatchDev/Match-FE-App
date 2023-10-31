@@ -68,6 +68,22 @@ class CommonButton extends StatelessWidget {
       isBottom: isBottom,
     );
   }
+  factory CommonButton.loginDis(
+    {String text = "로그인",
+    int verticalPadding = 13,
+    int textSize = 16,
+    required Future<void> Function() onTap, bool isBottom = true}) {
+    return CommonButton(
+      text: text,
+      verticalPadding: verticalPadding,
+      onTap: onTap,
+      backgroundColor: AppColors.grey1,
+      textColor: AppColors.white,
+      textSize: textSize,
+      isBottom: isBottom,
+    );
+  }
+
   factory CommonButton.back(
       {String text = "이전 돌아가기",
         int verticalPadding = 13,

@@ -6,30 +6,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:match/util/const/style/global_color.dart';
 import '../const/style/global_text_styles.dart';
 
-import 'package:flutter/cupertino.dart';
+class CallSelectBirthBottomSheet extends StatefulWidget {
+  final ValueChanged<String> onBirthSelected;
+  CallSelectBirthBottomSheet({required this.onBirthSelected});
 
-class CallBottomSheet extends StatefulWidget {
   @override
-  _CallBottomSheetState createState() => _CallBottomSheetState();
+  _CallSelectBirthBottomSheetState createState() => _CallSelectBirthBottomSheetState();
 }
 
-class _CallBottomSheetState extends State<CallBottomSheet> {
+class _CallSelectBirthBottomSheetState extends State<CallSelectBirthBottomSheet> {
   DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    // 여기에서 이전에 선택한 값을 초기화하거나 로드합니다.
-    selectedDate = DateTime.now(); // 예를 들어 현재 시간으로 초기화
+    selectedDate = DateTime.now();
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
       child: Text(
-        selectedDate != null
-            ? DateFormat('yyyy.MM.dd').format(selectedDate)
-            : '생년월일',
+        DateFormat('yyyy.MM.dd').format(selectedDate),
         style: AppTextStyles.T1Bold14,
       ),
       onPressed: () {
@@ -52,6 +50,7 @@ class _CallBottomSheetState extends State<CallBottomSheet> {
                         setState(() {
                           selectedDate = dateTime;
                         });
+                        widget.onBirthSelected(DateFormat('yyyy-MM-dd').format(selectedDate));
                       },
                       initDateStr: DateFormat('yyyy.MM.dd').format(selectedDate),
                     ),
@@ -66,11 +65,9 @@ class _CallBottomSheetState extends State<CallBottomSheet> {
   }
 }
 
-
-
-class BirthDatePicker extends StatelessWidget { //DatePicker 위젯
+class BirthDatePicker extends StatelessWidget {
   final void Function(DateTime) onDateTimeChanged;
-  final String ?initDateStr;
+  final String? initDateStr;
 
   BirthDatePicker({
     required this.onDateTimeChanged,
@@ -80,6 +77,7 @@ class BirthDatePicker extends StatelessWidget { //DatePicker 위젯
   @override
   Widget build(BuildContext context) {
     final initDate = DateFormat('yyyy.MM.dd').parse(initDateStr ?? '2000.01.01');
+
     return SizedBox(
       height: 150.h,
       child: CupertinoDatePicker(
@@ -136,8 +134,6 @@ class _BuildButtonSet extends StatelessWidget {
   }
 }
 
-
-
-double getHeightByPercentOfScreen(double percent,  BuildContext context) {
+double getHeightByPercentOfScreen(double percent, BuildContext context) {
   return MediaQuery.of(context).size.height * percent / 100;
 }

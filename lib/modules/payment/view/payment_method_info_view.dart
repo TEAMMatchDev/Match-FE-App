@@ -13,18 +13,22 @@ import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
-class PaymentMethodScreen extends GetView<PaymentController> {
-  const PaymentMethodScreen({super.key});
+class PaymentMethodScreen extends StatefulWidget {
+  @override
+  _PaymentScreenState createState() => _PaymentScreenState();
+}
+
+class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBindingObserver {
+  final PaymentController controller = Get.find();
+    List<String> payAgreeStringList = [
+      '[필수] 결제대행 서비스 이용약관 동의',
+      '[필수] 개인 정보 제 3자 정보 제공 동의',
+    ];
+    String title = '결제 내용에 모두 동의합니다.';
+    bool isAuthAble = false; //필수 항목을 모두 동의 했는지
 
   @override
   Widget build(BuildContext context){
-    List<String> payAgreeStringList = [
-      '결제대행 서비스 이용약관 동의',
-      '개인 정보 제 3자 정보 제공 동의',
-    ];
-    String title = '결제 내용에 모두 동의합니다.';
-
-
     return  Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -105,8 +109,18 @@ class PaymentMethodScreen extends GetView<PaymentController> {
                 ),
                 SizedBox(height: 16.h),
 
-                CheckBoxExample(stringList: payAgreeStringList, title: title),
-
+                CheckBoxExample(
+                  stringList: payAgreeStringList,
+                  title: title,
+                  onAgreementSelected: (value) {
+                    print(">>> 선택한 체크박스: $value");
+                    controller.selectedItems.value = value;
+                    int mandatoryCount = value.where((item) => item.contains('[필수]')).length; // 선택한 항목 중에서 [필수] 문자열을 포함하는 항목의 개수를 확인
+                    setState(() {
+                      isAuthAble = mandatoryCount >= 2;
+                    });
+                  },
+                ),
 
 
                 SizedBox(height: 60.h),
@@ -131,13 +145,28 @@ class PaymentMethodScreen extends GetView<PaymentController> {
                 ),
               ),
               Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 6.w, right: 20),
-                  child: CommonButton.login(
+                child:
+                // Padding(
+                //   padding: EdgeInsets.only(left: 6.w, right: 20),
+                //   child: CommonButton.login(
+                //     text: "확인",
+                //     onTap: () async {
+                //       Get.back();
+                //     },
+                //   ),
+                // ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: isAuthAble
+                      ? CommonButton.login(
                     text: "확인",
                     onTap: () async {
                       Get.back();
                     },
+                  )
+                      : CommonButton.loginDis(
+                    text: "확인",
+                    onTap: () async {},
                   ),
                 ),
               ),

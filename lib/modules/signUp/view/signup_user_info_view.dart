@@ -5,11 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart'; //Date Format 사용
-import 'package:match/model/enum/search_statu.dart';
+import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/modules/signUp/view/agreement_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
-import 'package:match/modules/signUp/widget/select_sex_widget.dart';
+import 'package:match/modules/signUp/widget/select_gender_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_date_picker.dart';
@@ -55,26 +55,23 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        CommonTextField(
-                          textController: controller.idTextController.value,
-                          isSearchScreen: false, //뒤로가기
-                          hasPrefix: false, //검색 아이콘
-                          placeHolder: "이름을 입력해주세요.",
-                          textStatus: controller.searchStatus,
-                          suffixOnTap: () async {},
-                          onSubmitted: (value) async {},
-                          onChanged: ((value) async {
-                            controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                          }),
-                          isPlain: true,
-                        ),
+                        CommonInputField.userName(
+                            textController : controller.userNameTextController.value,
+                            onChange: (value) async {
+                              print(">>> 입력한 이름: $value");
+                            }),
                         SizedBox(height: 20.h),
                         Text(
                           '성별',
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        SelectSexRadioButtons(),
+                        SelectGenderRadioButtons(
+                          onGenderSelected: (gender) {
+                            print(">>> 선택한 성별: $gender");
+                            controller.selectedItemsgendrState.value = gender;
+                          },
+                        ),
                         SizedBox(height: 20.h),
                         Text(
                           '생년월일',
@@ -89,8 +86,13 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Align(
-                              alignment: Alignment.centerLeft, // Align the text to the left
-                              child: CallBottomSheet(),
+                              alignment: Alignment.centerLeft,
+                              child: CallSelectBirthBottomSheet(
+                                onBirthSelected: (birth) {
+                                  print('>>> 선택한 생년월일: $birth');
+                                  controller.birthState.value = birth.toString();
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -103,22 +105,14 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                         Row(
                           children: [
                             Expanded(
-                              child: CommonTextField(
-                                textController: controller.idTextController.value,
-                                isSearchScreen: false, //뒤로가기
-                                hasPrefix: false, //검색 아이콘
-                                placeHolder: "- 없이 번호만 입력해주세요.",
-                                textStatus: controller.searchStatus,
-                                suffixOnTap: () async {},
-                                onSubmitted: (value) async {},
-                                onChanged: ((value) async {
-                                  controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                                }),
-                                isPlain: true,
-                              ),
+                              child: CommonInputField.userPhone(
+                                  textController : controller.userPhoneTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 전화번호: $value");
+                                  }),
                             ),
                             SizedBox(width: 10.w),
-                            certinumButton(),
+                            certinumButton('인증번호 발송'),
                           ],
                         ),
                         SizedBox(height: 20.h),
@@ -130,22 +124,14 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                         Row(
                           children: [
                             Expanded(
-                              child: CommonTextField(
-                                textController: controller.idTextController.value,
-                                isSearchScreen: false, //뒤로가기
-                                hasPrefix: false, //검색 아이콘
-                                placeHolder: "인증번호를 입력해주세요.",
-                                textStatus: controller.searchStatus,
-                                suffixOnTap: () async {},
-                                onSubmitted: (value) async {},
-                                onChanged: ((value) async {
-                                  controller.searchStatus.value = SEARCH_STATUS.EDIT;
-                                }),
-                                isPlain: true,
-                              ),
+                              child: CommonInputField.userPhoneConfirm(
+                                  textController : controller.userPhoneConfirmTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 인증번호: $value");
+                                  }),
                             ),
                             SizedBox(width: 10.w),
-                            certinumButton(),
+                            certinumButton('인증번호 확인'),
                           ],
                         ),
                         SizedBox(height: 27.h),
@@ -159,6 +145,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
           SizedBox(height: 8.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
+              //TODO) 01-05 api 연결
               child: CommonButton.login(
                       text: "확인",
                       onTap: () async {
@@ -174,9 +161,10 @@ class SignUpInfoScreen extends GetView<SignUpController> {
 }
 
 @override
-Widget certinumButton() {
+Widget certinumButton(text) {
   return GestureDetector(
     onTap: () {
+      //TODO) 01-09 인증번호 발송, 01-05-02 인증번호 확인 api 연결
       //Get.toNamed(Routes.home);
     },
     child: Container(
@@ -188,7 +176,7 @@ Widget certinumButton() {
       ),
       child: Center(
         child: Text(
-          '인증번호 발송',
+          text,
           style: AppTextStyles.T1Bold13.copyWith(color: AppColors.white),
           textAlign: TextAlign.center, // 중앙 정렬 설정
         ),

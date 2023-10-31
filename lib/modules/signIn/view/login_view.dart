@@ -29,11 +29,3 @@ class LoginScreen extends GetView<LoginController> {
   }
 
 }
-
-
-
-/*child: GestureDetector(
-onTap: () {
-Get.toNamed(Routes.home);
-},
-child: Text('login'))*/

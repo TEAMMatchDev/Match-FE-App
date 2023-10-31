@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:match/model/enum/search_statu.dart';
+import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/signIn/view/find_pw_view.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
@@ -48,37 +48,23 @@ class EmailLoginScreen extends GetView<LoginController> {
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        //TODO) 컨트롤러 & api 연동
-                        CommonTextField(
-                            textController: controller.idTextController.value,
-                            isSearchScreen: false, //뒤로가기
-                            hasPrefix: false, //검색 아이콘
-                            placeHolder: "이메일을 입력해주세요.",
-                            textStatus: controller.searchStatus,
-                            suffixOnTap: () async {},
-                            onSubmitted: (value) async {},
-                            onChanged: ((value) async {
-                              controller.searchStatus.value = SEARCH_STATUS.EDIT;
+                        //TODO) api 연동
+                        CommonInputField.signInID(
+                            textController : controller.idTextController.value,
+                            onChange: (value) async {
+                              print(">>> 입력한 id: $value");
                             }),
-                            isPlain: true,
-                        ),
                         SizedBox(height: 20.h),
                         Text(
                           '비밀번호',
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        CommonTextField(
-                            textController: controller.pwTextController.value,
-                            isSearchScreen: false, //뒤로가기
-                            hasPrefix: false, //검색 아이콘
-                            placeHolder: "비밀번호를 입력해주세요.",
-                            textStatus: controller.searchStatus,
-                            suffixOnTap: () async {},
-                            onSubmitted: (value) async {},
-                            onChanged: (value) async {},
-                            isPlain: true,
-                        ),
+                      CommonInputField.signInPW(
+                          textController : controller.pwTextController.value,
+                          onChange: (value) async {
+                            print(">>> 입력한 pw: $value");
+                          }),
                         SizedBox(height: 27.h),
                         Center(
                           child: Row(
