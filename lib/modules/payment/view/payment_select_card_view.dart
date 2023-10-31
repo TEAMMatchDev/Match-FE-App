@@ -23,6 +23,8 @@ class PaymentRegisterCardScreen extends StatefulWidget {
 
 class _PaymentRegisterCardScreenState extends State<PaymentRegisterCardScreen> {
   int? _selectedCardIndex; // 선택된 카드의 인덱스
+  int rowInx = 0;
+  int itemIdx = 0;
 
   @override
   Widget build(BuildContext context){
@@ -96,6 +98,9 @@ class _PaymentRegisterCardScreenState extends State<PaymentRegisterCardScreen> {
                                 setState(() {
                                   _selectedCardIndex = rowIndex * cardIcons[0].length + itemIndex; // 카드 인덱스를 업데이트합니다.
                                 });
+                                rowInx = rowIndex;
+                                itemIdx = itemIndex;
+                                print('>> 선택한 카드사 : ${cardNames[rowIndex][itemIndex]}');
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
@@ -156,7 +161,7 @@ class _PaymentRegisterCardScreenState extends State<PaymentRegisterCardScreen> {
                   child: CommonButton.login(
                     text: "다음",
                     onTap: () async {
-                      Get.to(PaymentRegisterCardInfoScreen());
+                      Get.to(() => PaymentRegisterCardInfoScreen(selectedCardName: cardNames[rowInx][itemIdx]));
                     },
                   ),
                 ),

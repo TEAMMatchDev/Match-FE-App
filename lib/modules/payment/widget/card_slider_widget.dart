@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:match/modules/payment/view/payment_select_card_view.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
@@ -28,9 +29,44 @@ class _CardSliderState extends State<CardSlider> {
     ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
   ];
   //TODO) 카드정보
-  final List<List<String>> cardInfoList = []; // id, cardCode, cardNo, cardAbleState 담은 json
+  final List<Map<String, dynamic>> cardInfoList = [
+    {
+      "id": 13,
+      "cardCode": "365",
+      "cardName": null,
+      "cardNo": "1234********2456",
+      "cardAbleStatus": "사용 가능"
+    },
+    {
+      "id": 14,
+      "cardCode": "365",
+      "cardName": null,
+      "cardNo": "1111********4444",
+      "cardAbleStatus": "사용 가능"
+    },
+    {
+      "id": 15,
+      "cardCode": "365",
+      "cardName": null,
+      "cardNo": "4444********1111",
+      "cardAbleStatus": "사용 가능"
+    },
+    {
+      "id": 16,
+      "cardCode": "365",
+      "cardName": null,
+      "cardNo": "7777********7777",
+      "cardAbleStatus": "사용 가능"
+    },
+    {
+      "id": 17,
+      "cardCode": "365",
+      "cardName": null,
+      "cardNo": "9999********9999",
+      "cardAbleStatus": "사용 가능"
+    }
+  ]; // id, cardCode, cardNo, cardAbleState 담은 json
   final List<String> cardCodeList = ['999','381','374','090']; // 카드 이름만 뽑은 리스트
-  final List<String> cardNameList = ['신협카드','KB국민카드','하나카드','카카오뱅크카드'];
   final List<String> cardNumList = ['1234********2456','1111********3333','4444********1111','5555********1111']; // 카드 번호만 뽑은 리스트
 
   int _currentSlide = 0;
@@ -52,7 +88,7 @@ class _CardSliderState extends State<CardSlider> {
               setState(() {
                 _currentSlide = index;
               });
-              print('>>> 선택한 카드 이름 : ${cardNameList[index]} \n 선택한 카드 번호 : ${cardNumList[index]} \n');
+              print('>>> 선택한 카드 code : ${cardCodeList[index]} \n 선택한 카드 번호 : ${cardNumList[index]} \n');
             },
           ),
 
@@ -80,7 +116,7 @@ class _CardSliderState extends State<CardSlider> {
                     bottom: 40.h,
                     left: 18.w,
                     child: Text(
-                      cardNameList[idx],
+                      matchingCard[0],
                       style: AppTextStyles.T1Bold15.copyWith(color: AppColors.white)
                     ),
                   ),

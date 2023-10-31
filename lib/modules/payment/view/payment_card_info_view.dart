@@ -14,7 +14,22 @@ import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
 class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
-  const PaymentRegisterCardInfoScreen({super.key});
+  final String selectedCardName;
+  final List<List<String>> cardBankList = [
+    ['하나','ic_card_hana.svg','374'],
+    ['현대','ic_card_hyundai.svg','367'],
+    ['기업','ic_card_ibk.svg',''],
+    ['카카오뱅크','ic_card_kakao.svg','090'],
+    ['국민','ic_card_kb.svg','381'],
+    ['MG새마을금고','ic_card_mg.svg','045'],
+    ['SC제일','ic_card_sc.svg',''],
+    ['신한','ic_card_shinhan.svg','366'],
+    ['우리','ic_card_woori.svg','041'],
+    ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
+  ];
+
+
+  PaymentRegisterCardInfoScreen({Key? key, required this.selectedCardName}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -67,6 +82,46 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                 ),
                 SizedBox(height: 40.h),
 
+                //TODO) 카드 svg
+                (() {
+                  final matchingCard = cardBankList.firstWhere(
+                        (card) => selectedCardName.contains(card[0]),
+                      orElse: () => cardBankList.firstWhere((card) => card[2] == '')
+                  );
+                  return Center(
+                    child: Stack(
+                      children: [
+                        // 기존 카드 이미지
+                        Container(
+                          child: SvgPicture.asset(
+                            iconDir + "card/" + matchingCard[1],
+                            width: 263.w,
+                            height: 150.h,
+                          ),
+                        ),
+                        /// 카드사
+                        Positioned(
+                          bottom: 40.h,
+                          left: 18.w,
+                          child: Text(
+                              matchingCard[0],
+                              style: AppTextStyles.T1Bold15.copyWith(color: AppColors.white)
+                          ),
+                        ),
+                        /// 카드 번호
+                        Positioned(
+                          bottom: 20.h,
+                          left: 18.w,
+                          child: Text(
+                              'NNNN - **** - **** - NNNN',
+                              style: AppTextStyles.T1Bold14.copyWith(color: AppColors.white)
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                })(),
+                SizedBox(height: 16.h),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
