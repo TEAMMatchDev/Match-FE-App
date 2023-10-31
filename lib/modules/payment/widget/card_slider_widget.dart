@@ -14,22 +14,24 @@ class CardSlider extends StatefulWidget {
 }
 
 class _CardSliderState extends State<CardSlider> {
-  //TODO) 카드정보
-  final List<List<String>> cardInfoList = []; // id, cardCode, cardNo, cardAbleState 담은 json
-  final List<String> cardNameList = ['카카오뱅크','삼성','현대','국민']; // 카드 이름만 뽑은 리스트
-  final List<String> cardNumList = ['1234********2456','1111********3333','4444********1111']; // 카드 번호만 뽑은 리스트
+
   final List<List<String>> cardBankList = [
     ['하나','ic_card_hana.svg','374'],
     ['현대','ic_card_hyundai.svg','367'],
-    ['기업','ic_card_ibk.svg',''],
+    // ['기업','ic_card_ibk.svg',''],
     ['카카오뱅크','ic_card_kakao.svg','090'],
     ['KB국민','ic_card_kb.svg','381'],
     ['MG새마을금고','ic_card_mg.svg','045'],
-    ['SC제일','ic_card_sc.svg',''],
+    // ['SC제일','ic_card_sc.svg',''],
     ['신한','ic_card_shinhan.svg','366'],
     ['우리','ic_card_woori.svg','041'],
     ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
   ];
+  //TODO) 카드정보
+  final List<List<String>> cardInfoList = []; // id, cardCode, cardNo, cardAbleState 담은 json
+  final List<String> cardCodeList = ['999','381','374','090']; // 카드 이름만 뽑은 리스트
+  final List<String> cardNameList = ['신협카드','KB국민카드','하나카드','카카오뱅크카드'];
+  final List<String> cardNumList = ['1234********2456','1111********3333','4444********1111','5555********1111']; // 카드 번호만 뽑은 리스트
 
   int _currentSlide = 0;
 
@@ -39,7 +41,7 @@ class _CardSliderState extends State<CardSlider> {
       children: [
         SizedBox(height: 23.h),
 
-        //TODO) 카드 캐러셀 슬라이더
+        //TODO) 카드 캐러셀 슬라이더 --현재 슬라이더 selected & 현재 슬라이더 정보 logger
         CarouselSlider(
           options: CarouselOptions(
             height: 150.h,
@@ -52,33 +54,67 @@ class _CardSliderState extends State<CardSlider> {
               });
             },
           ),
-          items: cardBankList.map((item) {
-            return Container(
-              child: SvgPicture.asset(
-                iconDir + "card/" + item[1],
-                width: 263.w,
-                height: 150.h,
-              ),
-            );
-          }).toList()
-            ..add(
-              Container(
-                child: GestureDetector(
-                  onTap: () {
-                    Get.to(PaymentRegisterCardScreen());
-                  },
-                  child: SvgPicture.asset(
-                    iconDir + "payment/ic_card_reg.svg",
-                    width: 263.w,
+
+          items: [
+            ...cardCodeList.asMap().entries.map((entry) {
+              int idx = entry.key;
+              String code = entry.value;
+
+              final matchingCard = cardBankList.firstWhere(
+                      (card) => card[2] == code,
+                  orElse: () => cardBankList.firstWhere((card) => card[2] == ''));
+
+              return Stack(
+                children: [
+                  // 기존 카드 이미지
+                  Container(
+                    child: SvgPicture.asset(
+                      iconDir + "card/" + matchingCard[1],
+                      width: 263.w,
+                      height: 150.h,
+                    ),
                   ),
+                  /// 카드사
+                  Positioned(
+                    bottom: 40.h,
+                    left: 18.w,
+                    child: Text(
+                      cardNameList[idx],
+                      style: AppTextStyles.T1Bold15.copyWith(color: AppColors.white)
+                    ),
+                  ),
+                  /// 카드 번호
+                  Positioned(
+                    bottom: 20.h,
+                    left: 18.w,
+                    child: Text(
+                        cardNumList[idx].substring(0, 4) +
+                            ' - **** - **** - ' +
+                            cardNumList[idx].substring(cardNumList[idx].length - 4),
+                        style: AppTextStyles.T1Bold14.copyWith(color: AppColors.white)
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
+            Container(
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(PaymentRegisterCardScreen());
+                },
+                child: SvgPicture.asset(
+                  iconDir + "payment/ic_card_reg.svg",
+                  width: 263.w,
                 ),
               ),
             ),
+          ],
         ),
+
         SizedBox(height: 20.h),
-        (_currentSlide != cardBankList.length)
+        (_currentSlide != cardCodeList.length)
           ? Text(
-              '${_currentSlide + 1}'+'/'+(cardBankList.length).toString(),
+              '${_currentSlide + 1}'+'/'+(cardCodeList.length).toString(),
               style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey6)
           )
         : Text(
