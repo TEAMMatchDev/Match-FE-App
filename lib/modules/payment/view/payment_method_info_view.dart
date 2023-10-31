@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/payment/view/payment_done_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
@@ -146,29 +147,20 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
               ),
               Expanded(
                 child:
-                // Padding(
-                //   padding: EdgeInsets.only(left: 6.w, right: 20),
-                //   child: CommonButton.login(
-                //     text: "확인",
-                //     onTap: () async {
-                //       Get.back();
-                //     },
-                //   ),
-                // ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: isAuthAble
-                      ? CommonButton.login(
-                    text: "확인",
-                    onTap: () async {
-                      Get.back();
-                    },
-                  )
-                      : CommonButton.loginDis(
-                    text: "확인",
-                    onTap: () async {},
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: isAuthAble
+                        ? CommonButton.login(
+                      text: "확인",
+                      onTap: () async {
+                        Get.to(PaymentDoneScreen());
+                      },
+                    )
+                        : CommonButton.loginDis(
+                      text: "확인",
+                      onTap: () async {},
+                    ),
                   ),
-                ),
               ),
             ],
           ),

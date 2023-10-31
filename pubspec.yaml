@@ -16,7 +16,6 @@ dependencies:
   kakao_flutter_sdk_share: ^1.6.0 # 카카오톡 공유
   kakao_flutter_sdk_navi: ^1.5.0 # 카카오내비
   kakao_flutter_sdk_friend: ^1.5.0 # 카카오톡 소셜(피커: 친구 선택하기)
-
   flutter_naver_login: ^1.8.0 # 네이버 로그인
 
   flutter:
@@ -48,6 +47,7 @@ dependencies:
   appsflyer_sdk: ^6.12.2
   firebase_dynamic_links: ^5.3.7
   firebase_core: ^2.17.0
+  flutter_local_notifications: ^13.0.0 # 알림권한
   permission_handler: ^11.0.1
   image_gallery_saver: ^2.0.3
   uni_links: ^0.5.1

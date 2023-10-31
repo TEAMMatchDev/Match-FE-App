@@ -26,6 +26,11 @@ class SignUpController extends GetxController {
   /// 이용약관
   var selectedItems = <String>[].obs;
 
+  //TODO) 회원가입 > 권한(알림 & 사진)
+  /// 알림권한
+  var noticeAuth = false.obs;
+  /// 사진권한
+  var pictureAuth = false.obs;
 
 
   @override

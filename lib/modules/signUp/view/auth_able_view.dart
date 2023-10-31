@@ -16,10 +16,8 @@ import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/style/global_color.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //카카오 로그인
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
-
 
 import '../../../provider/routes/routes.dart';
 
