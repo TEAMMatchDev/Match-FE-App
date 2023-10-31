@@ -25,7 +25,8 @@ mixin _$MatchHistory {
   String get histories => throw _privateConstructorUsedError;
   String get historyDate => throw _privateConstructorUsedError;
   String? get flameImage => throw _privateConstructorUsedError;
-  List<String>? get donationHistoryImages => throw _privateConstructorUsedError;
+  List<HistoryImages>? get donationHistoryImages =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +46,7 @@ abstract class $MatchHistoryCopyWith<$Res> {
       String histories,
       String historyDate,
       String? flameImage,
-      List<String>? donationHistoryImages});
+      List<HistoryImages>? donationHistoryImages});
 }
 
 /// @nodoc
@@ -92,7 +93,7 @@ class _$MatchHistoryCopyWithImpl<$Res, $Val extends MatchHistory>
       donationHistoryImages: freezed == donationHistoryImages
           ? _value.donationHistoryImages
           : donationHistoryImages // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<HistoryImages>?,
     ) as $Val);
   }
 }
@@ -111,7 +112,7 @@ abstract class _$$MatchHistoryImplCopyWith<$Res>
       String histories,
       String historyDate,
       String? flameImage,
-      List<String>? donationHistoryImages});
+      List<HistoryImages>? donationHistoryImages});
 }
 
 /// @nodoc
@@ -156,7 +157,7 @@ class __$$MatchHistoryImplCopyWithImpl<$Res>
       donationHistoryImages: freezed == donationHistoryImages
           ? _value._donationHistoryImages
           : donationHistoryImages // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<HistoryImages>?,
     ));
   }
 }
@@ -170,7 +171,7 @@ class _$MatchHistoryImpl with DiagnosticableTreeMixin implements _MatchHistory {
       required this.histories,
       required this.historyDate,
       this.flameImage,
-      final List<String>? donationHistoryImages})
+      final List<HistoryImages>? donationHistoryImages})
       : _donationHistoryImages = donationHistoryImages;
 
   factory _$MatchHistoryImpl.fromJson(Map<String, dynamic> json) =>
@@ -186,9 +187,9 @@ class _$MatchHistoryImpl with DiagnosticableTreeMixin implements _MatchHistory {
   final String historyDate;
   @override
   final String? flameImage;
-  final List<String>? _donationHistoryImages;
+  final List<HistoryImages>? _donationHistoryImages;
   @override
-  List<String>? get donationHistoryImages {
+  List<HistoryImages>? get donationHistoryImages {
     final value = _donationHistoryImages;
     if (value == null) return null;
     if (_donationHistoryImages is EqualUnmodifiableListView)
@@ -267,7 +268,7 @@ abstract class _MatchHistory implements MatchHistory {
       required final String histories,
       required final String historyDate,
       final String? flameImage,
-      final List<String>? donationHistoryImages}) = _$MatchHistoryImpl;
+      final List<HistoryImages>? donationHistoryImages}) = _$MatchHistoryImpl;
 
   factory _MatchHistory.fromJson(Map<String, dynamic> json) =
       _$MatchHistoryImpl.fromJson;
@@ -283,9 +284,175 @@ abstract class _MatchHistory implements MatchHistory {
   @override
   String? get flameImage;
   @override
-  List<String>? get donationHistoryImages;
+  List<HistoryImages>? get donationHistoryImages;
   @override
   @JsonKey(ignore: true)
   _$$MatchHistoryImplCopyWith<_$MatchHistoryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+HistoryImages _$HistoryImagesFromJson(Map<String, dynamic> json) {
+  return _HistoryImages.fromJson(json);
+}
+
+/// @nodoc
+mixin _$HistoryImages {
+  int get imageId => throw _privateConstructorUsedError;
+  String get imageUrl => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $HistoryImagesCopyWith<HistoryImages> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $HistoryImagesCopyWith<$Res> {
+  factory $HistoryImagesCopyWith(
+          HistoryImages value, $Res Function(HistoryImages) then) =
+      _$HistoryImagesCopyWithImpl<$Res, HistoryImages>;
+  @useResult
+  $Res call({int imageId, String imageUrl});
+}
+
+/// @nodoc
+class _$HistoryImagesCopyWithImpl<$Res, $Val extends HistoryImages>
+    implements $HistoryImagesCopyWith<$Res> {
+  _$HistoryImagesCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? imageId = null,
+    Object? imageUrl = null,
+  }) {
+    return _then(_value.copyWith(
+      imageId: null == imageId
+          ? _value.imageId
+          : imageId // ignore: cast_nullable_to_non_nullable
+              as int,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$HistoryImagesImplCopyWith<$Res>
+    implements $HistoryImagesCopyWith<$Res> {
+  factory _$$HistoryImagesImplCopyWith(
+          _$HistoryImagesImpl value, $Res Function(_$HistoryImagesImpl) then) =
+      __$$HistoryImagesImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int imageId, String imageUrl});
+}
+
+/// @nodoc
+class __$$HistoryImagesImplCopyWithImpl<$Res>
+    extends _$HistoryImagesCopyWithImpl<$Res, _$HistoryImagesImpl>
+    implements _$$HistoryImagesImplCopyWith<$Res> {
+  __$$HistoryImagesImplCopyWithImpl(
+      _$HistoryImagesImpl _value, $Res Function(_$HistoryImagesImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? imageId = null,
+    Object? imageUrl = null,
+  }) {
+    return _then(_$HistoryImagesImpl(
+      imageId: null == imageId
+          ? _value.imageId
+          : imageId // ignore: cast_nullable_to_non_nullable
+              as int,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$HistoryImagesImpl
+    with DiagnosticableTreeMixin
+    implements _HistoryImages {
+  const _$HistoryImagesImpl({required this.imageId, required this.imageUrl});
+
+  factory _$HistoryImagesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HistoryImagesImplFromJson(json);
+
+  @override
+  final int imageId;
+  @override
+  final String imageUrl;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HistoryImages(imageId: $imageId, imageUrl: $imageUrl)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HistoryImages'))
+      ..add(DiagnosticsProperty('imageId', imageId))
+      ..add(DiagnosticsProperty('imageUrl', imageUrl));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$HistoryImagesImpl &&
+            (identical(other.imageId, imageId) || other.imageId == imageId) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, imageId, imageUrl);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$HistoryImagesImplCopyWith<_$HistoryImagesImpl> get copyWith =>
+      __$$HistoryImagesImplCopyWithImpl<_$HistoryImagesImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$HistoryImagesImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _HistoryImages implements HistoryImages {
+  const factory _HistoryImages(
+      {required final int imageId,
+      required final String imageUrl}) = _$HistoryImagesImpl;
+
+  factory _HistoryImages.fromJson(Map<String, dynamic> json) =
+      _$HistoryImagesImpl.fromJson;
+
+  @override
+  int get imageId;
+  @override
+  String get imageUrl;
+  @override
+  @JsonKey(ignore: true)
+  _$$HistoryImagesImplCopyWith<_$HistoryImagesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

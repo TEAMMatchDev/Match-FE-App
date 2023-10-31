@@ -24,6 +24,7 @@ mixin _$Pay {
   String get payStatus => throw _privateConstructorUsedError;
   String get payMethod => throw _privateConstructorUsedError;
   String get amount => throw _privateConstructorUsedError;
+  String get inherenceNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,11 @@ abstract class $PayCopyWith<$Res> {
       _$PayCopyWithImpl<$Res, Pay>;
   @useResult
   $Res call(
-      {String payDate, String payStatus, String payMethod, String amount});
+      {String payDate,
+      String payStatus,
+      String payMethod,
+      String amount,
+      String inherenceNumber});
 }
 
 /// @nodoc
@@ -55,6 +60,7 @@ class _$PayCopyWithImpl<$Res, $Val extends Pay> implements $PayCopyWith<$Res> {
     Object? payStatus = null,
     Object? payMethod = null,
     Object? amount = null,
+    Object? inherenceNumber = null,
   }) {
     return _then(_value.copyWith(
       payDate: null == payDate
@@ -73,6 +79,10 @@ class _$PayCopyWithImpl<$Res, $Val extends Pay> implements $PayCopyWith<$Res> {
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as String,
+      inherenceNumber: null == inherenceNumber
+          ? _value.inherenceNumber
+          : inherenceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -84,7 +94,11 @@ abstract class _$$PayImplCopyWith<$Res> implements $PayCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String payDate, String payStatus, String payMethod, String amount});
+      {String payDate,
+      String payStatus,
+      String payMethod,
+      String amount,
+      String inherenceNumber});
 }
 
 /// @nodoc
@@ -100,6 +114,7 @@ class __$$PayImplCopyWithImpl<$Res> extends _$PayCopyWithImpl<$Res, _$PayImpl>
     Object? payStatus = null,
     Object? payMethod = null,
     Object? amount = null,
+    Object? inherenceNumber = null,
   }) {
     return _then(_$PayImpl(
       payDate: null == payDate
@@ -118,6 +133,10 @@ class __$$PayImplCopyWithImpl<$Res> extends _$PayCopyWithImpl<$Res, _$PayImpl>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as String,
+      inherenceNumber: null == inherenceNumber
+          ? _value.inherenceNumber
+          : inherenceNumber // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -129,7 +148,8 @@ class _$PayImpl with DiagnosticableTreeMixin implements _Pay {
       {required this.payDate,
       required this.payStatus,
       required this.payMethod,
-      required this.amount});
+      required this.amount,
+      required this.inherenceNumber});
 
   factory _$PayImpl.fromJson(Map<String, dynamic> json) =>
       _$$PayImplFromJson(json);
@@ -142,10 +162,12 @@ class _$PayImpl with DiagnosticableTreeMixin implements _Pay {
   final String payMethod;
   @override
   final String amount;
+  @override
+  final String inherenceNumber;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Pay(payDate: $payDate, payStatus: $payStatus, payMethod: $payMethod, amount: $amount)';
+    return 'Pay(payDate: $payDate, payStatus: $payStatus, payMethod: $payMethod, amount: $amount, inherenceNumber: $inherenceNumber)';
   }
 
   @override
@@ -156,7 +178,8 @@ class _$PayImpl with DiagnosticableTreeMixin implements _Pay {
       ..add(DiagnosticsProperty('payDate', payDate))
       ..add(DiagnosticsProperty('payStatus', payStatus))
       ..add(DiagnosticsProperty('payMethod', payMethod))
-      ..add(DiagnosticsProperty('amount', amount));
+      ..add(DiagnosticsProperty('amount', amount))
+      ..add(DiagnosticsProperty('inherenceNumber', inherenceNumber));
   }
 
   @override
@@ -169,13 +192,15 @@ class _$PayImpl with DiagnosticableTreeMixin implements _Pay {
                 other.payStatus == payStatus) &&
             (identical(other.payMethod, payMethod) ||
                 other.payMethod == payMethod) &&
-            (identical(other.amount, amount) || other.amount == amount));
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.inherenceNumber, inherenceNumber) ||
+                other.inherenceNumber == inherenceNumber));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, payDate, payStatus, payMethod, amount);
+  int get hashCode => Object.hash(
+      runtimeType, payDate, payStatus, payMethod, amount, inherenceNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +221,8 @@ abstract class _Pay implements Pay {
       {required final String payDate,
       required final String payStatus,
       required final String payMethod,
-      required final String amount}) = _$PayImpl;
+      required final String amount,
+      required final String inherenceNumber}) = _$PayImpl;
 
   factory _Pay.fromJson(Map<String, dynamic> json) = _$PayImpl.fromJson;
 
@@ -208,6 +234,8 @@ abstract class _Pay implements Pay {
   String get payMethod;
   @override
   String get amount;
+  @override
+  String get inherenceNumber;
   @override
   @JsonKey(ignore: true)
   _$$PayImplCopyWith<_$PayImpl> get copyWith =>

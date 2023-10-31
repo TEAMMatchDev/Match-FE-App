@@ -19,61 +19,63 @@ class NoticeScreen extends GetView<NoticeController> {
         appBar: CommonAppBar.basic("공지사항"),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 30.h),
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "총 공지사항",
-                        style: AppTextStyles.T1Bold14.copyWith(
-                            color: AppColors.grey8),
-                      ),
-                      TextSpan(
-                        text: " ${controller.totalNotice.value}",
-                        style: AppTextStyles.T1Bold14.copyWith(
-                            color: AppColors.primary500),
-                      ),
-                    ],
+          child: Obx(
+            ()=>Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 30.h),
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "총 공지사항",
+                          style: AppTextStyles.T1Bold14.copyWith(
+                              color: AppColors.grey8),
+                        ),
+                        TextSpan(
+                          text: " ${controller.totalNotice.value}",
+                          style: AppTextStyles.T1Bold14.copyWith(
+                              color: AppColors.primary500),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                itemCount: controller.noticeList.length,
-                itemBuilder: (context, index) {
-                  if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
-                    logger.d("1. getMore 호출!");
-                    Future.wait({
-                      controller.getMoreNotice(
-                          index: index ~/ (PAGINATION_SIZE - 1))
-                    });
-                  }
-                  final notice = controller.noticeList[index];
-                  return CommonListItem(
-                    category: notice.noticeType,
-                    title: notice.title,
-                    date: notice.noticeDate,
-                    onTap: () async {
-                      Get.toNamed(Routes.notice_detail,
-                          arguments: {"id": notice.noticeId});
-                    },
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
-                    child: const Divider(
-                      height: 1,
-                      color: Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ],
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: controller.noticeList.length,
+                  itemBuilder: (context, index) {
+                    if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
+                      logger.d("1. getMore 호출!");
+                      Future.wait({
+                        controller.getMoreNotice(
+                            index: index ~/ (PAGINATION_SIZE - 1))
+                      });
+                    }
+                    final notice = controller.noticeList[index];
+                    return CommonListItem(
+                      category: notice.noticeType,
+                      title: notice.title,
+                      date: notice.noticeDate,
+                      onTap: () async {
+                        Get.toNamed(Routes.notice_detail,
+                            arguments: {"id": notice.noticeId});
+                      },
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      child: const Divider(
+                        height: 1,
+                        color: Colors.grey,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ));
   }

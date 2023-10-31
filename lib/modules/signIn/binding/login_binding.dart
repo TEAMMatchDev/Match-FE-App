@@ -13,10 +13,8 @@ class LoginBinding implements Bindings {
   void dependencies() {
     Get.put(MainController());
     Get.put(LoginController());
-    Get.put(HomeController());
     Get.put(SignUpController());
 
-    Get.lazyPut(() => HomeController());
     Get.lazyPut(() => DonateController());
     Get.lazyPut(() => EventController());
     Get.lazyPut(() => MypageController());

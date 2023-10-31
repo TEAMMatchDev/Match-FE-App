@@ -12,8 +12,18 @@ class MatchHistory with _$MatchHistory {
     required String histories,
     required String historyDate,
     String? flameImage,
-    List<String>? donationHistoryImages,
+    List<HistoryImages>? donationHistoryImages,
   }) = _MatchHistory;
   factory MatchHistory.fromJson(Map<String, dynamic> json) =>
       _$MatchHistoryFromJson(json);
 }
+@freezed
+class HistoryImages with _$HistoryImages {
+  const factory HistoryImages({
+    required int imageId,
+    required String imageUrl,
+  }) = _HistoryImages;
+  factory HistoryImages.fromJson(Map<String, dynamic> json) =>
+      _$HistoryImagesFromJson(json);
+}
+

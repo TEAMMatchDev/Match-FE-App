@@ -16,6 +16,7 @@ import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_logger.dart';
+import '../../../util/const/style/global_skeleton.dart';
 
 class BurningMatchScreen extends GetView<BurningMatchController> {
   const BurningMatchScreen({super.key});
@@ -37,7 +38,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
               color: AppColors.divider1,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w).copyWith(bottom: 8.h),
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 20.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -48,12 +49,11 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                       flameImg: controller.flameDetail.value.imgUrl,
                       usages: controller.flameDetail.value.usages,
                       flameTalk: controller.flameDetail.value.randomMessage,
-                      // flameTalk: controller.flameDetail.value.fl,
                       isHome: false,
                     ),
                   ),
                   SizedBox(
-                    height: 19.h,
+                    height: 7.h,
                   ),
                   flameInfo(
                       title: "생성 횟수",
@@ -65,34 +65,49 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                       valueMsg: "°C"),
 
                   //매치 기록 제목
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 17.h)
-                        .copyWith(bottom: 0.h),
-                    child: Text(
-                      "매치 기록",
-                      style: AppTextStyles.T1Bold15,
-                    ),
+                  Text(
+                    "매치 기록",
+                    style: AppTextStyles.T1Bold15,
                   ),
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: controller.flameHistories.length,
-                    itemBuilder: (context, index) {
-                      logger.d(index);
-                      if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
-                        logger.d("1. getMoreFlame 호출!");
-                        Future.wait({
-                          controller.getMoreFlameHistory(
-                              index ~/ (PAGINATION_SIZE - 1))
-                        });
-                      }
-                      final history = controller.flameHistories[index];
-                      return MatchRecord(
-                          title: history.histories,
-                          date: history.historyDate,
-                          imgList: history.donationHistoryImages ?? []);
-                    },
-                  ),
+                  controller.flameHistories.isEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CommonSkeleton.historyTitle(),
+                            SizedBox(
+                              height: 6.h,
+                            ),
+                            CommonSkeleton.historyContent(),
+                          ],
+                        )
+                      : ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: controller.flameHistories.length,
+                          itemBuilder: (context, index) {
+                            logger.d(index);
+                            if (index % (PAGINATION_SIZE - 1) == 0 &&
+                                index != 0) {
+                              logger.d("1. getMoreFlame 호출!");
+                              Future.wait({
+                                controller.getMoreFlameHistory(
+                                    index ~/ (PAGINATION_SIZE - 1))
+                              });
+                            }
+                            final history = controller.flameHistories[index];
+                            return MatchRecord(
+                              title: history.histories,
+                              date: history.historyDate,
+                              imgList: history.donationHistoryImages
+                                      ?.map((e) => e.imageUrl)
+                                      .toList() ??
+                                  [],
+                              isChange: history.historyStatus == "CHANGE"
+                                  ? true
+                                  : false,
+                            );
+                          },
+                        ),
                   // 매치기록
                 ],
               ),
@@ -124,6 +139,9 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
             textAlign: TextAlign.end,
           ),
         ),
+        SizedBox(
+          width: 36.w,
+        )
       ],
     );
   }

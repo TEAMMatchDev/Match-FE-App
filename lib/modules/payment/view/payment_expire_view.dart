@@ -41,6 +41,7 @@ class PaymentExpireScreen extends StatelessWidget {
             ).copyWith(bottom: 24.h),
             child: CommonButton.payment(
                 verticalPadding: 13,
+                isActive: true,
                 text: "확인",
                 onTap: (() async {
                   Get.back();

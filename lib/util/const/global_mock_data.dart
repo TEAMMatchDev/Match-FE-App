@@ -20,7 +20,7 @@ var tmpFlameDetail = const FlameDetail(
   usages: "",
   amount: 0,
   sequence: 0,
-  randomMessage: "dd"
+  randomMessage: ""
 );
 var tmpProjectDetail = const ProjectDetail(
     projectId: 1,

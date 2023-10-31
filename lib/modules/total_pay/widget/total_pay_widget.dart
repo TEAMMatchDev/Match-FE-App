@@ -68,6 +68,7 @@ class MatchPayItem extends StatelessWidget {
           children: [
             Expanded(
               child: CommonButton(
+                verticalPadding: 14,
                 text: "상세정보",
                 onTap: () async {
                   Get.toNamed(Routes.pay,
@@ -80,6 +81,7 @@ class MatchPayItem extends StatelessWidget {
             ),
             Expanded(
               child: CommonButton(
+                  verticalPadding: 14,
                   text: "해지하기",
                   onTap: () async {
                     showDialog(

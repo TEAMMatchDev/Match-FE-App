@@ -32,8 +32,8 @@ class ProjectComment extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          profileItem(profileUrl: profileUrl, isBorder: false),
-          SizedBox(width: 11.w),
+          profileItem(profileUrl: profileUrl, isBorder: false,size: 40),
+          SizedBox(width: 8.w),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +41,7 @@ class ProjectComment extends StatelessWidget {
               children: [
                 Text(
                   profile,
-                  style: AppTextStyles.T1Bold13,
+                  style: AppTextStyles.T1Bold14,
                 ),
                 SizedBox(height: 6.h),
                 Text(
@@ -49,7 +49,7 @@ class ProjectComment extends StatelessWidget {
                   style: AppTextStyles.S1SemiBold12.copyWith(
                       color: AppColors.grey7),
                 ),
-                SizedBox(height: 6.h),
+                SizedBox(height: 4.h),
                 SizedBox(
                   width: 251.w,
                   child: Text(

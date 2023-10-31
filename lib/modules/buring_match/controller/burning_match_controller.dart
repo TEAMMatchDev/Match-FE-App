@@ -20,9 +20,6 @@ class BurningMatchController extends GetxController {
   static BurningMatchController get to => Get.find();
   int id = Get.arguments["donaionId"] ?? 0;
 
-  // 공유하기 로직때문에 추가했던 변수<- 임시 삭제
-  // int projectId = Get.arguments["projectId"] ?? -1;
-
   ///*5-10-1 상단 매치 정보
   Rx<FlameDetail> flameDetail = tmpFlameDetail.obs;
 

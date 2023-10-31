@@ -19,34 +19,36 @@ class NoticeDetailScreen extends GetView<NoticeDetailController> {
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Obx(
+                ()=> Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             CommonListItem(
-              category: controller.noticeDetail.value.noticeInfo.noticeType,
-              title: controller.noticeDetail.value.noticeInfo.title,
-              date: controller.noticeDetail.value.noticeInfo.noticeDate,
-              onTap: () async {
-                // Get.toNamed(Routes.notice_detail);
-              },
+                category: controller.noticeDetail.value.noticeInfo.noticeType,
+                title: controller.noticeDetail.value.noticeInfo.title,
+                date: controller.noticeDetail.value.noticeInfo.noticeDate,
+                onTap: () async {
+                  // Get.toNamed(Routes.notice_detail);
+                },
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 23.h),
-              child: Divider(
-                height: 1,
-                color: Colors.grey,
-              ),
+                padding: EdgeInsets.symmetric(vertical: 23.h),
+                child: Divider(
+                  height: 1,
+                  color: Colors.grey,
+                ),
             ),
             ...controller.noticeDetail.value.noticeContents.map((content) {
-              return content.contentsType == "IMG"
-                  ? Image.network(
-                      content.contents,
-                      width: double.infinity,
-                    )
-                  : Text(
-                      content.contents,
-                      style: AppTextStyles.S1SemiBold14,
-                    );
+                return content.contentsType == "IMG"
+                    ? Image.network(
+                        content.contents,
+                        fit: BoxFit.cover,
+                      )
+                    : Text(
+                        content.contents,
+                        style: AppTextStyles.S1SemiBold14,
+                      );
             }).toList(),
           ]),
+              ),
         ));
   }
 }

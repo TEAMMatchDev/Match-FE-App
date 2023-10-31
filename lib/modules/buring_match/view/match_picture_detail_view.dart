@@ -24,49 +24,51 @@ class PictureDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.black,
-      body: PageView.builder(
-        itemCount: pictureList.length,
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 27.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(width: 24.w,),
-                    Text(
-                      "${index+1}/${pictureList.length}",
-                      textAlign: TextAlign.center,
-                      style:
-                          AppTextStyles.T1Bold15.copyWith(color: AppColors.white),
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                        Get.back();
-                      },
-                      child: SvgPicture.asset(
-                        iconDir + "ic_close_24.svg",
-                        color: AppColors.white,
-                        width: 24.w,
+      body: SafeArea(
+        child: PageView.builder(
+          itemCount: pictureList.length,
+          itemBuilder: (context, index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 27.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(width: 24.w,),
+                      Text(
+                        "${index+1}/${pictureList.length}",
+                        textAlign: TextAlign.center,
+                        style:
+                            AppTextStyles.T1Bold15.copyWith(color: AppColors.white),
                       ),
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Container(
-                    width: 360.w,
-                    height: 360.w,
-                    child: Image.network(pictureList[index]),
+                      GestureDetector(
+                        onTap: (){
+                          Get.back();
+                        },
+                        child: SvgPicture.asset(
+                          iconDir + "ic_close_24.svg",
+                          color: AppColors.white,
+                          width: 24.w,
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+                Expanded(
+                  child: Center(
+                    child: Container(
+                      width: 360.w,
+                      height: 360.w,
+                      child: Image.network(pictureList[index]),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

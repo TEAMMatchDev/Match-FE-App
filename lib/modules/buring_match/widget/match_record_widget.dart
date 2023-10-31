@@ -28,10 +28,11 @@ class MatchRecord extends StatelessWidget {
       lineXY: 0.0,
       isFirst: true,
       indicatorStyle: IndicatorStyle(
-        padding: EdgeInsets.symmetric(vertical: 20.h),
+        padding: EdgeInsets.symmetric(vertical: 20.h)
+            .copyWith(left: isChange ? 3.w : 0),
         color: isChange ? AppColors.grey5 : AppColors.primary500,
-        height: isChange ? 8.h : 20.w,
-        width: isChange ? 8.h : 20.w,
+        height: isChange ? 8.w : 14.w,
+        width: isChange ? 8.w : 14.w,
       ),
       beforeLineStyle: LineStyle(color: AppColors.grey1, thickness: 2.w),
       // endChild: Padding(
@@ -44,7 +45,9 @@ class MatchRecord extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(height: 30.h,),
+                SizedBox(
+                  height: 30.h,
+                ),
                 Text(
                   title,
                   style: AppTextStyles.T1Bold13,
@@ -61,8 +64,8 @@ class MatchRecord extends StatelessWidget {
                   height: 10.h,
                 ),
                 GestureDetector(
-                  onTap: ()async{
-                    await Get.to(()=>PictureDetailScreen());
+                  onTap: () async {
+                    await Get.to(() => PictureDetailScreen());
                   },
                   child: Wrap(
                       direction: Axis.horizontal,
