@@ -83,12 +83,6 @@ Future<void> setAlarm() async {
   // if (GetStorageUtil.getToken(StorageKey.FCM_TOKEN) != null &&
   //     GetStorageUtil.getToken(StorageKey.DEVICE_ID) != null) {
   // } else {
-
-  ///* alarm 관련 permission 체크
-  if (await Permission.notification.isDenied) {
-    await Permission.notification.request();
-  }
-
   var fcmToken = await initFirebaseMsg();
   GetStorageUtil.addToken(StorageKey.FCM_TOKEN, fcmToken ?? "");
   var deviceId = await getDeviceId();
@@ -118,6 +112,15 @@ Future<void> setAlarm() async {
       }
     }
   });
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+}
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  logger.d("Handling a background message: ${message.messageId}");
 }
 
 class MyApp extends StatelessWidget {
