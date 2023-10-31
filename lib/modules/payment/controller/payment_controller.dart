@@ -7,6 +7,10 @@ import '../../../model/pay/pay.dart';
 class PaymentController extends GetxController {
   int id = Get.arguments["regularPayId"] ?? -1;
   RxList<Pay> payList = <Pay>[].obs;
+
+  /// 동의항목
+  var selectedItems = <String>[].obs;
+
   @override
   void onInit() async {
     super.onInit();

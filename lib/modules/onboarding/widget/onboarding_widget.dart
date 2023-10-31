@@ -18,14 +18,14 @@ class OnboardingWidget extends StatefulWidget {
 class _CarouselExampleState extends State<OnboardingWidget> {
 
   final List<String> images = [
-    '$imgDir'+'logo/iv_home_logo.png',
-    '$imgDir'+'logo/iv_home_logo.png',
-    '$imgDir'+'logo/iv_home_logo.png',
+    '$imgDir'+'onboarding/iv_onboarding_1.png',
+    '$imgDir'+'onboarding/iv_onboarding_2.png',
+    '$imgDir'+'onboarding/iv_onboarding_3.png',
   ];
   final List<String> titles = ['Title 1', 'Title 2', 'Title 3'];
   final List<String> descriptions = [
-    'MATCH에서 후원으로\n꿈꾸고 있던 세상을 만들어 보세요.',
-    'MATCH에서\n특별한 후원 경험을 만나보세요.',
+    'MATCH를 통해 기부된\n여러분의 마음은 불꽃이가 돼요.',
+    '불꽃이는 선택한 기부처에 따라\n필요한 쓰임으로 변신합니다.',
     'MATCH에서 후원금이\n어떻게 관리되고 있는지 알아보세요.',
   ];
 
@@ -36,9 +36,11 @@ class _CarouselExampleState extends State<OnboardingWidget> {
     return Scaffold(
       body: Column(
         children: [
-          skipWidget(),
-          sliderWidget(images, _currentSlide),
-          indicatorWidget(images.length, _currentSlide),
+          SizedBox(height: 10.h),
+          skipWidget(), //상단 건너뛰기 버튼
+          sliderWidget(images, _currentSlide), //온보딩 이미지
+          SizedBox(height: 90.h),
+          indicatorWidget(images.length, _currentSlide), //인디케이터
           SizedBox(height: 100.h),
         ],
       ),
@@ -89,11 +91,12 @@ class _CarouselExampleState extends State<OnboardingWidget> {
                 ),
                 SizedBox(height: 28.h), // Add spacing
                 Container(
-                  width: 225.w, // Set your desired width
+                  width: 230.w,
+                  height: 48.h,
                   child: Text(
                     description,
                     style: AppTextStyles.T1Bold16,
-                    textAlign: TextAlign.center, // 중앙 정렬 설정
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
@@ -101,9 +104,9 @@ class _CarouselExampleState extends State<OnboardingWidget> {
           );
         }).toList(),
         options: CarouselOptions(
-          aspectRatio: 16 / 9,
+          aspectRatio: 10 / 9.5,  //슬라이드의 종횡비 4:3
           autoPlay: true,
-          viewportFraction: 320 / 300,
+          viewportFraction: 320 / 320, //화면에 보이는 슬라이드 크기
           onPageChanged: (index, reason) {
             setState(() {
               _currentSlide = index;
@@ -154,7 +157,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
         width: 300.w,
         height: 50.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0), // Set border radius to 10px
+          borderRadius: BorderRadius.circular(10.0),
           color: AppColors.grey10, // Button's background color
         ),
         child: Center(

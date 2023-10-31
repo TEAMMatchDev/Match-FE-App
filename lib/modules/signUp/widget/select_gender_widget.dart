@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
-
-
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+
+class SelectGenderRadioButtons extends StatefulWidget {
+  final ValueChanged<String> onGenderSelected;
+  SelectGenderRadioButtons({required this.onGenderSelected}); //callback할 성별버튼 상태
+
+  @override
+  _RadioButtonsState createState() => _RadioButtonsState();
+}
 
 class GenderButton extends StatelessWidget {
   final String text;
@@ -47,13 +53,7 @@ class GenderButton extends StatelessWidget {
   }
 }
 
-
-class SelectSexRadioButtons extends StatefulWidget {
-  @override
-  _RadioButtonsState createState() => _RadioButtonsState();
-}
-
-class _RadioButtonsState extends State<SelectSexRadioButtons> {
+class _RadioButtonsState extends State<SelectGenderRadioButtons> {
   String selectedGender = '남성';
 
   @override
@@ -67,6 +67,7 @@ class _RadioButtonsState extends State<SelectSexRadioButtons> {
             setState(() {
               selectedGender = '남성';
             });
+            widget.onGenderSelected(selectedGender);
           },
         ),
         SizedBox(width: 10.w),
@@ -77,6 +78,7 @@ class _RadioButtonsState extends State<SelectSexRadioButtons> {
             setState(() {
               selectedGender = '여성';
             });
+            widget.onGenderSelected(selectedGender);
           },
         ),
         SizedBox(width: 10.w),
@@ -87,6 +89,7 @@ class _RadioButtonsState extends State<SelectSexRadioButtons> {
             setState(() {
               selectedGender = '선택안함';
             });
+            widget.onGenderSelected(selectedGender);
           },
         ),
       ],

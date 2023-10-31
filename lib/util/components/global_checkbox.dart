@@ -13,10 +13,11 @@ class CheckBoxItem {
 }
 
 class CheckBoxExample extends StatefulWidget {
-  final List<String> stringList;
+  final List<String> stringList; //체크박스 리스트
   final String title;
+  final ValueChanged<List<String>> onAgreementSelected; //선택한 체크박스
 
-  CheckBoxExample({required this.stringList, required this.title});
+  CheckBoxExample({required this.stringList, required this.onAgreementSelected, required this.title});
 
   @override
   _CheckBoxExampleState createState() => _CheckBoxExampleState(stringList: stringList, title: title);
@@ -37,6 +38,14 @@ class _CheckBoxExampleState extends State<CheckBoxExample> {
       selectAllValue = value ?? false;
       checkBoxValues = List.filled(checkBoxValues.length, selectAllValue);
     });
+    // 선택된 항목의 string 값을 추출
+    List<String> selectedAgreements = [];
+    for (int i = 0; i < checkBoxValues.length; i++) {
+      if (checkBoxValues[i]) {
+        selectedAgreements.add(stringList[i]);
+      }
+    }
+    widget.onAgreementSelected(selectedAgreements);
   }
 
   void onSingleCheckBoxChanged(CheckBoxItem item) {
@@ -44,6 +53,14 @@ class _CheckBoxExampleState extends State<CheckBoxExample> {
       checkBoxValues[item.index] = item.value;
       selectAllValue = checkBoxValues.every((value) => value);
     });
+    // 선택된 항목의 string 값을 추출
+    List<String> selectedAgreements = [];
+    for (int i = 0; i < checkBoxValues.length; i++) {
+      if (checkBoxValues[i]) {
+        selectedAgreements.add(stringList[i]);
+      }
+    }
+    widget.onAgreementSelected(selectedAgreements);
   }
 
   @override
@@ -147,34 +164,36 @@ class SingleCheckBox extends StatefulWidget {
 class _SingleCheckBoxState extends State<SingleCheckBox> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        // 라벨 클릭 시 체크박스 토글
-        widget.onChanged(!widget.value);
-      },
-      child: Expanded(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.0), // 원하는 상하 간격
-          child: Row(
-            children: [
-              Container(
-                width: 24.w,
-                height: 24.h,
-                child: widget.value
-                    ? SvgPicture.asset(iconDir + "login/ic_check2_able_24.svg")
-                    : SvgPicture.asset(iconDir + "login/ic_check2_disable_24.svg"),
+    return Row(
+      children: [
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              // 라벨 클릭 시 체크박스 토글
+              widget.onChanged(!widget.value);
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0), // 원하는 상하 간격
+              child: Row(
+                children: [
+                  Container(
+                    width: 24.w,
+                    height: 24.h,
+                    child: widget.value
+                        ? SvgPicture.asset(iconDir + "login/ic_check2_able_24.svg")
+                        : SvgPicture.asset(iconDir + "login/ic_check2_disable_24.svg"),
+                  ),
+                  SizedBox(width: 6.w),
+                  Text(
+                    widget.label,
+                    style: AppTextStyles.T1Bold13,
+                  ),
+                ],
               ),
-              SizedBox(width: 6.w),
-              Text(
-                widget.label,
-                style: AppTextStyles.T1Bold13,
-              ),
-            ],
+            ),
           ),
         ),
-      ),
-
-
+      ],
     );
   }
 }

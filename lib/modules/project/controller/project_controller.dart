@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:match/model/enum/search_statu.dart';
+import 'package:match/model/enum/search_status.dart';
 import 'package:match/model/project_detail/project_detail.dart';
 import 'package:match/model/project_history.dart/project_history.dart';
 import 'package:match/util/const/global_mock_data.dart';

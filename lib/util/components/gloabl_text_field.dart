@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:match/model/enum/search_statu.dart';
+import 'package:match/model/enum/search_status.dart';
 
 import '../const/global_variable.dart';
 import '../const/style/global_color.dart';
@@ -187,6 +187,85 @@ class CommonInputField extends StatelessWidget {
     );
   }
 
+  //TODO) signIn 로그인
+  /// id 입력
+  factory CommonInputField.signInID(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "이메일을 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+  /// pw 입력
+  factory CommonInputField.signInPW(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "비밀번호를 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+  /// 비밀번호 찾기
+  factory CommonInputField.findPW(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "이메일을 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+  //TODO) signUp 회원가입
+  /// 이름 입력
+  factory CommonInputField.userName(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "이름을 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+  /// 전화번호
+  factory CommonInputField.userPhone({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "-없이 번호만 입력해주세요",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
+  /// 전화번호 인증
+  factory CommonInputField.userPhoneConfirm({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "인증번호를 입력해주세요",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
+
   factory CommonInputField.nickName(
       {required TextEditingController textController,
       required Future<void> Function(String) onChange}) {
@@ -198,6 +277,7 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
+
 
   factory CommonInputField.phone({
     required TextEditingController textController,

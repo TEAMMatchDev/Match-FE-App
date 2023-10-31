@@ -84,6 +84,7 @@ flutter:
     - asset/image/icon/project/
     - asset/image/icon/mypage/
     - asset/image/logo/
+    - asset/image/onboarding/
 
   fonts:
     - family: AppleSDGothicNeo
