@@ -52,6 +52,7 @@ class _CardSliderState extends State<CardSlider> {
               setState(() {
                 _currentSlide = index;
               });
+              print('>>> 선택한 카드 이름 : ${cardNameList[index]} \n 선택한 카드 번호 : ${cardNumList[index]} \n');
             },
           ),
 
@@ -94,6 +95,16 @@ class _CardSliderState extends State<CardSlider> {
                         style: AppTextStyles.T1Bold14.copyWith(color: AppColors.white)
                     ),
                   ),
+                  if (idx == _currentSlide)  // <- 이 부분을 추가
+                    Positioned(
+                      top: 18.h,
+                      right: 15.w,
+                      child: SvgPicture.asset(
+                        iconDir + "card/ic_card_selected.svg",
+                        width: 20.w,
+                        height: 20.h,
+                      ),
+                    ),
                 ],
               );
             }).toList(),
