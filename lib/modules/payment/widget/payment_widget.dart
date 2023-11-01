@@ -34,6 +34,10 @@ class PaymentListTile extends StatelessWidget {
           height: 10.h,
         ),
         PaymentDetail(title: "결제 금액", content: pay.amount),
+        SizedBox(
+          height: 10.h,
+        ),
+        PaymentDetail(title: "고유 번호", content: pay.inherenceNumber),
       ],
     );
   }

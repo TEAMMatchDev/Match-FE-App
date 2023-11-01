@@ -12,6 +12,7 @@ import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:match/util/method/permission_handler.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/style/global_color.dart';
 
@@ -104,6 +105,8 @@ class AuthAbleScreen extends GetView<SignUpController> {
             child: CommonButton.login(
               text: "확인",
               onTap: () async {
+                await PermissionHandler.checkGalleryPermission();
+                await PermissionHandler.checkAlarmPermission();
                 Get.to(LoginScreen());
               },
             ),

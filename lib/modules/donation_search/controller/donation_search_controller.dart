@@ -46,13 +46,11 @@ class DonationSearchController extends GetxController {
       if (searchTextController.value.text.isNotEmpty &&
           searchStatus.value == SEARCH_STATUS.EDIT) {
         // 입력이 없을 때 타이머 시작
-        if (_timer == null) {
-          _timer = Timer(Duration(seconds: 1), () {
+        _timer ??= Timer(Duration(seconds: 1), () {
             logger.d('1초가 경과했습니다.');
-            //TODO: api 호출
+            getSearchList(content: searchTextController.value.text);
             searchStatus.value = SEARCH_STATUS.SEARCH;
           });
-        }
       } else {
         // 입력이 있으면 타이머 초기화
         await resetTimer();

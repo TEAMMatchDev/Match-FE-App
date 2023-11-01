@@ -35,7 +35,10 @@ Widget alarmButton() {
       onTap: () {
         Get.toNamed(Routes.alarm);
       },
-      child: SvgPicture.asset(iconDir + "ic_alarm_20.svg"));
+      child: SvgPicture.asset(
+        iconDir + "ic_alarm_20.svg",
+        width: 20.w,
+      ));
 }
 
 Widget CommonListItem({

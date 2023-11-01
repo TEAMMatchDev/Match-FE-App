@@ -10,14 +10,10 @@ import 'package:match/modules/signUp/controller/signup_controller.dart';
 class SignUpBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(MainController());
     Get.put(SignUpController());
     Get.put(LoginController());
-    Get.put(HomeController());
 
-    Get.lazyPut(() => HomeController());
-    Get.lazyPut(() => DonateController());
-    Get.lazyPut(() => EventController());
-    Get.lazyPut(() => MypageController());
+    Get.lazyPut(()=>MainController());
+
   }
 }
