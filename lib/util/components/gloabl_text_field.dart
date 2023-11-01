@@ -266,6 +266,82 @@ class CommonInputField extends StatelessWidget {
         autoFocus: false);
   }
 
+
+  //TODO) 카드정보 입력
+  /// 카드번호
+  factory CommonInputField.cardNum({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "NNNN - NNNN - NNNN - NNNN",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
+  /// 유효기간
+  factory CommonInputField.cardExp({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "MM / YY",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
+  /// cvc
+  factory CommonInputField.cardCvc({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "NNN",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
+  /// 생년월일
+  factory CommonInputField.cardUserBirth({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "NNNNNN",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
+  /// 카드 비밀번호
+  factory CommonInputField.cardPw({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "NN **",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        inputType: TextInputType.phone,
+        autoFocus: false);
+  }
+
+
+
+
   factory CommonInputField.nickName(
       {required TextEditingController textController,
       required Future<void> Function(String) onChange}) {
