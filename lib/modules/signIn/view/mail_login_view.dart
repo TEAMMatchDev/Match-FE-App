@@ -108,7 +108,7 @@ class EmailLoginScreen extends GetView<LoginController> {
               child: CommonButton.login(
                 text: "로그인",
                 onTap: () async {
-                  Get.to(MainScreen());
+                  Get.toNamed(Routes.main);
                 },
               ),
             ),

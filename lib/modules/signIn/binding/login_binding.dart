@@ -5,16 +5,19 @@ import 'package:match/modules/home/controller/home_controller.dart';
 import 'package:match/modules/main/controller/main_controller.dart';
 import 'package:match/modules/mypage/controller/mypage_controller.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
+import 'package:match/provider/service/auth_service.dart';
 
 import '../controller/login_controller.dart';
 
 class LoginBinding implements Bindings {
   @override
   void dependencies() {
+    Get.put(AuthService());
     Get.put(MainController());
     Get.put(LoginController());
     Get.put(SignUpController());
 
+    Get.lazyPut(() => HomeController());
     Get.lazyPut(() => DonateController());
     Get.lazyPut(() => EventController());
     Get.lazyPut(() => MypageController());

@@ -47,7 +47,6 @@ dependencies:
   appsflyer_sdk: ^6.12.2
   firebase_dynamic_links: ^5.3.7
   firebase_core: ^2.17.0
-  flutter_local_notifications: ^13.0.0 # 알림권한
   permission_handler: ^11.0.1
   image_gallery_saver: ^2.0.3
   uni_links: ^0.5.1
