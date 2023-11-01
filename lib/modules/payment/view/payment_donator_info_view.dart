@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:match/modules/payment/view/payment_donation_info_view.dart';
+import 'package:match/provider/service/auth_service.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -14,6 +16,17 @@ import '../widget/payment_widget.dart';
 
 class PaymentDonatorScreen extends GetView<PaymentController> {
   const PaymentDonatorScreen({super.key});
+
+  String formatPhoneNumber(String rawNumber) {
+    if (rawNumber.length != 11) return rawNumber;
+
+    String part1 = rawNumber.substring(0, 3);
+    String part2 = rawNumber.substring(3, 7);
+    String part3 = rawNumber.substring(7, 11);
+
+    return '$part1-$part2-$part3';
+  }
+
 
   @override
   Widget build(BuildContext context){
@@ -86,7 +99,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                         ),
                         padding: EdgeInsets.all(20.0), // 내부 패딩 설정
                         child: Text(
-                          '박레이',
+                          '${AuthService.to.donatorProfile.value.name}',
                           style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
                         ),
                       )
@@ -108,7 +121,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                         ),
                         padding: EdgeInsets.all(20.0), // 내부 패딩 설정
                         child: Text(
-                          '1998.06.23',
+                          '${AuthService.to.donatorProfile.value.birthDay}',
                           style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
                         ),
                       )
@@ -130,7 +143,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                         ),
                         padding: EdgeInsets.all(20.0), // 내부 패딩 설정
                         child: Text(
-                          '010-1234-5678',
+                          '${formatPhoneNumber(AuthService.to.donatorProfile.value.phoneNumber)}',
                           style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
                         ),
                       )

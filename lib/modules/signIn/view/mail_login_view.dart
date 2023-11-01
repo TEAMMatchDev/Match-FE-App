@@ -108,6 +108,7 @@ class EmailLoginScreen extends GetView<LoginController> {
               child: CommonButton.login(
                 text: "로그인",
                 onTap: () async {
+                  //TODO) Get.ofAllNamed() 로 수정 필요
                   Get.toNamed(Routes.main);
                 },
               ),
