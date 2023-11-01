@@ -80,7 +80,7 @@ class _DualRadioButtonsState extends State<DualRadioButtons> {
                 visualDensity: VisualDensity(horizontal: -4.0),
               ),
               SvgPicture.asset(
-                iconDir + "payment/ic_rating_stick_1.svg",
+                iconDir + "payment/ic_kakaopay.svg",
                 width: 40.w,
               ),
               SizedBox(width: 8.w),

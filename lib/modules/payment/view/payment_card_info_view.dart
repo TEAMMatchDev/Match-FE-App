@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
+import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_checkbox.dart';
@@ -14,20 +15,26 @@ import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
 class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
+
   final String selectedCardName;
   final List<List<String>> cardBankList = [
     ['하나','ic_card_hana.svg','374'],
     ['현대','ic_card_hyundai.svg','367'],
-    ['기업','ic_card_ibk.svg',''],
+    // ['기업','ic_card_ibk.svg',''],
     ['카카오뱅크','ic_card_kakao.svg','090'],
     ['국민','ic_card_kb.svg','381'],
     ['MG새마을금고','ic_card_mg.svg','045'],
-    ['SC제일','ic_card_sc.svg',''],
+    // ['SC제일','ic_card_sc.svg',''],
     ['신한','ic_card_shinhan.svg','366'],
     ['우리','ic_card_woori.svg','041'],
     ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
   ];
 
+  final String cardNum = '';
+  final String cardExp = '';
+  final String cardCvc = '';
+  final String cardUserBirth = '';
+  final String cardPw = '';
 
   PaymentRegisterCardInfoScreen({Key? key, required this.selectedCardName}) : super(key: key);
 
@@ -130,10 +137,11 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                         style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                     ),
                     SizedBox(height: 12.h),
-                    Text(
-                        '카드번호 input',
-                        style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
-                    ),
+                    CommonInputField.cardNum(
+                        textController : controller.cardNumTextController.value,
+                        onChange: (value) async {
+                          print(">>> 입력한 카드번호: $value");
+                        }),
                     SizedBox(height: 37.h),
 
                     Row(
@@ -146,9 +154,13 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                 style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                             ),
                             SizedBox(height: 14.h),
-                            Text(
-                                '유효기간 input',
-                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
+                            Container(
+                              width: 150.w,
+                              child: CommonInputField.cardExp(
+                                  textController : controller.cardExpTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 유효기간: $value");
+                                  }),
                             ),
                           ],
                         ),
@@ -164,14 +176,18 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                 ),
                                 Text(
                                     '(카드 뒷면 숫자 3자리)',
-                                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey3)
+                                    style: AppTextStyles.T1Bold13.copyWith(color: AppColors.grey3)
                                 ),
                               ],
                             ),
                             SizedBox(height: 14.h),
-                            Text(
-                                'CVC input',
-                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
+                            Container(
+                              width: 150.w,
+                              child: CommonInputField.cardCvc(
+                                  textController : controller.cardCVCTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 CVC: $value");
+                                  }),
                             ),
                           ],
                         )
@@ -197,9 +213,13 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                               ],
                             ),
                             SizedBox(height: 14.h),
-                            Text(
-                                '생년월일 input',
-                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
+                            Container(
+                              width: 150.w,
+                              child: CommonInputField.cardUserBirth(
+                                  textController : controller.cardUserBirthTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 생년월일: $value");
+                                  }),
                             ),
                           ],
                         ),
@@ -220,15 +240,19 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                               ],
                             ),
                             SizedBox(height: 14.h),
-                            Text(
-                                '카드 비밀번호 input',
-                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
+                            Container(
+                              width: 150.w,
+                              child: CommonInputField.cardPw(
+                                  textController : controller.cardPWTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 카드 비밀번호: $value");
+                                  }),
                             ),
                           ],
                         )
                       ],
                     ),
-                    SizedBox(height: 180.h),
+                    SizedBox(height: 35.h),
 
 
 

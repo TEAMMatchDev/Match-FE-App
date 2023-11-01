@@ -38,10 +38,10 @@ class _PaymentRegisterCardScreenState extends State<PaymentRegisterCardScreen> {
       ['신협카드','기타'],
     ];
     final cardIcons = [
-      ['ic_toss.svg','ic_kakao.svg','ic_kbb.svg'],
+      ['ic_toss2.svg','ic_kakao.svg','ic_kbb.svg'],
       ['ic_nh.svg','ic_woori.svg','ic_hyundai.svg'],
-      ['ic_hana.svg','ic_shinhan.svg','ic_lotte.svg'],
-      ['ic_bc.svg','ic_samsung.svg','ic_kbank.svg'],
+      ['ic_hana.svg','ic_shinhan2.svg','ic_lotte2.svg'],
+      ['ic_bc.svg','ic_samsung2.svg','ic_kbank.svg'],
       ['ic_citi.svg','ic_suhyup.svg','ic_postoffice.svg'],
       ['ic_sinhyup.svg','ic_etc.svg',],
     ];
