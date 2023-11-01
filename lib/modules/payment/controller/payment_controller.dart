@@ -6,7 +6,10 @@ import 'package:match/provider/api/payment_api.dart';
 import '../../../model/pay/pay.dart';
 
 class PaymentController extends GetxController {
-  int id = Get.arguments["regularPayId"] ?? -1;
+  //TODO) 주석처리 한 거로 로그인 api 연결 후 수정 필요
+  //int id = Get.arguments["regularPayId"] ?? -1;
+  int id = (Get.arguments != null && Get.arguments.containKey("regularPayId")) ? Get.arguments["regularPayId"] : -1;
+
   RxList<Pay> payList = <Pay>[].obs;
 
   /// 동의항목
