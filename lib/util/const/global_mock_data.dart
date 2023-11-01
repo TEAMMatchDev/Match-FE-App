@@ -1,3 +1,4 @@
+import 'package:match/model/donator/donator.dart';
 import 'package:match/model/notice/notice.dart';
 import 'package:match/model/notice_detail/notice_detail.dart';
 
@@ -109,6 +110,10 @@ var tmpProfile = const Profile(
     socialType: "NORMAL",
     email: "gusdn8926@naver.com",
     phone: "01049177672");
+var tmpDonator = const Donator( //기부자 정보 임시 데이터
+    name: "테스트",
+    birthDay: "2001-01-02",
+    phoneNumber: "010-1234-5678");
 var tmpNoticeDetail = const NoticeDetail(
     noticeInfo: Notice(
         noticeId: 1, noticeType: '소분류', noticeDate: "2023.10.20", title: "fds"),

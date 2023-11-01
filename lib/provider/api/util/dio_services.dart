@@ -8,7 +8,7 @@ import 'dio_interceptor.dart';
 class DioServices {
   ///*임시 jwt 토큰
   String tmpToken =
-      "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFM1MTIifQ.eyJ1c2VySWQiOjQsImlhdCI6MTY5ODgwMDA1MCwiZXhwIjoxNjk4ODMxNTg2fQ.Qjph8xrE6MPcyk2KSr_xZ1V5vfB38oTqjfmGssEVPiEAuTq4p6Sr3FE7JE3RXk2n2Aj9wYlDv19rEaiTiO7IaA";
+      "eyJ0eXBlIjoiand0IiwiYWxnIjoiSFM1MTIifQ.eyJ1c2VySWQiOjQsImlhdCI6MTY5ODgyNTAzMiwiZXhwIjoxNjk4ODU2NTY4fQ.RvO3KhLvxROEN60rL5QxPLbXywuB2KFGD2-2Solme7rdCu0op6338APFtx_b4SVOubxqKrSNPT4NDlQJzEUGEQ";
   static final DioServices _dioServices = DioServices._internal();
   //dioService singleton
   factory DioServices() => _dioServices;

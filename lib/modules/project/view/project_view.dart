@@ -6,7 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/regular_status.dart';
+import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/modules/payment/view/payment_donator_info_view.dart';
+import 'package:match/modules/project/binding/project_binding.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
 import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
@@ -218,6 +220,7 @@ class ProjectScreen extends GetView<ProjectController> {
                   child: CommonButton.login(
                     text: "기부하기",
                     onTap: () async {
+
                       Get.to(PaymentDonatorScreen());
                     },
                   ),
