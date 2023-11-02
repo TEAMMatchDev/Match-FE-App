@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:match/modules/payment/view/payment_done_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
@@ -26,8 +27,14 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
       '[필수] 결제대행 서비스 이용약관 동의',
       '[필수] 개인 정보 제 3자 정보 제공 동의',
     ];
-    String title = '결제 내용에 모두 동의합니다.';
-    bool isAuthAble = false; //필수 항목을 모두 동의 했는지
+
+  String title = '결제 내용에 모두 동의합니다.';
+  bool isAuthAble = false; //필수 항목을 모두 동의 했는지
+
+  String get formattedAmount {
+    final formatter = NumberFormat('#,###', 'ko_KR');
+    return formatter.format(controller.selectedAmount.value);
+  }
 
   @override
   Widget build(BuildContext context){
@@ -86,7 +93,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                    '매월 • ${controller.selectedDate.value}일 • ${controller.selectedAmount.value}원',
+                    '매월 • ${controller.selectedDate.value}일 • ${formattedAmount}원',
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8)
                 ),
                 SizedBox(height: 30.h),
