@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/util/components/global_number_field.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -57,10 +59,12 @@ class PayDateRadioButtons extends StatefulWidget {
 }
 
 class _RadioButtonsState extends State<PayDateRadioButtons> {
+  final PaymentController _paymentController = Get.find<PaymentController>();
+
   List<String> payDates = ['1일', '15일', '직접 입력'];
   List<String> payDatesNew = ['1일', '15일'];
 
-  String selectedDate = '1일';
+  String selectedDateStr = '1일';
   int selectedDateInt = 1;
 
   @override
@@ -83,31 +87,35 @@ class _RadioButtonsState extends State<PayDateRadioButtons> {
                     children: [
                       PayDateButton(
                         text: activeDates[i],
-                        isSelected: selectedDate == activeDates[i],
+                        isSelected: selectedDateStr == activeDates[i],
                         onPressed: () {
                           setState(() {
-                            selectedDate = activeDates[i];
+                            selectedDateStr = activeDates[i];
                             if (activeDates[i] == '1일') {
                               selectedDateInt = 1;
                             } else if (activeDates[i] == '15일') {
                               selectedDateInt = 15;
                             } else {
                               selectedDateInt = 0;
+                              _paymentController.selectedDate.value = 0;
+                              _paymentController.updateIsPayAble();
+                              //print('컨트롤러에 저장된 날짜: ' + _paymentController.selectedDate.value);
                             }
-                            print('선택된 날짜: ' + selectedDateInt.toString());
+                            _paymentController.selectedDate.value = selectedDateInt;
+                            _paymentController.updateIsPayAble();
+                            print('선택된 날짜: ${selectedDateInt.toString()}');
                           });
                         },
                       ),
                     ],
                   ),
                 ),
-              // '직접 입력' 필드가 필요한 경우 추가합니다.
               if (selectedDateInt != 1 && selectedDateInt != 15)
-                Container(
+                Container( // 날짜 직접입력
                   width: 100.w,
                   height: 46.h,
                   margin: EdgeInsets.only(left: 10.w),
-                  child: NumberInputFieldExample(), // 이 부분은 해당 입력 필드 위젯으로 교체하시면 됩니다.
+                  child: NumberInputFieldExample(),
                 ),
             ],
           ),

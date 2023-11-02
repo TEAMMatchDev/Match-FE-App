@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:match/modules/payment/binding/payment_binding.dart';
 import 'package:match/modules/payment/view/payment_donation_info_view.dart';
 import 'package:match/provider/service/auth_service.dart';
 import 'package:match/util/components/global_app_bar.dart';
@@ -191,7 +192,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                   child: CommonButton.login(
                     text: "확인",
                     onTap: () async {
-                      Get.to(PaymentDonationScreen());
+                      Get.to(() => PaymentDonationScreen(), binding: PaymentBinding());
                     },
                   ),
                 ),

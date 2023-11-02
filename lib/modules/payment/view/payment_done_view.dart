@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
+import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/payment/view/payment_donation_info_view.dart';
+import 'package:match/modules/project/controller/project_controller.dart';
+import 'package:match/provider/service/auth_service.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -13,7 +18,20 @@ import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
 class PaymentDoneScreen extends GetView<PaymentController> {
-  const PaymentDoneScreen({super.key});
+  //const PaymentDoneScreen({super.key});
+  PaymentDoneScreen({Key? key}) : super(key: key);
+
+  final ProjectController _projectController = Get.find<ProjectController>();
+
+  String get formattedAmount {
+    final formatter = NumberFormat('#,###', 'ko_KR');
+    return formatter.format(controller.selectedAmount.value);
+  }
+
+  String getRegularStatusName() { //정기후원 or 일회성후원
+    RegularStatus? status = regularStatusMap[_projectController.projectDetail.value.regularStatus];
+    return status?.stateName ?? 'Unknown Status';
+  }
 
   @override
   Widget build(BuildContext context){
@@ -83,7 +101,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(
-                            '레이님, 후원해주셔서 감사합니다.\n세부 내역은 홈에서 확인할 수 있습니다.',
+                            '${AuthService.to.donatorProfile.value.name}님, 후원해주셔서 감사합니다.\n세부 내역은 홈에서 확인할 수 있습니다.',
                             style: AppTextStyles.T1Bold15.copyWith(color: AppColors.grey7),
                             textAlign: TextAlign.center,
                           ),
@@ -113,7 +131,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '후원명 자리에요',
+                                  '${_projectController.projectDetail.value.usages}',
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],
@@ -127,7 +145,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '후원처명 자리에요',
+                                  '${_projectController.projectDetail.value.title}',
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],
@@ -141,7 +159,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '100,000 원',
+                                  '${formattedAmount} 원',
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],
@@ -155,7 +173,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '일시후원 or 정기후원',
+                                  getRegularStatusName(),
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],

@@ -62,7 +62,7 @@ class ProjectController extends GetxController {
 
   @override
   void onInit() async {
-    // TODO projectId로 서버에서 데이터 가져오기ㄴ
+    // TODO projectId로 서버에서 데이터 가져오기
     matchTabBar = Get.put(MatchTabBar());
     projectDetail.value =
         await ProjectApi.getProjectDetail(projectId: projectId) ??

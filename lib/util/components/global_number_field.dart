@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
-class NumberInputFieldExample extends GetView {
+class NumberInputFieldExample extends GetView<PaymentController> {
   final TextEditingController textController = TextEditingController();
-  final RxString inputValue = ''.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,9 @@ class NumberInputFieldExample extends GetView {
           textController: textController,
           placeHolder: "직접 입력",
           onChanged: (value) {
-            // Handle the input value here
-            inputValue.value = value;
+            controller.selectedDate.value = int.parse(value);
+            controller.updateIsPayAble();
+            print('>>> 입력한: ${controller.selectedDate.value}');
           },
           isPlain: true,
         ),

@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
@@ -55,7 +58,9 @@ class SelectAmountRadioButtons extends StatefulWidget {
 }
 
 class _RadioButtonsState extends State<SelectAmountRadioButtons> {
-  String selectedAmount = '1,000';
+  final PaymentController _paymentController = Get.find<PaymentController>();
+
+  String selectedAmountStr = '1,000';
   int selectedAmountInt = 1000;
 
   final amountButtons = [
@@ -102,19 +107,23 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                 for (var i = 0; i < row.length; i++)
                   AmountButton(
                     text: row[i],
-                    isSelected: selectedAmount == row[i], // Set isSelected to false by default
+                    isSelected: selectedAmountStr == row[i], // Set isSelected to false by default
                     onPressed: () {
                       if (row[i] == '더보기') {
                         print('더보기 버튼 클릭!!');
-                        selectedAmount = row[i];
+                        selectedAmountStr = row[i];
                         selectedAmountInt = 0;
                         print('선택된 금액: '+selectedAmountInt.toString());
+                        _paymentController.selectedAmount.value = selectedAmountInt;
+                        _paymentController.updateIsPayAble();
                         toggleExpansion();
                       }
                       setState(() {
-                        selectedAmount = row[i];
+                        selectedAmountStr = row[i];
                         selectedAmountInt = int.parse(row[i].replaceAll(',', ''));
                         print('선택된 금액: '+selectedAmountInt.toString());
+                        _paymentController.selectedAmount.value = selectedAmountInt;
+                        _paymentController.updateIsPayAble();
                       });
                     },
                   ),
