@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:match/modules/payment/view/payment_done_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
+import 'package:match/modules/project/controller/project_controller.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_checkbox.dart';
@@ -23,7 +24,9 @@ class PaymentMethodScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBindingObserver {
 
   final PaymentController controller = Get.find();
-    List<String> payAgreeStringList = [
+  final ProjectController _projectController = Get.find<ProjectController>();
+
+  List<String> payAgreeStringList = [
       '[필수] 결제대행 서비스 이용약관 동의',
       '[필수] 개인 정보 제 3자 정보 제공 동의',
     ];
@@ -38,6 +41,8 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
 
   @override
   Widget build(BuildContext context){
+    final String state = _projectController.projectDetail.value.regularStatus;
+
     return  Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -92,8 +97,13 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                 ),
                 SizedBox(height: 10.h),
-                Text(
+                state == 'REGULAR'
+                ? Text(
                     '매월 • ${controller.selectedDate.value}일 • ${formattedAmount}원',
+                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8)
+                )
+                : Text(
+                    '${formattedAmount}원',
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8)
                 ),
                 SizedBox(height: 30.h),
@@ -103,7 +113,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                 ),
                 //SizedBox(height: 16.h),
 
-                PayMethodRadioButtons(),
+                PayMethodRadioButtons(state: state),
 
 
                 SizedBox(height: 23.h),

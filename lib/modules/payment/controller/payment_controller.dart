@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/match_history/match_history.dart';
+import 'package:match/modules/project/controller/project_controller.dart';
 import 'package:match/provider/api/order_api.dart';
 import 'package:match/provider/api/payment_api.dart';
 import 'package:match/util/const/global_mock_data.dart';
@@ -16,6 +17,9 @@ class PaymentController extends GetxController {
   int id = (Get.arguments != null && Get.arguments.containsKey("regularPayId")) ? Get.arguments["regularPayId"] : -1;
 
   RxList<Pay> payList = <Pay>[].obs;
+
+  final ProjectController _projectController = Get.find<ProjectController>();
+  RxString donateState = "".obs; /// 기부상태 (정기/단기)
 
   //TODO) 후원자 정보
   Rx<Donator> donator = tmpDonator.obs;
@@ -33,7 +37,6 @@ class PaymentController extends GetxController {
       isPayAble.value = false;
     }
   }
-
 
   //TODO) 결제 정보
   /// 동의항목
@@ -59,5 +62,6 @@ class PaymentController extends GetxController {
   void onInit() async {
     super.onInit();
     payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
+    donateState.value = _projectController.projectDetail.value.regularStatus;
   }
 }
