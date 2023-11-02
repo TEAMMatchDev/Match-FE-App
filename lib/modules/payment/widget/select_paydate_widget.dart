@@ -98,9 +98,11 @@ class _RadioButtonsState extends State<PayDateRadioButtons> {
                             } else {
                               selectedDateInt = 0;
                               _paymentController.selectedDate.value = 0;
+                              _paymentController.updateIsPayAble();
                               //print('컨트롤러에 저장된 날짜: ' + _paymentController.selectedDate.value);
                             }
                             _paymentController.selectedDate.value = selectedDateInt;
+                            _paymentController.updateIsPayAble();
                             print('선택된 날짜: ${selectedDateInt.toString()}');
                           });
                         },

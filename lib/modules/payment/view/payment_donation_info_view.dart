@@ -19,6 +19,8 @@ import '../widget/payment_widget.dart';
 class PaymentDonationScreen extends GetView<PaymentController> {
   const PaymentDonationScreen({super.key});
 
+
+
   @override
   Widget build(BuildContext context){
     return  Scaffold(
@@ -121,15 +123,22 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                   ),
                 ),
                 Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 6.w, right: 20),
-                    child: CommonButton.login(
-                      text: "확인",
-                      onTap: () async {
-                        Get.to(PaymentMethodScreen());
-                        //Get.to(() => PaymentMethodScreen(), binding: PaymentBinding());
-                      },
-                    ),
+                  child:
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Obx(() =>
+                        controller.isPayAble.value
+                        ? CommonButton.login(
+                          text: "확인",
+                          onTap: () async {
+                            Get.to(PaymentMethodScreen());
+                          },
+                        )
+                            : CommonButton.loginDis(
+                          text: "확인",
+                          onTap: () async {},
+                        ),
+                    )
                   ),
                 ),
               ],

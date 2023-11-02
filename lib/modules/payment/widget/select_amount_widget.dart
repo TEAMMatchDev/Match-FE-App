@@ -115,6 +115,7 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                         selectedAmountInt = 0;
                         print('선택된 금액: '+selectedAmountInt.toString());
                         _paymentController.selectedAmount.value = selectedAmountInt;
+                        _paymentController.updateIsPayAble();
                         toggleExpansion();
                       }
                       setState(() {
@@ -122,6 +123,7 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                         selectedAmountInt = int.parse(row[i].replaceAll(',', ''));
                         print('선택된 금액: '+selectedAmountInt.toString());
                         _paymentController.selectedAmount.value = selectedAmountInt;
+                        _paymentController.updateIsPayAble();
                       });
                     },
                   ),
