@@ -98,7 +98,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                 ),
                 SizedBox(height: 30.h),
                 Text(
-                    '기부  수단',
+                    '기부 수단',
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                 ),
                 //SizedBox(height: 16.h),
