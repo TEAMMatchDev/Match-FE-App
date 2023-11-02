@@ -20,6 +20,7 @@ class PaymentMethodScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBindingObserver {
+
   final PaymentController controller = Get.find();
     List<String> payAgreeStringList = [
       '[필수] 결제대행 서비스 이용약관 동의',
@@ -85,7 +86,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                    '매월 • 1일 • N,000원',
+                    '매월 • ${controller.selectedDate.value}일 • ${controller.selectedAmount.value}원',
                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8)
                 ),
                 SizedBox(height: 30.h),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:match/modules/payment/view/payment_donation_info_view.dart';
+import 'package:match/provider/service/auth_service.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -83,7 +85,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                         child: FittedBox(
                           fit: BoxFit.scaleDown,
                           child: Text(
-                            '레이님, 후원해주셔서 감사합니다.\n세부 내역은 홈에서 확인할 수 있습니다.',
+                            '${AuthService.to.donatorProfile.value.name}님, 후원해주셔서 감사합니다.\n세부 내역은 홈에서 확인할 수 있습니다.',
                             style: AppTextStyles.T1Bold15.copyWith(color: AppColors.grey7),
                             textAlign: TextAlign.center,
                           ),
@@ -141,7 +143,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '100,000 원',
+                                  '${controller.selectedAmount.value} 원',
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],

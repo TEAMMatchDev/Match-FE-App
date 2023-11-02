@@ -126,8 +126,8 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                     child: CommonButton.login(
                       text: "확인",
                       onTap: () async {
-                        //Get.to(PaymentMethodScreen());
-                        Get.to(() => PaymentMethodScreen(), binding: PaymentBinding());
+                        Get.to(PaymentMethodScreen());
+                        //Get.to(() => PaymentMethodScreen(), binding: PaymentBinding());
                       },
                     ),
                   ),

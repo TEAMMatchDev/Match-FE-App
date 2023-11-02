@@ -13,13 +13,15 @@ class PaymentController extends GetxController {
   //TODO) 주석처리 한 거로 로그인 api 연결 후 수정 필요
   //int id = Get.arguments["regularPayId"] ?? -1;
   int id = (Get.arguments != null && Get.arguments.containsKey("regularPayId")) ? Get.arguments["regularPayId"] : -1;
-
   RxList<Pay> payList = <Pay>[].obs;
 
   //TODO) 후원자 정보
   Rx<Donator> donator = tmpDonator.obs;
 
   //TODO) 기부금 정보
+  final Rx<int> inputValue = 0.obs;
+  final Rx<int> selectedAmount = 1000.obs;
+  final Rx<int> selectedDate = 1.obs;
 
   //TODO) 결제 정보
   /// 동의항목
@@ -45,7 +47,5 @@ class PaymentController extends GetxController {
   void onInit() async {
     super.onInit();
     payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
-    donator.value = await OrderApi.getProfile() ?? tmpDonator;
-    print('>> response: ${donator.value}');
   }
 }
