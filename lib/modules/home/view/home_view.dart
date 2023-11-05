@@ -102,6 +102,7 @@ class HomeScreen extends GetView<HomeController> {
                   ),
 
                   ///*불꽃이 ListView
+                  ///FlameWidget 내부에 Burning widget routing 포함
                   controller.flameList.isEmpty
                       ? const FlameWidget()
                       : SizedBox(

@@ -124,8 +124,10 @@ class FlameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        //상세페이지에서도 동일한 위젯이 사용되기때문에
+        //라우팅 분기처리
         isHome
-            ? await Get.toNamed(Routes.home + Routes.burning_match,
+            ? await Get.toNamed(Routes.burning_match,
                 arguments: {"donaionId": id})
             : null;
       },
@@ -254,87 +256,4 @@ Widget profileItem(
       ),
     ),
   );
-}
-
-///* 오늘의 후원에서 사용되는 listTile
-///[TodayMatchScreen]에서 사용되는 위젯<br/>
-class TodayMatchList extends StatelessWidget {
-  final int count;
-  final List<String> imgList;
-  final String backgroundImg;
-  final int projectId;
-
-  const TodayMatchList(
-      {super.key,
-      required this.count,
-      required this.imgList,
-      this.backgroundImg = tmpBackgroundImg,
-      required this.projectId});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        await Get.toNamed(Routes.project, arguments: {"projectId": projectId});
-      },
-      child: Container(
-        height: 180.h,
-        width: 320.w,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.5, 1],
-            colors: [
-              Color(0x00000099),
-              Color(0x0000001A),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(10.r),
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(backgroundImg),
-              colorFilter: ColorFilter.mode(
-                  //TODO: gradient 적용 detail 수정
-                  Colors.black.withOpacity(0.3),
-                  BlendMode.srcATop)),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 17.h,
-              left: 20.w,
-              child: count == 0
-                  ? Text(
-                      "아직 후원하는 사람이 없어요.",
-                      style: AppTextStyles.T1Bold12.copyWith(
-                        color: AppColors.white,
-                      ),
-                    )
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                          Wrap(
-                            spacing: -4,
-                            children: imgList
-                                .map((e) => profileItem(size: 30))
-                                .toList(),
-                          ),
-                          SizedBox(
-                            width: 7.w,
-                          ),
-                          Text(
-                            "외 $count마리의 불꽃이 함께하고 있어요.",
-                            style: AppTextStyles.L1Medium13.copyWith(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ]),
-            )
-          ],
-        ),
-      ),
-    );
-  }
 }

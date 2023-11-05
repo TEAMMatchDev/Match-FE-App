@@ -47,7 +47,7 @@ Widget SearchItem({required Search search}) {
         "id": search.donationId, // TODO: regularPayId로 적용해야함
         //TODO: projectId로 적용해야함
         "projectId": search.projectId,
-        "type": MATCH_STATUS.DONAITON.name
+        "type": MatchStatus.DONAITON.name
       });
     },
     child: Row(
