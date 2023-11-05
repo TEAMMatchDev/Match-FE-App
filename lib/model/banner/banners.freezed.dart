@@ -24,7 +24,7 @@ mixin _$Banners {
   String get bannerType => throw _privateConstructorUsedError;
   String get bannerImg => throw _privateConstructorUsedError;
   int? get eventId => throw _privateConstructorUsedError;
-  String get contentsUrl => throw _privateConstructorUsedError;
+  String? get contentsUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,7 +41,7 @@ abstract class $BannersCopyWith<$Res> {
       String bannerType,
       String bannerImg,
       int? eventId,
-      String contentsUrl});
+      String? contentsUrl});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$BannersCopyWithImpl<$Res, $Val extends Banners>
     Object? bannerType = null,
     Object? bannerImg = null,
     Object? eventId = freezed,
-    Object? contentsUrl = null,
+    Object? contentsUrl = freezed,
   }) {
     return _then(_value.copyWith(
       bannerId: null == bannerId
@@ -80,10 +80,10 @@ class _$BannersCopyWithImpl<$Res, $Val extends Banners>
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as int?,
-      contentsUrl: null == contentsUrl
+      contentsUrl: freezed == contentsUrl
           ? _value.contentsUrl
           : contentsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -100,7 +100,7 @@ abstract class _$$BannersImplCopyWith<$Res> implements $BannersCopyWith<$Res> {
       String bannerType,
       String bannerImg,
       int? eventId,
-      String contentsUrl});
+      String? contentsUrl});
 }
 
 /// @nodoc
@@ -118,7 +118,7 @@ class __$$BannersImplCopyWithImpl<$Res>
     Object? bannerType = null,
     Object? bannerImg = null,
     Object? eventId = freezed,
-    Object? contentsUrl = null,
+    Object? contentsUrl = freezed,
   }) {
     return _then(_$BannersImpl(
       bannerId: null == bannerId
@@ -137,10 +137,10 @@ class __$$BannersImplCopyWithImpl<$Res>
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as int?,
-      contentsUrl: null == contentsUrl
+      contentsUrl: freezed == contentsUrl
           ? _value.contentsUrl
           : contentsUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -153,7 +153,7 @@ class _$BannersImpl with DiagnosticableTreeMixin implements _Banners {
       required this.bannerType,
       required this.bannerImg,
       this.eventId,
-      required this.contentsUrl});
+      this.contentsUrl});
 
   factory _$BannersImpl.fromJson(Map<String, dynamic> json) =>
       _$$BannersImplFromJson(json);
@@ -167,7 +167,7 @@ class _$BannersImpl with DiagnosticableTreeMixin implements _Banners {
   @override
   final int? eventId;
   @override
-  final String contentsUrl;
+  final String? contentsUrl;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -227,7 +227,7 @@ abstract class _Banners implements Banners {
       required final String bannerType,
       required final String bannerImg,
       final int? eventId,
-      required final String contentsUrl}) = _$BannersImpl;
+      final String? contentsUrl}) = _$BannersImpl;
 
   factory _Banners.fromJson(Map<String, dynamic> json) = _$BannersImpl.fromJson;
 
@@ -240,7 +240,7 @@ abstract class _Banners implements Banners {
   @override
   int? get eventId;
   @override
-  String get contentsUrl;
+  String? get contentsUrl;
   @override
   @JsonKey(ignore: true)
   _$$BannersImplCopyWith<_$BannersImpl> get copyWith =>

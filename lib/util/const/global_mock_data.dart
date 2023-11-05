@@ -14,15 +14,24 @@ import '../../model/profile/profile.dart';
 import '../../model/project_detail/project_detail.dart';
 import '../../model/project_history.dart/project_history.dart';
 
+///*서버 통신 로직 구현전에 사용할 임시 프로필이미지
+const String tmpProfileImg =
+    "http://k.kakaocdn.net/dn/bq8XQY/btsjqweTr1J/c0kplPW8eo8iOCeoYTBGxK/img_640x640.jpg";
+const String tmpBackgroundImg =
+    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
+
+///색상있는 버전
+const String tmpBackgroundImg2 =
+    "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png";
+
 var tmpFlameDetail = const FlameDetail(
-  imgUrl: "",
-  flameType: "",
-  inherenceName: "",
-  usages: "",
-  amount: 0,
-  sequence: 0,
-  randomMessage: ""
-);
+    imgUrl: "",
+    flameType: "",
+    inherenceName: "",
+    usages: "",
+    amount: 0,
+    sequence: 0,
+    randomMessage: "");
 var tmpProjectDetail = const ProjectDetail(
     projectId: 1,
     thumbNail:
@@ -110,7 +119,8 @@ var tmpProfile = const Profile(
     socialType: "NORMAL",
     email: "gusdn8926@naver.com",
     phone: "01049177672");
-var tmpDonator = const Donator( //기부자 정보 임시 데이터
+var tmpDonator = const Donator(
+    //기부자 정보 임시 데이터
     name: "테스트",
     birthDay: "2001-01-02",
     phoneNumber: "010-1234-5678");
@@ -132,5 +142,5 @@ var tmpEventDetail = const EventDetail(
     eventContents: [
       Contents(contentId: 1, contentsType: "CONTENTS", contents: "fds")
     ]);
-var tmpNotificationPermission= const NotificationPermission(
-serviceAlarm: false, eventAlarm: false);
+var tmpNotificationPermission =
+    const NotificationPermission(serviceAlarm: false, eventAlarm: false);

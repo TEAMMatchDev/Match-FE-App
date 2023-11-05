@@ -11,6 +11,7 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../util/const/style/global_color.dart';
 import '../controller/main_controller.dart';
 
+///* <h2>BottomNavigation 설정을 위해 상위 라우팅으로 설정 </h2>
 class MainScreen extends GetView<MainController> {
   const MainScreen({super.key});
 

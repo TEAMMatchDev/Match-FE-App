@@ -13,6 +13,7 @@ import '../../../util/const/style/global_skeleton.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
 
+///* <h2> main 홈 진입시 홈 탭에 해당하는 화면 </h2>
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
 
@@ -29,12 +30,12 @@ class HomeScreen extends GetView<HomeController> {
                   .copyWith(bottom: 0.h),
               child: Column(
                 children: [
-                  //*1.제목 header
+                  ///*1.제목 header
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset(
-                        imgDir + "logo/iv_home_logo.png",
+                        "${imgDir}logo/iv_home_logo.png",
                         width: 75.w,
                       ),
                       alarmButton()
@@ -43,8 +44,9 @@ class HomeScreen extends GetView<HomeController> {
                   SizedBox(
                     height: 16.h,
                   ),
-                  //*2. 광고 section
-                  controller.bannerList.value.isEmpty
+
+                  ///*2. 광고 section
+                  controller.bannerList.isEmpty
                       ? CommonSkeleton.ad()
                       : SizedBox(
                           width: 320.w,
@@ -73,12 +75,13 @@ class HomeScreen extends GetView<HomeController> {
               color: AppColors.searchBackground,
               height: 10.h,
             ),
-            //*3. 타오르는 불꽃이 section
+
+            ///*3. 타오르는 불꽃이 section
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Column(
                 children: [
-                  //*제목
+                  ///*제목
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -86,18 +89,21 @@ class HomeScreen extends GetView<HomeController> {
                         alignment: Alignment.centerLeft,
                         padding: EdgeInsets.only(top: 11.h, bottom: 15.h),
                         child: Text(
-                            //TODO: username 적용
                             "${AuthService.to.myProfile.value.nickName}님의 타오르는 불꽃이",
                             style: AppTextStyles.T1Bold20),
                       ),
-                      Text(
-                          "${controller.currentIdx.value} / ${controller.totalCnt.value}",
-                          style: AppTextStyles.T1Bold20),
+                      //총 불꽃이 1개일때는 개수를 나타내지 않는다
+                      controller.totalCnt.value != 1
+                          ? Text(
+                              "${controller.currentIdx.value} / ${controller.totalCnt.value}",
+                              style: AppTextStyles.T1Bold20)
+                          : const SizedBox.shrink(),
                     ],
                   ),
-                  //*불꽃이 ListView
+
+                  ///*불꽃이 ListView
                   controller.flameList.isEmpty
-                      ? FlameWidget()
+                      ? const FlameWidget()
                       : SizedBox(
                           height: 350.h,
                           child: CarouselSlider.builder(
@@ -108,20 +114,18 @@ class HomeScreen extends GetView<HomeController> {
                                 aspectRatio: 270.w / 298.h,
                                 viewportFraction: 1),
                             itemBuilder: (context, index, realIndex) {
-                              logger.d(index);
                               //builder 안에서 상태값을 바꿔주기때문에 build이후에 추가하는 로직 추가
+                              //현재 index 표시 text에서 버벅임 현상을 줄이기 위해 해당 scope 추가
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 controller.currentIdx.value = index + 1;
                               });
                               if (index % (PAGINATION_SIZE - 1) == 0 &&
                                   index != 0) {
-                                logger.d("1. getMoreFlame 호출!");
                                 Future.wait({
                                   controller.getMoreFlame(
                                       index ~/ (PAGINATION_SIZE - 1))
                                 });
                               }
-                              //TODO: pagination 처리
                               final flame = controller.flameList[index];
                               return FlameWidget(
                                 flameName: flame.inherenceName,
