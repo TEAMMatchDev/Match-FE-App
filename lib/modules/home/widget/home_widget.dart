@@ -2,53 +2,39 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:match/model/enum/banner_type.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
 import '../../../model/banner/banners.dart';
 import '../../../provider/routes/routes.dart';
-import '../../../util/components/global_widget.dart';
-
-///*서버 통신 로직 구현전에 사용할 임시 프로필이미지
-const String tmpProfileImg =
-    "http://k.kakaocdn.net/dn/bq8XQY/btsjqweTr1J/c0kplPW8eo8iOCeoYTBGxK/img_640x640.jpg";
-const String tmpBackgroundImg =
-    "https://match-image.s3.ap-northeast-2.amazonaws.com/project/1/1fd4cf5b-1863-432f-8277-f51bccd0c3e6.png";
-
-///색상있는 버전
-const String tmpBackgroundImg2 =
-    "https://match-image.s3.ap-northeast-2.amazonaws.com/profile.png";
+import '../../../util/const/global_mock_data.dart';
 
 ///*광고 section 순서 표시하는 위젯
 Widget adIndexItem({required int total, required int currentIdx}) {
   return Container(
     padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
     decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4.r), color: Color(0x4D000000)),
+        borderRadius: BorderRadius.circular(4.r),
+        color: const Color(0x4D000000)),
     child: RichText(
         text: TextSpan(children: [
       TextSpan(
-        text: "${currentIdx}",
+        text: "$currentIdx",
         style: AppTextStyles.T1Bold12.copyWith(
             color: AppColors.white, letterSpacing: 0),
       ),
       TextSpan(
-        text: " / ${total}",
+        text: " / $total",
         style: AppTextStyles.T1Bold12.copyWith(
             color: AppColors.grey4, letterSpacing: 0),
       )
     ])),
   );
 }
-
 
 ///<h2> 광고 section widget</h2>
 class BannerWidget extends StatelessWidget {
@@ -72,22 +58,25 @@ class BannerWidget extends StatelessWidget {
           } else {
             if (Platform.isAndroid) {
               launchUrlString(
-                      mode: LaunchMode.externalApplication, banner.contentsUrl)
+                      mode: LaunchMode.externalApplication, banner.contentsUrl!)
                   .catchError((err) {
                 launchUrlString(
                     mode: LaunchMode.externalApplication,
                     'https://www.official-match.kr');
+                return true;
               });
             }
             //IOS
             else if (Platform.isIOS) {
-              launchUrlString(banner.contentsUrl).catchError((err) {
+              launchUrlString(banner.contentsUrl!).catchError((err) {
                 launchUrlString('https://www.official-match.kr');
+                return true;
               });
             }
           }
         } else {
-          //event일 경우; 해당 버전에서는 해당 데이터및 화면 X
+          Get.toNamed(Routes.event_detail,
+              arguments: {"eventId": banner.eventId});
         }
       },
       child: Container(
@@ -113,6 +102,7 @@ class BannerWidget extends StatelessWidget {
 
 ///*타오로는 불꽃이 위젯
 ///[HomeScreen], [BurningMathScreen]에서 사용
+///초기화 위젯 생성을 위해 Flame 모델 field 각각을 생성자로 설정
 class FlameWidget extends StatelessWidget {
   final String? flameName;
   final String? flameImg;
@@ -134,8 +124,10 @@ class FlameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        //상세페이지에서도 동일한 위젯이 사용되기때문에
+        //라우팅 분기처리
         isHome
-            ? await Get.toNamed(Routes.home + Routes.burning_match,
+            ? await Get.toNamed(Routes.burning_match,
                 arguments: {"donaionId": id})
             : null;
       },
@@ -151,6 +143,7 @@ class FlameWidget extends StatelessWidget {
                 fit: BoxFit.fill,
                 image: AssetImage(imgDir +
                     (flameName == null
+                        //배경 색상에 따른 이미지 변경
                         ? "iv_home_background_blank.png"
                         : "iv_home_background.png")),
               ),
@@ -160,7 +153,7 @@ class FlameWidget extends StatelessWidget {
                 SizedBox(
                   height: 18.h,
                 ),
-                usages != null ? UsagesChip() : SizedBox.shrink(),
+                usages != null ? usageChip() : const SizedBox.shrink(),
                 SizedBox(
                   height: 20.h,
                 ),
@@ -171,7 +164,7 @@ class FlameWidget extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.fill,
                       image:
-                          AssetImage(imgDir + "ic_speech_background_232.png"),
+                          AssetImage("${imgDir}ic_speech_background_232.png"),
                     ),
                   ),
                   alignment: Alignment.center,
@@ -201,7 +194,7 @@ class FlameWidget extends StatelessWidget {
                 ),
                 flameImg != null
                     ? Image.network(height: 114.h, width: 102.w, flameImg!)
-                    : SizedBox.shrink(),
+                    : const SizedBox.shrink(),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -220,7 +213,7 @@ class FlameWidget extends StatelessWidget {
                           Text("불꽃이", style: AppTextStyles.T1Bold18)
                         ],
                       )
-                    : SizedBox.shrink()
+                    : const SizedBox.shrink()
               ],
             ),
           ),
@@ -229,7 +222,7 @@ class FlameWidget extends StatelessWidget {
     );
   }
 
-  Widget UsagesChip() {
+  Widget usageChip() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
       decoration: BoxDecoration(
@@ -263,87 +256,4 @@ Widget profileItem(
       ),
     ),
   );
-}
-
-///* 오늘의 후원에서 사용되는 listTile
-///[TodayMatchScreen]에서 사용되는 위젯<br/>
-class TodayMatchList extends StatelessWidget {
-  final int count;
-  final List<String> imgList;
-  final String backgroundImg;
-  final int projectId;
-
-  const TodayMatchList(
-      {super.key,
-      required this.count,
-      required this.imgList,
-      this.backgroundImg = tmpBackgroundImg,
-      required this.projectId});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        await Get.toNamed(Routes.project, arguments: {"projectId": projectId});
-      },
-      child: Container(
-        height: 180.h,
-        width: 320.w,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            stops: [0.5, 1],
-            colors: [
-              Color(0x00000099),
-              Color(0x0000001A),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(10.r),
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(backgroundImg),
-              colorFilter: ColorFilter.mode(
-                  //TODO: gradient 적용 detail 수정
-                  Colors.black.withOpacity(0.3),
-                  BlendMode.srcATop)),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 17.h,
-              left: 20.w,
-              child: count == 0
-                  ? Text(
-                      "아직 후원하는 사람이 없어요.",
-                      style: AppTextStyles.T1Bold12.copyWith(
-                        color: AppColors.white,
-                      ),
-                    )
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                          Wrap(
-                            spacing: -4,
-                            children: imgList
-                                .map((e) => profileItem(size: 30))
-                                .toList(),
-                          ),
-                          SizedBox(
-                            width: 7.w,
-                          ),
-                          Text(
-                            "외 ${count}마리의 불꽃이 함께하고 있어요.",
-                            style: AppTextStyles.L1Medium13.copyWith(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ]),
-            )
-          ],
-        ),
-      ),
-    );
-  }
 }

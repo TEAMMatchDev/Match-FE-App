@@ -1,22 +1,19 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/util/method/get_storage.dart';
 
 import '../../../model/enum/search_status.dart';
 import '../../../model/recent_search/recent_search.dart';
 import '../../../util/components/gloabl_text_field.dart';
-import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
 import '../controller/search_controller.dart';
 import '../widget/search_widget.dart';
 
+///현재 사용하지 않는 화면
 class SearchScreen extends GetView<SearchViewController> {
   const SearchScreen({super.key});
 

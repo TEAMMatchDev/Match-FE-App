@@ -3,11 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/buring_match/view/match_picture_detail_view.dart';
 import 'package:timeline_tile_nic/timeline_tile.dart';
-
+import '../../../util/const/global_mock_data.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
-import '../../home/widget/home_widget.dart';
 
+///<h2> 불꽃이 상세의 하단 정보를 표시하는 위젯 </h2>
+/// Timeline 라이브러리를 활용하여 구현
 class MatchRecord extends StatelessWidget {
   final String title;
   final String date;
@@ -30,13 +31,12 @@ class MatchRecord extends StatelessWidget {
       indicatorStyle: IndicatorStyle(
         padding: EdgeInsets.symmetric(vertical: 20.h)
             .copyWith(left: isChange ? 3.w : 0),
+        // historyStatus == CHANGE 일 경우에 회색 색상의 indicator로 변경
         color: isChange ? AppColors.grey5 : AppColors.primary500,
         height: isChange ? 8.w : 14.w,
         width: isChange ? 8.w : 14.w,
       ),
       beforeLineStyle: LineStyle(color: AppColors.grey1, thickness: 2.w),
-      // endChild: Padding(
-      // padding: EdgeInsets.only(left: 8.w, bottom: 30.h),
       endChild: IntrinsicHeight(
         child: Padding(
           padding: EdgeInsets.only(left: 16.w),
@@ -65,7 +65,8 @@ class MatchRecord extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await Get.to(() => PictureDetailScreen());
+                    //사진 클릭시 상세 화면으로 이동
+                    await Get.to(() => const PictureDetailScreen());
                   },
                   child: Wrap(
                       direction: Axis.horizontal,

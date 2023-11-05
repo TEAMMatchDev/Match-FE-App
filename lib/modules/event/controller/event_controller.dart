@@ -6,11 +6,11 @@ import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/const/style/global_logger.dart';
 
 class EventController extends GetxController {
+  ///* event list
   RxList<Event> eventList = <Event>[].obs;
 
+  ///* pagination 함수
   Future<void> getMoreNotice({required int index}) async {
-    logger.d(
-        "2:  총 페이지수 : ${EventApi.event.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
     if (!(EventApi.event.totalCnt ~/ PAGINATION_SIZE < index) &&
         !EventApi.event.isLast) {
       EventApi.event.currentpage = index;

@@ -10,7 +10,7 @@ import 'package:match/util/components/global_button.dart';
 import '../../../provider/service/auth_service.dart';
 
 class NicknameEditScreen extends GetView<NickNameController> {
-  NicknameEditScreen({super.key});
+  const NicknameEditScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,6 +8,7 @@ import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
 import '../../home/widget/home_widget.dart';
 
+///<h2>이벤트 아이템 위젯</h2>
 class EventWidget extends StatelessWidget {
   final Event event;
 
@@ -17,8 +18,7 @@ class EventWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(Routes.event_detail,
-            arguments: {"eventId": event.eventId});
+        Get.toNamed(Routes.event_detail, arguments: {"eventId": event.eventId});
       },
       child: Container(
           width: double.infinity,
