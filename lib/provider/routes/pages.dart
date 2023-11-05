@@ -10,8 +10,7 @@ import 'package:match/modules/donation_search/binding/donation_search_binding.da
 import 'package:match/modules/donation_search/view/donation_search_view.dart';
 import 'package:match/modules/event_detail/binding/event_detail_binding.dart';
 import 'package:match/modules/event_detail/view/event_detail_view.dart';
-import 'package:match/modules/mypage/binding/mypage_binding.dart';
-import 'package:match/modules/mypage/controller/nickname_controller.dart';
+import 'package:match/modules/mypage/binding/nickname_binding.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/mypage/view/nickname_edit_view.dart';
 import 'package:match/modules/mypage/view/setting_view.dart';
@@ -42,8 +41,6 @@ import '../../modules/notice/binding/notice_binding.dart';
 import '../../modules/notice/binding/notice_detail_binding.dart';
 import '../../modules/notice/view/notice_detail_view.dart';
 import '../../modules/notice/view/notice_view.dart';
-import '../../modules/search/binding/search_binding.dart';
-import '../../modules/search/view/search_view.dart';
 import '../../modules/total_pay/binding/total_pay_binding.dart';
 import 'routes.dart';
 
@@ -136,7 +133,6 @@ class Pages {
       name: Routes.mypage,
       page: () => const MypageScreen(),
       transition: Transition.noTransition,
-      binding: MypageBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
@@ -172,7 +168,7 @@ class Pages {
       name: Routes.nickname,
       page: () => NicknameEditScreen(),
       transition: Transition.noTransition,
-      binding: MypageBinding(),
+      binding: NicknameBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

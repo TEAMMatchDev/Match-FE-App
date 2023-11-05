@@ -33,7 +33,7 @@ class SettingScreen extends GetView<SettingController> {
                     style: AppTextStyles.T1Bold15,
                     textAlign: TextAlign.start,
                   ),
-                  SwitchListTile(
+                  switchListTile(
                       isSwitch: controller.servicePermission,
                       alarmType: AlarmType.SERVICE),
                   Divider(
@@ -41,7 +41,7 @@ class SettingScreen extends GetView<SettingController> {
                     height: 1.h,
                     color: AppColors.divider1,
                   ),
-                  SwitchListTile(
+                  switchListTile(
                       isSwitch: controller.eventPermission,
                       alarmType: AlarmType.EVENT),
                 ],
@@ -52,7 +52,7 @@ class SettingScreen extends GetView<SettingController> {
     );
   }
 
-  Widget SwitchListTile(
+  Widget switchListTile(
       {required Rx<bool> isSwitch, required AlarmType alarmType}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20.h),
@@ -65,7 +65,6 @@ class SettingScreen extends GetView<SettingController> {
               style:
                   AppTextStyles.S1SemiBold14.copyWith(color: AppColors.grey7),
             ),
-            //TODO: GetStorage 저장 및 서버 연결(기획 확인 필요)
             CupertinoSwitch(
                 activeColor: AppColors.grey9,
                 dragStartBehavior: DragStartBehavior.start,

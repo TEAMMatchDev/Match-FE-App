@@ -8,6 +8,8 @@ import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../home/widget/home_widget.dart';
 
+///<h2>이벤트 상세 화면</h2>
+///공지사항,알림과 유사한 구조
 class EventDetailScreen extends GetView<EventDetailController> {
   const EventDetailScreen({super.key});
 
