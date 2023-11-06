@@ -2,118 +2,126 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:match/model/enum/social_type.dart';
 import 'package:match/modules/mypage/view/policy_view.dart';
 import 'package:match/modules/mypage/view/setting_view.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
-
 import '../../../provider/routes/routes.dart';
 import '../../../provider/service/auth_service.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
 import '../../../util/const/style/global_color.dart';
-import '../controller/mypage_controller.dart';
 import '../widget/mypage_widget.dart';
 import 'mypage_edit_view.dart';
 
-class MypageScreen extends GetView<MypageController> {
+///<h2> 마이페이지 화면 </h2>
+///탭에서 내 정보를 클릭했을때 나오는 화면<br/>
+///* 별도의 init하거나 logic이 필요하지 않아 controller를 사용하지 않고 StatelessWidget으로 구현
+///* 회원정보는 AuthService에서 관리
+class MypageScreen extends StatelessWidget {
   const MypageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w).copyWith(
-                    top: 10.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "내 정보",
-                            style: AppTextStyles.T1Bold16,
-                          ),
-                          alarmButton()
-                        ]),
-                    SizedBox(
-                      height: 25.h,
-                    ),
-                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                      Text(
-                        "${AuthService.to.myProfile.value.name}님",
-                        style: AppTextStyles.T1Bold18,
-                      ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(MypageEditScreen());
-                        },
-                        child: Container(
-                          padding:
-                          EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.grey6),
-                            borderRadius: BorderRadius.circular(7.r),
-                          ),
-                          child: Text("회원 정보 수정",
-                              style: AppTextStyles.L1Medium10.copyWith(
-                                color: AppColors.grey6,
-                              )),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 10.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ///*1. 상단 내정보
+                  ///AuthService 이용
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "내 정보",
+                          style: AppTextStyles.T1Bold16,
                         ),
-                      )
-                    ]),
-                    SizedBox(
-                      height: 9.h,
+                        alarmButton()
+                      ]),
+                  SizedBox(
+                    height: 25.h,
+                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Text(
+                      "${AuthService.to.myProfile.value.name}님",
+                      style: AppTextStyles.T1Bold18,
                     ),
-                    SocialTypeEmailWidget(),
                     SizedBox(
-                      height: 23.h,
+                      width: 5.w,
                     ),
-                  ],
-                ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(const MypageEditScreen());
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 7.w, vertical: 2.h),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.grey6),
+                          borderRadius: BorderRadius.circular(7.r),
+                        ),
+                        child: Text("회원 정보 수정",
+                            style: AppTextStyles.L1Medium10.copyWith(
+                              color: AppColors.grey6,
+                            )),
+                      ),
+                    )
+                  ]),
+                  SizedBox(
+                    height: 9.h,
+                  ),
+                  SocialTypeEmailWidget(),
+                  SizedBox(
+                    height: 23.h,
+                  ),
+                ],
               ),
-              GreySizedBox(),
-              Padding(
+            ),
+            GreySizedBox(),
+
+            ///*2. 메뉴
+            Padding(
                 padding:
-                EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 8.h),
+                    EdgeInsets.symmetric(horizontal: 20.w).copyWith(top: 8.h),
                 child: Column(
-                    children: [
+                  children: [
                     MypageListTile(
-                    icon: "donation",
-                    title: "기부내역 / 해지하기",
-                    onTap: (() async {
-                      await Get.toNamed(Routes.total_pay);
-                    })),
-                MypageListTile(
-                    icon: "notice",
-                    title: "공지사항",
-                    onTap: (() async {
-                      await Get.toNamed(Routes.notice);
-                    })),
-                MypageListTile(
-                  icon: "setting",
-                  title: "환경설정",
-                  onTap: () async {
-                    await Get.toNamed(Routes.setting);
-                  },
-                ),
-                MypageListTile(icon: "policy", title: "운영정책 및 약관"
-                    ,onTap: () async {
-              Get.to(() => PolicyScreen());
-              },),
-              MypageListTile(icon: "client", title: "고객센터"),
-            ],
-          ))],
-    ),
-        )
-    ,
+                        icon: "donation",
+                        title: "기부내역 / 해지하기",
+                        onTap: (() async {
+                          await Get.toNamed(Routes.total_pay);
+                        })),
+                    MypageListTile(
+                        icon: "notice",
+                        title: "공지사항",
+                        onTap: (() async {
+                          await Get.toNamed(Routes.notice);
+                        })),
+                    MypageListTile(
+                      icon: "setting",
+                      title: "환경설정",
+                      onTap: () async {
+                        await Get.to(const SettingScreen());
+                      },
+                    ),
+                    MypageListTile(
+                      icon: "policy",
+                      title: "운영정책 및 약관",
+                      onTap: () async {
+                        Get.to(() => const PolicyScreen());
+                      },
+                    ),
+                    const MypageListTile(icon: "client", title: "고객센터"),
+                  ],
+                ))
+          ],
+        ),
+      ),
     );
   }
 }
@@ -141,7 +149,7 @@ class MypageListTile extends StatelessWidget {
             border: isLast
                 ? null
                 : Border(
-                bottom: BorderSide(color: AppColors.divider1, width: 1.h))),
+                    bottom: BorderSide(color: AppColors.divider1, width: 1.h))),
         padding: EdgeInsets.symmetric(vertical: 16.h),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,10 +157,10 @@ class MypageListTile extends StatelessWidget {
           children: [
             icon != null
                 ? SvgPicture.asset(
-              "${iconDir}mypage/ic_${icon}_18.svg",
-              width: 18.w,
-            )
-                : SizedBox.shrink(),
+                    "${iconDir}mypage/ic_${icon}_18.svg",
+                    width: 18.w,
+                  )
+                : const SizedBox.shrink(),
             SizedBox(
               width: 14.w,
             ),

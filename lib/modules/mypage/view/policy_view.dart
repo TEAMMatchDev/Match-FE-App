@@ -21,7 +21,7 @@ class PolicyScreen extends StatelessWidget {
           children: [
             GestureDetector(
                 onTap: () {
-                  Get.to(PolicyDetailView(
+                  Get.to(const PolicyDetailView(
                     webUrl: "/terms/service",
                     title: "개인정보 처리 방침",
                   ));
@@ -40,7 +40,7 @@ class PolicyScreen extends StatelessWidget {
             ),
             GestureDetector(
                 onTap: () {
-                  Get.to(PolicyDetailView(
+                  Get.to(const PolicyDetailView(
                     webUrl: "/terms/policy",
                     title: "개인정보 처리 방침",
                   ));
@@ -56,7 +56,7 @@ class PolicyScreen extends StatelessWidget {
             ),
             GestureDetector(
                 onTap: () {
-                  Get.to(PolicyDetailView(
+                  Get.to(const PolicyDetailView(
                     webUrl: "/terms/marketing ",
                     title: "마케팅 정보 수집 및 수신 동의",
                   ));

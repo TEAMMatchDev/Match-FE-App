@@ -29,7 +29,7 @@ Widget GreySizedBox() {
     height: 10.h,
   );
 }
-
+/// <h2> 알림 버튼 </h2>
 Widget alarmButton() {
   return GestureDetector(
       onTap: () {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:match/modules/home/widget/home_widget.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../util/const/global_mock_data.dart';
 import '../../../util/const/global_variable.dart';
 
 class PictureDetailScreen extends StatelessWidget {

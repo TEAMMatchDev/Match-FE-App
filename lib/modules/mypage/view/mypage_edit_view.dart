@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/util/components/global_app_bar.dart';
-
 import '../../../provider/routes/routes.dart';
 import '../../../provider/service/auth_service.dart';
 import '../../../util/const/global_variable.dart';
@@ -64,16 +63,16 @@ class MypageEditScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              PrivacyInfo(
+              privacyInfo(
                   title: "이름", value: AuthService.to.myProfile.value.name),
               SizedBox(
                 height: 20.h,
               ),
-              PrivacyInfo(
+              privacyInfo(
                 title: "휴대폰번호",
                 value: AuthService.to.myProfile.value.phone,
                 icon: "phone_edit",
-                onTap: () async{
+                onTap: () async {
                   Get.toNamed(Routes.phone);
                 },
               ),
@@ -85,15 +84,15 @@ class MypageEditScreen extends StatelessWidget {
           thickness: 1.h,
           color: AppColors.divider1,
         ),
-        MypageListTile(title: "결제 수단 관리"),
-        MypageListTile(title: "로그아웃"),
-        MypageListTile(title: "탈퇴하기"),
+        const MypageListTile(title: "결제 수단 관리"),
+        const MypageListTile(title: "로그아웃"),
+        const MypageListTile(title: "탈퇴하기"),
       ]),
     );
   }
 }
 
-Widget PrivacyInfo(
+Widget privacyInfo(
     {required String title,
     required String value,
     String? icon,
