@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:match/model/card_info/card_info.dart';
 import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/modules/payment/view/payment_select_card_view.dart';
+import 'package:match/modules/project/controller/project_controller.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -54,6 +55,7 @@ class _CardSliderState extends State<CardSlider> {
               });
 
               print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]} \n 선택한 카드 번호 : ${_paymentController.cardNumList[index]} \n');
+              _paymentController.cardId.value = _paymentController.cardIdList[index];
               print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
             },
           ),

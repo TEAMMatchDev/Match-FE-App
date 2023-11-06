@@ -53,7 +53,10 @@ class PaymentController extends GetxController {
   void selectCard(int index) {
     selectedCardIndex.value = index;
   }
+  /// 결제할 카드 & 프로젝트 정보
+  RxInt cardId = 1.obs;
 
+  //TODO) 카드 신규 등록
   /// 카드 번호
   Rx<TextEditingController> cardNumTextController = TextEditingController().obs;
   /// 유효기간
