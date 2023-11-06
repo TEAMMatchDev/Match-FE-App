@@ -8,6 +8,28 @@ import '../../util/const/style/global_logger.dart';
 import 'util/dio_services.dart';
 
 class OrderApi {
+  ///<h2>4-2API | 정기 결제용 카드 등록</h2>
+  static Future<bool> setCard({
+    required String cardNo,
+    required String expYear,
+    required String expMonth,
+    required String idNo,
+    required String cardPw,
+}) async {
+    try {
+      Response response = await DioServices().to().post("/order/pay/card",
+          data: {"cardNo": cardNo, "expYear": expYear, "expMonth": expMonth, "idNo": idNo, "cardPw": cardPw});
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(msg: response.data[MSG]);
+        logger.e(response.data[CODE]);
+      }
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
+
   ///<h2>4-3API | 정기 결제용 카드 조회</h2>
   static Future<List<CardInfo>> getCardList() async {
     try {

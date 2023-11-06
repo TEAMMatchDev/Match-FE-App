@@ -45,6 +45,7 @@ class PaymentController extends GetxController {
     }
   }
 
+
   //TODO) 결제 정보
   /// 동의항목
   var selectedItems = <String>[].obs;

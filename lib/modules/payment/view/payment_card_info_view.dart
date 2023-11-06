@@ -1,8 +1,15 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:match/model/card_info/card_info.dart';
+import 'package:match/modules/payment/view/payment_method_info_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
+import 'package:match/provider/api/order_api.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
@@ -30,11 +37,13 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
     ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
   ];
 
-  final String cardNum = '';
-  final String cardExp = '';
-  final String cardCvc = '';
-  final String cardUserBirth = '';
-  final String cardPw = '';
+  String cardNum = '';
+  String cardExp = '';
+  String cardCvc = '';
+  String cardUserBirth = '';
+  String cardPw = '';
+  String cardExpYear = '';
+  String cardExpMonth = '';
 
   PaymentRegisterCardInfoScreen({Key? key, required this.selectedCardName}) : super(key: key);
 
@@ -140,7 +149,8 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                     CommonInputField.cardNum(
                         textController : controller.cardNumTextController.value,
                         onChange: (value) async {
-                          print(">>> 입력한 카드번호: $value");
+                          cardNum = value;
+                          print(">>> 입력한 카드번호: $cardNum");
                         }),
                     SizedBox(height: 37.h),
 
@@ -159,7 +169,12 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                               child: CommonInputField.cardExp(
                                   textController : controller.cardExpTextController.value,
                                   onChange: (value) async {
+                                    cardExp = value;
+                                    cardExpYear = value.substring(2,4);
+                                    cardExpMonth = value.substring(0,2);
                                     print(">>> 입력한 유효기간: $value");
+                                    print(">>> 입력한 유효기간 year: ${cardExpYear}");
+                                    print(">>> 입력한 유효기간 month: ${cardExpMonth}");
                                   }),
                             ),
                           ],
@@ -186,7 +201,8 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                               child: CommonInputField.cardCvc(
                                   textController : controller.cardCVCTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 CVC: $value");
+                                    cardCvc = value;
+                                    print(">>> 입력한 CVC: $cardCvc");
                                   }),
                             ),
                           ],
@@ -218,7 +234,8 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                               child: CommonInputField.cardUserBirth(
                                   textController : controller.cardUserBirthTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 생년월일: $value");
+                                    cardUserBirth = value;
+                                    print(">>> 입력한 생년월일: $cardUserBirth");
                                   }),
                             ),
                           ],
@@ -245,7 +262,8 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                               child: CommonInputField.cardPw(
                                   textController : controller.cardPWTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 카드 비밀번호: $value");
+                                    cardPw = value;
+                                    print(">>> 입력한 카드 비밀번호: $cardPw");
                                   }),
                             ),
                           ],
@@ -253,8 +271,6 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                       ],
                     ),
                     SizedBox(height: 35.h),
-
-
 
 
                   ],
@@ -281,9 +297,34 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                 child: Padding(
                   padding: EdgeInsets.only(left: 6.w, right: 20),
                   child: CommonButton.login(
-                    text: "다음",
+                    text: "등록",
                     onTap: () async {
-                      Get.back();
+                      if (cardNum != "" && cardExpYear != "" && cardExpMonth != "" && cardUserBirth != "" && cardPw != ""){
+                        var result = await OrderApi.setCard(
+                            cardNo: cardNum,
+                            expYear: cardExpYear,
+                            expMonth: cardExpMonth,
+                            idNo: cardUserBirth,
+                            cardPw: cardPw);
+                        if(result) {
+                          // PaymentController 인스턴스를 가져옴
+                          final PaymentController paymentController = Get.find<PaymentController>();
+
+                          // 새로운 카드 정보를 가져와서 cardInfoList를 업데이트함
+                          List<CardInfo> newCardInfoList = await OrderApi.getCardList();
+                          paymentController.cardInfoList.assignAll(newCardInfoList);
+                          paymentController.cardCodeList.assignAll(
+                              newCardInfoList.map((card) => card.cardCode.toString()).toList()
+                          );
+                          paymentController.cardNumList.assignAll(
+                              newCardInfoList.map((card) => card.cardNo).toList()
+                          );
+
+                          Get.to(PaymentMethodScreen());
+                        }
+                      } else {
+                        Fluttertoast.showToast(msg: "입력값 중 빈 값이 있습니다. 입력 정보를 다시 확인해주세요.");
+                      }
                     },
                   ),
                 ),
