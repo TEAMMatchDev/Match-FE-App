@@ -175,7 +175,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                       text: "확인",
                       onTap: () async {
                         if(state == 'REGULAR') {
-                          var result = await OrderApi.postPay(
+                          var result = await OrderApi.setRegularPay(
                               cardId: controller.cardId.value,
                               projectId: _projectController.projectId,
                               amount: controller.selectedDate.value,

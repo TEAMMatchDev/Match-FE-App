@@ -31,7 +31,7 @@ class OrderApi {
   }
 
 ///<h2>4-5API | 정기 결제 등록</h2>
-  static Future<bool> postPay({
+  static Future<bool> setRegularPay({
     required int cardId,
     required int projectId,
     required int amount,
@@ -39,10 +39,6 @@ class OrderApi {
 }) async {
     try {
       Response response = await DioServices().to().post("/order/pay/card/${cardId}/${projectId}",
-          // queryParameters: {
-          //   "cardId": cardId,
-          //   "projectId": projectId
-          // },
           data: {"amount": amount, "payDate": payDate});
 
       if(!response.data[SUCCESS]) {
