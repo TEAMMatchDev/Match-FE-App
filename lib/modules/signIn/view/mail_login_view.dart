@@ -17,16 +17,16 @@ import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/style/global_color.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //카카오 로그인
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:io';
 
+import 'package:match/provider/api/user_auth_api.dart';
 
 import '../../../provider/routes/routes.dart';
 import '../controller/login_controller.dart';
 
 class EmailLoginScreen extends GetView<LoginController> {
   const EmailLoginScreen({super.key});
+
+
 
   @override
   Widget build(BuildContext context){
@@ -53,6 +53,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                             textController : controller.idTextController.value,
                             onChange: (value) async {
                               print(">>> 입력한 id: $value");
+                              controller.userId.value = value;
                             }),
                         SizedBox(height: 20.h),
                         Text(
@@ -64,6 +65,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                           textController : controller.pwTextController.value,
                           onChange: (value) async {
                             print(">>> 입력한 pw: $value");
+                            controller.userPw.value = value;
                           }),
                         SizedBox(height: 27.h),
                         Center(
@@ -108,8 +110,12 @@ class EmailLoginScreen extends GetView<LoginController> {
               child: CommonButton.login(
                 text: "로그인",
                 onTap: () async {
-                  //TODO) Get.ofAllNamed() 로 수정 필요
-                  Get.toNamed(Routes.main);
+                  var result = await UserAuthApi.setSignIn(
+                      email: controller.userId.value,
+                      password: controller.userPw.value);
+                  if (result) {
+                    Get.offAllNamed(Routes.main);
+                  }
                 },
               ),
             ),
