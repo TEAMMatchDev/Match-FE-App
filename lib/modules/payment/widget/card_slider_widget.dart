@@ -33,50 +33,6 @@ class _CardSliderState extends State<CardSlider> {
     ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
   ];
 
-  //TODO) 카드정보
-  late List<CardInfo> cardInfoList = _paymentController.cardInfoList.value;
-  /*[
-    {
-      "id": 13,
-      "cardCode": "365",
-      "cardName": null,
-      "cardNo": "1234********2456",
-      "cardAbleStatus": "사용 가능"
-    },
-    {
-      "id": 14,
-      "cardCode": "365",
-      "cardName": null,
-      "cardNo": "1111********4444",
-      "cardAbleStatus": "사용 가능"
-    },
-    {
-      "id": 15,
-      "cardCode": "365",
-      "cardName": null,
-      "cardNo": "4444********1111",
-      "cardAbleStatus": "사용 가능"
-    },
-    {
-      "id": 16,
-      "cardCode": "365",
-      "cardName": null,
-      "cardNo": "7777********7777",
-      "cardAbleStatus": "사용 가능"
-    },
-    {
-      "id": 17,
-      "cardCode": "365",
-      "cardName": null,
-      "cardNo": "9999********9999",
-      "cardAbleStatus": "사용 가능"
-    }
-  ]; // id, cardCode, cardNo, cardAbleState 담은 json*/
-  //final List<String> cardCodeList = ['999','381','374','090']; // 카드 이름만 뽑은 리스트
-  //final List<String> cardNumList = ['1234********2456','1111********3333','4444********1111','5555********1111']; // 카드 번호만 뽑은 리스트
-  //late List<String> cardCodeList = _paymentController.cardCodeList; // 카드 이름만 뽑은 리스트
-  //late List<String> cardNumList = _paymentController.cardNumList; // 카드 번호만 뽑은 리스트
-
   int _currentSlide = 0;
 
   @override

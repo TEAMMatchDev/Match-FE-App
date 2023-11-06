@@ -14,7 +14,6 @@ class OrderApi {
       Response response = await DioServices().to().get("/order/pay/card");
       var data = response.data[RESULT];
 
-      logger.d('>>> 카드조회 결과리스트 $data');
       if(data != null) {
         return List.generate(
           response.data[RESULT].length,
