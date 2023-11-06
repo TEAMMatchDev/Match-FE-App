@@ -30,6 +30,32 @@ class OrderApi {
     }
   }
 
+///<h2>4-5API | 정기 결제 등록</h2>
+  static Future<bool> postPay({
+    required int cardId,
+    required int projectId,
+    required int amount,
+    required int payDate,
+}) async {
+    try {
+      Response response = await DioServices().to().post("/order/pay/card/${cardId}/${projectId}",
+          // queryParameters: {
+          //   "cardId": cardId,
+          //   "projectId": projectId
+          // },
+          data: {"amount": amount, "payDate": payDate});
+
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(msg: response.data[MSG]);
+        logger.e(response.data[CODE]);
+      }
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
+
   ///<h2>4-3API | 정기 결제용 카드 조회</h2>
   static Future<List<CardInfo>> getCardList() async {
     try {

@@ -70,7 +70,7 @@ class _DualRadioButtonsState extends State<DualRadioButtons> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        if (widget.state == 'REGULAR')
+        if (widget.state != 'REGULAR')
           InkWell(
             onTap: () {
               widget.onChanged(widget.option1);

@@ -26,10 +26,9 @@ class PaymentController extends GetxController {
   Rx<Donator> donator = tmpDonator.obs;
   //TODO) 카드 정보
   RxList<CardInfo> cardInfoList = <CardInfo>[].obs;
-
   RxList<String> cardCodeList = [tmpCardInfo.cardCode].obs;
   RxList<String> cardNumList = [tmpCardInfo.cardNo].obs;
-
+  RxList<int> cardIdList = [tmpCardInfo.id].obs;
 
   //TODO) 기부금 정보
   final RxBool isPayAble = false.obs;  //금액, 날짜 선택 모두 했는지
@@ -73,6 +72,7 @@ class PaymentController extends GetxController {
     cardInfoList.assignAll(await OrderApi.getCardList());
     cardCodeList.assignAll(cardInfoList.map((card) => card.cardCode.toString()).toList());
     cardNumList.assignAll(cardInfoList.map((card) => card.cardNo).toList());
+    cardIdList.assignAll(cardInfoList.map((card) => card.id).toList());
 
     donateState.value = _projectController.projectDetail.value.regularStatus;
   }

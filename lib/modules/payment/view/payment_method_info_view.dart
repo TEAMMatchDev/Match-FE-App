@@ -172,6 +172,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                         ? CommonButton.login(
                       text: "확인",
                       onTap: () async {
+                        print('>>> ');
                         Get.to(PaymentDoneScreen());
                       },
                     )
