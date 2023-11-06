@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:match/model/card_info/card_info.dart';
+import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/modules/payment/view/payment_select_card_view.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
@@ -15,6 +18,7 @@ class CardSlider extends StatefulWidget {
 }
 
 class _CardSliderState extends State<CardSlider> {
+  final PaymentController _paymentController = Get.find<PaymentController>();
 
   final List<List<String>> cardBankList = [
     ['하나','ic_card_hana.svg','374'],
@@ -28,8 +32,10 @@ class _CardSliderState extends State<CardSlider> {
     ['우리','ic_card_woori.svg','041'],
     ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
   ];
+
   //TODO) 카드정보
-  final List<Map<String, dynamic>> cardInfoList = [
+  late List<CardInfo> cardInfoList = _paymentController.cardInfoList.value;
+  /*[
     {
       "id": 13,
       "cardCode": "365",
@@ -65,9 +71,11 @@ class _CardSliderState extends State<CardSlider> {
       "cardNo": "9999********9999",
       "cardAbleStatus": "사용 가능"
     }
-  ]; // id, cardCode, cardNo, cardAbleState 담은 json
-  final List<String> cardCodeList = ['999','381','374','090']; // 카드 이름만 뽑은 리스트
-  final List<String> cardNumList = ['1234********2456','1111********3333','4444********1111','5555********1111']; // 카드 번호만 뽑은 리스트
+  ]; // id, cardCode, cardNo, cardAbleState 담은 json*/
+  //final List<String> cardCodeList = ['999','381','374','090']; // 카드 이름만 뽑은 리스트
+  //final List<String> cardNumList = ['1234********2456','1111********3333','4444********1111','5555********1111']; // 카드 번호만 뽑은 리스트
+  //late List<String> cardCodeList = _paymentController.cardCodeList; // 카드 이름만 뽑은 리스트
+  //late List<String> cardNumList = _paymentController.cardNumList; // 카드 번호만 뽑은 리스트
 
   int _currentSlide = 0;
 
@@ -88,12 +96,12 @@ class _CardSliderState extends State<CardSlider> {
               setState(() {
                 _currentSlide = index;
               });
-              print('>>> 선택한 카드 code : ${cardCodeList[index]} \n 선택한 카드 번호 : ${cardNumList[index]} \n');
+              print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]} \n 선택한 카드 번호 : ${_paymentController.cardNumList[index]} \n');
             },
           ),
 
           items: [
-            ...cardCodeList.asMap().entries.map((entry) {
+            ..._paymentController.cardCodeList.asMap().entries.map((entry) {
               int idx = entry.key;
               String code = entry.value;
 
@@ -125,13 +133,13 @@ class _CardSliderState extends State<CardSlider> {
                     bottom: 20.h,
                     left: 18.w,
                     child: Text(
-                        cardNumList[idx].substring(0, 4) +
+                        _paymentController.cardNumList[idx].substring(0, 4) +
                             ' - **** - **** - ' +
-                            cardNumList[idx].substring(cardNumList[idx].length - 4),
+                            _paymentController.cardNumList[idx].substring(_paymentController.cardNumList[idx].length - 4),
                         style: AppTextStyles.T1Bold14.copyWith(color: AppColors.white)
                     ),
                   ),
-                  if (idx == _currentSlide)  // <- 이 부분을 추가
+                  if (idx == _currentSlide)
                     Positioned(
                       top: 18.h,
                       right: 15.w,
@@ -159,9 +167,9 @@ class _CardSliderState extends State<CardSlider> {
         ),
 
         SizedBox(height: 20.h),
-        (_currentSlide != cardCodeList.length)
+        (_currentSlide != _paymentController.cardCodeList.length)
           ? Text(
-              '${_currentSlide + 1}'+'/'+(cardCodeList.length).toString(),
+              '${_currentSlide + 1}'+'/'+(_paymentController.cardCodeList.length).toString(),
               style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey6)
           )
         : Text(
