@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/payment/view/payment_donation_info_view.dart';
 import 'package:match/modules/project/controller/project_controller.dart';
+import 'package:match/provider/routes/routes.dart';
 import 'package:match/provider/service/auth_service.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
@@ -194,7 +195,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
             child: CommonButton.login(
               text: "확인",
               onTap: () async {
-                Get.back();
+                Get.offAllNamed(Routes.main);
               },
             ),
           ),

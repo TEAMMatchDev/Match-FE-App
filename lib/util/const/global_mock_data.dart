@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:match/model/card_info/card_info.dart';
 import 'package:match/model/donator/donator.dart';
 import 'package:match/model/notice/notice.dart';
 import 'package:match/model/notice_detail/notice_detail.dart';
@@ -124,6 +126,12 @@ var tmpDonator = const Donator(
     name: "테스트",
     birthDay: "2001-01-02",
     phoneNumber: "010-1234-5678");
+var tmpCardInfo = const CardInfo(
+    id: 1,
+    cardCode: "041",
+    cardName: "우리카드",
+    cardNo: "4170********0825",
+    cardAbleStatus: "사용 가능");
 var tmpNoticeDetail = const NoticeDetail(
     noticeInfo: Notice(
         noticeId: 1, noticeType: '소분류', noticeDate: "2023.10.20", title: "fds"),

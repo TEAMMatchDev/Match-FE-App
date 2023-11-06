@@ -198,7 +198,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
-        autoFocus: true);
+        autoFocus: false);
   }
   /// pw 입력
   factory CommonInputField.signInPW(
@@ -210,7 +210,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
-        autoFocus: true);
+        autoFocus: false);
   }
   /// 비밀번호 찾기
   factory CommonInputField.findPW(

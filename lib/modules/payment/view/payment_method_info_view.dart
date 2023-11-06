@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:match/modules/payment/view/payment_done_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
 import 'package:match/modules/project/controller/project_controller.dart';
+import 'package:match/provider/api/order_api.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_checkbox.dart';
@@ -172,7 +174,19 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                         ? CommonButton.login(
                       text: "확인",
                       onTap: () async {
-                        Get.to(PaymentDoneScreen());
+                        if(state == 'REGULAR') {
+                          var result = await OrderApi.postPay(
+                              cardId: controller.cardId.value,
+                              projectId: _projectController.projectId,
+                              amount: controller.selectedDate.value,
+                              payDate: controller.selectedAmount.value);
+                          if (result){
+                            Get.to(PaymentDoneScreen());
+                          }
+                        }
+                        else{
+                          Get.back(); ///단기결제(2차)
+                        }
                       },
                     )
                         : CommonButton.loginDis(

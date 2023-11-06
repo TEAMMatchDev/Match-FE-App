@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:match/model/card_info/card_info.dart';
 import 'package:match/model/match_history/match_history.dart';
 import 'package:match/modules/project/controller/project_controller.dart';
 import 'package:match/provider/api/order_api.dart';
@@ -23,6 +24,11 @@ class PaymentController extends GetxController {
 
   //TODO) 후원자 정보
   Rx<Donator> donator = tmpDonator.obs;
+  //TODO) 카드 정보
+  RxList<CardInfo> cardInfoList = <CardInfo>[].obs;
+  RxList<String> cardCodeList = [tmpCardInfo.cardCode].obs;
+  RxList<String> cardNumList = [tmpCardInfo.cardNo].obs;
+  RxList<int> cardIdList = [tmpCardInfo.id].obs;
 
   //TODO) 기부금 정보
   final RxBool isPayAble = false.obs;  //금액, 날짜 선택 모두 했는지
@@ -38,6 +44,7 @@ class PaymentController extends GetxController {
     }
   }
 
+
   //TODO) 결제 정보
   /// 동의항목
   var selectedItems = <String>[].obs;
@@ -46,7 +53,10 @@ class PaymentController extends GetxController {
   void selectCard(int index) {
     selectedCardIndex.value = index;
   }
+  /// 결제할 카드 & 프로젝트 정보
+  RxInt cardId = 1.obs;
 
+  //TODO) 카드 신규 등록
   /// 카드 번호
   Rx<TextEditingController> cardNumTextController = TextEditingController().obs;
   /// 유효기간
@@ -62,6 +72,11 @@ class PaymentController extends GetxController {
   void onInit() async {
     super.onInit();
     payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
+    cardInfoList.assignAll(await OrderApi.getCardList());
+    cardCodeList.assignAll(cardInfoList.map((card) => card.cardCode.toString()).toList());
+    cardNumList.assignAll(cardInfoList.map((card) => card.cardNo).toList());
+    cardIdList.assignAll(cardInfoList.map((card) => card.id).toList());
+
     donateState.value = _projectController.projectDetail.value.regularStatus;
   }
 }
