@@ -89,7 +89,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                               SizedBox(width: 10.w),
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(FindPWScreen());
+                                  Get.to(FindPwScreen());
                                 },
                                 child: Text(
                                   "비밀번호 찾기",

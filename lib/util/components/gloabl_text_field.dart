@@ -198,6 +198,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.emailAddress,
         autoFocus: false);
   }
   /// pw 입력
@@ -210,6 +211,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.visiblePassword,
         autoFocus: false);
   }
   /// 비밀번호 찾기
@@ -265,6 +267,61 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+  /// 비밀번호 찾기 - 이메일
+  factory CommonInputField.findPwAuthEmail({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "이메일을 입력해주세요",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: false);
+  }
+  /// 비밀번호 찾기 - 인증번호
+  factory CommonInputField.findPwAuthNum({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "인증번호를 입력해주세요",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: false);
+  }
+  /// 비밀번호 찾기 - 새로운 비밀번호
+  factory CommonInputField.newPw({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "비밀번호 (영문, 숫자 조합 6~20자)",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: false);
+  }
+  /// 비밀번호 찾기 - 새로운 비밀번호 확인
+  factory CommonInputField.newPwConfirm({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "비밀번호 확인",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: false);
+  }
+
+
+
 
 
   //TODO) 카드정보 입력
