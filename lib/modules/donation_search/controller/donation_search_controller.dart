@@ -80,9 +80,9 @@ class DonationSearchController extends GetxController {
 
   @override
   Future<void> dispose() async {
+    super.dispose();
     searchTextController.value.dispose();
     await resetTimer();
-    super.dispose();
   }
 
   @override
