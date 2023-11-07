@@ -39,8 +39,7 @@ static Future<bool> getEmailAuth({
     required String email,
 }) async {
     try {
-      Response response = await DioServices().to().get("/auth/email",
-          data: {"email": email});
+      Response response = await DioServices().to().get("/auth/email/${email}");
 
       if(!response.data[SUCCESS]) {
         Fluttertoast.showToast(msg: response.data[MSG]);
@@ -78,8 +77,7 @@ static Future<bool> getPhoneAuth({
   required String phone,
 }) async {
   try {
-    Response response = await DioServices().to().get("/auth/phone",
-        data: {"phone": phone});
+    Response response = await DioServices().to().get("/auth/phone/${phone}");
 
     if(!response.data[SUCCESS]) {
       Fluttertoast.showToast(msg: response.data[MSG]);
