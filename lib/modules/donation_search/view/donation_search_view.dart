@@ -27,11 +27,11 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h)
                   .copyWith(bottom: 0),
-              child: CommonTextField(
+              child: CommonSearchField(
                   textController: controller.searchTextController.value,
                   placeHolder: "후원명, 후원사, 후원분야 검색",
                   textStatus: controller.searchStatus,
-                  suffixOnTap: () async {},
+                  suffixOnTap: (value) async {},
                   onSubmitted: (value) async {
                     await controller.getSearchList(content: value);
                   },

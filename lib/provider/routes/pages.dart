@@ -10,6 +10,8 @@ import 'package:match/modules/donation_search/binding/donation_search_binding.da
 import 'package:match/modules/donation_search/view/donation_search_view.dart';
 import 'package:match/modules/event_detail/binding/event_detail_binding.dart';
 import 'package:match/modules/event_detail/view/event_detail_view.dart';
+import 'package:match/modules/like_project/binding/like_project_binding.dart';
+import 'package:match/modules/like_project/view/like_project_view.dart';
 import 'package:match/modules/mypage/binding/nickname_binding.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/mypage/view/nickname_edit_view.dart';
@@ -223,6 +225,15 @@ class Pages {
       page: () => const DonateScreen(),
       transition: Transition.noTransition,
       binding: DonateBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "찜한 후원처 화면",
+      name: Routes.like_project,
+      page: () => const LikeProjectScreen(),
+      transition: Transition.noTransition,
+      binding: LikeProjectBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

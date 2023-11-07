@@ -1,20 +1,15 @@
-import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/regular_status.dart';
-import 'package:match/modules/payment/controller/payment_controller.dart';
+import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/payment/view/payment_donator_info_view.dart';
-import 'package:match/modules/project/binding/project_binding.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
-import 'package:match/provider/api/project_api.dart';
+import 'package:match/provider/api/comment_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
-
-import '../../../model/enum/search_status.dart';
-import '../../../provider/api/util/global_api_field.dart';
+import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
@@ -23,6 +18,7 @@ import '../../../util/const/style/global_text_styles.dart';
 import '../../home/widget/home_widget.dart';
 import '../controller/project_controller.dart';
 
+///<h2>프로젝트 상세페이지</h2>
 class ProjectScreen extends GetView<ProjectController> {
   const ProjectScreen({super.key});
 
@@ -44,7 +40,7 @@ class ProjectScreen extends GetView<ProjectController> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 20.w),
                     child: SvgPicture.asset(
-                      iconDir + "ic_arrow_left_24.svg",
+                      "${iconDir}ic_arrow_left_24.svg",
                     ),
                   ),
                 ),
@@ -68,7 +64,7 @@ class ProjectScreen extends GetView<ProjectController> {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
-                  stretchModes: [
+                  stretchModes: const [
                     StretchMode.zoomBackground,
                     StretchMode.blurBackground,
                     StretchMode.fadeTitle,
@@ -128,7 +124,7 @@ class ProjectScreen extends GetView<ProjectController> {
                                   ? SizedBox(
                                       width: 8.w,
                                     )
-                                  : SizedBox.shrink(),
+                                  : const SizedBox.shrink(),
                               Text(
                                 controller.projectDetail.value
                                             .totalDonationCnt >
@@ -147,21 +143,22 @@ class ProjectScreen extends GetView<ProjectController> {
                 delegate: _SliverAppBarDelegate(
                   TabBar(
                     controller: controller.matchTabBar.controller,
-                    onTap: (index) async{
+                    onTap: (index) async {
                       controller.tabIndex.value = index;
-                      if(index ==1 && controller.projectHistories.isEmpty){
+                      if (index == 1 && controller.projectHistories.isEmpty) {
                         await controller.getProjectHistory();
                       }
                     },
                     labelColor: AppColors.grey9,
-                    labelStyle: AppTextStyles.L1Medium14,
+                    labelStyle: AppTextStyles.S1SemiBold14,
                     unselectedLabelColor: AppColors.grey4,
                     indicatorColor: AppColors.grey9,
-                    tabs: [
+                    tabs: const [
                       Tab(
                         text: "기부처 이야기",
                       ),
                       Tab(text: "불꽃이 기록"),
+                      Tab(text: "응원&댓글"),
                     ],
                   ),
                 ),
@@ -175,57 +172,107 @@ class ProjectScreen extends GetView<ProjectController> {
                 child: TabBarView(
                   controller: controller.matchTabBar.controller,
                   children: [
-                    // 첫 번째 탭 (기부처 이야기)
+                    ///* 첫 번째 탭 (기부처 이야기)
                     ListView.separated(
                       // controller: controller.scrollController.value,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: controller.projectDetail.value.projectImgList.length,
+                      itemCount:
+                          controller.projectDetail.value.projectImgList.length,
                       separatorBuilder: (context, index) {
-                        return SizedBox(height: 10.0);
+                        return const SizedBox(height: 10.0);
                       },
                       itemBuilder: (context, index) {
-                        final imageUrl = controller.projectDetail.value.projectImgList[index].imgUrl;
+                        final imageUrl = controller
+                            .projectDetail.value.projectImgList[index].imgUrl;
                         return Image.network(imageUrl);
                       },
                     ),
-                    // 두 번째 탭 (불꽃이 기록)
+
+                    ///* 두 번째 탭 (불꽃이 기록)
                     ListView.separated(
                       controller: controller.scrollController.value,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: controller.projectHistories.length,
                       separatorBuilder: (context, index) {
-                        return SizedBox(height: 10.0);
+                        return const SizedBox(height: 10.0);
                       },
                       itemBuilder: (context, index) {
                         final history = controller.projectHistories[index];
                         return Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 20.w),
+                          padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: ProjectComment(
                             profileUrl: history.profileImageUrl,
                             profile: history.nickname,
-                            comment: history.histories,
+                            text: history.histories,
                             timeStamp: history.historyDate,
                           ),
+                        );
+                      },
+                    ),
+
+                    ///* 세 번째 탭 (응원)
+                    ListView.separated(
+                      controller: controller.scrollController.value,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.comments.length,
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(height: 10.0);
+                      },
+                      itemBuilder: (context, index) {
+                        final comment = controller.comments[index];
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.w)
+                              .copyWith(top: index == 0 ? 20.h : 0.h),
+                          child: ProjectComment(
+                              profileUrl: comment.profileImgUrl ?? "",
+                              profile: comment.nickname,
+                              text: comment.comment,
+                              timeStamp: comment.commentDate,
+                              isEdit: true,
+                              my: comment.my,
+                              comment: comment),
                         );
                       },
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 28.h, top: 9.h), // 하단 padding 추가
-                  child: CommonButton.login(
-                    text: "기부하기",
-                    onTap: () async {
-
-                      Get.to(PaymentDonatorScreen());
-                    },
-                  ),
-                ),
-              ),
+              controller.tabIndex.value != 2
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                          bottom: 28.h, top: 9.h, left: 20.w, right: 20.w),
+                      // 하단 padding 추가
+                      child: CommonButton.login(
+                        text: "기부하기",
+                        onTap: () async {
+                          Get.to(const PaymentDonatorScreen());
+                        },
+                      ),
+                    )
+                  : Container(
+                      color: AppColors.white,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 11.h, horizontal: 20.w),
+                      child: CommonSearchField.comment(
+                        textController: controller.commentTextController.value,
+                        onSubmit: (value) async {
+                          var tmpResult = await CommentApi.registerComment(
+                              comment:
+                                  controller.commentTextController.value.text,
+                              projectId: controller.projectId);
+                          if (tmpResult) {
+                            Fluttertoast.showToast(msg: "댓글이 등록되었습니다.");
+                            ///초기화
+                            controller.commentTextController.value.clear();
+                            controller.searchStatus.value = SEARCH_STATUS.INIT;
+                            FocusScope.of(context).unfocus();
+                          }
+                          //TODO: comment List add new
+                        },
+                        textStatus: controller.searchStatus,
+                      ),
+                    ),
             ],
           ),
         ),
@@ -246,7 +293,6 @@ class ProjectScreen extends GetView<ProjectController> {
           ),
         ));
   }
-
 }
 
 //*SliverDelegate
@@ -257,6 +303,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   double get minExtent => _tabBar.preferredSize.height;
+
   @override
   double get maxExtent => _tabBar.preferredSize.height;
 

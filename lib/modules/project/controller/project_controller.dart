@@ -17,7 +17,7 @@ class MatchTabBar extends GetxController
   @override
   void onInit() {
     super.onInit();
-    controller = TabController(vsync: this, length: 2);
+    controller = TabController(vsync: this, length: 3);
   }
 
   @override
@@ -36,6 +36,7 @@ class ProjectController extends GetxController {
   Rx<ScrollController> scrollController = ScrollController().obs;
   Rx<ProjectDetail> projectDetail = tmpProjectDetail.obs;
   RxList<ProjectHistory> projectHistories = <ProjectHistory>[].obs;
+  RxList<Comment> comments = <Comment>[].obs;
 
   Future<void> getProjectHistory() async {
     projectHistories.assignAll(
@@ -62,13 +63,15 @@ class ProjectController extends GetxController {
 
   @override
   void onInit() async {
-    // TODO projectId로 서버에서 데이터 가져오기
+    super.onInit();
+
     matchTabBar = Get.put(MatchTabBar());
     projectDetail.value =
         await ProjectApi.getProjectDetail(projectId: projectId) ??
             tmpProjectDetail;
-    super.onInit();
+    comments.assignAll(tmpComments);
   }
+
   //TODO: 페이지 전환시 상세페이지 변수 초기화
   @override
   void onClose() {

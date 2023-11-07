@@ -29,11 +29,11 @@ class SearchScreen extends GetView<SearchViewController> {
             shrinkWrap: true,
             children: [
               //1. 뒤로가기 아이콘 + 검색 필드
-              CommonTextField(
+              CommonSearchField(
                   textController: controller.searchTextController.value,
                   placeHolder: "고유 이름을 입력해보세요.",
                   textStatus: controller.searchStatus,
-                  suffixOnTap: () async {
+                  suffixOnTap: (value) async {
                     //저장된 최근검색어가 있을 경우 다시 불러온다
                     controller.recentSearchList.value =
                         await GetStorageUtil.getRecentSearches(
