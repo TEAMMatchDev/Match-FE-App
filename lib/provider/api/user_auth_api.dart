@@ -90,7 +90,7 @@ static Future<bool> postAuthCheckEmail({
     }
 }
 
-///<h2>1-9API | 유저 회원 문자인증 요청</h2>
+///<h2>1-9API | 유저 회원 문자 인증번호 요청</h2>
 static Future<bool> getPhoneAuth({
   required String phone,
 }) async {

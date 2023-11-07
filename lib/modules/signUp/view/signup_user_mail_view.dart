@@ -71,8 +71,8 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                     isActive: true,
                                     onTap: () async {
                                       var chk = await UserAuthApi.postValidCheckEmail(email: controller.signUpId.value); /// 중복검사
-                                      var result = await UserAuthApi.getEmailAuth(email: controller.signUpId.value);
                                       if (chk) {
+                                        var result = await UserAuthApi.getEmailAuth(email: controller.signUpId.value); /// 인증번호 전송
                                         if (controller.signUpId.value != '' && result) {
                                           Fluttertoast.showToast(msg: "이메일로 인증번호를 발송했습니다.");
                                         } else{
@@ -169,7 +169,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                     Get.to(SignUpInfoScreen());
                   }
                   else {
-
+                    Fluttertoast.showToast(msg: "비밀번호 확인 입력값을 다시 확인해주세요.");
                   }
                 },
               ),
