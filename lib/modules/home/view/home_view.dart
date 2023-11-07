@@ -88,9 +88,19 @@ class HomeScreen extends GetView<HomeController> {
                       Container(
                         alignment: Alignment.centerLeft,
                         padding: EdgeInsets.only(top: 11.h, bottom: 15.h),
-                        child: Text(
-                            "${AuthService.to.myProfile.value.nickName}님의 타오르는 불꽃이",
-                            style: AppTextStyles.T1Bold20),
+                        child: Row(
+                          children: [
+                            Container(
+                              constraints: BoxConstraints(maxWidth: 110.w),
+                              child: Text(
+                                AuthService.to.myProfile.value.nickName,
+                                style: AppTextStyles.T1Bold20,
+                                overflow: TextOverflow.ellipsis
+                              ),
+                            ),
+                            Text("님의 타오르는 불꽃이", style: AppTextStyles.T1Bold20),
+                          ],
+                        ),
                       ),
                       //총 불꽃이 1개일때는 개수를 나타내지 않는다
                       controller.totalCnt.value != 1
