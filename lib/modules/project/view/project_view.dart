@@ -6,6 +6,7 @@ import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/payment/view/payment_donator_info_view.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
 import 'package:match/util/const/style/global_logger.dart';
+import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/global_variable.dart';
@@ -184,6 +185,7 @@ class ProjectScreen extends GetView<ProjectController> {
                         return Image.network(imageUrl);
                       },
                     ),
+
                     ///* 두 번째 탭 (불꽃이 기록)
                     ListView.separated(
                       controller: controller.scrollController.value,
@@ -205,6 +207,7 @@ class ProjectScreen extends GetView<ProjectController> {
                         );
                       },
                     ),
+
                     ///* 세 번째 탭 (응원)
                     ListView.separated(
                       controller: controller.scrollController.value,
@@ -216,7 +219,8 @@ class ProjectScreen extends GetView<ProjectController> {
                       itemBuilder: (context, index) {
                         final comment = controller.comments[index];
                         return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w),
+                          padding: EdgeInsets.symmetric(horizontal: 20.w)
+                              .copyWith(top: index == 0 ? 20.h : 0.h),
                           child: ProjectComment(
                             profileUrl: comment.profileImgUrl ?? "",
                             profile: comment.nickname,
@@ -230,19 +234,29 @@ class ProjectScreen extends GetView<ProjectController> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 28.h, top: 9.h),
-                  // 하단 padding 추가
-                  child: CommonButton.login(
-                    text: "기부하기",
-                    onTap: () async {
-                      Get.to(const PaymentDonatorScreen());
-                    },
-                  ),
-                ),
-              ),
+              controller.tabIndex.value != 2
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                          bottom: 28.h, top: 9.h, left: 20.w, right: 20.w),
+                      // 하단 padding 추가
+                      child: CommonButton.login(
+                        text: "기부하기",
+                        onTap: () async {
+                          Get.to(const PaymentDonatorScreen());
+                        },
+                      ),
+                    )
+                  : Container(
+                      color: AppColors.white,
+                      padding: EdgeInsets.symmetric(vertical: 11.h,horizontal: 20.w),
+                      child: CommonSearchField.comment(
+                        textController: controller.commentTextController.value,
+                        onSubmit: (value) async {
+                          //TODO: add comment 등록 api
+                        },
+                        textStatus: controller.searchStatus,
+                      ),
+                    ),
             ],
           ),
         ),

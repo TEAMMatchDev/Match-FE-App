@@ -63,13 +63,15 @@ class ProjectController extends GetxController {
 
   @override
   void onInit() async {
-    // TODO projectId로 서버에서 데이터 가져오기
+    super.onInit();
+
     matchTabBar = Get.put(MatchTabBar());
     projectDetail.value =
         await ProjectApi.getProjectDetail(projectId: projectId) ??
             tmpProjectDetail;
-    super.onInit();
+    comments.assignAll(tmpComments);
   }
+
   //TODO: 페이지 전환시 상세페이지 변수 초기화
   @override
   void onClose() {

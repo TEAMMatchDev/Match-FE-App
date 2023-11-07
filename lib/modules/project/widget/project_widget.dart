@@ -17,6 +17,7 @@ class ProjectComment extends StatelessWidget {
   final String comment;
   final String timeStamp;
   final bool isEdit;
+
   const ProjectComment(
       {super.key,
       required this.profileUrl,
@@ -32,7 +33,7 @@ class ProjectComment extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          profileItem(profileUrl: profileUrl, isBorder: false,size: 40),
+          profileItem(profileUrl: profileUrl, isBorder: false, size: 40),
           SizedBox(width: 8.w),
           Expanded(
             child: Column(
@@ -66,10 +67,10 @@ class ProjectComment extends StatelessWidget {
           isEdit
               ? GestureDetector(
                   onTap: () {
-                    Get.bottomSheet(AlertBottomSheet());
+                    Get.bottomSheet(const AlertBottomSheet());
                   },
-                  child: SvgPicture.asset(iconDir + "ic_more_18.svg"))
-              : SizedBox.shrink()
+                  child: SvgPicture.asset("${iconDir}ic_more_18.svg"))
+              : const SizedBox.shrink()
         ],
       ),
     );
@@ -77,58 +78,71 @@ class ProjectComment extends StatelessWidget {
 }
 
 class AlertBottomSheet extends StatelessWidget {
-  const AlertBottomSheet({super.key});
+  final bool isMine;
+
+  const AlertBottomSheet({super.key, this.isMine = false});
 
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 27.h),
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 27.h)
+            .copyWith(bottom: 0.h),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r)),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _bottomSheetItem(
-                icon: "ic_alert_18.svg",
+            _textListTile(
                 text: "신고하기",
                 onTap: () async {
-                  //TODO: 신고하기 api 호출
+                  //TODO: 신고하기 api 연결
                 }),
-            _bottomSheetItem(
-                icon: "ic_block_18.svg",
+            _textListTile(
                 text: "차단하기",
                 onTap: () async {
-                  //TODO: 삭제하기 api 호출
+                  //TODO: 차단하기 api 연결
                 }),
-            CommonButton.payment(
-                text: "취소",
-                verticalPadding: 13,
-                onTap: () async {
-                  Get.back();
-                })
+            isMine
+                ? _textListTile(
+                    text: "삭제하기",
+                    onTap: () async {
+                      //TODO: 삭제하기 api 연결
+                    })
+                : const SizedBox.shrink(),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: CommonButton.payment(
+                  text: "취소",
+                  verticalPadding: 13,
+                  isActive: true,
+                  onTap: () async {
+                    Get.back();
+                  }),
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget _bottomSheetItem(
-      {required String icon,
-      required String text,
-      required Future<void> Function() onTap}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
-      child: Row(
-        children: [
-          SvgPicture.asset(iconDir + icon),
-          SizedBox(
-            width: 12.w,
-          ),
-          Text(text, style: AppTextStyles.T1Bold15),
-        ],
+  Widget _textListTile(
+      {required String text, required Future<void> Function() onTap}) {
+    return GestureDetector(
+      onTap: () {
+        onTap();
+        Get.back();
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
+        child: Text(
+          text,
+          style: AppTextStyles.T1Bold15,
+          textAlign: TextAlign.start,
+        ),
       ),
     );
   }

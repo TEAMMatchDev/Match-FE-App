@@ -12,9 +12,9 @@ import '../const/style/global_text_styles.dart';
 import '../method/get_storage.dart';
 
 /// <h2>CupertinoTextField를 이용한 TextField</h2>
-///* [SearchScreen], [DonationSearchScreen], [ProjectScreen](댓글)에서 사용
+///* [SearchScreen], [DonationSearchScreen], [ProjectScreen] (댓글)에서 사용
 /// @param textController: 텍스트 컨트롤러
-class CommonTextField extends StatelessWidget {
+class CommonSearchField extends StatelessWidget {
   final TextEditingController textController;
   final String placeHolder;
   final bool isSearchScreen;
@@ -25,20 +25,23 @@ class CommonTextField extends StatelessWidget {
   final Future<void> Function(String) onChanged;
   final Future<void> Function()? suffixOnTap;
   final bool isPlain;
+  final String suffixActiveIcon;
+  final String suffixUnActiveIcon;
 
-  const CommonTextField({
-    super.key,
-    required this.textController,
-    required this.placeHolder,
-    this.isSearchScreen = true,
-    required this.textStatus,
-    this.hasPrefix = true,
-    this.alwaysSuffix = false,
-    required this.onSubmitted,
-    required this.onChanged,
-    required this.suffixOnTap,
-    this.isPlain = false,
-  });
+  const CommonSearchField(
+      {super.key,
+      required this.textController,
+      required this.placeHolder,
+      this.isSearchScreen = true,
+      required this.textStatus,
+      this.hasPrefix = true,
+      this.alwaysSuffix = false,
+      required this.onSubmitted,
+      required this.onChanged,
+      required this.suffixOnTap,
+      this.isPlain = false,
+      this.suffixActiveIcon = "search_cancel_22",
+      this.suffixUnActiveIcon = "search_cancel_22"});
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +105,9 @@ class CommonTextField extends StatelessWidget {
               },
               child: Padding(
                   padding: EdgeInsets.only(right: 14.w),
-                  //TODO 추후 다른 아이콘 추가시 변수 추가
-                  child: SvgPicture.asset(iconDir + "ic_search_cancel_22.svg")),
+                  child: textStatus.value == SEARCH_STATUS.INIT
+                      ? SvgPicture.asset("${iconDir}ic_$suffixUnActiveIcon.svg")
+                      : SvgPicture.asset("${iconDir}ic_$suffixActiveIcon.svg")),
             ),
             //자동 키보드 활성화
             autofocus: isSearchScreen ? true : false,
@@ -118,6 +122,26 @@ class CommonTextField extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+
+  factory CommonSearchField.comment({
+    required TextEditingController textController,
+    required Rx<SEARCH_STATUS> textStatus,
+    required Future<void> Function(String) onSubmit,
+  }) {
+    return CommonSearchField(
+      isSearchScreen: false,
+      textController: textController,
+      placeHolder: "댓글을 남겨 응원해주세요.",
+      alwaysSuffix: true,
+      hasPrefix: false,
+      suffixActiveIcon: "comment_send_active_30",
+      suffixUnActiveIcon: "comment_send_30",
+      onSubmitted: onSubmit,
+      onChanged: (value) async {},
+      textStatus: textStatus,
+      suffixOnTap: () async {},
     );
   }
 }
@@ -191,7 +215,7 @@ class CommonInputField extends StatelessWidget {
   /// id 입력
   factory CommonInputField.signInID(
       {required TextEditingController textController,
-        required Future<void> Function(String) onChange}) {
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "이메일을 입력해주세요.",
@@ -201,10 +225,11 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.emailAddress,
         autoFocus: false);
   }
+
   /// pw 입력
   factory CommonInputField.signInPW(
       {required TextEditingController textController,
-        required Future<void> Function(String) onChange}) {
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "비밀번호를 입력해주세요.",
@@ -214,10 +239,11 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.visiblePassword,
         autoFocus: false);
   }
+
   /// 비밀번호 찾기
   factory CommonInputField.findPW(
       {required TextEditingController textController,
-        required Future<void> Function(String) onChange}) {
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "이메일을 입력해주세요.",
@@ -231,7 +257,7 @@ class CommonInputField extends StatelessWidget {
   /// id 입력
   factory CommonInputField.signUpId(
       {required TextEditingController textController,
-        required Future<void> Function(String) onChange}) {
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "이메일을 입력해주세요.",
@@ -240,10 +266,11 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
+
   /// id confirm num 입력
   factory CommonInputField.signUpIdConfirm(
       {required TextEditingController textController,
-        required Future<void> Function(String) onChange}) {
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "인증번호를 입력해주세요.",
@@ -252,10 +279,11 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
+
   /// pw 입력
   factory CommonInputField.signUpPw(
       {required TextEditingController textController,
-        required Future<void> Function(String) onChange}) {
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "비밀번호를 입력해주세요.",
@@ -264,10 +292,11 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
+
   /// pw confirm 입력
   factory CommonInputField.signUpPwConfirm(
       {required TextEditingController textController,
-        required Future<void> Function(String) onChange}) {
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "비밀번호를 입력해주세요.",
@@ -276,10 +305,11 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
+
   /// 이름 입력
   factory CommonInputField.userName(
       {required TextEditingController textController,
-        required Future<void> Function(String) onChange}) {
+      required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
         placeHolder: "이름을 입력해주세요.",
@@ -288,6 +318,7 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
+
   /// 전화번호
   factory CommonInputField.userPhone({
     required TextEditingController textController,
@@ -302,6 +333,7 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+
   /// 전화번호 인증
   factory CommonInputField.userPhoneConfirm({
     required TextEditingController textController,
@@ -316,6 +348,7 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+
   /// 비밀번호 찾기 - 이메일
   factory CommonInputField.findPwAuthEmail({
     required TextEditingController textController,
@@ -329,6 +362,7 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: false);
   }
+
   /// 비밀번호 찾기 - 인증번호
   factory CommonInputField.findPwAuthNum({
     required TextEditingController textController,
@@ -342,6 +376,7 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: false);
   }
+
   /// 비밀번호 찾기 - 새로운 비밀번호
   factory CommonInputField.newPw({
     required TextEditingController textController,
@@ -355,6 +390,7 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: false);
   }
+
   /// 비밀번호 찾기 - 새로운 비밀번호 확인
   factory CommonInputField.newPwConfirm({
     required TextEditingController textController,
@@ -368,10 +404,6 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: false);
   }
-
-
-
-
 
   //TODO) 카드정보 입력
   /// 카드번호
@@ -388,6 +420,7 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+
   /// 유효기간
   factory CommonInputField.cardExp({
     required TextEditingController textController,
@@ -402,6 +435,7 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+
   /// cvc
   factory CommonInputField.cardCvc({
     required TextEditingController textController,
@@ -416,6 +450,7 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+
   /// 생년월일
   factory CommonInputField.cardUserBirth({
     required TextEditingController textController,
@@ -430,6 +465,7 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+
   /// 카드 비밀번호
   factory CommonInputField.cardPw({
     required TextEditingController textController,
@@ -445,9 +481,6 @@ class CommonInputField extends StatelessWidget {
         autoFocus: false);
   }
 
-
-
-
   factory CommonInputField.nickName(
       {required TextEditingController textController,
       required Future<void> Function(String) onChange}) {
@@ -459,7 +492,6 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
-
 
   factory CommonInputField.phone({
     required TextEditingController textController,

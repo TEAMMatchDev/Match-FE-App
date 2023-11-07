@@ -152,3 +152,21 @@ var tmpEventDetail = const EventDetail(
     ]);
 var tmpNotificationPermission =
     const NotificationPermission(serviceAlarm: false, eventAlarm: false);
+var tmpComments = const [
+  Comment(
+      commentId: 1,
+      comment: "매치 화이팅",
+      commentDate: "2023.9.26 15:30",
+      profileImgUrl: null,
+      nickname: "이메누",
+      userId: 1,
+      my: true),
+  Comment(
+      commentId: 2,
+      comment: "매치 화이팅",
+      commentDate: "2023.9.26 15:30",
+      profileImgUrl: null,
+      nickname: "이메누",
+      userId: 1,
+      my: true),
+];
