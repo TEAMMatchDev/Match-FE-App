@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_status.dart';
@@ -8,6 +9,7 @@ import 'package:match/modules/signIn/view/login_view.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
+import 'package:match/provider/api/user_auth_api.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -107,7 +109,20 @@ class AuthAbleScreen extends GetView<SignUpController> {
               onTap: () async {
                 await PermissionHandler.checkGalleryPermission();
                 await PermissionHandler.checkAlarmPermission();
-                Get.to(LoginScreen());
+                var result = await UserAuthApi.setSignUp(
+                  email: controller.signUpId.value,
+                  password: controller.signUpPw.value,
+                  name: controller.signUpName.value,
+                  phone: controller.signUpPhone.value,
+                  gender: controller.signUpGender.value,
+                  birthDate: controller.signUpBirth.value,
+                );
+                if (result) {
+                  Get.to(LoginScreen());
+                }
+                else {
+                  Fluttertoast.showToast(msg: "회원가입에 실패했습니다. ");
+                }
               },
             ),
           ),
