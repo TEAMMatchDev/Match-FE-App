@@ -7,7 +7,8 @@ class SignUpController extends GetxController {
 
   RxString signUpId = ''.obs; //id
   RxString signUpAuthMail = ''.obs; //id 인증번호
-  RxBool validEmail = false.obs; //이메일 인증 완료 여부
+  RxBool authEmail = false.obs; //이메일 인증 완료 여부
+  RxBool validEmail = false.obs; //이메일 중복검사
   RxString signUpPw = ''.obs; //pw
   RxString signUpPwConfirm = ''.obs; //pw 확인
   RxBool validPw = false.obs; //pw 유효성 검사

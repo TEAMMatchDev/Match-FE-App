@@ -70,11 +70,16 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                     verticalPadding: 10,
                                     isActive: true,
                                     onTap: () async {
+                                      var chk = await UserAuthApi.postValidCheckEmail(email: controller.signUpId.value); /// 중복검사
                                       var result = await UserAuthApi.getEmailAuth(email: controller.signUpId.value);
-                                      if (controller.signUpId.value != '' && result) {
-                                        Fluttertoast.showToast(msg: "이메일로 인증번호를 발송했습니다.");
-                                      } else{
-                                        Fluttertoast.showToast(msg: "올바른 이메일 형식이 아닙니다.");
+                                      if (chk) {
+                                        if (controller.signUpId.value != '' && result) {
+                                          Fluttertoast.showToast(msg: "이메일로 인증번호를 발송했습니다.");
+                                        } else{
+                                          Fluttertoast.showToast(msg: "올바른 이메일 형식이 아닙니다.");
+                                        }
+                                      } else {
+                                        Fluttertoast.showToast(msg: "중복된 이메일로 가입할 수 없습니다.");
                                       }
                                     },
                                   ),
@@ -108,7 +113,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                       var result = await UserAuthApi.postAuthCheckEmail(email: controller.signUpId.value, code: controller.signUpAuthMail.value);
                                       if (controller.signUpAuthMail.value != '' && result) {
                                         Fluttertoast.showToast(msg: "이메일 인증에 성공했습니다.");
-                                        controller.validEmail.value = true;
+                                        controller.authEmail.value = true;
                                       } else{
                                         Fluttertoast.showToast(msg: "올바른 인증번호가 아닙니다.");
                                       }
@@ -160,7 +165,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
               child: CommonButton.login(
                 text: "확인",
                 onTap: () async {
-                  if (controller.validEmail.value && controller.validPw.value) {
+                  if (controller.authEmail.value && controller.validPw.value) {
                     Get.to(SignUpInfoScreen());
                   }
                   else {
