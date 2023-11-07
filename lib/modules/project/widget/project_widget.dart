@@ -9,6 +9,7 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../model/comment/comment.dart';
+import '../../../model/enum/report_type.dart';
 import '../../../provider/api/comment_api.dart';
 import '../../../util/components/global_modal.dart';
 import '../../home/widget/home_widget.dart';
@@ -87,6 +88,24 @@ class ProjectComment extends StatelessWidget {
   }
 }
 
+Widget _textListTile(
+    {required String text, required Future<void> Function() onTap}) {
+  return GestureDetector(
+    onTap: () {
+      onTap();
+      Get.back();
+    },
+    child: Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
+      child: Text(
+        text,
+        style: AppTextStyles.T1Bold15,
+        textAlign: TextAlign.start,
+      ),
+    ),
+  );
+}
+
 ///<h2>Comment 관련 로직을 처리하는 BottomSheet 위젯</h2>
 class CommentBottomSheet extends StatelessWidget {
   final bool isMine;
@@ -116,9 +135,14 @@ class CommentBottomSheet extends StatelessWidget {
                     text: "신고",
                     context: context,
                     onGrant: () async {
-                      // await CommentApi.reportComment(comment: comment.comment,
-                      //     commentId: comment.commentId,
-                      //     reportReason: reportReason)
+                      var reportType = ReportType.values[0].obs;
+                      Get.back();
+                      Get.bottomSheet(
+                          ReportReasonSheet(reportType: reportType));
+                      await CommentApi.reportComment(
+                          comment: comment.comment,
+                          commentId: comment.commentId,
+                          reportReason: reportType.value.name);
                     },
                   );
                 }),
@@ -161,21 +185,44 @@ class CommentBottomSheet extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _textListTile(
-      {required String text, required Future<void> Function() onTap}) {
-    return GestureDetector(
-      onTap: () {
-        onTap();
-        Get.back();
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 10.w),
-        child: Text(
-          text,
-          style: AppTextStyles.T1Bold15,
-          textAlign: TextAlign.start,
+class ReportReasonSheet extends StatelessWidget {
+  final Rx<ReportType> reportType;
+
+  const ReportReasonSheet({super.key, required this.reportType});
+
+  @override
+  Widget build(BuildContext context) {
+    return IntrinsicHeight(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 27.h)
+            .copyWith(bottom: 0.h),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r)),
         ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          ...ReportType.values
+              .map((report) => _textListTile(
+                  text: report.stateName,
+                  onTap: () async {
+                    reportType.value = report;
+                    Get.back();
+                  }))
+              .toList(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 20.h),
+            child: CommonButton.payment(
+                text: "취소",
+                verticalPadding: 13,
+                isActive: true,
+                onTap: () async {
+                  Get.back();
+                }),
+          )
+        ]),
       ),
     );
   }
