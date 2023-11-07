@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
@@ -31,6 +32,38 @@ Widget emptyWidget() {
   );
 }
 
+///<h2>like Icon widget</h2>
+class LikeIcon extends StatelessWidget {
+  final Rx<bool> isLike;
+
+  LikeIcon({
+    super.key,
+    required this.isLike,
+  });
+
+  ///TODO: API 연결
+  void onLikeTap() {
+    var likeToastMsg = "찜했어요!";
+    var dislikeToastMsg = "찜에서 삭제했어요!";
+    Fluttertoast.showToast(
+        msg: isLike.value ? dislikeToastMsg : likeToastMsg, fontSize: 12.sp);
+    isLike.value = !isLike.value;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => isLike.value
+          ? GestureDetector(
+              onTap: () => onLikeTap(),
+              child: SvgPicture.asset("${iconDir}ic_like_able_24.svg"))
+          : GestureDetector(
+              onTap: () => onLikeTap(),
+              child: SvgPicture.asset("${iconDir}ic_like_disable_24.svg")),
+    );
+  }
+}
+
 ///* [DonateScreen], [DonateSearchScreen]에서 사용
 /// [TodayProject] model의 field들로 후원 Project 상세 내용을 보여주는 위젯
 class ProjectWidget extends StatelessWidget {
@@ -45,10 +78,10 @@ class ProjectWidget extends StatelessWidget {
       children: [
         ///* 프로젝트 이미지, 후원자수를 표시하는 위젯
         TodayMatchList(
-          count: project.totalDonationCnt,
-          imgList: project.userProfileImages,
-          projectId: project.projectId,
-        ),
+            count: project.totalDonationCnt,
+            imgList: project.userProfileImages,
+            projectId: project.projectId,
+            isLike: project.like),
 
         ///* 후원처명, 분야, 후원 제목을 나타냄
         SizedBox(
@@ -123,13 +156,15 @@ class TodayMatchList extends StatelessWidget {
   final List<String> imgList;
   final String backgroundImg;
   final int projectId;
+  final bool isLike;
 
   const TodayMatchList(
       {super.key,
       required this.count,
       required this.imgList,
       this.backgroundImg = tmpBackgroundImg,
-      required this.projectId});
+      required this.projectId,
+      required this.isLike});
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +196,8 @@ class TodayMatchList extends StatelessWidget {
         ),
         child: Stack(
           children: [
+            Positioned(
+                top: 16.h, right: 19.w, child: LikeIcon(isLike: isLike.obs)),
             Positioned(
               bottom: 17.h,
               left: 20.w,
