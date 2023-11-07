@@ -226,7 +226,56 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         autoFocus: true);
   }
+
   //TODO) signUp 회원가입
+  /// id 입력
+  factory CommonInputField.signUpId(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "이메일을 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+  /// id confirm num 입력
+  factory CommonInputField.signUpIdConfirm(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "인증번호를 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+  /// pw 입력
+  factory CommonInputField.signUpPw(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "비밀번호를 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
+  /// pw confirm 입력
+  factory CommonInputField.signUpPwConfirm(
+      {required TextEditingController textController,
+        required Future<void> Function(String) onChange}) {
+    return CommonInputField(
+        textController: textController,
+        placeHolder: "비밀번호를 입력해주세요.",
+        alwaysSuffix: false,
+        onSubmitted: (value) async {},
+        onChanged: onChange,
+        autoFocus: true);
+  }
   /// 이름 입력
   factory CommonInputField.userName(
       {required TextEditingController textController,

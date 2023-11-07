@@ -75,14 +75,16 @@ class NewPwScreen extends GetView<LoginController> {
             ),
           ),
           SizedBox(height: 8.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: CommonButton.login(
-              text: "확인",
-              onTap: () async {
-                //TODO) 비밀번호 변경 api
-                Get.back();
-              },
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: 6.w, right: 20),
+              child: CommonButton.login(
+                text: "확인",
+                onTap: () async {
+                  //TODO) 비밀번호 변경 api
+                  Get.back();
+                  },
+              ),
             ),
           ),
           SizedBox(height: 24.h),
