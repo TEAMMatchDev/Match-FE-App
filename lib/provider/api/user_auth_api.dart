@@ -21,7 +21,12 @@ class UserAuthApi {
           data: {"email": email, "password": password});
 
       if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(msg: response.data[MSG]);
+        Fluttertoast.showToast(
+          msg: response.data[MSG],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1
+        );
         logger.e(response.data[CODE]);
       }
 
@@ -39,10 +44,18 @@ static Future<bool> getEmailAuth({
     required String email,
 }) async {
     try {
-      Response response = await DioServices().to().get("/auth/email/${email}");
+      Response response = await DioServices().to().get("/auth/email",
+          queryParameters: {
+            "email": email,
+          });
 
       if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(msg: response.data[MSG]);
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
       }
 
       return response.data[SUCCESS];
@@ -62,7 +75,12 @@ static Future<bool> postAuthCheckEmail({
           data: {"email": email, "code": code});
 
       if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(msg: response.data[MSG]);
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
       }
 
       return response.data[SUCCESS];
@@ -77,10 +95,18 @@ static Future<bool> getPhoneAuth({
   required String phone,
 }) async {
   try {
-    Response response = await DioServices().to().get("/auth/phone/${phone}");
+    Response response = await DioServices().to().get("/auth/phone",
+        queryParameters: {
+          "phone": phone,
+        });
 
     if(!response.data[SUCCESS]) {
-      Fluttertoast.showToast(msg: response.data[MSG]);
+      Fluttertoast.showToast(
+          msg: response.data[MSG],
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1
+      );
     }
 
     return response.data[SUCCESS];
@@ -100,7 +126,12 @@ static Future<bool> postAuthCheckPhone({
           data: {"phone": phone, "code": code});
 
       if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(msg: response.data[MSG]);
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
       }
 
       return response.data[SUCCESS];
@@ -119,7 +150,12 @@ static Future<bool> postValidCheckEmail({
           data: {"email": email});
 
       if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(msg: response.data[MSG]);
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
       }
 
       return response.data[SUCCESS];
@@ -138,7 +174,12 @@ static Future<bool> postValidCheckPhone({
           data: {"phone": phone});
 
       if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(msg: response.data[MSG]);
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
       }
 
       return response.data[SUCCESS];
@@ -162,7 +203,12 @@ static Future<bool> setSignUp({
         data: {"email": email, "password": password, "name": name, "phone": phone, "gender": gender, "birthDate": birthDate});
 
       if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(msg: response.data[MSG]);
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
       }
 
       return response.data[SUCCESS];
@@ -171,12 +217,5 @@ static Future<bool> setSignUp({
       return false;
     }
 }
-
-
-
-
-
-
-
 
 }
