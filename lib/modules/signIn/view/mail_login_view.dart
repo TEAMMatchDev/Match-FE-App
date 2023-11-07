@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_status.dart';
@@ -115,6 +116,9 @@ class EmailLoginScreen extends GetView<LoginController> {
                       password: controller.userPw.value);
                   if (result) {
                     Get.offAllNamed(Routes.main);
+                  }
+                  else {
+                    Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
                   }
                 },
               ),
