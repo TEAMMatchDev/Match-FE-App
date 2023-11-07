@@ -34,4 +34,9 @@ class DioServices {
   Dio to() {
     return _dio;
   }
+
+  // accessToken을 업데이트하는 메서드 추가
+  void setAccessToken(String accessToken) {
+    _dio.options.headers['X-AUTH-TOKEN'] = accessToken;
+  }
 }
