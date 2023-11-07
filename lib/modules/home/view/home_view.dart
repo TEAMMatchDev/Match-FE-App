@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/provider/service/auth_service.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -93,10 +94,9 @@ class HomeScreen extends GetView<HomeController> {
                             Container(
                               constraints: BoxConstraints(maxWidth: 110.w),
                               child: Text(
-                                AuthService.to.myProfile.value.nickName,
-                                style: AppTextStyles.T1Bold20,
-                                overflow: TextOverflow.ellipsis
-                              ),
+                                  AuthService.to.myProfile.value.nickName,
+                                  style: AppTextStyles.T1Bold20,
+                                  overflow: TextOverflow.ellipsis),
                             ),
                             Text("님의 타오르는 불꽃이", style: AppTextStyles.T1Bold20),
                           ],
@@ -138,12 +138,22 @@ class HomeScreen extends GetView<HomeController> {
                                 });
                               }
                               final flame = controller.flameList[index];
-                              return FlameWidget(
-                                flameName: flame.inherenceName,
-                                flameImg: flame.image,
-                                flameTalk: flame.randomMessage,
-                                usages: flame.usages,
-                                id: flame.donationId,
+                              return Column(
+                                children: [
+                                  FlameWidget(
+                                    flameName: flame.inherenceName,
+                                    flameImg: flame.image,
+                                    flameTalk: flame.randomMessage,
+                                    usages: flame.usages,
+                                    id: flame.donationId,
+                                  ),
+                                  SizedBox(
+                                    height: 9.h,
+                                  ),
+                                  shareChip(
+                                      imgUrl: flame.image,
+                                      donationId: flame.donationId)
+                                ],
                               );
                             },
                           ),
@@ -152,6 +162,37 @@ class HomeScreen extends GetView<HomeController> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget shareChip({required String imgUrl, required int donationId}) {
+    return GestureDetector(
+      onTap: () async {
+        //TODO: donationId -> ProjectID로 변경
+        await controller.kakoShare(imgUrl: imgUrl, donationId: donationId);
+      },
+      child: IntrinsicWidth(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
+          decoration: BoxDecoration(
+            color: AppColors.grey0,
+              borderRadius: BorderRadius.circular(5.r),
+              border: Border.all(color: AppColors.grey1)),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SvgPicture.asset("${iconDir}ic_share_16_fill.svg"),
+              SizedBox(
+                width: 4.w,
+              ),
+              Text(
+                "공유하기",
+                style: AppTextStyles.L1Medium12.copyWith(color: AppColors.grey5),
+              )
+            ],
+          ),
         ),
       ),
     );

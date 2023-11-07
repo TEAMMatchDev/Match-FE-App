@@ -1,8 +1,5 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
-import 'package:match/modules/project/view/project_view.dart';
 import 'package:uni_links/uni_links.dart';
 
 import '../../provider/routes/routes.dart';
@@ -69,10 +66,6 @@ class DynamicLink {
 
         switch (link) {
           case "project":
-            Get.offAllNamed(Routes.project, arguments: {"projectId": id});
-            break;
-          case "burnMatch":
-            //기획 변경으로 프로젝트로 이동
             Get.offAllNamed(Routes.project, arguments: {"projectId": id});
             break;
         }
