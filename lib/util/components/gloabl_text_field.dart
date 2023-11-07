@@ -8,6 +8,7 @@ import 'package:match/model/enum/search_status.dart';
 
 import '../const/global_variable.dart';
 import '../const/style/global_color.dart';
+import '../const/style/global_logger.dart';
 import '../const/style/global_text_styles.dart';
 import '../method/get_storage.dart';
 
@@ -97,17 +98,20 @@ class CommonSearchField extends StatelessWidget {
                 : OverlayVisibilityMode.always,
             suffix: GestureDetector(
               onTap: () async {
-                textController.clear();
-                textStatus.value = SEARCH_STATUS.INIT;
                 if (suffixOnTap != null) {
                   await suffixOnTap!();
+                } else {
+                  textController.clear();
+                  textStatus.value = SEARCH_STATUS.INIT;
                 }
               },
-              child: Padding(
-                  padding: EdgeInsets.only(right: 14.w),
-                  child: textStatus.value == SEARCH_STATUS.INIT
-                      ? SvgPicture.asset("${iconDir}ic_$suffixUnActiveIcon.svg")
-                      : SvgPicture.asset("${iconDir}ic_$suffixActiveIcon.svg")),
+              child: Obx(
+                ()=> Padding(
+                    padding: EdgeInsets.only(right: 14.w),
+                    child: textStatus.value == SEARCH_STATUS.INIT
+                        ? SvgPicture.asset("${iconDir}ic_$suffixUnActiveIcon.svg")
+                        : SvgPicture.asset("${iconDir}ic_$suffixActiveIcon.svg")),
+              ),
             ),
             //자동 키보드 활성화
             autofocus: isSearchScreen ? true : false,
@@ -116,7 +120,12 @@ class CommonSearchField extends StatelessWidget {
               await onSubmitted(value);
             }),
             onChanged: ((value) async {
-              textStatus.value = SEARCH_STATUS.EDIT;
+              logger.e(value);
+              if (value.isEmpty) {
+                textStatus.value = SEARCH_STATUS.INIT;
+              } else {
+                textStatus.value = SEARCH_STATUS.EDIT;
+              }
               await onChanged(value);
             }),
           ),
