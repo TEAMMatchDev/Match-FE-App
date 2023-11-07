@@ -9,16 +9,22 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import '../../provider/routes/routes.dart';
 import '../const/global_variable.dart';
 
-Widget TypeChip({required String type}) {
+Widget TypeChip(
+    {required String type,
+    Color color = AppColors.grey0,
+    Color textColor = AppColors.grey6,
+    int horizontalPadding = 8,
+    int verticalPadding = 4}) {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+    padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding.w, vertical: verticalPadding.h),
     decoration: BoxDecoration(
-      color: AppColors.grey0,
+      color: color,
       borderRadius: BorderRadius.circular(4.r),
     ),
     child: Text(type,
         style: AppTextStyles.T1Bold12.copyWith(
-          color: AppColors.grey6,
+          color: textColor,
         )),
   );
 }
@@ -29,6 +35,7 @@ Widget GreySizedBox() {
     height: 10.h,
   );
 }
+
 /// <h2> 알림 버튼 </h2>
 Widget alarmButton() {
   return GestureDetector(

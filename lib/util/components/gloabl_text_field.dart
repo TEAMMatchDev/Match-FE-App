@@ -24,7 +24,7 @@ class CommonSearchField extends StatelessWidget {
   final bool alwaysSuffix;
   final Future<void> Function(String) onSubmitted;
   final Future<void> Function(String) onChanged;
-  final Future<void> Function()? suffixOnTap;
+  final Future<void> Function(String)? suffixOnTap;
   final bool isPlain;
   final String suffixActiveIcon;
   final String suffixUnActiveIcon;
@@ -99,18 +99,20 @@ class CommonSearchField extends StatelessWidget {
             suffix: GestureDetector(
               onTap: () async {
                 if (suffixOnTap != null) {
-                  await suffixOnTap!();
+                  await suffixOnTap!(textController.text);
                 } else {
                   textController.clear();
                   textStatus.value = SEARCH_STATUS.INIT;
                 }
               },
               child: Obx(
-                ()=> Padding(
+                () => Padding(
                     padding: EdgeInsets.only(right: 14.w),
                     child: textStatus.value == SEARCH_STATUS.INIT
-                        ? SvgPicture.asset("${iconDir}ic_$suffixUnActiveIcon.svg")
-                        : SvgPicture.asset("${iconDir}ic_$suffixActiveIcon.svg")),
+                        ? SvgPicture.asset(
+                            "${iconDir}ic_$suffixUnActiveIcon.svg")
+                        : SvgPicture.asset(
+                            "${iconDir}ic_$suffixActiveIcon.svg")),
               ),
             ),
             //자동 키보드 활성화
@@ -150,7 +152,7 @@ class CommonSearchField extends StatelessWidget {
       onSubmitted: onSubmit,
       onChanged: (value) async {},
       textStatus: textStatus,
-      suffixOnTap: () async {},
+      suffixOnTap: onSubmit,
     );
   }
 }

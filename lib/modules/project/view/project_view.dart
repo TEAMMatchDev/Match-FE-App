@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/regular_status.dart';
+import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/payment/view/payment_donator_info_view.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
 import 'package:match/provider/api/comment_api.dart';
@@ -262,6 +263,10 @@ class ProjectScreen extends GetView<ProjectController> {
                               projectId: controller.projectId);
                           if (tmpResult) {
                             Fluttertoast.showToast(msg: "댓글이 등록되었습니다.");
+                            ///초기화
+                            controller.commentTextController.value.clear();
+                            controller.searchStatus.value = SEARCH_STATUS.INIT;
+                            FocusScope.of(context).unfocus();
                           }
                           //TODO: comment List add new
                         },

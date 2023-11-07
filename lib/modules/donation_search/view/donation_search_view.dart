@@ -31,7 +31,7 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                   textController: controller.searchTextController.value,
                   placeHolder: "후원명, 후원사, 후원분야 검색",
                   textStatus: controller.searchStatus,
-                  suffixOnTap: () async {},
+                  suffixOnTap: (value) async {},
                   onSubmitted: (value) async {
                     await controller.getSearchList(content: value);
                   },
