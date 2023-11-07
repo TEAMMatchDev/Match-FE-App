@@ -227,6 +227,7 @@ class ProjectScreen extends GetView<ProjectController> {
                             comment: comment.comment,
                             timeStamp: comment.commentDate,
                             isEdit: true,
+                            my: comment.my,
                           ),
                         );
                       },
@@ -248,7 +249,8 @@ class ProjectScreen extends GetView<ProjectController> {
                     )
                   : Container(
                       color: AppColors.white,
-                      padding: EdgeInsets.symmetric(vertical: 11.h,horizontal: 20.w),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 11.h, horizontal: 20.w),
                       child: CommonSearchField.comment(
                         textController: controller.commentTextController.value,
                         onSubmit: (value) async {

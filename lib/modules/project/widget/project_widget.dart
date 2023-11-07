@@ -17,6 +17,7 @@ class ProjectComment extends StatelessWidget {
   final String comment;
   final String timeStamp;
   final bool isEdit;
+  final bool my;
 
   const ProjectComment(
       {super.key,
@@ -24,7 +25,8 @@ class ProjectComment extends StatelessWidget {
       required this.profile,
       required this.comment,
       required this.timeStamp,
-      this.isEdit = false});
+      this.isEdit = false,
+      this.my = false});
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +69,9 @@ class ProjectComment extends StatelessWidget {
           isEdit
               ? GestureDetector(
                   onTap: () {
-                    Get.bottomSheet(const AlertBottomSheet());
+                    Get.bottomSheet(AlertBottomSheet(
+                      isMine: my,
+                    ));
                   },
                   child: SvgPicture.asset("${iconDir}ic_more_18.svg"))
               : const SizedBox.shrink()
