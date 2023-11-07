@@ -14,6 +14,7 @@ class CommonDialog extends StatelessWidget {
   final String? subtitle;
   final Future<void> Function() onGrant;
   final String grantText;
+
   const CommonDialog(
       {super.key,
       required this.title,
@@ -94,6 +95,7 @@ class CommonDialog extends StatelessWidget {
       },
     );
   }
+
   factory CommonDialog.payDelete({required BuildContext context}) {
     return CommonDialog(
       title: "정기기부를 해지하시겠어요?",
@@ -105,24 +107,27 @@ class CommonDialog extends StatelessWidget {
       },
     );
   }
-  factory CommonDialog.delete({required BuildContext context}) {
+
+  factory CommonDialog.delete(
+      {required BuildContext context,
+      required Future<void> Function() onGrant}) {
     return CommonDialog(
       title: "댓글을 삭제하시겠어요?",
       subtitle: null,
       grantText: "삭제하기",
-      onGrant: () async {
-        await openAppSettings();
-      },
+      onGrant: onGrant,
     );
   }
-  factory CommonDialog.alert({required BuildContext context}) {
+
+  factory CommonDialog.report(
+      {required String text,
+      required BuildContext context,
+      required Future<void> Function() onGrant}) {
     return CommonDialog(
-      title: "정말 댓글을 신고하시겠어요?",
+      title: "정말 댓글을 $text하시겠어요?",
       subtitle: null,
-      grantText: "신고하기",
-      onGrant: () async {
-        await openAppSettings();
-      },
+      grantText: text,
+      onGrant: onGrant,
     );
   }
 }

@@ -8,25 +8,30 @@ import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../model/comment/comment.dart';
+import '../../../provider/api/comment_api.dart';
+import '../../../util/components/global_modal.dart';
 import '../../home/widget/home_widget.dart';
 
 //*댓글, 기록 Widget
 class ProjectComment extends StatelessWidget {
   final String profileUrl;
   final String profile;
-  final String comment;
+  final String text;
   final String timeStamp;
   final bool isEdit;
   final bool my;
+  final Comment? comment;
 
   const ProjectComment(
       {super.key,
       required this.profileUrl,
       required this.profile,
-      required this.comment,
+      required this.text,
       required this.timeStamp,
       this.isEdit = false,
-      this.my = false});
+      this.my = false,
+      this.comment});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +53,7 @@ class ProjectComment extends StatelessWidget {
                 ),
                 SizedBox(height: 6.h),
                 Text(
-                  comment,
+                  text,
                   style: AppTextStyles.S1SemiBold12.copyWith(
                       color: AppColors.grey7),
                 ),
@@ -69,7 +74,8 @@ class ProjectComment extends StatelessWidget {
           isEdit
               ? GestureDetector(
                   onTap: () {
-                    Get.bottomSheet(AlertBottomSheet(
+                    Get.bottomSheet(CommentBottomSheet(
+                      comment: comment!,
                       isMine: my,
                     ));
                   },
@@ -81,10 +87,13 @@ class ProjectComment extends StatelessWidget {
   }
 }
 
-class AlertBottomSheet extends StatelessWidget {
+///<h2>Comment 관련 로직을 처리하는 BottomSheet 위젯</h2>
+class CommentBottomSheet extends StatelessWidget {
   final bool isMine;
+  final Comment comment;
 
-  const AlertBottomSheet({super.key, this.isMine = false});
+  const CommentBottomSheet(
+      {super.key, this.isMine = false, required this.comment});
 
   @override
   Widget build(BuildContext context) {
@@ -103,18 +112,38 @@ class AlertBottomSheet extends StatelessWidget {
             _textListTile(
                 text: "신고하기",
                 onTap: () async {
-                  //TODO: 신고하기 api 연결
+                  CommonDialog.report(
+                    text: "신고",
+                    context: context,
+                    onGrant: () async {
+                      // await CommentApi.reportComment(comment: comment.comment,
+                      //     commentId: comment.commentId,
+                      //     reportReason: reportReason)
+                    },
+                  );
                 }),
             _textListTile(
                 text: "차단하기",
                 onTap: () async {
-                  //TODO: 차단하기 api 연결
+                  CommonDialog.report(
+                    text: "차단",
+                    context: context,
+                    onGrant: () async {
+                      //TODO: 차단하기 api 연결
+                    },
+                  );
                 }),
             isMine
                 ? _textListTile(
                     text: "삭제하기",
                     onTap: () async {
-                      //TODO: 삭제하기 api 연결
+                      CommonDialog.delete(
+                          context: context,
+                          onGrant: () async {
+                            await CommentApi.deleteComment(
+                              commentId: comment.commentId,
+                            );
+                          });
                     })
                 : const SizedBox.shrink(),
             Padding(

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/payment/view/payment_donator_info_view.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
+import 'package:match/provider/api/comment_api.dart';
 import 'package:match/util/const/style/global_logger.dart';
 import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
@@ -201,7 +203,7 @@ class ProjectScreen extends GetView<ProjectController> {
                           child: ProjectComment(
                             profileUrl: history.profileImageUrl,
                             profile: history.nickname,
-                            comment: history.histories,
+                            text: history.histories,
                             timeStamp: history.historyDate,
                           ),
                         );
@@ -222,13 +224,13 @@ class ProjectScreen extends GetView<ProjectController> {
                           padding: EdgeInsets.symmetric(horizontal: 20.w)
                               .copyWith(top: index == 0 ? 20.h : 0.h),
                           child: ProjectComment(
-                            profileUrl: comment.profileImgUrl ?? "",
-                            profile: comment.nickname,
-                            comment: comment.comment,
-                            timeStamp: comment.commentDate,
-                            isEdit: true,
-                            my: comment.my,
-                          ),
+                              profileUrl: comment.profileImgUrl ?? "",
+                              profile: comment.nickname,
+                              text: comment.comment,
+                              timeStamp: comment.commentDate,
+                              isEdit: true,
+                              my: comment.my,
+                              comment: comment),
                         );
                       },
                     ),
@@ -254,7 +256,14 @@ class ProjectScreen extends GetView<ProjectController> {
                       child: CommonSearchField.comment(
                         textController: controller.commentTextController.value,
                         onSubmit: (value) async {
-                          //TODO: add comment 등록 api
+                          var tmpResult = await CommentApi.registerComment(
+                              comment:
+                                  controller.commentTextController.value.text,
+                              projectId: controller.projectId);
+                          if (tmpResult) {
+                            Fluttertoast.showToast(msg: "댓글이 등록되었습니다.");
+                          }
+                          //TODO: comment List add new
                         },
                         textStatus: controller.searchStatus,
                       ),
