@@ -83,11 +83,11 @@ class _RadioButtonsState extends State<SelectGenderRadioButtons> {
         ),
         SizedBox(width: 10.w),
         GenderButton(
-          text: '선택안함',
-          isSelected: selectedGender == '선택안함',
+          text: '선택 안함',
+          isSelected: selectedGender == '선택 안함',
           onPressed: () {
             setState(() {
-              selectedGender = '선택안함';
+              selectedGender = '선택 안함';
             });
             widget.onGenderSelected(selectedGender);
           },
