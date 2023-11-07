@@ -68,12 +68,35 @@ class SignUpMailScreen extends GetView<SignUpController> {
                         ),
 
                         SizedBox(height: 20.h),
+
+                        Text(
+                          '인증번호 입력',
+                          style: AppTextStyles.T1Bold14,
+                        ),
+                        SizedBox(height: 10.h),
+
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CommonInputField.signUpIdConfirm(
+                                  textController : controller.idAuthNumTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 이메일 인증번호: $value");
+                                  }),
+                            ),
+                            SizedBox(width: 10.w),
+                            certinumButton(),
+                          ],
+                        ),
+
+                        SizedBox(height: 20.h),
+
                         Text(
                           '비밀번호',
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        CommonInputField.signInPW(
+                        CommonInputField.signUpPw(
                             textController : controller.pwTextController.value,
                             onChange: (value) async {
                               print(">>> 입력한 회원가입 pw: $value");
@@ -84,7 +107,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        CommonInputField.signInPW(
+                        CommonInputField.signUpPwConfirm(
                             textController : controller.pwConfirmTextController.value,
                             onChange: (value) async {
                               print(">>> 입력한 회원가입 확인pw: $value");
@@ -95,6 +118,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                 ],
               ),
             ),
+
             SizedBox(height: 8.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),

@@ -12,7 +12,15 @@ class LoginController extends GetxController {
   RxString userPw = ''.obs;
 
   //비밀번호 찾을 때 입력하는 이메일
-  Rx<TextEditingController> findPwTextController = TextEditingController().obs;
+  Rx<TextEditingController> findPwEmailTextController = TextEditingController().obs;
+  //비밀번호 찾을 때 입력하는 인증번호
+  Rx<TextEditingController> findPwAuthNumTextController = TextEditingController().obs;
+
+  //새로운 비밀번호 & 비밀번호 확인
+  Rx<TextEditingController> newPw = TextEditingController().obs;
+  Rx<TextEditingController> newPwConfirm = TextEditingController().obs;
+
+
 
   @override
   void onInit() {

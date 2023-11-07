@@ -7,6 +7,7 @@ class SignUpController extends GetxController {
   //TODO) signUp controller
   /// 회원가입 > id, pw, pw확인
   Rx<TextEditingController> idTextController = TextEditingController().obs;
+  Rx<TextEditingController> idAuthNumTextController = TextEditingController().obs;
   Rx<TextEditingController> pwTextController = TextEditingController().obs;
   Rx<TextEditingController> pwConfirmTextController = TextEditingController().obs;
 

@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_status.dart';
-import 'package:match/modules/signIn/view/find_pw_auth_view.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
@@ -23,8 +22,8 @@ import 'dart:io';
 import '../../../provider/routes/routes.dart';
 import '../controller/login_controller.dart';
 
-class FindPwScreen extends GetView<LoginController> {
-  const FindPwScreen({super.key});
+class NewPwScreen extends GetView<LoginController> {
+  const NewPwScreen({super.key});
 
   @override
   Widget build(BuildContext context){
@@ -42,20 +41,32 @@ class FindPwScreen extends GetView<LoginController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '인증번호를 보내드릴\n이메일을 입력해주세요.',
+                        '새로운 비밀번호를\n입력해주세요.',
                         style: AppTextStyles.T1Bold18,
                       ),
                       SizedBox(height: 30.h),
                       Text(
-                        '이메일',
+                        '새 비밀번호',
                         style: AppTextStyles.T1Bold14,
                       ),
                       SizedBox(height: 10.h),
                       //TODO) 01-08 api 연결 & 입력 float 메시지
-                      CommonInputField.findPwAuthEmail(
-                          textController : controller.findPwEmailTextController.value,
+                      CommonInputField.newPw(
+                          textController : controller.newPw.value,
                           onChange: (value) async {
-                            print(">>> 입력한 이메일: $value");
+                            print(">>> 입력한 새로운 비밀번호: $value");
+                          }),
+                      SizedBox(height: 30.h),
+                      Text(
+                        '새 비밀번호 확인',
+                        style: AppTextStyles.T1Bold14,
+                      ),
+                      SizedBox(height: 10.h),
+                      //TODO) 01-08 api 연결 & 입력 float 메시지
+                      CommonInputField.newPwConfirm(
+                          textController : controller.newPwConfirm.value,
+                          onChange: (value) async {
+                            print(">>> 입력한 새로운 비밀번호: $value");
                           }),
                     ],
                   ),
@@ -64,13 +75,16 @@ class FindPwScreen extends GetView<LoginController> {
             ),
           ),
           SizedBox(height: 8.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: CommonButton.login(
-              text: "확인",
-              onTap: () async {
-                Get.to(FindPwAuthScreen());
-              },
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: 6.w, right: 20),
+              child: CommonButton.login(
+                text: "확인",
+                onTap: () async {
+                  //TODO) 비밀번호 변경 api
+                  Get.back();
+                  },
+              ),
             ),
           ),
           SizedBox(height: 24.h),

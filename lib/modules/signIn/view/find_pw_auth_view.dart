@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_status.dart';
-import 'package:match/modules/signIn/view/find_pw_auth_view.dart';
+import 'package:match/modules/signIn/view/new_pw_view.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
@@ -23,8 +23,8 @@ import 'dart:io';
 import '../../../provider/routes/routes.dart';
 import '../controller/login_controller.dart';
 
-class FindPwScreen extends GetView<LoginController> {
-  const FindPwScreen({super.key});
+class FindPwAuthScreen extends GetView<LoginController> {
+  const FindPwAuthScreen({super.key});
 
   @override
   Widget build(BuildContext context){
@@ -42,20 +42,20 @@ class FindPwScreen extends GetView<LoginController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '인증번호를 보내드릴\n이메일을 입력해주세요.',
+                        '이메일에 전송된\n인증번호를 입력해주세요.',
                         style: AppTextStyles.T1Bold18,
                       ),
                       SizedBox(height: 30.h),
                       Text(
-                        '이메일',
+                        '인증번호 입력',
                         style: AppTextStyles.T1Bold14,
                       ),
                       SizedBox(height: 10.h),
-                      //TODO) 01-08 api 연결 & 입력 float 메시지
-                      CommonInputField.findPwAuthEmail(
-                          textController : controller.findPwEmailTextController.value,
+                      //TODO) 01-10 api 연결 & 입력 float 메시지
+                      CommonInputField.findPwAuthNum(
+                          textController : controller.findPwAuthNumTextController.value,
                           onChange: (value) async {
-                            print(">>> 입력한 이메일: $value");
+                            print(">>> 입력한 인증번호: $value");
                           }),
                     ],
                   ),
@@ -69,7 +69,7 @@ class FindPwScreen extends GetView<LoginController> {
             child: CommonButton.login(
               text: "확인",
               onTap: () async {
-                Get.to(FindPwAuthScreen());
+                Get.to(NewPwScreen());
               },
             ),
           ),
