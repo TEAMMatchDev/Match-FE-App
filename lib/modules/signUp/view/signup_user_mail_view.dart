@@ -34,89 +34,91 @@ class SignUpMailScreen extends GetView<SignUpController> {
       body: Column(
           children: <Widget>[
             Expanded(
-              child: Column(
-                children: [
-                  SizedBox(height: 35.h),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: SingleChildScrollView(
+                  child: Column(
                       children: [
-                        Text(
-                          '로그인할 이메일과\n비밀번호를 입력해주세요.',
-                          style: AppTextStyles.T1Bold18,
-                        ),
-                        SizedBox(height: 30.h),
-                        Text(
-                          '이메일',
-                          style: AppTextStyles.T1Bold14,
-                        ),
-                        SizedBox(height: 10.h),
+                        SizedBox(height: 35.h),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '로그인할 이메일과\n비밀번호를 입력해주세요.',
+                                style: AppTextStyles.T1Bold18,
+                              ),
+                              SizedBox(height: 30.h),
+                              Text(
+                                '이메일',
+                                style: AppTextStyles.T1Bold14,
+                              ),
+                              SizedBox(height: 10.h),
 
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CommonInputField.signInID(
-                                  textController : controller.idTextController.value,
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: CommonInputField.signInID(
+                                        textController : controller.idTextController.value,
+                                        onChange: (value) async {
+                                          print(">>> 입력한 회원가입 이메일: $value");
+                                        }),
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  certinumButton(),
+                                ],
+                              ),
+
+                              SizedBox(height: 20.h),
+
+                              Text(
+                                '인증번호 입력',
+                                style: AppTextStyles.T1Bold14,
+                              ),
+                              SizedBox(height: 10.h),
+
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: CommonInputField.signUpIdConfirm(
+                                        textController : controller.idAuthNumTextController.value,
+                                        onChange: (value) async {
+                                          print(">>> 입력한 이메일 인증번호: $value");
+                                        }),
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  certinumButton(),
+                                ],
+                              ),
+
+                              SizedBox(height: 20.h),
+
+                              Text(
+                                '비밀번호',
+                                style: AppTextStyles.T1Bold14,
+                              ),
+                              SizedBox(height: 10.h),
+                              CommonInputField.signUpPw(
+                                  textController : controller.pwTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 회원가입 이메일: $value");
+                                    print(">>> 입력한 회원가입 pw: $value");
                                   }),
-                            ),
-                            SizedBox(width: 10.w),
-                            certinumButton(),
-                          ],
-                        ),
-
-                        SizedBox(height: 20.h),
-
-                        Text(
-                          '인증번호 입력',
-                          style: AppTextStyles.T1Bold14,
-                        ),
-                        SizedBox(height: 10.h),
-
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CommonInputField.signUpIdConfirm(
-                                  textController : controller.idAuthNumTextController.value,
+                              SizedBox(height: 27.h),
+                              Text(
+                                '비밀번호 확인',
+                                style: AppTextStyles.T1Bold14,
+                              ),
+                              SizedBox(height: 10.h),
+                              CommonInputField.signUpPwConfirm(
+                                  textController : controller.pwConfirmTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 이메일 인증번호: $value");
+                                    print(">>> 입력한 회원가입 확인pw: $value");
                                   }),
-                            ),
-                            SizedBox(width: 10.w),
-                            certinumButton(),
-                          ],
-                        ),
-
-                        SizedBox(height: 20.h),
-
-                        Text(
-                          '비밀번호',
-                          style: AppTextStyles.T1Bold14,
-                        ),
-                        SizedBox(height: 10.h),
-                        CommonInputField.signUpPw(
-                            textController : controller.pwTextController.value,
-                            onChange: (value) async {
-                              print(">>> 입력한 회원가입 pw: $value");
-                            }),
-                        SizedBox(height: 27.h),
-                        Text(
-                          '비밀번호 확인',
-                          style: AppTextStyles.T1Bold14,
-                        ),
-                        SizedBox(height: 10.h),
-                        CommonInputField.signUpPwConfirm(
-                            textController : controller.pwConfirmTextController.value,
-                            onChange: (value) async {
-                              print(">>> 입력한 회원가입 확인pw: $value");
-                            }),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                  )
-                ],
-              ),
+                  ),
             ),
 
             SizedBox(height: 8.h),
