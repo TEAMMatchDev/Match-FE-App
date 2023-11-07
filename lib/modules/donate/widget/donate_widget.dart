@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
@@ -35,19 +36,27 @@ Widget emptyWidget() {
 ///<h2>like Icon widget</h2>
 class LikeIcon extends StatelessWidget {
   final Rx<bool> isLike;
+  final int projectId;
 
-  LikeIcon({
+  const LikeIcon({
     super.key,
     required this.isLike,
+    required this.projectId,
   });
 
   ///TODO: API 연결
-  void onLikeTap() {
+  Future<void> onLikeTap() async {
     var likeToastMsg = "찜했어요!";
     var dislikeToastMsg = "찜에서 삭제했어요!";
-    Fluttertoast.showToast(
-        msg: isLike.value ? dislikeToastMsg : likeToastMsg, fontSize: 12.sp);
-    isLike.value = !isLike.value;
+    var tmpLikeStatus = await ProjectApi.setProjectLike(
+        projectId: projectId, isLike: isLike.value);
+    if (tmpLikeStatus != isLike.value) {
+      Fluttertoast.showToast(
+          msg: isLike.value ? dislikeToastMsg : likeToastMsg, fontSize: 12.sp);
+      isLike.value = !isLike.value;
+    } else {
+      Fluttertoast.showToast(msg: "요청에 실패했습니다. 잠시후에 다시 시도해주세요");
+    }
   }
 
   @override
@@ -197,7 +206,9 @@ class TodayMatchList extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-                top: 16.h, right: 19.w, child: LikeIcon(isLike: isLike.obs)),
+                top: 16.h,
+                right: 19.w,
+                child: LikeIcon(projectId: projectId, isLike: isLike.obs)),
             Positioned(
               bottom: 17.h,
               left: 20.w,

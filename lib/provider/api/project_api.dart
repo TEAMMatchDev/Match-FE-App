@@ -75,6 +75,23 @@ class ProjectApi {
     }
   }
 
+  ///<h2>3-6 API | 프로젝트 관심 설정 / 관심 삭제</h2>
+  ///* @param bool isLike, int projectId
+  static Future<bool> setProjectLike({
+    required bool isLike,
+    required int projectId,
+  }) async {
+    try {
+      Response response =
+          await DioServices().to().patch("/projects/$projectId");
+
+      return response.data[RESULT]["like"];
+    } catch (e) {
+      logger.e(e.toString());
+      return isLike;
+    }
+  }
+
   ///<h2>3-9 API | 프로젝트 매치 기록 조회</h2>
   ///* pagination
   static Future<List<ProjectHistory>> getProjectHistoryList(
