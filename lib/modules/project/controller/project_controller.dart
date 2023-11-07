@@ -17,7 +17,7 @@ class MatchTabBar extends GetxController
   @override
   void onInit() {
     super.onInit();
-    controller = TabController(vsync: this, length: 2);
+    controller = TabController(vsync: this, length: 3);
   }
 
   @override
@@ -36,6 +36,7 @@ class ProjectController extends GetxController {
   Rx<ScrollController> scrollController = ScrollController().obs;
   Rx<ProjectDetail> projectDetail = tmpProjectDetail.obs;
   RxList<ProjectHistory> projectHistories = <ProjectHistory>[].obs;
+  RxList<Comment> comments = <Comment>[].obs;
 
   Future<void> getProjectHistory() async {
     projectHistories.assignAll(
