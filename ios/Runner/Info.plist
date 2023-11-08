@@ -47,5 +47,26 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+
+
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>사용자의 프로필을 선택하고 변경하기 위해 사진 라이브러리에 접근합니다.</string>
+
+    <key>NSCameraUsageDescription</key>
+    <string>사용자의 프로필을 선택하고 변경하기 위해 사진 라이브러리에 접근합니다.</string>
+
+    <!-- Firebase -->
+    <key>UIBackgroundModes</key>
+    <array>
+      <string>fetch</string>
+      <string>remote-notification</string>
+    </array>
+
+
+
+
+
+
+
 	</dict>
 </plist>
