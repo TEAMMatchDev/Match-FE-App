@@ -27,6 +27,7 @@ import 'package:match/modules/signIn/view/login_view.dart';
 import 'package:match/modules/signUp/binding/signup_binding.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
+import 'package:match/modules/tutorial/view/tutorial_view.dart';
 import 'package:match/modules/user_phone/binding/user_phone_binding.dart';
 import 'package:match/modules/user_phone/view/user_phone_view.dart';
 
@@ -44,6 +45,7 @@ import '../../modules/notice/binding/notice_detail_binding.dart';
 import '../../modules/notice/view/notice_detail_view.dart';
 import '../../modules/notice/view/notice_view.dart';
 import '../../modules/total_pay/binding/total_pay_binding.dart';
+import '../../modules/tutorial/binding/tutorial_binding.dart';
 import 'routes.dart';
 
 class Pages {
@@ -72,6 +74,15 @@ class Pages {
       page: () => const SignUpMailScreen(),
       transition: Transition.noTransition,
       binding: SignUpBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "튜토리얼 화면",
+      name: Routes.tutorial,
+      page: () => const TutorialScreen(),
+      transition: Transition.noTransition,
+      binding: TutorialBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
