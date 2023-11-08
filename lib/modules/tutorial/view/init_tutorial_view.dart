@@ -21,26 +21,32 @@ class InitTutorialScreen extends StatelessWidget {
             Expanded(
               child: Center(
                 child: RichText(
+                    textAlign: TextAlign.center,
                     text: TextSpan(children: [
-                  TextSpan(
-                    text: "M",
-                    style: AppTextStyles.L1Medium14.copyWith(
-                        color: AppColors.primaryRed, fontSize: 20.sp),
-                  ),
-                  TextSpan(
-                    text:
-                        "ATCH 서비스 체험을 위해\n${AuthService.to.myProfile.value.name}님께 기부금 1원을 드렸어요.",
-                    style: AppTextStyles.L1Medium14.copyWith(fontSize: 20.sp),
-                  ),
-                ])),
+                      TextSpan(
+                        text: "M",
+                        style: AppTextStyles.S1SemiBold14.copyWith(
+                            color: AppColors.primaryRed, fontSize: 20.sp),
+                      ),
+                      TextSpan(
+                        text:
+                            "ATCH 서비스 체험을 위해\n${AuthService.to.myProfile.value.name}님께 기부금 1원을 드렸어요.",
+                        style: AppTextStyles.S1SemiBold14.copyWith(
+                            fontSize: 20.sp),
+                      ),
+                    ])),
               ),
             ),
             CommonButton.edit(
+              isActive: true,
               text: "기부 체험 시작하기",
               verticalPadding: 14,
               onTap: () async {
                 await Get.toNamed(Routes.tutorial);
               },
+            ),
+            SizedBox(
+              height: 24.h,
             )
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/naver_login_state.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
+import 'package:match/modules/tutorial/view/init_tutorial_view.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/services.dart';
@@ -340,8 +341,9 @@ class _LoginState extends State<LoginWidget> {
   @override
   Widget mailLogin() {
     return GestureDetector(
-      onTap: () async{
+      onTap: () async {
         // 홈-후원처 개발을 위한 임시 라우팅
+        await Get.to(() => InitTutorialScreen());
         // await Get.offAllNamed(Routes.main);
         Get.to(EmailLoginScreen());
       },

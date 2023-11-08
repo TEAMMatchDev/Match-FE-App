@@ -12,6 +12,7 @@ enum ProjectType {
 
   final String stateName;
   final String engName;
+
   const ProjectType(this.stateName, this.engName);
 }
 
@@ -26,4 +27,10 @@ Map<String, ProjectType> projectTypeMap = {
   'NEIGHBOR': ProjectType.NEIGHBOR,
   'ANIMAL': ProjectType.ANIMAL,
   'ENVIRONMENT': ProjectType.ENVIRONMENT,
+};
+
+Map<ProjectType, String> projectTypDescription = {
+  ProjectType.EARTH: '바다를 다시 깨끗하게 만들 수 있어요!',
+  ProjectType.ANIMAL: "유기동물들의 아픈 상처들을 치유할 수 있어요.",
+  ProjectType.CHILDREN: '아이들의 꿈을 꿀 수 있도록 응원해줄 수 있어요.',
 };
