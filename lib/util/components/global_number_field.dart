@@ -18,7 +18,7 @@ class NumberInputFieldExample extends GetView<PaymentController> {
           placeHolder: "직접 입력",
           onChanged: (value) {
             controller.selectedDate.value = int.parse(value);
-            controller.updateIsPayAble();
+            controller.updateIsPayAbleReg();
             print('>>> 입력한: ${controller.selectedDate.value}');
           },
           isPlain: true,

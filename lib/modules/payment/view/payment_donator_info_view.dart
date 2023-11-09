@@ -93,7 +93,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                       ),
                       SizedBox(width: 37.w),
                       Container(
-                        width: 260.w,
+                        width: 258.w,
                         decoration: BoxDecoration(
                           color: AppColors.grey11, // 배경색 설정
                           borderRadius: BorderRadius.circular(5.0), // 모서리를 둥글게 설정
