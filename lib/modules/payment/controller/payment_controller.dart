@@ -37,18 +37,25 @@ class PaymentController extends GetxController {
   RxList<int> cardIdList = [tmpCardInfo.id].obs;
 
   //TODO) 기부금 정보
-  final RxBool isPayAble = false.obs; //금액, 날짜 선택 모두 했는지
+  final RxBool isPayAbleReg = false.obs;  //금액, 날짜 선택 모두 했는지
+  final RxBool isPayAbleConce = false.obs;  //금액 선택 모두 했는지
+
   final Rx<int> inputValue = 0.obs;
   final Rx<int> selectedAmount = 1000.obs;
   final Rx<int> selectedDate = 1.obs;
 
-  void updateIsPayAble() {
-    /// 금액, 날짜 null 체크
-    if (selectedAmount.value > 0 &&
-        (selectedDate.value >= 1 && selectedDate.value <= 31)) {
-      isPayAble.value = true;
+  void updateIsPayAbleReg() { /// 금액, 날짜 null 체크
+    if (selectedAmount.value > 0 && (selectedDate.value >= 1 && selectedDate.value <= 31)) {
+      isPayAbleReg.value = true;
     } else {
-      isPayAble.value = false;
+      isPayAbleReg.value = false;
+    }
+  }
+  void updateIsPayAbleOnce() { /// 금액 null 체크
+    if (selectedAmount.value > 0) {
+      isPayAbleReg.value = true;
+    } else {
+      isPayAbleReg.value = false;
     }
   }
 

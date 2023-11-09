@@ -119,6 +119,8 @@ class AuthAbleScreen extends GetView<SignUpController> {
                   birthDate: controller.signUpBirth.value,
                 );
                 if (result) {
+                  //TODO) 메인화면으로 바로 보내기
+                  //Get.offAllNamed(Routes.main);
                   Get.to(LoginScreen());
                 }
                 else {

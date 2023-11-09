@@ -143,7 +143,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Obx(() =>
-                        controller.isPayAble.value
+                        controller.isPayAbleReg.value
                         ? CommonButton.login(
                           text: "확인",
                           onTap: () async {

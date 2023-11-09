@@ -96,6 +96,14 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
 
   @override
   Widget build(BuildContext context) {
+    if(_paymentController.donateState.value == "REGULAR") {
+      _paymentController.updateIsPayAbleReg();
+    }
+    else {
+      _paymentController.updateIsPayAbleOnce();
+    }
+    print('>>>set된 금액 ${_paymentController.selectedAmount.value}');
+
     return Column(
       children: [
         for (var row in displayedAmountButtons)
@@ -115,7 +123,12 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                         selectedAmountInt = 0;
                         print('선택된 금액: '+selectedAmountInt.toString());
                         _paymentController.selectedAmount.value = selectedAmountInt;
-                        _paymentController.updateIsPayAble();
+                        if(_paymentController.donateState.value == "REGULAR") {
+                          _paymentController.updateIsPayAbleReg();
+                        }
+                        else {
+                          _paymentController.updateIsPayAbleOnce();
+                        }
                         toggleExpansion();
                       }
                       setState(() {
@@ -123,7 +136,12 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                         selectedAmountInt = int.parse(row[i].replaceAll(',', ''));
                         print('선택된 금액: '+selectedAmountInt.toString());
                         _paymentController.selectedAmount.value = selectedAmountInt;
-                        _paymentController.updateIsPayAble();
+                        if(_paymentController.donateState.value == "REGULAR") {
+                          _paymentController.updateIsPayAbleReg();
+                        }
+                        else {
+                          _paymentController.updateIsPayAbleOnce();
+                        }
                       });
                     },
                   ),
