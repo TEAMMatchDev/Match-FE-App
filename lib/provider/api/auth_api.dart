@@ -11,6 +11,34 @@ import 'package:match/model/user/user.dart';
 
 class UserAuthApi {
 
+  ///<h2>1-2API | 카카오 로그인 --카카오 토큰으로 access token 발급</h2>
+  static Future<bool> setKakaoLogin({
+    required String token,
+}) async {
+    try {
+      Response response = await DioServices().to().post("/auth/kakao",
+        data: {"accessToken": token});
+
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
+        logger.e(response.data[CODE]);
+      }
+
+      String accessToken = response.data[RESULT]["accessToken"];
+      DioServices().setAccessToken(accessToken);
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
+
   ///<h2>1-6API | 유저 로그인</h2>
   static Future<bool> setSignIn({
     required String email,
