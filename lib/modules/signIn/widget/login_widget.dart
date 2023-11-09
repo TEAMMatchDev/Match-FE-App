@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import '../../../provider/service/auth_service.dart';
 import '../../../util/const/style/global_color.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //카카오 로그인

@@ -9,22 +9,36 @@ import '../api/mypage_api.dart';
 
 class AuthService extends GetxService{
   static AuthService get to => Get.find();
+  ///튜토리얼 진행시 사용자 이름을 출력하기 위한 변수
+  ///회원가입시 저장해줘야함
+  RxString name = "".obs;
+  RxString nickName = "".obs;
+
   Rx<Profile> myProfile = tmpProfile.obs;
   Rx<Donator> donatorProfile = tmpDonator.obs;
 
   void setPhone(String phone) {
     myProfile.value = myProfile.value.copyWith(phone: phone);
   }
-  @override
-  void onInit() async {
-    super.onInit();
+  ///<h2>회원 정보 가져오는 함수</h2>
+  ///로그인 이후 가져와야하기 때문에 onInit에서 분리
+  Future<void> getUserInfo() async{
     var tmpResult = await MypageApi.getProfile();
     if (tmpResult != null) {
       myProfile.value = tmpResult;
     }
-    var tmpDonatorResult = await OrderApi.getProfile();
-    if(tmpDonatorResult != null) {
-      donatorProfile.value = tmpDonatorResult;
+  }
+  ///<h2>후원자 정보 가져오는 함수</h2>
+  ///로그인 이후 가져와야하기 때문에 onInit에서 분리
+  Future<void> getDonatorInfo() async{
+    var tmpResult = await MypageApi.getProfile();
+    if (tmpResult != null) {
+      myProfile.value = tmpResult;
     }
+  }
+  @override
+  void onInit() async {
+    super.onInit();
+
   }
 }
