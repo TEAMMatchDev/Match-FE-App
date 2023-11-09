@@ -46,7 +46,7 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
         /// 카카오톡이 설치 되어있는 경우
         try {
           OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
-          print('카카오톡으로 로그인 성공 (by.앱) ${token.accessToken}');
+          print('카카오톡으로 로그인 성공 (by.앱) ${token.accessToken}기');
 
           //TODO) setKakaoLogin 호출
           var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
