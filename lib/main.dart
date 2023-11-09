@@ -51,6 +51,10 @@ Future<void> initService() async {
   await GetStorage.init();
   await setAlarm();
   await DynamicLink.setUp();
+
+  // 푸시 알림 설정 및 권한 요청
+  await requestPermission();
+  await setAlarm();
 }
 
 Future<String?> initFirebaseMsg() async {
@@ -61,6 +65,36 @@ Future<String?> initFirebaseMsg() async {
   String? token = await messaging.getToken();
   logger.d('FCM 토큰: $token');
   return token;
+}
+
+// 알림권한 관련 APNS 토큰 발급 코드
+Future<void> requestPermission() async {
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+    provisional: false,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+    // Optionally handle the case where the user granted permission
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+    // Optionally handle the case where the user granted provisional permission
+  } else {
+    print('User declined or has not accepted permission');
+    // Optionally handle the case where the user declined or has not accepted permission
+  }
+
+  // APNS 토큰 가져오기
+  String? apnsToken = await messaging.getAPNSToken();
+  if (apnsToken != null) {
+    // 여기에서 APNS 토큰을 사용하세요. 예를 들어 서버에 저장하거나 로그로 출력할 수 있습니다.
+    print('APNS Token: $apnsToken');
+  }
 }
 
 Future<String> getDeviceId() async {
