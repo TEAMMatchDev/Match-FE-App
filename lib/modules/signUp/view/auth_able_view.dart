@@ -109,6 +109,7 @@ class AuthAbleScreen extends GetView<SignUpController> {
               onTap: () async {
                 await PermissionHandler.checkGalleryPermission();
                 await PermissionHandler.checkAlarmPermission();
+
                 var result = await UserAuthApi.setSignUp(
                   email: controller.signUpId.value,
                   password: controller.signUpPw.value,
