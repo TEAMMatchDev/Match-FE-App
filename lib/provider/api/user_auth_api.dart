@@ -30,11 +30,9 @@ class UserAuthApi {
         logger.e(response.data[CODE]);
       }
 
-      logger.e('>>> 로그인 성공 후 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}');
+      logger.i('>>> 로그인 성공 후 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}');
       String accessToken = response.data[RESULT]["accessToken"];
       DioServices().setAccessToken(accessToken);
-      //DioServices().tmpToken = response.data[RESULT]["accessToken"];
-
 
       return response.data[SUCCESS];
     } catch(e){
