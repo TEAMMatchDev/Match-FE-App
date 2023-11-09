@@ -16,7 +16,7 @@ class LoginBinding implements Bindings {
     Get.put(SignUpController());
 
     //profile 정보는 로그인 이후에 가져와야기 때문에
-    //auth serivce 초기화 코드 주석처리
-    // Get.put(AuthService());
+    // auth serivce 초기화 코드 주석처리
+    Get.put(AuthService());
   }
 }
