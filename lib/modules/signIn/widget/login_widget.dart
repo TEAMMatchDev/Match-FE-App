@@ -11,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import '../../../provider/service/auth_service.dart';
 import '../../../util/const/style/global_color.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //카카오 로그인
@@ -343,6 +344,8 @@ class _LoginState extends State<LoginWidget> {
     return GestureDetector(
       onTap: () async {
         // 홈-후원처 개발을 위한 임시 라우팅
+        AuthService.to.name.value = "테스트";
+        AuthService.to.nickName.value = "테스트";
         await Get.to(() => InitTutorialScreen());
         // await Get.offAllNamed(Routes.main);
         Get.to(EmailLoginScreen());

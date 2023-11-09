@@ -30,7 +30,7 @@ class InitTutorialScreen extends StatelessWidget {
                       ),
                       TextSpan(
                         text:
-                            "ATCH 서비스 체험을 위해\n${AuthService.to.myProfile.value.name}님께 기부금 1원을 드렸어요.",
+                            "ATCH 서비스 체험을 위해\n${AuthService.to.name.value}님께 기부금 1원을 드렸어요.",
                         style: AppTextStyles.S1SemiBold14.copyWith(
                             fontSize: 20.sp),
                       ),
