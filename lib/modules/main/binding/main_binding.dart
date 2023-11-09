@@ -3,6 +3,7 @@ import 'package:match/modules/donate/controller/donate_controller.dart';
 import 'package:match/modules/event/controller/event_controller.dart';
 
 import '../../../provider/service/auth_service.dart';
+import '../../../provider/service/fcm_service.dart';
 import '../../home/controller/home_controller.dart';
 import '../controller/main_controller.dart';
 
@@ -12,6 +13,7 @@ class MainBiding implements Bindings {
   @override
   void dependencies() {
     Get.put(MainController());
+    Get.put(FcmService());
 
     Get.put(AuthService());
     Get.put(HomeController());
