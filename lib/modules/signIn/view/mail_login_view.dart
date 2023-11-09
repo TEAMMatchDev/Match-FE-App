@@ -19,7 +19,7 @@ import '../../../util/const/style/global_color.dart';
 
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //카카오 로그인
 
-import 'package:match/provider/api/user_auth_api.dart';
+import 'package:match/provider/api/auth_api.dart';
 
 import '../../../provider/routes/routes.dart';
 import '../controller/login_controller.dart';

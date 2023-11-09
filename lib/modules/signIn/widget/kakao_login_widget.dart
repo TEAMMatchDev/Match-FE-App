@@ -4,14 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
+import 'package:match/provider/api/auth_api.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 class KakaoLoginWidget extends StatefulWidget {
+  final LoginController loginController = Get.find<LoginController>();
+
   @override
   _KakaoLoginState createState() => _KakaoLoginState();
 }
@@ -43,7 +48,13 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
           OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
           print('카카오톡으로 로그인 성공 (by.앱) ${token.accessToken}');
 
-          Get.toNamed(Routes.main);
+          //TODO) setKakaoLogin 호출
+          var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
+          if(result) {
+            Get.offAllNamed(Routes.main);
+          } else {
+            Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+          }
         } catch (error) {
           print('카카오톡으로 로그인 실패 1) $error');
 
