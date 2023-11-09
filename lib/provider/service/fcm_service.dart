@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/alarm_screen_type.dart';
 import 'package:match/provider/routes/routes.dart';
 
 import '../../util/const/style/global_logger.dart';
@@ -32,6 +33,7 @@ class FcmService extends GetxService {
     await setAlarm();
   }
 
+  ///* alarm click event를 onMessageOpenApp listener로 등록하는 메소드
   static Future<void> setupInteractedMessage() async {
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
@@ -42,9 +44,32 @@ class FcmService extends GetxService {
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
   }
 
+  ///* alarm click event 설정하는 메소드
   static void _handleMessage(RemoteMessage message) {
     logger.d(message);
-    Get.toNamed(Routes.alarm);
+    //default 값 선언
+    AlarmRoutes alarmRoutes = AlarmRoutes.ALARM_SCREEN;
+    message.data.forEach((key, value) {
+      logger.d("key: $key, value: $value");
+      ///* screen type 변수 업데이트
+      if (key == "screen") {
+        if (alarmScreen[value] != null) {
+          alarmRoutes = alarmScreen[value]!;
+        }
+      }
+      ///* screen arugment에 따라 화면 이동
+      if ((alarmRoutes == AlarmRoutes.MATCH_SCREEN ||
+              alarmRoutes == AlarmRoutes.MATCH_SCREEN) &&
+          key == "projectId") {
+        Get.toNamed(alarmRoutes.routes, arguments: {"projectId": value});
+      } else if (alarmRoutes == AlarmRoutes.HOME_SCREEN) {
+        Get.toNamed(alarmRoutes.routes);
+      } else if (alarmRoutes == AlarmRoutes.EVENT_SCREEN && key == "eventId") {
+        Get.toNamed(alarmRoutes.routes, arguments: {"eventId": value});
+      } else {
+        Get.toNamed(Routes.alarm);
+      }
+    });
   }
 
   static Future<void> showNotification(
@@ -114,8 +139,6 @@ class FcmService extends GetxService {
     });
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   }
-
-
 
   Future<String?> initFirebaseMsg() async {
     // FirebaseMessaging 인스턴스 초기화
