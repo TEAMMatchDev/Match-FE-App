@@ -12,7 +12,7 @@ import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/modules/signUp/view/agreement_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
 import 'package:match/modules/signUp/widget/select_gender_widget.dart';
-import 'package:match/provider/api/user_auth_api.dart';
+import 'package:match/provider/api/auth_api.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_date_picker.dart';
