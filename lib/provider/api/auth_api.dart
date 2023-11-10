@@ -39,6 +39,34 @@ class UserAuthApi {
     }
   }
 
+  ///<h2>1-11API | 애플 로그인</h2>
+  static Future<bool> setAppleLogin({
+    required String accessToken,
+  }) async {
+    try {
+      Response response = await DioServices().to().post("/auth/apple",
+          data: {"accessToken": accessToken});
+
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
+        logger.e(response.data[CODE]);
+      }
+
+      String token = response.data[RESULT]["accessToken"];
+      DioServices().setAccessToken(token);
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
+
   ///<h2>1-6API | 유저 로그인</h2>
   static Future<bool> setSignIn({
     required String email,

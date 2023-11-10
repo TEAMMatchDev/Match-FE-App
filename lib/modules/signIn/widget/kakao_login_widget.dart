@@ -46,7 +46,7 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
         /// 카카오톡이 설치 되어있는 경우
         try {
           OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
-          print('카카오톡으로 로그인 성공 (by.앱) ${token.accessToken}기');
+          print('카카오톡으로 로그인 성공 (by.앱) ${token.accessToken}');
 
           //TODO) setKakaoLogin 호출
           var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
@@ -75,7 +75,7 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
             } else {
               Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
             }
-            Get.toNamed(Routes.main);
+
           } catch (error) {
             print('카카오계정으로 로그인 실패 1) $error');
           }
@@ -95,7 +95,6 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
             Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
           }
 
-          Get.toNamed(Routes.main);
         } catch (error) {
           print('카카오계정으로 로그인 실패 2) $error');
         }

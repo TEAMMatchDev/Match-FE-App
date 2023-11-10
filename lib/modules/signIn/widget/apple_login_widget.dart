@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:match/model/enum/login_type.dart';
+import 'package:match/provider/api/auth_api.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AppleLoginWidget extends StatefulWidget {
   @override
@@ -15,13 +20,58 @@ class AppleLoginWidget extends StatefulWidget {
 }
 
 class _AppleLoginState extends State<AppleLoginWidget> {
+  LoginPlatform _loginPlatform = LoginPlatform.none;
 
+  Future<void> signInWithApple() async {
+    try {
+      final AuthorizationCredentialAppleID credential =
+      await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        webAuthenticationOptions: WebAuthenticationOptions(
+          clientId: dotenv.env['appleServiceId']!,
+          redirectUri: Uri.parse(dotenv.env['appleRedirectUri']!),
+        ),
+      );
+
+
+      setState(() {
+        _loginPlatform = LoginPlatform.apple;
+      });
+
+      // 인증 성공 후 처리
+      print('>>> 애플로그인 사용자 정보 : credential 전체 = $credential');
+      print('>>> 애플로그인 사용자 정보 : userIdentifier = ${credential.userIdentifier}');
+      print('>>> 애플로그인 사용자 정보 : givenName = ${credential.givenName}');
+      print('>>> 애플로그인 사용자 정보 : familyName = ${credential.familyName}');
+      print('>>> 애플로그인 사용자 정보 : authorizationCode = ${credential.authorizationCode}');
+      print('>>> 애플로그인 사용자 정보 : email = ${credential.email}');
+      print('>>> 애플로그인 사용자 정보 : identityToken = ${credential.identityToken}');
+      print('>>> 애플로그인 사용자 정보 : state = ${credential.state}');
+
+      var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
+      if (result) {
+        Fluttertoast.showToast(msg: "애플 로그인 성공!");
+        print(">>> 애플로그인 accessToken: ${credential.identityToken}");
+        Get.offAllNamed(Routes.main);
+      } else {
+        Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+      }
+
+      // 예: 서버로 인증 정보를 보내거나 사용자 정보를 저장
+    } catch (error) {
+      // 인증 실패시 에러 처리
+      print(error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(Routes.home);
+        signInWithApple();
       },
       child: Container(
         width: 300.w,
@@ -52,3 +102,4 @@ class _AppleLoginState extends State<AppleLoginWidget> {
   }
 
 }
+
