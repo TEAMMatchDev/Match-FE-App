@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
+import 'package:match/provider/api/util/dio_services.dart';
+import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/method/dynamic_link.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:kakao_flutter_sdk_common/kakao_flutter_sdk_common.dart';
@@ -44,6 +46,7 @@ Future<void> initService() async {
 
   // // 푸시 알림 설정 및 권한 요청
   await requestIOSPermission();
+
   // await setAlarm();
 }
 // 알림권한 관련 APNS 토큰 발급 코드

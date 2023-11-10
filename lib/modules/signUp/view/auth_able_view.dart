@@ -15,6 +15,7 @@ import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import 'package:match/util/method/permission_handler.dart';
+import '../../../provider/service/auth_service.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/style/global_color.dart';
 
@@ -23,6 +24,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import '../../../provider/routes/routes.dart';
+import '../../tutorial/view/init_tutorial_view.dart';
 
 class AuthAbleScreen extends GetView<SignUpController> {
   const AuthAbleScreen({super.key});
@@ -119,9 +121,11 @@ class AuthAbleScreen extends GetView<SignUpController> {
                   birthDate: controller.signUpBirth.value,
                 );
                 if (result) {
-                  //TODO) 메인화면으로 바로 보내기
-                  //Get.offAllNamed(Routes.main);
-                  Get.to(LoginScreen());
+                  AuthService.to.name.value = controller.signUpName.value;
+                  AuthService.to.nickName.value = controller.signUpName.value;
+                  ///* 최초 회원가입 시 튜토리얼 화면 진입
+                  Get.to(()=>const InitTutorialScreen());
+                  // Get.to(LoginScreen());
                 }
                 else {
                   Fluttertoast.showToast(msg: "회원가입에 실패했습니다. ");

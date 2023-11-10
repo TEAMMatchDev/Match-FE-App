@@ -7,6 +7,8 @@ import '../../model/recent_search/recent_search.dart';
 enum StorageKey {
   NAME_SEARCH,
   FCM_TOKEN,
+  REFRESH_TOKEN,
+  ACCESS_TOKEN,
   DEVICE_ID,
   PROJECT_SEARCH;
 }

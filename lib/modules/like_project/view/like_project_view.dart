@@ -12,7 +12,7 @@ class LikeProjectScreen extends GetView<LikeProjectController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar.basic("오늘의 후원"),
+      appBar: CommonAppBar.basic("내가 찜한 기부처"),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h),
         child: Obx(
