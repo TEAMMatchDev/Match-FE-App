@@ -94,6 +94,7 @@ class PaymentController extends GetxController {
   void onInit() async {
     super.onInit();
     await AuthService.to.getDonatorInfo();
+
     payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
     cardInfoList.assignAll(await OrderApi.getCardList());
     cardCodeList.assignAll(

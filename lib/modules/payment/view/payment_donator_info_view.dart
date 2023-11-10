@@ -16,7 +16,7 @@ import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
 class PaymentDonatorScreen extends GetView<PaymentController> {
-  const PaymentDonatorScreen({super.key});
+  PaymentDonatorScreen({Key? key}) : super(key: key);
 
   String formatPhoneNumber(String rawNumber) {
     if (rawNumber.length != 11) return rawNumber;
