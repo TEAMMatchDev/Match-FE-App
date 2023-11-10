@@ -59,6 +59,7 @@ class UserAuthApi {
 
       String token = response.data[RESULT]["accessToken"];
       DioServices().setAccessToken(token);
+      //print(">>> (애플로그인) 사용자의 accessToken: ${token}");
 
       return response.data[SUCCESS];
     } catch (e) {

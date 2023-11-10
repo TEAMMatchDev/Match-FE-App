@@ -54,7 +54,10 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
       if (result) {
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
-        print(">>> 애플로그인 accessToken: ${credential.identityToken}");
+
+        //TODO) 로그인 후 사용자의 정보 저장
+
+
         Get.offAllNamed(Routes.main);
       } else {
         Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
