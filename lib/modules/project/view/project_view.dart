@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/regular_status.dart';
 import 'package:match/model/enum/search_status.dart';
+import 'package:match/modules/payment/binding/payment_binding.dart';
 import 'package:match/modules/payment/view/payment_donator_info_view.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
 import 'package:match/provider/api/comment_api.dart';
@@ -246,7 +247,7 @@ class ProjectScreen extends GetView<ProjectController> {
                       child: CommonButton.login(
                         text: "기부하기",
                         onTap: () async {
-                          Get.to(const PaymentDonatorScreen());
+                          Get.to(() => PaymentDonatorScreen(), binding: PaymentBinding());
                         },
                       ),
                     )

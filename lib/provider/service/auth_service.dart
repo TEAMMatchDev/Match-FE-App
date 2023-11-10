@@ -31,9 +31,10 @@ class AuthService extends GetxService{
   ///<h2>후원자 정보 가져오는 함수</h2>
   ///로그인 이후 가져와야하기 때문에 onInit에서 분리
   Future<void> getDonatorInfo() async{
-    var tmpResult = await MypageApi.getProfile();
+    var tmpResult = await OrderApi.getProfile();
     if (tmpResult != null) {
-      myProfile.value = tmpResult;
+      donatorProfile.value = tmpResult;
+      print(">>> 기부자 프로필 조회: ${donatorProfile.value}");
     }
   }
   @override

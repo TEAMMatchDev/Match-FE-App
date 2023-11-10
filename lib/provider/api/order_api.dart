@@ -78,10 +78,9 @@ class OrderApi {
   static Future<Donator?> getProfile() async {
     try {
       Response response = await DioServices().to().post("/order/user");
-
       var data = response.data[RESULT];
 
-      if (data['name'] != null && data['birthDay'] != null && data['phoneNumber'] != null) {
+      if (data != null) {
         return Donator.fromJson(response.data[RESULT]);
       } else {
         logger.e("response 값이 아무것도 담겨있지 않습니다.");
