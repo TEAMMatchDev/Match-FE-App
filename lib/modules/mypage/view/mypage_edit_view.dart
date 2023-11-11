@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
+import 'package:match/provider/api/util/dio_services.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../provider/service/auth_service.dart';
@@ -85,8 +87,25 @@ class MypageEditScreen extends StatelessWidget {
           color: AppColors.divider1,
         ),
         const MypageListTile(title: "결제 수단 관리"),
-        const MypageListTile(title: "로그아웃"),
-        const MypageListTile(title: "탈퇴하기"),
+        MypageListTile(
+          title: "로그아웃",
+          onTap: () async {
+            DioServices().removeAccessToken();
+            Fluttertoast.showToast(msg: "로그아웃 되었습니다");
+            Get.offAllNamed(Routes.login);
+          },
+        ),
+        MypageListTile(
+          title: "탈퇴하기",
+          isLast: true,
+          leading: true,
+          onTap: () async {
+            DioServices().removeAccessToken();
+            //TODO: 탈퇴하기 API
+            Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
+            Get.offAllNamed(Routes.login);
+          },
+        )
       ]),
     );
   }
