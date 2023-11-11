@@ -150,9 +150,9 @@ class HomeScreen extends GetView<HomeController> {
                                   SizedBox(
                                     height: 9.h,
                                   ),
-                                  shareChip(
-                                      imgUrl: flame.image,
-                                      donationId: flame.donationId)
+                                  // shareChip(
+                                  //     imgUrl: flame.image,
+                                  //     donationId: flame.donationId)
                                 ],
                               );
                             },

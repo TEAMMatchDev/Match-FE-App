@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/policy_view.dart';
+import 'package:match/modules/mypage/view/service_center_view.dart';
 import 'package:match/modules/mypage/view/setting_view.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../provider/routes/routes.dart';
@@ -91,17 +92,17 @@ class MypageScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     MypageListTile(
-                        icon: "list",
+                        icon: "donation",
                         title: "기부내역 / 해지하기",
                         onTap: (() async {
                           await Get.toNamed(Routes.total_pay);
                         })),
-                    MypageListTile(
-                        icon: "donation",
-                        title: "내가 찜한 기부처",
-                        onTap: (() async {
-                          await Get.toNamed(Routes.like_project);
-                        })),
+                    // MypageListTile(
+                    //     icon: "donation",
+                    //     title: "내가 찜한 기부처",
+                    //     onTap: (() async {
+                    //       await Get.toNamed(Routes.like_project);
+                    //     })),
                     MypageListTile(
                         icon: "notice",
                         title: "공지사항",
@@ -112,7 +113,7 @@ class MypageScreen extends StatelessWidget {
                       icon: "setting",
                       title: "환경설정",
                       onTap: () async {
-                        await Get.to(const SettingScreen());
+                        await Get.toNamed(Routes.setting);
                       },
                     ),
                     MypageListTile(
@@ -122,55 +123,16 @@ class MypageScreen extends StatelessWidget {
                         Get.to(() => const PolicyScreen());
                       },
                     ),
-                    const MypageListTile(icon: "client", title: "고객센터"),
+                    MypageListTile(
+                      icon: "client",
+                      title: "고객센터",
+                      isLast: true,
+                      onTap: () async {
+                        Get.to(() => const ServiceCenterScreen());
+                      },
+                    ),
                   ],
                 ))
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MypageListTile extends StatelessWidget {
-  final Future<void> Function()? onTap;
-  final String title;
-  final String? icon;
-  final bool isLast;
-
-  const MypageListTile({
-    super.key,
-    this.onTap,
-    required this.title,
-    this.icon,
-    this.isLast = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-            border: isLast
-                ? null
-                : Border(
-                    bottom: BorderSide(color: AppColors.divider1, width: 1.h))),
-        padding: EdgeInsets.symmetric(vertical: 16.h),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            icon != null
-                ? SvgPicture.asset(
-                    "${iconDir}mypage/ic_${icon}_18.svg",
-                    width: 18.w,
-                  )
-                : const SizedBox.shrink(),
-            SizedBox(
-              width: 14.w,
-            ),
-            Text(title, style: AppTextStyles.T1Bold14),
           ],
         ),
       ),

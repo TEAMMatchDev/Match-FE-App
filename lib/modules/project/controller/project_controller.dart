@@ -17,7 +17,7 @@ class MatchTabBar extends GetxController
   @override
   void onInit() {
     super.onInit();
-    controller = TabController(vsync: this, length: 3);
+    controller = TabController(vsync: this, length: 2);
   }
 
   @override
@@ -49,7 +49,6 @@ class ProjectController extends GetxController {
     if (!(ProjectApi.project.totalCnt ~/ PAGINATION_SIZE < index) &&
         !ProjectApi.project.isLast) {
       ProjectApi.project.currentpage = index;
-      searchStatus.value = SEARCH_STATUS.SEARCH;
       projectHistories.addAll(await ProjectApi.getProjectHistoryList(
         projectId: projectId,
         getMore: true,
@@ -57,9 +56,9 @@ class ProjectController extends GetxController {
     }
   }
 
-  //* 댓글
-  Rx<TextEditingController> commentTextController = TextEditingController().obs;
-  Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
+  // //* 댓글
+  // Rx<TextEditingController> commentTextController = TextEditingController().obs;
+  // Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
 
   @override
   void onInit() async {
