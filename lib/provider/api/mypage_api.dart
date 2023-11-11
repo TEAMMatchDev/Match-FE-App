@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
+import 'package:match/util/method/get_storage.dart';
 
 import '../../model/banner/banners.dart';
 import '../../model/profile/profile.dart';
@@ -26,8 +27,8 @@ class MypageApi {
         "name": nickName,
       });
 
-      Response response = await DioServices().to().patch("/users/profile",
-          data: formData);
+      Response response =
+          await DioServices().to().patch("/users/profile", data: formData);
 
       if (!response.data[SUCCESS]) {
         Fluttertoast.showToast(msg: response.data[MSG]);
@@ -89,6 +90,24 @@ class MypageApi {
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
+      return false;
+    }
+  }
+
+  ///<h2>2-4 API | 로그아웃 ; 알림 device ID 제거</h2>
+  static Future<bool> logout() async {
+    try {
+      var deviceId = await GetStorageUtil.getToken(StorageKey.DEVICE_ID);
+      DioServices().addHeader("DEVICE_ID", deviceId ?? "");
+      Response response = await DioServices().to().get(
+            "/auth/logout",
+          );
+      if (response.data[SUCCESS]) {
+        DioServices().removeHeader('DEVICE_ID');
+      }
+      return response.data[SUCCESS];
+    } catch (e) {
+      Fluttertoast.showToast(msg: "로그아웃에 실패하였습니다. ${e}");
       return false;
     }
   }

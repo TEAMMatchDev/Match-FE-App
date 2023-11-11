@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
+import 'package:match/provider/api/mypage_api.dart';
 import 'package:match/provider/api/util/dio_services.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import '../../../provider/routes/routes.dart';
@@ -91,8 +92,11 @@ class MypageEditScreen extends StatelessWidget {
           title: "로그아웃",
           onTap: () async {
             DioServices().removeAccessToken();
-            Fluttertoast.showToast(msg: "로그아웃 되었습니다");
-            Get.offAllNamed(Routes.login);
+            var result = await MypageApi.logout();
+            if (result) {
+              Fluttertoast.showToast(msg: "로그아웃 되었습니다");
+              Get.offAllNamed(Routes.login);
+            }
           },
         ),
         MypageListTile(
@@ -100,10 +104,11 @@ class MypageEditScreen extends StatelessWidget {
           isLast: true,
           leading: true,
           onTap: () async {
-            DioServices().removeAccessToken();
-            //TODO: 탈퇴하기 API
-            Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
-            Get.offAllNamed(Routes.login);
+            //TODO: 탈퇴 API 개발 이후에 활성화
+            // DioServices().removeAccessToken();
+            // //TODO: 탈퇴하기 API
+            // Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
+            // Get.offAllNamed(Routes.login);
           },
         )
       ]),

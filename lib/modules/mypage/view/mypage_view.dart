@@ -122,8 +122,14 @@ class MypageScreen extends StatelessWidget {
                         Get.to(() => const PolicyScreen());
                       },
                     ),
-                    const MypageListTile(
-                        icon: "client", title: "고객센터", isLast: true),
+                    MypageListTile(
+                      icon: "client",
+                      title: "고객센터",
+                      isLast: true,
+                      onTap: () async {
+                        //TODO:add 고객센터
+                      },
+                    ),
                   ],
                 ))
           ],

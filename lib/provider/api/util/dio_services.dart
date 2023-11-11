@@ -47,4 +47,12 @@ class DioServices {
   void removeAccessToken() {
     _dio.options.headers.remove(TOKEN_HEADER);
   }
+  // 헤더에 값을 업데이트하는 메서드 추가
+  void addHeader(String key, String value) {
+    _dio.options.headers[key] = value;
+  }
+  // 헤더에 값을 업데이트하는 메서드 추가
+  void removeHeader(String key) {
+    _dio.options.headers.remove(key);
+  }
 }
