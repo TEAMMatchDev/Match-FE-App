@@ -11,7 +11,9 @@ import '../controller/main_controller.dart';
 class MainBiding implements Bindings {
   @override
   void dependencies() {
-    Get.put(MainController());
+    //Get.put(MainController());
+    Get.lazyPut<MainController>(() => MainController());
+
 
     Get.put(AuthService());
     Get.put(HomeController());
