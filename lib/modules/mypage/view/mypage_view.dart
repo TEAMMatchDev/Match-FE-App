@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/policy_view.dart';
+import 'package:match/modules/mypage/view/service_center_view.dart';
 import 'package:match/modules/mypage/view/setting_view.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../provider/routes/routes.dart';
@@ -127,7 +128,7 @@ class MypageScreen extends StatelessWidget {
                       title: "고객센터",
                       isLast: true,
                       onTap: () async {
-                        //TODO:add 고객센터
+                        Get.to(() => const ServiceCenterScreen());
                       },
                     ),
                   ],
