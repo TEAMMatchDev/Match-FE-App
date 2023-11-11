@@ -11,8 +11,8 @@ class AuthService extends GetxService{
   static AuthService get to => Get.find();
   ///튜토리얼 진행시 사용자 이름을 출력하기 위한 변수
   ///회원가입시 저장해줘야함
-  RxString name = "".obs;
-  RxString nickName = "".obs;
+  Rx<String> name = "".obs;
+  Rx<String> nickName = "".obs;
 
   Rx<Profile> myProfile = tmpProfile.obs;
   Rx<Donator> donatorProfile = tmpDonator.obs;
@@ -26,6 +26,8 @@ class AuthService extends GetxService{
     var tmpResult = await MypageApi.getProfile();
     if (tmpResult != null) {
       myProfile.value = tmpResult;
+      name.value = myProfile.value.name;
+      nickName.value = myProfile.value.nickName;
       print(">>> 로그인한 사용자 프로필 조회: ${myProfile.value}");
     }
   }

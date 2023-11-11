@@ -116,7 +116,7 @@ var tmpMatchPay = const MatchPay(
 var tmpProfile = const Profile(
     profileImgUrl:
         "https://phinf.pstatic.net/contact/20220316_168/1647357936388otkFi_JPEG/image.jpg",
-    name: "임현우",
+    name: "test",
     nickName: "test",
     socialType: "NORMAL",
     email: "gusdn8926@naver.com",

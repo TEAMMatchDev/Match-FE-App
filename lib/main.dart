@@ -37,7 +37,6 @@ Future<void> main() async {
 //초기 구동
 Future<void> initService() async {
   await dotenv.load(fileName: ".env");
-  Get.put(FcmService());
   //* Widget Binding 초기화및 splash 화면
   var widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -49,22 +48,10 @@ Future<void> initService() async {
 
   /// * GetStorage 초기화
   await GetStorage.init();
-  await setAlarm();
   await DynamicLink.setUp();
 
   // 푸시 알림 설정 및 권한 요청
   await requestPermission();
-  await setAlarm();
-}
-
-Future<String?> initFirebaseMsg() async {
-  // FirebaseMessaging 인스턴스 초기화
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  // 토큰 얻기
-  String? token = await messaging.getToken();
-  logger.d('FCM 토큰: $token');
-  return token;
 }
 
 // 알림권한 관련 APNS 토큰 발급 코드
@@ -94,88 +81,6 @@ Future<void> requestPermission() async {
   if (apnsToken != null) {
     // 여기에서 APNS 토큰을 사용하세요. 예를 들어 서버에 저장하거나 로그로 출력할 수 있습니다.
     print('APNS Token: $apnsToken');
-  }
-}
-
-Future<String> getDeviceId() async {
-  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  if (Platform.isAndroid) {
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    return androidInfo.androidId;
-  } else if (Platform.isIOS) {
-    IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-    return iosInfo.identifierForVendor;
-  }
-  return '';
-}
-
-///* fcm(알람) 관련 권한, 기기 등록 api, listener 등록
-Future<void> setAlarm() async {
-  ///* alarm 관련 토큰 및 api
-  // if (GetStorageUtil.getToken(StorageKey.FCM_TOKEN) != null &&
-  //     GetStorageUtil.getToken(StorageKey.DEVICE_ID) != null) {
-  // } else {
-  var fcmToken = await initFirebaseMsg();
-  GetStorageUtil.addToken(StorageKey.FCM_TOKEN, fcmToken ?? "");
-  var deviceId = await getDeviceId();
-  GetStorageUtil.addToken(StorageKey.DEVICE_ID, deviceId);
-  var tmpResult = await NotificationApi.setAlarmToken(
-      fcmToken: fcmToken!, deviceId: deviceId);
-  logger.d(tmpResult);
-  // }
-  // await FirebaseMessaging.instance.setAutoInitEnabled(true);
-  FirebaseMessaging.instance.onTokenRefresh.listen((token) async {
-    logger.w("!!!refreseh Token: $token");
-    GetStorageUtil.addToken(StorageKey.FCM_TOKEN, token ?? "");
-    var tmpResult = await NotificationApi.setAlarmToken(
-        fcmToken: token!, deviceId: deviceId);
-  }).onError((err) {
-    logger.e("!!!refreseh Token: $err");
-  });
-
-  ///* alarm listener 등록
-  FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
-    logger.w("!!!onMessage: $message");
-    if (message != null) {
-      if (message.notification != null) {
-        logger.d(message.notification!.title);
-        logger.d(message.notification!.body);
-        FcmService.showNotification(
-            title: message.notification!.title ?? "",
-            content: message.notification!.body ?? "");
-      }
-    }
-  });
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage? message) {
-    logger.w("!!!onMessageOpenedApp: $message");
-    if (message != null) {
-      if (message.notification != null) {
-        logger.d(message.notification!.title);
-        logger.d(message.notification!.body);
-        FcmService.showNotification(
-            title: message.notification!.title ?? "",
-            content: message.notification!.body ?? "");
-      }
-    }
-  });
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-}
-
-@pragma('vm:entry-point')
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
-
-  logger.w("!!!Handling a background message: ${message.messageId}");
-  if (message != null) {
-    if (message.notification != null) {
-      logger.d(message.notification!.title);
-      logger.d(message.notification!.body);
-      FcmService.showNotification(
-          title: message.notification!.title ?? "",
-          content: message.notification!.body ?? "");
-    }
   }
 }
 

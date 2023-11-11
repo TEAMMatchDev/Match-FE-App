@@ -8,3 +8,4 @@ const String CONTENTS = "contents";
 const String NOTIFICATIONS = "notificationLists";
 ///* pagination 기본 호출 단위
 const int PAGINATION_SIZE = 5;
+const String TOKEN_HEADER = 'X-AUTH-TOKEN';
