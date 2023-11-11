@@ -24,9 +24,10 @@ class NicknameEditScreen extends GetView<NickNameController> {
                 child: CommonInputField.nickName(
                   textController: controller.nicknameController.value,
                   onChange: (text) async {
-                    if (text != AuthService.to.myProfile.value.nickName && text != "") {
+                    if (text != AuthService.to.myProfile.value.nickName &&
+                        text != "") {
                       controller.canChange.value = true;
-                    }else{
+                    } else {
                       controller.canChange.value = false;
                     }
                   },
@@ -36,13 +37,14 @@ class NicknameEditScreen extends GetView<NickNameController> {
             CommonButton.edit(
               isActive: controller.canChange.value,
               onTap: () async {
-                controller.newNickname.value = controller.nicknameController.value.text;
+                controller.newNickname.value =
+                    controller.nicknameController.value.text;
                 var result = await MypageApi.setNickname(
-                    nickName:  controller.newNickname.value);
-                if(result){
-                  AuthService.to.myProfile.value = AuthService.to.myProfile.value.copyWith(nickName:  controller.newNickname.value);
+                    nickName: controller.newNickname.value);
+                if (result) {
+                  AuthService.to.nickName.value = controller.newNickname.value;
                   Get.back();
-                }else{
+                } else {
                   Fluttertoast.showToast(msg: "변경에 실패하였습니다. 다시 시도해주세요");
                 }
               },

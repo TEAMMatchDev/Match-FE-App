@@ -31,9 +31,11 @@ class MypageEditScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "${AuthService.to.myProfile.value.nickName}님",
-                    style: AppTextStyles.T1Bold20,
+                  Obx(
+                    ()=> Text(
+                      "${AuthService.to.nickName.value}님",
+                      style: AppTextStyles.T1Bold20,
+                    ),
                   ),
                   SizedBox(
                     width: 5.w,
