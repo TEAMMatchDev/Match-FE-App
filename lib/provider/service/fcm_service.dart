@@ -69,9 +69,10 @@ class FcmService extends GetxService {
       } else {
         Get.toNamed(Routes.alarm);
       }
-    }
+    });
+  }
 
-        static Future<void> showNotification(
+  static Future<void> showNotification(
         {required String title, required String content})
     async {
       const AndroidNotificationDetails androidNotificationDetails =

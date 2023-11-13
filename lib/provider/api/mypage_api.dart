@@ -13,6 +13,7 @@ class MypageApi {
   static Future<Profile?> getProfile() async {
     try {
       Response response = await DioServices().to().get("/users/profile");
+      logger.i(">>> 마이페이지 프로필 정보 조회: ${response}");
 
       return Profile.fromJson(response.data[RESULT]);
     } catch (e) {

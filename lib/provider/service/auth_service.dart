@@ -28,6 +28,7 @@ class AuthService extends GetxService{
       myProfile.value = tmpResult;
       name.value = myProfile.value.name;
       nickName.value = myProfile.value.nickName;
+      print(">>> 로그인한 사용자 프로필 조회: ${myProfile.value}");
     }
   }
   ///<h2>후원자 정보 가져오는 함수</h2>
@@ -42,5 +43,6 @@ class AuthService extends GetxService{
   @override
   void onInit() async {
     super.onInit();
+
   }
 }
