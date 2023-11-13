@@ -26,7 +26,7 @@ class AuthService extends GetxService{
     var tmpResult = await MypageApi.getProfile();
     if (tmpResult != null) {
       myProfile.value = tmpResult;
-      name.value = myProfile.value.name;
+      name.value = myProfile.value.name!;
       nickName.value = myProfile.value.nickName;
       print(">>> 로그인한 사용자 프로필 조회: ${myProfile.value}");
     }
