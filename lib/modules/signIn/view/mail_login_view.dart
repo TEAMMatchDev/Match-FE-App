@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:match/model/enum/login_type.dart';
 import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/signIn/view/find_pw_view.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
@@ -115,6 +116,8 @@ class EmailLoginScreen extends GetView<LoginController> {
                       email: controller.userId.value,
                       password: controller.userPw.value);
                   if (result) {
+                    controller.setLoginPlatform(LoginPlatform.EMAIL);
+                    print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
                     Get.offAllNamed(Routes.main);
                   }
                   else {

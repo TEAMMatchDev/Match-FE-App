@@ -92,8 +92,8 @@ class PaymentController extends GetxController {
 
 
   //TODO) 애플로그인 사용자 정보
-  RxString userName = ''.obs;
   var birthState = "".obs;
+  RxString userName = ''.obs;
   RxString userBirth = ''.obs;
   RxString userPhone = ''.obs;
   Rx<TextEditingController> userNameTextController = TextEditingController().obs;

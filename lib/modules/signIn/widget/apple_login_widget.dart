@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:match/model/enum/login_type.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/provider/api/auth_api.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -20,7 +21,8 @@ class AppleLoginWidget extends StatefulWidget {
 }
 
 class _AppleLoginState extends State<AppleLoginWidget> {
-  LoginPlatform _loginPlatform = LoginPlatform.none;
+  LoginController controller = Get.put(LoginController());
+  //LoginPlatform _loginPlatform = LoginPlatform.none;
 
   Future<void> signInWithApple() async {
     try {
@@ -36,9 +38,10 @@ class _AppleLoginState extends State<AppleLoginWidget> {
         ),
       );
 
-
       setState(() {
-        _loginPlatform = LoginPlatform.apple;
+        controller.setLoginPlatform(LoginPlatform.APPLE);
+        print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
+        //_loginPlatform = LoginPlatform.APPLE;
       });
 
       // 인증 성공 후 처리
@@ -60,7 +63,6 @@ class _AppleLoginState extends State<AppleLoginWidget> {
         Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
       }
 
-      // 예: 서버로 인증 정보를 보내거나 사용자 정보를 저장
     } catch (error) {
       // 인증 실패시 에러 처리
       print(error);

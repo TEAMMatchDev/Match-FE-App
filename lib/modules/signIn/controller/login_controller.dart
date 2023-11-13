@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/login_type.dart';
 
 import '../../../model/enum/search_status.dart';
 
@@ -20,6 +21,11 @@ class LoginController extends GetxController {
   Rx<TextEditingController> newPw = TextEditingController().obs;
   Rx<TextEditingController> newPwConfirm = TextEditingController().obs;
 
+  /// 로그인한 플랫폼
+  var loginPlatformState = LoginPlatform.none.obs;
+  void setLoginPlatform(LoginPlatform platform) {
+    loginPlatformState.value = platform;
+  }
 
 
   @override
