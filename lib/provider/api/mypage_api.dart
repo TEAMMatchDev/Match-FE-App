@@ -112,4 +112,17 @@ class MypageApi {
       return false;
     }
   }
+
+  ///<h2>2-12 API | 회원탈퇴</h2>
+  static Future<bool> signOut() async {
+    try {
+      Response response = await DioServices().to().delete(
+        "/users",
+      );
+      return response.data[SUCCESS];
+    } catch (e) {
+      Fluttertoast.showToast(msg: "회원탈퇴에 실패하였습니다. ${e}");
+      return false;
+    }
+  }
 }

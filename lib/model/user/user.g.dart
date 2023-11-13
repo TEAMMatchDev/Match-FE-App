@@ -9,10 +9,10 @@ part of 'user.dart';
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       email: json['email'] as String,
       password: json['password'] as String,
-      name: json['name'] as String,
-      phone: json['phone'] as String,
+      name: json['name'] as String?,
+      phone: json['phone'] as String?,
       gender: json['gender'] as String,
-      birthDate: json['birthDate'] as String,
+      birthDate: json['birthDate'] as String?,
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
