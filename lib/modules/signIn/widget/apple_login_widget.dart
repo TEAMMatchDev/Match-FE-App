@@ -55,9 +55,6 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       if (result) {
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
 
-        //TODO) 로그인 후 사용자의 정보 저장
-
-
         Get.offAllNamed(Routes.main);
       } else {
         Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
