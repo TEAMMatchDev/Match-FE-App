@@ -106,11 +106,11 @@ class MypageEditScreen extends StatelessWidget {
           isLast: true,
           leading: true,
           onTap: () async {
-            //TODO: 탈퇴 API 개발 이후에 활성화
-            // DioServices().removeAccessToken();
-            // //TODO: 탈퇴하기 API
-            // Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
-            // Get.offAllNamed(Routes.login);
+            var result = await MypageApi.signOut();
+            if(result){
+              Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
+              Get.offAllNamed(Routes.login);
+            }
           },
         )
       ]),
