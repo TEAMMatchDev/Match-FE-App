@@ -119,9 +119,6 @@ class MypageApi {
       Response response = await DioServices().to().delete(
         "/users",
       );
-      if (response.data[SUCCESS]) {
-        DioServices().removeAccessToken();
-      }
       return response.data[SUCCESS];
     } catch (e) {
       Fluttertoast.showToast(msg: "회원탈퇴에 실패하였습니다. ${e}");
