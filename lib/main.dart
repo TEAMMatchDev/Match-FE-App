@@ -55,7 +55,7 @@ Future<void> initService() async {
   await requestPermission();
 
   //알림 클릭시 접근할때 token 저장
-  var token = await GetStorageUtil.getToken(StorageKey.ACCESS_TOKEN);
+  String? token = await GetStorageUtil.getToken(StorageKey.ACCESS_TOKEN);
   if (token != null) {
     DioServices().setAccessToken(token);
   }
