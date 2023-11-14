@@ -38,9 +38,9 @@ class FcmService extends GetxService {
         await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
-      _handleMessage(initialMessage);
+      FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
     }
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+    logger.d(initialMessage);
   }
 
   static void _handleMessage(RemoteMessage message) {
@@ -113,10 +113,9 @@ class FcmService extends GetxService {
   Future<void> setAlarm() async {
     var deviceId = await GetStorageUtil.getToken(StorageKey.DEVICE_ID);
     var token = await GetStorageUtil.getToken(StorageKey.FCM_TOKEN);
+
     ///* alarm 관련 토큰 및 api
-    if ( token != null &&
-        deviceId != null) {
-    } else {
+    if (token == null || deviceId == null) {
       var fcmToken = await initFirebaseMsg();
       GetStorageUtil.addToken(StorageKey.FCM_TOKEN, fcmToken ?? "");
 
@@ -127,6 +126,7 @@ class FcmService extends GetxService {
           fcmToken: fcmToken ?? "", deviceId: deviceId);
       logger.d(tmpResult);
     }
+
     await FirebaseMessaging.instance.setAutoInitEnabled(true);
     FirebaseMessaging.instance.onTokenRefresh.listen((token) async {
       logger.w("!!!refreseh Token: $token");
