@@ -59,7 +59,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                         CommonInputField.signInID(
                             textController : controller.idTextController.value,
                             onChange: (value) async {
-                              print(">>> 입력한 id: $value");
+                              //print(">>> 입력한 id: $value");
                               controller.userId.value = value;
                             }),
                         SizedBox(height: 20.h),
@@ -71,7 +71,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                       CommonInputField.signInPW(
                           textController : controller.pwTextController.value,
                           onChange: (value) async {
-                            print(">>> 입력한 pw: $value");
+                            //print(">>> 입력한 pw: $value");
                             controller.userPw.value = value;
                           }),
                         SizedBox(height: 27.h),
@@ -126,7 +126,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                           password: controller.userPw.value);
                       if (result) {
                         controller.setPlatform('email');
-                        print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
+                        //print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
                         Get.offAllNamed(Routes.main);
                       }
                       else {

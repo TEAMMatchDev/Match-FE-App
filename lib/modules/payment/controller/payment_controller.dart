@@ -104,7 +104,7 @@ class PaymentController extends GetxController {
   void onInit() async {
     super.onInit();
     await AuthService.to.getDonatorInfo();
-    print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}");
+    //print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}");
 
     payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
     cardInfoList.assignAll(await OrderApi.getCardList());

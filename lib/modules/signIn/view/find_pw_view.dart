@@ -55,7 +55,7 @@ class FindPwScreen extends GetView<LoginController> {
                       CommonInputField.findPwAuthEmail(
                           textController : controller.findPwEmailTextController.value,
                           onChange: (value) async {
-                            print(">>> 입력한 이메일: $value");
+                            //print(">>> 입력한 이메일: $value");
                           }),
                     ],
                   ),
