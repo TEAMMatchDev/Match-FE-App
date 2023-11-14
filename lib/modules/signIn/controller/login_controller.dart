@@ -22,10 +22,7 @@ class LoginController extends GetxController {
   Rx<TextEditingController> newPwConfirm = TextEditingController().obs;
 
   /// 로그인한 플랫폼
-  var loginPlatformState = LoginPlatform.none.obs;
-  void setLoginPlatform(LoginPlatform platform) {
-    loginPlatformState.value = platform;
-  }
+  RxString loginPlatform = ''.obs;
 
 
   @override

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -21,8 +23,7 @@ class AppleLoginWidget extends StatefulWidget {
 }
 
 class _AppleLoginState extends State<AppleLoginWidget> {
-  LoginController controller = Get.put(LoginController());
-  //LoginPlatform _loginPlatform = LoginPlatform.none;
+  LoginController controller = Get.find<LoginController>();
 
   Future<void> signInWithApple() async {
     try {
@@ -38,11 +39,6 @@ class _AppleLoginState extends State<AppleLoginWidget> {
         ),
       );
 
-      setState(() {
-        controller.setLoginPlatform(LoginPlatform.APPLE);
-        print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
-        //_loginPlatform = LoginPlatform.APPLE;
-      });
 
       // 인증 성공 후 처리
       print('>>> 애플로그인 사용자 정보 : credential 전체 = $credential');
@@ -57,6 +53,8 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
       if (result) {
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
+        controller.loginPlatform.value = 'apple';
+        print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
 
         Get.offAllNamed(Routes.main);
       } else {

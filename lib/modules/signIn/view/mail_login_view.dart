@@ -125,8 +125,8 @@ class EmailLoginScreen extends GetView<LoginController> {
                           email: controller.userId.value,
                           password: controller.userPw.value);
                       if (result) {
-                        controller.setLoginPlatform(LoginPlatform.EMAIL);
-                        print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
+                        controller.loginPlatform.value = 'email';
+                        print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
                         Get.offAllNamed(Routes.main);
                       }
                       else {

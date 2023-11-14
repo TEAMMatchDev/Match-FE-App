@@ -23,7 +23,7 @@ class KakaoLoginWidget extends StatefulWidget {
 }
 
 class _KakaoLoginState extends State<KakaoLoginWidget> {
-  LoginController controller = Get.put(LoginController());
+  LoginController controller = Get.find<LoginController>();
   bool _isKakaoTalkInstalled = true;
   var validateToken;
 
@@ -53,8 +53,8 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
           //TODO) setKakaoLogin 호출
           var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
           if(result) {
-            controller.setLoginPlatform(LoginPlatform.KAKAO);
-            print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
+            controller.loginPlatform.value = 'kakao';
+            print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
             Get.offAllNamed(Routes.main);
           } else {
             Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
@@ -75,8 +75,8 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
             //TODO) setKakaoLogin 호출
             var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
             if(result) {
-              controller.setLoginPlatform(LoginPlatform.KAKAO);
-              print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
+              controller.loginPlatform.value = 'kakao';
+              print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
               Get.offAllNamed(Routes.main);
             } else {
               Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
@@ -96,8 +96,8 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
           //TODO) setKakaoLogin 호출
           var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
           if(result) {
-            controller.setLoginPlatform(LoginPlatform.KAKAO);
-            print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
+            controller.loginPlatform.value = 'kakao';
+            print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
             Get.offAllNamed(Routes.main);
           } else {
             Fluttertoast.showToast(msg: "로그인에 실패했습니다.");

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,6 +28,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
   PaymentDonatorScreen({Key? key}) : super(key: key) {
     Get.find<PaymentController>();
   }
+  final loginController = Get.find<LoginController>();
 
   String formatPhoneNumber(String rawNumber) {
     if (rawNumber.length != 11) return rawNumber;
@@ -198,28 +201,28 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                         ),
                                         child: donatorProfile.name != '테스트'
                                             ? Padding(
-                                          padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              '${formatPhoneNumber(donatorProfile.phoneNumber)}',
-                                              style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
-                                            ),
-                                          ),
-                                        )
+                                                padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
+                                                child: Align(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Text(
+                                                    '${formatPhoneNumber(donatorProfile.phoneNumber)}',
+                                                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
+                                                  ),
+                                                ),
+                                              )
                                             : Padding(
-                                          padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: CommonInputField.userPhone(
-                                              textController: controller.userPhoneTextController.value,
-                                              onChange: (value) async {
-                                                print(">>> 입력한 전화번호: $value");
-                                                controller.userPhone.value = value;
-                                              },
-                                            ),
-                                          ),
-                                        ),
+                                                padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
+                                                child: Align(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: CommonInputField.userPhone(
+                                                    textController: controller.userPhoneTextController.value,
+                                                    onChange: (value) async {
+                                                      print(">>> 입력한 전화번호: $value");
+                                                      controller.userPhone.value = value;
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
                                       )
                                     ],
                                   ),
@@ -266,8 +269,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                   child: CommonButton.login(
                                     text: "확인",
                                     onTap: () async {
-                                      LoginController loginController = Get.put(LoginController());
-                                      if (loginController.loginPlatformState.value == LoginPlatform.APPLE){
+                                      if (donatorProfile.name != '테스트' && controller.userName.value != null && controller.userPhone.value != ''){
                                         var result = await OrderApi.postProfile(
                                             name: controller.userName.value,
                                             birthDate: controller.userBirth.value,
