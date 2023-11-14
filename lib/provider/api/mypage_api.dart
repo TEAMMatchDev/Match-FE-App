@@ -101,7 +101,7 @@ class MypageApi {
       var deviceId = await GetStorageUtil.getToken(StorageKey.DEVICE_ID);
       DioServices().addHeader("DEVICE_ID", deviceId ?? "");
       Response response = await DioServices().to().get(
-            "/auth/logout",
+            "/users/logout",
           );
       if (response.data[SUCCESS]) {
         DioServices().removeHeader('DEVICE_ID');
@@ -132,7 +132,7 @@ class MypageApi {
   }) async {
     try {
       Response response = await DioServices().to().delete("/users/apple",
-      data: {"code": code});
+        data: {"code": code});
 
       return response.data[SUCCESS];
     } catch (e) {

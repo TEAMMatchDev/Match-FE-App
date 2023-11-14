@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:match/model/enum/login_type.dart';
 import 'package:match/model/enum/naver_login_state.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
@@ -18,6 +19,7 @@ class NaverLoginWidget extends StatefulWidget {
 }
 
 class _NaverLoginState extends State<NaverLoginWidget> {
+  LoginController controller = Get.find<LoginController>();
   LoginPlatform _loginPlatform = LoginPlatform.none;
   NaverLoginUserState accessToken = NaverLoginUserState.accessToken;
   NaverLoginUserState tokenType = NaverLoginUserState.tokenType;
@@ -32,9 +34,8 @@ class _NaverLoginState extends State<NaverLoginWidget> {
       print('email = ${result.account.email}');
       print('name = ${result.account.name}');
 
-      setState(() {
-        _loginPlatform = LoginPlatform.NAVER;
-      });
+      controller.setPlatform('naver');
+
       Get.toNamed(Routes.home);
     }
   }
@@ -43,7 +44,7 @@ class _NaverLoginState extends State<NaverLoginWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        signInWithNaver();
+        //signInWithNaver();
       },
       child: Container(
         width: 300.w,

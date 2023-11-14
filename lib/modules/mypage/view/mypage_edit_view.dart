@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
 import 'package:match/modules/signIn/controller/login_controller.dart';
+import 'package:match/provider/api/auth_api.dart';
 import 'package:match/provider/api/mypage_api.dart';
 import 'package:match/provider/api/util/dio_services.dart';
 import 'package:match/util/components/global_app_bar.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../provider/service/auth_service.dart';
 import '../../../util/const/global_variable.dart';
@@ -110,18 +113,43 @@ class MypageEditScreen extends StatelessWidget {
           isLast: true,
           leading: true,
           onTap: () async {
-            var result = await MypageApi.signOut();
-            if (result){
-              DioServices().removeAccessToken();
-              Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
-              Get.offAllNamed(Routes.login);
-            } else { /// 애플유저 탈퇴
-              print(">> 애플유저 탈퇴 code: ${loginController.appleLoginCode.value}");
-              var result = await MypageApi.signOutApple(code: loginController.appleLoginCode.value);
-              if(result) {
+            if (loginController.loginPlatform == 'apple'){
+              final AuthorizationCredentialAppleID credential =
+              await SignInWithApple.getAppleIDCredential(
+                scopes: [
+                  AppleIDAuthorizationScopes.email,
+                  AppleIDAuthorizationScopes.fullName,
+                ],
+                webAuthenticationOptions: WebAuthenticationOptions(
+                  clientId: dotenv.env['appleServiceId']!,
+                  redirectUri: Uri.parse(dotenv.env['appleRedirectUri']!),
+                ),
+              );
+
+              // 인증 성공 후 처리
+              print('>>> 애플유저 탈퇴 애플로그인 사용자 정보 : credential 전체 = $credential');
+              print(">> 애플유저 탈퇴 code: ${credential.authorizationCode}");
+              var resultLogin = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
+              if (resultLogin) {
+                Fluttertoast.showToast(msg: "애플 로그인 성공!");
+                var result = await MypageApi.signOutApple(code: credential.authorizationCode);
+                if (result) {
+                  DioServices().removeAccessToken();
+                  Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
+                  Get.offAllNamed(Routes.login);
+                } else {
+                  Fluttertoast.showToast(msg: "탈퇴를 실패했습니다.");
+                }
+              }
+            }
+            else {
+              var result = await MypageApi.signOut();
+              if (result){
                 DioServices().removeAccessToken();
                 Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
                 Get.offAllNamed(Routes.login);
+              } else {
+                Fluttertoast.showToast(msg: "탈퇴를 실패했습니다.");
               }
             }
           },
