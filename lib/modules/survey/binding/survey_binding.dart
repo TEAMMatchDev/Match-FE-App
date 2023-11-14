@@ -7,5 +7,4 @@ class SurveyBinding extends Bindings{
   void dependencies() {
     Get.put(SurveyController());
   }
-
 }

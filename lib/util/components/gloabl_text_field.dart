@@ -163,6 +163,7 @@ class CommonInputField extends StatelessWidget {
   final bool autoFocus;
   final bool alwaysSuffix;
   final TextInputType inputType;
+  final double? cursorHeight;
   final Future<void> Function(String) onSubmitted;
   final Future<void> Function(String) onChanged;
   final Future<void> Function()? suffixOnTap;
@@ -176,7 +177,8 @@ class CommonInputField extends StatelessWidget {
       required this.onChanged,
       this.inputType = TextInputType.text,
       this.suffixOnTap,
-      required this.autoFocus});
+      required this.autoFocus,
+      this.cursorHeight});
 
   @override
   Widget build(BuildContext context) {
@@ -190,6 +192,8 @@ class CommonInputField extends StatelessWidget {
               ? Border.all(color: AppColors.grey8)
               : Border.all(color: AppColors.grey1)),
       keyboardType: inputType,
+      textAlignVertical:
+          cursorHeight != null ? TextAlignVertical(y: cursorHeight!) : null,
       cursorColor: AppColors.black,
       cursorHeight: 18.h,
       style: AppTextStyles.T1Bold13.copyWith(
@@ -344,7 +348,8 @@ class CommonInputField extends StatelessWidget {
           if (value.length > 11) {
             Fluttertoast.showToast(msg: "전화번호는 11자리를 넘을 수 없습니다.");
             textController.text = value.substring(0, 11);
-            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+            textController.selection = TextSelection.fromPosition(
+              // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );
           } else {
@@ -370,7 +375,8 @@ class CommonInputField extends StatelessWidget {
           if (value.length > 6) {
             Fluttertoast.showToast(msg: "인증번호는 6자리를 넘을 수 없습니다.");
             textController.text = value.substring(0, 6);
-            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+            textController.selection = TextSelection.fromPosition(
+              // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );
           } else {
@@ -452,13 +458,15 @@ class CommonInputField extends StatelessWidget {
           if (value.length > 12) {
             Fluttertoast.showToast(msg: "카드번호는 12자리를 넘을 수 없습니다.");
             textController.text = value.substring(0, 12);
-            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+            textController.selection = TextSelection.fromPosition(
+              // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );
           } else {
             onChange(value);
           }
-        },        inputType: TextInputType.phone,
+        },
+        inputType: TextInputType.phone,
         autoFocus: false);
   }
 
@@ -500,7 +508,8 @@ class CommonInputField extends StatelessWidget {
           if (value.length > 4) {
             Fluttertoast.showToast(msg: "4자리를 넘을 수 없습니다.");
             textController.text = value.substring(0, 4);
-            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+            textController.selection = TextSelection.fromPosition(
+              // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );
           } else {
@@ -516,7 +525,8 @@ class CommonInputField extends StatelessWidget {
             int currentYear = currentDate.year % 100;
             int currentMonth = currentDate.month;
 
-            if (year < currentYear || (year == currentYear && month < currentMonth)) {
+            if (year < currentYear ||
+                (year == currentYear && month < currentMonth)) {
               Fluttertoast.showToast(msg: "유효기간을 바르게 입력해주세요");
             }
 
@@ -541,7 +551,8 @@ class CommonInputField extends StatelessWidget {
           if (value.length > 3) {
             Fluttertoast.showToast(msg: "3자리를 넘을 수 없습니다.");
             textController.text = value.substring(0, 3);
-            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+            textController.selection = TextSelection.fromPosition(
+              // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );
           } else {
@@ -566,7 +577,8 @@ class CommonInputField extends StatelessWidget {
           if (value.length > 10) {
             Fluttertoast.showToast(msg: "6-10자리를 넘을 수 없습니다.");
             textController.text = value.substring(0, 10);
-            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+            textController.selection = TextSelection.fromPosition(
+              // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );
           } else {
@@ -591,7 +603,8 @@ class CommonInputField extends StatelessWidget {
           if (value.length > 2) {
             Fluttertoast.showToast(msg: "2자리를 넘을 수 없습니다.");
             textController.text = value.substring(0, 2);
-            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+            textController.selection = TextSelection.fromPosition(
+              // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );
           } else {
@@ -626,5 +639,22 @@ class CommonInputField extends StatelessWidget {
         onChanged: onChange,
         inputType: TextInputType.phone,
         autoFocus: false);
+  }
+
+  //TODO: 너비이상의 텍스트 입력시 줄바꿈 하기
+  factory CommonInputField.survey({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+      textController: textController,
+      placeHolder: "리뷰 내용을 입력해주세요. (선택)",
+      alwaysSuffix: false,
+      onSubmitted: (value) async {},
+      onChanged: onChange,
+      inputType: TextInputType.text,
+      autoFocus: false,
+      cursorHeight: -1.0,
+    );
   }
 }
