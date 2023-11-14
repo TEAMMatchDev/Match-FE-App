@@ -19,6 +19,9 @@ abstract class _Paths {
   /// 홈 화면
   static const home = "/home";
 
+  /// 설문조사 화면
+  static const survey = "/survey";
+
   // /// 검색 화면
   // static const search = "/search";
 
@@ -94,6 +97,9 @@ abstract class Routes {
 
   /// 홈 화면
   static const home = _Paths.home;
+
+  /// 설문조사 화면
+  static const survey = _Paths.survey;
 
   // /// 검색 화면
   // static const search = _Paths.search;

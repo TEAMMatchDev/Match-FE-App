@@ -26,6 +26,8 @@ import 'package:match/modules/signIn/binding/login_binding.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
 import 'package:match/modules/signUp/binding/signup_binding.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
+import 'package:match/modules/survey/binding/survey_binding.dart';
+import 'package:match/modules/survey/view/survey_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
 import 'package:match/modules/tutorial/view/tutorial_view.dart';
 import 'package:match/modules/user_phone/binding/user_phone_binding.dart';
@@ -101,6 +103,15 @@ class Pages {
       page: () => const HomeScreen(),
       transition: Transition.noTransition,
       binding: HomeBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "설문조사 화면",
+      name: Routes.survey,
+      page: () => const SurveyScreen(),
+      transition: Transition.noTransition,
+      binding: SurveyBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
