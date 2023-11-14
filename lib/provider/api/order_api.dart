@@ -78,19 +78,36 @@ class OrderApi {
   static Future<Donator?> getProfile() async {
     try {
       Response response = await DioServices().to().post("/order/user");
-      var data = response.data[RESULT];
 
-      if (data != null) {
-        return Donator.fromJson(response.data[RESULT]);
-      } else {
-        logger.e("response 값이 아무것도 담겨있지 않습니다.");
-        return null;
-      }
+      logger.i(">>> 후원자 정보 조회: ${response}");
+      return Donator.fromJson(response.data[RESULT]);
 
+      // if (data != null) {
+      //   return Donator.fromJson(response.data[RESULT]);
+      // } else {
+      //   logger.e("response 값이 아무것도 담겨있지 않습니다.");
+      //   return null;
+      // }
     } catch (e) {
       logger.e(e.toString());
     }
   }
 
+  ///<h2>2-11API | 애플유저 결제화면(기부자 정보조회 화면) 추가 정보 POST </h2>
+  static Future<bool> postProfile({
+    required String name,
+    required String birthDate,
+    required String phone,
+  }) async {
+    try {
+      Response response = await DioServices().to().post("/users/apple",
+        data: {"name": name, "birthDate": birthDate, "phone": phone});
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
 
 }

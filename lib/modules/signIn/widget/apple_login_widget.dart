@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -7,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:match/model/enum/login_type.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/provider/api/auth_api.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -20,7 +23,7 @@ class AppleLoginWidget extends StatefulWidget {
 }
 
 class _AppleLoginState extends State<AppleLoginWidget> {
-  LoginPlatform _loginPlatform = LoginPlatform.none;
+  LoginController controller = Get.find<LoginController>();
 
   Future<void> signInWithApple() async {
     try {
@@ -37,10 +40,6 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       );
 
 
-      setState(() {
-        _loginPlatform = LoginPlatform.apple;
-      });
-
       // 인증 성공 후 처리
       print('>>> 애플로그인 사용자 정보 : credential 전체 = $credential');
       print('>>> 애플로그인 사용자 정보 : userIdentifier = ${credential.userIdentifier}');
@@ -51,16 +50,20 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       print('>>> 애플로그인 사용자 정보 : identityToken = ${credential.identityToken}');
       print('>>> 애플로그인 사용자 정보 : state = ${credential.state}');
 
+      controller.setAppleLoginCode(credential.authorizationCode);
+      controller.appleLoginCode.value = credential.authorizationCode.toString();
+      print(">>> 애플유저 코드: ${controller.appleLoginCode.value}");
       var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
       if (result) {
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
+        controller.setPlatform('apple');
+        print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
 
         Get.offAllNamed(Routes.main);
       } else {
         Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
       }
 
-      // 예: 서버로 인증 정보를 보내거나 사용자 정보를 저장
     } catch (error) {
       // 인증 실패시 에러 처리
       print(error);

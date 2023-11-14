@@ -33,7 +33,7 @@ class _NaverLoginState extends State<NaverLoginWidget> {
       print('name = ${result.account.name}');
 
       setState(() {
-        _loginPlatform = LoginPlatform.naver;
+        _loginPlatform = LoginPlatform.NAVER;
       });
       Get.toNamed(Routes.home);
     }

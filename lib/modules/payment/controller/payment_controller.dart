@@ -90,6 +90,16 @@ class PaymentController extends GetxController {
   /// 카드 비밀번호 todo- ** 로 표시
   Rx<TextEditingController> cardPWTextController = TextEditingController().obs;
 
+
+  //TODO) 애플로그인 사용자 정보
+  var birthState = "".obs;
+  RxString userName = ''.obs;
+  RxString userBirth = ''.obs;
+  RxString userPhone = ''.obs;
+  Rx<TextEditingController> userNameTextController = TextEditingController().obs;
+  Rx<TextEditingController> userBirthTextController = TextEditingController().obs;
+  Rx<TextEditingController> userPhoneTextController = TextEditingController().obs;
+
   @override
   void onInit() async {
     super.onInit();

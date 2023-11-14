@@ -21,10 +21,10 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Profile {
   String get profileImgUrl => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String get nickName => throw _privateConstructorUsedError;
   String get socialType => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,10 +39,10 @@ abstract class $ProfileCopyWith<$Res> {
   @useResult
   $Res call(
       {String profileImgUrl,
-      String name,
+      String? name,
       String nickName,
       String socialType,
-      String email,
+      String? email,
       String phone});
 }
 
@@ -60,10 +60,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   @override
   $Res call({
     Object? profileImgUrl = null,
-    Object? name = null,
+    Object? name = freezed,
     Object? nickName = null,
     Object? socialType = null,
-    Object? email = null,
+    Object? email = freezed,
     Object? phone = null,
   }) {
     return _then(_value.copyWith(
@@ -71,10 +71,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.profileImgUrl
           : profileImgUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       nickName: null == nickName
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
@@ -83,10 +83,10 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
           ? _value.socialType
           : socialType // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -104,10 +104,10 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
   @useResult
   $Res call(
       {String profileImgUrl,
-      String name,
+      String? name,
       String nickName,
       String socialType,
-      String email,
+      String? email,
       String phone});
 }
 
@@ -123,10 +123,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? profileImgUrl = null,
-    Object? name = null,
+    Object? name = freezed,
     Object? nickName = null,
     Object? socialType = null,
-    Object? email = null,
+    Object? email = freezed,
     Object? phone = null,
   }) {
     return _then(_$ProfileImpl(
@@ -134,10 +134,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.profileImgUrl
           : profileImgUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       nickName: null == nickName
           ? _value.nickName
           : nickName // ignore: cast_nullable_to_non_nullable
@@ -146,10 +146,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
           ? _value.socialType
           : socialType // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -163,10 +163,10 @@ class __$$ProfileImplCopyWithImpl<$Res>
 class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
   const _$ProfileImpl(
       {required this.profileImgUrl,
-      required this.name,
+      this.name,
       required this.nickName,
       required this.socialType,
-      required this.email,
+      this.email,
       required this.phone});
 
   factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
@@ -175,13 +175,13 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
   @override
   final String profileImgUrl;
   @override
-  final String name;
+  final String? name;
   @override
   final String nickName;
   @override
   final String socialType;
   @override
-  final String email;
+  final String? email;
   @override
   final String phone;
 
@@ -241,10 +241,10 @@ class _$ProfileImpl with DiagnosticableTreeMixin implements _Profile {
 abstract class _Profile implements Profile {
   const factory _Profile(
       {required final String profileImgUrl,
-      required final String name,
+      final String? name,
       required final String nickName,
       required final String socialType,
-      required final String email,
+      final String? email,
       required final String phone}) = _$ProfileImpl;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
@@ -252,13 +252,13 @@ abstract class _Profile implements Profile {
   @override
   String get profileImgUrl;
   @override
-  String get name;
+  String? get name;
   @override
   String get nickName;
   @override
   String get socialType;
   @override
-  String get email;
+  String? get email;
   @override
   String get phone;
   @override

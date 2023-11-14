@@ -207,28 +207,3 @@ class SignUpInfoScreen extends GetView<SignUpController> {
     );
   }
 }
-
-@override
-Widget certinumButton(text) {
-  return GestureDetector(
-    onTap: () {
-      //TODO) 01-09 인증번호 발송, 01-05-02 인증번호 확인 api 연결
-      //Get.toNamed(Routes.home);
-    },
-    child: Container(
-      width: 92.w,
-      height: 40.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0), // Set border radius to 10px
-        color: AppColors.grey10, // Button's background color
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: AppTextStyles.T1Bold13.copyWith(color: AppColors.white),
-          textAlign: TextAlign.center, // 중앙 정렬 설정
-        ),
-      ),
-    ),
-  );
-}

@@ -9,10 +9,10 @@ part of 'profile.dart';
 _$ProfileImpl _$$ProfileImplFromJson(Map<String, dynamic> json) =>
     _$ProfileImpl(
       profileImgUrl: json['profileImgUrl'] as String,
-      name: json['name'] as String,
+      name: json['name'] as String?,
       nickName: json['nickName'] as String,
       socialType: json['socialType'] as String,
-      email: json['email'] as String,
+      email: json['email'] as String?,
       phone: json['phone'] as String,
     );
 

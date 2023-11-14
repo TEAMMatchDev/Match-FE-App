@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/provider/api/mypage_api.dart';
 import 'package:match/provider/api/util/dio_services.dart';
 import 'package:match/util/components/global_app_bar.dart';
@@ -19,6 +20,9 @@ class MypageEditScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut<LoginController>(() => LoginController(), fenix: true);
+    final LoginController loginController = Get.find<LoginController>();
+
     return Scaffold(
       appBar: CommonAppBar.basic("회원정보 수정"),
       body: Column(children: [
@@ -69,7 +73,7 @@ class MypageEditScreen extends StatelessWidget {
                 height: 20.h,
               ),
               privacyInfo(
-                  title: "이름", value: AuthService.to.myProfile.value.name),
+                  title: "이름", value: AuthService.to.myProfile.value.name!),
               SizedBox(
                 height: 20.h,
               ),
@@ -107,10 +111,18 @@ class MypageEditScreen extends StatelessWidget {
           leading: true,
           onTap: () async {
             var result = await MypageApi.signOut();
-            if(result){
+            if (result){
               DioServices().removeAccessToken();
               Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
               Get.offAllNamed(Routes.login);
+            } else { /// 애플유저 탈퇴
+              print(">> 애플유저 탈퇴 code: ${loginController.appleLoginCode.value}");
+              var result = await MypageApi.signOutApple(code: loginController.appleLoginCode.value);
+              if(result) {
+                DioServices().removeAccessToken();
+                Fluttertoast.showToast(msg: "탈퇴 처리되었습니다.");
+                Get.offAllNamed(Routes.login);
+              }
             }
           },
         )
