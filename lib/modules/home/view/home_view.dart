@@ -150,9 +150,9 @@ class HomeScreen extends GetView<HomeController> {
                                   SizedBox(
                                     height: 9.h,
                                   ),
-                                  // shareChip(
-                                  //     imgUrl: flame.image,
-                                  //     donationId: flame.donationId)
+                                  shareChip(
+                                      imgUrl: flame.image,
+                                      donationId: flame.donationId)
                                 ],
                               );
                             },
@@ -167,11 +167,12 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 
+  //TODO: 현재 donationId로 전달받고 있기때문에 동작 X
   Widget shareChip({required String imgUrl, required int donationId}) {
     return GestureDetector(
       onTap: () async {
         //TODO: donationId -> ProjectID로 변경
-        await controller.kakoShare(imgUrl: imgUrl, donationId: donationId);
+        // await controller.kakoShare(imgUrl: imgUrl, donationId: donationId);
       },
       child: IntrinsicWidth(
         child: Container(

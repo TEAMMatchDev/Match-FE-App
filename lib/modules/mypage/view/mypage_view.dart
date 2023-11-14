@@ -92,17 +92,17 @@ class MypageScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     MypageListTile(
-                        icon: "donation",
+                        icon: "list",
                         title: "기부내역 / 해지하기",
                         onTap: (() async {
                           await Get.toNamed(Routes.total_pay);
                         })),
-                    // MypageListTile(
-                    //     icon: "donation",
-                    //     title: "내가 찜한 기부처",
-                    //     onTap: (() async {
-                    //       await Get.toNamed(Routes.like_project);
-                    //     })),
+                    MypageListTile(
+                        icon: "donation",
+                        title: "내가 찜한 기부처",
+                        onTap: (() async {
+                          await Get.toNamed(Routes.like_project);
+                        })),
                     MypageListTile(
                         icon: "notice",
                         title: "공지사항",
