@@ -39,7 +39,6 @@ class _AppleLoginState extends State<AppleLoginWidget> {
         ),
       );
 
-
       // 인증 성공 후 처리
       // print('>>> 애플로그인 사용자 정보 : credential 전체 = $credential');
       // print('>>> 애플로그인 사용자 정보 : userIdentifier = ${credential.userIdentifier}');
@@ -52,7 +51,7 @@ class _AppleLoginState extends State<AppleLoginWidget> {
 
       controller.setAppleLoginCode(credential.authorizationCode);
       controller.appleLoginCode.value = credential.authorizationCode.toString();
-      //print(">>> 애플유저 코드: ${controller.appleLoginCode.value}");
+      print(">>> 애플유저 코드: ${controller.appleLoginCode.value}");
       var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
       if (result) {
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
