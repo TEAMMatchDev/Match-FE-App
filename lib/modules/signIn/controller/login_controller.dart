@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/login_type.dart';
 
 import '../../../model/enum/search_status.dart';
 
@@ -20,7 +21,15 @@ class LoginController extends GetxController {
   Rx<TextEditingController> newPw = TextEditingController().obs;
   Rx<TextEditingController> newPwConfirm = TextEditingController().obs;
 
-
+  /// 로그인한 플랫폼
+  var loginPlatform = ''.obs;
+  void setPlatform(String str) {
+    loginPlatform.value = str;
+  }
+  var appleLoginCode = ''.obs;
+  void setAppleLoginCode(String code) {
+    appleLoginCode.value = code;
+  }
 
   @override
   void onInit() {

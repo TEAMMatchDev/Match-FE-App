@@ -9,5 +9,6 @@ class MainController extends GetxController {
   void onInit() async{
     super.onInit();
     await AuthService.to.getUserInfo();
+    await AuthService.to.getDonatorInfo();
   }
 }

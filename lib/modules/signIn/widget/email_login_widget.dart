@@ -18,8 +18,6 @@ class EmailLoginWidget extends StatefulWidget {
 
 class _EmailLoginState extends State<EmailLoginWidget> {
 
-
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

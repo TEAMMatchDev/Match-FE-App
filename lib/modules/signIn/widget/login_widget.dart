@@ -38,17 +38,15 @@ class _LoginState extends State<LoginWidget> {
 
   void signOut() async {
     switch (_loginPlatform) {
-      case LoginPlatform.facebook:
-        break;
-      case LoginPlatform.google:
-        break;
-      case LoginPlatform.kakao:
+      case LoginPlatform.KAKAO:
         await UserApi.instance.logout();
         break;
-      case LoginPlatform.naver:
+      case LoginPlatform.NAVER:
         await FlutterNaverLogin.logOut();
         break;
-      case LoginPlatform.apple:
+      case LoginPlatform.APPLE:
+        break;
+      case LoginPlatform.EMAIL:
         break;
       case LoginPlatform.none:
         break;

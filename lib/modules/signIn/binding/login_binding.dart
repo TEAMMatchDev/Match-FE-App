@@ -12,7 +12,8 @@ import '../controller/login_controller.dart';
 class LoginBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(LoginController());
+    //Get.put(LoginController());
+    Get.put(LoginController(), permanent: true);
     Get.put(SignUpController());
 
     //profile 정보는 로그인 이후에 가져와야기 때문에

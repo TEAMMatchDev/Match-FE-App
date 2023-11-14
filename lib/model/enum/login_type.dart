@@ -1,8 +1,7 @@
 enum LoginPlatform {
-  facebook,
-  google,
-  kakao,
-  naver,
-  apple,
+  KAKAO,
+  NAVER,
+  APPLE,
+  EMAIL,
   none,
 }

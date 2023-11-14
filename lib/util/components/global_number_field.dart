@@ -19,7 +19,7 @@ class NumberInputFieldExample extends GetView<PaymentController> {
           onChanged: (value) {
             controller.selectedDate.value = int.parse(value);
             controller.updateIsPayAbleReg();
-            print('>>> 입력한: ${controller.selectedDate.value}');
+            //print('>>> 입력한: ${controller.selectedDate.value}');
           },
           isPlain: true,
         ),

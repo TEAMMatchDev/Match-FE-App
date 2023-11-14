@@ -28,6 +28,14 @@ import '../../../provider/routes/routes.dart';
 class SignUpMailScreen extends GetView<SignUpController> {
   const SignUpMailScreen({super.key});
 
+  bool isValidPassword(String password) {
+    // 영문, 숫자, 특수문자를 포함하며, 길이가 6-20자인지 검사하는 정규식
+    final passwordRegex = RegExp(
+      r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,20}$',
+    );
+    return passwordRegex.hasMatch(password);
+  }
+
   @override
   Widget build(BuildContext context){
     return  Scaffold(
@@ -61,7 +69,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                     child: CommonInputField.signInID(
                                         textController : controller.idTextController.value,
                                         onChange: (value) async {
-                                          print(">>> 입력한 회원가입 이메일: $value");
+                                          //print(">>> 입력한 회원가입 이메일: $value");
                                           controller.signUpId.value = value;
                                         }),
                                   ),
@@ -70,6 +78,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                     verticalPadding: 10,
                                     isActive: true,
                                     onTap: () async {
+
                                       var chk = await UserAuthApi.postValidCheckEmail(email: controller.signUpId.value); /// 중복검사
                                       if (chk) {
                                         var result = await UserAuthApi.getEmailAuth(email: controller.signUpId.value); /// 인증번호 전송
@@ -100,7 +109,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                     child: CommonInputField.signUpIdConfirm(
                                         textController : controller.idAuthNumTextController.value,
                                         onChange: (value) async {
-                                          print(">>> 입력한 이메일 인증번호: $value");
+                                          //print(">>> 입력한 이메일 인증번호: $value");
                                           controller.signUpAuthMail.value = value;
                                         }),
                                   ),
@@ -132,7 +141,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                               CommonInputField.signUpPw(
                                   textController : controller.pwTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 회원가입 pw: $value");
+                                    //print(">>> 입력한 회원가입 pw: $value");
                                     controller.signUpPw.value = value;
                                   }),
                               SizedBox(height: 27.h),
@@ -144,7 +153,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                               CommonInputField.signUpPwConfirm(
                                   textController : controller.pwConfirmTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 회원가입 확인pw: $value");
+                                    //print(">>> 입력한 회원가입 확인pw: $value");
                                     controller.signUpPwConfirm.value = value;
                                     if(controller.signUpPw.value == controller.signUpPwConfirm.value) {
                                       controller.validPw.value = true; ///입력한 비밀번호와 비밀번호 확인이 일치하면 비밀번호 유효성 검사 통과
@@ -165,7 +174,8 @@ class SignUpMailScreen extends GetView<SignUpController> {
               child: CommonButton.login(
                 text: "확인",
                 onTap: () async {
-                  if (controller.authEmail.value && controller.validPw.value) {
+                  bool isValid = isValidPassword(controller.signUpPw.value);
+                  if (controller.authEmail.value && controller.validPw.value && isValid) {
                     Get.to(SignUpInfoScreen());
                   }
                   else {

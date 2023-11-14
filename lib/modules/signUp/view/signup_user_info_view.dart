@@ -61,7 +61,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                         CommonInputField.userName(
                             textController : controller.userNameTextController.value,
                             onChange: (value) async {
-                              print(">>> 입력한 이름: $value");
+                              //print(">>> 입력한 이름: $value");
                               controller.signUpName.value = value;
                             }),
                         SizedBox(height: 20.h),
@@ -72,7 +72,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                         SizedBox(height: 10.h),
                         SelectGenderRadioButtons(
                           onGenderSelected: (gender) {
-                            print(">>> 선택한 성별: $gender");
+                            //print(">>> 선택한 성별: $gender");
                             controller.selectedItemsgendrState.value = gender;
                             controller.signUpGender.value = gender;
                           },
@@ -94,7 +94,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               alignment: Alignment.centerLeft,
                               child: CallSelectBirthBottomSheet(
                                 onBirthSelected: (birth) {
-                                  print('>>> 선택한 생년월일: $birth');
+                                  //print('>>> 선택한 생년월일: $birth');
                                   //print('>>> 선택한 생년월일: ${controller.signUpBirth.value}');
                                   controller.birthState.value = birth.toString();
                                   controller.signUpBirth.value = birth.toString().replaceAll("-", "");
@@ -115,7 +115,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               child: CommonInputField.userPhone(
                                   textController : controller.userPhoneTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 전화번호: $value");
+                                    //print(">>> 입력한 전화번호: $value");
                                     controller.signUpPhone.value = value;
                                   }),
                             ),
@@ -156,7 +156,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               child: CommonInputField.userPhoneConfirm(
                                   textController : controller.userPhoneConfirmTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 인증번호: $value");
+                                    //print(">>> 입력한 인증번호: $value");
                                     controller.signUpPhoneConfirm.value = value;
                                   }),
                             ),
@@ -206,29 +206,4 @@ class SignUpInfoScreen extends GetView<SignUpController> {
       ),
     );
   }
-}
-
-@override
-Widget certinumButton(text) {
-  return GestureDetector(
-    onTap: () {
-      //TODO) 01-09 인증번호 발송, 01-05-02 인증번호 확인 api 연결
-      //Get.toNamed(Routes.home);
-    },
-    child: Container(
-      width: 92.w,
-      height: 40.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0), // Set border radius to 10px
-        color: AppColors.grey10, // Button's background color
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: AppTextStyles.T1Bold13.copyWith(color: AppColors.white),
-          textAlign: TextAlign.center, // 중앙 정렬 설정
-        ),
-      ),
-    ),
-  );
 }

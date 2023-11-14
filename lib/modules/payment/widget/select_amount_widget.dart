@@ -102,7 +102,7 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
     else {
       _paymentController.updateIsPayAbleOnce();
     }
-    print('>>>set된 금액 ${_paymentController.selectedAmount.value}');
+    //print('>>>set된 금액 ${_paymentController.selectedAmount.value}');
 
     return Column(
       children: [
@@ -118,10 +118,9 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                     isSelected: selectedAmountStr == row[i], // Set isSelected to false by default
                     onPressed: () {
                       if (row[i] == '더보기') {
-                        print('더보기 버튼 클릭!!');
                         selectedAmountStr = row[i];
                         selectedAmountInt = 0;
-                        print('선택된 금액: '+selectedAmountInt.toString());
+                        //print('선택된 금액: '+selectedAmountInt.toString());
                         _paymentController.selectedAmount.value = selectedAmountInt;
                         if(_paymentController.donateState.value == "REGULAR") {
                           _paymentController.updateIsPayAbleReg();
@@ -134,7 +133,7 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                       setState(() {
                         selectedAmountStr = row[i];
                         selectedAmountInt = int.parse(row[i].replaceAll(',', ''));
-                        print('선택된 금액: '+selectedAmountInt.toString());
+                        //print('선택된 금액: '+selectedAmountInt.toString());
                         _paymentController.selectedAmount.value = selectedAmountInt;
                         if(_paymentController.donateState.value == "REGULAR") {
                           _paymentController.updateIsPayAbleReg();

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:match/model/enum/login_type.dart';
 import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/signIn/view/find_pw_view.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
@@ -27,7 +28,12 @@ import '../controller/login_controller.dart';
 class EmailLoginScreen extends GetView<LoginController> {
   const EmailLoginScreen({super.key});
 
-
+  bool isEmail(String email) {
+    final emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$',
+    );
+    return emailRegex.hasMatch(email);
+  }
 
   @override
   Widget build(BuildContext context){
@@ -53,7 +59,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                         CommonInputField.signInID(
                             textController : controller.idTextController.value,
                             onChange: (value) async {
-                              print(">>> 입력한 id: $value");
+                              //print(">>> 입력한 id: $value");
                               controller.userId.value = value;
                             }),
                         SizedBox(height: 20.h),
@@ -65,7 +71,7 @@ class EmailLoginScreen extends GetView<LoginController> {
                       CommonInputField.signInPW(
                           textController : controller.pwTextController.value,
                           onChange: (value) async {
-                            print(">>> 입력한 pw: $value");
+                            //print(">>> 입력한 pw: $value");
                             controller.userPw.value = value;
                           }),
                         SizedBox(height: 27.h),
@@ -111,14 +117,28 @@ class EmailLoginScreen extends GetView<LoginController> {
               child: CommonButton.login(
                 text: "로그인",
                 onTap: () async {
-                  var result = await UserAuthApi.setSignIn(
-                      email: controller.userId.value,
-                      password: controller.userPw.value);
-                  if (result) {
-                    Get.offAllNamed(Routes.main);
+                  if(controller.userId.value != '' && controller.userPw.value != '') {
+                    ///이메일 유효성 검사
+                    bool isValidEmail = isEmail(controller.userId.value);
+                    if (isValidEmail) {
+                      var result = await UserAuthApi.setSignIn(
+                          email: controller.userId.value,
+                          password: controller.userPw.value);
+                      if (result) {
+                        controller.setPlatform('email');
+                        //print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
+                        Get.offAllNamed(Routes.main);
+                      }
+                      else {
+                        Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+                      }
+                    }
+                    else {
+                      Fluttertoast.showToast(msg: "이메일 형식을 다시 확인해주세요");
+                    }
                   }
-                  else {
-                    Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+                  else { //아이디 비밀번호 둘 중 하나 ''ㄴ
+                    Fluttertoast.showToast(msg: "아이디와 비밀번호를 입력해주세요.");
                   }
                 },
               ),

@@ -125,4 +125,20 @@ class MypageApi {
       return false;
     }
   }
+
+///<h2>2-13 API | 회원탈퇴</h2>
+  static Future<bool> signOutApple({
+    required String code
+  }) async {
+    try {
+      Response response = await DioServices().to().delete("/users/apple",
+      data: {"code": code});
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      Fluttertoast.showToast(msg: "회원탈퇴에 실패하였습니다. ${e}");
+      return false;
+    }
+  }
+  
 }
