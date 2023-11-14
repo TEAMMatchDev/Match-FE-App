@@ -22,8 +22,14 @@ class LoginController extends GetxController {
   Rx<TextEditingController> newPwConfirm = TextEditingController().obs;
 
   /// 로그인한 플랫폼
-  RxString loginPlatform = ''.obs;
-
+  var loginPlatform = ''.obs;
+  void setPlatform(String str) {
+    loginPlatform.value = str;
+  }
+  var appleLoginCode = ''.obs;
+  void setAppleLoginCode(String code) {
+    appleLoginCode.value = code;
+  }
 
   @override
   void onInit() {

@@ -44,6 +44,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
   @override
   Widget build(BuildContext context){
     print(">>> DonatorScreen 기부자 프로필 조회: ${AuthService.to.donatorProfile.value}");
+    print(">> 로그인 플랫폼 정보: ${loginController.loginPlatform.value}");
 
     return Obx(() {
       var donatorProfile = AuthService.to.donatorProfile.value;
@@ -269,7 +270,8 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                   child: CommonButton.login(
                                     text: "확인",
                                     onTap: () async {
-                                      if (donatorProfile.name != '테스트' && controller.userName.value != null && controller.userPhone.value != ''){
+
+                                      if (loginController.loginPlatform.value == 'apple' && controller.userName.value != null && controller.userPhone.value != ''){
                                         var result = await OrderApi.postProfile(
                                             name: controller.userName.value,
                                             birthDate: controller.userBirth.value,

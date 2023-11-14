@@ -7,7 +7,8 @@ class SignUpBinding implements Bindings {
   @override
   void dependencies() {
     Get.put(SignUpController());
-    Get.put(LoginController());
+    //Get.put(LoginController());
+    Get.put(LoginController(), permanent: true);
 
     Get.lazyPut(()=>MainController());
 

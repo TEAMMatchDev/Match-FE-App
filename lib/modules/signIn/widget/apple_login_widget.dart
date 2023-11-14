@@ -50,10 +50,13 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       print('>>> 애플로그인 사용자 정보 : identityToken = ${credential.identityToken}');
       print('>>> 애플로그인 사용자 정보 : state = ${credential.state}');
 
+      controller.setAppleLoginCode(credential.authorizationCode);
+      controller.appleLoginCode.value = credential.authorizationCode.toString();
+      print(">>> 애플유저 코드: ${controller.appleLoginCode.value}");
       var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
       if (result) {
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
-        controller.loginPlatform.value = 'apple';
+        controller.setPlatform('apple');
         print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
 
         Get.offAllNamed(Routes.main);

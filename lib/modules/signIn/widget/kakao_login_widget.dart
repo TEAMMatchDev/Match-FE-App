@@ -53,7 +53,7 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
           //TODO) setKakaoLogin 호출
           var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
           if(result) {
-            controller.loginPlatform.value = 'kakao';
+            controller.setPlatform('kakao');
             print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
             Get.offAllNamed(Routes.main);
           } else {
@@ -75,7 +75,7 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
             //TODO) setKakaoLogin 호출
             var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
             if(result) {
-              controller.loginPlatform.value = 'kakao';
+              controller.setPlatform('kakao');
               print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
               Get.offAllNamed(Routes.main);
             } else {
@@ -96,7 +96,7 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
           //TODO) setKakaoLogin 호출
           var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
           if(result) {
-            controller.loginPlatform.value = 'kakao';
+            controller.setPlatform('kakao');
             print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
             Get.offAllNamed(Routes.main);
           } else {
