@@ -8,10 +8,10 @@ part 'profile.g.dart';
 class Profile with _$Profile {
   const factory Profile({
     required String profileImgUrl,
-    required String name,
+    String? name,
     required String nickName,
     required String socialType,
-    required String email,
+    String? email,
     required String phone,
   }) = _Profile;
   factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);

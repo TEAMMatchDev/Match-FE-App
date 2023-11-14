@@ -18,7 +18,7 @@ Widget SocialTypeEmailWidget() {
                   "${iconDir}login/ic_${socialTypeToIcon[AuthService.to.myProfile.value.socialType]}.svg"),
             )
           : const SizedBox.shrink(),
-      Text(AuthService.to.myProfile.value.email,
+      Text(AuthService.to.myProfile.value.email!,
           style: AppTextStyles.S1SemiBold14.copyWith(
             color: AppColors.grey6,
           )),

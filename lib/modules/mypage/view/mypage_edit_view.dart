@@ -69,7 +69,7 @@ class MypageEditScreen extends StatelessWidget {
                 height: 20.h,
               ),
               privacyInfo(
-                  title: "이름", value: AuthService.to.myProfile.value.name),
+                  title: "이름", value: AuthService.to.myProfile.value.name!),
               SizedBox(
                 height: 20.h,
               ),
