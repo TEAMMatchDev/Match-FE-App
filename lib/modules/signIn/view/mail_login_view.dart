@@ -28,7 +28,12 @@ import '../controller/login_controller.dart';
 class EmailLoginScreen extends GetView<LoginController> {
   const EmailLoginScreen({super.key});
 
-
+  bool isEmail(String email) {
+    final emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$',
+    );
+    return emailRegex.hasMatch(email);
+  }
 
   @override
   Widget build(BuildContext context){
@@ -112,16 +117,28 @@ class EmailLoginScreen extends GetView<LoginController> {
               child: CommonButton.login(
                 text: "로그인",
                 onTap: () async {
-                  var result = await UserAuthApi.setSignIn(
-                      email: controller.userId.value,
-                      password: controller.userPw.value);
-                  if (result) {
-                    controller.setLoginPlatform(LoginPlatform.EMAIL);
-                    print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
-                    Get.offAllNamed(Routes.main);
+                  if(controller.userId.value != '' && controller.userPw.value != '') {
+                    ///이메일 유효성 검사
+                    bool isValidEmail = isEmail(controller.userId.value);
+                    if (isValidEmail) {
+                      var result = await UserAuthApi.setSignIn(
+                          email: controller.userId.value,
+                          password: controller.userPw.value);
+                      if (result) {
+                        controller.setLoginPlatform(LoginPlatform.EMAIL);
+                        print(">> 로그인한 플랫폼: ${controller.loginPlatformState}");
+                        Get.offAllNamed(Routes.main);
+                      }
+                      else {
+                        Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+                      }
+                    }
+                    else {
+                      Fluttertoast.showToast(msg: "이메일 형식을 다시 확인해주세요");
+                    }
                   }
-                  else {
-                    Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+                  else { //아이디 비밀번호 둘 중 하나 ''ㄴ
+                    Fluttertoast.showToast(msg: "아이디와 비밀번호를 입력해주세요.");
                   }
                 },
               ),
