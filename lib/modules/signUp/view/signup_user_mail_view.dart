@@ -69,7 +69,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                     child: CommonInputField.signInID(
                                         textController : controller.idTextController.value,
                                         onChange: (value) async {
-                                          print(">>> 입력한 회원가입 이메일: $value");
+                                          //print(">>> 입력한 회원가입 이메일: $value");
                                           controller.signUpId.value = value;
                                         }),
                                   ),
@@ -109,7 +109,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                     child: CommonInputField.signUpIdConfirm(
                                         textController : controller.idAuthNumTextController.value,
                                         onChange: (value) async {
-                                          print(">>> 입력한 이메일 인증번호: $value");
+                                          //print(">>> 입력한 이메일 인증번호: $value");
                                           controller.signUpAuthMail.value = value;
                                         }),
                                   ),
@@ -141,7 +141,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                               CommonInputField.signUpPw(
                                   textController : controller.pwTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 회원가입 pw: $value");
+                                    //print(">>> 입력한 회원가입 pw: $value");
                                     controller.signUpPw.value = value;
                                   }),
                               SizedBox(height: 27.h),
@@ -153,7 +153,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                               CommonInputField.signUpPwConfirm(
                                   textController : controller.pwConfirmTextController.value,
                                   onChange: (value) async {
-                                    print(">>> 입력한 회원가입 확인pw: $value");
+                                    //print(">>> 입력한 회원가입 확인pw: $value");
                                     controller.signUpPwConfirm.value = value;
                                     if(controller.signUpPw.value == controller.signUpPwConfirm.value) {
                                       controller.validPw.value = true; ///입력한 비밀번호와 비밀번호 확인이 일치하면 비밀번호 유효성 검사 통과

@@ -54,7 +54,7 @@ class NewPwScreen extends GetView<LoginController> {
                       CommonInputField.newPw(
                           textController : controller.newPw.value,
                           onChange: (value) async {
-                            print(">>> 입력한 새로운 비밀번호: $value");
+                            //print(">>> 입력한 새로운 비밀번호: $value");
                           }),
                       SizedBox(height: 30.h),
                       Text(
@@ -66,7 +66,7 @@ class NewPwScreen extends GetView<LoginController> {
                       CommonInputField.newPwConfirm(
                           textController : controller.newPwConfirm.value,
                           onChange: (value) async {
-                            print(">>> 입력한 새로운 비밀번호: $value");
+                            //print(">>> 입력한 새로운 비밀번호: $value");
                           }),
                     ],
                   ),

@@ -135,7 +135,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                   stringList: payAgreeStringList,
                   title: title,
                   onAgreementSelected: (value) {
-                    print(">>> 선택한 체크박스: $value");
+                    //print(">>> 선택한 체크박스: $value");
                     controller.selectedItems.value = value;
                     int mandatoryCount = value.where((item) => item.contains('[필수]')).length; // 선택한 항목 중에서 [필수] 문자열을 포함하는 항목의 개수를 확인
                     setState(() {

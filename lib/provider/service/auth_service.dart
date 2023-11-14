@@ -28,7 +28,7 @@ class AuthService extends GetxService{
       myProfile.value = tmpResult;
       name.value = myProfile.value.name!;
       nickName.value = myProfile.value.nickName;
-      print(">>> 로그인한 사용자 프로필 조회: ${myProfile.value}");
+      //print(">>> 로그인한 사용자 프로필 조회: ${myProfile.value}");
     }
   }
   ///<h2>후원자 정보 가져오는 함수</h2>
@@ -37,10 +37,10 @@ class AuthService extends GetxService{
     var tmpDonatorResult = await OrderApi.getProfile();
     if (tmpDonatorResult != null) {
       donatorProfile.value = tmpDonatorResult;
-      print(">>> 기부자 프로필 조회: ${donatorProfile.value}");
+      //print(">>> 기부자 프로필 조회: ${donatorProfile.value}");
     }
     else {
-      print(">>> tmpResult 가 null");
+      //print(">>> tmpResult 가 null");
     }
   }
   @override

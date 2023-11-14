@@ -43,8 +43,8 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context){
-    print(">>> DonatorScreen 기부자 프로필 조회: ${AuthService.to.donatorProfile.value}");
-    print(">> 로그인 플랫폼 정보: ${loginController.loginPlatform.value}");
+    //print(">>> DonatorScreen 기부자 프로필 조회: ${AuthService.to.donatorProfile.value}");
+    //print(">> 로그인 플랫폼 정보: ${loginController.loginPlatform.value}");
 
     return Obx(() {
       var donatorProfile = AuthService.to.donatorProfile.value;
@@ -133,7 +133,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                               : CommonInputField.userName(
                                               textController : controller.userNameTextController.value,
                                               onChange: (value) async {
-                                                print(">>> 입력한 이름: $value");
+                                                //print(">>> 입력한 이름: $value");
                                                 controller.userName.value = value;
                                               }
                                           ),
@@ -174,7 +174,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                             alignment: Alignment.centerLeft,
                                             child: CallSelectBirthBottomSheet(
                                               onBirthSelected: (birth) {
-                                                print('>>> 선택한 생년월일: $birth');
+                                                //print('>>> 선택한 생년월일: $birth');
                                                 controller.birthState.value = birth.toString();
                                                 controller.userBirth.value = birth.toString(); //.replaceAll("-", "");
                                               },
@@ -218,7 +218,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                                   child: CommonInputField.userPhone(
                                                     textController: controller.userPhoneTextController.value,
                                                     onChange: (value) async {
-                                                      print(">>> 입력한 전화번호: $value");
+                                                      //print(">>> 입력한 전화번호: $value");
                                                       controller.userPhone.value = value;
                                                     },
                                                   ),
