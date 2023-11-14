@@ -37,20 +37,19 @@ class DioServices {
     );
     _dio = Dio(_baseOptions);
     _dio.interceptors.add(InterceptorsWrapper(
-      onRequest: CustomDioInterceptor().onRequest,
-        onResponse:CustomDioInterceptor().onResponse,
+        onRequest: CustomDioInterceptor().onRequest,
+        onResponse: CustomDioInterceptor().onResponse,
         onError: (DioException err, ErrorInterceptorHandler handler) async {
-          logger.e("Error Message ${err.response
-              ?.data[MSG]} \nError code ${err.response?.data[CODE]}");
+          logger.e(
+              "Error Message ${err.response?.data[MSG]} \nError code ${err.response?.data[CODE]}");
           switch (err.response?.data[CODE]) {
-            case EXPIRE_TOKEN :
+            case EXPIRE_TOKEN:
               await requestByNewAccessToken(err, handler);
             case UNAUTHORIZE:
               Fluttertoast.showToast(msg: "자동 로그인이 해제되었습니다. 로그인 화면으로 돌아갑니다.");
               //response에서 import 충돌로 Get으로 import 처리
               Get.Get.offAllNamed(Routes.login);
               break;
-
           }
           return handler.next(err);
         }));
@@ -69,20 +68,23 @@ class DioServices {
   void removeAccessToken() {
     _dio.options.headers.remove(TOKEN_HEADER);
   }
+
   // 헤더에 값을 업데이트하는 메서드 추가
   void addHeader(String key, String value) {
     _dio.options.headers[key] = value;
   }
+
   // 헤더에 값을 업데이트하는 메서드 추가
   void removeHeader(String key) {
     _dio.options.headers.remove(key);
   }
+
   ///* refresh Token
-  Future<void> requestByNewAccessToken(DioException err, ErrorInterceptorHandler handler)async{
+  Future<void> requestByNewAccessToken(
+      DioException err, ErrorInterceptorHandler handler) async {
     var newAccessToken = await setNewAccessToken();
     // AccessToken의 만료로 수행하지 못했던 API 요청에 담겼던 AccessToken 갱신
-    err.requestOptions.headers[TOKEN_HEADER] =
-        newAccessToken;
+    err.requestOptions.headers[TOKEN_HEADER] = newAccessToken;
 
     // 수행하지 못했던 API 요청 복사본 생성
     final clonedRequest = await _dio.request(err.requestOptions.path,
@@ -93,8 +95,7 @@ class DioServices {
         queryParameters: err.requestOptions.queryParameters);
 
     // header 새로운 AccessToken으로 갱신
-    _dio.options.headers[TOKEN_HEADER] =
-        newAccessToken;
+    _dio.options.headers[TOKEN_HEADER] = newAccessToken;
     // API 복사본으로 재요청
     return handler.resolve(clonedRequest);
   }

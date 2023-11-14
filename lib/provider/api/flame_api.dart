@@ -17,7 +17,6 @@ class FlameApi {
   ///* pagination
   static Future<List<Flame>> getBurningFlameList({bool getMore = false}) async {
     try {
-      logger.d("api호출 성공");
       if (!getMore) {
         burningFlame.currentpage = 0;
       }

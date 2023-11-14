@@ -24,6 +24,9 @@ class CustomDioInterceptor extends Interceptor {
     options.queryParameters.forEach((key, value) {
       queryParam += '$key : $value\n';
     });
+    if (queryParam.isNotEmpty) {
+      logger.i("Data ${options.data} >>");
+    }
     logger.i(queryParam);
     if (options.data != null) {
       logger.i("Data ${options.data} >>");
