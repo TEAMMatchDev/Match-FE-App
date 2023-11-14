@@ -22,10 +22,10 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get phone => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
-  String get birthDate => throw _privateConstructorUsedError;
+  String? get birthDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,10 +40,10 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String email,
       String password,
-      String name,
-      String phone,
+      String? name,
+      String? phone,
       String gender,
-      String birthDate});
+      String? birthDate});
 }
 
 /// @nodoc
@@ -61,10 +61,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? name = null,
-    Object? phone = null,
+    Object? name = freezed,
+    Object? phone = freezed,
     Object? gender = null,
-    Object? birthDate = null,
+    Object? birthDate = freezed,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -75,22 +75,22 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String,
-      birthDate: null == birthDate
+      birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -105,10 +105,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String email,
       String password,
-      String name,
-      String phone,
+      String? name,
+      String? phone,
       String gender,
-      String birthDate});
+      String? birthDate});
 }
 
 /// @nodoc
@@ -123,10 +123,10 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? name = null,
-    Object? phone = null,
+    Object? name = freezed,
+    Object? phone = freezed,
     Object? gender = null,
-    Object? birthDate = null,
+    Object? birthDate = freezed,
   }) {
     return _then(_$UserImpl(
       email: null == email
@@ -137,22 +137,22 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      phone: null == phone
+              as String?,
+      phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String,
-      birthDate: null == birthDate
+      birthDate: freezed == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -163,10 +163,10 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   const _$UserImpl(
       {required this.email,
       required this.password,
-      required this.name,
-      required this.phone,
+      this.name,
+      this.phone,
       required this.gender,
-      required this.birthDate});
+      this.birthDate});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -176,13 +176,13 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   @override
   final String password;
   @override
-  final String name;
+  final String? name;
   @override
-  final String phone;
+  final String? phone;
   @override
   final String gender;
   @override
-  final String birthDate;
+  final String? birthDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -240,10 +240,10 @@ abstract class _User implements User {
   const factory _User(
       {required final String email,
       required final String password,
-      required final String name,
-      required final String phone,
+      final String? name,
+      final String? phone,
       required final String gender,
-      required final String birthDate}) = _$UserImpl;
+      final String? birthDate}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -252,13 +252,13 @@ abstract class _User implements User {
   @override
   String get password;
   @override
-  String get name;
+  String? get name;
   @override
-  String get phone;
+  String? get phone;
   @override
   String get gender;
   @override
-  String get birthDate;
+  String? get birthDate;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

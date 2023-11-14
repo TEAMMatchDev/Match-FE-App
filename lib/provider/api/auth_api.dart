@@ -18,7 +18,7 @@ class UserAuthApi {
     try {
       Response response = await DioServices().to().post("/auth/kakao",
         data: {"accessToken": token});
-
+      logger.e(response.data["message"]);
       if(!response.data[SUCCESS]) {
         Fluttertoast.showToast(
             msg: response.data[MSG],

@@ -9,10 +9,10 @@ class User with _$User {
   const factory User({
     required String email,
     required String password,
-    required String name,
-    required String phone,
+    String? name,
+    String? phone,
     required String gender,
-    required String birthDate,
+    String? birthDate,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) =>
       _$UserFromJson(json);
