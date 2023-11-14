@@ -11,6 +11,7 @@ import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/style/global_logger.dart';
 import '../../../util/const/style/global_skeleton.dart';
+import '../../survey/widget/survey_widget.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
 
@@ -172,6 +173,7 @@ class HomeScreen extends GetView<HomeController> {
     return GestureDetector(
       onTap: () async {
         //TODO: donationId -> ProjectID로 변경
+        await Get.dialog(SurveyModal(title: "설문조사", surveyId: 1));
         // await controller.kakoShare(imgUrl: imgUrl, donationId: donationId);
       },
       child: IntrinsicWidth(
