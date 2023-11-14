@@ -55,7 +55,7 @@ class FindPwAuthScreen extends GetView<LoginController> {
                       CommonInputField.findPwAuthNum(
                           textController : controller.findPwAuthNumTextController.value,
                           onChange: (value) async {
-                            print(">>> 입력한 인증번호: $value");
+                            //print(">>> 입력한 인증번호: $value");
                           }),
                     ],
                   ),

@@ -100,7 +100,7 @@ class _PaymentRegisterCardScreenState extends State<PaymentRegisterCardScreen> {
                                 });
                                 rowInx = rowIndex;
                                 itemIdx = itemIndex;
-                                print('>> 선택한 카드사 : ${cardNames[rowIndex][itemIndex]}');
+                                //print('>> 선택한 카드사 : ${cardNames[rowIndex][itemIndex]}');
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
