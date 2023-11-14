@@ -9,3 +9,4 @@ const String NOTIFICATIONS = "notificationLists";
 ///* pagination 기본 호출 단위
 const int PAGINATION_SIZE = 5;
 const String TOKEN_HEADER = 'X-AUTH-TOKEN';
+const String REFRESH_HEADER = 'X-REFRESH-TOKEN';

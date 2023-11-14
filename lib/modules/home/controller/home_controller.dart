@@ -90,10 +90,15 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    bannerList.assignAll(await BannerApi.getBannerList());
-    adCount.value = bannerList.length;
+    ///* home의 경우, 자동로그인이 적용되었을때
+    /// MainBinding에서 mypage API와 동시 호출되어 refresh api 중복호출 가능성이 있음
+    /// 이에 API를 3초 가량 delay후 호출
+    Future.delayed(Duration(seconds: 3), () async {
+      bannerList.assignAll(await BannerApi.getBannerList());
+      adCount.value = bannerList.length;
 
-    flameList.assignAll(await FlameApi.getBurningFlameList());
-    totalCnt = FlameApi.burningFlame.totalCnt.obs;
+      flameList.assignAll(await FlameApi.getBurningFlameList());
+      totalCnt = FlameApi.burningFlame.totalCnt.obs;
+    });
   }
 }

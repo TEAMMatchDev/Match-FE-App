@@ -13,6 +13,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/provider/api/notification_api.dart';
+import 'package:match/provider/api/util/dio_services.dart';
 import 'package:match/provider/service/fcm_service.dart';
 import 'package:match/util/const/style/global_logger.dart';
 import 'package:match/util/method/dynamic_link.dart';
@@ -52,6 +53,12 @@ Future<void> initService() async {
 
   // 푸시 알림 설정 및 권한 요청
   await requestPermission();
+
+  //알림 클릭시 접근할때 token 저장
+  String? token = await GetStorageUtil.getToken(StorageKey.ACCESS_TOKEN);
+  if (token != null) {
+    DioServices().setAccessToken(token);
+  }
 }
 
 // 알림권한 관련 APNS 토큰 발급 코드

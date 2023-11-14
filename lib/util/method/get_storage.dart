@@ -8,7 +8,9 @@ enum StorageKey {
   NAME_SEARCH,
   FCM_TOKEN,
   DEVICE_ID,
-  PROJECT_SEARCH;
+  PROJECT_SEARCH,
+  ACCESS_TOKEN,
+  REFRESH_TOKEN;
 }
 
 const MAX_ITEMS = 10;
@@ -28,6 +30,7 @@ class GetStorageUtil {
     }
     return token;
   }
+
   ///* return : [List<RecentSearch>]
   static Future<List<RecentSearch>> getRecentSearches(StorageKey key) async {
     final List<dynamic>? jsonList = storage.read<List<dynamic>>(key.name);
@@ -41,8 +44,9 @@ class GetStorageUtil {
 
   ///* return : String
   static Future<void> addToken(StorageKey key, String token) async {
-    await storage.write(key.name,token);
+    await storage.write(key.name, token);
   }
+
   ///GetStorage에서 key에 해당하는 value를 설정해줌
   ///* [recentSearch] : [RecentSearch]
   static Future<void> addRecentSearch(
