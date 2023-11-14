@@ -28,6 +28,14 @@ import '../../../provider/routes/routes.dart';
 class SignUpMailScreen extends GetView<SignUpController> {
   const SignUpMailScreen({super.key});
 
+  bool isValidPassword(String password) {
+    // 영문, 숫자, 특수문자를 포함하며, 길이가 6-20자인지 검사하는 정규식
+    final passwordRegex = RegExp(
+      r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,20}$',
+    );
+    return passwordRegex.hasMatch(password);
+  }
+
   @override
   Widget build(BuildContext context){
     return  Scaffold(
@@ -70,6 +78,7 @@ class SignUpMailScreen extends GetView<SignUpController> {
                                     verticalPadding: 10,
                                     isActive: true,
                                     onTap: () async {
+
                                       var chk = await UserAuthApi.postValidCheckEmail(email: controller.signUpId.value); /// 중복검사
                                       if (chk) {
                                         var result = await UserAuthApi.getEmailAuth(email: controller.signUpId.value); /// 인증번호 전송
@@ -165,7 +174,8 @@ class SignUpMailScreen extends GetView<SignUpController> {
               child: CommonButton.login(
                 text: "확인",
                 onTap: () async {
-                  if (controller.authEmail.value && controller.validPw.value) {
+                  bool isValid = isValidPassword(controller.signUpPw.value);
+                  if (controller.authEmail.value && controller.validPw.value && isValid) {
                     Get.to(SignUpInfoScreen());
                   }
                   else {

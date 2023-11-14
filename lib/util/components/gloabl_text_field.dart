@@ -297,7 +297,7 @@ class CommonInputField extends StatelessWidget {
       required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
-        placeHolder: "비밀번호를 입력해주세요.",
+        placeHolder: "비밀번호를 입력해주세요. 영문, 숫자, 특수문자 조합 6-20자",
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
@@ -310,7 +310,7 @@ class CommonInputField extends StatelessWidget {
       required Future<void> Function(String) onChange}) {
     return CommonInputField(
         textController: textController,
-        placeHolder: "비밀번호를 입력해주세요.",
+        placeHolder: "비밀번호를 입력해주세요. ",
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
