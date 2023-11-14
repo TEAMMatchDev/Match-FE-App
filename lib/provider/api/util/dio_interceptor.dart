@@ -1,7 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart' as Get;
+import 'package:match/util/method/get_storage.dart';
 
 import '../../../util/const/style/global_logger.dart';
+import '../../routes/routes.dart';
+import 'global_api_code.dart';
+import 'global_api_field.dart';
 
 class CustomDioInterceptor extends Interceptor {
   // 1) 요청 보낼때
@@ -19,8 +25,9 @@ class CustomDioInterceptor extends Interceptor {
       queryParam += '$key : $value\n';
     });
     logger.i(queryParam);
-
-    logger.i("Data ${options.data} >>");
+    if (options.data != null) {
+      logger.i("Data ${options.data} >>");
+    }
     options.connectTimeout != null
         ? ((timeout) => logger.e("Connect Timeout $timeout"))
         : null;
@@ -46,13 +53,5 @@ class CustomDioInterceptor extends Interceptor {
     logger.i("Receive Timeout ${response.requestOptions.receiveTimeout}");
     return super.onResponse(response, handler);
   }
-
-  // 3) 에러가 났을때
-  @override
-  void onError(DioException exception, ErrorInterceptorHandler handler) {
-    logger.e("Error ${exception.error}");
-    logger.e("Error Message ${exception.message}");
-
-    return super.onError(exception, handler);
-  }
 }
+
