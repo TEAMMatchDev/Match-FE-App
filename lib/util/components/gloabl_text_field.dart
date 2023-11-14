@@ -340,7 +340,18 @@ class CommonInputField extends StatelessWidget {
         placeHolder: "-없이 번호만 입력해주세요",
         alwaysSuffix: false,
         onSubmitted: (value) async {},
-        onChanged: onChange,
+        onChanged: (value) async {
+          if (value.length > 11) {
+            Fluttertoast.showToast(msg: "전화번호는 11자리를 넘을 수 없습니다.");
+            textController.text = value.substring(0, 11);
+            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+              TextPosition(offset: textController.text.length),
+            );
+          } else {
+            // 정상적으로 변경 처리
+            onChange(value);
+          }
+        },
         inputType: TextInputType.phone,
         autoFocus: false);
   }
@@ -355,7 +366,17 @@ class CommonInputField extends StatelessWidget {
         placeHolder: "인증번호를 입력해주세요",
         alwaysSuffix: false,
         onSubmitted: (value) async {},
-        onChanged: onChange,
+        onChanged: (value) async {
+          if (value.length > 6) {
+            Fluttertoast.showToast(msg: "인증번호는 6자리를 넘을 수 없습니다.");
+            textController.text = value.substring(0, 6);
+            textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
+              TextPosition(offset: textController.text.length),
+            );
+          } else {
+            onChange(value);
+          }
+        },
         inputType: TextInputType.phone,
         autoFocus: false);
   }
