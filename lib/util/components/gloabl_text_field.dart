@@ -449,9 +449,9 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: (value) async {
-          if (value.length > 12) {
-            Fluttertoast.showToast(msg: "카드번호는 12자리를 넘을 수 없습니다.");
-            textController.text = value.substring(0, 12);
+          if (value.length > 16) {
+            Fluttertoast.showToast(msg: "카드번호는 16자리를 넘을 수 없습니다.");
+            textController.text = value.substring(0, 16);
             textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );
