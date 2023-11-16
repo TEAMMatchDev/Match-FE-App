@@ -52,7 +52,7 @@ class NewPwScreen extends GetView<LoginController> {
                       SizedBox(height: 10.h),
                       //TODO) 01-08 api 연결 & 입력 float 메시지
                       CommonInputField.newPw(
-                          textController : controller.newPw.value,
+                          textController : controller.newPwController.value,
                           onChange: (value) async {
                             //print(">>> 입력한 새로운 비밀번호: $value");
                           }),
@@ -64,7 +64,7 @@ class NewPwScreen extends GetView<LoginController> {
                       SizedBox(height: 10.h),
                       //TODO) 01-08 api 연결 & 입력 float 메시지
                       CommonInputField.newPwConfirm(
-                          textController : controller.newPwConfirm.value,
+                          textController : controller.newPwConfirmController.value,
                           onChange: (value) async {
                             //print(">>> 입력한 새로운 비밀번호: $value");
                           }),

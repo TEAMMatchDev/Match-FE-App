@@ -406,6 +406,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.phone,
         autoFocus: false);
   }
 
@@ -458,7 +459,8 @@ class CommonInputField extends StatelessWidget {
           } else {
             onChange(value);
           }
-        },        inputType: TextInputType.phone,
+        },
+        inputType: TextInputType.phone,
         autoFocus: false);
   }
 

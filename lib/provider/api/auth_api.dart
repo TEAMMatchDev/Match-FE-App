@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -282,5 +283,59 @@ static Future<bool> setSignUp({
       return false;
     }
 }
+
+  ///<h2>1-14API | 비밀번호 찾기용 이메일 전송  -> 1-8 다시 인증 -> 1-13 변경요청</h2>
+  static Future<bool> sendSearchPwEmail({
+    required String email,
+}) async {
+    try {
+      Response response = await DioServices().to().post("/auth/password/email",
+        queryParameters: {"email": email});
+
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
+      }
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
+
+  ///<h2>1-13API | 비밀번호 변경</h2>
+  static Future<bool> modifyPw({
+    required String email,
+    required String code,
+    required String modifyPassword,
+}) async {
+    try {
+      Response response = await DioServices().to().get("/auth/password",
+          queryParameters: {
+            "email": email,
+            "code": code,
+            "modifyPassword": modifyPassword,
+          });
+
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
+      }
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
 
 }
