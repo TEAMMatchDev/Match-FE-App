@@ -48,6 +48,8 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
     height: _regularHeight,
   );
+  static var S1SemiBold15 = T1Bold15.copyWith(fontWeight: FontWeight.w600);
+
   static var T1Bold14 = TextStyle(
     color: _defaultTextColor,
     fontFamily: _defaultFontFamily,

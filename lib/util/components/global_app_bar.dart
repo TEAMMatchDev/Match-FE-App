@@ -51,4 +51,24 @@ class CommonAppBar extends AppBar {
     );
   }
 
+  factory CommonAppBar.closeIcon(String title) {
+    return CommonAppBar(
+      title: Text(
+        title,
+        style: AppTextStyles.T1Bold16,
+      ),
+      leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: Padding(
+            padding: EdgeInsets.only(left: 10.w),
+            child: SvgPicture.asset(
+              "${iconDir}ic_close_24.svg",
+            ),
+          )),
+      elevation: 0,
+      centerTitle: true,
+    );
+  }
 }
