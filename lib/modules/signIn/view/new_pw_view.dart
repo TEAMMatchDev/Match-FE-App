@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
+import 'package:match/provider/api/auth_api.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -54,7 +57,8 @@ class NewPwScreen extends GetView<LoginController> {
                       CommonInputField.newPw(
                           textController : controller.newPwController.value,
                           onChange: (value) async {
-                            //print(">>> 입력한 새로운 비밀번호: $value");
+                            controller.newPw.value = value;
+                            print(">>> 입력한 새로운 비밀번호: ${controller.newPw.value}");
                           }),
                       SizedBox(height: 30.h),
                       Text(
@@ -66,7 +70,8 @@ class NewPwScreen extends GetView<LoginController> {
                       CommonInputField.newPwConfirm(
                           textController : controller.newPwConfirmController.value,
                           onChange: (value) async {
-                            //print(">>> 입력한 새로운 비밀번호: $value");
+                            controller.newPwConfirm.value = value;
+                            print(">>> 입력한 새로운 비밀번호: ${controller.newPwConfirm.value}");
                           }),
                     ],
                   ),
@@ -75,16 +80,23 @@ class NewPwScreen extends GetView<LoginController> {
             ),
           ),
           SizedBox(height: 8.h),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(left: 6.w, right: 20),
-              child: CommonButton.login(
-                text: "확인",
-                onTap: () async {
-                  //TODO) 비밀번호 변경 api
-                  Get.back();
-                  },
-              ),
+          Padding(
+            padding: EdgeInsets.only(left: 6.w, right: 20),
+            child: CommonButton.login(
+              text: "확인",
+              onTap: () async {
+                if (controller.newPw.value == controller.newPwConfirm.value) {
+                  var result = await UserAuthApi.modifyPw(email: controller.searchPwEmail.value, code: controller.searchPwAuthNum.value, modifyPassword: controller.newPw.value);
+                  if (result) {
+                    Fluttertoast.showToast(msg: "비밀번호가 변경되었습니다.");
+                    Get.offAllNamed(Routes.login);
+                  } else {
+                    Fluttertoast.showToast(msg: "비밀번호 변경에 실패했습니다.");
+                  }
+                } else {
+                  Fluttertoast.showToast(msg: "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+                }
+              },
             ),
           ),
           SizedBox(height: 24.h),

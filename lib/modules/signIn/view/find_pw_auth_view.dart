@@ -74,6 +74,7 @@ class FindPwAuthScreen extends GetView<LoginController> {
               onTap: () async {
                 var result = await UserAuthApi.postAuthCheckEmail(email: controller.searchPwEmail.value, code: controller.searchPwAuthNum.value);
                 if (result) {
+                  Fluttertoast.showToast(msg: "인증에 성공했습니다!");
                   Get.to(NewPwScreen());
                 } else {
                   Fluttertoast.showToast(msg: "인증번호를 다시 확인해주세요;");

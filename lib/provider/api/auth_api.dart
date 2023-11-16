@@ -315,8 +315,8 @@ static Future<bool> setSignUp({
     required String modifyPassword,
 }) async {
     try {
-      Response response = await DioServices().to().get("/auth/password",
-          queryParameters: {
+      Response response = await DioServices().to().post("/auth/password",
+          data: {
             "email": email,
             "code": code,
             "modifyPassword": modifyPassword,
