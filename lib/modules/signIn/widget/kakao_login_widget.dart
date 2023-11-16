@@ -40,23 +40,36 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
     });
   }
 
+  Future<void> handleKakaoSignIn(OAuthToken token) async { /// 서버에 로그인 요청
+    print('Kakao 로그인 성공 ${token.accessToken}');
+    var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
+    if (result) {
+      controller.setPlatform('kakao');
+      print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
+      Get.offAllNamed(Routes.main);
+    } else {
+      Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+    }
+  }
+
+  Future<void> loginWithKakaoAccount() async { /// 카카오계정으로 로그인 시도
+    try {
+      OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+      await handleKakaoSignIn(token);
+    } catch (error) {
+      print('카카오계정으로 로그인 실패: $error');
+    }
+  }
+
   void signInWithKakao() async {
     try {
       if (await isKakaoTalkInstalled()) {
         /// 카카오톡이 설치 되어있는 경우
         try {
           OAuthToken token = await UserApi.instance.loginWithKakaoTalk();
+          await handleKakaoSignIn(token);
           print('카카오톡으로 로그인 성공 (by.앱) ${token.accessToken}');
 
-          //TODO) setKakaoLogin 호출
-          var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
-          if(result) {
-            controller.setPlatform('kakao');
-            print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
-            Get.offAllNamed(Routes.main);
-          } else {
-            Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
-          }
         } catch (error) {
           print('카카오톡으로 로그인 실패 1) $error');
 
@@ -68,18 +81,8 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
           // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
           try {
             OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
-            print('카카오계정으로 로그인 성공 ${token.accessToken}');
-
-            //TODO) setKakaoLogin 호출
-            var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
-            if(result) {
-              controller.setPlatform('kakao');
-              print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
-              Get.offAllNamed(Routes.main);
-            } else {
-              Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
-            }
-
+            print('카카오계정으로 로그인 성공 (by.앱) ${token.accessToken}');
+            await handleKakaoSignIn(token);
           } catch (error) {
             print('카카오계정으로 로그인 실패 1) $error');
           }
@@ -89,18 +92,8 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
         /// 카카오톡 미설치 경우
         try {
           OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
-          print('카카오톡으로 로그인 성공 (by.웹뷰) ${token.accessToken}');
-
-          //TODO) setKakaoLogin 호출
-          var result = await UserAuthApi.setKakaoLogin(token: token.accessToken);
-          if(result) {
-            controller.setPlatform('kakao');
-            print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
-            Get.offAllNamed(Routes.main);
-          } else {
-            Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
-          }
-
+          print('카카오계정으로 로그인 성공 (by.웹뷰) ${token.accessToken}');
+          await handleKakaoSignIn(token);
         } catch (error) {
           print('카카오계정으로 로그인 실패 2) $error');
         }

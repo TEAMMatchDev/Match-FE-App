@@ -102,6 +102,7 @@ class MypageApi {
       DioServices().addHeader("DEVICE_ID", deviceId ?? "");
       Response response = await DioServices().to().get(
             "/users/logout",
+            queryParameters: {"DEVICE_ID": deviceId},
           );
       if (response.data[SUCCESS]) {
         DioServices().removeHeader('DEVICE_ID');
