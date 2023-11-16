@@ -58,9 +58,9 @@ class _NaverLoginState extends State<NaverLoginWidget> {
           children: [
             SizedBox(width: 24.w),
             SvgPicture.asset(iconDir + "login/ic_naver_16.svg"),
-            SizedBox(width: 80.w),
+            SizedBox(width: 28.w),
             Text(
-              '네이버 로그인',
+              '네이버로 로그인하고 시작하기',
               style: AppTextStyles.T1Bold14.copyWith(
                   fontWeight: FontWeight.w600, color: AppColors.white),
               textAlign: TextAlign.center,

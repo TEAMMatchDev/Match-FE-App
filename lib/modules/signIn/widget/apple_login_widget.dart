@@ -86,13 +86,10 @@ class _AppleLoginState extends State<AppleLoginWidget> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(width: 24.w),
-            // Add some spacing between the icon and text
             SvgPicture.asset(iconDir + "login/ic_apple_20.svg"),
-            // Include your SVG here
-            SizedBox(width: 80.w),
-            // Add some spacing between the icon and text
+            SizedBox(width: 28.w),
             Text(
-              '애플 로그인',
+              'Apple로 로그인하고 시작하기',
               style: AppTextStyles.T1Bold14.copyWith(
                   fontWeight: FontWeight.w600, color: AppColors.white),
               textAlign: TextAlign.center,

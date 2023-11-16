@@ -134,9 +134,9 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
           children: [
             SizedBox(width: 24.w),
             SvgPicture.asset(iconDir + "login/ic_kakao_19.svg"),
-            SizedBox(width: 80.w),
+            SizedBox(width: 28.w),
             Text(
-              '카카오 로그인',
+              '카카오로 로그인하고 시작하기',
               style:
               AppTextStyles.T1Bold14.copyWith(fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
