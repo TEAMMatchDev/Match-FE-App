@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_status.dart';
 import 'package:match/modules/signIn/view/new_pw_view.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
+import 'package:match/provider/api/auth_api.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -55,7 +57,8 @@ class FindPwAuthScreen extends GetView<LoginController> {
                       CommonInputField.findPwAuthNum(
                           textController : controller.findPwAuthNumTextController.value,
                           onChange: (value) async {
-                            //print(">>> 입력한 인증번호: $value");
+                            controller.searchPwAuthNum.value = value;
+                            print(">>> 입력한 인증번호: $value");
                           }),
                     ],
                   ),
@@ -69,7 +72,13 @@ class FindPwAuthScreen extends GetView<LoginController> {
             child: CommonButton.login(
               text: "확인",
               onTap: () async {
-                Get.to(NewPwScreen());
+                var result = await UserAuthApi.postAuthCheckEmail(email: controller.searchPwEmail.value, code: controller.searchPwAuthNum.value);
+                if (result) {
+                  Fluttertoast.showToast(msg: "인증에 성공했습니다!");
+                  Get.to(NewPwScreen());
+                } else {
+                  Fluttertoast.showToast(msg: "인증번호를 다시 확인해주세요;");
+                }
               },
             ),
           ),

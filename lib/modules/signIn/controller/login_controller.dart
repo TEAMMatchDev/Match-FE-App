@@ -12,14 +12,18 @@ class LoginController extends GetxController {
   RxString userId = ''.obs;
   RxString userPw = ''.obs;
 
+  RxString searchPwEmail = ''.obs; //비밀번호 찾을 때 입력하는 이메일
+  RxString searchPwAuthNum = ''.obs; //이메일 인증번호
+  RxString newPw = ''.obs; //새로운 비밀번호
+  RxString newPwConfirm = ''.obs; //새로운 비밀번호 확인
   //비밀번호 찾을 때 입력하는 이메일
   Rx<TextEditingController> findPwEmailTextController = TextEditingController().obs;
   //비밀번호 찾을 때 입력하는 인증번호
   Rx<TextEditingController> findPwAuthNumTextController = TextEditingController().obs;
 
   //새로운 비밀번호 & 비밀번호 확인
-  Rx<TextEditingController> newPw = TextEditingController().obs;
-  Rx<TextEditingController> newPwConfirm = TextEditingController().obs;
+  Rx<TextEditingController> newPwController = TextEditingController().obs;
+  Rx<TextEditingController> newPwConfirmController = TextEditingController().obs;
 
   /// 로그인한 플랫폼
   var loginPlatform = ''.obs;

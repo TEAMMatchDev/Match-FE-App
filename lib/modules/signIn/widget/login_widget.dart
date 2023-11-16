@@ -97,7 +97,6 @@ class _LoginState extends State<LoginWidget> {
             ? _logoutButton()
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                // Center the children vertically
                 children: [
                   SizedBox(
                     height: 150.h,
@@ -106,9 +105,12 @@ class _LoginState extends State<LoginWidget> {
                     imgDir + "logo/iv_home_logo.png",
                     width: 120.w,
                   ),
-                  SizedBox(
-                    height: 150.h,
+                  SizedBox(height: 84.h),
+                  Image.asset(
+                    iconDir + "login/iv_login_msg.png",
+                    width: 233.w,
                   ),
+                  SvgPicture.asset(iconDir + "login/iv_login_msg.png"),
                   KakaoLoginWidget(),
                   SizedBox(
                     height: 12.h,
