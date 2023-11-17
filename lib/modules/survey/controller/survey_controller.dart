@@ -10,7 +10,6 @@ class SurveyController extends GetxController {
 
   Rx<TextEditingController> commentTextController = TextEditingController().obs;
   Rx<ScrollController> scrollController = ScrollController().obs;
-  RxBool isSubmit = false.obs;
 
   // 키보드 상태에 따라 스크롤 조절
   void _scrollListener() async{

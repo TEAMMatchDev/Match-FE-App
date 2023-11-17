@@ -10,6 +10,7 @@ import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
 import '../controller/survey_controller.dart';
+import 'survey_complete_view.dart';
 
 class SurveyScreen extends GetView<SurveyController> {
   const SurveyScreen({super.key});
@@ -120,9 +121,10 @@ class SurveyScreen extends GetView<SurveyController> {
                       EdgeInsets.symmetric(horizontal: 29.w, vertical: 20.h),
                   child: CommonButton.edit(
                     text: "작성 완료",
-                    isActive: controller.isSubmit.value,
+                    isActive: true,
                     onTap: () async {
                       //TODO: 리뷰 등록 api
+                      Get.to(() => const SurveyCompleteScreen());
                     },
                   ),
                 ))
