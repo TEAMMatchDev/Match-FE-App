@@ -106,19 +106,29 @@ class _LoginState extends State<LoginWidget> {
                     width: 120.w,
                   ),
                   SizedBox(height: 84.h),
-                  Image.asset(
-                    iconDir + "login/iv_login_msg.png",
-                    width: 233.w,
+                  Stack(
+                   children: [
+                     Container(
+                       child: Image.asset(
+                         iconDir + "login/iv_login_msg_background.png",
+                         width: 240.w,
+                       ),
+                     ),
+                     /// 카드사
+                     Positioned(
+                       bottom: 25.h,
+                       left: 35.w,
+                       child: Text(
+                         '별도의 회원가입 절차 없이\nSNS 계정으로 빠르게 로그인 하세요. ',
+                         style: AppTextStyles.T1Bold12.copyWith(color: AppColors.grey7),
+                         textAlign: TextAlign.center,
+                       ),
+                     ),
+                   ],
                   ),
-                  SvgPicture.asset(iconDir + "login/iv_login_msg.png"),
                   KakaoLoginWidget(),
-                  SizedBox(
-                    height: 12.h,
-                  ),
-                  NaverLoginWidget(),
-                  SizedBox(
-                    height: 12.h,
-                  ),
+                  SizedBox(height: 12.h),
+                  //NaverLoginWidget(),
                   AppleLoginWidget(),
                   SizedBox(
                     height: 30.h,

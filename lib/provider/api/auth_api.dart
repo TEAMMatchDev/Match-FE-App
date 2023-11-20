@@ -40,6 +40,34 @@ class UserAuthApi {
     }
   }
 
+///<h2>1-3API | 네이버 로그인</h2>
+  static Future<bool> setNaverLogin({
+    required String token,
+}) async {
+    try {
+      Response response = await DioServices().to().post("/auth/naver",
+        data: {"accessToken": token});
+      logger.e(response.data["message"]);
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
+        logger.e(response.data[CODE]);
+      }
+
+      String accessToken = response.data[RESULT]["accessToken"];
+      DioServices().setAccessToken(accessToken);
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
+
   ///<h2>1-11API | 애플 로그인</h2>
   static Future<bool> setAppleLogin({
     required String accessToken,
