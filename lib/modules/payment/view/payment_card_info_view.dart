@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/card_info/card_info.dart';
+import 'package:match/model/enum/card_types.dart';
 import 'package:match/modules/payment/view/payment_method_info_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
 import 'package:match/provider/api/order_api.dart';
@@ -24,20 +25,6 @@ import '../widget/payment_widget.dart';
 class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
   final String selectedCardName;
-  final List<List<String>> cardBankList = [
-    ['하나','ic_card_hana.svg','374'],
-    ['현대','ic_card_hyundai.svg','367'],
-    // ['기업','ic_card_ibk.svg',''],
-    ['카카오뱅크','ic_card_kakao.svg','090'],
-    ['국민','ic_card_kb.svg','381'],
-    ['MG새마을금고','ic_card_mg.svg','045'],
-    // ['SC제일','ic_card_sc.svg',''],
-    ['신한','ic_card_shinhan.svg','366'],
-    ['우리','ic_card_woori.svg','041'],
-    ['농협','ic_card_nh.svg','371'],
-    ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
-  ];
-
   String cardNum = '';
   String cardExp = '';
   String cardCvc = '';
@@ -101,17 +88,15 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
                 //TODO) 카드 svg
                 (() {
-                  final matchingCard = cardBankList.firstWhere(
-                        (card) => selectedCardName.contains(card[0]),
-                      orElse: () => cardBankList.firstWhere((card) => card[2] == '')
-                  );
+                  final matchingCard = CardBank.fromName(selectedCardName);
+
                   return Center(
                     child: Stack(
                       children: [
                         // 기존 카드 이미지
                         Container(
                           child: SvgPicture.asset(
-                            iconDir + "card/" + matchingCard[1],
+                            iconDir + "card/" + matchingCard.icon,
                             width: 263.w,
                             height: 150.h,
                           ),
@@ -121,7 +106,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           bottom: 40.h,
                           left: 18.w,
                           child: Text(
-                              matchingCard[0],
+                              matchingCard.cardName,
                               style: AppTextStyles.T1Bold15.copyWith(color: AppColors.white)
                           ),
                         ),
