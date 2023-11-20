@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/card_types.dart';
 import 'package:match/modules/payment/view/payment_card_info_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
@@ -34,9 +35,10 @@ class _PaymentRegisterCardScreenState extends State<PaymentRegisterCardScreen> {
       ['신한카드','우리카드','기업카드'],
       ['하나카드','우체국카드','기타'],
     ];
+
     final cardIcons = [
-      ['ic_kakao.svg','ic_kbb.svg','ic_nh.svg'],
-      ['ic_shinhan2.svg','ic_woori.svg','ic_ibk.svg'],
+      ['ic_kakao.svg','ic_kb.svg','ic_nh.svg'],
+      ['ic_shinhan.svg','ic_woori.svg','ic_ibk.svg'],
       ['ic_hana.svg','ic_postoffice.svg','ic_etc.svg'],
     ];
 

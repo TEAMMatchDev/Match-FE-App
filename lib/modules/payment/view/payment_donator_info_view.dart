@@ -43,7 +43,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context){
-    //print(">>> DonatorScreen 기부자 프로필 조회: ${AuthService.to.donatorProfile.value}");
+    print(">>> DonatorScreen 기부자 프로필 조회: ${AuthService.to.donatorProfile.value}");
     //print(">> 로그인 플랫폼 정보: ${loginController.loginPlatform.value}");
 
     return Obx(() {

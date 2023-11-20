@@ -104,6 +104,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
           );
         }).toList(),
         options: CarouselOptions(
+          enableInfiniteScroll: false,
           aspectRatio: 10 / 9.5,  //슬라이드의 종횡비 4:3
           autoPlay: true,
           viewportFraction: 320 / 320, //화면에 보이는 슬라이드 크기

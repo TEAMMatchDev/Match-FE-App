@@ -60,7 +60,7 @@ class _CardSliderState extends State<CardSlider> {
                   // 기존 카드 이미지
                   Container(
                     child: SvgPicture.asset(
-                      iconDir + "card/" + matchingCard.icon,
+                      iconDir + "card/" + matchingCard.cardIcon,
                       width: 263.w,
                       height: 150.h,
                     ),

@@ -96,7 +96,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                         // 기존 카드 이미지
                         Container(
                           child: SvgPicture.asset(
-                            iconDir + "card/" + matchingCard.icon,
+                            iconDir + "card/" + matchingCard.cardIcon,
                             width: 263.w,
                             height: 150.h,
                           ),
@@ -106,7 +106,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           bottom: 40.h,
                           left: 18.w,
                           child: Text(
-                              matchingCard.cardName,
+                              matchingCard.bankName,
                               style: AppTextStyles.T1Bold15.copyWith(color: AppColors.white)
                           ),
                         ),
