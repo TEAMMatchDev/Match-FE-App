@@ -30,20 +30,14 @@ class _PaymentRegisterCardScreenState extends State<PaymentRegisterCardScreen> {
   Widget build(BuildContext context){
 
     final cardNames = [
-      ['토스카드','카카오뱅크','국민카드'],
-      ['농협카드','우리카드','현대카드'],
-      ['하나카드','신한카드','롯데카드'],
-      ['BC카드','삼성카드','K뱅크카드'],
-      ['씨티카드','수협카드','우체국카드'],
-      ['신협카드','기타'],
+      ['카카오뱅크','국민카드','농협카드'],
+      ['신한카드','우리카드','기업카드'],
+      ['하나카드','우체국카드','기타'],
     ];
     final cardIcons = [
-      ['ic_toss2.svg','ic_kakao.svg','ic_kbb.svg'],
-      ['ic_nh.svg','ic_woori.svg','ic_hyundai.svg'],
-      ['ic_hana.svg','ic_shinhan2.svg','ic_lotte2.svg'],
-      ['ic_bc.svg','ic_samsung2.svg','ic_kbank.svg'],
-      ['ic_citi.svg','ic_suhyup.svg','ic_postoffice.svg'],
-      ['ic_sinhyup.svg','ic_etc.svg',],
+      ['ic_kakao.svg','ic_kbb.svg','ic_nh.svg'],
+      ['ic_shinhan2.svg','ic_woori.svg','ic_ibk.svg'],
+      ['ic_hana.svg','ic_postoffice.svg','ic_etc.svg'],
     ];
 
 

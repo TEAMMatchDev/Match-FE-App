@@ -34,6 +34,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
     // ['SC제일','ic_card_sc.svg',''],
     ['신한','ic_card_shinhan.svg','366'],
     ['우리','ic_card_woori.svg','041'],
+    ['농협','ic_card_nh.svg','371'],
     ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
   ];
 
