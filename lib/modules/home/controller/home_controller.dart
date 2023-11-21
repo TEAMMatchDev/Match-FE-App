@@ -40,9 +40,9 @@ class HomeController extends GetxController {
   }
 
   ///*카카오톡 공유하기 메소드
-  Future<void> kakoShare({required String imgUrl,required int donationId}) async {
+  Future<void> kakoShare({required String imgUrl,required int projectId}) async {
     var appLink =
-    await DynamicLink.getShortLink(screenName: "project", id: donationId);
+    await DynamicLink.getShortLink(screenName: "project", id: projectId);
     ShareClient shareClient = ShareClient.instance;
     //카카오톡 설치 여부 판별
     bool isKakaoTalkSharingAvailable =
