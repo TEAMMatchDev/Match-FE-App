@@ -119,7 +119,7 @@ var tmpProfile = const Profile(
     name: "test",
     nickName: "test",
     socialType: "NORMAL",
-    email: "gusdn8926@naver.com",
+    email: "test@naver.com",
     phone: "01049177672");
 var tmpDonator = const Donator(
     //기부자 정보 임시 데이터

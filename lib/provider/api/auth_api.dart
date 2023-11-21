@@ -48,6 +48,7 @@ class UserAuthApi {
       Response response = await DioServices().to().post("/auth/naver",
         data: {"accessToken": token});
       logger.e(response.data["message"]);
+
       if(!response.data[SUCCESS]) {
         Fluttertoast.showToast(
             msg: response.data[MSG],
@@ -76,26 +77,25 @@ class UserAuthApi {
       Response response = await DioServices().to().post("/auth/apple",
           data: {"accessToken": accessToken});
 
-      if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(
-            msg: response.data[MSG],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1
-        );
-        logger.e(response.data[CODE]);
+      if (response.data[SUCCESS]) {
+        print(">>> (애플로그인) 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}");
+        String token = response.data[RESULT]["accessToken"];
+        DioServices().setAccessToken(token);
       }
 
-
-      print(">>> (애플로그인) 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}");
-
-      logger.i('>>> 로그인 성공 후 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}');
-      String token = response.data[RESULT]["accessToken"];
-      DioServices().setAccessToken(token);
-
-      return response.data[SUCCESS];
+      return true;
     } catch (e) {
-      logger.e(e.toString());
+      logger.e(">> 애플로그인 시도: ${e.toString()}");
+      if (e is DioError && e.response != null) {
+        final errorData = e.response!.data;
+        if (errorData[RESULT] != null && errorData[RESULT]['socialId'] != null) {
+
+          User user = User(socialId: errorData[RESULT]['socialId'], email: '', gender: '');
+          print(">>> 애플로그인 시도할 socialId: ${user.socialId}");
+        }
+      } else {
+          Fluttertoast.showToast(msg: "애플 로그인 실패");
+      }
       return false;
     }
   }

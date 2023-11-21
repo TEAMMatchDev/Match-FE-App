@@ -11,6 +11,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:match/model/enum/login_type.dart';
 import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/provider/api/auth_api.dart';
+import 'package:match/provider/api/util/global_api_field.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
@@ -52,14 +53,20 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       controller.setAppleLoginCode(credential.authorizationCode);
       controller.appleLoginCode.value = credential.authorizationCode.toString();
       print(">>> 애플유저 코드: ${controller.appleLoginCode.value}");
+      controller.setAppleLoginToken(credential.identityToken.toString());
+      controller.appleLoginToken.value = credential.identityToken.toString();
+      print(">>> 애플유저 토큰: ${controller.appleLoginToken.value}");
+
       var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
-      if (result) {
+
+      if (result) { /// true : 기존 애플유저 / false : 신규 애플유저
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
         controller.setPlatform('apple');
-        //print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
 
         Get.offAllNamed(Routes.main);
       } else {
+        // false 일 때 socailId 출력
+
         Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
       }
 

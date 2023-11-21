@@ -34,6 +34,10 @@ class LoginController extends GetxController {
   void setAppleLoginCode(String code) {
     appleLoginCode.value = code;
   }
+  var appleLoginToken = ''.obs;
+  void setAppleLoginToken(String token) {
+    appleLoginToken.value = token;
+  }
 
   @override
   void onInit() {
