@@ -124,8 +124,8 @@ var tmpProfile = const Profile(
 var tmpDonator = const Donator(
     //기부자 정보 임시 데이터
     name: "테스트",
-    birthDay: "2001-01-02",
-    phoneNumber: "010-1234-5678");
+    birthDay: "2099-01-01",
+    phoneNumber: "010-9999-9999");
 var tmpCardInfo = const CardInfo(
     id: 1,
     cardCode: "041",

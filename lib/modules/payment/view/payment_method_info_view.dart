@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -172,27 +173,28 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: isAuthAble
                         ? CommonButton.login(
-                      text: "확인",
-                      onTap: () async {
-                        if(state == 'REGULAR') {
-                          var result = await OrderApi.setRegularPay(
-                              cardId: controller.cardId.value,
-                              projectId: _projectController.projectId,
-                              amount: controller.selectedDate.value,
-                              payDate: controller.selectedAmount.value);
-                          if (result){
-                            Get.to(PaymentDoneScreen());
-                          }
-                        }
-                        else{
-                          Get.back(); ///단기결제(2차)
-                        }
-                      },
-                    )
+                            text: "확인",
+                            onTap: () async {
+                              if(state == 'REGULAR') {
+                                var result = await OrderApi.setRegularPay(
+                                    cardId: controller.cardId.value,
+                                    projectId: _projectController.projectId,
+                                    amount: controller.selectedDate.value,
+                                    payDate: controller.selectedAmount.value);
+                                if (result){
+                                  Get.to(PaymentDoneScreen());
+                                }
+                              }
+                              else{
+                                //Get.back(); ///단기결제(2차)
+                                Fluttertoast.showToast(msg: "단기결제 도입 예정");
+                              }
+                            },
+                        )
                         : CommonButton.loginDis(
-                      text: "확인",
-                      onTap: () async {},
-                    ),
+                            text: "확인",
+                            onTap: () async {},
+                          ),
                   ),
               ),
             ],

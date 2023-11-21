@@ -36,5 +36,14 @@ enum CardBank {
     );
   }
 
+  /// 카드사 선택화면 -카드 이름 리스트
+  List<List<CardBank>> getCardBanksFromNames(List<List<String>> cardNames) {
+    return cardNames.map((row) => row.map((name) => CardBank.fromName(name)).toList()).toList();
+  }
+
+  /// 카드사 선택화면 -카드 아이콘 리스트
+  List<List<CardBank>> getCardBanksFromIcons(List<List<String>> icon) {
+    return icon.map((row) => row.map((name) => CardBank.fromName(name)).toList()).toList();
+  }
 
 }
