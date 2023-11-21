@@ -26,8 +26,6 @@ import 'package:match/modules/signIn/binding/login_binding.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
 import 'package:match/modules/signUp/binding/signup_binding.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
-import 'package:match/modules/survey/binding/survey_binding.dart';
-import 'package:match/modules/survey/view/survey_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
 import 'package:match/modules/tutorial/view/tutorial_view.dart';
 import 'package:match/modules/user_phone/binding/user_phone_binding.dart';
@@ -46,6 +44,8 @@ import '../../modules/notice/binding/notice_binding.dart';
 import '../../modules/notice/binding/notice_detail_binding.dart';
 import '../../modules/notice/view/notice_detail_view.dart';
 import '../../modules/notice/view/notice_view.dart';
+import '../../modules/review/binding/review_binding.dart';
+import '../../modules/review/view/review_view.dart';
 import '../../modules/total_pay/binding/total_pay_binding.dart';
 import '../../modules/tutorial/binding/tutorial_binding.dart';
 import 'routes.dart';
@@ -108,10 +108,10 @@ class Pages {
     ),
     GetPage(
       title: "설문조사 화면",
-      name: Routes.survey,
-      page: () => const SurveyScreen(),
+      name: Routes.review,
+      page: () => const ReviewScreen(),
       transition: Transition.noTransition,
-      binding: SurveyBinding(),
+      binding: ReviewBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

@@ -29,7 +29,7 @@ class CommentApi {
           .to()
           .get("$commentPath$projectId", queryParameters: queryParameters);
       logger.d(
-          "pagination 정보: totalCnt:${comments.totalCnt}, currentPage:${comments.currentpage} isLast:${project.isLast}");
+          "pagination 정보: totalCnt:${comments.totalCnt}, currentPage:${comments.currentpage} isLast:${comments.isLast}");
 
       return List.generate(response.data[RESULT].length,
           (index) => Comment.fromJson(response.data[RESULT][index]));

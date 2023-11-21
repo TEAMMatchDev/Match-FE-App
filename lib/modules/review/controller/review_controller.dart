@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../util/const/style/global_logger.dart';
 
-class SurveyController extends GetxController {
+class ReviewController extends GetxController {
   Rx<int> donateRate = 4.obs;
   Rx<int> truthRate = 4.obs;
   Rx<int> informRate = 4.obs;

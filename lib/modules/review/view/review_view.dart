@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:match/modules/survey/widget/survey_widget.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
-import '../controller/survey_controller.dart';
-import 'survey_complete_view.dart';
+import '../controller/review_controller.dart';
+import '../widget/survey_widget.dart';
+import 'review_complete_view.dart';
 
-class SurveyScreen extends GetView<SurveyController> {
-  const SurveyScreen({super.key});
+class ReviewScreen extends GetView<ReviewController> {
+  const ReviewScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
