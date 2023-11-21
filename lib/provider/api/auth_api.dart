@@ -217,8 +217,8 @@ static Future<bool> postValidCheckEmail({
         );
       }
 
-      String accessToken = response.data[RESULT]["accessToken"];
-      DioServices().setAccessToken(accessToken);
+      // String accessToken = response.data[RESULT]["accessToken"];
+      // DioServices().setAccessToken(accessToken);
 
       return response.data[SUCCESS];
     } catch (e) {

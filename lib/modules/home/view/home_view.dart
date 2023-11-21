@@ -153,7 +153,7 @@ class HomeScreen extends GetView<HomeController> {
                                   ),
                                   shareChip(
                                       imgUrl: flame.image,
-                                      donationId: flame.donationId)
+                                      projectId: flame.projectId)
                                 ],
                               );
                             },
@@ -167,14 +167,12 @@ class HomeScreen extends GetView<HomeController> {
       ),
     );
   }
-
-  //TODO: 현재 donationId로 전달받고 있기때문에 동작 X
-  Widget shareChip({required String imgUrl, required int donationId}) {
+//TODO: kakao -> app routing 테스트 이전
+  Widget shareChip({required String imgUrl, required int projectId}) {
     return GestureDetector(
       onTap: () async {
-        //TODO: donationId -> ProjectID로 변경
-        await Get.dialog(SurveyModal(title: "설문조사", surveyId: 1));
-        // await controller.kakoShare(imgUrl: imgUrl, donationId: donationId);
+        // await Get.dialog(SurveyModal(title: "설문조사", surveyId: 1));
+        await controller.kakoShare(imgUrl: imgUrl, projectId: projectId);
       },
       child: IntrinsicWidth(
         child: Container(

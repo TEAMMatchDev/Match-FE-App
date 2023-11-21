@@ -7,6 +7,7 @@ part 'flame.g.dart';
 @freezed
 class Flame with _$Flame {
   const factory Flame({
+    required int projectId,
     required int donationId,
     required String usages,
     required String inherenceName,

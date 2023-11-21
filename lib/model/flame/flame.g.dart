@@ -7,6 +7,7 @@ part of 'flame.dart';
 // **************************************************************************
 
 _$FlameImpl _$$FlameImplFromJson(Map<String, dynamic> json) => _$FlameImpl(
+      projectId: json['projectId'] as int,
       donationId: json['donationId'] as int,
       usages: json['usages'] as String,
       inherenceName: json['inherenceName'] as String,
@@ -16,6 +17,7 @@ _$FlameImpl _$$FlameImplFromJson(Map<String, dynamic> json) => _$FlameImpl(
 
 Map<String, dynamic> _$$FlameImplToJson(_$FlameImpl instance) =>
     <String, dynamic>{
+      'projectId': instance.projectId,
       'donationId': instance.donationId,
       'usages': instance.usages,
       'inherenceName': instance.inherenceName,
