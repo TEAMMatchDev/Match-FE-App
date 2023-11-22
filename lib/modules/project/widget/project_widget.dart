@@ -157,23 +157,12 @@ class CommentBottomSheet extends StatelessWidget {
                           text: "신고",
                           context: context,
                           onGrant: () async {
-                            Rx<ReportType?> reportType = (null).obs;
                             Get.bottomSheet(
                               isScrollControlled: true,
-                              ReportReasonSheet(reportType: reportType),
+                              ReportReasonSheet(
+                                comment: comment,
+                              ),
                             );
-                            if (reportType.value != null) {
-                              var tmpResult = await CommentApi.reportComment(
-                                  comment: comment.comment,
-                                  commentId: comment.commentId,
-                                  reportReason: reportType.value!.name);
-                              if (tmpResult) {
-                                Fluttertoast.showToast(
-                                    msg: "신고가 성공적으로 접수되었습니다.");
-                                ProjectController.to.comments.remove(comment);
-                                Get.back();
-                              }
-                            }
                           },
                         );
                       });
@@ -206,9 +195,10 @@ class CommentBottomSheet extends StatelessWidget {
                                   var result = await CommentApi.deleteComment(
                                     commentId: comment.commentId,
                                   );
-                                  if(result){
+                                  if (result) {
                                     Fluttertoast.showToast(msg: "삭제되었습니다.");
-                                    ProjectController.to.comments.remove(comment);
+                                    ProjectController.to.comments
+                                        .remove(comment);
                                     Get.back();
                                   }
                                 });
@@ -233,9 +223,9 @@ class CommentBottomSheet extends StatelessWidget {
 }
 
 class ReportReasonSheet extends StatelessWidget {
-  final Rx<ReportType?> reportType;
+  final Comment comment;
 
-  const ReportReasonSheet({super.key, required this.reportType});
+  const ReportReasonSheet({super.key, required this.comment});
 
   @override
   Widget build(BuildContext context) {
@@ -253,8 +243,15 @@ class ReportReasonSheet extends StatelessWidget {
             .map((report) => _textListTile(
                 text: report.stateName,
                 onTap: () async {
-                  reportType.value = report;
-                  Get.back();
+                  var tmpResult = await CommentApi.reportComment(
+                      comment: comment.comment,
+                      commentId: comment.commentId,
+                      reportReason: report.name);
+                  if (tmpResult) {
+                    Fluttertoast.showToast(msg: "신고가 성공적으로 접수되었습니다.");
+                    ProjectController.to.comments.remove(comment);
+                    Get.back();
+                  }
                 }))
             .toList(),
         Padding(

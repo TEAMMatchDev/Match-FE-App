@@ -1,5 +1,4 @@
 enum ReportType {
-
   PROMOTION("영리, 홍보목적"),
   ILLEGAL("불법정보"),
   LEWDNESS("음란, 청소년 유해"),
