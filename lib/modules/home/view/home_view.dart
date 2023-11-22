@@ -170,7 +170,6 @@ class HomeScreen extends GetView<HomeController> {
   Widget shareChip({required String imgUrl, required int projectId}) {
     return GestureDetector(
       onTap: () async {
-        // await Get.dialog(SurveyModal(title: "설문조사", surveyId: 1));
         await controller.kakoShare(imgUrl: imgUrl, projectId: projectId);
       },
       child: IntrinsicWidth(

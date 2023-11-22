@@ -93,7 +93,7 @@ class HomeController extends GetxController {
     ///* home의 경우, 자동로그인이 적용되었을때
     /// MainBinding에서 mypage API와 동시 호출되어 refresh api 중복호출 가능성이 있음
     /// 이에 API를 3초 가량 delay후 호출
-    Future.delayed(Duration(seconds: 3), () async {
+    Future.delayed(Duration(seconds: 2), () async {
       bannerList.assignAll(await BannerApi.getBannerList());
       adCount.value = bannerList.length;
 

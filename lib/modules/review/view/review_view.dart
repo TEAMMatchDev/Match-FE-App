@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:match/model/review/review.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
+import '../../../provider/api/review_api.dart';
 import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
@@ -123,7 +125,14 @@ class ReviewScreen extends GetView<ReviewController> {
                     text: "작성 완료",
                     isActive: true,
                     onTap: () async {
-                      //TODO: 리뷰 등록 api
+                      await ReviewApi.registerReview(
+                          review: Review(
+                              executionId: controller.executionId,
+                              donation: controller.donateRate.value + 1,
+                              transparency: controller.truthRate.value + 1,
+                              information: controller.informRate.value + 1,
+                              comment:
+                                  controller.commentTextController.value.text));
                       Get.to(() => const SurveyCompleteScreen());
                     },
                   ),
