@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:match/model/user/user.dart';
 
 import '../../../model/enum/search_status.dart';
 
@@ -13,7 +14,8 @@ class SignUpController extends GetxController {
   RxString signUpPwConfirm = ''.obs; //pw 확인
   RxBool authPhone = false.obs; ///전화번호 인증 완료 여부
   RxBool validPw = false.obs; //pw 유효성 검사
-
+  RxList<User> userInfo = <User>[].obs;
+  RxString socailId = ''.obs; ///애플유저 회원가입 시 필요한 socailId
 
   RxString signUpName = ''.obs;
   RxString signUpGender = ''.obs;
@@ -55,5 +57,7 @@ class SignUpController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    socailId.value = userInfo.map((info) => info.socialId).toString();
+
   }
 }

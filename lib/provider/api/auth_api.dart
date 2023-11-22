@@ -101,7 +101,7 @@ class UserAuthApi {
   }
 
   ///<h2>1-11-1API 애플 회원가입</h2>
-  static Future<bool> setAppleSinUp({
+  static Future<bool> setAppleSignUp({
     required String socialId,
     required String email,
     required String name,
