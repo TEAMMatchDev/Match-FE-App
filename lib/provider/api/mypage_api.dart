@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:match/model/today_project/today_project.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
 import 'package:match/util/method/get_storage.dart';
 
+import '../../model/api/pagination.dart';
 import '../../model/banner/banners.dart';
 import '../../model/profile/profile.dart';
 import '../../util/const/style/global_logger.dart';
@@ -119,8 +121,8 @@ class MypageApi {
   static Future<bool> signOut() async {
     try {
       Response response = await DioServices().to().delete(
-        "/users",
-      );
+            "/users",
+          );
       return response.data[SUCCESS];
     } catch (e) {
       Fluttertoast.showToast(msg: "회원탈퇴에 실패하였습니다. ${e}");
@@ -128,19 +130,52 @@ class MypageApi {
     }
   }
 
-///<h2>2-13 API | 회원탈퇴</h2>
-  static Future<bool> signOutApple({
-    required String code
+  ///<h2>2-13 API | 회원탈퇴</h2>
+  static Future<bool> signOutApple({required String code}) async {
+    try {
+      Response response =
+          await DioServices().to().delete("/users/apple", data: {"code": code});
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      Fluttertoast.showToast(msg: "회원탈퇴에 실패하였습니다. ${e}");
+      return false;
+    }
+  }
+
+  ///* 3-5 pagination 추가 호출 판별 함수
+  static Pagination likes = Pagination(isLast: false, totalCnt: 0);
+
+  ///<h2>3-13API | 내가 찜한 기부처 모아보기 </h2>
+  static Future<List<TodayProject>> getLikeList({
+    bool getMore = false,
   }) async {
     try {
-      Response response = await DioServices().to().delete("/users/apple",
-      data: {"code": code});
+      if (!getMore) {
+        likes.currentpage = 0;
+      }
+      var queryParameters = {
+        "page": likes.currentpage,
+        "size": PAGINATION_SIZE,
+        "filter": "LATEST",
+      };
+      Response response = await DioServices()
+          .to()
+          .get("/projects/like", queryParameters: queryParameters);
 
-      return response.data[SUCCESS];
+      likes.totalCnt = response.data[RESULT][TOTAL];
+      likes.isLast = response.data[RESULT][LAST];
+      logger.d(
+          "pagination 정보: totalCnt:${likes.totalCnt}, currentPage:${likes.currentpage} isLast:${likes.isLast}");
+
+      return List.generate(
+        response.data[RESULT][CONTENTS].length,
+        (index) =>
+            TodayProject.fromJson(response.data[RESULT][CONTENTS][index]),
+      );
     } catch (e) {
-      Fluttertoast.showToast(msg: "회원탈퇴에 실패하였습니다. ${e}");
-      return false;
+      logger.e(e.toString());
+      return [];
     }
   }
-  
 }
