@@ -14,7 +14,7 @@ Widget ReviewModal({required PopupInfo popupInfo}) {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16.r)),
       ),
-      title: Text("'${popupInfo.title}'\n정기 후원이 집행 완료되었습니다🎉",
+      title: Text("'${popupInfo.title}'\n${popupInfo.regularStatus}이 집행 완료되었습니다🎉",
           textAlign: TextAlign.center, style: AppTextStyles.T1Bold16),
       titlePadding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 30.w)
           .copyWith(bottom: 0.h),
