@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/project_type.dart';
+import 'package:match/provider/api/tutorial_api.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/routes/routes.dart';
@@ -48,7 +49,9 @@ class TutorialScreen extends GetView<TutorialController> {
                                             ? 36.w
                                             : 0),
                                     child: categoryType(
-                                      type: controller.projectTypes[i],
+                                      type: projectTypeMap[controller
+                                              .projectTypes[i].projectKind] ??
+                                          ProjectType.CHILDREN,
                                       isSelect:
                                           (controller.selectTypeIdx.value == i)
                                               .obs,
@@ -58,7 +61,7 @@ class TutorialScreen extends GetView<TutorialController> {
                             ],
                           ),
                         ),
-                        controller.selectTypeIdx.value == -1
+                        controller.selectProject == null
                             ? Padding(
                                 padding: EdgeInsets.only(top: 60.h),
                                 child: Text(
@@ -77,7 +80,7 @@ class TutorialScreen extends GetView<TutorialController> {
                                       image: DecorationImage(
                                         fit: BoxFit.fill,
                                         image: AssetImage(
-                                            "${imgDir}ic_speech_${controller.selectTypeIdx.value}_248.png"),
+                                            "${imgDir}ic_speech_${controller.projectTypes.indexOf(controller.selectProject!.value)}_248.png"),
                                       ),
                                     ),
                                     alignment: Alignment.center,
@@ -90,11 +93,10 @@ class TutorialScreen extends GetView<TutorialController> {
                                             width: 250.w,
                                             height: 30.h,
                                             child: Text(
-                                              projectTypDescription[
-                                                      controller.projectTypes[
-                                                          controller
-                                                              .selectTypeIdx
-                                                              .value]] ??
+                                              projectTypDescription[controller
+                                                      .selectProject!
+                                                      .value
+                                                      .projectKind] ??
                                                   "",
                                               style: AppTextStyles.L1Medium13,
                                               textAlign: TextAlign.center,
@@ -111,10 +113,11 @@ class TutorialScreen extends GetView<TutorialController> {
                 ),
               ),
               CommonButton.edit(
-                  isActive: controller.selectTypeIdx.value != -1,
+                  isActive: controller.selectProject != null,
                   text: "기부 분야 선택 완료",
                   onTap: () async {
-                    //TODO: api 연결여부 확인 필요
+                    TutorialApi.setDonationTutorial(
+                        projectId: controller.selectProject!.value.projectId);
                     await Get.toNamed(Routes.main);
                   }),
               SizedBox(

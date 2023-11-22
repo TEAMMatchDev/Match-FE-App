@@ -4,9 +4,10 @@ import 'package:match/provider/api/util/global_api_field.dart';
 
 import '../../model/recommend_project/recommend_project.dart';
 import '../../util/const/style/global_logger.dart';
+
 const String tutorialPath = "/donations/tutorial";
 
-class MypageApi {
+class TutorialApi {
   ///<h2>5-13 API | 튜토리얼 - 추천 기부 분야 조회 </h2>
   static Future<List<RecommendProject>> getRecommendProjects() async {
     try {
@@ -19,10 +20,13 @@ class MypageApi {
       return [];
     }
   }
+
   ///<h2>5-13 API | 튜토리얼 - 추천 기부 분야 조회 </h2>
-  static Future<bool> setDonationTutorial() async {
+  static Future<bool> setDonationTutorial({required int projectId}) async {
     try {
-      Response response = await DioServices().to().post(tutorialPath);
+      Response response = await DioServices()
+          .to()
+          .post(tutorialPath, data: {"projectId": projectId});
 
       return response.data[SUCCESS];
     } catch (e) {
