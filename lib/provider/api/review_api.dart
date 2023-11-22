@@ -14,7 +14,7 @@ class ReviewApi {
   static Future<PopupInfo?> getReviewPopup() async {
     try {
       Response response = await DioServices().to().get(reviewPath);
-      return response.data[SUCCESS];
+      return PopupInfo.fromJson(response.data[RESULT]);
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
       return null;

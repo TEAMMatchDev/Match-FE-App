@@ -38,6 +38,7 @@ Widget ReviewModal({required PopupInfo popupInfo}) {
               icon: "up",
               text: "좋아요",
               onTap: () async {
+                Get.back();
                 Get.toNamed(Routes.review,
                     arguments: {"executionId": popupInfo.executionId});
               }),
