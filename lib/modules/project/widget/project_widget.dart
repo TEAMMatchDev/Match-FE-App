@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/project/controller/project_controller.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/global_variable.dart';
@@ -169,6 +170,8 @@ class CommentBottomSheet extends StatelessWidget {
                               if (tmpResult) {
                                 Fluttertoast.showToast(
                                     msg: "신고가 성공적으로 접수되었습니다.");
+                                ProjectController.to.comments.remove(comment);
+                                Get.back();
                               }
                             }
                           },
@@ -200,9 +203,14 @@ class CommentBottomSheet extends StatelessWidget {
                             return CommonDialog.delete(
                                 context: context,
                                 onGrant: () async {
-                                  await CommentApi.deleteComment(
+                                  var result = await CommentApi.deleteComment(
                                     commentId: comment.commentId,
                                   );
+                                  if(result){
+                                    Fluttertoast.showToast(msg: "삭제되었습니다.");
+                                    ProjectController.to.comments.remove(comment);
+                                    Get.back();
+                                  }
                                 });
                           });
                     })

@@ -18,7 +18,8 @@ class MatchTabBar extends GetxController
   @override
   void onInit() {
     super.onInit();
-    controller = TabController(vsync: this, length: 2);
+    //2차 제외 경우 legnth:2로 수정
+    controller = TabController(vsync: this, length: 3);
   }
 
   @override

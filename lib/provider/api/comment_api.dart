@@ -28,11 +28,13 @@ class CommentApi {
       Response response = await DioServices()
           .to()
           .get("$commentPath$projectId", queryParameters: queryParameters);
+      comments.totalCnt = response.data[RESULT][TOTAL];
+      comments.isLast = response.data[RESULT][LAST];
       logger.d(
           "pagination 정보: totalCnt:${comments.totalCnt}, currentPage:${comments.currentpage} isLast:${comments.isLast}");
 
-      return List.generate(response.data[RESULT].length,
-          (index) => Comment.fromJson(response.data[RESULT][index]));
+      return List.generate(response.data[RESULT][CONTENTS].length,
+          (index) => Comment.fromJson(response.data[RESULT][CONTENTS][index]));
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
       return [];
@@ -40,7 +42,7 @@ class CommentApi {
   }
 
   ///<h2>3-10 API | 응원 등록하기</h2>
-  static Future<bool> registerComment({
+  static Future<Comment?> registerComment({
     required String comment,
     required int projectId,
   }) async {
@@ -49,10 +51,10 @@ class CommentApi {
           await DioServices().to().post("$commentPath$projectId", data: {
         "comment": comment,
       });
-      return response.data[SUCCESS];
+      return Comment.fromJson(response.data[RESULT]);
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
-      return false;
+      return null;
     }
   }
 

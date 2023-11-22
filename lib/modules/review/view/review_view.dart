@@ -9,7 +9,7 @@ import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/components/global_widget.dart';
 import '../controller/review_controller.dart';
-import '../widget/survey_widget.dart';
+import '../widget/review_widget.dart';
 import 'review_complete_view.dart';
 
 class ReviewScreen extends GetView<ReviewController> {

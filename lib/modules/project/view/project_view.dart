@@ -161,7 +161,7 @@ class ProjectScreen extends GetView<ProjectController> {
                         text: "기부처 이야기",
                       ),
                       Tab(text: "불꽃이 기록"),
-                      // Tab(text: "응원&댓글"),
+                      Tab(text: "응원&댓글"),
                     ],
                   ),
                 ),
@@ -222,35 +222,37 @@ class ProjectScreen extends GetView<ProjectController> {
                     ),
 
                     ///* 세 번째 탭 (응원)
-                    ListView.separated(
-                      controller: controller.scrollController.value,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.comments.length,
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(height: 10.0);
-                      },
-                      itemBuilder: (context, index) {
-                        //pagination 처리
-                        if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
-                          Future.wait({
-                            controller.getMoreComments(
-                                index: index ~/ (PAGINATION_SIZE - 1))
-                          });
-                        }
-                        final comment = controller.comments[index];
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.w)
-                              .copyWith(top: index == 0 ? 20.h : 0.h),
-                          child: ProjectComment(
-                              profileUrl: comment.profileImgUrl ?? "",
-                              profile: comment.nickname,
-                              text: comment.comment,
-                              timeStamp: comment.commentDate,
-                              isEdit: true,
-                              my: comment.my,
-                              comment: comment),
-                        );
-                      },
+                    Obx(
+                      ()=> ListView.separated(
+                        controller: controller.scrollController.value,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.comments.length,
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(height: 10.0);
+                        },
+                        itemBuilder: (context, index) {
+                          //pagination 처리
+                          if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
+                            Future.wait({
+                              controller.getMoreComments(
+                                  index: index ~/ (PAGINATION_SIZE - 1))
+                            });
+                          }
+                          final comment = controller.comments[index];
+                          return Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.w)
+                                .copyWith(top: index == 0 ? 20.h : 0.h),
+                            child: ProjectComment(
+                                profileUrl: comment.profileImgUrl ?? "",
+                                profile: comment.nickname,
+                                text: comment.comment,
+                                timeStamp: comment.commentDate,
+                                isEdit: true,
+                                my: comment.my,
+                                comment: comment),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -279,20 +281,10 @@ class ProjectScreen extends GetView<ProjectController> {
                               comment:
                                   controller.commentTextController.value.text,
                               projectId: controller.projectId);
-                          if (tmpResult) {
+                          if (tmpResult != null) {
                             Fluttertoast.showToast(msg: "댓글이 등록되었습니다.");
-                            // controller.comments.insert(
-                            //     0,
-                            //     Comment(
-                            //         comment: controller
-                            //             .commentTextController.value.text,
-                            //         nickname: AuthService.to.myProfile.value
-                            //             .nickname,
-                            //         profileImgUrl: AuthService
-                            //             .to.myProfile.value.profileImgUrl,
-                            //         commentDate: DateTime.now().toString(),
-                            //         my: true));
-                            ///초기화
+                            controller.comments.add(tmpResult);
+                            //초기화
                             controller.commentTextController.value.clear();
                             controller.searchStatus.value = SEARCH_STATUS.INIT;
                             FocusScope.of(context).unfocus();

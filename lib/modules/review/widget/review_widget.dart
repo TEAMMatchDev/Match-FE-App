@@ -1,4 +1,3 @@
-//TODO: add survey modal
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,7 +8,7 @@ import '../../../provider/routes/routes.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
 
-Widget SurveyModal({required String title, required int surveyId}) {
+Widget ReviewModal({required String title, required int surveyId}) {
   return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16.r)),
@@ -38,7 +37,7 @@ Widget SurveyModal({required String title, required int surveyId}) {
                 icon: "up",
                 text: "좋아요",
                 onTap: () async {
-                  Get.toNamed(Routes.survey);
+                  Get.toNamed(Routes.review);
                 })),
         SizedBox(
           height: 14.h,
