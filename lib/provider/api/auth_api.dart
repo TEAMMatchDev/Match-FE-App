@@ -4,6 +4,9 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
 import '../../util/const/style/global_logger.dart';
 import 'util/dio_services.dart';
@@ -87,11 +90,14 @@ class UserAuthApi {
     } catch (e) {
       logger.e(">> 애플로그인 시도: ${e.toString()}");
       if (e is DioError && e.response != null) {
+        SignUpController signUpController = Get.find();
         final errorData = e.response!.data;
         if (errorData[RESULT] != null && errorData[RESULT]['socialId'] != null) {
 
           User user = User(socialId: errorData[RESULT]['socialId'], email: '', gender: '');
+          signUpController.socialId.value = user.socialId.toString();
           print(">>> 애플로그인 시도할 socialId: ${user.socialId}");
+          print(">>> 애플로그인 시도할 socialId: ${signUpController.socialId.value}");
         }
       } else {
           Fluttertoast.showToast(msg: "애플 로그인 실패");

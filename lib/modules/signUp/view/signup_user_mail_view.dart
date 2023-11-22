@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,8 +33,9 @@ class SignUpMailScreen extends StatefulWidget {
 
 class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBindingObserver {
 
-  final SignUpController controller = Get.find();
   final LoginController loginController = Get.find<LoginController>();
+  SignUpController signUpController = Get.find();
+
 
   bool isValidPassword(String password) {
     // 영문, 숫자, 특수문자를 포함하며, 길이가 6-20자인지 검사하는 정규식
@@ -52,6 +55,12 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
 
   @override
   Widget build(BuildContext context){
+
+    final socialIdArg = Get.arguments as Map<String, dynamic>?;
+    final socialId = socialIdArg?['socialId'] ?? 'default';
+    signUpController.socialId.value = socialId;
+    print(">>> signup_user_mail_view:: 저장된 애플유저 socialId: ${socialId}");
+    print(">>> signup_user_mail_view:: 저장된 애플유저 socialId: ${signUpController.socialId.value}");
 
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
@@ -82,11 +91,11 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
                                 children: [
                                   Expanded(
                                     child: CommonInputField.signInID(
-                                        textController : controller.idTextController.value,
+                                        textController : signUpController.idTextController.value,
                                         onChange: (value) async {
                                           print(">>> 입력한 회원가입 이메일: $value");
                                           setState(() {
-                                            controller.signUpId.value = value;
+                                            signUpController.signUpId.value = value;
                                           });
                                         }),
                                   ),
@@ -95,10 +104,10 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
                                     verticalPadding: 10,
                                     isActive: true,
                                     onTap: () async {
-                                      var chk = await UserAuthApi.postValidCheckEmail(email: controller.signUpId.value); /// 중복검사
+                                      var chk = await UserAuthApi.postValidCheckEmail(email: signUpController.signUpId.value); /// 중복검사
                                       if (chk) {
-                                        var result = await UserAuthApi.getEmailAuth(email: controller.signUpId.value); /// 인증번호 전송
-                                        if (controller.signUpId.value != '' && result) {
+                                        var result = await UserAuthApi.getEmailAuth(email: signUpController.signUpId.value); /// 인증번호 전송
+                                        if (signUpController.signUpId.value != '' && result) {
                                           Fluttertoast.showToast(msg: "이메일로 인증번호를 발송했습니다.");
                                         } else{
                                           Fluttertoast.showToast(msg: "올바른 이메일 형식이 아닙니다.");
@@ -121,11 +130,11 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
                                 children: [
                                   Expanded(
                                     child: CommonInputField.signUpIdConfirm(
-                                        textController : controller.idAuthNumTextController.value,
+                                        textController : signUpController.idAuthNumTextController.value,
                                         onChange: (value) async {
                                           print(">>> 입력한 이메일 인증번호: $value");
                                           setState(() {
-                                            controller.signUpAuthMail.value = value;
+                                            signUpController.signUpAuthMail.value = value;
                                           });
                                         }),
                                   ),
@@ -135,10 +144,10 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
                                     isActive: true,
                                     text: "인증번호 확인",
                                     onTap: () async {
-                                      var result = await UserAuthApi.postAuthCheckEmail(email: controller.signUpId.value, code: controller.signUpAuthMail.value);
-                                      if (controller.signUpAuthMail.value != '' && result) {
+                                      var result = await UserAuthApi.postAuthCheckEmail(email: signUpController.signUpId.value, code: signUpController.signUpAuthMail.value);
+                                      if (signUpController.signUpAuthMail.value != '' && result) {
                                         Fluttertoast.showToast(msg: "이메일 인증에 성공했습니다.");
-                                        controller.authEmail.value = true;
+                                        signUpController.authEmail.value = true;
                                       } else{
                                         Fluttertoast.showToast(msg: "올바른 인증번호가 아닙니다.");
                                       }
@@ -159,11 +168,11 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
                                     ),
                                     SizedBox(height: 10.h),
                                     CommonInputField.signUpPw(
-                                        textController : controller.pwTextController.value,
+                                        textController : signUpController.pwTextController.value,
                                         onChange: (value) async {
                                           print(">>> 입력한 회원가입 pw: $value");
                                           setState(() {
-                                            controller.signUpPw.value = value;
+                                            signUpController.signUpPw.value = value;
                                           });
                                         }),
                                     SizedBox(height: 27.h),
@@ -173,13 +182,13 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
                                     ),
                                     SizedBox(height: 10.h),
                                     CommonInputField.signUpPwConfirm(
-                                        textController : controller.pwConfirmTextController.value,
+                                        textController : signUpController.pwConfirmTextController.value,
                                         onChange: (value) async {
                                           print(">>> 입력한 회원가입 확인pw: $value");
                                           setState(() {
-                                            controller.signUpPwConfirm.value = value;
-                                            if(controller.signUpPw.value == controller.signUpPwConfirm.value) {
-                                              controller.validPw.value = true; ///입력한 비밀번호와 비밀번호 확인이 일치하면 비밀번호 유효성 검사 통과
+                                            signUpController.signUpPwConfirm.value = value;
+                                            if(signUpController.signUpPw.value == signUpController.signUpPwConfirm.value) {
+                                              signUpController.validPw.value = true; ///입력한 비밀번호와 비밀번호 확인이 일치하면 비밀번호 유효성 검사 통과
                                             }
                                           });
                                         }),
@@ -208,7 +217,7 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
 
   Widget _confirmBtnApple() {
     // 공통 조건: 이메일 ID와 인증 메일이 비어있지 않은 경우
-    if (controller.signUpId.value != '' && controller.signUpAuthMail.value != '') {
+    if (signUpController.signUpId.value != '' && signUpController.signUpAuthMail.value != '') {
       // Apple 로그인인 경우
       return CommonButton.login(
         text: "확인",
@@ -229,13 +238,13 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
 
   Widget _confirmBtnNomal() {
     // 공통 조건: 이메일 ID와 인증 메일이 비어있지 않은 경우
-    if (controller.signUpId.value != '' && controller.signUpAuthMail.value != '' && controller.signUpPw.value != '' && controller.signUpPwConfirm.value != '') {
+    if (signUpController.signUpId.value != '' && signUpController.signUpAuthMail.value != '' && signUpController.signUpPw.value != '' && signUpController.signUpPwConfirm.value != '') {
       // Apple 로그인이 아니고, 비밀번호 및 비밀번호 확인이 입력된 경우
       return CommonButton.login(
         text: "확인",
         onTap: () async {
-          bool isValid = isValidPassword(controller.signUpPw.value);
-          if (controller.authEmail.value && controller.validPw.value && isValid) {
+          bool isValid = isValidPassword(signUpController.signUpPw.value);
+          if (signUpController.authEmail.value && signUpController.validPw.value && isValid) {
             Get.to(SignUpInfoScreen());
           } else {
             Fluttertoast.showToast(msg: "비밀번호 확인 입력값을 다시 확인해주세요.");

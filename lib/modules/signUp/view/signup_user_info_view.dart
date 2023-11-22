@@ -34,6 +34,8 @@ class SignUpInfoScreen extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context){
+    print(">>> signup_user_info_view:: controller에 저장된 socialId: ${controller.socialId.value}");
+
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
       body: Column(
@@ -99,10 +101,10 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               alignment: Alignment.centerLeft,
                               child: CallSelectBirthBottomSheet(
                                 onBirthSelected: (birth) {
+                                  controller.signUpBirth.value = birth.toString().replaceAll("-", "");
+                                  controller.birthState.value = birth.toString();
                                   print('>>> 선택한 생년월일: $birth');
                                   print('>>> 선택한 생년월일: ${controller.signUpBirth.value}');
-                                  controller.birthState.value = birth.toString();
-                                  controller.signUpBirth.value = birth.toString().replaceAll("-", "");
                                 },
                               ),
                             ),
@@ -197,8 +199,9 @@ class SignUpInfoScreen extends GetView<SignUpController> {
               child: CommonButton.login(
                       text: "확인",
                       onTap: () async {
-                        if(controller.authPhone.value) {
+                        if (controller.authPhone.value) {
                           Get.to(AgreementScreen());
+                          print(">>> signup_user_into_view:: controller에 저장된 애플유저 socialId: ${controller.socialId.value}");
                         }
                         else {
                           Fluttertoast.showToast(msg: "회원정보와 전화번호 인증확인을 해주세요.");

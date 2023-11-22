@@ -7,9 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:match/model/enum/login_type.dart';
 import 'package:match/modules/signIn/controller/login_controller.dart';
+import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/provider/api/auth_api.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
 import 'package:match/provider/routes/routes.dart';
@@ -25,6 +27,7 @@ class AppleLoginWidget extends StatefulWidget {
 
 class _AppleLoginState extends State<AppleLoginWidget> {
   LoginController loginController = Get.find<LoginController>();
+  SignUpController signUpController = Get.find();
 
   Future<void> signInWithApple() async {
     try {
@@ -68,7 +71,8 @@ class _AppleLoginState extends State<AppleLoginWidget> {
         // false 일 때 socailId 출력
         Fluttertoast.showToast(msg: "애플유저 회원가입을 진행합니다.");
         loginController.setPlatform('apple');
-        Get.offAllNamed(Routes.sign_up);
+        print(">>> apple_login_widget:: controller에 저장된 socialId: ${signUpController.socialId.value}");
+        Get.offAllNamed(Routes.sign_up, arguments: {'socialId': signUpController.socialId.value});
       }
 
     } catch (error) {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:match/model/user/user.dart';
 
 import '../../../model/enum/search_status.dart';
@@ -15,7 +16,7 @@ class SignUpController extends GetxController {
   RxBool authPhone = false.obs; ///전화번호 인증 완료 여부
   RxBool validPw = false.obs; //pw 유효성 검사
   RxList<User> userInfo = <User>[].obs;
-  RxString socailId = ''.obs; ///애플유저 회원가입 시 필요한 socailId
+  var socialId = ''.obs; ///애플유저 회원가입 시 필요한 socailId
 
   RxString signUpName = ''.obs;
   RxString signUpGender = ''.obs;
@@ -53,11 +54,15 @@ class SignUpController extends GetxController {
   /// 사진권한
   var pictureAuth = false.obs;
 
+  String getFormattedCurrentDate() {
+    final DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('yyyyMMdd');
+    return formatter.format(now);
+  }
 
   @override
   void onInit() {
     super.onInit();
-    socailId.value = userInfo.map((info) => info.socialId).toString();
-
+    signUpBirth.value = getFormattedCurrentDate(); //사용자 birth 초기화
   }
 }
