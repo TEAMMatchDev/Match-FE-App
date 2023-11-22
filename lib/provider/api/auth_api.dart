@@ -270,21 +270,13 @@ static Future<bool> postValidCheckEmail({
       Response response = await DioServices().to().post("/auth/email",
           data: {"email": email});
 
-      if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(
-            msg: response.data[MSG],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1
-        );
-      }
-
-      String accessToken = response.data[RESULT]["accessToken"];
-      DioServices().setAccessToken(accessToken);
-
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
+      if (e is DioError && e.response != null) {
+        final errorData = e.response!.data;
+        Fluttertoast.showToast(msg: errorData[MSG]);
+      }
       return false;
     }
 }

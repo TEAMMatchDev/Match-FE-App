@@ -71,7 +71,7 @@ class Pages {
     GetPage(
       title: "회원가입 화면",
       name: Routes.sign_up,
-      page: () => const SignUpMailScreen(),
+      page: () => SignUpMailScreen(),
       transition: Transition.noTransition,
       binding: SignUpBinding(),
       curve: Curves.easeIn,

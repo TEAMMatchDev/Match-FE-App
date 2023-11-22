@@ -24,7 +24,7 @@ class AppleLoginWidget extends StatefulWidget {
 }
 
 class _AppleLoginState extends State<AppleLoginWidget> {
-  LoginController controller = Get.find<LoginController>();
+  LoginController loginController = Get.find<LoginController>();
 
   Future<void> signInWithApple() async {
     try {
@@ -50,24 +50,25 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       // print('>>> 애플로그인 사용자 정보 : identityToken = ${credential.identityToken}');
       // print('>>> 애플로그인 사용자 정보 : state = ${credential.state}');
 
-      controller.setAppleLoginCode(credential.authorizationCode);
-      controller.appleLoginCode.value = credential.authorizationCode.toString();
-      print(">>> 애플유저 코드: ${controller.appleLoginCode.value}");
-      controller.setAppleLoginToken(credential.identityToken.toString());
-      controller.appleLoginToken.value = credential.identityToken.toString();
-      print(">>> 애플유저 토큰: ${controller.appleLoginToken.value}");
+      loginController.setAppleLoginCode(credential.authorizationCode);
+      loginController.appleLoginCode.value = credential.authorizationCode.toString();
+      print(">>> 애플유저 코드: ${loginController.appleLoginCode.value}");
+      loginController.setAppleLoginToken(credential.identityToken.toString());
+      loginController.appleLoginToken.value = credential.identityToken.toString();
+      print(">>> 애플유저 토큰: ${loginController.appleLoginToken.value}");
 
       var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
 
       if (result) { /// true : 기존 애플유저 / false : 신규 애플유저
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
-        controller.setPlatform('apple');
+        loginController.setPlatform('apple');
 
         Get.offAllNamed(Routes.main);
       } else {
         // false 일 때 socailId 출력
-
-        Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+        Fluttertoast.showToast(msg: "애플유저 회원가입을 진행합니다.");
+        loginController.setPlatform('apple');
+        Get.offAllNamed(Routes.sign_up);
       }
 
     } catch (error) {

@@ -205,6 +205,10 @@ class CommonInputField extends StatelessWidget {
       suffix: GestureDetector(
         onTap: () async {
           textController.clear();
+          //TODO) textController 가 초기화 될 때 onChange callback
+          if (onChanged != null) {
+            await onChanged("");
+          }
         },
         child: Padding(
             padding: EdgeInsets.only(right: 14.w),

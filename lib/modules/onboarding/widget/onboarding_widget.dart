@@ -36,12 +36,12 @@ class _CarouselExampleState extends State<OnboardingWidget> {
     return Scaffold(
       body: Column(
         children: [
+          SizedBox(height: 30.h),
           SizedBox(height: 10.h),
           skipWidget(), //상단 건너뛰기 버튼
           sliderWidget(images, _currentSlide), //온보딩 이미지
           SizedBox(height: 90.h),
           indicatorWidget(images.length, _currentSlide), //인디케이터
-          SizedBox(height: 100.h),
         ],
       ),
     );

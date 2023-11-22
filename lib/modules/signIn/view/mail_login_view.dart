@@ -37,6 +37,7 @@ class EmailLoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context){
+    String logintype = 'NOMAL';
     return  Scaffold(
       appBar: CommonAppBar.basic("로그인"),
       body: Column(

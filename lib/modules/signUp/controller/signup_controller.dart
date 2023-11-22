@@ -14,6 +14,7 @@ class SignUpController extends GetxController {
   RxBool authPhone = false.obs; ///전화번호 인증 완료 여부
   RxBool validPw = false.obs; //pw 유효성 검사
 
+
   RxString signUpName = ''.obs;
   RxString signUpGender = ''.obs;
   RxString signUpBirth = ''.obs;
