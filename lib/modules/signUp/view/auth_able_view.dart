@@ -107,10 +107,11 @@ class AuthAbleScreen extends GetView<SignUpController> {
                 await PermissionHandler.checkGalleryPermission();
                 await PermissionHandler.checkAlarmPermission();
 
-                (loginController.loginPlatform == 'apple')
-                  ? _signUpBtnApple()
-                  : _signUpBtnNomal();
-
+                if (loginController.loginPlatform == 'apple') {
+                  _signUpBtnApple();
+                } else {
+                  _signUpBtnNomal();
+                }
               },
             ),
           ),
