@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:match/model/enum/search_status.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/modules/signIn/view/login_view.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
@@ -18,15 +19,13 @@ import 'package:match/util/method/permission_handler.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/style/global_color.dart';
 
-import 'package:match/model/user/user.dart';
-
-import '../../../provider/routes/routes.dart';
-
 class AuthAbleScreen extends GetView<SignUpController> {
   const AuthAbleScreen({super.key});
 
   @override
   Widget build(BuildContext context){
+    final LoginController loginController = Get.find<LoginController>();
+
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
       body: Column(
@@ -108,6 +107,9 @@ class AuthAbleScreen extends GetView<SignUpController> {
                 await PermissionHandler.checkGalleryPermission();
                 await PermissionHandler.checkAlarmPermission();
 
+                (loginController.loginPlatform == 'apple')
+                  ? _signUpBtnApple()
+                  : _signUpBtnNomal();
 
               },
             ),
