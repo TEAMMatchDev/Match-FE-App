@@ -93,9 +93,15 @@ class UserAuthApi {
         SignUpController signUpController = Get.find();
         final errorData = e.response!.data;
         if (errorData[RESULT] != null && errorData[RESULT]['socialId'] != null) {
+          var socialId = errorData[RESULT]['socialId'];
+          if (socialId.startsWith('"') && socialId.endsWith('"')) {
+            socialId = socialId.substring(1, socialId.length - 1);
+          }
 
-          User user = User(socialId: errorData[RESULT]['socialId'], email: '', gender: '');
-          signUpController.socialId.value = user.socialId.toString();
+          User user = User(socialId: socialId, email: '', gender: '');
+
+          signUpController.socialId.value = socialId;
+          print(">>> 애플로그인 시도할 socialId: ${socialId}");
           print(">>> 애플로그인 시도할 socialId: ${user.socialId}");
           print(">>> 애플로그인 시도할 socialId: ${signUpController.socialId.value}");
         }
