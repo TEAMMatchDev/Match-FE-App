@@ -27,7 +27,7 @@ class PaymentMethodScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBindingObserver {
 
   final PaymentController controller = Get.find();
-  final ProjectController _projectController = Get.find<ProjectController>();
+  ProjectController _projectController = Get.find();
 
   List<String> payAgreeStringList = [
       '[필수] 결제대행 서비스 이용약관 동의',
@@ -178,7 +178,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                               if(state == 'REGULAR') {
                                 var result = await OrderApi.setRegularPay(
                                     cardId: controller.cardId.value,
-                                    projectId: _projectController.projectId,
+                                    projectId: controller.projectId.value,
                                     amount: controller.selectedAmount.value,
                                     payDate: controller.selectedDate.value);
                                 if (result){

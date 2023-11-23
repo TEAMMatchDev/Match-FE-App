@@ -25,9 +25,7 @@ import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
 class PaymentDonatorScreen extends GetView<PaymentController> {
-  PaymentDonatorScreen({Key? key}) : super(key: key) {
-    Get.find<PaymentController>();
-  }
+  PaymentDonatorScreen({Key? key}) : super(key: key);
   final loginController = Get.find<LoginController>();
 
   String formatPhoneNumber(String rawNumber) {

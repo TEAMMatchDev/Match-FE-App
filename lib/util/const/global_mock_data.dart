@@ -127,7 +127,7 @@ var tmpDonator = const Donator(
     birthDay: "2099-01-01",
     phoneNumber: "010-9999-9999");
 var tmpCardInfo = const CardInfo(
-    id: 1,
+    id: 999,
     cardCode: "041",
     cardName: "우리카드",
     cardNo: "4170********0825",
