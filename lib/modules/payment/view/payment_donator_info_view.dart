@@ -225,7 +225,7 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(height: 16.h),
+                                  SizedBox(height: 40.h),
                                   Container(
                                     width: 360.w,
                                     decoration: BoxDecoration(
@@ -247,55 +247,53 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                               ),
                             );
                           }),
-                          SizedBox(height: 8.h),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 20.w, right: 6),
-                                  child: CommonButton.back(
-                                    text: "이전 돌아가기",
-                                    onTap: () async {
-                                      Get.back();
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 6.w, right: 20),
-                                  child: CommonButton.login(
-                                    text: "확인",
-                                    onTap: () async {
-
-                                      if (loginController.loginPlatform.value == 'apple' && controller.userName.value != null && controller.userPhone.value != ''){
-                                        var result = await OrderApi.postProfile(
-                                            name: controller.userName.value,
-                                            birthDate: controller.userBirth.value,
-                                            phone: controller.userPhone.value);
-                                        if(result) {
-                                          Get.to(() => PaymentDonationScreen(),
-                                              binding: PaymentBinding());
-                                        }
-                                        else {
-                                          Fluttertoast.showToast(msg: '사용자님의 정보를 올바르게 입력해주세요.');
-                                        }
-                                      }
-                                      else {
-                                        Get.to(() => PaymentDonationScreen(),
-                                            binding: PaymentBinding());
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 24.h),
                         ],
                       )
                   ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20.w, right: 6.w, bottom: 20.h),
+                        child: CommonButton.back(
+                          text: "이전 돌아가기",
+                          onTap: () async {
+                            Get.back();
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 6.w, right: 20.w, bottom: 20.h),
+                        child: CommonButton.login(
+                          text: "확인",
+                          onTap: () async {
+                            if (loginController.loginPlatform.value == 'apple' && controller.userName.value != null && controller.userPhone.value != ''){
+                              var result = await OrderApi.postProfile(
+                                  name: controller.userName.value,
+                                  birthDate: controller.userBirth.value,
+                                  phone: controller.userPhone.value);
+                              if(result) {
+                                Get.to(() => PaymentDonationScreen(),
+                                    binding: PaymentBinding());
+                              }
+                              else {
+                                Fluttertoast.showToast(msg: '사용자님의 정보를 올바르게 입력해주세요.');
+                              }
+                            }
+                            else {
+                              Get.to(() => PaymentDonationScreen(),
+                                  binding: PaymentBinding());
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ])
         );
