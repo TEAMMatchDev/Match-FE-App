@@ -1,8 +1,12 @@
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
 import '../../model/token/token.dart';
 import '../../util/const/style/global_logger.dart';
@@ -38,13 +42,14 @@ class UserAuthApi {
     }
   }
 
-  ///<h2>1-11API | 애플 로그인</h2>
-  static Future<bool> setAppleLogin({
-    required String accessToken,
-  }) async {
+///<h2>1-3API | 네이버 로그인</h2>
+  static Future<bool> setNaverLogin({
+    required String token,
+}) async {
     try {
-      Response response = await DioServices().to().post("/auth/apple",
-          data: {"accessToken": accessToken});
+      Response response = await DioServices().to().post("/auth/naver",
+        data: {"accessToken": token});
+      logger.e(response.data["message"]);
 
       if(!response.data[SUCCESS]) {
         Fluttertoast.showToast(
@@ -56,11 +61,79 @@ class UserAuthApi {
         logger.e(response.data[CODE]);
       }
 
+      String accessToken = response.data[RESULT]["accessToken"];
+      DioServices().setAccessToken(accessToken);
 
-      print(">>> (애플로그인) 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}");
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
 
-      logger.i(
-          '>>> 로그인 성공 후 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}');
+  ///<h2>1-11API | 애플 로그인</h2>
+  static Future<bool> setAppleLogin({
+    required String accessToken,
+  }) async {
+    try {
+      Response response = await DioServices().to().post("/auth/apple",
+          data: {"accessToken": accessToken});
+
+      if (response.data[SUCCESS]) {
+        print(">>> (애플로그인) 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}");
+        String token = response.data[RESULT]["accessToken"];
+        DioServices().setAccessToken(token);
+      }
+
+      return true;
+    } catch (e) {
+      logger.e(">> 애플로그인 시도: ${e.toString()}");
+      if (e is DioError && e.response != null) {
+        SignUpController signUpController = Get.find();
+        final errorData = e.response!.data;
+        if (errorData[RESULT] != null && errorData[RESULT]['socialId'] != null) {
+          var socialId = errorData[RESULT]['socialId'];
+          if (socialId.startsWith('"') && socialId.endsWith('"')) {
+            socialId = socialId.substring(1, socialId.length - 1);
+          }
+
+          User user = User(socialId: socialId, email: '', gender: '');
+
+          signUpController.socialId.value = socialId;
+          print(">>> 애플로그인 시도할 socialId: ${socialId}");
+          print(">>> 애플로그인 시도할 socialId: ${user.socialId}");
+          print(">>> 애플로그인 시도할 socialId: ${signUpController.socialId.value}");
+        }
+      } else {
+          Fluttertoast.showToast(msg: "애플 로그인 실패");
+      }
+      return false;
+    }
+  }
+
+  ///<h2>1-11-1API 애플 회원가입</h2>
+  static Future<bool> setAppleSignUp({
+    required String socialId,
+    required String email,
+    required String name,
+    required String phone,
+    required String gender,
+    required String birthDate,
+}) async {
+    try {
+      Response response = await DioServices().to().post("/auth/apple/sign-up",
+        data: {"socialId": socialId, "email": email, "name": name, "phone": phone, "gender": gender, "birthDate": birthDate});
+
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
+        logger.e(response.data[CODE]);
+      }
+
       saveToken(response.data[RESULT]);
       return response.data[SUCCESS];
     } catch (e) {
@@ -208,21 +281,13 @@ static Future<bool> postValidCheckEmail({
       Response response = await DioServices().to().post("/auth/email",
           data: {"email": email});
 
-      if(!response.data[SUCCESS]) {
-        Fluttertoast.showToast(
-            msg: response.data[MSG],
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1
-        );
-      }
-
-      // String accessToken = response.data[RESULT]["accessToken"];
-      // DioServices().setAccessToken(accessToken);
-
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
+      if (e is DioError && e.response != null) {
+        final errorData = e.response!.data;
+        Fluttertoast.showToast(msg: errorData[MSG]);
+      }
       return false;
     }
 }
@@ -273,6 +338,60 @@ static Future<bool> setSignUp({
         );
       }
       saveToken(response.data[RESULT]);
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+}
+
+  ///<h2>1-14API | 비밀번호 찾기용 이메일 전송  -> 1-8 다시 인증 -> 1-13 변경요청</h2>
+  static Future<bool> sendSearchPwEmail({
+    required String email,
+}) async {
+    try {
+      Response response = await DioServices().to().post("/auth/password/email",
+        queryParameters: {"email": email});
+
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
+      }
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
+
+  ///<h2>1-13API | 비밀번호 변경</h2>
+  static Future<bool> modifyPw({
+    required String email,
+    required String code,
+    required String modifyPassword,
+}) async {
+    try {
+      Response response = await DioServices().to().post("/auth/password",
+          data: {
+            "email": email,
+            "code": code,
+            "modifyPassword": modifyPassword,
+          });
+
+      if(!response.data[SUCCESS]) {
+        Fluttertoast.showToast(
+            msg: response.data[MSG],
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1
+        );
+      }
 
       return response.data[SUCCESS];
     } catch (e) {

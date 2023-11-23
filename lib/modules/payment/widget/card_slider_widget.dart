@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/card_info/card_info.dart';
+import 'package:match/model/enum/card_types.dart';
 import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/modules/payment/view/payment_select_card_view.dart';
 import 'package:match/modules/project/controller/project_controller.dart';
@@ -21,27 +22,35 @@ class CardSlider extends StatefulWidget {
 class _CardSliderState extends State<CardSlider> {
   final PaymentController _paymentController = Get.find<PaymentController>();
 
-  final List<List<String>> cardBankList = [
-    ['하나','ic_card_hana.svg','374'],
-    ['현대','ic_card_hyundai.svg','367'],
-    // ['기업','ic_card_ibk.svg',''],
-    ['카카오뱅크','ic_card_kakao.svg','090'],
-    ['KB국민','ic_card_kb.svg','381'],
-    ['MG새마을금고','ic_card_mg.svg','045'],
-    // ['SC제일','ic_card_sc.svg',''],
-    ['신한','ic_card_shinhan.svg','366'],
-    ['우리','ic_card_woori.svg','041'],
-    ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
-  ];
-
   int _currentSlide = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // 초기화 시점에 실행할 로직
+    _onSliderInitialized();
+  }
+
+  void _onSliderInitialized() {
+    // 첫 번째 카드에 대한 정보 처리
+    if (_paymentController.cardCodeList.isNotEmpty) {
+      _currentSlide = 0; // 첫 번째 슬라이드로 설정
+      _handleSlideChange(_currentSlide);
+    }
+  }
+
+  void _handleSlideChange(int index) {
+    print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]}');
+    print('>>> 선택한 카드 번호 : ${_paymentController.cardNumList[index]}');
+    _paymentController.cardId.value = _paymentController.cardIdList[index];
+    print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(height: 23.h),
-
         //TODO) 카드 캐러셀 슬라이더 --현재 슬라이더 selected & 현재 슬라이더 정보 logger
         CarouselSlider(
           options: CarouselOptions(
@@ -54,9 +63,7 @@ class _CardSliderState extends State<CardSlider> {
                 _currentSlide = index;
               });
 
-              //print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]} \n 선택한 카드 번호 : ${_paymentController.cardNumList[index]} \n');
-              _paymentController.cardId.value = _paymentController.cardIdList[index];
-              //print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
+              _handleSlideChange(index);
             },
           ),
 
@@ -65,16 +72,14 @@ class _CardSliderState extends State<CardSlider> {
               int idx = entry.key;
               String code = entry.value;
 
-              final matchingCard = cardBankList.firstWhere(
-                      (card) => card[2] == code,
-                  orElse: () => cardBankList.firstWhere((card) => card[2] == ''));
+              final matchingCard = CardBank.fromCode(code);
 
               return Stack(
                 children: [
                   // 기존 카드 이미지
                   Container(
                     child: SvgPicture.asset(
-                      iconDir + "card/" + matchingCard[1],
+                      iconDir + "card/" + matchingCard.cardIcon,
                       width: 263.w,
                       height: 150.h,
                     ),
@@ -84,7 +89,7 @@ class _CardSliderState extends State<CardSlider> {
                     bottom: 40.h,
                     left: 18.w,
                     child: Text(
-                      matchingCard[0],
+                      matchingCard.name,
                       style: AppTextStyles.T1Bold15.copyWith(color: AppColors.white)
                     ),
                   ),

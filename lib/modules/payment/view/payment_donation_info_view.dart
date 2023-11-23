@@ -28,141 +28,146 @@ class PaymentDonationScreen extends GetView<PaymentController> {
     final String state = _projectController.projectDetail.value.regularStatus;
 
     return  Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h)
-                  .copyWith(bottom: 0.h),
-              child: Column(
-                children: [
-                  // *1.제목 header
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(
-                        imgDir + "logo/iv_home_logo.png",
-                        width: 75.w,
+      body: Column(
+        children: [
+          Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 7.h)
+                          .copyWith(bottom: 0.h),
+                      child: Column(
+                        children: [
+                          // *1.제목 header
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image.asset(
+                                imgDir + "logo/iv_home_logo.png",
+                                width: 75.w,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 24.h),
+                          Text(
+                            '기부금 결제하기',
+                            style: AppTextStyles.T1Bold18,
+                          ),
+                          SizedBox(height: 23.h),
+                          SvgPicture.asset(
+                            iconDir + "payment/ic_rating_stick_2.svg",
+                            width: 330.w,
+                          ),
+                          SizedBox(height: 30.h),
+                          Text(
+                            '2. 결제 방식을 선택해주세요.',
+                            style: AppTextStyles.T1Bold15.copyWith(color: AppColors.grey9),
+                          ),
+                          SizedBox(height: 20.h),
+                          Divider(
+                            height: 1,
+                            color: AppColors.grey1,
+                            thickness: 1,
+                          ),
+                          SizedBox(height: 20.h),
+                          state == 'REGULAR'
+                              ? Text(
+                            '기부처',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                          )
+                              : Text(
+                            '기부 프로젝트',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                          ),
+                          SizedBox(height: 16.h),
+                          Container(
+                            width: 360.w,
+                            decoration: BoxDecoration(
+                              color: AppColors.grey11,
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            padding: EdgeInsets.all(20.0),
+                            child: Text(
+                              '${_projectController.projectDetail.value.title}',
+                              style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
+                            ),
+                          ),
+                          SizedBox(height: 30.h),
+                          Text(
+                            '기부 금액',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                          ),
+                          SizedBox(height: 16.h),
+                          SelectAmountRadioButtons(),
+                          SizedBox(height: 30.h),
+                          state != "REGULAR"
+                              ? SizedBox.shrink()
+                              : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '기부 결제일',
+                                style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                              ),
+                              SizedBox(height: 16.h),
+                              PayDateRadioButtons(),
+                            ],
+                          ),
+                          SizedBox(height: 56.h),
+                        ],
+                      ),
+                    ),
+
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 24.h),
-                  Text(
-                    '기부금 결제하기',
-                    style: AppTextStyles.T1Bold18,
-                  ),
-                  SizedBox(height: 23.h),
-                  SvgPicture.asset(
-                    iconDir + "payment/ic_rating_stick_2.svg",
-                    width: 330.w,
-                  ),
-                  SizedBox(height: 30.h),
-                  Text(
-                    '2. 결제 방식을 선택해주세요.',
-                    style: AppTextStyles.T1Bold15.copyWith(color: AppColors.grey9),
-                  ),
-                  SizedBox(height: 20.h),
-                  Divider(
-                    height: 1,
-                    color: AppColors.grey1,
-                    thickness: 1,
-                  ),
-                  SizedBox(height: 20.h),
-                  state == 'REGULAR'
-                    ? Text(
-                      '기부처',
-                      style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
-                    )
-                    : Text(
-                      '기부 프로젝트',
-                      style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
-                    ),
-                  SizedBox(height: 16.h),
-                  Container(
-                    width: 360.w,
-                    decoration: BoxDecoration(
-                      color: AppColors.grey11,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      '${_projectController.projectDetail.value.title}',
-                      style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
-                    ),
-                  ),
-                  SizedBox(height: 30.h),
-                  Text(
-                    '기부 금액',
-                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
-                  ),
-                  SizedBox(height: 16.h),
-                  SelectAmountRadioButtons(),
-                  SizedBox(height: 30.h),
-                  state != "REGULAR"
-                      ? SizedBox.shrink()
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                                  Text(
-                                    '기부 결제일',
-                                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
-                                  ),
-                                  SizedBox(height: 16.h),
-                                  PayDateRadioButtons(),
-                          ],
-                  ),
-                  SizedBox(height: 56.h),
-                ],
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20.w, right: 6),
-                    child: CommonButton.back(
-                      text: "이전 돌아가기",
-                      onTap: () async {
-                        Get.back();
-                      },
-                    ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20.w, right: 6.w, bottom: 20.h, top: 10.h),
+                  child: CommonButton.back(
+                    text: "이전 돌아가기",
+                    onTap: () async {
+                      Get.back();
+                    },
                   ),
                 ),
-                Expanded(
-                  child:
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Obx(() =>
-                        controller.isPayAbleReg.value
+              ),
+              Expanded(
+                child: Padding(
+                    padding: EdgeInsets.only(left: 6.w, right: 20.w, bottom: 20.h, top: 10.h),
+                    child:
+                    Obx(() =>
+                    controller.isPayAbleReg.value
                         ? CommonButton.login(
-                          text: "확인",
-                          onTap: () async {
-                            Get.to(PaymentMethodScreen());
-                          },
-                        )
-                            : CommonButton.loginDis(
-                          text: "확인",
-                          onTap: () async {},
-                        ),
+                      text: "확인",
+                      onTap: () async {
+                        Get.to(PaymentMethodScreen());
+                      },
                     )
-                  ),
+                        : CommonButton.loginDis(
+                      text: "확인",
+                      onTap: () async {},
+                    ),
+                    )
                 ),
-              ],
-            ),
-            SizedBox(height: 24.h),
-          ],
-        ),
-      ),
+              ),
+            ],
+          ),
+        ],
+      )
     );
   }
 }

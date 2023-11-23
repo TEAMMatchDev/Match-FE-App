@@ -14,7 +14,7 @@ class LoginBinding implements Bindings {
   void dependencies() {
     //Get.put(LoginController());
     Get.put(LoginController(), permanent: true);
-    Get.put(SignUpController());
+    Get.lazyPut<SignUpController>(() => SignUpController(), fenix: true);
 
     //profile 정보는 로그인 이후에 가져와야기 때문에
     // auth serivce 초기화 코드 주석처리

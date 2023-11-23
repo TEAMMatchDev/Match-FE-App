@@ -37,7 +37,7 @@ class AuthService extends GetxService{
     var tmpDonatorResult = await OrderApi.getProfile();
     if (tmpDonatorResult != null) {
       donatorProfile.value = tmpDonatorResult;
-      //print(">>> 기부자 프로필 조회: ${donatorProfile.value}");
+      print(">>> 기부자 프로필 조회: ${donatorProfile.value}");
     }
     else {
       //print(">>> tmpResult 가 null");

@@ -119,15 +119,15 @@ var tmpProfile = const Profile(
     name: "test",
     nickName: "test",
     socialType: "NORMAL",
-    email: "gusdn8926@naver.com",
+    email: "test@naver.com",
     phone: "01049177672");
 var tmpDonator = const Donator(
     //기부자 정보 임시 데이터
     name: "테스트",
-    birthDay: "2001-01-02",
-    phoneNumber: "010-1234-5678");
+    birthDay: "2099-01-01",
+    phoneNumber: "010-9999-9999");
 var tmpCardInfo = const CardInfo(
-    id: 1,
+    id: 999,
     cardCode: "041",
     cardName: "우리카드",
     cardNo: "4170********0825",

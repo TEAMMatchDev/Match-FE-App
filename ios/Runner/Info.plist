@@ -33,6 +33,16 @@
 			</array>
 		</dict>
 	</array>
+
+	<key>naverConsumerKey</key>
+    <string>8SFlnjHGk9S71HcRtHpg</string>
+    <key>naverConsumerSecret</key>
+    <string>AX2RitUnq3</string>
+    <key>naverServiceAppName</key>
+    <string>MATCH</string>
+    <key>naverServiceAppUrlScheme</key>
+    <string>naver</string>
+
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>KAKAO_APP_KEY</key>
