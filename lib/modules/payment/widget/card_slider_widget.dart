@@ -42,9 +42,9 @@ class _CardSliderState extends State<CardSlider> {
                 _currentSlide = index;
               });
 
-              //print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]} \n 선택한 카드 번호 : ${_paymentController.cardNumList[index]} \n');
+              print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]} \n 선택한 카드 번호 : ${_paymentController.cardNumList[index]} \n');
               _paymentController.cardId.value = _paymentController.cardIdList[index];
-              //print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
+              print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
             },
           ),
 

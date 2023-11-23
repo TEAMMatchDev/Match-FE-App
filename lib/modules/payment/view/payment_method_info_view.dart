@@ -179,8 +179,8 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                                 var result = await OrderApi.setRegularPay(
                                     cardId: controller.cardId.value,
                                     projectId: _projectController.projectId,
-                                    amount: controller.selectedDate.value,
-                                    payDate: controller.selectedAmount.value);
+                                    amount: controller.selectedAmount.value,
+                                    payDate: controller.selectedDate.value);
                                 if (result){
                                   Get.to(PaymentDoneScreen());
                                 }
