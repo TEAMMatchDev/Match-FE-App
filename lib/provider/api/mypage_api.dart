@@ -99,6 +99,7 @@ class MypageApi {
   static Future<bool> logout() async {
     try {
       var deviceId = await GetStorageUtil.getToken(StorageKey.DEVICE_ID);
+      logger.e(deviceId);
       DioServices().addHeader("DEVICE_ID", deviceId ?? "");
       Response response = await DioServices().to().get(
             "/users/logout",
@@ -109,6 +110,7 @@ class MypageApi {
       }
       return response.data[SUCCESS];
     } catch (e) {
+      logger.e(e);
       Fluttertoast.showToast(msg: "로그아웃에 실패하였습니다. ${e}");
       return false;
     }

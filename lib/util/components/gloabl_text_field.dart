@@ -163,9 +163,12 @@ class CommonInputField extends StatelessWidget {
   final bool autoFocus;
   final bool alwaysSuffix;
   final TextInputType inputType;
+  final double? cursorHeight;
   final Future<void> Function(String) onSubmitted;
   final Future<void> Function(String) onChanged;
   final Future<void> Function()? suffixOnTap;
+  final int? maxLength;
+  final int? maxLines;
 
   const CommonInputField(
       {super.key,
@@ -176,11 +179,16 @@ class CommonInputField extends StatelessWidget {
       required this.onChanged,
       this.inputType = TextInputType.text,
       this.suffixOnTap,
-      required this.autoFocus});
+      required this.autoFocus,
+      this.cursorHeight,
+      this.maxLength,
+      this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTextField(
+      maxLines: maxLines,
+      maxLength: maxLength,
       controller: textController,
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
       decoration: BoxDecoration(
@@ -190,6 +198,8 @@ class CommonInputField extends StatelessWidget {
               ? Border.all(color: AppColors.grey8)
               : Border.all(color: AppColors.grey1)),
       keyboardType: inputType,
+      textAlignVertical:
+          cursorHeight != null ? TextAlignVertical(y: cursorHeight!) : null,
       cursorColor: AppColors.black,
       cursorHeight: 18.h,
       style: AppTextStyles.T1Bold13.copyWith(
@@ -633,4 +643,29 @@ class CommonInputField extends StatelessWidget {
         inputType: TextInputType.phone,
         autoFocus: false);
   }
+
+  factory CommonInputField.survey({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonInputField(
+      maxLines: 50,
+      maxLength: 1000,
+      textController: textController,
+      placeHolder: "리뷰 내용을 입력해주세요. (선택)",
+      alwaysSuffix: false,
+      onSubmitted: (value) async {},
+      onChanged: onChange,
+      inputType: TextInputType.text,
+      autoFocus: false,
+      cursorHeight: -1.0,
+    );
+  }
+}
+
+Future<void> scrollAnimate(
+    BuildContext context, ScrollController scrollController) async {
+  logger.e("tap");
+  await scrollController.animateTo(MediaQuery.of(context).viewInsets.bottom,
+      duration: Duration(milliseconds: 100), curve: Curves.easeIn);
 }

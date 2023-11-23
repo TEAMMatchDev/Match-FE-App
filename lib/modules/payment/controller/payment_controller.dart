@@ -22,7 +22,7 @@ class PaymentController extends GetxController {
 
   RxList<Pay> payList = <Pay>[].obs;
 
-  final ProjectController _projectController = Get.find<ProjectController>();
+  // final ProjectController _projectController = Get.find<ProjectController>();
   RxString donateState = "".obs;
 
   /// 기부상태 (정기/단기)
@@ -113,6 +113,6 @@ class PaymentController extends GetxController {
     cardNumList.assignAll(cardInfoList.map((card) => card.cardNo).toList());
     cardIdList.assignAll(cardInfoList.map((card) => card.id).toList());
 
-    donateState.value = _projectController.projectDetail.value.regularStatus;
+    donateState.value = ProjectController.to.projectDetail.value.regularStatus;
   }
 }

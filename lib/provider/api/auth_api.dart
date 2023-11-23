@@ -8,7 +8,9 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
+import '../../model/token/token.dart';
 import '../../util/const/style/global_logger.dart';
+import '../../util/method/get_storage.dart';
 import 'util/dio_services.dart';
 
 import 'package:match/model/user/user.dart';
@@ -32,10 +34,7 @@ class UserAuthApi {
         );
         logger.e(response.data[CODE]);
       }
-
-      String accessToken = response.data[RESULT]["accessToken"];
-      DioServices().setAccessToken(accessToken);
-
+      saveToken(response.data[RESULT]);
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
@@ -135,6 +134,7 @@ class UserAuthApi {
         logger.e(response.data[CODE]);
       }
 
+      saveToken(response.data[RESULT]);
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
@@ -161,10 +161,9 @@ class UserAuthApi {
         logger.e(response.data[CODE]);
       }
 
-      logger.i('>>> 로그인 성공 후 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}');
-      String accessToken = response.data[RESULT]["accessToken"];
-      DioServices().setAccessToken(accessToken);
-
+      logger.i(
+          '>>> 로그인 성공 후 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}');
+      saveToken(response.data[RESULT]);
       return response.data[SUCCESS];
     } catch(e){
       logger.e(e.toString());
@@ -338,6 +337,7 @@ static Future<bool> setSignUp({
             timeInSecForIosWeb: 1
         );
       }
+      saveToken(response.data[RESULT]);
 
       return response.data[SUCCESS];
     } catch (e) {
@@ -399,5 +399,12 @@ static Future<bool> setSignUp({
       return false;
     }
   }
+}
 
+///* 토큰 정보 저장
+Future<void> saveToken(Map<String, dynamic> json) async {
+  Token token = Token.fromJson(json);
+  GetStorageUtil.addToken(StorageKey.REFRESH_TOKEN, token.refreshToken);
+  GetStorageUtil.addToken(StorageKey.ACCESS_TOKEN, token.accessToken);
+  DioServices().setAccessToken(token.accessToken);
 }

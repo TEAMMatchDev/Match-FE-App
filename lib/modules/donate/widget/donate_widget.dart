@@ -205,10 +205,10 @@ class TodayMatchList extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Positioned(
-            //     top: 16.h,
-            //     right: 19.w,
-            //     child: LikeIcon(projectId: projectId, isLike: isLike.obs)),
+            Positioned(
+                top: 16.h,
+                right: 19.w,
+                child: LikeIcon(projectId: projectId, isLike: isLike.obs)),
             Positioned(
               bottom: 17.h,
               left: 20.w,

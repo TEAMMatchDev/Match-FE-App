@@ -90,6 +90,7 @@ flutter:
     - asset/image/icon/mypage/
     - asset/image/logo/
     - asset/image/onboarding/
+    - asset/image/icon/survey/
 
   fonts:
     - family: AppleSDGothicNeo

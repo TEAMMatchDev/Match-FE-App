@@ -11,6 +11,7 @@ import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_widget.dart';
 import '../../../util/const/style/global_logger.dart';
 import '../../../util/const/style/global_skeleton.dart';
+import '../../survey/widget/survey_widget.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
 
@@ -150,9 +151,9 @@ class HomeScreen extends GetView<HomeController> {
                                   SizedBox(
                                     height: 9.h,
                                   ),
-                                  // shareChip(
-                                  //     imgUrl: flame.image,
-                                  //     donationId: flame.donationId)
+                                  shareChip(
+                                      imgUrl: flame.image,
+                                      projectId: flame.projectId)
                                 ],
                               );
                             },
@@ -166,12 +167,12 @@ class HomeScreen extends GetView<HomeController> {
       ),
     );
   }
-
-  Widget shareChip({required String imgUrl, required int donationId}) {
+//TODO: kakao -> app routing 테스트 이전
+  Widget shareChip({required String imgUrl, required int projectId}) {
     return GestureDetector(
       onTap: () async {
-        //TODO: donationId -> ProjectID로 변경
-        await controller.kakoShare(imgUrl: imgUrl, donationId: donationId);
+        // await Get.dialog(SurveyModal(title: "설문조사", surveyId: 1));
+        await controller.kakoShare(imgUrl: imgUrl, projectId: projectId);
       },
       child: IntrinsicWidth(
         child: Container(
