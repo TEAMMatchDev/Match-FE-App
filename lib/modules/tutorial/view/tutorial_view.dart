@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/model/enum/project_type.dart';
+import 'package:match/modules/tutorial/view/tutorial_result_view.dart';
 import 'package:match/provider/api/tutorial_api.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
@@ -45,18 +46,16 @@ class TutorialScreen extends GetView<TutorialController> {
                               },
                               child: Padding(
                                 padding: EdgeInsets.only(
-                                    right: i !=
-                                            controller.projectTypes.length -
-                                                1
-                                        ? 36.w
-                                        : 0),
+                                    right:
+                                        i != controller.projectTypes.length - 1
+                                            ? 36.w
+                                            : 0),
                                 child: categoryType(
                                   type: projectTypeMap[controller
                                           .projectTypes[i].projectKind] ??
                                       ProjectType.CHILDREN,
                                   isSelect:
-                                      (controller.selectTypeIdx.value == i)
-                                          .obs,
+                                      (controller.selectTypeIdx.value == i).obs,
                                 ),
                               ),
                             ),
@@ -113,9 +112,15 @@ class TutorialScreen extends GetView<TutorialController> {
                   isActive: controller.selectProject != null,
                   text: "기부 분야 선택 완료",
                   onTap: () async {
-                    TutorialApi.setDonationTutorial(
+                    var result = await TutorialApi.setDonationTutorial(
                         projectId: controller.selectProject!.value.projectId);
-
+                    if (result != null) {
+                      Get.to(() => TutorialResultScreen(
+                            tutorialFlame: result,
+                          ));
+                    } else {
+                      Get.offAllNamed(Routes.main);
+                    }
                   }),
               SizedBox(
                 height: 24.h,
