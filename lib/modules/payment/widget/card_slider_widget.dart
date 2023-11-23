@@ -25,11 +25,32 @@ class _CardSliderState extends State<CardSlider> {
   int _currentSlide = 0;
 
   @override
+  void initState() {
+    super.initState();
+    // 초기화 시점에 실행할 로직
+    _onSliderInitialized();
+  }
+
+  void _onSliderInitialized() {
+    // 첫 번째 카드에 대한 정보 처리
+    if (_paymentController.cardCodeList.isNotEmpty) {
+      _currentSlide = 0; // 첫 번째 슬라이드로 설정
+      _handleSlideChange(_currentSlide);
+    }
+  }
+
+  void _handleSlideChange(int index) {
+    print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]}');
+    print('>>> 선택한 카드 번호 : ${_paymentController.cardNumList[index]}');
+    _paymentController.cardId.value = _paymentController.cardIdList[index];
+    print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(height: 23.h),
-
         //TODO) 카드 캐러셀 슬라이더 --현재 슬라이더 selected & 현재 슬라이더 정보 logger
         CarouselSlider(
           options: CarouselOptions(
@@ -42,9 +63,7 @@ class _CardSliderState extends State<CardSlider> {
                 _currentSlide = index;
               });
 
-              print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]} \n 선택한 카드 번호 : ${_paymentController.cardNumList[index]} \n');
-              _paymentController.cardId.value = _paymentController.cardIdList[index];
-              print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
+              _handleSlideChange(index);
             },
           ),
 
