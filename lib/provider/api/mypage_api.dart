@@ -105,6 +105,7 @@ class MypageApi {
       DioServices().addHeader("DEVICE_ID", deviceId ?? "");
       Response response = await DioServices().to().get(
             "/users/logout",
+            queryParameters: {"DEVICE_ID": deviceId},
           );
       if (response.data[SUCCESS]) {
         DioServices().removeHeader('DEVICE_ID');
@@ -121,8 +122,8 @@ class MypageApi {
   static Future<bool> signOut() async {
     try {
       Response response = await DioServices().to().delete(
-            "/users",
-          );
+        "/users",
+      );
       return response.data[SUCCESS];
     } catch (e) {
       Fluttertoast.showToast(msg: "회원탈퇴에 실패하였습니다. ${e}");
@@ -130,11 +131,13 @@ class MypageApi {
     }
   }
 
-  ///<h2>2-13 API | 회원탈퇴</h2>
-  static Future<bool> signOutApple({required String code}) async {
+///<h2>2-13 API | 회원탈퇴</h2>
+  static Future<bool> signOutApple({
+    required String code
+  }) async {
     try {
-      Response response =
-          await DioServices().to().delete("/users/apple", data: {"code": code});
+      Response response = await DioServices().to().delete("/users/apple",
+        data: {"code": code});
 
       return response.data[SUCCESS];
     } catch (e) {

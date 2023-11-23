@@ -20,8 +20,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  String? get socialId => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
@@ -38,8 +38,8 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String email,
-      String password,
+      {String? socialId,
+      String email,
       String? name,
       String? phone,
       String gender,
@@ -59,21 +59,21 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? socialId = freezed,
     Object? email = null,
-    Object? password = null,
     Object? name = freezed,
     Object? phone = freezed,
     Object? gender = null,
     Object? birthDate = freezed,
   }) {
     return _then(_value.copyWith(
+      socialId: freezed == socialId
+          ? _value.socialId
+          : socialId // ignore: cast_nullable_to_non_nullable
+              as String?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
               as String,
       name: freezed == name
           ? _value.name
@@ -103,8 +103,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String email,
-      String password,
+      {String? socialId,
+      String email,
       String? name,
       String? phone,
       String gender,
@@ -121,21 +121,21 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? socialId = freezed,
     Object? email = null,
-    Object? password = null,
     Object? name = freezed,
     Object? phone = freezed,
     Object? gender = null,
     Object? birthDate = freezed,
   }) {
     return _then(_$UserImpl(
+      socialId: freezed == socialId
+          ? _value.socialId
+          : socialId // ignore: cast_nullable_to_non_nullable
+              as String?,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
               as String,
       name: freezed == name
           ? _value.name
@@ -161,8 +161,8 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl with DiagnosticableTreeMixin implements _User {
   const _$UserImpl(
-      {required this.email,
-      required this.password,
+      {this.socialId,
+      required this.email,
       this.name,
       this.phone,
       required this.gender,
@@ -172,9 +172,9 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
       _$$UserImplFromJson(json);
 
   @override
-  final String email;
+  final String? socialId;
   @override
-  final String password;
+  final String email;
   @override
   final String? name;
   @override
@@ -186,7 +186,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(email: $email, password: $password, name: $name, phone: $phone, gender: $gender, birthDate: $birthDate)';
+    return 'User(socialId: $socialId, email: $email, name: $name, phone: $phone, gender: $gender, birthDate: $birthDate)';
   }
 
   @override
@@ -194,8 +194,8 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'User'))
+      ..add(DiagnosticsProperty('socialId', socialId))
       ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('phone', phone))
       ..add(DiagnosticsProperty('gender', gender))
@@ -207,9 +207,9 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
+            (identical(other.socialId, socialId) ||
+                other.socialId == socialId) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.gender, gender) || other.gender == gender) &&
@@ -220,7 +220,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, email, password, name, phone, gender, birthDate);
+      Object.hash(runtimeType, socialId, email, name, phone, gender, birthDate);
 
   @JsonKey(ignore: true)
   @override
@@ -238,8 +238,8 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {required final String email,
-      required final String password,
+      {final String? socialId,
+      required final String email,
       final String? name,
       final String? phone,
       required final String gender,
@@ -248,9 +248,9 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get email;
+  String? get socialId;
   @override
-  String get password;
+  String get email;
   @override
   String? get name;
   @override

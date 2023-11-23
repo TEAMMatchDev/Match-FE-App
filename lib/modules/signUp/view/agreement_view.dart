@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/search_status.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/modules/signUp/view/auth_able_view.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
+import 'package:match/provider/api/auth_api.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_checkbox.dart';
@@ -30,6 +33,9 @@ class AgreementScreen extends StatefulWidget {
 
 class _AgreementScreenState extends State<AgreementScreen> with WidgetsBindingObserver {
   final SignUpController controller = Get.find();
+  final LoginController loginController = Get.find();
+
+
   List<String> agreementStringList = [
     '[필수] MATCH 이용약관 동의',
     '[필수] 개인정보 수집 및 이용 동의',
@@ -92,6 +98,11 @@ class _AgreementScreenState extends State<AgreementScreen> with WidgetsBindingOb
                 ? CommonButton.login(
                     text: "확인",
                     onTap: () async {
+                      if (loginController.loginPlatform == 'apple') {
+                        _signUpBtnApple();
+                      } else {
+                        _signUpBtnNomal();
+                      }
                       Get.to(AuthAbleScreen());
                     },
                   )
@@ -104,5 +115,46 @@ class _AgreementScreenState extends State<AgreementScreen> with WidgetsBindingOb
         ],
       ),
     );
+  }
+
+  Future<void> _signUpBtnApple() async {
+    try {
+      var result = await UserAuthApi.setAppleSignUp(
+        socialId: controller.socialId.value,
+        email: controller.signUpId.value,
+        name: controller.signUpName.value,
+        phone: controller.signUpPhone.value,
+        gender: controller.signUpGender.value,
+        birthDate: controller.signUpBirth.value,
+      );
+      if (result) {
+        Fluttertoast.showToast(msg: "애플유저 회원가입에 성공했습니다.");
+        Get.to(AuthAbleScreen());
+      } else {
+        Fluttertoast.showToast(msg: "회원가입에 실패했습니다.");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "오류가 발생했습니다: $e");
+    }
+  }
+
+  Future<void> _signUpBtnNomal() async {
+    try {
+      var result = await UserAuthApi.setSignUp(
+        email: controller.signUpId.value,
+        password: controller.signUpPw.value,
+        name: controller.signUpName.value,
+        phone: controller.signUpPhone.value,
+        gender: controller.signUpGender.value,
+        birthDate: controller.signUpBirth.value,
+      );
+      if (result) {
+        Get.to(AuthAbleScreen());
+      } else {
+        Fluttertoast.showToast(msg: "회원가입에 실패했습니다.");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "오류가 발생했습니다: $e");
+    }
   }
 }

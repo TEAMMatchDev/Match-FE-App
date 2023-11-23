@@ -24,6 +24,7 @@ class PaymentController extends GetxController {
 
   // final ProjectController _projectController = Get.find<ProjectController>();
   RxString donateState = "".obs;
+  RxInt projectId = 0.obs;
 
   /// 기부상태 (정기/단기)
 
@@ -104,15 +105,16 @@ class PaymentController extends GetxController {
   void onInit() async {
     super.onInit();
     await AuthService.to.getDonatorInfo();
-    //print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}");
+    print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n "
+        "paymentController onInit 내부 :: projectId: ${ProjectController.to.projectId}");
 
     payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
     cardInfoList.assignAll(await OrderApi.getCardList());
-    cardCodeList.assignAll(
-        cardInfoList.map((card) => card.cardCode.toString()).toList());
+    cardCodeList.assignAll(cardInfoList.map((card) => card.cardCode.toString()).toList());
     cardNumList.assignAll(cardInfoList.map((card) => card.cardNo).toList());
     cardIdList.assignAll(cardInfoList.map((card) => card.id).toList());
 
     donateState.value = ProjectController.to.projectDetail.value.regularStatus;
+    projectId.value = ProjectController.to.projectId;
   }
 }

@@ -14,7 +14,7 @@ class PolicyDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _webViewController = WebViewController()
-      ..loadRequest(Uri.parse((dotenv.env['prodApiUrl'] ?? "") + webUrl))
+      ..loadRequest(Uri.parse((dotenv.env['devApiUrl'] ?? "") + webUrl))
       ..setJavaScriptMode(JavaScriptMode.unrestricted);
     return Scaffold(
       appBar: CommonAppBar.basic(title),

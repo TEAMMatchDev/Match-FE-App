@@ -34,6 +34,8 @@ class SignUpInfoScreen extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context){
+    print(">>> signup_user_info_view:: controller에 저장된 socialId: ${controller.socialId.value}");
+
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
       body: Column(
@@ -61,8 +63,13 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                         CommonInputField.userName(
                             textController : controller.userNameTextController.value,
                             onChange: (value) async {
-                              //print(">>> 입력한 이름: $value");
-                              controller.signUpName.value = value;
+                              print(">>> 입력한 이름: $value");
+                              if (value != '테스트') {
+                                controller.signUpName.value = value;
+                              }
+                              else {
+                                Fluttertoast.showToast(msg: "유효한 이름을 입력해주세요");
+                              }
                             }),
                         SizedBox(height: 20.h),
                         Text(
@@ -72,7 +79,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                         SizedBox(height: 10.h),
                         SelectGenderRadioButtons(
                           onGenderSelected: (gender) {
-                            //print(">>> 선택한 성별: $gender");
+                            print(">>> 선택한 성별: $gender");
                             controller.selectedItemsgendrState.value = gender;
                             controller.signUpGender.value = gender;
                           },
@@ -94,10 +101,10 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               alignment: Alignment.centerLeft,
                               child: CallSelectBirthBottomSheet(
                                 onBirthSelected: (birth) {
-                                  //print('>>> 선택한 생년월일: $birth');
-                                  //print('>>> 선택한 생년월일: ${controller.signUpBirth.value}');
-                                  controller.birthState.value = birth.toString();
                                   controller.signUpBirth.value = birth.toString().replaceAll("-", "");
+                                  controller.birthState.value = birth.toString();
+                                  print('>>> 선택한 생년월일: $birth');
+                                  print('>>> 선택한 생년월일: ${controller.signUpBirth.value}');
                                 },
                               ),
                             ),
@@ -115,7 +122,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               child: CommonInputField.userPhone(
                                   textController : controller.userPhoneTextController.value,
                                   onChange: (value) async {
-                                    //print(">>> 입력한 전화번호: $value");
+                                    print(">>> 입력한 전화번호: $value");
                                     controller.signUpPhone.value = value;
                                   }),
                             ),
@@ -156,7 +163,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               child: CommonInputField.userPhoneConfirm(
                                   textController : controller.userPhoneConfirmTextController.value,
                                   onChange: (value) async {
-                                    //print(">>> 입력한 인증번호: $value");
+                                    print(">>> 입력한 인증번호: $value");
                                     controller.signUpPhoneConfirm.value = value;
                                   }),
                             ),
@@ -192,8 +199,9 @@ class SignUpInfoScreen extends GetView<SignUpController> {
               child: CommonButton.login(
                       text: "확인",
                       onTap: () async {
-                        if(controller.authPhone.value) {
+                        if (controller.authPhone.value) {
                           Get.to(AgreementScreen());
+                          print(">>> signup_user_into_view:: controller에 저장된 애플유저 socialId: ${controller.socialId.value}");
                         }
                         else {
                           Fluttertoast.showToast(msg: "회원정보와 전화번호 인증확인을 해주세요.");
