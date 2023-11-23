@@ -96,7 +96,12 @@ class MypageEditScreen extends StatelessWidget {
           thickness: 1.h,
           color: AppColors.divider1,
         ),
-        const MypageListTile(title: "결제 수단 관리"),
+        MypageListTile(
+            title: "결제수단 관리",
+            onTap: () async {
+              Get.toNamed(Routes.pay_method);
+            },
+        ),
         MypageListTile(
           title: "로그아웃",
           onTap: () async {

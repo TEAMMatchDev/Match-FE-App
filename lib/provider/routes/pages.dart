@@ -30,6 +30,8 @@ import 'package:match/modules/survey/binding/survey_binding.dart';
 import 'package:match/modules/survey/view/survey_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
 import 'package:match/modules/tutorial/view/tutorial_view.dart';
+import 'package:match/modules/user_paymethod/binding/user_paymethod_binding.dart';
+import 'package:match/modules/user_paymethod/view/user_paymethod_view.dart';
 import 'package:match/modules/user_phone/binding/user_phone_binding.dart';
 import 'package:match/modules/user_phone/view/user_phone_view.dart';
 
@@ -202,6 +204,15 @@ class Pages {
       page: () => const UserPhoneScreen(),
       transition: Transition.noTransition,
       binding: UserPhoneBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "간편결제 관리 화면",
+      name: Routes.pay_method,
+      page: () => const UserPayMethodScreen(),
+      transition: Transition.noTransition,
+      binding: UserPayMethodBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

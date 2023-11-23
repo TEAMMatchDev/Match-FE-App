@@ -58,8 +58,11 @@ abstract class _Paths {
   /// 닉네임 화면
   static const nickname = "/nickname";
 
-  // 핸드폰 변경화면
+  /// 핸드폰 변경화면
   static const phone = "/phone";
+
+  /// 결제 수단 관리 화면
+  static const pay_method = "/pay_method";
 
   ///알람 화면
   static const alarm = "/alarm";
@@ -139,6 +142,9 @@ abstract class Routes {
 
   /// 핸드폰 변경화면
   static const phone = _Paths.phone;
+
+  /// 결제 수단 관리 화면
+  static const pay_method = _Paths.pay_method;
 
   /// 공지사항 화면
   static const notice = _Paths.notice;
