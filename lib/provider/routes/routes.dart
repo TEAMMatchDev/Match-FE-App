@@ -20,7 +20,7 @@ abstract class _Paths {
   static const home = "/home";
 
   /// 설문조사 화면
-  static const survey = "/survey";
+  static const review = "/review";
 
   // /// 검색 화면
   // static const search = "/search";
@@ -99,7 +99,7 @@ abstract class Routes {
   static const home = _Paths.home;
 
   /// 설문조사 화면
-  static const survey = _Paths.survey;
+  static const review = _Paths.review;
 
   // /// 검색 화면
   // static const search = _Paths.search;

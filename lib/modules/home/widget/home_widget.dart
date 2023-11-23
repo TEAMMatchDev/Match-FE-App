@@ -251,7 +251,7 @@ Widget profileItem(
     ),
     child: ClipOval(
       child: Image.network(
-        tmpProfileImg,
+        profileUrl,
         fit: BoxFit.fill,
       ),
     ),

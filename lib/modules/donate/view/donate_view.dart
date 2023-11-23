@@ -81,7 +81,6 @@ class DonateScreen extends GetView<DonateController> {
                                 : controller.projectList.assignAll(
                                     await ProjectApi.getProjectList(
                                         type: ProjectType.ANIMAL));
-                            //TODO: api 호출
                           },
                           child: index == 0
                               ? CircleType(

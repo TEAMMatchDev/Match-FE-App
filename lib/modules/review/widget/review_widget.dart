@@ -1,20 +1,20 @@
-//TODO: add survey modal
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/util/const/global_variable.dart';
 
+import '../../../model/popup/popup_info.dart';
 import '../../../provider/routes/routes.dart';
 import '../../../util/const/style/global_color.dart';
 import '../../../util/const/style/global_text_styles.dart';
 
-Widget SurveyModal({required String title, required int surveyId}) {
+Widget ReviewModal({required PopupInfo popupInfo}) {
   return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16.r)),
       ),
-      title: Text("'${title}'\n정기 후원이 집행 완료되었습니다🎉",
+      title: Text("'${popupInfo.title}'\n${popupInfo.regularStatus}이 집행 완료되었습니다🎉",
           textAlign: TextAlign.center, style: AppTextStyles.T1Bold16),
       titlePadding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 30.w)
           .copyWith(bottom: 0.h),
@@ -29,17 +29,20 @@ Widget SurveyModal({required String title, required int surveyId}) {
           height: 27.h,
         ),
         Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.black,
-            ),
-            child: thumbsTextButton(
-                icon: "up",
-                text: "좋아요",
-                onTap: () async {
-                  Get.toNamed(Routes.survey);
-                })),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.r),
+            color: Colors.black,
+          ),
+          child: thumbsTextButton(
+              icon: "up",
+              text: "좋아요",
+              onTap: () async {
+                Get.back();
+                Get.toNamed(Routes.review,
+                    arguments: {"executionId": popupInfo.executionId});
+              }),
+        ),
         SizedBox(
           height: 14.h,
         ),
