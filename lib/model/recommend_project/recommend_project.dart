@@ -9,6 +9,7 @@ class RecommendProject with _$RecommendProject {
   const factory RecommendProject({
     required int projectId,
     required String projectKind,
+    required String randomMessage,
   }) = _RecommendProject;
   factory RecommendProject.fromJson(Map<String, dynamic> json) =>
       _$RecommendProjectFromJson(json);

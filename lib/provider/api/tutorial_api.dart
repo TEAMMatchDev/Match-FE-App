@@ -27,7 +27,7 @@ class TutorialApi {
       Response response = await DioServices()
           .to()
           .post(tutorialPath, data: {"projectId": projectId});
-
+      logger.e(response.data[RESULT]);
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());

@@ -11,6 +11,7 @@ _$RecommendProjectImpl _$$RecommendProjectImplFromJson(
     _$RecommendProjectImpl(
       projectId: json['projectId'] as int,
       projectKind: json['projectKind'] as String,
+      randomMessage: json['randomMessage'] as String,
     );
 
 Map<String, dynamic> _$$RecommendProjectImplToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$RecommendProjectImplToJson(
     <String, dynamic>{
       'projectId': instance.projectId,
       'projectKind': instance.projectKind,
+      'randomMessage': instance.randomMessage,
     };

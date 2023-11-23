@@ -26,89 +26,86 @@ class TutorialScreen extends GetView<TutorialController> {
             children: [
               Expanded(
                 child: Center(
-                  child: IntrinsicHeight(
-                    child: Column(
-                      children: [
-                        IntrinsicHeight(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              for (var i = 0;
-                                  i < controller.projectTypes.length;
-                                  i++)
-                                GestureDetector(
-                                  onTap: () {
-                                    controller.selectTypeIdx.value = i;
-                                  },
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                        right: i !=
-                                                controller.projectTypes.length -
-                                                    1
-                                            ? 36.w
-                                            : 0),
-                                    child: categoryType(
-                                      type: projectTypeMap[controller
-                                              .projectTypes[i].projectKind] ??
-                                          ProjectType.CHILDREN,
-                                      isSelect:
-                                          (controller.selectTypeIdx.value == i)
-                                              .obs,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          for (var i = 0;
+                              i < controller.projectTypes.length;
+                              i++)
+                            GestureDetector(
+                              onTap: () {
+                                controller.selectTypeIdx.value = i;
+                                controller.selectProject =
+                                    controller.projectTypes[i].obs;
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    right: i !=
+                                            controller.projectTypes.length -
+                                                1
+                                        ? 36.w
+                                        : 0),
+                                child: categoryType(
+                                  type: projectTypeMap[controller
+                                          .projectTypes[i].projectKind] ??
+                                      ProjectType.CHILDREN,
+                                  isSelect:
+                                      (controller.selectTypeIdx.value == i)
+                                          .obs,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                      controller.selectProject == null
+                          ? Padding(
+                              padding: EdgeInsets.only(top: 60.h),
+                              child: Text(
+                                "${AuthService.to.name.value}님, 첫 기부금 1원을 \n어디에 기부할까요?",
+                                style: AppTextStyles.S1SemiBold14.copyWith(
+                                    fontSize: 20.sp),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          : Padding(
+                              padding: EdgeInsets.only(top: 20.h),
+                              child: Container(
+                                  width: 260.w,
+                                  height: 45.h,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: AssetImage(
+                                          "${imgDir}ic_speech_${controller.projectTypes.indexOf(controller.selectProject!.value)}_248.png"),
                                     ),
                                   ),
-                                ),
-                            ],
-                          ),
-                        ),
-                        controller.selectProject == null
-                            ? Padding(
-                                padding: EdgeInsets.only(top: 60.h),
-                                child: Text(
-                                  "${AuthService.to.name.value}님, 첫 기부금 1원을 \n어디에 기부할까요?",
-                                  style: AppTextStyles.S1SemiBold14.copyWith(
-                                      fontSize: 20.sp),
-                                  textAlign: TextAlign.center,
-                                ),
-                              )
-                            : Padding(
-                                padding: EdgeInsets.only(top: 20.h),
-                                child: Container(
-                                    width: 260.w,
-                                    height: 45.h,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        fit: BoxFit.fill,
-                                        image: AssetImage(
-                                            "${imgDir}ic_speech_${controller.projectTypes.indexOf(controller.selectProject!.value)}_248.png"),
-                                      ),
-                                    ),
+                                  alignment: Alignment.center,
+                                  child: Stack(
                                     alignment: Alignment.center,
-                                    child: Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        Positioned(
-                                          top: 13.h,
-                                          child: SizedBox(
-                                            width: 250.w,
-                                            height: 30.h,
-                                            child: Text(
-                                              projectTypDescription[controller
-                                                      .selectProject!
-                                                      .value
-                                                      .projectKind] ??
-                                                  "",
-                                              style: AppTextStyles.L1Medium13,
-                                              textAlign: TextAlign.center,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
+                                    children: [
+                                      Positioned(
+                                        top: 13.h,
+                                        child: SizedBox(
+                                          width: 250.w,
+                                          height: 30.h,
+                                          child: Text(
+                                            controller.selectProject!.value
+                                                .randomMessage,
+                                            style: AppTextStyles.L1Medium13,
+                                            textAlign: TextAlign.center,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-                                      ],
-                                    )),
-                              )
-                      ],
-                    ),
+                                      ),
+                                    ],
+                                  )),
+                            )
+                    ],
                   ),
                 ),
               ),
@@ -118,7 +115,7 @@ class TutorialScreen extends GetView<TutorialController> {
                   onTap: () async {
                     TutorialApi.setDonationTutorial(
                         projectId: controller.selectProject!.value.projectId);
-                    await Get.toNamed(Routes.main);
+
                   }),
               SizedBox(
                 height: 24.h,

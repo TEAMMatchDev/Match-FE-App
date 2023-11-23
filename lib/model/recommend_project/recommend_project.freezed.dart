@@ -22,6 +22,7 @@ RecommendProject _$RecommendProjectFromJson(Map<String, dynamic> json) {
 mixin _$RecommendProject {
   int get projectId => throw _privateConstructorUsedError;
   String get projectKind => throw _privateConstructorUsedError;
+  String get randomMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $RecommendProjectCopyWith<$Res> {
           RecommendProject value, $Res Function(RecommendProject) then) =
       _$RecommendProjectCopyWithImpl<$Res, RecommendProject>;
   @useResult
-  $Res call({int projectId, String projectKind});
+  $Res call({int projectId, String projectKind, String randomMessage});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$RecommendProjectCopyWithImpl<$Res, $Val extends RecommendProject>
   $Res call({
     Object? projectId = null,
     Object? projectKind = null,
+    Object? randomMessage = null,
   }) {
     return _then(_value.copyWith(
       projectId: null == projectId
@@ -62,6 +64,10 @@ class _$RecommendProjectCopyWithImpl<$Res, $Val extends RecommendProject>
       projectKind: null == projectKind
           ? _value.projectKind
           : projectKind // ignore: cast_nullable_to_non_nullable
+              as String,
+      randomMessage: null == randomMessage
+          ? _value.randomMessage
+          : randomMessage // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -75,7 +81,7 @@ abstract class _$$RecommendProjectImplCopyWith<$Res>
       __$$RecommendProjectImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int projectId, String projectKind});
+  $Res call({int projectId, String projectKind, String randomMessage});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$RecommendProjectImplCopyWithImpl<$Res>
   $Res call({
     Object? projectId = null,
     Object? projectKind = null,
+    Object? randomMessage = null,
   }) {
     return _then(_$RecommendProjectImpl(
       projectId: null == projectId
@@ -100,6 +107,10 @@ class __$$RecommendProjectImplCopyWithImpl<$Res>
       projectKind: null == projectKind
           ? _value.projectKind
           : projectKind // ignore: cast_nullable_to_non_nullable
+              as String,
+      randomMessage: null == randomMessage
+          ? _value.randomMessage
+          : randomMessage // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -111,7 +122,9 @@ class _$RecommendProjectImpl
     with DiagnosticableTreeMixin
     implements _RecommendProject {
   const _$RecommendProjectImpl(
-      {required this.projectId, required this.projectKind});
+      {required this.projectId,
+      required this.projectKind,
+      required this.randomMessage});
 
   factory _$RecommendProjectImpl.fromJson(Map<String, dynamic> json) =>
       _$$RecommendProjectImplFromJson(json);
@@ -120,10 +133,12 @@ class _$RecommendProjectImpl
   final int projectId;
   @override
   final String projectKind;
+  @override
+  final String randomMessage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecommendProject(projectId: $projectId, projectKind: $projectKind)';
+    return 'RecommendProject(projectId: $projectId, projectKind: $projectKind, randomMessage: $randomMessage)';
   }
 
   @override
@@ -132,7 +147,8 @@ class _$RecommendProjectImpl
     properties
       ..add(DiagnosticsProperty('type', 'RecommendProject'))
       ..add(DiagnosticsProperty('projectId', projectId))
-      ..add(DiagnosticsProperty('projectKind', projectKind));
+      ..add(DiagnosticsProperty('projectKind', projectKind))
+      ..add(DiagnosticsProperty('randomMessage', randomMessage));
   }
 
   @override
@@ -143,12 +159,15 @@ class _$RecommendProjectImpl
             (identical(other.projectId, projectId) ||
                 other.projectId == projectId) &&
             (identical(other.projectKind, projectKind) ||
-                other.projectKind == projectKind));
+                other.projectKind == projectKind) &&
+            (identical(other.randomMessage, randomMessage) ||
+                other.randomMessage == randomMessage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, projectId, projectKind);
+  int get hashCode =>
+      Object.hash(runtimeType, projectId, projectKind, randomMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +187,8 @@ class _$RecommendProjectImpl
 abstract class _RecommendProject implements RecommendProject {
   const factory _RecommendProject(
       {required final int projectId,
-      required final String projectKind}) = _$RecommendProjectImpl;
+      required final String projectKind,
+      required final String randomMessage}) = _$RecommendProjectImpl;
 
   factory _RecommendProject.fromJson(Map<String, dynamic> json) =
       _$RecommendProjectImpl.fromJson;
@@ -177,6 +197,8 @@ abstract class _RecommendProject implements RecommendProject {
   int get projectId;
   @override
   String get projectKind;
+  @override
+  String get randomMessage;
   @override
   @JsonKey(ignore: true)
   _$$RecommendProjectImplCopyWith<_$RecommendProjectImpl> get copyWith =>
