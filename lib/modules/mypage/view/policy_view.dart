@@ -54,15 +54,15 @@ class PolicyScreen extends StatelessWidget {
                 color: AppColors.divider1,
               ),
             ),
-            GestureDetector(
-                onTap: () {
-                  Get.to(const PolicyDetailView(
-                    webUrl: "/terms/marketing ",
-                    title: "마케팅 정보 수집 및 수신 동의",
-                  ));
-                },
-                child:
-                    Text("마케팅 정보 수집 및 수신 동의", style: AppTextStyles.T1Bold15)),
+            // GestureDetector(
+            //     onTap: () {
+            //       Get.to(const PolicyDetailView(
+            //         webUrl: "/terms/marketing ",
+            //         title: "마케팅 정보 수집 및 수신 동의",
+            //       ));
+            //     },
+            //     child:
+            //         Text("마케팅 정보 수집 및 수신 동의", style: AppTextStyles.T1Bold15)),
           ],
         ),
       ),
