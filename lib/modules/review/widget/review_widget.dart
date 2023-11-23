@@ -14,13 +14,14 @@ Widget ReviewModal({required PopupInfo popupInfo}) {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(16.r)),
       ),
-      title: Text("'${popupInfo.title}'\n${popupInfo.regularStatus}이 집행 완료되었습니다🎉",
+      title: Text(
+          "'${popupInfo.title}'\n${popupInfo.regularStatus}이 집행 완료되었습니다🎉",
           textAlign: TextAlign.center, style: AppTextStyles.T1Bold16),
       titlePadding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 30.w)
           .copyWith(bottom: 0.h),
       content: IntrinsicHeight(
-          child: Column(children: [
-        Text(
+        child: Column(children: [
+          Text(
           "MATCH와 함께 한 후원 마음에 드셨나요?",
           style: AppTextStyles.S1SemiBold14.copyWith(color: AppColors.grey7),
           textAlign: TextAlign.center,
@@ -47,18 +48,22 @@ Widget ReviewModal({required PopupInfo popupInfo}) {
           height: 14.h,
         ),
         thumbsTextButton(
-          icon: "down",
-          text: "아니요",
-          color: AppColors.grey5,
-        )
+            icon: "down",
+            text: "아니요",
+            color: AppColors.grey5,
+            onTap: () async {
+              Get.back();
+              Get.toNamed(Routes.review,
+                  arguments: {"executionId": popupInfo.executionId});
+            }),
+      )
       ])));
 }
 
-Widget thumbsTextButton(
-    {required String icon,
-    required String text,
-    Color color = Colors.white,
-    Future<void> Function()? onTap}) {
+Widget thumbsTextButton({required String icon,
+  required String text,
+  Color color = Colors.white,
+  Future<void> Function()? onTap}) {
   return GestureDetector(
     onTap: () {
       if (onTap != null) {
@@ -94,55 +99,56 @@ class RateWidget extends StatelessWidget {
   final String subtitle;
   final Rx<int> rate;
 
-  const RateWidget(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      required this.rate});
+  const RateWidget({super.key,
+    required this.title,
+    required this.subtitle,
+    required this.rate});
 
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            style: AppTextStyles.S1SemiBold14,
+          () =>
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: AppTextStyles.S1SemiBold14,
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              Text(
+                subtitle,
+                style: AppTextStyles.L1Medium12.copyWith(
+                  color: AppColors.grey7,
+                ),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                    5,
+                        (index) =>
+                        Container(
+                          margin: EdgeInsets.only(right: 5.w),
+                          child: GestureDetector(
+                            onTap: () {
+                              rate.value = index;
+                            },
+                            child: SvgPicture.asset(
+                              "${iconDir}survey/ic_rate_${index}_30.svg",
+                              color: rate.value == index
+                                  ? AppColors.grey5
+                                  : AppColors.grey1,
+                            ),
+                          ),
+                        )),
+              )
+            ],
           ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Text(
-            subtitle,
-            style: AppTextStyles.L1Medium12.copyWith(
-              color: AppColors.grey7,
-            ),
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-                5,
-                (index) => Container(
-                      margin: EdgeInsets.only(right: 5.w),
-                      child: GestureDetector(
-                        onTap: () {
-                          rate.value = index;
-                        },
-                        child: SvgPicture.asset(
-                          "${iconDir}survey/ic_rate_${index}_30.svg",
-                          color: rate.value == index
-                              ? AppColors.grey5
-                              : AppColors.grey1,
-                        ),
-                      ),
-                    )),
-          )
-        ],
-      ),
     );
   }
 }
