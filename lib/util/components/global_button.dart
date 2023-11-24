@@ -114,6 +114,20 @@ class CommonButton extends StatelessWidget {
       verticalPadding: verticalPadding,
     );
   }
+  factory CommonButton.deletePay(
+      {String text = "등록된 카드 삭제",
+        int verticalPadding = 13,
+        bool isActive = false,
+        required Future<void> Function() onTap}) {
+    return CommonButton(
+      onTap: isActive ? onTap : () async {},
+      text: text,
+      backgroundColor: isActive ? AppColors.black : AppColors.grey0,
+      textColor: isActive ? AppColors.white : AppColors.grey2,
+      textSize: 16,
+      verticalPadding: verticalPadding,
+    );
+  }
 
   factory CommonButton.edit(
       {String text = "변경 완료",

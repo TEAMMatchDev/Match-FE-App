@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:match/modules/payment/widget/card_slider_widget.dart';
 import 'package:match/modules/user_paymethod/controller/user_paymethod_controller.dart';
 import 'package:match/modules/user_phone/controller/user_phone_controller.dart';
 import 'package:match/provider/api/mypage_api.dart';
@@ -30,66 +31,42 @@ class UserPayMethodScreen extends GetView<UserPayMethodController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 30.h,
+                      height: 150.h,
                     ),
-                    Text(
-                      "변경할 휴대폰 번호",
-                      style: AppTextStyles.S1SemiBold14,
-                    ),
+                    CardSlider(),
                     SizedBox(
                       height: 10.h,
                     ),
-                    SizedBox(
-                      height: 48.h,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Expanded(
-                            child: Obx(
-                              () => CommonInputField.phone(
-                                  textController:
-                                      controller.phoneController.value,
-                                  onChange: (text) async {
-                                    if (text != "" &&
-                                        RegExp(r'^01[016789]?\d{3,4}\d{4}$')
-                                            .hasMatch(text)) {
-                                      controller.phoneChange.value = true;
-                                      logger.d(
-                                          "변경할 번호: $text  ${controller.phoneChange.value}");
-                                    } else {
-                                      controller.phoneChange.value = false;
-                                    }
-                                  }),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          CommonButton.phone(
-                            isActive: controller.phoneChange.value,
-                            onTap: () async {
-                              controller.newPhone.value =
-                                  controller.phoneController.value.text;
-                              if (controller.newPhone.value ==
-                                  AuthService.to.myProfile.value.phone) {
-                                Fluttertoast.showToast(
-                                    msg: "등록된 핸드폰과 같은 번호입니다");
-                              } else {
-                                controller.isPhoneValid.value =
-                                    await MypageApi.getPhoneValidCode(
-                                        phone: controller.newPhone.value);
-                                if (controller.isPhoneValid.value) {
-                                  Fluttertoast.showToast(msg: "인증번호가 발송되었습니다");
-                                } else {
-                                  Fluttertoast.showToast(
-                                      msg: "인증번호 발송에 실패하였습니다. 전화번호를 다시 확인해주세요");
-                                }
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 48.h,
+                    //   child: Row(
+                    //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                    //     children: [
+                    //       Expanded(
+                    //         child: Obx(
+                    //           () => CommonInputField.phone(
+                    //               textController:
+                    //                   controller.phoneController.value,
+                    //               onChange: (text) async {
+                    //                 if (text != "" &&
+                    //                     RegExp(r'^01[016789]?\d{3,4}\d{4}$')
+                    //                         .hasMatch(text)) {
+                    //                   controller.phoneChange.value = true;
+                    //                   logger.d(
+                    //                       "변경할 번호: $text  ${controller.phoneChange.value}");
+                    //                 } else {
+                    //                   controller.phoneChange.value = false;
+                    //                 }
+                    //               }),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         width: 10.w,
+                    //       ),
+                    //
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 20.h,
                     ),

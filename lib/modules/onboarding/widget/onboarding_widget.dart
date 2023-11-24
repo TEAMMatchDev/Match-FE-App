@@ -18,15 +18,15 @@ class OnboardingWidget extends StatefulWidget {
 class _CarouselExampleState extends State<OnboardingWidget> {
 
   final List<String> images = [
-    '$imgDir'+'onboarding/iv_onboarding_1.png',
-    '$imgDir'+'onboarding/iv_onboarding_2.png',
-    '$imgDir'+'onboarding/iv_onboarding_3.png',
+    '$imgDir'+'onboarding/iv_onboarding_new1.png',
+    '$imgDir'+'onboarding/iv_onboarding_new2.png',
+    '$imgDir'+'onboarding/iv_onboarding_new1.png',
   ];
   final List<String> titles = ['Title 1', 'Title 2', 'Title 3'];
   final List<String> descriptions = [
-    'MATCH를 통해 기부된\n여러분의 마음은 불꽃이가 돼요.',
-    '불꽃이는 선택한 기부처에 따라\n필요한 쓰임으로 변신합니다.',
-    'MATCH에서 후원금이\n어떻게 관리되고 있는지 알아보세요.',
+    '안녕! 나는 네가 남을 위하는\n따뜻한 마음이 들 때 피어나는 불꽃이야.',
+    '나는 도움을 기다리는 이들이\n\필요한 물품으로 변할 수 있어!',
+    '이제 앞으로 내가 무엇으로 변했는지\n너에게 직접 알려줄게. 앞으로 자주 보자!',
   ];
 
   int _currentSlide = 0;
@@ -74,7 +74,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
         items: images.asMap().entries.map((entry) {
           final int index = entry.key;
           final String image = entry.value;
-          final String description = descriptions[index]; // Get the description for the current image
+          final String description = descriptions[index];
 
           return Container(
             child: Column(
@@ -85,14 +85,14 @@ class _CarouselExampleState extends State<OnboardingWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
                     image,
-                    width: 180.w,
-                    height: 180.h,
+                    width: 150.w,
+                    height: 150.h,
                   ),
                 ),
                 SizedBox(height: 28.h), // Add spacing
                 Container(
-                  width: 230.w,
-                  height: 48.h,
+                  width: 300.w,
+                  height: 70.h,
                   child: Text(
                     description,
                     style: AppTextStyles.T1Bold16,
