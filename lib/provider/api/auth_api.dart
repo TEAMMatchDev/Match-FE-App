@@ -85,7 +85,6 @@ class UserAuthApi {
             ">>> (애플로그인) 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}");
         String token = response.data[RESULT]["accessToken"];
         DioServices().setAccessToken(token);
-
       }
 
       return true;
@@ -170,7 +169,7 @@ class UserAuthApi {
             timeInSecForIosWeb: 1);
         logger.e(response.data[CODE]);
       }
-      logger.e(response.data[RESULT]);
+      // logger.e(response.data[RESULT]);
       logger.i(
           '>>> 로그인 성공 후 사용자의 accessToken: ${response.data[RESULT]["accessToken"]}');
       saveToken(response.data[RESULT]);
