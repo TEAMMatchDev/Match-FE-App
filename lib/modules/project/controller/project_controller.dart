@@ -45,12 +45,11 @@ class ProjectController extends GetxController {
         await ProjectApi.getProjectHistoryList(projectId: projectId));
   }
   ///* 프로젝트 기록 pagination
-  Future<void> getMoreProjectHistory({required int index}) async {
+  Future<void> getMoreProjectHistory(int index) async {
     logger.d(
         "2:  총 페이지수 : ${ProjectApi.project.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (!(ProjectApi.project.totalCnt ~/ PAGINATION_SIZE < index) &&
+    if (
         !ProjectApi.project.isLast) {
-      ProjectApi.project.currentpage = index;
       projectHistories.addAll(await ProjectApi.getProjectHistoryList(
         projectId: projectId,
         getMore: true,
@@ -63,12 +62,11 @@ class ProjectController extends GetxController {
   Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
 
   ///* 응원 댓글 pagination
-  Future<void> getMoreComments({required int index}) async {
+  Future<void> getMoreComments( int index) async {
     logger.d(
         "2:  총 페이지수 : ${CommentApi.comments.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (!(CommentApi.comments.totalCnt ~/ PAGINATION_SIZE < index) &&
+    if (
         !CommentApi.comments.isLast) {
-      CommentApi.comments.currentpage = index;
       comments.addAll(await CommentApi.getComments(
         projectId: projectId,
         getMore: true,

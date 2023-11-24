@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:match/modules/like_project/controller/like_project_controller.dart';
 
 import '../../../provider/api/util/global_api_field.dart';
+import '../../../provider/api/util/pagination_function.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../donate/widget/donate_widget.dart';
 
@@ -22,12 +23,10 @@ class LikeProjectScreen extends GetView<LikeProjectController> {
             itemCount: controller.projectList.length,
             itemBuilder: (context, index) {
               //pagination 처리
-              if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
-                Future.wait({
-                  controller.getMoreProject(
-                      index: index ~/ (PAGINATION_SIZE - 1))
-                });
-              }
+              getMoreData(
+                  index: index,
+                  totalCnt: controller.projectList.length,
+                  getMore: controller.getMoreProject);
               final project = controller.projectList[index];
               return ProjectWidget(project: project);
             },

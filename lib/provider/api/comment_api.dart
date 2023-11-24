@@ -18,6 +18,8 @@ class CommentApi {
       {bool getMore = false, required int projectId}) async {
     if (!getMore) {
       comments.currentpage = 0;
+    } else {
+      comments.currentpage += 1;
     }
     var queryParameters = {
       "page": comments.currentpage,

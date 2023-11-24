@@ -33,9 +33,8 @@ class HomeController extends GetxController {
     if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE <
             FlameApi.burningFlame.currentpage + 1) &&
         !FlameApi.burningFlame.isLast) {
-      FlameApi.burningFlame.currentpage = index;
-
       flameList.addAll(await FlameApi.getBurningFlameList(getMore: true));
+      FlameApi.burningFlame.currentpage = index;
     }
   }
 

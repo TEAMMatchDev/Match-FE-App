@@ -16,6 +16,8 @@ class NoticeApi {
     try {
       if (!getMore) {
         notice.currentpage = 0;
+      } else {
+        notice.currentpage += 1;
       }
       Response response = await DioServices().to().get("/notices",
           queryParameters: {

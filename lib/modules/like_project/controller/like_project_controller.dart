@@ -9,11 +9,10 @@ class LikeProjectController extends GetxController {
   RxList<TodayProject> projectList = <TodayProject>[].obs;
 
   ///* 프로젝트 pagination
-  Future<void> getMoreProject({required int index}) async {
+  Future<void> getMoreProject(int index) async {
     logger.d(
         "2:  총 페이지수 : ${MypageApi.likes.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (!(MypageApi.likes.totalCnt ~/ PAGINATION_SIZE < index) &&
-        !MypageApi.likes.isLast) {
+    if (!MypageApi.likes.isLast) {
       MypageApi.likes.currentpage = index;
       projectList.addAll(await MypageApi.getLikeList(
         getMore: true,

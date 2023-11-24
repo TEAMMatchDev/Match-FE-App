@@ -27,9 +27,7 @@ class BurningMatchController extends GetxController {
   ///<h2> Listview builder에서 호출하는 pagination 추가 호출 함수 </h2>
   ///* 총 데이터 수와 비교하여, 페이지를 더 늘릴수있다면 api 호출, 그렇지 않다면 호출 X
   Future<void> getMoreFlameHistory(int index) async {
-    if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE < index) &&
-        !FlameApi.burningFlame.isLast) {
-      FlameApi.burningFlame.currentpage = index;
+    if (!FlameApi.burningFlame.isLast) {
       flameHistories.addAll(await FlameApi.getFlameDetailBottomList(
           donationId: id, getMore: true));
     }
