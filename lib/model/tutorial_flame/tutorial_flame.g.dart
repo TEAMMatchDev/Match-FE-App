@@ -1,23 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recommend_project.dart';
+part of 'tutorial_flame.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$RecommendProjectImpl _$$RecommendProjectImplFromJson(
-        Map<String, dynamic> json) =>
-    _$RecommendProjectImpl(
+_$TutorialFlameImpl _$$TutorialFlameImplFromJson(Map<String, dynamic> json) =>
+    _$TutorialFlameImpl(
       projectId: json['projectId'] as int,
-      projectKind: json['projectKind'] as String,
+      inherenceName: json['inherenceName'] as String,
+      image: json['image'] as String,
       randomMessage: json['randomMessage'] as String,
     );
 
-Map<String, dynamic> _$$RecommendProjectImplToJson(
-        _$RecommendProjectImpl instance) =>
+Map<String, dynamic> _$$TutorialFlameImplToJson(_$TutorialFlameImpl instance) =>
     <String, dynamic>{
       'projectId': instance.projectId,
-      'projectKind': instance.projectKind,
+      'inherenceName': instance.inherenceName,
+      'image': instance.image,
       'randomMessage': instance.randomMessage,
     };

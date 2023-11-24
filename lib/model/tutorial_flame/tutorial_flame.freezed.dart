@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'recommend_project.dart';
+part of 'tutorial_flame.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,35 +14,40 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-RecommendProject _$RecommendProjectFromJson(Map<String, dynamic> json) {
-  return _RecommendProject.fromJson(json);
+TutorialFlame _$TutorialFlameFromJson(Map<String, dynamic> json) {
+  return _TutorialFlame.fromJson(json);
 }
 
 /// @nodoc
-mixin _$RecommendProject {
+mixin _$TutorialFlame {
   int get projectId => throw _privateConstructorUsedError;
-  String get projectKind => throw _privateConstructorUsedError;
+  String get inherenceName => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
   String get randomMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $RecommendProjectCopyWith<RecommendProject> get copyWith =>
+  $TutorialFlameCopyWith<TutorialFlame> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RecommendProjectCopyWith<$Res> {
-  factory $RecommendProjectCopyWith(
-          RecommendProject value, $Res Function(RecommendProject) then) =
-      _$RecommendProjectCopyWithImpl<$Res, RecommendProject>;
+abstract class $TutorialFlameCopyWith<$Res> {
+  factory $TutorialFlameCopyWith(
+          TutorialFlame value, $Res Function(TutorialFlame) then) =
+      _$TutorialFlameCopyWithImpl<$Res, TutorialFlame>;
   @useResult
-  $Res call({int projectId, String projectKind, String randomMessage});
+  $Res call(
+      {int projectId,
+      String inherenceName,
+      String image,
+      String randomMessage});
 }
 
 /// @nodoc
-class _$RecommendProjectCopyWithImpl<$Res, $Val extends RecommendProject>
-    implements $RecommendProjectCopyWith<$Res> {
-  _$RecommendProjectCopyWithImpl(this._value, this._then);
+class _$TutorialFlameCopyWithImpl<$Res, $Val extends TutorialFlame>
+    implements $TutorialFlameCopyWith<$Res> {
+  _$TutorialFlameCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -53,7 +58,8 @@ class _$RecommendProjectCopyWithImpl<$Res, $Val extends RecommendProject>
   @override
   $Res call({
     Object? projectId = null,
-    Object? projectKind = null,
+    Object? inherenceName = null,
+    Object? image = null,
     Object? randomMessage = null,
   }) {
     return _then(_value.copyWith(
@@ -61,9 +67,13 @@ class _$RecommendProjectCopyWithImpl<$Res, $Val extends RecommendProject>
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
               as int,
-      projectKind: null == projectKind
-          ? _value.projectKind
-          : projectKind // ignore: cast_nullable_to_non_nullable
+      inherenceName: null == inherenceName
+          ? _value.inherenceName
+          : inherenceName // ignore: cast_nullable_to_non_nullable
+              as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String,
       randomMessage: null == randomMessage
           ? _value.randomMessage
@@ -74,39 +84,48 @@ class _$RecommendProjectCopyWithImpl<$Res, $Val extends RecommendProject>
 }
 
 /// @nodoc
-abstract class _$$RecommendProjectImplCopyWith<$Res>
-    implements $RecommendProjectCopyWith<$Res> {
-  factory _$$RecommendProjectImplCopyWith(_$RecommendProjectImpl value,
-          $Res Function(_$RecommendProjectImpl) then) =
-      __$$RecommendProjectImplCopyWithImpl<$Res>;
+abstract class _$$TutorialFlameImplCopyWith<$Res>
+    implements $TutorialFlameCopyWith<$Res> {
+  factory _$$TutorialFlameImplCopyWith(
+          _$TutorialFlameImpl value, $Res Function(_$TutorialFlameImpl) then) =
+      __$$TutorialFlameImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int projectId, String projectKind, String randomMessage});
+  $Res call(
+      {int projectId,
+      String inherenceName,
+      String image,
+      String randomMessage});
 }
 
 /// @nodoc
-class __$$RecommendProjectImplCopyWithImpl<$Res>
-    extends _$RecommendProjectCopyWithImpl<$Res, _$RecommendProjectImpl>
-    implements _$$RecommendProjectImplCopyWith<$Res> {
-  __$$RecommendProjectImplCopyWithImpl(_$RecommendProjectImpl _value,
-      $Res Function(_$RecommendProjectImpl) _then)
+class __$$TutorialFlameImplCopyWithImpl<$Res>
+    extends _$TutorialFlameCopyWithImpl<$Res, _$TutorialFlameImpl>
+    implements _$$TutorialFlameImplCopyWith<$Res> {
+  __$$TutorialFlameImplCopyWithImpl(
+      _$TutorialFlameImpl _value, $Res Function(_$TutorialFlameImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? projectId = null,
-    Object? projectKind = null,
+    Object? inherenceName = null,
+    Object? image = null,
     Object? randomMessage = null,
   }) {
-    return _then(_$RecommendProjectImpl(
+    return _then(_$TutorialFlameImpl(
       projectId: null == projectId
           ? _value.projectId
           : projectId // ignore: cast_nullable_to_non_nullable
               as int,
-      projectKind: null == projectKind
-          ? _value.projectKind
-          : projectKind // ignore: cast_nullable_to_non_nullable
+      inherenceName: null == inherenceName
+          ? _value.inherenceName
+          : inherenceName // ignore: cast_nullable_to_non_nullable
+              as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String,
       randomMessage: null == randomMessage
           ? _value.randomMessage
@@ -118,36 +137,40 @@ class __$$RecommendProjectImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$RecommendProjectImpl
+class _$TutorialFlameImpl
     with DiagnosticableTreeMixin
-    implements _RecommendProject {
-  const _$RecommendProjectImpl(
+    implements _TutorialFlame {
+  const _$TutorialFlameImpl(
       {required this.projectId,
-      required this.projectKind,
+      required this.inherenceName,
+      required this.image,
       required this.randomMessage});
 
-  factory _$RecommendProjectImpl.fromJson(Map<String, dynamic> json) =>
-      _$$RecommendProjectImplFromJson(json);
+  factory _$TutorialFlameImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TutorialFlameImplFromJson(json);
 
   @override
   final int projectId;
   @override
-  final String projectKind;
+  final String inherenceName;
+  @override
+  final String image;
   @override
   final String randomMessage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'RecommendProject(projectId: $projectId, projectKind: $projectKind, randomMessage: $randomMessage)';
+    return 'TutorialFlame(projectId: $projectId, inherenceName: $inherenceName, image: $image, randomMessage: $randomMessage)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'RecommendProject'))
+      ..add(DiagnosticsProperty('type', 'TutorialFlame'))
       ..add(DiagnosticsProperty('projectId', projectId))
-      ..add(DiagnosticsProperty('projectKind', projectKind))
+      ..add(DiagnosticsProperty('inherenceName', inherenceName))
+      ..add(DiagnosticsProperty('image', image))
       ..add(DiagnosticsProperty('randomMessage', randomMessage));
   }
 
@@ -155,11 +178,12 @@ class _$RecommendProjectImpl
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RecommendProjectImpl &&
+            other is _$TutorialFlameImpl &&
             (identical(other.projectId, projectId) ||
                 other.projectId == projectId) &&
-            (identical(other.projectKind, projectKind) ||
-                other.projectKind == projectKind) &&
+            (identical(other.inherenceName, inherenceName) ||
+                other.inherenceName == inherenceName) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.randomMessage, randomMessage) ||
                 other.randomMessage == randomMessage));
   }
@@ -167,40 +191,42 @@ class _$RecommendProjectImpl
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, projectId, projectKind, randomMessage);
+      Object.hash(runtimeType, projectId, inherenceName, image, randomMessage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RecommendProjectImplCopyWith<_$RecommendProjectImpl> get copyWith =>
-      __$$RecommendProjectImplCopyWithImpl<_$RecommendProjectImpl>(
-          this, _$identity);
+  _$$TutorialFlameImplCopyWith<_$TutorialFlameImpl> get copyWith =>
+      __$$TutorialFlameImplCopyWithImpl<_$TutorialFlameImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$RecommendProjectImplToJson(
+    return _$$TutorialFlameImplToJson(
       this,
     );
   }
 }
 
-abstract class _RecommendProject implements RecommendProject {
-  const factory _RecommendProject(
+abstract class _TutorialFlame implements TutorialFlame {
+  const factory _TutorialFlame(
       {required final int projectId,
-      required final String projectKind,
-      required final String randomMessage}) = _$RecommendProjectImpl;
+      required final String inherenceName,
+      required final String image,
+      required final String randomMessage}) = _$TutorialFlameImpl;
 
-  factory _RecommendProject.fromJson(Map<String, dynamic> json) =
-      _$RecommendProjectImpl.fromJson;
+  factory _TutorialFlame.fromJson(Map<String, dynamic> json) =
+      _$TutorialFlameImpl.fromJson;
 
   @override
   int get projectId;
   @override
-  String get projectKind;
+  String get inherenceName;
+  @override
+  String get image;
   @override
   String get randomMessage;
   @override
   @JsonKey(ignore: true)
-  _$$RecommendProjectImplCopyWith<_$RecommendProjectImpl> get copyWith =>
+  _$$TutorialFlameImplCopyWith<_$TutorialFlameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

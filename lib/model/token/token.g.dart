@@ -10,6 +10,7 @@ _$TokenImpl _$$TokenImplFromJson(Map<String, dynamic> json) => _$TokenImpl(
       userId: json['userId'] as int,
       accessToken: json['accessToken'] as String,
       refreshToken: json['refreshToken'] as String,
+      isTutorial: json['new'] as bool,
     );
 
 Map<String, dynamic> _$$TokenImplToJson(_$TokenImpl instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$$TokenImplToJson(_$TokenImpl instance) =>
       'userId': instance.userId,
       'accessToken': instance.accessToken,
       'refreshToken': instance.refreshToken,
+      'new': instance.isTutorial,
     };

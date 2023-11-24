@@ -10,6 +10,7 @@ class Token with _$Token {
     required int userId,
     required String accessToken,
     required String refreshToken,
+    @JsonKey(name: 'new')required bool isTutorial,
   }) = _Token;
   factory Token.fromJson(Map<String, dynamic> json) =>
       _$TokenFromJson(json);

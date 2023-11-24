@@ -119,7 +119,7 @@ class ProjectScreen extends GetView<ProjectController> {
                                 spacing: -10.w,
                                 children: controller
                                     .projectDetail.value.userProfileImages
-                                    .map((e) => profileItem(size: 40))
+                                    .map((e) => profileItem(size: 40, profileUrl: e))
                                     .toList(),
                               ),
                               controller.projectDetail.value.totalDonationCnt >

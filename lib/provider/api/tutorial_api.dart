@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:match/provider/api/util/dio_services.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
 
 import '../../model/recommend_project/recommend_project.dart';
+import '../../model/tutorial_flame/tutorial_flame.dart';
 import '../../util/const/style/global_logger.dart';
 
 const String tutorialPath = "/donations/tutorial";
@@ -22,16 +24,17 @@ class TutorialApi {
   }
 
   ///<h2>5-13 API | 튜토리얼 - 추천 기부 분야 조회 </h2>
-  static Future<bool> setDonationTutorial({required int projectId}) async {
+  static Future<TutorialFlame?> setDonationTutorial(
+      {required int projectId}) async {
     try {
       Response response = await DioServices()
           .to()
           .post(tutorialPath, data: {"projectId": projectId});
 
-      return response.data[SUCCESS];
+      return TutorialFlame.fromJson(response.data[RESULT]);
     } catch (e) {
-      logger.e(e.toString());
-      return false;
+      Fluttertoast.showToast(msg: e.toString());
+      return null;
     }
   }
 }

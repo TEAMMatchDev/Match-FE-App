@@ -21,6 +21,9 @@ import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../provider/service/auth_service.dart';
+import '../../tutorial/view/init_tutorial_view.dart';
+
 class NaverLoginWidget extends StatefulWidget {
   @override
   _NaverLoginState createState() => _NaverLoginState();
@@ -41,15 +44,22 @@ class _NaverLoginState extends State<NaverLoginWidget> {
       print('email = ${naverLoginResult.account.email}');
       print('name = ${naverLoginResult.account.name}');
       print('phone(+82) = ${naverLoginResult.account.mobile}');
-      print('phone(010) = ${naverLoginResult.account.mobile.replaceAll('+82', '0').replaceAll('-', '').replaceAll(' ', '').replaceAll('+', '')}');
+      print(
+          'phone(010) = ${naverLoginResult.account.mobile.replaceAll('+82', '0').replaceAll('-', '').replaceAll(' ', '').replaceAll('+', '')}');
 
-      var result = await UserAuthApi.setNaverLogin(token: naverLoginResult.accessToken.toString());
-      if(result) {
+      var result = await UserAuthApi.setNaverLogin(
+          token: naverLoginResult.accessToken.toString());
+      if (result) {
         controller.setPlatform('naver');
         print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
-        Get.offAllNamed(Routes.main);
+        if (AuthService.to.isTutorial.value) {
+          await AuthService.to.getUserInfo();
+          Get.to(()=>const InitTutorialScreen());
+        } else {
+          Get.offAllNamed(Routes.main);
+        }
       } else {
-          Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+        Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
       }
     }
   }
@@ -61,7 +71,7 @@ class _NaverLoginState extends State<NaverLoginWidget> {
       'client_id': "8SFlnjHGk9S71HcRtHpg",
       'response_mode': 'form_post',
       'redirect_uri':
-      'https://warp-dazzling-vegetarian.glitch.me/callback/naver/sign_in/',
+          'https://warp-dazzling-vegetarian.glitch.me/callback/naver/sign_in/',
       'state': clientState,
     });
 
@@ -74,20 +84,19 @@ class _NaverLoginState extends State<NaverLoginWidget> {
     final tokenUrl = Uri.https('nid.naver.com', '/oauth2.0/token', {
       'grant_type': 'authorization_code',
       'client_id': "8SFlnjHGk9S71HcRtHpg",
-      'client_secret':'AX2RitUnq3',
+      'client_secret': 'AX2RitUnq3',
       'code': body["code"],
       'state': clientState,
     });
-    var customTokenUrl = Uri.parse("https://warp-dazzling-vegetarian.glitch.me/callback/naver/token");
+    var customTokenUrl = Uri.parse(
+        "https://warp-dazzling-vegetarian.glitch.me/callback/naver/token");
 
     var responseTokens = await http.post(tokenUrl);
     Map<String, dynamic> bodys = json.decode(responseTokens.body);
-    var response = await http.post(
-        customTokenUrl,
-        body: {"accessToken": bodys['access_token']});
+    var response = await http
+        .post(customTokenUrl, body: {"accessToken": bodys['access_token']});
     return FirebaseAuth.instance.signInWithCustomToken(response.body);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -119,5 +128,4 @@ class _NaverLoginState extends State<NaverLoginWidget> {
       ),
     );
   }
-
 }

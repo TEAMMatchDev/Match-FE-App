@@ -13,6 +13,7 @@ class AuthService extends GetxService{
   ///회원가입시 저장해줘야함
   Rx<String> name = "".obs;
   Rx<String> nickName = "".obs;
+  Rx<bool> isTutorial = false.obs;
 
   Rx<Profile> myProfile = tmpProfile.obs;
   Rx<Donator> donatorProfile = tmpDonator.obs;
