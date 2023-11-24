@@ -39,8 +39,9 @@ class _CarouselExampleState extends State<OnboardingWidget> {
           SizedBox(height: 30.h),
           SizedBox(height: 10.h),
           skipWidget(), //상단 건너뛰기 버튼
+          SizedBox(height: 50.h),
           sliderWidget(images, _currentSlide), //온보딩 이미지
-          SizedBox(height: 90.h),
+          SizedBox(height: 70.h),
           indicatorWidget(images.length, _currentSlide), //인디케이터
         ],
       ),
@@ -80,16 +81,46 @@ class _CarouselExampleState extends State<OnboardingWidget> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Image
-                ClipRRect(
+                if (index == 2)
+                  Stack(
+                    children: [
+                      Container(
+                        child: Image.asset(
+                          iconDir + "login/iv_login_msg_background.png",
+                          width: 275.w,
+                          height: 60.h,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 20.h,
+                        left: 65.w,
+                        child: Text(
+                          '나 방금 행복동에 연탄이 필요한\n할머니를 위한 연탄으로 변했어! ',
+                          style: AppTextStyles.T1Bold12.copyWith(color: AppColors.grey7),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                if (index != 2)
+                  ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    image,
-                    width: 150.w,
-                    height: 150.h,
+                      image,
+                      width: index == 1 ? 167.w : 100.w,
+                      height: index == 1 ? 170.h : 100.h,
+                    ),
                   ),
-                ),
-                SizedBox(height: 28.h), // Add spacing
+                if (index == 2)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      image,
+                      width: 100.w,
+                      height: 100.h,
+                    ),
+                  ),
+                SizedBox(height: 35.h),
                 Container(
                   width: 300.w,
                   height: 70.h,
@@ -99,6 +130,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
                     textAlign: TextAlign.center,
                   ),
                 ),
+
               ],
             ),
           );

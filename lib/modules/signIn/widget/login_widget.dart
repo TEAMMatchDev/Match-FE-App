@@ -114,7 +114,6 @@ class _LoginState extends State<LoginWidget> {
                          width: 240.w,
                        ),
                      ),
-                     /// 카드사
                      Positioned(
                        bottom: 25.h,
                        left: 35.w,
