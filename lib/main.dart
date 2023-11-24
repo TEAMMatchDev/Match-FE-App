@@ -49,7 +49,8 @@ Future<void> initService() async {
 
   /// * GetStorage 초기화
   await GetStorage.init();
-  await DynamicLink.setUp();
+  var reulst = await DynamicLink.setUp();
+  logger.e("dynamicc link initialized ; $reulst");
 
   // 푸시 알림 설정 및 권한 요청
   await requestPermission();

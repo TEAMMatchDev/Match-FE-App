@@ -419,6 +419,6 @@ Future<void> saveToken(Map<String, dynamic> json) async {
   GetStorageUtil.addToken(StorageKey.ACCESS_TOKEN, token.accessToken);
   DioServices().setAccessToken(token.accessToken);
   //튜토리얼 진행여부 저장
-  // AuthService.to.isTutorial.value = token.isTutorial;
-  AuthService.to.isTutorial.value = true;
+  AuthService.to.isTutorial.value = token.isTutorial;
+  // AuthService.to.isTutorial.value = true;
 }
