@@ -34,32 +34,31 @@ class TutorialScreen extends GetView<TutorialController> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          for (var i = 0;
-                              i < controller.projectTypes.length;
-                              i++)
-                            GestureDetector(
-                              onTap: () {
-                                controller.selectTypeIdx.value = i;
-                                controller.selectProject =
-                                    controller.projectTypes[i].obs;
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    right:
-                                        i != controller.projectTypes.length - 1
-                                            ? 36.w
-                                            : 0),
-                                child: categoryType(
-                                  type: projectTypeMap[controller
-                                          .projectTypes[i].projectKind] ??
-                                      ProjectType.CHILDREN,
-                                  isSelect:
-                                      (controller.selectTypeIdx.value == i).obs,
-                                ),
+                        children: List.generate(
+                          controller.projectTypes.length,
+                          (index) => GestureDetector(
+                            onTap: () {
+                              controller.selectTypeIdx.value = index;
+                              controller.selectProject =
+                                  controller.projectTypes[index].obs;
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  right: index !=
+                                          controller.projectTypes.length - 1
+                                      ? 36.w
+                                      : 0),
+                              child: categoryType(
+                                type: projectTypeMap[controller
+                                        .projectTypes[index].projectKind] ??
+                                    ProjectType.CHILDREN,
+                                isSelect:
+                                    (controller.selectTypeIdx.value == index)
+                                        .obs,
                               ),
                             ),
-                        ],
+                          ),
+                        ),
                       ),
                       controller.selectProject == null
                           ? Padding(

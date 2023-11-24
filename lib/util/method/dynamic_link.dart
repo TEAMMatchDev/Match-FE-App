@@ -36,7 +36,7 @@ class DynamicLink {
     required int id,
   }) async {
     final dynamicLinkParams = DynamicLinkParameters(
-      link: Uri.parse("${dynamicBase}/$screenName?id=$id"),
+      link: Uri.parse("$dynamicBase/$screenName?id=$id"),
       uriPrefix: dynamicBase,
       androidParameters: const AndroidParameters(packageName: "com.dev.match"),
       iosParameters: const IOSParameters(bundleId: "com.dev.match"),
@@ -59,17 +59,11 @@ class DynamicLink {
   }
 
   static void _redirectScreen(PendingDynamicLinkData dynamicLinkData) {
-    if (dynamicLinkData.link.queryParameters.containsKey('id')) {
-      if (dynamicLinkData.link.queryParameters.containsKey('id')) {
-        String link = dynamicLinkData.link.path.split('/').last;
-        int id = dynamicLinkData.link.queryParameters['id'] as int;
-
-        switch (link) {
-          case "project":
-            Get.offAllNamed(Routes.project, arguments: {"projectId": id});
-            break;
-        }
-      }
+    logger.e(dynamicLinkData);
+    String link = dynamicLinkData.link.path;
+    int id = int.parse(dynamicLinkData.link.queryParameters["id"] ?? "-1");
+    if (link.contains("project")) {
+      Get.toNamed(Routes.project, arguments: {"projectId": id});
     }
   }
 }

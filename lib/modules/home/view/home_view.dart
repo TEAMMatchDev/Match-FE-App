@@ -9,7 +9,6 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/global_widget.dart';
-import '../../../util/const/style/global_logger.dart';
 import '../../../util/const/style/global_skeleton.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
