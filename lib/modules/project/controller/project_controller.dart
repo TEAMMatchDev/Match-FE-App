@@ -65,8 +65,7 @@ class ProjectController extends GetxController {
   Future<void> getMoreComments( int index) async {
     logger.d(
         "2:  총 페이지수 : ${CommentApi.comments.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (
-        !CommentApi.comments.isLast) {
+    if (!CommentApi.comments.isLast) {
       comments.addAll(await CommentApi.getComments(
         projectId: projectId,
         getMore: true,

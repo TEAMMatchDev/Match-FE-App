@@ -148,6 +148,7 @@ class FcmService extends GetxService {
           FcmService.showNotification(
               title: message.notification!.title ?? "",
               content: message.notification!.body ?? "");
+          _handleMessage(message);
         }
       }
     });
@@ -160,6 +161,7 @@ class FcmService extends GetxService {
           FcmService.showNotification(
               title: message.notification!.title ?? "",
               content: message.notification!.body ?? "");
+          _handleMessage(message);
         }
       }
     });
