@@ -64,12 +64,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                             textController : controller.userNameTextController.value,
                             onChange: (value) async {
                               print(">>> 입력한 이름: $value");
-                              if (value != '테스트') {
-                                controller.signUpName.value = value;
-                              }
-                              else {
-                                Fluttertoast.showToast(msg: "유효한 이름을 입력해주세요");
-                              }
+                              controller.signUpName.value = value;
                             }),
                         SizedBox(height: 20.h),
                         Text(
