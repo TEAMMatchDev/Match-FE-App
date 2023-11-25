@@ -99,6 +99,7 @@ class MypageEditScreen extends StatelessWidget {
         MypageListTile(
             title: "결제수단 관리",
             onTap: () async {
+
               Get.toNamed(Routes.pay_method);
             },
         ),
