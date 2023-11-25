@@ -92,7 +92,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
                         ),
                       ),
                       Positioned(
-                        bottom: 20.h,
+                        bottom: 23.h,
                         left: 65.w,
                         child: Text(
                           '나 방금 행복동에 연탄이 필요한\n할머니를 위한 연탄으로 변했어! ',

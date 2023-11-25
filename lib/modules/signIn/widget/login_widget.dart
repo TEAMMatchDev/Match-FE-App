@@ -115,7 +115,7 @@ class _LoginState extends State<LoginWidget> {
                        ),
                      ),
                      Positioned(
-                       bottom: 25.h,
+                       bottom: 23.h,
                        left: 35.w,
                        child: Text(
                          '별도의 회원가입 절차 없이\nSNS 계정으로 빠르게 로그인 하세요. ',
