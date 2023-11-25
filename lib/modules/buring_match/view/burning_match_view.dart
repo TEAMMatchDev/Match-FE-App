@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:match/modules/buring_match/controller/burning_match_controller.dart';
 import 'package:match/modules/buring_match/widget/match_record_widget.dart';
 import 'package:match/modules/home/widget/home_widget.dart';
+import 'package:match/provider/api/util/pagination_function.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../provider/api/util/global_api_field.dart';
@@ -82,13 +83,7 @@ class BurningMatchScreen extends GetView<BurningMatchController> {
                           itemBuilder: (context, index) {
                             logger.d(index);
                             //pagination 처리
-                            if (index % (PAGINATION_SIZE - 1) == 0 &&
-                                index != 0) {
-                              Future.wait({
-                                controller.getMoreFlameHistory(
-                                    index ~/ (PAGINATION_SIZE - 1))
-                              });
-                            }
+                            getMoreData(index: index, totalCnt: controller.flameHistories.length, getMore: controller.getMoreFlameHistory);
                             final history = controller.flameHistories[index];
                             return MatchRecord(
                               title: history.histories,

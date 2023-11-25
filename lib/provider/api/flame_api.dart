@@ -19,6 +19,8 @@ class FlameApi {
     try {
       if (!getMore) {
         burningFlame.currentpage = 0;
+      } else {
+        burningFlame.currentpage += 1;
       }
       Response response = await DioServices()
           .to()
@@ -61,6 +63,8 @@ class FlameApi {
       logger.d("api호출 성공");
       if (!getMore) {
         detailFlameBottom.currentpage = 0;
+      } else {
+        detailFlameBottom.currentpage += 1;
       }
       Response response = await DioServices()
           .to()
@@ -73,8 +77,10 @@ class FlameApi {
       detailFlameBottom.isLast = response.data[RESULT][LAST];
       logger.d(
           "pagination 정보: totalCnt:${detailFlameBottom.totalCnt}, currentPage:${detailFlameBottom.currentpage} isLast:${detailFlameBottom.isLast}");
-      return List.generate(response.data[RESULT][CONTENTS].length,
-          (index) => MatchHistory.fromJson(response.data[RESULT][CONTENTS][index]));
+      return List.generate(
+          response.data[RESULT][CONTENTS].length,
+          (index) =>
+              MatchHistory.fromJson(response.data[RESULT][CONTENTS][index]));
     } catch (e) {
       logger.e(e.toString());
       return [];

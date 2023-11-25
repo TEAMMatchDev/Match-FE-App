@@ -60,6 +60,19 @@ Future<void> initService() async {
   if (token != null) {
     DioServices().setAccessToken(token);
   }
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+  if (message.notification != null) {
+    logger.d(message.notification!.title);
+    logger.d(message.notification!.body);
+    FcmService.showNotification(
+        title: message.notification!.title ?? "",
+        content: message.notification!.body ?? "");
+  }
 }
 
 // 알림권한 관련 APNS 토큰 발급 코드

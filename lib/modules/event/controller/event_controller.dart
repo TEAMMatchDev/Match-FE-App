@@ -10,15 +10,14 @@ class EventController extends GetxController {
   RxList<Event> eventList = <Event>[].obs;
 
   ///* pagination 함수
-  Future<void> getMoreNotice({required int index}) async {
-    if (!(EventApi.event.totalCnt ~/ PAGINATION_SIZE < index) &&
-        !EventApi.event.isLast) {
-      EventApi.event.currentpage = index;
+  Future<void> getMoreNotice(int index) async {
+    if (!EventApi.event.isLast) {
       eventList.addAll(await EventApi.getEventList(getMore: true));
     }
   }
+
   @override
-  void onInit() async{
+  void onInit() async {
     super.onInit();
     eventList.assignAll(await EventApi.getEventList());
   }

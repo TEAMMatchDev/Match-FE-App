@@ -7,6 +7,7 @@ import 'package:match/model/enum/regular_status.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
 import 'package:match/modules/payment/view/payment_donator_info_view.dart';
 import 'package:match/modules/project/widget/project_widget.dart';
+import 'package:match/provider/api/util/pagination_function.dart';
 import 'package:match/util/const/style/global_logger.dart';
 import '../../../model/comment/comment.dart';
 import '../../../model/enum/search_status.dart';
@@ -119,7 +120,8 @@ class ProjectScreen extends GetView<ProjectController> {
                                 spacing: -10.w,
                                 children: controller
                                     .projectDetail.value.userProfileImages
-                                    .map((e) => profileItem(size: 40, profileUrl: e))
+                                    .map((e) =>
+                                        profileItem(size: 40, profileUrl: e))
                                     .toList(),
                               ),
                               controller.projectDetail.value.totalDonationCnt >
@@ -202,12 +204,10 @@ class ProjectScreen extends GetView<ProjectController> {
                       },
                       itemBuilder: (context, index) {
                         //pagination 처리
-                        if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
-                          Future.wait({
-                            controller.getMoreProjectHistory(
-                                index: index ~/ (PAGINATION_SIZE - 1))
-                          });
-                        }
+                        getMoreData(
+                            index: index,
+                            totalCnt: controller.projectHistories.length,
+                            getMore: controller.getMoreProjectHistory);
                         final history = controller.projectHistories[index];
                         return Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -223,7 +223,7 @@ class ProjectScreen extends GetView<ProjectController> {
 
                     ///* 세 번째 탭 (응원)
                     Obx(
-                      ()=> ListView.separated(
+                      () => ListView.separated(
                         controller: controller.scrollController.value,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.comments.length,
@@ -232,12 +232,10 @@ class ProjectScreen extends GetView<ProjectController> {
                         },
                         itemBuilder: (context, index) {
                           //pagination 처리
-                          if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
-                            Future.wait({
-                              controller.getMoreComments(
-                                  index: index ~/ (PAGINATION_SIZE - 1))
-                            });
-                          }
+                          getMoreData(
+                              index: index,
+                              totalCnt: controller.comments.length,
+                              getMore: controller.getMoreComments);
                           final comment = controller.comments[index];
                           return Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20.w)

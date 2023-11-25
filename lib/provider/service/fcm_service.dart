@@ -20,6 +20,7 @@ class FcmService extends GetxService {
   @override
   void onInit() async {
     super.onInit();
+    logger.d("fcm init");
     AndroidInitializationSettings androidInitializationSettings =
         const AndroidInitializationSettings('drawable/splash');
     DarwinInitializationSettings iosInitializationSettings =
@@ -126,7 +127,7 @@ class FcmService extends GetxService {
           fcmToken: fcmToken ?? "", deviceId: deviceId);
       logger.d(tmpResult);
     }
-
+    await setupInteractedMessage();
     await FirebaseMessaging.instance.setAutoInitEnabled(true);
     FirebaseMessaging.instance.onTokenRefresh.listen((token) async {
       logger.w("!!!refreseh Token: $token");
@@ -147,6 +148,7 @@ class FcmService extends GetxService {
           FcmService.showNotification(
               title: message.notification!.title ?? "",
               content: message.notification!.body ?? "");
+          _handleMessage(message);
         }
       }
     });
@@ -159,28 +161,9 @@ class FcmService extends GetxService {
           FcmService.showNotification(
               title: message.notification!.title ?? "",
               content: message.notification!.body ?? "");
+          _handleMessage(message);
         }
       }
     });
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  }
-
-  @pragma('vm:entry-point')
-  Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage? message) async {
-    // If you're going to use other Firebase services in the background, such as Firestore,
-    // make sure you call `initializeApp` before using other Firebase services.
-    await Firebase.initializeApp();
-
-    logger.w("!!!Handling a background message: ${message?.messageId}");
-    if (message != null) {
-      if (message.notification != null) {
-        logger.d(message.notification!.title);
-        logger.d(message.notification!.body);
-        FcmService.showNotification(
-            title: message.notification!.title ?? "",
-            content: message.notification!.body ?? "");
-      }
-    }
   }
 }

@@ -24,7 +24,7 @@ class DonationSearchController extends GetxController {
 
   ///* 추천 검색어 리스트
   RxList<String> recommendSearchList = List.generate(10, (index) => "").obs;
-
+  RxString currentSearchText = "".obs;
   ///▼ 입력을 시작하고, 아무 action이 없을시
   ///자동으로 검색되는 기능을 위한 변수
 
@@ -62,18 +62,17 @@ class DonationSearchController extends GetxController {
     totalSearchLength.value = ProjectApi.project.totalCnt;
 
     searchStatus.value = SEARCH_STATUS.SEARCH;
+    currentSearchText.value = content;
   }
 
   ///* 검색 결과 api에대한 pagination을 처리하는 함수
-  Future<void> getMoreSearchList(
-      {required String content, required int index}) async {
-    if (!(ProjectApi.project.totalCnt ~/ PAGINATION_SIZE < index) &&
-        !ProjectApi.project.isLast) {
+  Future<void> getMoreSearchList(int index) async {
+    if (!ProjectApi.project.isLast) {
       ProjectApi.project.currentpage = index;
       searchStatus.value = SEARCH_STATUS.SEARCH;
       projectList.addAll(await ProjectApi.getProjectList(
         getMore: true,
-        content: content,
+        content: currentSearchText.value ,
       ));
     }
   }
