@@ -101,6 +101,11 @@ class PaymentController extends GetxController {
   Rx<TextEditingController> userBirthTextController = TextEditingController().obs;
   Rx<TextEditingController> userPhoneTextController = TextEditingController().obs;
 
+  var accessFrom = ''.obs;
+  void setAccess(String str) {
+    accessFrom.value = str;
+  }
+
   @override
   void onInit() async {
     super.onInit();

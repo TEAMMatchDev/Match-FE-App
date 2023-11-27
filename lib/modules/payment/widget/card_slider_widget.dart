@@ -48,6 +48,10 @@ class _CardSliderState extends State<CardSlider> {
 
   @override
   Widget build(BuildContext context) {
+    if (_paymentController.accessFrom != '') {
+      print('>> ${_paymentController.accessFrom}에서 접근');
+    }
+
     return Column(
       children: [
         SizedBox(height: 23.h),
@@ -142,22 +146,23 @@ class _CardSliderState extends State<CardSlider> {
             style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey6)
           ),
         SizedBox(height: 20.h),
-        Container(
-          width: 360.w,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4.0),
-            border: Border.all(
+        if (_paymentController.accessFrom != 'mypage')
+          Container(
+            width: 360.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4.0),
+              border: Border.all(
+                color: AppColors.grey11,
+                width: 1.0,
+              ),
               color: AppColors.grey11,
-              width: 1.0,
             ),
-            color: AppColors.grey11,
+            padding: EdgeInsets.only(left: 10.w, top: 11.w, bottom: 11.w),
+            child: Text(
+              '* 첫 후원금은 즉시 결제되며,\n  다음 달부터 선택한 결제일에 결제됩니다.\n* 출금일에 후원금이 승인되지 않으면, 재요청할 수 있습니다.',
+              style: AppTextStyles.T1Bold12.copyWith(color: AppColors.grey4),
+            ),
           ),
-          padding: EdgeInsets.only(left: 10.w, top: 11.w, bottom: 11.w),
-          child: Text(
-            '* 첫 후원금은 즉시 결제되며,\n  다음 달부터 선택한 결제일에 결제됩니다.\n* 출금일에 후원금이 승인되지 않으면, 재요청할 수 있습니다.',
-            style: AppTextStyles.T1Bold12.copyWith(color: AppColors.grey4),
-          ),
-        ),
       ],
     );
   }

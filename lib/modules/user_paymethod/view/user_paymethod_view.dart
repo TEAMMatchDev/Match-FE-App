@@ -30,8 +30,8 @@ class UserPayMethodScreen extends GetView<UserPayMethodController> {
             ),
             SizedBox(height: 30.h),
             Obx(
-              () => CommonButton.edit(
-                isActive: controller.isValidCode.value,
+              () => CommonButton.deletePay(
+                isActive: controller.isValidCode.value, // 카드 개수가 0 이 아니면
                 onTap: () async {
                   if (controller.newPhone.value != "") {
                     if (controller.newPhone.value !=
