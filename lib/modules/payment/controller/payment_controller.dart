@@ -77,17 +77,12 @@ class PaymentController extends GetxController {
   //TODO) 카드 신규 등록
   /// 카드 번호
   Rx<TextEditingController> cardNumTextController = TextEditingController().obs;
-
   /// 유효기간
   Rx<TextEditingController> cardExpTextController = TextEditingController().obs;
-
   /// CVC
   Rx<TextEditingController> cardCVCTextController = TextEditingController().obs;
-
   /// 생년월일
-  Rx<TextEditingController> cardUserBirthTextController =
-      TextEditingController().obs;
-
+  Rx<TextEditingController> cardUserBirthTextController = TextEditingController().obs;
   /// 카드 비밀번호 todo- ** 로 표시
   Rx<TextEditingController> cardPWTextController = TextEditingController().obs;
 
@@ -106,20 +101,26 @@ class PaymentController extends GetxController {
     accessFrom.value = str;
   }
 
+  /// 카드 삭제 가능 여부
+  Rx<bool> isDeleteAble = true.obs;
+
+
   @override
   void onInit() async {
     super.onInit();
     await AuthService.to.getDonatorInfo();
-    print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n "
-        "paymentController onInit 내부 :: projectId: ${ProjectController.to.projectId}");
+    print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n ");
 
     payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
     cardInfoList.assignAll(await OrderApi.getCardList());
     cardCodeList.assignAll(cardInfoList.map((card) => card.cardCode.toString()).toList());
     cardNumList.assignAll(cardInfoList.map((card) => card.cardNo).toList());
     cardIdList.assignAll(cardInfoList.map((card) => card.id).toList());
+    if (accessFrom != 'mypage'){
+      print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n paymentController onInit 내부 :: projectId: ${ProjectController.to.projectId}");
+      donateState.value = ProjectController.to.projectDetail.value.regularStatus;
+      projectId.value = ProjectController.to.projectId;
+    }
 
-    donateState.value = ProjectController.to.projectDetail.value.regularStatus;
-    projectId.value = ProjectController.to.projectId;
   }
 }

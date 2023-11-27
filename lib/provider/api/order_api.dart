@@ -8,6 +8,7 @@ import '../../util/const/style/global_logger.dart';
 import 'util/dio_services.dart';
 
 class OrderApi {
+
   ///<h2>4-2API | 정기 결제용 카드 등록</h2>
   static Future<bool> setCard({
     required String cardNo,
@@ -27,6 +28,22 @@ class OrderApi {
     } catch (e) {
       logger.e(e.toString());
       return false;
+    }
+  }
+
+  ///<h2>4-4API | 정기, 단기 결제용 카드 삭제</h2>
+  static Future<bool> deleteCard({
+      required int cardId,
+}) async {
+      try {
+        Response response = await DioServices().to().delete("/order/pay/card",
+            queryParameters: {"cardId": cardId
+        });
+
+        return response.data[SUCCESS];
+      } catch (e) {
+        logger.e(e.toString());
+        return false;
     }
   }
 

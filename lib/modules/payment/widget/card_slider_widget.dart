@@ -40,6 +40,14 @@ class _CardSliderState extends State<CardSlider> {
   }
 
   void _handleSlideChange(int index) {
+    // 리스트의 크기를 가져옵니다.
+    int listSize = _paymentController.cardCodeList.length;
+    if (_currentSlide == listSize) {
+      _paymentController.isDeleteAble.value = false;
+    } else {
+      _paymentController.isDeleteAble.value = true;
+    }
+
     print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]}');
     print('>>> 선택한 카드 번호 : ${_paymentController.cardNumList[index]}');
     _paymentController.cardId.value = _paymentController.cardIdList[index];
@@ -48,6 +56,7 @@ class _CardSliderState extends State<CardSlider> {
 
   @override
   Widget build(BuildContext context) {
+
     if (_paymentController.accessFrom != '') {
       print('>> ${_paymentController.accessFrom}에서 접근');
     }
@@ -146,6 +155,7 @@ class _CardSliderState extends State<CardSlider> {
             style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey6)
           ),
         SizedBox(height: 20.h),
+
         if (_paymentController.accessFrom != 'mypage')
           Container(
             width: 360.w,

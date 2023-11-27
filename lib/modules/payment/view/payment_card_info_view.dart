@@ -10,7 +10,9 @@ import 'package:match/model/card_info/card_info.dart';
 import 'package:match/model/enum/card_types.dart';
 import 'package:match/modules/payment/view/payment_method_info_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
+import 'package:match/modules/user_paymethod/view/user_paymethod_view.dart';
 import 'package:match/provider/api/order_api.dart';
+import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
@@ -306,7 +308,11 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                               newCardInfoList.map((card) => card.cardNo).toList()
                           );
 
-                          Get.to(PaymentMethodScreen());
+                          if (paymentController.accessFrom == 'mypage') {
+                            Get.toNamed(Routes.pay_method);
+                          } else {
+                            Get.to(PaymentMethodScreen());
+                          }
                         }
                       } else {
                         Fluttertoast.showToast(msg: "입력값 중 빈 값이 있습니다. 입력 정보를 다시 확인해주세요.");
