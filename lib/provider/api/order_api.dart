@@ -36,9 +36,7 @@ class OrderApi {
       required int cardId,
 }) async {
       try {
-        Response response = await DioServices().to().delete("/order/pay/card",
-            queryParameters: {"cardId": cardId
-        });
+        Response response = await DioServices().to().delete("/order/pay/card/${cardId}");
 
         return response.data[SUCCESS];
       } catch (e) {
