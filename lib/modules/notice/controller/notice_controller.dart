@@ -9,12 +9,10 @@ class NoticeController extends GetxController {
   RxList<Notice> noticeList = <Notice>[].obs;
   RxInt totalNotice = 0.obs;
 
-  Future<void> getMoreNotice({required int index}) async {
+  Future<void> getMoreNotice(int index) async {
     logger.d(
         "2:  총 페이지수 : ${NoticeApi.notice.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (!(NoticeApi.notice.totalCnt ~/ PAGINATION_SIZE < index) &&
-        !NoticeApi.notice.isLast) {
-      NoticeApi.notice.currentpage = index;
+    if (!NoticeApi.notice.isLast) {
       noticeList.addAll(await NoticeApi.getNoticeList(getMore: true));
     }
   }

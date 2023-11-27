@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/donate/widget/donate_widget.dart';
+import 'package:match/provider/api/util/pagination_function.dart';
 import 'package:match/util/components/global_widget.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../model/enum/project_type.dart';
@@ -29,8 +30,8 @@ class DonateScreen extends GetView<DonateController> {
               children: [
                 ///*1.제목 header
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 8.h).copyWith(bottom: 25.h),
+                  padding: EdgeInsets.symmetric(vertical: 8.h)
+                      .copyWith(bottom: 25.h),
                   child: Row(
                     children: [
                       Expanded(
@@ -56,6 +57,7 @@ class DonateScreen extends GetView<DonateController> {
                     ],
                   ),
                 ),
+
                 ///*2.프로젝트 카테고리
                 SizedBox(
                   height: 76.h,
@@ -81,7 +83,6 @@ class DonateScreen extends GetView<DonateController> {
                                 : controller.projectList.assignAll(
                                     await ProjectApi.getProjectList(
                                         type: ProjectType.ANIMAL));
-                            //TODO: api 호출
                           },
                           child: index == 0
                               ? CircleType(
@@ -99,29 +100,33 @@ class DonateScreen extends GetView<DonateController> {
                     }),
                   ),
                 ),
+
                 ///*3.프로젝트 리스트
                 Expanded(
-                  child: controller.projectList.isNotEmpty?ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: controller.projectList.length,
-                    itemBuilder: (context, index) {
-                      if (index % (PAGINATION_SIZE - 1) == 0 && index != 0) {
-                        Future.wait({
-                          controller.getMoreProject(index ~/ (PAGINATION_SIZE - 1))
-                        });
-                      }
-                      final project = controller.projectList[index];
-                      return Container(
-                          padding: EdgeInsets.symmetric(vertical: 8.h),
-                          margin: EdgeInsets.only(
-                              //상단,하단 margin 예외 처리
-                              top: index == 0 ? 14.h : 0.h,
-                              bottom: index == controller.projectList.length - 1
-                                  ? 14.h
-                                  : 0.h),
-                          child: ProjectWidget(project: project));
-                    },
-                  ):emptyWidget(),
+                  child: controller.projectList.isNotEmpty
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: controller.projectList.length,
+                          itemBuilder: (context, index) {
+                            getMoreData(
+                                index: index,
+                                totalCnt: controller.projectList.length,
+                                getMore: controller.getMoreProject);
+
+                            final project = controller.projectList[index];
+                            return Container(
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                margin: EdgeInsets.only(
+                                    //상단,하단 margin 예외 처리
+                                    top: index == 0 ? 14.h : 0.h,
+                                    bottom: index ==
+                                            controller.projectList.length - 1
+                                        ? 14.h
+                                        : 0.h),
+                                child: ProjectWidget(project: project));
+                          },
+                        )
+                      : emptyWidget(),
                 ),
               ],
             ),

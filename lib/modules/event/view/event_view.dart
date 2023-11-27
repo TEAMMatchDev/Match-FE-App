@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/event/widget/event_widget.dart';
+import 'package:match/provider/api/util/pagination_function.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../provider/api/util/global_api_field.dart';
@@ -53,13 +54,11 @@ class EventScreen extends GetView<EventController> {
                     : CarouselSlider.builder(
                         itemCount: controller.eventList.length,
                         itemBuilder: (context, index, realIndex) {
-                          if (index % (PAGINATION_SIZE - 1) == 0 &&
-                              index != 0) {
-                            Future.wait({
-                              controller.getMoreNotice(
-                                  index: index ~/ (PAGINATION_SIZE - 1))
-                            });
-                          }
+                          getMoreData(
+                              index: index,
+                              totalCnt: controller.eventList.length,
+                              getMore: controller.getMoreNotice);
+
                           ///* event detail 라우팅은 해당 위젯 내부에서 구현
                           return EventWidget(
                               event: controller.eventList[index]);

@@ -20,6 +20,9 @@ import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../../../provider/service/auth_service.dart';
+import '../../tutorial/view/init_tutorial_view.dart';
+
 class AppleLoginWidget extends StatefulWidget {
   @override
   _AppleLoginState createState() => _AppleLoginState();
@@ -66,7 +69,13 @@ class _AppleLoginState extends State<AppleLoginWidget> {
         Fluttertoast.showToast(msg: "애플 로그인 성공!");
         loginController.setPlatform('apple');
 
-        Get.offAllNamed(Routes.main);
+        if(AuthService.to.isTutorial.value) {
+          await AuthService.to.getUserInfo();
+          Get.to(()=>const InitTutorialScreen());
+        }
+        else {
+          Get.offAllNamed(Routes.main);
+        }
       } else {
         // false 일 때 socailId 출력
         Fluttertoast.showToast(msg: "애플유저 회원가입을 진행합니다.");

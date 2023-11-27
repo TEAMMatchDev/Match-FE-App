@@ -49,7 +49,8 @@ Future<void> initService() async {
 
   /// * GetStorage 초기화
   await GetStorage.init();
-  await DynamicLink.setUp();
+  var reulst = await DynamicLink.setUp();
+  logger.e("dynamicc link initialized ; $reulst");
 
   // 푸시 알림 설정 및 권한 요청
   await requestPermission();
@@ -58,6 +59,19 @@ Future<void> initService() async {
   String? token = await GetStorageUtil.getToken(StorageKey.ACCESS_TOKEN);
   if (token != null) {
     DioServices().setAccessToken(token);
+  }
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+  if (message.notification != null) {
+    logger.d(message.notification!.title);
+    logger.d(message.notification!.body);
+    FcmService.showNotification(
+        title: message.notification!.title ?? "",
+        content: message.notification!.body ?? "");
   }
 }
 

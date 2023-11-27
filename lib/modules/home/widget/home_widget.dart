@@ -202,8 +202,8 @@ class FlameWidget extends StatelessWidget {
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: 200.w,
+                          Container(
+                            constraints: BoxConstraints(maxWidth: 200.w),
                             child: Text(
                               flameName!.substring(0, flameName!.length - 3),
                               style: AppTextStyles.T1Bold18,
@@ -251,7 +251,7 @@ Widget profileItem(
     ),
     child: ClipOval(
       child: Image.network(
-        tmpProfileImg,
+        profileUrl,
         fit: BoxFit.fill,
       ),
     ),

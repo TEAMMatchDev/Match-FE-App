@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:match/model/enum/search_status.dart';
 import 'package:match/model/project_detail/project_detail.dart';
 import 'package:match/model/project_history.dart/project_history.dart';
+import 'package:match/provider/api/comment_api.dart';
 import 'package:match/util/const/global_mock_data.dart';
 
 import '../../../model/comment/comment.dart';
@@ -17,7 +18,8 @@ class MatchTabBar extends GetxController
   @override
   void onInit() {
     super.onInit();
-    controller = TabController(vsync: this, length: 2);
+    //2차 제외 경우 legnth:2로 수정
+    controller = TabController(vsync: this, length: 3);
   }
 
   @override
@@ -42,13 +44,12 @@ class ProjectController extends GetxController {
     projectHistories.assignAll(
         await ProjectApi.getProjectHistoryList(projectId: projectId));
   }
-
-  Future<void> getMoreProjectHistory({required int index}) async {
+  ///* 프로젝트 기록 pagination
+  Future<void> getMoreProjectHistory(int index) async {
     logger.d(
         "2:  총 페이지수 : ${ProjectApi.project.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
-    if (!(ProjectApi.project.totalCnt ~/ PAGINATION_SIZE < index) &&
+    if (
         !ProjectApi.project.isLast) {
-      ProjectApi.project.currentpage = index;
       projectHistories.addAll(await ProjectApi.getProjectHistoryList(
         projectId: projectId,
         getMore: true,
@@ -56,9 +57,22 @@ class ProjectController extends GetxController {
     }
   }
 
-  // //* 댓글
-  // Rx<TextEditingController> commentTextController = TextEditingController().obs;
-  // Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
+  //* 댓글
+  Rx<TextEditingController> commentTextController = TextEditingController().obs;
+  Rx<SEARCH_STATUS> searchStatus = SEARCH_STATUS.INIT.obs;
+
+  ///* 응원 댓글 pagination
+  Future<void> getMoreComments( int index) async {
+    logger.d(
+        "2:  총 페이지수 : ${CommentApi.comments.totalCnt ~/ PAGINATION_SIZE}, 불러오고자 하는 페이지: ${index}");
+    if (!CommentApi.comments.isLast) {
+      comments.addAll(await CommentApi.getComments(
+        projectId: projectId,
+        getMore: true,
+      ));
+    }
+  }
+
 
   @override
   void onInit() async {
@@ -68,7 +82,8 @@ class ProjectController extends GetxController {
     projectDetail.value =
         await ProjectApi.getProjectDetail(projectId: projectId) ??
             tmpProjectDetail;
-    comments.assignAll(tmpComments);
+    // comments.assignAll(tmpComments);
+    comments.assignAll(await CommentApi.getComments(projectId: projectId));
   }
 
   //TODO: 페이지 전환시 상세페이지 변수 초기화

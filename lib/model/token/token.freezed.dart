@@ -23,6 +23,8 @@ mixin _$Token {
   int get userId => throw _privateConstructorUsedError;
   String get accessToken => throw _privateConstructorUsedError;
   String get refreshToken => throw _privateConstructorUsedError;
+  @JsonKey(name: 'new')
+  bool get isTutorial => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,11 @@ abstract class $TokenCopyWith<$Res> {
   factory $TokenCopyWith(Token value, $Res Function(Token) then) =
       _$TokenCopyWithImpl<$Res, Token>;
   @useResult
-  $Res call({int userId, String accessToken, String refreshToken});
+  $Res call(
+      {int userId,
+      String accessToken,
+      String refreshToken,
+      @JsonKey(name: 'new') bool isTutorial});
 }
 
 /// @nodoc
@@ -53,6 +59,7 @@ class _$TokenCopyWithImpl<$Res, $Val extends Token>
     Object? userId = null,
     Object? accessToken = null,
     Object? refreshToken = null,
+    Object? isTutorial = null,
   }) {
     return _then(_value.copyWith(
       userId: null == userId
@@ -67,6 +74,10 @@ class _$TokenCopyWithImpl<$Res, $Val extends Token>
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
+      isTutorial: null == isTutorial
+          ? _value.isTutorial
+          : isTutorial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -78,7 +89,11 @@ abstract class _$$TokenImplCopyWith<$Res> implements $TokenCopyWith<$Res> {
       __$$TokenImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int userId, String accessToken, String refreshToken});
+  $Res call(
+      {int userId,
+      String accessToken,
+      String refreshToken,
+      @JsonKey(name: 'new') bool isTutorial});
 }
 
 /// @nodoc
@@ -95,6 +110,7 @@ class __$$TokenImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? accessToken = null,
     Object? refreshToken = null,
+    Object? isTutorial = null,
   }) {
     return _then(_$TokenImpl(
       userId: null == userId
@@ -109,6 +125,10 @@ class __$$TokenImplCopyWithImpl<$Res>
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
+      isTutorial: null == isTutorial
+          ? _value.isTutorial
+          : isTutorial // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -119,7 +139,8 @@ class _$TokenImpl with DiagnosticableTreeMixin implements _Token {
   const _$TokenImpl(
       {required this.userId,
       required this.accessToken,
-      required this.refreshToken});
+      required this.refreshToken,
+      @JsonKey(name: 'new') required this.isTutorial});
 
   factory _$TokenImpl.fromJson(Map<String, dynamic> json) =>
       _$$TokenImplFromJson(json);
@@ -130,10 +151,13 @@ class _$TokenImpl with DiagnosticableTreeMixin implements _Token {
   final String accessToken;
   @override
   final String refreshToken;
+  @override
+  @JsonKey(name: 'new')
+  final bool isTutorial;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Token(userId: $userId, accessToken: $accessToken, refreshToken: $refreshToken)';
+    return 'Token(userId: $userId, accessToken: $accessToken, refreshToken: $refreshToken, isTutorial: $isTutorial)';
   }
 
   @override
@@ -143,7 +167,8 @@ class _$TokenImpl with DiagnosticableTreeMixin implements _Token {
       ..add(DiagnosticsProperty('type', 'Token'))
       ..add(DiagnosticsProperty('userId', userId))
       ..add(DiagnosticsProperty('accessToken', accessToken))
-      ..add(DiagnosticsProperty('refreshToken', refreshToken));
+      ..add(DiagnosticsProperty('refreshToken', refreshToken))
+      ..add(DiagnosticsProperty('isTutorial', isTutorial));
   }
 
   @override
@@ -155,13 +180,15 @@ class _$TokenImpl with DiagnosticableTreeMixin implements _Token {
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken) &&
             (identical(other.refreshToken, refreshToken) ||
-                other.refreshToken == refreshToken));
+                other.refreshToken == refreshToken) &&
+            (identical(other.isTutorial, isTutorial) ||
+                other.isTutorial == isTutorial));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, userId, accessToken, refreshToken);
+      Object.hash(runtimeType, userId, accessToken, refreshToken, isTutorial);
 
   @JsonKey(ignore: true)
   @override
@@ -181,7 +208,8 @@ abstract class _Token implements Token {
   const factory _Token(
       {required final int userId,
       required final String accessToken,
-      required final String refreshToken}) = _$TokenImpl;
+      required final String refreshToken,
+      @JsonKey(name: 'new') required final bool isTutorial}) = _$TokenImpl;
 
   factory _Token.fromJson(Map<String, dynamic> json) = _$TokenImpl.fromJson;
 
@@ -191,6 +219,9 @@ abstract class _Token implements Token {
   String get accessToken;
   @override
   String get refreshToken;
+  @override
+  @JsonKey(name: 'new')
+  bool get isTutorial;
   @override
   @JsonKey(ignore: true)
   _$$TokenImplCopyWith<_$TokenImpl> get copyWith =>

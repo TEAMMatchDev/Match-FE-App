@@ -15,6 +15,7 @@ import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import '../../../provider/service/auth_service.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/style/global_color.dart';
 
@@ -23,6 +24,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //카카오 로그인
 import 'package:match/provider/api/auth_api.dart';
 
 import '../../../provider/routes/routes.dart';
+import '../../tutorial/view/init_tutorial_view.dart';
 import '../controller/login_controller.dart';
 
 class EmailLoginScreen extends GetView<LoginController> {
@@ -128,7 +130,13 @@ class EmailLoginScreen extends GetView<LoginController> {
                       if (result) {
                         controller.setPlatform('email');
                         //print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
-                        Get.offAllNamed(Routes.main);
+                        if(AuthService.to.isTutorial.value) {
+                          await AuthService.to.getUserInfo();
+                          Get.to(()=>const InitTutorialScreen());
+                        }
+                        else {
+                          Get.offAllNamed(Routes.main);
+                        }
                       }
                       else {
                         Fluttertoast.showToast(msg: "로그인에 실패했습니다.");

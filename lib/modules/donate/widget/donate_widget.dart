@@ -225,7 +225,7 @@ class TodayMatchList extends StatelessWidget {
                           Wrap(
                             spacing: -4,
                             children: imgList
-                                .map((e) => profileItem(size: 30))
+                                .map((e) => profileItem(size: 30,profileUrl: e))
                                 .toList(),
                           ),
                           SizedBox(
