@@ -81,7 +81,7 @@ class _AppleLoginState extends State<AppleLoginWidget> {
         Fluttertoast.showToast(msg: "애플유저 회원가입을 진행합니다.");
         loginController.setPlatform('apple');
         print(">>> apple_login_widget:: controller에 저장된 socialId: ${signUpController.socialId.value}");
-        Get.offAllNamed(Routes.sign_up, arguments: {'socialId': signUpController.socialId.value});
+        Get.to(Routes.sign_up, arguments: {'socialId': signUpController.socialId.value});
       }
 
     } catch (error) {

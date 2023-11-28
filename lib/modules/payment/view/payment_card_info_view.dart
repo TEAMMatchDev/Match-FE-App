@@ -299,6 +299,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           final PaymentController paymentController = Get.find<PaymentController>();
 
                           // 새로운 카드 정보를 가져와서 cardInfoList를 업데이트함
+                          // paymentController.refreshCardList();
                           List<CardInfo> newCardInfoList = await OrderApi.getCardList();
                           paymentController.cardInfoList.assignAll(newCardInfoList);
                           paymentController.cardCodeList.assignAll(

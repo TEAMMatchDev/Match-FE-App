@@ -46,18 +46,9 @@ class UserPayMethodScreen extends GetView<UserPayMethodController> {
                   if (result) {
                     Fluttertoast.showToast(msg: "선택한 카드가 삭제 되었습니다.");
 
-                    // 새로운 카드 정보를 가져와서 cardInfoList를 업데이트함
-                    List<CardInfo> newCardInfoList = await OrderApi.getCardList();
-                    paymentController.cardInfoList.assignAll(newCardInfoList);
-                    paymentController.cardCodeList.assignAll(
-                        newCardInfoList.map((card) => card.cardCode.toString()).toList()
-                    );
-                    paymentController.cardNumList.assignAll(
-                        newCardInfoList.map((card) => card.cardNo).toList()
-                    );
+                    await paymentController.refreshCardList();
 
                     Get.toNamed(Routes.pay_method);
-
                   } else {
                     Fluttertoast.showToast(msg: "카드 삭제를 실패했습니다.");
                   }

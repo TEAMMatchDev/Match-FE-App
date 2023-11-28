@@ -104,6 +104,13 @@ class PaymentController extends GetxController {
   /// 카드 삭제 가능 여부
   Rx<bool> isDeleteAble = true.obs;
 
+  Future<void> refreshCardList() async {
+    List<CardInfo> newCardInfoList = await OrderApi.getCardList();
+
+    cardInfoList.assignAll(newCardInfoList);
+    cardCodeList.assignAll(newCardInfoList.map((card) => card.cardCode.toString()).toList());
+    cardNumList.assignAll(newCardInfoList.map((card) => card.cardNo).toList());
+  }
 
   @override
   void onInit() async {

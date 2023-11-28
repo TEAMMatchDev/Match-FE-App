@@ -33,16 +33,14 @@
 			</array>
 		</dict>
 	</array>
-
 	<key>naverConsumerKey</key>
-    <string>8SFlnjHGk9S71HcRtHpg</string>
-    <key>naverConsumerSecret</key>
-    <string>AX2RitUnq3</string>
-    <key>naverServiceAppName</key>
-    <string>MATCH</string>
-    <key>naverServiceAppUrlScheme</key>
-    <string>naver</string>
-
+	<string>8SFlnjHGk9S71HcRtHpg</string>
+	<key>naverConsumerSecret</key>
+	<string>AX2RitUnq3</string>
+	<key>naverServiceAppName</key>
+	<string>MATCH</string>
+	<key>naverServiceAppUrlScheme</key>
+	<string>naver</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>KAKAO_APP_KEY</key>
@@ -79,19 +77,13 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-
 	<key>LSApplicationQueriesSchemes</key>
-      <array>
-          <!-- common -->
-          <string>kakao7fa6647c42cb7de746a02ea6c1138117</string>
-
-          <!-- KakaoTalk login -->
-          <string>kakaokompassauth</string>
-          <string>storykompassauth</string>
-
-          <!-- KakaoLink -->
-          <string>kakaolink</string>
-          <string>kakaotalk-5.9.7</string>
-      </array>
+	<array>
+		<string>kakao7fa6647c42cb7de746a02ea6c1138117</string>
+		<string>kakaokompassauth</string>
+		<string>storykompassauth</string>
+		<string>kakaolink</string>
+		<string>kakaotalk-5.9.7</string>
+	</array>
 </dict>
 </plist>
