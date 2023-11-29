@@ -94,7 +94,7 @@ class HomeScreen extends GetView<HomeController> {
                             Container(
                               constraints: BoxConstraints(maxWidth: 110.w),
                               child: Text(
-                                  AuthService.to.myProfile.value.nickName,
+                                  AuthService.to.nickName.value,
                                   style: AppTextStyles.T1Bold20,
                                   overflow: TextOverflow.ellipsis),
                             ),
