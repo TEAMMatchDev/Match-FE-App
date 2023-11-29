@@ -66,7 +66,9 @@ class MatchRecord extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     //사진 클릭시 상세 화면으로 이동
-                    await Get.to(() => const PictureDetailScreen());
+                    await Get.to(() => PictureDetailScreen(
+                          pictureList: imgList,
+                        ));
                   },
                   child: Wrap(
                       direction: Axis.horizontal,
