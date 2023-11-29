@@ -71,32 +71,32 @@ class _DualRadioButtonsState extends State<DualRadioButtons> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        if (widget.state != 'REGULAR')
-          InkWell(
-            onTap: () {
-              widget.onChanged(widget.option1);
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Radio<String>(
-                  value: widget.option1,
-                  groupValue: widget.selectedOption,
-                  onChanged: (value) {
-                    widget.onChanged(value!);
-                  },
-                  activeColor: AppColors.grey9,
-                  visualDensity: VisualDensity(horizontal: -4.0),
-                ),
-                SvgPicture.asset(
-                  iconDir + "payment/ic_kakaopay.svg",
-                  width: 40.w,
-                ),
-                SizedBox(width: 8.w),
-                Text(widget.option1),
-              ],
-            ),
-          ),
+        // if (widget.state != 'REGULAR')
+        //   InkWell(
+        //     onTap: () {
+        //       widget.onChanged(widget.option1);
+        //     },
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.start,
+        //       children: <Widget>[
+        //         Radio<String>(
+        //           value: widget.option1,
+        //           groupValue: widget.selectedOption,
+        //           onChanged: (value) {
+        //             widget.onChanged(value!);
+        //           },
+        //           activeColor: AppColors.grey9,
+        //           visualDensity: VisualDensity(horizontal: -4.0),
+        //         ),
+        //         SvgPicture.asset(
+        //           iconDir + "payment/ic_kakaopay.svg",
+        //           width: 40.w,
+        //         ),
+        //         SizedBox(width: 8.w),
+        //         Text(widget.option1),
+        //       ],
+        //     ),
+        //   ),
         InkWell(
           onTap: () {
             widget.onChanged(widget.option2);

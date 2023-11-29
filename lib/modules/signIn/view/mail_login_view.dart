@@ -58,7 +58,6 @@ class EmailLoginScreen extends GetView<LoginController> {
                           style: AppTextStyles.T1Bold14,
                         ),
                         SizedBox(height: 10.h),
-                        //TODO) api 연동
                         CommonInputField.signInID(
                             textController : controller.idTextController.value,
                             onChange: (value) async {
