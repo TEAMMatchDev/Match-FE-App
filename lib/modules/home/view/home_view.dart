@@ -103,7 +103,7 @@ class HomeScreen extends GetView<HomeController> {
                         ),
                       ),
                       //총 불꽃이 1개일때는 개수를 나타내지 않는다
-                      controller.totalCnt.value != 1
+                      controller.totalCnt.value >= 1
                           ? Text(
                               "${controller.currentIdx.value} / ${controller.totalCnt.value}",
                               style: AppTextStyles.T1Bold20)
