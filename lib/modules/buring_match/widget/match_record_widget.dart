@@ -72,14 +72,14 @@ class MatchRecord extends StatelessWidget {
                       direction: Axis.horizontal,
                       spacing: 10.w,
                       children: imgList
-                          .map((e) => Container(
+                          .map((String img) => Container(
                               height: 60.h,
                               width: 60.w,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                image: const DecorationImage(
+                                image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(tmpBackgroundImg),
+                                  image: NetworkImage(img),
                                 ),
                               )))
                           .toList()),

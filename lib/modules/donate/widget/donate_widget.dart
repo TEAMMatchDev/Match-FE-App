@@ -89,6 +89,7 @@ class ProjectWidget extends StatelessWidget {
         TodayMatchList(
             count: project.totalDonationCnt,
             imgList: project.userProfileImages,
+            backgroundImg: project.imgUrl,
             projectId: project.projectId,
             isLike: project.like),
 
@@ -225,7 +226,8 @@ class TodayMatchList extends StatelessWidget {
                           Wrap(
                             spacing: -4,
                             children: imgList
-                                .map((e) => profileItem(size: 30,profileUrl: e))
+                                .map(
+                                    (e) => profileItem(size: 30, profileUrl: e))
                                 .toList(),
                           ),
                           SizedBox(
