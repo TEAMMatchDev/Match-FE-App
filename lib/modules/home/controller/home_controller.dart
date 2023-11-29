@@ -39,9 +39,11 @@ class HomeController extends GetxController {
   }
 
   ///*카카오톡 공유하기 메소드
-  Future<void> kakoShare({required String imgUrl,required int projectId}) async {
+  Future<void> kakoShare(
+      {required String imgUrl, required int projectId}) async {
     var appLink =
-    await DynamicLink.getShortLink(screenName: "project", id: projectId);
+        await DynamicLink.getShortLink(screenName: "project", id: projectId);
+    logger.e(appLink);
     ShareClient shareClient = ShareClient.instance;
     //카카오톡 설치 여부 판별
     bool isKakaoTalkSharingAvailable =
@@ -89,6 +91,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+
     ///* home의 경우, 자동로그인이 적용되었을때
     /// MainBinding에서 mypage API와 동시 호출되어 refresh api 중복호출 가능성이 있음
     /// 이에 API를 3초 가량 delay후 호출

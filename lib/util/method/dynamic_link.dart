@@ -64,6 +64,8 @@ class DynamicLink {
     int id = int.parse(dynamicLinkData.link.queryParameters["id"] ?? "-1");
     if (link.contains("project")) {
       Get.toNamed(Routes.project, arguments: {"projectId": id});
+    }else if(link.contains("flame")){
+      Get.toNamed(Routes.burning_match, arguments: {"donationId": id});
     }
   }
 }
