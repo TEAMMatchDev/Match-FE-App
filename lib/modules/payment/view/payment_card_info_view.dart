@@ -138,7 +138,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                         textController : controller.cardNumTextController.value,
                         onChange: (value) async {
                           cardNum = value;
-                          //print(">>> 입력한 카드번호: $cardNum");
+                          print(">>> 입력한 카드번호: $cardNum");
                         }),
                     SizedBox(height: 37.h),
 
@@ -160,9 +160,9 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                     cardExp = value;
                                     cardExpYear = value.substring(2,4);
                                     cardExpMonth = value.substring(0,2);
-                                    //print(">>> 입력한 유효기간: $value");
-                                    //print(">>> 입력한 유효기간 year: ${cardExpYear}");
-                                    //print(">>> 입력한 유효기간 month: ${cardExpMonth}");
+                                    print(">>> 입력한 유효기간: $value");
+                                    print(">>> 입력한 유효기간 year: ${cardExpYear}");
+                                    print(">>> 입력한 유효기간 month: ${cardExpMonth}");
                                   }),
                             ),
                           ],
@@ -190,7 +190,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                   textController : controller.cardCVCTextController.value,
                                   onChange: (value) async {
                                     cardCvc = value;
-                                    //print(">>> 입력한 CVC: $cardCvc");
+                                    print(">>> 입력한 CVC: $cardCvc");
                                   }),
                             ),
                           ],
@@ -223,7 +223,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                   textController : controller.cardUserBirthTextController.value,
                                   onChange: (value) async {
                                     cardUserBirth = value;
-                                    //print(">>> 입력한 생년월일: $cardUserBirth");
+                                    print(">>> 입력한 생년월일: $cardUserBirth");
                                   }),
                             ),
                           ],
@@ -251,7 +251,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                   textController : controller.cardPWTextController.value,
                                   onChange: (value) async {
                                     cardPw = value;
-                                    //print(">>> 입력한 카드 비밀번호: $cardPw");
+                                    print(">>> 입력한 카드 비밀번호: $cardPw");
                                   }),
                             ),
                           ],
@@ -294,7 +294,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                             expMonth: cardExpMonth,
                             idNo: cardUserBirth,
                             cardPw: cardPw);
-                        if(result) {
+                        if (result) {
                           // PaymentController 인스턴스를 가져옴
                           final PaymentController paymentController = Get.find<PaymentController>();
 
@@ -310,7 +310,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           );
 
                           if (paymentController.accessFrom == 'mypage') {
-                            Get.toNamed(Routes.pay_method);
+                            Get.offAllNamed(Routes.pay_method);
                           } else {
                             Get.to(PaymentMethodScreen());
                           }
