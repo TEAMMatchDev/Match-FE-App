@@ -8,20 +8,20 @@ part of 'total_pay.dart';
 
 _$TotalPayImpl _$$TotalPayImplFromJson(Map<String, dynamic> json) =>
     _$TotalPayImpl(
-      donationId: json['donationId'] as int,
-      payDate: json['payDate'] as String,
-      amount: json['amount'] as String,
+      regularId: json['regularId'] as int,
       projectTitle: json['projectTitle'] as String,
       regularDate: json['regularDate'] as String,
       regularPayStatus: json['regularPayStatus'] as String,
+      payDate: json['payDate'] as int,
+      amount: json['amount'] as String,
     );
 
 Map<String, dynamic> _$$TotalPayImplToJson(_$TotalPayImpl instance) =>
     <String, dynamic>{
-      'donationId': instance.donationId,
-      'payDate': instance.payDate,
-      'amount': instance.amount,
+      'regularId': instance.regularId,
       'projectTitle': instance.projectTitle,
       'regularDate': instance.regularDate,
       'regularPayStatus': instance.regularPayStatus,
+      'payDate': instance.payDate,
+      'amount': instance.amount,
     };

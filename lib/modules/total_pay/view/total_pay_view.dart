@@ -29,7 +29,7 @@ class TotalPayScreen extends GetView<TotalPayController> {
                   type: regularPayStatusMap[pay.regularPayStatus] ??
                       RegularPayStatus.PROCEEDING,
                   regularInfo: regularInfo,
-                  regularPayId: pay.donationId,
+                  regularPayId: pay.regularId,
                 ),
               );
             }),
