@@ -312,7 +312,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           if (paymentController.accessFrom == 'mypage') {
                             Get.offAllNamed(Routes.pay_method);
                           } else {
-                            Get.to(PaymentMethodScreen());
+                            Get.offAll(PaymentMethodScreen());
                           }
                         }
                       } else {

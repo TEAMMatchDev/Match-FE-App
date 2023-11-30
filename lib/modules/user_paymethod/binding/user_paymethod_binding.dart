@@ -6,6 +6,6 @@ class UserPayMethodBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(UserPayMethodController());
-    Get.put(PaymentController());
+    Get.lazyPut<PaymentController>(() => PaymentController(), fenix: true);
   }
 }

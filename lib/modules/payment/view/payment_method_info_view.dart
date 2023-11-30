@@ -117,7 +117,6 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                               '기부 수단',
                               style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                           ),
-                          //SizedBox(height: 16.h),
 
                           PayMethodRadioButtons(state: state),
 
@@ -175,32 +174,33 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                 ),
               ),
               Expanded(
-                child:
-                Padding(
-                  padding: EdgeInsets.only(left: 6.w, right: 20.w, bottom: 20.h, top: 10.h),
-                  child: isAuthAble
-                      ? CommonButton.login(
-                    text: "확인",
-                    onTap: () async {
-                      if(state == 'REGULAR') {
-                        var result = await OrderApi.setRegularPay(
-                            cardId: controller.cardId.value,
-                            projectId: controller.projectId.value,
-                            amount: controller.selectedAmount.value,
-                            payDate: controller.selectedDate.value);
-                        if (result){
-                          Get.to(PaymentDoneScreen());
+                child: Obx(() =>
+                    Padding(
+                    padding: EdgeInsets.only(left: 6.w, right: 20.w, bottom: 20.h, top: 10.h),
+                    child: (isAuthAble == true && controller.isDeleteAble.value == true)
+                        ? CommonButton.login(
+                      text: "확인",
+                      onTap: () async {
+                        if(state == 'REGULAR') {
+                          var result = await OrderApi.setRegularPay(
+                              cardId: controller.cardId.value,
+                              projectId: controller.projectId.value,
+                              amount: controller.selectedAmount.value,
+                              payDate: controller.selectedDate.value);
+                          if (result){
+                            Get.to(PaymentDoneScreen());
+                          }
                         }
-                      }
-                      else{
-                        //Get.back(); ///단기결제(2차)
-                        Fluttertoast.showToast(msg: "단기결제 도입 예정");
-                      }
-                    },
-                  )
-                      : CommonButton.loginDis(
-                    text: "확인",
-                    onTap: () async {},
+                        else{
+                          //Get.back(); ///단기결제(2차)
+                          Fluttertoast.showToast(msg: "단기결제 도입 예정");
+                        }
+                      },
+                    )
+                        : CommonButton.loginDis(
+                      text: "확인",
+                      onTap: () async {},
+                    ),
                   ),
                 ),
               ),

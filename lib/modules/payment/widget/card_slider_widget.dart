@@ -42,16 +42,23 @@ class _CardSliderState extends State<CardSlider> {
   void _handleSlideChange(int index) {
     // 리스트의 크기를 가져옵니다.
     int listSize = _paymentController.cardCodeList.length;
-    if (_currentSlide == listSize) {
-      _paymentController.isDeleteAble.value = false;
-    } else {
-      _paymentController.isDeleteAble.value = true;
-    }
+    // 인덱스가 리스트 범위 내에 있는지 확인합니다.
+    if (index < listSize) {
+      // 인덱스가 리스트 범위 내에 있으면 카드 정보를 처리합니다.
+      print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]}');
+      print('>>> 선택한 카드 번호 : ${_paymentController.cardNumList[index]}');
+      _paymentController.cardId.value = _paymentController.cardIdList[index];
+      print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
 
-    print('>>> 선택한 카드 code : ${_paymentController.cardCodeList[index]}');
-    print('>>> 선택한 카드 번호 : ${_paymentController.cardNumList[index]}');
-    _paymentController.cardId.value = _paymentController.cardIdList[index];
-    print('>>> 선택한 카드 id : ${_paymentController.cardIdList[index]}');
+      _paymentController.isDeleteAble.value = true;
+      print('>>> 카드 삭제 가능 여부 : ${_paymentController.isDeleteAble.value}');
+
+    } else {
+      print('>>> 카드 등록');
+      _paymentController.isDeleteAble.value = false;
+      print('>>> 카드 삭제 가능 여부 : ${_paymentController.isDeleteAble.value}');
+
+    }
   }
 
   @override
