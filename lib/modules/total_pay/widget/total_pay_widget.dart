@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:match/model/enum/regular_pay_status.dart';
 
 import '../../../provider/routes/routes.dart';
 import '../../../util/components/global_button.dart';
@@ -17,7 +18,7 @@ import '../../../util/const/style/global_text_styles.dart';
 class MatchPayItem extends StatelessWidget {
   final String title;
   final String date;
-  final String type;
+  final RegularPayStatus type;
   final String regularInfo;
   final int regularPayId;
 
@@ -49,7 +50,7 @@ class MatchPayItem extends StatelessWidget {
                         color: AppColors.grey6)),
               ],
             ),
-            TypeChip(type: type)
+            TypeChip(type: type.stateName)
           ],
         ),
         Padding(
@@ -81,7 +82,7 @@ class MatchPayItem extends StatelessWidget {
               width: 12.w,
             ),
             Expanded(
-              child: type == "정기 후원"
+              child: type == RegularPayStatus.PROCEEDING
                   ? CommonButton(
                       verticalPadding: 14,
                       text: "해지하기",

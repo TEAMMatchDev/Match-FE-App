@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/total_pay/controller/total_pay_controller.dart';
 
+import '../../../model/enum/regular_pay_status.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/style/global_color.dart';
 import '../widget/total_pay_widget.dart';
@@ -25,7 +26,8 @@ class TotalPayScreen extends GetView<TotalPayController> {
                 child: MatchPayItem(
                   title: pay.projectTitle,
                   date: pay.regularDate,
-                  type: pay.regularPayStatus,
+                  type: regularPayStatusMap[pay.regularPayStatus] ??
+                      RegularPayStatus.PROCEEDING,
                   regularInfo: regularInfo,
                   regularPayId: pay.donationId,
                 ),
