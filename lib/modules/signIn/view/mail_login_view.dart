@@ -135,13 +135,13 @@ class EmailLoginScreen extends GetView<LoginController> {
                     if (result) {
                       controller.setPlatform('email');
                       //print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
-                      // if(AuthService.to.isTutorial.value) {
+                      if(AuthService.to.isTutorial.value) {
                       await AuthService.to.getUserInfo();
                       Get.to(() => const InitTutorialScreen());
-                      // }
-                      // else {
-                      //   Get.offAllNamed(Routes.main);
-                      // }
+                      }
+                      else {
+                        Get.offAllNamed(Routes.main);
+                      }
                     } else {
                       Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
                     }

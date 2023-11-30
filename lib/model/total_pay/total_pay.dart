@@ -9,11 +9,11 @@ part 'total_pay.g.dart';
 class TotalPay with _$TotalPay {
   const factory TotalPay({
     required int donationId,
-    required String donationDate,
-    required String projectName,
+    required String payDate,
+    required String amount,
+    required String projectTitle,
     required String regularDate,
-    required String donationStatus,
-    required String regularStatus,
+    required String regularPayStatus,
   }) = _TotalPay;
   factory TotalPay.fromJson(Map<String, dynamic> json) =>
       _$TotalPayFromJson(json);
