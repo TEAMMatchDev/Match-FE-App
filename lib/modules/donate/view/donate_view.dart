@@ -60,7 +60,7 @@ class DonateScreen extends GetView<DonateController> {
 
                 ///*2.프로젝트 카테고리
                 SizedBox(
-                  height: 76.h,
+                  height : 80.h,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,

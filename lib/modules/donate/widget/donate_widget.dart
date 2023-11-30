@@ -127,6 +127,7 @@ class CircleType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
           width: 50.w,
@@ -146,9 +147,6 @@ class CircleType extends StatelessWidget {
                   ))
               : SvgPicture.asset(
                   "${iconDir}project/ic_${type?.engName}${!isSelect.value ? "_unable" : ""}.svg"),
-        ),
-        SizedBox(
-          height: 6.h,
         ),
         Text(type?.stateName ?? "전체",
             style: AppTextStyles.T1Bold13.copyWith(
