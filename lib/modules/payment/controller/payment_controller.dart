@@ -102,6 +102,8 @@ class PaymentController extends GetxController {
 
   /// 카드 삭제 가능 여부
   Rx<bool> isDeleteAble = true.obs;
+  /// 필수 항목을 모두 동의 했는지
+  Rx<bool> isAuthAble = false.obs;
 
   Future<void> refreshCardList() async {
     List<CardInfo> newCardInfoList = await OrderApi.getCardList();

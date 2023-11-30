@@ -35,7 +35,6 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
     ];
 
   String title = '결제 내용에 모두 동의합니다.';
-  bool isAuthAble = false; //필수 항목을 모두 동의 했는지
 
   String get formattedAmount {
     final formatter = NumberFormat('#,###', 'ko_KR');
@@ -142,7 +141,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                               controller.selectedItems.value = value;
                               int mandatoryCount = value.where((item) => item.contains('[필수]')).length; // 선택한 항목 중에서 [필수] 문자열을 포함하는 항목의 개수를 확인
                               setState(() {
-                                isAuthAble = mandatoryCount >= 2;
+                                controller.isAuthAble.value = mandatoryCount >= 2;
                               });
                             },
                           ),
@@ -174,10 +173,11 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                 ),
               ),
               Expanded(
-                child: Obx(() =>
-                    Padding(
+                child: Padding(
                     padding: EdgeInsets.only(left: 6.w, right: 20.w, bottom: 20.h, top: 10.h),
-                    child: (isAuthAble == true && controller.isDeleteAble.value == true)
+                    child:
+                    Obx(() =>
+                    (controller.isAuthAble.value == true && controller.isDeleteAble.value == true)
                         ? CommonButton.login(
                       text: "확인",
                       onTap: () async {
@@ -188,7 +188,10 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                               amount: controller.selectedAmount.value,
                               payDate: controller.selectedDate.value);
                           if (result){
+                            Fluttertoast.showToast(msg: "결제가 완료 되었습니다. ");
                             Get.to(PaymentDoneScreen());
+                          } else {
+                            Fluttertoast.showToast(msg: "결제 실패");
                           }
                         }
                         else{
@@ -201,7 +204,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                       text: "확인",
                       onTap: () async {},
                     ),
-                  ),
+                    )
                 ),
               ),
             ],

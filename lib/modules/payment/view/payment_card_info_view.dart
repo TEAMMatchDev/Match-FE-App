@@ -295,6 +295,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                             idNo: cardUserBirth,
                             cardPw: cardPw);
                         if (result) {
+                          Fluttertoast.showToast(msg: "카드가 등록되었습니다.");
                           // PaymentController 인스턴스를 가져옴
                           final PaymentController paymentController = Get.find<PaymentController>();
 
@@ -314,9 +315,11 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           } else {
                             Get.offAll(PaymentMethodScreen());
                           }
+                        } else {
+                          Fluttertoast.showToast(msg: "카드 등록에 실패했습니다. 카드 정보를 다시 확인해주세요.");
                         }
                       } else {
-                        Fluttertoast.showToast(msg: "입력값 중 빈 값이 있습니다. 입력 정보를 다시 확인해주세요.");
+                        Fluttertoast.showToast(msg: "입력값 중 빈 값이 있는 지 확인해주세요. (끝자리를 한번씩 다시 입력해주세요)");
                       }
                     },
                   ),
