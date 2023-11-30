@@ -248,7 +248,7 @@ class CommonInputField extends StatelessWidget {
         onSubmitted: (value) async {},
         onChanged: onChange,
         inputType: TextInputType.emailAddress,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// pw 입력
@@ -262,7 +262,7 @@ class CommonInputField extends StatelessWidget {
         onSubmitted: (value) async {},
         onChanged: onChange,
         inputType: TextInputType.visiblePassword,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// 비밀번호 찾기
@@ -367,7 +367,7 @@ class CommonInputField extends StatelessWidget {
           }
         },
         inputType: TextInputType.phone,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// 전화번호 인증
@@ -392,7 +392,7 @@ class CommonInputField extends StatelessWidget {
           }
         },
         inputType: TextInputType.phone,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// 비밀번호 찾기 - 이메일
@@ -406,7 +406,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// 비밀번호 찾기 - 인증번호
@@ -421,7 +421,7 @@ class CommonInputField extends StatelessWidget {
         onSubmitted: (value) async {},
         onChanged: onChange,
         inputType: TextInputType.phone,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// 비밀번호 찾기 - 새로운 비밀번호
@@ -435,7 +435,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// 비밀번호 찾기 - 새로운 비밀번호 확인
@@ -449,7 +449,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   //TODO) 카드정보 입력
@@ -475,7 +475,7 @@ class CommonInputField extends StatelessWidget {
           }
         },
         inputType: TextInputType.phone,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   // 카드 유효기간의 유효성 검사를 수행하는 함수
@@ -540,7 +540,7 @@ class CommonInputField extends StatelessWidget {
           }
         },
         inputType: TextInputType.phone,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// cvc
@@ -565,7 +565,7 @@ class CommonInputField extends StatelessWidget {
           }
         },
         inputType: TextInputType.phone,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// 생년월일
@@ -590,7 +590,7 @@ class CommonInputField extends StatelessWidget {
           }
         },
         inputType: TextInputType.phone,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   /// 카드 비밀번호
@@ -615,7 +615,7 @@ class CommonInputField extends StatelessWidget {
           }
         },
         inputType: TextInputType.phone,
-        autoFocus: false);
+        autoFocus: true);
   }
 
   factory CommonInputField.nickName(

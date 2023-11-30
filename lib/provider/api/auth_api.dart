@@ -93,19 +93,24 @@ class UserAuthApi {
       if (e is DioError && e.response != null) {
         SignUpController signUpController = Get.find();
         final errorData = e.response!.data;
-        if (errorData[RESULT] != null &&
-            errorData[RESULT]['socialId'] != null) {
+        if (errorData[RESULT] != null && errorData[RESULT]['socialId'] != null) {
           var socialId = errorData[RESULT]['socialId'];
+          var email = errorData[RESULT]['email'];
           if (socialId.startsWith('"') && socialId.endsWith('"')) {
             socialId = socialId.substring(1, socialId.length - 1);
           }
 
-          User user = User(socialId: socialId, email: '', gender: '');
+          User user = User(socialId: socialId, email: email, gender: '');
 
           signUpController.socialId.value = socialId;
+          signUpController.signUpId.value = email;
+
           print(">>> 애플로그인 시도할 socialId: ${socialId}");
+          print(">>> 애플로그인 시도할 email: ${email}");
           print(">>> 애플로그인 시도할 socialId: ${user.socialId}");
+          print(">>> 애플로그인 시도할 email: ${user.email}");
           print(">>> 애플로그인 시도할 socialId: ${signUpController.socialId.value}");
+          print(">>> 애플로그인 시도할 email: ${signUpController.signUpId.value}");
         }
       } else {
         Fluttertoast.showToast(msg: "애플 로그인 실패");

@@ -35,6 +35,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context){
     print(">>> signup_user_info_view:: controller에 저장된 socialId: ${controller.socialId.value}");
+    print(">>> signup_user_info_view:: controller에 저장된 email: ${controller.signUpId.value}");
 
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
@@ -169,10 +170,10 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               text: "인증번호 확인",
                               onTap: () async {
                                 var result = await UserAuthApi.postAuthCheckPhone(phone: controller.signUpPhone.value, code: controller.signUpPhoneConfirm.value);
-                                if (controller.signUpAuthMail.value != '' && result) {
+                                if (result) {
                                   Fluttertoast.showToast(msg: "전화번호 인증에 성공했습니다.");
                                   controller.authPhone.value = true;
-                                } else{
+                                } else {
                                   Fluttertoast.showToast(msg: "올바른 인증번호가 아닙니다.");
                                 }
                               },

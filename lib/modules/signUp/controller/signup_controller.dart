@@ -15,7 +15,7 @@ class SignUpController extends GetxController {
   RxString signUpPwConfirm = ''.obs; //pw 확인
   RxBool authPhone = false.obs; ///전화번호 인증 완료 여부
   RxBool validPw = false.obs; //pw 유효성 검사
-  RxList<User> userInfo = <User>[].obs;
+
   var socialId = ''.obs; ///애플유저 회원가입 시 필요한 socailId
 
   RxString signUpName = ''.obs;
