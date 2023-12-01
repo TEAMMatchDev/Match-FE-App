@@ -60,7 +60,7 @@ class DonateScreen extends GetView<DonateController> {
 
                 ///*2.프로젝트 카테고리
                 SizedBox(
-                  height: 76.h,
+                  height : 80.h,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
@@ -81,8 +81,7 @@ class DonateScreen extends GetView<DonateController> {
                                     await ProjectApi.getProjectList(
                                         type: ProjectType.values[index - 1]))
                                 : controller.projectList.assignAll(
-                                    await ProjectApi.getProjectList(
-                                        type: ProjectType.ANIMAL));
+                                    await ProjectApi.getProjectList());
                           },
                           child: index == 0
                               ? CircleType(

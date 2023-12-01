@@ -20,12 +20,12 @@ TotalPay _$TotalPayFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TotalPay {
-  int get donationId => throw _privateConstructorUsedError;
-  String get donationDate => throw _privateConstructorUsedError;
-  String get projectName => throw _privateConstructorUsedError;
+  int get regularId => throw _privateConstructorUsedError;
+  String get projectTitle => throw _privateConstructorUsedError;
   String get regularDate => throw _privateConstructorUsedError;
-  String get donationStatus => throw _privateConstructorUsedError;
-  String get regularStatus => throw _privateConstructorUsedError;
+  String get regularPayStatus => throw _privateConstructorUsedError;
+  int get payDate => throw _privateConstructorUsedError;
+  String get amount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,12 +39,12 @@ abstract class $TotalPayCopyWith<$Res> {
       _$TotalPayCopyWithImpl<$Res, TotalPay>;
   @useResult
   $Res call(
-      {int donationId,
-      String donationDate,
-      String projectName,
+      {int regularId,
+      String projectTitle,
       String regularDate,
-      String donationStatus,
-      String regularStatus});
+      String regularPayStatus,
+      int payDate,
+      String amount});
 }
 
 /// @nodoc
@@ -60,37 +60,37 @@ class _$TotalPayCopyWithImpl<$Res, $Val extends TotalPay>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? donationId = null,
-    Object? donationDate = null,
-    Object? projectName = null,
+    Object? regularId = null,
+    Object? projectTitle = null,
     Object? regularDate = null,
-    Object? donationStatus = null,
-    Object? regularStatus = null,
+    Object? regularPayStatus = null,
+    Object? payDate = null,
+    Object? amount = null,
   }) {
     return _then(_value.copyWith(
-      donationId: null == donationId
-          ? _value.donationId
-          : donationId // ignore: cast_nullable_to_non_nullable
+      regularId: null == regularId
+          ? _value.regularId
+          : regularId // ignore: cast_nullable_to_non_nullable
               as int,
-      donationDate: null == donationDate
-          ? _value.donationDate
-          : donationDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      projectName: null == projectName
-          ? _value.projectName
-          : projectName // ignore: cast_nullable_to_non_nullable
+      projectTitle: null == projectTitle
+          ? _value.projectTitle
+          : projectTitle // ignore: cast_nullable_to_non_nullable
               as String,
       regularDate: null == regularDate
           ? _value.regularDate
           : regularDate // ignore: cast_nullable_to_non_nullable
               as String,
-      donationStatus: null == donationStatus
-          ? _value.donationStatus
-          : donationStatus // ignore: cast_nullable_to_non_nullable
+      regularPayStatus: null == regularPayStatus
+          ? _value.regularPayStatus
+          : regularPayStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      regularStatus: null == regularStatus
-          ? _value.regularStatus
-          : regularStatus // ignore: cast_nullable_to_non_nullable
+      payDate: null == payDate
+          ? _value.payDate
+          : payDate // ignore: cast_nullable_to_non_nullable
+              as int,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -105,12 +105,12 @@ abstract class _$$TotalPayImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int donationId,
-      String donationDate,
-      String projectName,
+      {int regularId,
+      String projectTitle,
       String regularDate,
-      String donationStatus,
-      String regularStatus});
+      String regularPayStatus,
+      int payDate,
+      String amount});
 }
 
 /// @nodoc
@@ -124,37 +124,37 @@ class __$$TotalPayImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? donationId = null,
-    Object? donationDate = null,
-    Object? projectName = null,
+    Object? regularId = null,
+    Object? projectTitle = null,
     Object? regularDate = null,
-    Object? donationStatus = null,
-    Object? regularStatus = null,
+    Object? regularPayStatus = null,
+    Object? payDate = null,
+    Object? amount = null,
   }) {
     return _then(_$TotalPayImpl(
-      donationId: null == donationId
-          ? _value.donationId
-          : donationId // ignore: cast_nullable_to_non_nullable
+      regularId: null == regularId
+          ? _value.regularId
+          : regularId // ignore: cast_nullable_to_non_nullable
               as int,
-      donationDate: null == donationDate
-          ? _value.donationDate
-          : donationDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      projectName: null == projectName
-          ? _value.projectName
-          : projectName // ignore: cast_nullable_to_non_nullable
+      projectTitle: null == projectTitle
+          ? _value.projectTitle
+          : projectTitle // ignore: cast_nullable_to_non_nullable
               as String,
       regularDate: null == regularDate
           ? _value.regularDate
           : regularDate // ignore: cast_nullable_to_non_nullable
               as String,
-      donationStatus: null == donationStatus
-          ? _value.donationStatus
-          : donationStatus // ignore: cast_nullable_to_non_nullable
+      regularPayStatus: null == regularPayStatus
+          ? _value.regularPayStatus
+          : regularPayStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      regularStatus: null == regularStatus
-          ? _value.regularStatus
-          : regularStatus // ignore: cast_nullable_to_non_nullable
+      payDate: null == payDate
+          ? _value.payDate
+          : payDate // ignore: cast_nullable_to_non_nullable
+              as int,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -164,32 +164,32 @@ class __$$TotalPayImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TotalPayImpl with DiagnosticableTreeMixin implements _TotalPay {
   const _$TotalPayImpl(
-      {required this.donationId,
-      required this.donationDate,
-      required this.projectName,
+      {required this.regularId,
+      required this.projectTitle,
       required this.regularDate,
-      required this.donationStatus,
-      required this.regularStatus});
+      required this.regularPayStatus,
+      required this.payDate,
+      required this.amount});
 
   factory _$TotalPayImpl.fromJson(Map<String, dynamic> json) =>
       _$$TotalPayImplFromJson(json);
 
   @override
-  final int donationId;
+  final int regularId;
   @override
-  final String donationDate;
-  @override
-  final String projectName;
+  final String projectTitle;
   @override
   final String regularDate;
   @override
-  final String donationStatus;
+  final String regularPayStatus;
   @override
-  final String regularStatus;
+  final int payDate;
+  @override
+  final String amount;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TotalPay(donationId: $donationId, donationDate: $donationDate, projectName: $projectName, regularDate: $regularDate, donationStatus: $donationStatus, regularStatus: $regularStatus)';
+    return 'TotalPay(regularId: $regularId, projectTitle: $projectTitle, regularDate: $regularDate, regularPayStatus: $regularPayStatus, payDate: $payDate, amount: $amount)';
   }
 
   @override
@@ -197,12 +197,12 @@ class _$TotalPayImpl with DiagnosticableTreeMixin implements _TotalPay {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TotalPay'))
-      ..add(DiagnosticsProperty('donationId', donationId))
-      ..add(DiagnosticsProperty('donationDate', donationDate))
-      ..add(DiagnosticsProperty('projectName', projectName))
+      ..add(DiagnosticsProperty('regularId', regularId))
+      ..add(DiagnosticsProperty('projectTitle', projectTitle))
       ..add(DiagnosticsProperty('regularDate', regularDate))
-      ..add(DiagnosticsProperty('donationStatus', donationStatus))
-      ..add(DiagnosticsProperty('regularStatus', regularStatus));
+      ..add(DiagnosticsProperty('regularPayStatus', regularPayStatus))
+      ..add(DiagnosticsProperty('payDate', payDate))
+      ..add(DiagnosticsProperty('amount', amount));
   }
 
   @override
@@ -210,24 +210,22 @@ class _$TotalPayImpl with DiagnosticableTreeMixin implements _TotalPay {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TotalPayImpl &&
-            (identical(other.donationId, donationId) ||
-                other.donationId == donationId) &&
-            (identical(other.donationDate, donationDate) ||
-                other.donationDate == donationDate) &&
-            (identical(other.projectName, projectName) ||
-                other.projectName == projectName) &&
+            (identical(other.regularId, regularId) ||
+                other.regularId == regularId) &&
+            (identical(other.projectTitle, projectTitle) ||
+                other.projectTitle == projectTitle) &&
             (identical(other.regularDate, regularDate) ||
                 other.regularDate == regularDate) &&
-            (identical(other.donationStatus, donationStatus) ||
-                other.donationStatus == donationStatus) &&
-            (identical(other.regularStatus, regularStatus) ||
-                other.regularStatus == regularStatus));
+            (identical(other.regularPayStatus, regularPayStatus) ||
+                other.regularPayStatus == regularPayStatus) &&
+            (identical(other.payDate, payDate) || other.payDate == payDate) &&
+            (identical(other.amount, amount) || other.amount == amount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, donationId, donationDate,
-      projectName, regularDate, donationStatus, regularStatus);
+  int get hashCode => Object.hash(runtimeType, regularId, projectTitle,
+      regularDate, regularPayStatus, payDate, amount);
 
   @JsonKey(ignore: true)
   @override
@@ -245,28 +243,28 @@ class _$TotalPayImpl with DiagnosticableTreeMixin implements _TotalPay {
 
 abstract class _TotalPay implements TotalPay {
   const factory _TotalPay(
-      {required final int donationId,
-      required final String donationDate,
-      required final String projectName,
+      {required final int regularId,
+      required final String projectTitle,
       required final String regularDate,
-      required final String donationStatus,
-      required final String regularStatus}) = _$TotalPayImpl;
+      required final String regularPayStatus,
+      required final int payDate,
+      required final String amount}) = _$TotalPayImpl;
 
   factory _TotalPay.fromJson(Map<String, dynamic> json) =
       _$TotalPayImpl.fromJson;
 
   @override
-  int get donationId;
+  int get regularId;
   @override
-  String get donationDate;
-  @override
-  String get projectName;
+  String get projectTitle;
   @override
   String get regularDate;
   @override
-  String get donationStatus;
+  String get regularPayStatus;
   @override
-  String get regularStatus;
+  int get payDate;
+  @override
+  String get amount;
   @override
   @JsonKey(ignore: true)
   _$$TotalPayImplCopyWith<_$TotalPayImpl> get copyWith =>

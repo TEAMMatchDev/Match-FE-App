@@ -11,14 +11,7 @@ import '../../../util/const/global_variable.dart';
 class PictureDetailScreen extends StatelessWidget {
   final List<String> pictureList;
 
-  const PictureDetailScreen(
-      {super.key,
-      this.pictureList = const [
-        tmpBackgroundImg,
-        tmpBackgroundImg,
-        tmpBackgroundImg,
-        tmpBackgroundImg
-      ]});
+  const PictureDetailScreen({super.key, required this.pictureList});
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +25,22 @@ class PictureDetailScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.h,horizontal: 27.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 20.h, horizontal: 27.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(width: 24.w,),
+                      SizedBox(
+                        width: 24.w,
+                      ),
                       Text(
-                        "${index+1}/${pictureList.length}",
+                        "${index + 1}/${pictureList.length}",
                         textAlign: TextAlign.center,
-                        style:
-                            AppTextStyles.T1Bold15.copyWith(color: AppColors.white),
+                        style: AppTextStyles.T1Bold15.copyWith(
+                            color: AppColors.white),
                       ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Get.back();
                         },
                         child: SvgPicture.asset(

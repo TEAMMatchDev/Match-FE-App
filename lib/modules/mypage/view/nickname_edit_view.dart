@@ -24,7 +24,7 @@ class NicknameEditScreen extends GetView<NickNameController> {
                 child: CommonInputField.nickName(
                   textController: controller.nicknameController.value,
                   onChange: (text) async {
-                    if (text != AuthService.to.myProfile.value.nickName &&
+                    if (text != AuthService.to.nickName.value &&
                         text != "") {
                       controller.canChange.value = true;
                     } else {

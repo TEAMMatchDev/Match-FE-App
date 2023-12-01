@@ -16,18 +16,20 @@ Widget categoryType({
 }) {
   return Column(
     children: [
-      Container(
-        width: 60.w,
-        height: 60.w,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: isSelect.value ? AppColors.primary100 : AppColors.white,
-          shape: BoxShape.circle,
-          border: Border.all(color: AppColors.grey9, width: 2),
-        ),
-        child: SvgPicture.asset(
-          "${iconDir}project/ic_${type.engName}.svg",
-          height: 30.w,
+      Obx(
+        ()=> Container(
+          width: 60.w,
+          height: 60.w,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isSelect.value ? AppColors.primary100 : AppColors.white,
+            shape: BoxShape.circle,
+            border: Border.all(color: AppColors.grey9, width: 2),
+          ),
+          child: SvgPicture.asset(
+            "${iconDir}project/ic_${type.engName}.svg",
+            height: 30.w,
+          ),
         ),
       ),
       SizedBox(

@@ -34,6 +34,9 @@ abstract class _Paths {
   ///결제내역
   static const pay = "/pay";
 
+  ///공지사항 상세 화면
+  static const payment_detail = "/payment_detail";
+
   ///후원 상세내역
   static const project = "/project";
 
@@ -111,7 +114,7 @@ abstract class Routes {
   static const total_pay = _Paths.total_pay;
 
   /// 불타는 매치 결제 상세 화면
-  static const pay = _Paths.pay;
+  static const payment_detail = _Paths.payment_detail;
 
   ///후원 상세내역
   static const project = _Paths.project;

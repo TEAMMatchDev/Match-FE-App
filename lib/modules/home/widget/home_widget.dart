@@ -87,7 +87,7 @@ class BannerWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(5.r),
             image: DecorationImage(
               fit: BoxFit.fitWidth,
-              image: NetworkImage(banner.bannerImg),
+              image: AssetImage(banner.bannerImg),
             ),
           ),
           child: Stack(children: [
