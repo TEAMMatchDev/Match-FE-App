@@ -73,7 +73,7 @@ class MatchPayItem extends StatelessWidget {
                 verticalPadding: 14,
                 text: "상세정보",
                 onTap: () async {
-                  Get.toNamed(Routes.pay,
+                  Get.toNamed(Routes.payment_detail,
                       arguments: {"regularPayId": regularPayId});
                 },
               ),

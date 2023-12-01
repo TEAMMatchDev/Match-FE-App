@@ -7,6 +7,7 @@ import 'package:match/util/const/style/global_text_styles.dart';
 
 class PaymentListTile extends StatelessWidget {
   final Pay pay;
+
   const PaymentListTile({super.key, required this.pay});
 
   @override
@@ -56,7 +57,12 @@ class PaymentListTile extends StatelessWidget {
         SizedBox(
           width: 20.w,
         ),
-        Text(content, style: AppTextStyles.T1Bold13),
+        Expanded(
+            child: Text(
+          content,
+          style: AppTextStyles.T1Bold13,
+          overflow: TextOverflow.visible,
+        )),
       ],
     );
   }
