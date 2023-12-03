@@ -25,6 +25,7 @@ class UserPayMethodScreen extends GetView<UserPayMethodController> {
   Widget build(BuildContext context) {
     PaymentController paymentController = Get.find();
     paymentController.onInit();
+    paymentController.accessFrom.value = 'mypage';
 
     return Scaffold(
       appBar: CommonAppBar.basic("간편결제 관리"),

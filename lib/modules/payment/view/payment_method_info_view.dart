@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:match/modules/payment/view/payment_donation_info_view.dart';
 import 'package:match/modules/payment/view/payment_done_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
 import 'package:match/modules/project/controller/project_controller.dart';
@@ -167,7 +168,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                   child: CommonButton.back(
                     text: "이전 돌아가기",
                     onTap: () async {
-                      Get.back();
+                      Get.to(PaymentDonationScreen());
                     },
                   ),
                 ),

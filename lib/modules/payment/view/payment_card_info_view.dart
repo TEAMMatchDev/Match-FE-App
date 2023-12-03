@@ -312,8 +312,10 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
                           if (paymentController.accessFrom == 'mypage') {
                             Get.offAllNamed(Routes.pay_method);
+                            print('>>> 넘어온 화면: ${paymentController.accessFrom}');
                           } else {
                             Get.offAll(PaymentMethodScreen());
+                            print('>>> 넘어온 화면: ${paymentController.accessFrom}');
                           }
                         } else {
                           Fluttertoast.showToast(msg: "카드 등록에 실패했습니다. 카드 정보를 다시 확인해주세요.");
