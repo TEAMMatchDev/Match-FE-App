@@ -39,6 +39,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context){
+    controller.clearInputFields();
 
     return  Scaffold(
       body: SingleChildScrollView(

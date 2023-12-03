@@ -210,7 +210,7 @@ class Pages {
     GetPage(
       title: "간편결제 관리 화면",
       name: Routes.pay_method,
-      page: () => const UserPayMethodScreen(),
+      page: () => UserPayMethodScreen(),
       transition: Transition.noTransition,
       binding: UserPayMethodBinding(),
       curve: Curves.easeIn,

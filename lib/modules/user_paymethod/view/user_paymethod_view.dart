@@ -18,12 +18,16 @@ import '../../../util/components/gloabl_text_field.dart';
 import '../../../util/components/global_button.dart';
 import '../../../util/const/style/global_logger.dart';
 
-class UserPayMethodScreen extends GetView<UserPayMethodController> {
-  const UserPayMethodScreen({super.key});
+class UserPayMethodScreen extends StatefulWidget{
+  @override
+  _UserPayMethodScreenState createState() => _UserPayMethodScreenState();
+}
+
+class _UserPayMethodScreenState extends State<UserPayMethodScreen> with WidgetsBindingObserver {
+  final PaymentController paymentController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    PaymentController paymentController = Get.find<PaymentController>();
 
     paymentController.loadData();
     paymentController.accessFrom.value = 'mypage';
@@ -46,18 +50,18 @@ class UserPayMethodScreen extends GetView<UserPayMethodController> {
                   var result = await OrderApi.deleteCard(cardId: paymentController.cardId.value);
                   if (result) {
                     Fluttertoast.showToast(msg: "선택한 카드가 삭제 되었습니다.");
+                    await paymentController.updateCardList(); // 카드 목록 업데이트
 
-                    final PaymentController paymentController = Get.find<PaymentController>();
-                    List<CardInfo> newCardInfoList = await OrderApi.getCardList();
-                    paymentController.cardInfoList.assignAll(newCardInfoList);
-                    paymentController.cardCodeList.assignAll(
-                        newCardInfoList.map((card) => card.cardCode.toString()).toList()
-                    );
-                    paymentController.cardNumList.assignAll(
-                        newCardInfoList.map((card) => card.cardNo).toList()
-                    );
-
-                    Get.forceAppUpdate();
+                    // List<CardInfo> newCardInfoList = await OrderApi.getCardList();
+                    // paymentController.cardInfoList.assignAll(newCardInfoList);
+                    // paymentController.cardCodeList.assignAll(
+                    //     newCardInfoList.map((card) => card.cardCode.toString()).toList()
+                    // );
+                    // paymentController.cardNumList.assignAll(
+                    //     newCardInfoList.map((card) => card.cardNo).toList()
+                    // );
+                    //
+                    // Get.forceAppUpdate();
                   } else {
                     Fluttertoast.showToast(msg: "카드 삭제를 실패했습니다.");
                   }

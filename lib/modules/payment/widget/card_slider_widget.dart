@@ -21,8 +21,7 @@ class CardSlider extends StatefulWidget {
 
 class _CardSliderState extends State<CardSlider> {
   final PaymentController _paymentController = Get.find<PaymentController>();
-
-  int _currentSlide = 0;
+  final RxInt _currentSlide = RxInt(0); //0.obs;  // RxInt로 변경
 
   @override
   void initState() {
@@ -34,8 +33,8 @@ class _CardSliderState extends State<CardSlider> {
   void _onSliderInitialized() {
     // 첫 번째 카드에 대한 정보 처리
     if (_paymentController.cardCodeList.isNotEmpty) {
-      _currentSlide = 0; // 첫 번째 슬라이드로 설정
-      _handleSlideChange(_currentSlide);
+      _currentSlide.value = 0; // 첫 번째 슬라이드로 설정
+      _handleSlideChange(_currentSlide.value);
     }
   }
 
@@ -80,10 +79,7 @@ class _CardSliderState extends State<CardSlider> {
               viewportFraction: 0.8,
               enableInfiniteScroll: false,
               onPageChanged: (index, reason) {
-                setState(() {
-                  _currentSlide = index;
-                });
-
+                _currentSlide.value = index;
                 _handleSlideChange(index);
               },
             ),
@@ -125,7 +121,7 @@ class _CardSliderState extends State<CardSlider> {
                           style: AppTextStyles.T1Bold14.copyWith(color: AppColors.white)
                       ),
                     ),
-                    if (idx == _currentSlide)
+                    if (idx == _currentSlide.value)
                       Positioned(
                         top: 18.h,
                         right: 15.w,
@@ -153,9 +149,9 @@ class _CardSliderState extends State<CardSlider> {
           ),
 
           SizedBox(height: 20.h),
-          (_currentSlide != _paymentController.cardCodeList.length)
+          (_currentSlide.value != _paymentController.cardCodeList.length)
               ? Text(
-              '${_currentSlide + 1}'+'/'+(_paymentController.cardCodeList.length).toString(),
+              '${_currentSlide.value + 1}'+'/'+(_paymentController.cardCodeList.length).toString(),
               style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey6)
           )
               : Text(

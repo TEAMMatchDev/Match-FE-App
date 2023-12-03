@@ -86,6 +86,7 @@ class PaymentController extends GetxController {
   Rx<TextEditingController> cardPWTextController = TextEditingController().obs;
 
 
+
   //TODO) 애플로그인 사용자 정보
   var birthState = "".obs;
   RxString userName = ''.obs;
@@ -116,6 +117,23 @@ class PaymentController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    clearInputFields();
+  }
+
+  void clearInputFields() {
+    // 입력 필드 클리어
+    cardNumTextController.value.clear();
+    cardExpTextController.value.clear();
+    cardCVCTextController.value.clear();
+    cardUserBirthTextController.value.clear();
+    cardPWTextController.value.clear();
+  }
+
+  Future<void> updateCardList() async {
+    List<CardInfo> newCardInfoList = await OrderApi.getCardList();
+    cardInfoList.assignAll(newCardInfoList);
+    cardCodeList.assignAll(newCardInfoList.map((card) => card.cardCode.toString()).toList());
+    cardNumList.assignAll(newCardInfoList.map((card) => card.cardNo).toList());
   }
 
   Future<void> loadData() async {
