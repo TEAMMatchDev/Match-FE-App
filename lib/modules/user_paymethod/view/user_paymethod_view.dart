@@ -23,8 +23,9 @@ class UserPayMethodScreen extends GetView<UserPayMethodController> {
 
   @override
   Widget build(BuildContext context) {
-    PaymentController paymentController = Get.find();
-    paymentController.onInit();
+    PaymentController paymentController = Get.find<PaymentController>();
+
+    paymentController.loadData();
     paymentController.accessFrom.value = 'mypage';
 
     return Scaffold(
@@ -37,8 +38,7 @@ class UserPayMethodScreen extends GetView<UserPayMethodController> {
               child: CardSlider(),
             ),
             SizedBox(height: 30.h),
-            Obx(
-              () => CommonButton.deletePay(
+            Obx(() => CommonButton.deletePay(
                 isActive: paymentController.isDeleteAble.value,
                 onTap: () async {
                   print('>>> 삭제할 cardId: ${paymentController.cardId.value}');
@@ -61,7 +61,6 @@ class UserPayMethodScreen extends GetView<UserPayMethodController> {
                   } else {
                     Fluttertoast.showToast(msg: "카드 삭제를 실패했습니다.");
                   }
-
                 },
               ),
             ),

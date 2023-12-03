@@ -311,10 +311,10 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           );
 
                           if (paymentController.accessFrom == 'mypage') {
-                            Get.offAllNamed(Routes.pay_method);
+                            Get.toNamed(Routes.pay_method);
                             print('>>> 넘어온 화면: ${paymentController.accessFrom}');
                           } else {
-                            Get.offAll(PaymentMethodScreen());
+                            Get.to(PaymentMethodScreen());
                             print('>>> 넘어온 화면: ${paymentController.accessFrom}');
                           }
                         } else {

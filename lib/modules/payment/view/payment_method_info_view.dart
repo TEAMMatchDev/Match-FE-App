@@ -168,7 +168,7 @@ class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBinding
                   child: CommonButton.back(
                     text: "이전 돌아가기",
                     onTap: () async {
-                      Get.to(PaymentDonationScreen());
+                      Get.back();
                     },
                   ),
                 ),

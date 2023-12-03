@@ -116,6 +116,9 @@ class PaymentController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+  }
+
+  Future<void> loadData() async {
     await AuthService.to.getDonatorInfo();
     print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n ");
 
@@ -131,6 +134,5 @@ class PaymentController extends GetxController {
       donateState.value = ProjectController.to.projectDetail.value.regularStatus;
       projectId.value = ProjectController.to.projectId;
     }
-
   }
 }
