@@ -23,9 +23,11 @@ class _PayMethodRadioButtonsState extends State<PayMethodRadioButtons> {
   String selectedOption = '카카오페이';
 
   void handleRadioValueChanged(String value) {
-    setState(() {
-      selectedOption = value;
-    });
+    Future.microtask(() =>
+        setState(() {
+          selectedOption = value;
+        })
+    );
   }
 
   @override
