@@ -23,13 +23,10 @@ class PolicyScreen extends StatelessWidget {
                 onTap: () {
                   Get.to(const PolicyDetailView(
                     webUrl: "/terms/service",
-                    title: "개인정보 처리 방침",
+                    title: "서비스 이용약관",
                   ));
                 },
-                child: Text(
-                  "이용약관",
-                  style: AppTextStyles.T1Bold15,
-                )),
+                child: Text("이용약관", style: AppTextStyles.T1Bold15)),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h),
               child: Divider(
