@@ -3,6 +3,7 @@ import 'package:match/model/card_info/card_info.dart';
 import 'package:match/model/donator/donator.dart';
 import 'package:match/model/notice/notice.dart';
 import 'package:match/model/notice_detail/notice_detail.dart';
+import 'package:match/model/recommend_project/recommend_project.dart';
 
 import '../../model/comment/comment.dart';
 import '../../model/content/content.dart';
@@ -170,3 +171,5 @@ var tmpComments = const [
       userId: 1,
       my: true),
 ];
+
+var tmpRecommendProject = RecommendProject(projectId: -1, projectKind: "", randomMessage: "로딩중");
