@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,11 +33,11 @@ class PaymentDonationScreen extends GetView<PaymentController> {
   @override
   Widget build(BuildContext context){
     final String state = _projectController.projectDetail.value.regularStatus;
-    final int projectId = controller.projectId.value;
-    final int amount = controller.selectedAmount.value;
-    final int date = controller.selectedDate.value;
     final String title = _projectController.projectDetail.value.title;
     final bool inApp = true;
+    // final int projectId = controller.projectId.value;
+    // final int amount = controller.selectedAmount.value;
+    // final int date = controller.selectedDate.value;
 
     String webUrl = '/auth/pay';
     String finalUrl = '';
@@ -43,15 +45,15 @@ class PaymentDonationScreen extends GetView<PaymentController> {
     String queryParamsOnce = "";
 
     void _urlMaker() {
-      if (projectId != null) queryParamsReg += "projectId=$projectId&";
-      if (amount != null) queryParamsReg += "amount=$amount&";
-      if (date != null) queryParamsReg += "date=$date&";
+      if (controller.projectId.value != null) queryParamsReg += "projectId=${controller.projectId.value}&";
+      if (controller.selectedAmount.value != null) queryParamsReg += "amount=${controller.selectedAmount.value}&";
+      if (controller.selectedDate.value != null) queryParamsReg += "date=${controller.selectedDate.value}&";
       if (controller.orderId.value != null) queryParamsReg += "orderId=${controller.orderId.value}&";
       queryParamsReg += "inApp=$inApp";
 
-      if (projectId != null) queryParamsOnce += "projectId=$projectId&";
-      if (amount != null) queryParamsOnce += "amount=$amount&";
-      if (date != null) queryParamsOnce += "date=$date&";
+      if (controller.projectId.value != null) queryParamsOnce += "projectId=${controller.projectId.value}&";
+      if (controller.selectedAmount.value != null) queryParamsOnce += "amount=${controller.selectedAmount.value}&";
+      if (controller.selectedDate.value != null) queryParamsOnce += "date=${controller.selectedDate.value}&";
       if (title != null) queryParamsOnce += "title=$title&";
       if (controller.orderId.value != null) queryParamsOnce += "orderId=${controller.orderId.value}&";
       queryParamsOnce += "inApp=$inApp";
@@ -199,11 +201,11 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                               if (result != null) {
                                 controller.orderId.value = result; //orderId 업데이트
                                 print('>> orderId --controller: ${controller.orderId.value}');
+                                //print('>> 현재 선택된 금액: ${controller.selectedAmount.value}');
                                 Fluttertoast.showToast(msg: "기부 진행 시작!");
                                 _urlMaker();
                                 await launch(finalUrl, forceWebView: false, forceSafariVC: false); //TODO) forceWebView forceSafariVC 가 false : 외부 브라우저, true : 내부 브라우저
                               } else {
-                                controller.orderId.value = '';
                                 Fluttertoast.showToast(msg: "기부 진행 실패");
                               }
 
