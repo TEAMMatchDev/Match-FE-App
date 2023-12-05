@@ -181,7 +181,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                                   webUrl: "/auth/pay",
                                   projectId: projectId,
                                   amount: amount,
-                                  date: date,
+                                  date: 0,
                                   orderId: orderId,
                                   title: title,
                                   inApp: true,

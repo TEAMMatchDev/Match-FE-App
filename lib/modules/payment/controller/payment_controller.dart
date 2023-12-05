@@ -126,6 +126,15 @@ class PaymentController extends GetxController {
       selectedDate.value = 1;
     }
 
+    //TODO) 04-00 api 요청 -> orderId 반환
+    var result = await OrderApi.setOrderRequest(
+        projectId: ProjectController.to.projectId,
+        amount: selectedAmount.value
+    );
+    if (result) { /// 웹에선 단기 결제 시만 진행했었
+      print('>> orderId: ${orderId}');
+    }
+
   }
 
   void clearInputFields() {
