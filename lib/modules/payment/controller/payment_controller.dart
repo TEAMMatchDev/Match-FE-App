@@ -44,7 +44,7 @@ class PaymentController extends GetxController {
 
   final Rx<int> inputValue = 0.obs;
   final Rx<int> selectedAmount = 1000.obs;
-  final Rx<int> selectedDate = 1.obs;
+  final Rx<int> selectedDate = 0.obs;
 
   void updateIsPayAbleReg() { /// 금액, 날짜 null 체크
     if (selectedAmount.value > 0 && (selectedDate.value >= 1 && selectedDate.value <= 31)) {

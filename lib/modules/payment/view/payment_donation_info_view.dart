@@ -160,7 +160,8 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                         ? CommonButton.login(
                             text: "확인",
                             onTap: () async {
-                              //Get.to(PaymentMethodScreen());
+                              print(">>> 현재 결제방식 state: ${state}");
+
                               if (state == 'REGULAR') {
                                 /// 정기결제
                                 Get.to(PaymentMethodWebView(
@@ -172,7 +173,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                                   date: date,
                                   inApp: true,
                                 ));
-                              } else {
+                              } else if (state == 'ONE_TIME'){
                                 /// 단기결제
                                 Get.to(PaymentMethodWebView(
                                   appTitle: "기부금 단기 결제하기",

@@ -49,8 +49,10 @@ class PaymentMethodWebView extends StatelessWidget {
     String fullUrl = "";
     if (state == 'REGULAR') {
       fullUrl = regUrl;
-    } else {
+      print('>> 생성된 인앱 정기결제 url: ${fullUrl}');
+    } else if (state == 'ONE_TIME'){
       fullUrl = onceUrl;
+      print('>> 생성된 인앱 단기결제 url: ${fullUrl}');
     }
 
     var _webViewController = WebViewController()
