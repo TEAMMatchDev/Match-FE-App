@@ -45,6 +45,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
       if (projectId != null) queryParamsReg += "projectId=$projectId&";
       if (amount != null) queryParamsReg += "amount=$amount&";
       if (date != null) queryParamsReg += "date=$date&";
+      if (orderId != null) queryParamsReg += "orderId=$orderId&";
       queryParamsReg += "inApp=$inApp";
 
       if (projectId != null) queryParamsOnce += "projectId=$projectId&";
@@ -190,32 +191,33 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                             onTap: () async {
                               print(">>> 현재 결제방식 state: ${state}");
                               _urlMaker();
-                              await launch(finalUrl, forceWebView: false, forceSafariVC: false);
-                              // if (state == 'REGULAR') {
-                              //   /// 정기결제
-                              //   Get.to(PaymentMethodWebView(
-                              //     appTitle: "기부금 정기 결제하기",
-                              //     state: state,
-                              //     webUrl: "/auth/pay",
-                              //     projectId: projectId,
-                              //     amount: amount,
-                              //     date: date,
-                              //     inApp: true,
-                              //   ));
-                              // } else if (state == 'ONE_TIME'){
-                              //   /// 단기결제
-                              //   Get.to(PaymentMethodWebView(
-                              //     appTitle: "기부금 단기 결제하기",
-                              //     state: state,
-                              //     webUrl: "/auth/pay",
-                              //     projectId: projectId,
-                              //     amount: amount,
-                              //     date: 0,
-                              //     orderId: orderId,
-                              //     title: title,
-                              //     inApp: true,
-                              //   ));
-                              // }
+                              await launch(finalUrl, forceWebView: false, forceSafariVC: false); //TODO) forceWebView forceSafariVC 가 false : 외부 브라우저, true : 내부 브라우저
+                              /* //TODO) 인앱에서 화면 자체에 띄우는 방식
+                              if (state == 'REGULAR') {
+                                /// 정기결제
+                                Get.to(PaymentMethodWebView(
+                                  appTitle: "기부금 정기 결제하기",
+                                  state: state,성
+                                  webUrl: "/auth/pay",
+                                  projectId: projectId,
+                                  amount: amount,
+                                  date: date,
+                                  inApp: true,
+                                ));
+                              } else if (state == 'ONE_TIME'){
+                                /// 단기결제
+                                Get.to(PaymentMethodWebView(
+                                  appTitle: "기부금 단기 결제하기",
+                                  state: state,
+                                  webUrl: "/auth/pay",
+                                  projectId: projectId,
+                                  amount: amount,
+                                  date: 0,
+                                  orderId: orderId,
+                                  title: title,
+                                  inApp: true,
+                                ));
+                              }*/
                             },
                           )
                         : CommonButton.loginDis(

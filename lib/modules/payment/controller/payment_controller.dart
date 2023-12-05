@@ -136,7 +136,7 @@ class PaymentController extends GetxController {
       print('>> orderId: ${orderId}');
       Fluttertoast.showToast(msg: "기부 진행 시작!");
     } else {
-      Fluttertoast.showToast(msg: "기부 진행 실패.");
+      Fluttertoast.showToast(msg: "기부 진행 실패");
     }
   }
 

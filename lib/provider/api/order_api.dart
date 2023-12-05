@@ -30,6 +30,8 @@ class OrderApi {
       var orderId = response.data[RESULT];
       paymentController.orderId.value = orderId;
 
+      print('>> 정기결제 시 전달할 orderId: ${orderId}');
+
       return response.data[SUCCESS];
     } catch (e) {
       logger.e(e.toString());
