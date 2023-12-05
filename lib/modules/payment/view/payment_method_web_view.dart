@@ -46,25 +46,34 @@ class PaymentMethodWebView extends StatelessWidget {
 
     final regUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
     final onceUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
-    String fullUrl = "";
-    if (state == 'REGULAR') {
-      fullUrl = regUrl;
-      print('>> 생성된 인앱 정기결제 url: ${fullUrl}');
-    } else if (state == 'ONE_TIME'){
-      fullUrl = onceUrl;
-      print('>> 생성된 인앱 단기결제 url: ${fullUrl}');
-    }
+
+    final fullUrl = state == 'REGULAR' ? regUrl : onceUrl;
+    (state == 'REGULAR') ? print('>> 생성된 인앱 정기결제 url: ${fullUrl}') : print('>> 생성된 인앱 단기결제 url: ${fullUrl}');
 
     var _webViewController = WebViewController()
       ..loadRequest(Uri.parse(fullUrl))
       ..setJavaScriptMode(JavaScriptMode.unrestricted);
+
+    _showWebViewModal(BuildContext context) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        builder: (BuildContext context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.9, // 예: 화면의 80%
+            child:  WebViewWidget(
+              controller: _webViewController,
+            ),
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: CommonAppBar.basic(appTitle),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: WebViewWidget(
-          controller: _webViewController,
-        ),
+        child: _showWebViewModal(context),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_number_field.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
@@ -32,6 +34,32 @@ class PaymentDonationScreen extends GetView<PaymentController> {
     final int date = controller.selectedDate.value;
     final String orderId = controller.orderId.value;
     final String title = _projectController.projectDetail.value.title;
+    final bool inApp = true;
+
+    String webUrl = '/auth/pay';
+    String finalUrl = '';
+    String queryParamsReg = "";
+    String queryParamsOnce = "";
+
+    void _urlMaker() {
+      if (projectId != null) queryParamsReg += "projectId=$projectId&";
+      if (amount != null) queryParamsReg += "amount=$amount&";
+      if (date != null) queryParamsReg += "date=$date&";
+      queryParamsReg += "inApp=$inApp";
+
+      if (projectId != null) queryParamsOnce += "projectId=$projectId&";
+      if (amount != null) queryParamsOnce += "amount=$amount&";
+      if (date != null) queryParamsOnce += "date=$date&";
+      if (title != null) queryParamsOnce += "title=$title&";
+      if (orderId != null) queryParamsOnce += "orderId=$orderId&";
+      queryParamsOnce += "inApp=$inApp";
+
+      final regUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
+      final onceUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
+
+      finalUrl = state == 'REGULAR' ? regUrl : onceUrl;
+      (state == 'REGULAR') ? print('>> 생성된 인앱 정기결제 url: ${finalUrl}') : print('>> 생성된 인앱 단기결제 url: ${finalUrl}');
+    }
 
     return  Scaffold(
       body: Column(
@@ -161,32 +189,33 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                             text: "확인",
                             onTap: () async {
                               print(">>> 현재 결제방식 state: ${state}");
-
-                              if (state == 'REGULAR') {
-                                /// 정기결제
-                                Get.to(PaymentMethodWebView(
-                                  appTitle: "기부금 정기 결제하기",
-                                  state: state,
-                                  webUrl: "/auth/pay",
-                                  projectId: projectId,
-                                  amount: amount,
-                                  date: date,
-                                  inApp: true,
-                                ));
-                              } else if (state == 'ONE_TIME'){
-                                /// 단기결제
-                                Get.to(PaymentMethodWebView(
-                                  appTitle: "기부금 단기 결제하기",
-                                  state: state,
-                                  webUrl: "/auth/pay",
-                                  projectId: projectId,
-                                  amount: amount,
-                                  date: 0,
-                                  orderId: orderId,
-                                  title: title,
-                                  inApp: true,
-                                ));
-                              }
+                              _urlMaker();
+                              await launch(finalUrl, forceWebView: false, forceSafariVC: false);
+                              // if (state == 'REGULAR') {
+                              //   /// 정기결제
+                              //   Get.to(PaymentMethodWebView(
+                              //     appTitle: "기부금 정기 결제하기",
+                              //     state: state,
+                              //     webUrl: "/auth/pay",
+                              //     projectId: projectId,
+                              //     amount: amount,
+                              //     date: date,
+                              //     inApp: true,
+                              //   ));
+                              // } else if (state == 'ONE_TIME'){
+                              //   /// 단기결제
+                              //   Get.to(PaymentMethodWebView(
+                              //     appTitle: "기부금 단기 결제하기",
+                              //     state: state,
+                              //     webUrl: "/auth/pay",
+                              //     projectId: projectId,
+                              //     amount: amount,
+                              //     date: 0,
+                              //     orderId: orderId,
+                              //     title: title,
+                              //     inApp: true,
+                              //   ));
+                              // }
                             },
                           )
                         : CommonButton.loginDis(

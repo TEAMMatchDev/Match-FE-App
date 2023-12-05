@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/card_info/card_info.dart';
@@ -127,14 +128,16 @@ class PaymentController extends GetxController {
     }
 
     //TODO) 04-00 api 요청 -> orderId 반환
-    var result = await OrderApi.setOrderRequest(
+    var result = await OrderApi.setRequestOrder(
         projectId: ProjectController.to.projectId,
         amount: selectedAmount.value
     );
     if (result) { /// 웹에선 단기 결제 시만 진행했었
       print('>> orderId: ${orderId}');
+      Fluttertoast.showToast(msg: "기부 진행 시작!");
+    } else {
+      Fluttertoast.showToast(msg: "기부 진행 실패.");
     }
-
   }
 
   void clearInputFields() {

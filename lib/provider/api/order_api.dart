@@ -16,7 +16,7 @@ import 'util/dio_services.dart';
 class OrderApi {
 
   ///<h2>4-0API | 결제 요청용 처음 결제할 때 요청 보내기 return orderId</h2>
-  static Future<bool> setOrderRequest({
+  static Future<bool> setRequestOrder({
     required int projectId,
     required int amount,
 }) async {
@@ -27,10 +27,8 @@ class OrderApi {
           queryParameters: {"projectId": projectId, "amount": amount});
 
       PaymentController paymentController = Get.find();
-      var orderId = response.data[SUCCESS][RESULT];
+      var orderId = response.data[RESULT];
       paymentController.orderId.value = orderId;
-
-      print(">>> 단기결제 시 결제창에 전달할 orderId: ${orderId}");
 
       return response.data[SUCCESS];
     } catch (e) {
