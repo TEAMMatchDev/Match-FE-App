@@ -126,18 +126,6 @@ class PaymentController extends GetxController {
     if(ProjectController.to.projectDetail.value.regularStatus == 'REGULAR') {
       selectedDate.value = 1;
     }
-
-    //TODO) 04-00 api 요청 -> orderId 반환
-    var result = await OrderApi.setRequestOrder(
-        projectId: ProjectController.to.projectId,
-        amount: selectedAmount.value
-    );
-    if (result) { /// 웹에선 단기 결제 시만 진행했었
-      print('>> orderId: ${orderId}');
-      Fluttertoast.showToast(msg: "기부 진행 시작!");
-    } else {
-      Fluttertoast.showToast(msg: "기부 진행 실패");
-    }
   }
 
   void clearInputFields() {

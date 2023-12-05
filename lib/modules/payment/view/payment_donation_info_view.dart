@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
@@ -10,6 +11,7 @@ import 'package:match/modules/payment/view/payment_method_web_view.dart';
 import 'package:match/modules/payment/widget/select_amount_widget.dart';
 import 'package:match/modules/payment/widget/select_paydate_widget.dart';
 import 'package:match/modules/project/controller/project_controller.dart';
+import 'package:match/provider/api/order_api.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_number_field.dart';
@@ -32,7 +34,6 @@ class PaymentDonationScreen extends GetView<PaymentController> {
     final int projectId = controller.projectId.value;
     final int amount = controller.selectedAmount.value;
     final int date = controller.selectedDate.value;
-    final String orderId = controller.orderId.value;
     final String title = _projectController.projectDetail.value.title;
     final bool inApp = true;
 
@@ -45,14 +46,14 @@ class PaymentDonationScreen extends GetView<PaymentController> {
       if (projectId != null) queryParamsReg += "projectId=$projectId&";
       if (amount != null) queryParamsReg += "amount=$amount&";
       if (date != null) queryParamsReg += "date=$date&";
-      if (orderId != null) queryParamsReg += "orderId=$orderId&";
+      if (controller.orderId.value != null) queryParamsReg += "orderId=${controller.orderId.value}&";
       queryParamsReg += "inApp=$inApp";
 
       if (projectId != null) queryParamsOnce += "projectId=$projectId&";
       if (amount != null) queryParamsOnce += "amount=$amount&";
       if (date != null) queryParamsOnce += "date=$date&";
       if (title != null) queryParamsOnce += "title=$title&";
-      if (orderId != null) queryParamsOnce += "orderId=$orderId&";
+      if (controller.orderId.value != null) queryParamsOnce += "orderId=${controller.orderId.value}&";
       queryParamsOnce += "inApp=$inApp";
 
       final regUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
@@ -190,8 +191,22 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                             text: "확인",
                             onTap: () async {
                               print(">>> 현재 결제방식 state: ${state}");
-                              _urlMaker();
-                              await launch(finalUrl, forceWebView: false, forceSafariVC: false); //TODO) forceWebView forceSafariVC 가 false : 외부 브라우저, true : 내부 브라우저
+                              //TODO) 04-00 api 요청 -> orderId 반환
+                              var result = await OrderApi.requestOrderId(
+                                  projectId: ProjectController.to.projectId,
+                                  amount: controller.selectedAmount.value
+                              );
+                              if (result != null) {
+                                controller.orderId.value = result; //orderId 업데이트
+                                print('>> orderId --controller: ${controller.orderId.value}');
+                                Fluttertoast.showToast(msg: "기부 진행 시작!");
+                                _urlMaker();
+                                await launch(finalUrl, forceWebView: false, forceSafariVC: false); //TODO) forceWebView forceSafariVC 가 false : 외부 브라우저, true : 내부 브라우저
+                              } else {
+                                controller.orderId.value = '';
+                                Fluttertoast.showToast(msg: "기부 진행 실패");
+                              }
+
                               /* //TODO) 인앱에서 화면 자체에 띄우는 방식
                               if (state == 'REGULAR') {
                                 /// 정기결제
