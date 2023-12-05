@@ -48,7 +48,6 @@ class PaymentMethodWebView extends StatelessWidget {
     final onceUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
 
     final fullUrl = state == 'REGULAR' ? regUrl : onceUrl;
-    (state == 'REGULAR') ? print('>> 생성된 인앱 정기결제 url: ${fullUrl}') : print('>> 생성된 인앱 단기결제 url: ${fullUrl}');
 
     var _webViewController = WebViewController()
       ..loadRequest(Uri.parse(fullUrl))
