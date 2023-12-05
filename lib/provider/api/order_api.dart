@@ -1,13 +1,43 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:match/model/card_info/card_info.dart';
 import 'package:match/model/donator/donator.dart';
+import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
 
 import '../../util/const/style/global_logger.dart';
 import 'util/dio_services.dart';
 
 class OrderApi {
+
+  ///<h2>4-0API | 결제 요청용 처음 결제할 때 요청 보내기 return orderId</h2>
+  static Future<bool> setOrderRequest({
+    required int projectId,
+    required int amount,
+}) async {
+    try {
+      Response response = await DioServices()
+          .to()
+          .post("/order/v2/${projectId}",
+          queryParameters: {"projectId": projectId, "amount": amount});
+
+      PaymentController paymentController = Get.find();
+      var orderId = response.data[SUCCESS][RESULT];
+      paymentController.orderId.value = orderId;
+
+      print(">>> 단기결제 시 결제창에 전달할 orderId: ${orderId}");
+
+      return response.data[SUCCESS];
+    } catch (e) {
+      logger.e(e.toString());
+      return false;
+    }
+  }
 
   ///<h2>4-2API | 정기 결제용 카드 등록</h2>
   static Future<bool> setCard({

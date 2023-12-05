@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
 import 'package:match/modules/payment/view/payment_method_info_view.dart';
+import 'package:match/modules/payment/view/payment_method_web_view.dart';
 import 'package:match/modules/payment/widget/select_amount_widget.dart';
 import 'package:match/modules/payment/widget/select_paydate_widget.dart';
 import 'package:match/modules/project/controller/project_controller.dart';
@@ -26,6 +27,11 @@ class PaymentDonationScreen extends GetView<PaymentController> {
   @override
   Widget build(BuildContext context){
     final String state = _projectController.projectDetail.value.regularStatus;
+    final int projectId = controller.projectId.value;
+    final int amount = controller.selectedAmount.value;
+    final int date = controller.selectedDate.value;
+    final String orderId = controller.orderId.value;
+    final String title = _projectController.projectDetail.value.title;
 
     return  Scaffold(
       body: Column(
@@ -152,15 +158,40 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                     Obx(() =>
                     controller.isPayAbleReg.value
                         ? CommonButton.login(
-                      text: "확인",
-                      onTap: () async {
-                        Get.to(PaymentMethodScreen());
-                      },
-                    )
+                            text: "확인",
+                            onTap: () async {
+                              //Get.to(PaymentMethodScreen());
+                              if (state == 'REGULAR') {
+                                /// 정기결제
+                                Get.to(PaymentMethodWebView(
+                                  appTitle: "기부금 정기 결제하기",
+                                  state: state,
+                                  webUrl: "/auth/pay",
+                                  projectId: projectId,
+                                  amount: amount,
+                                  date: date,
+                                  inApp: true,
+                                ));
+                              } else {
+                                /// 단기결제
+                                Get.to(PaymentMethodWebView(
+                                  appTitle: "기부금 단기 결제하기",
+                                  state: state,
+                                  webUrl: "/auth/pay",
+                                  projectId: projectId,
+                                  amount: amount,
+                                  date: date,
+                                  orderId: orderId,
+                                  title: title,
+                                  inApp: true,
+                                ));
+                              }
+                            },
+                          )
                         : CommonButton.loginDis(
-                      text: "확인",
-                      onTap: () async {},
-                    ),
+                            text: "확인",
+                            onTap: () async {},
+                          ),
                     )
                 ),
               ),

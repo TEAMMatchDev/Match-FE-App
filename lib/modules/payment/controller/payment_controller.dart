@@ -22,10 +22,12 @@ class PaymentController extends GetxController {
 
   RxList<Pay> payList = <Pay>[].obs;
 
-  RxString donateState = "".obs;
+  /// 기부상태 (정기/단기)
+  RxString donateState = "".obs; // or REGULAR
   RxInt projectId = 0.obs;
 
-  /// 기부상태 (정기/단기)
+  var orderId = ''.obs; /// 단기결제 시 웹뷰에 전달 해야하는 orderId
+
 
   //TODO) 후원자 정보
   Rx<Donator> donator = tmpDonator.obs;
