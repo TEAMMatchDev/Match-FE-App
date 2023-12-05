@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
 import 'package:match/modules/payment/view/payment_method_info_view.dart';
+import 'package:match/modules/payment/view/payment_method_web_view.dart';
 import 'package:match/modules/payment/widget/select_amount_widget.dart';
 import 'package:match/modules/payment/widget/select_paydate_widget.dart';
 import 'package:match/modules/project/controller/project_controller.dart';
+import 'package:match/provider/api/order_api.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
 import 'package:match/util/components/global_number_field.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
@@ -26,6 +31,37 @@ class PaymentDonationScreen extends GetView<PaymentController> {
   @override
   Widget build(BuildContext context){
     final String state = _projectController.projectDetail.value.regularStatus;
+    final int projectId = controller.projectId.value;
+    final int amount = controller.selectedAmount.value;
+    final int date = controller.selectedDate.value;
+    final String title = _projectController.projectDetail.value.title;
+    final bool inApp = true;
+
+    String webUrl = '/auth/pay';
+    String finalUrl = '';
+    String queryParamsReg = "";
+    String queryParamsOnce = "";
+
+    void _urlMaker() {
+      if (projectId != null) queryParamsReg += "projectId=$projectId&";
+      if (amount != null) queryParamsReg += "amount=$amount&";
+      if (date != null) queryParamsReg += "date=$date&";
+      if (controller.orderId.value != null) queryParamsReg += "orderId=${controller.orderId.value}&";
+      queryParamsReg += "inApp=$inApp";
+
+      if (projectId != null) queryParamsOnce += "projectId=$projectId&";
+      if (amount != null) queryParamsOnce += "amount=$amount&";
+      if (date != null) queryParamsOnce += "date=$date&";
+      if (title != null) queryParamsOnce += "title=$title&";
+      if (controller.orderId.value != null) queryParamsOnce += "orderId=${controller.orderId.value}&";
+      queryParamsOnce += "inApp=$inApp";
+
+      final regUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
+      final onceUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
+
+      finalUrl = state == 'REGULAR' ? regUrl : onceUrl;
+      (state == 'REGULAR') ? print('>> 생성된 인앱 정기결제 url: ${finalUrl}') : print('>> 생성된 인앱 단기결제 url: ${finalUrl}');
+    }
 
     return  Scaffold(
       body: Column(
@@ -152,15 +188,57 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                     Obx(() =>
                     controller.isPayAbleReg.value
                         ? CommonButton.login(
-                      text: "확인",
-                      onTap: () async {
-                        Get.to(PaymentMethodScreen());
-                      },
-                    )
+                            text: "확인",
+                            onTap: () async {
+                              print(">>> 현재 결제방식 state: ${state}");
+                              //TODO) 04-00 api 요청 -> orderId 반환
+                              var result = await OrderApi.requestOrderId(
+                                  projectId: ProjectController.to.projectId,
+                                  amount: controller.selectedAmount.value
+                              );
+                              if (result != null) {
+                                controller.orderId.value = result; //orderId 업데이트
+                                print('>> orderId --controller: ${controller.orderId.value}');
+                                Fluttertoast.showToast(msg: "기부 진행 시작!");
+                                _urlMaker();
+                                await launch(finalUrl, forceWebView: false, forceSafariVC: false); //TODO) forceWebView forceSafariVC 가 false : 외부 브라우저, true : 내부 브라우저
+                              } else {
+                                controller.orderId.value = '';
+                                Fluttertoast.showToast(msg: "기부 진행 실패");
+                              }
+
+                              /* //TODO) 인앱에서 화면 자체에 띄우는 방식
+                              if (state == 'REGULAR') {
+                                /// 정기결제
+                                Get.to(PaymentMethodWebView(
+                                  appTitle: "기부금 정기 결제하기",
+                                  state: state,성
+                                  webUrl: "/auth/pay",
+                                  projectId: projectId,
+                                  amount: amount,
+                                  date: date,
+                                  inApp: true,
+                                ));
+                              } else if (state == 'ONE_TIME'){
+                                /// 단기결제
+                                Get.to(PaymentMethodWebView(
+                                  appTitle: "기부금 단기 결제하기",
+                                  state: state,
+                                  webUrl: "/auth/pay",
+                                  projectId: projectId,
+                                  amount: amount,
+                                  date: 0,
+                                  orderId: orderId,
+                                  title: title,
+                                  inApp: true,
+                                ));
+                              }*/
+                            },
+                          )
                         : CommonButton.loginDis(
-                      text: "확인",
-                      onTap: () async {},
-                    ),
+                            text: "확인",
+                            onTap: () async {},
+                          ),
                     )
                 ),
               ),

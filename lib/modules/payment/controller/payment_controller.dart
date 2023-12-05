@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/card_info/card_info.dart';
@@ -22,10 +23,12 @@ class PaymentController extends GetxController {
 
   RxList<Pay> payList = <Pay>[].obs;
 
-  RxString donateState = "".obs;
+  /// 기부상태 (정기/단기)
+  RxString donateState = "".obs; // or REGULAR
   RxInt projectId = 0.obs;
 
-  /// 기부상태 (정기/단기)
+  var orderId = ''.obs; /// 단기결제 시 웹뷰에 전달 해야하는 orderId
+
 
   //TODO) 후원자 정보
   Rx<Donator> donator = tmpDonator.obs;
@@ -42,7 +45,8 @@ class PaymentController extends GetxController {
 
   final Rx<int> inputValue = 0.obs;
   final Rx<int> selectedAmount = 1000.obs;
-  final Rx<int> selectedDate = 1.obs;
+  final Rx<int> selectedDate = 0.obs;
+
 
   void updateIsPayAbleReg() { /// 금액, 날짜 null 체크
     if (selectedAmount.value > 0 && (selectedDate.value >= 1 && selectedDate.value <= 31)) {
@@ -118,6 +122,10 @@ class PaymentController extends GetxController {
   void onInit() async {
     super.onInit();
     clearInputFields();
+
+    if(ProjectController.to.projectDetail.value.regularStatus == 'REGULAR') {
+      selectedDate.value = 1;
+    }
   }
 
   void clearInputFields() {
@@ -149,6 +157,7 @@ class PaymentController extends GetxController {
     if (accessFrom != 'mypage'){
       print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n "
           "paymentController onInit 내부 :: projectId: ${ProjectController.to.projectId}");
+
       donateState.value = ProjectController.to.projectDetail.value.regularStatus;
       projectId.value = ProjectController.to.projectId;
     }

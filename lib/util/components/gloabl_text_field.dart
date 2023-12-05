@@ -29,20 +29,21 @@ class CommonSearchField extends StatelessWidget {
   final String suffixActiveIcon;
   final String suffixUnActiveIcon;
 
-  const CommonSearchField(
-      {super.key,
-      required this.textController,
-      required this.placeHolder,
-      this.isSearchScreen = true,
-      required this.textStatus,
-      this.hasPrefix = true,
-      this.alwaysSuffix = false,
-      required this.onSubmitted,
-      required this.onChanged,
-      required this.suffixOnTap,
-      this.isPlain = false,
-      this.suffixActiveIcon = "search_cancel_22",
-      this.suffixUnActiveIcon = "search_cancel_22"});
+  const CommonSearchField({
+        super.key,
+        required this.textController,
+        required this.placeHolder,
+        this.isSearchScreen = true,
+        required this.textStatus,
+        this.hasPrefix = true,
+        this.alwaysSuffix = false,
+        required this.onSubmitted,
+        required this.onChanged,
+        required this.suffixOnTap,
+        this.isPlain = false,
+        this.suffixActiveIcon = "search_cancel_22",
+        this.suffixUnActiveIcon = "search_cancel_22",
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -169,25 +170,28 @@ class CommonInputField extends StatelessWidget {
   final Future<void> Function()? suffixOnTap;
   final int? maxLength;
   final int? maxLines;
+  final bool isPassword;
 
-  const CommonInputField(
-      {super.key,
-      required this.textController,
-      required this.placeHolder,
-      required this.alwaysSuffix,
-      required this.onSubmitted,
-      required this.onChanged,
-      this.inputType = TextInputType.text,
-      this.suffixOnTap,
-      required this.autoFocus,
-      this.cursorHeight,
-      this.maxLength,
-      this.maxLines});
+  const CommonInputField({
+    super.key,
+    required this.textController,
+    required this.placeHolder,
+    required this.alwaysSuffix,
+    required this.onSubmitted,
+    required this.onChanged,
+    this.inputType = TextInputType.text,
+    this.suffixOnTap,
+    required this.autoFocus,
+    this.cursorHeight,
+    this.maxLength,
+    this.maxLines,
+    this.isPassword = false
+  });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoTextField(
-      maxLines: maxLines,
+      maxLines: isPassword ? 1 : maxLines,
       maxLength: maxLength,
       controller: textController,
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
@@ -233,6 +237,7 @@ class CommonInputField extends StatelessWidget {
       onChanged: ((value) async {
         await onChanged(value);
       }),
+      obscureText: isPassword,
     );
   }
 
@@ -262,6 +267,7 @@ class CommonInputField extends StatelessWidget {
         onSubmitted: (value) async {},
         onChanged: onChange,
         inputType: TextInputType.visiblePassword,
+        isPassword: true,
         autoFocus: true);
   }
 
@@ -275,6 +281,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.emailAddress,
         autoFocus: true);
   }
 
@@ -289,6 +296,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.emailAddress,
         autoFocus: true);
   }
 
@@ -302,6 +310,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.number,
         autoFocus: true);
   }
 
@@ -315,6 +324,8 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.visiblePassword,
+        isPassword: true,
         autoFocus: true);
   }
 
@@ -328,6 +339,8 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.visiblePassword,
+        isPassword: true,
         autoFocus: true);
   }
 
@@ -341,6 +354,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
+        inputType: TextInputType.name,
         autoFocus: true);
   }
 
