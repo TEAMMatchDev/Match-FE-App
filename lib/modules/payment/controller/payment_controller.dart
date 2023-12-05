@@ -46,6 +46,7 @@ class PaymentController extends GetxController {
   final Rx<int> selectedAmount = 1000.obs;
   final Rx<int> selectedDate = 0.obs;
 
+
   void updateIsPayAbleReg() { /// 금액, 날짜 null 체크
     if (selectedAmount.value > 0 && (selectedDate.value >= 1 && selectedDate.value <= 31)) {
       isPayAbleReg.value = true;
@@ -120,6 +121,11 @@ class PaymentController extends GetxController {
   void onInit() async {
     super.onInit();
     clearInputFields();
+
+    if(ProjectController.to.projectDetail.value.regularStatus == 'REGULAR') {
+      selectedDate.value = 1;
+    }
+
   }
 
   void clearInputFields() {
@@ -151,6 +157,7 @@ class PaymentController extends GetxController {
     if (accessFrom != 'mypage'){
       print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n "
           "paymentController onInit 내부 :: projectId: ${ProjectController.to.projectId}");
+
       donateState.value = ProjectController.to.projectDetail.value.regularStatus;
       projectId.value = ProjectController.to.projectId;
     }
