@@ -22,14 +22,8 @@ if (keystorePropertiesFile.exists()) {
 
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '3'
-}
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0.2'
-}
 
 
 //앱키
