@@ -25,7 +25,7 @@ class DioServices {
 
   DioServices._internal() {
     BaseOptions _baseOptions = BaseOptions(
-      baseUrl: dotenv.env["prodApiUrl"]!,
+      baseUrl: dotenv.env["devApiUrl"]!,
       connectTimeout: const Duration(milliseconds: 10000),
       receiveTimeout: const Duration(milliseconds: 10000),
       sendTimeout: const Duration(milliseconds: 10000),
@@ -122,7 +122,7 @@ Future<String> setNewAccessToken() async {
   var refreshToken = await GetStorageUtil.getToken(StorageKey.REFRESH_TOKEN);
   logger.e("refresh token : $refreshToken");
   BaseOptions _baseOptions = BaseOptions(
-    baseUrl: dotenv.env["prodApiUrl"]!,
+    baseUrl: dotenv.env["devApiUrl"]!,
     connectTimeout: const Duration(milliseconds: 10000),
     receiveTimeout: const Duration(milliseconds: 10000),
     sendTimeout: const Duration(milliseconds: 10000),
