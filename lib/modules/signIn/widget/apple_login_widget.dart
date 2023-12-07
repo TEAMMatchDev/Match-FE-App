@@ -50,6 +50,7 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       // 인증 성공 후 처리
       // print('>>> 애플로그인 사용자 정보 : credential 전체 = $credential');
       // print('>>> 애플로그인 사용자 정보 : userIdentifier = ${credential.userIdentifier}');
+      // print('>>> 애플로그인 사용자 정보 : userIdentifier = ${credential.userIdentifier}');
       // print('>>> 애플로그인 사용자 정보 : givenName = ${credential.givenName}');
       // print('>>> 애플로그인 사용자 정보 : familyName = ${credential.familyName}');
       // print('>>> 애플로그인 사용자 정보 : authorizationCode = ${credential.authorizationCode}');
@@ -83,6 +84,16 @@ class _AppleLoginState extends State<AppleLoginWidget> {
         loginController.setPlatform('apple');
         print(">>> apple_login_widget:: controller에 저장된 socialId: ${signUpController.socialId.value}");
         print(">>> apple_login_widget:: controller에 저장된 email: ${signUpController.signUpId.value}");
+
+        if (credential.givenName != '' && credential.familyName != '') {
+          String given = credential.givenName ?? '';
+          String family = credential.familyName ?? '';
+          print('>>> 애플로그인 사용자 givenName = ${given}');
+          print('>>> 애플로그인 사용자 familyName = ${family}');
+
+          signUpController.signUpName.value = loginController.setAppleLoginUserName(given, family);
+          print(">>> 애플로그인 사용자 정보 : ${loginController.setAppleLoginUserName(given, family)}");
+        }
 
         //Get.to(Routes.sign_up, arguments: {'socialId': signUpController.socialId.value});
         Get.to(SignUpInfoScreen()); /// 애플유저 회원가입 정보 입력

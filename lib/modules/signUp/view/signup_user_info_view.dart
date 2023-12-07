@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart'; //Date Format 사용
 import 'package:match/model/enum/search_status.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/modules/signUp/view/agreement_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
@@ -34,8 +35,12 @@ class SignUpInfoScreen extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context){
+    final LoginController loginController = Get.find<LoginController>();
+
     print(">>> signup_user_info_view:: controller에 저장된 socialId: ${controller.socialId.value}");
     print(">>> signup_user_info_view:: controller에 저장된 email: ${controller.signUpId.value}");
+    print(">>> signup_user_info_view:: loginController에 저장된 loginPlatform: ${loginController.loginPlatform}");
+    print(">>> signup_user_info_view:: loginController에 저장된 default 생년월일: ${controller.signUpBirth.value}");
 
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
@@ -56,18 +61,24 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                           style: AppTextStyles.T1Bold18,
                         ),
                         SizedBox(height: 30.h),
-                        Text(
-                          '이름',
-                          style: AppTextStyles.T1Bold14,
-                        ),
-                        SizedBox(height: 10.h),
-                        CommonInputField.userName(
-                            textController : controller.userNameTextController.value,
-                            onChange: (value) async {
-                              print(">>> 입력한 이름: $value");
-                              controller.signUpName.value = value;
-                            }),
-                        SizedBox(height: 20.h),
+                        if (loginController.loginPlatform != 'apple')
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '이름',
+                                style: AppTextStyles.T1Bold14,
+                              ),
+                              SizedBox(height: 10.h),
+                              CommonInputField.userName(
+                                  textController : controller.userNameTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 이름: $value");
+                                    controller.signUpName.value = value;
+                                  }),
+                              SizedBox(height: 20.h),
+                            ],
+                          ),
                         Text(
                           '성별',
                           style: AppTextStyles.T1Bold14,

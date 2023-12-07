@@ -256,7 +256,10 @@ class _SignUpMailScreenState extends State<SignUpMailScreen> with WidgetsBinding
     else {
       return CommonButton.loginDis(
         text: "확인",
-        onTap: () async {},
+        onTap: () async {
+          Get.to(SignUpInfoScreen());
+
+        },
       );
     }
   }

@@ -310,7 +310,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
-        inputType: TextInputType.number,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -380,7 +380,7 @@ class CommonInputField extends StatelessWidget {
             onChange(value);
           }
         },
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -405,7 +405,7 @@ class CommonInputField extends StatelessWidget {
             onChange(value);
           }
         },
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -434,7 +434,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -488,7 +488,7 @@ class CommonInputField extends StatelessWidget {
             onChange(value);
           }
         },
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -553,7 +553,7 @@ class CommonInputField extends StatelessWidget {
             onChange(value);
           }
         },
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -578,7 +578,7 @@ class CommonInputField extends StatelessWidget {
             onChange(value);
           }
         },
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -603,7 +603,7 @@ class CommonInputField extends StatelessWidget {
             onChange(value);
           }
         },
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -628,7 +628,7 @@ class CommonInputField extends StatelessWidget {
             onChange(value);
           }
         },
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: true);
   }
 
@@ -654,7 +654,7 @@ class CommonInputField extends StatelessWidget {
         alwaysSuffix: false,
         onSubmitted: (value) async {},
         onChanged: onChange,
-        inputType: TextInputType.phone,
+        inputType: TextInputType.text,
         autoFocus: false);
   }
 

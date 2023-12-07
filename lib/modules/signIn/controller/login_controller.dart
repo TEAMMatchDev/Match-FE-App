@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:match/model/enum/login_type.dart';
 
 import '../../../model/enum/search_status.dart';
@@ -37,6 +38,16 @@ class LoginController extends GetxController {
   var appleLoginToken = ''.obs;
   void setAppleLoginToken(String token) {
     appleLoginToken.value = token;
+  }
+
+  var givenName = ''.obs;
+  var familyName = ''.obs;
+  var fullName = ''.obs;
+  String setAppleLoginUserName(String given, family) {
+    givenName.value = given;
+    familyName.value = family;
+    fullName.value = family+given;
+    return fullName.value;
   }
 
   @override
