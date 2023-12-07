@@ -58,8 +58,8 @@ class PaymentDonationScreen extends GetView<PaymentController> {
       if (controller.orderId.value != null) queryParamsOnce += "orderId=${controller.orderId.value}&";
       queryParamsOnce += "inApp=$inApp";
 
-      final regUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
-      final onceUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
+      final regUrl = (dotenv.env['prodWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
+      final onceUrl = (dotenv.env['prodWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
 
       finalUrl = state == 'REGULAR' ? regUrl : onceUrl;
       (state == 'REGULAR') ? print('>> 생성된 인앱 정기결제 url: ${finalUrl}') : print('>> 생성된 인앱 단기결제 url: ${finalUrl}');

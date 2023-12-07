@@ -44,8 +44,8 @@ class PaymentMethodWebView extends StatelessWidget {
     if (orderId != null) queryParamsOnce += "orderId=$orderId&";
     queryParamsOnce += "inApp=$inApp";
 
-    final regUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
-    final onceUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
+    final regUrl = (dotenv.env['prodWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
+    final onceUrl = (dotenv.env['prodWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
 
     final fullUrl = state == 'REGULAR' ? regUrl : onceUrl;
 
