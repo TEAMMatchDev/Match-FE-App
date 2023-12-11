@@ -64,14 +64,14 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
   int selectedAmountInt = 1000;
 
   final amountButtons = [
-    ['1,000', '5,000', '10,000'],
-    ['20,000', '30,000', '더보기'],
+    ['1,000', '3,000', '5,000'],
+    ['10,000', '15,000', '더보기'],
   ];
   final expandedAmountButtons = [
-    ['1,000', '5,000', '10,000'],
-    ['20,000', '30,000', '50,000'],
-    ['70,000', '100,000', '150,000'],
-    ['200,000', '250,000', '300,000'],
+    ['1,000', '3,000', '5,000'],
+    ['10,000', '15,000', '20,000'],
+    ['25,000', '30,000', '50,000'],
+    ['100,000', '200,000', '300,000'],
   ];
   List<List<String>> displayedAmountButtons = [];
 
@@ -102,7 +102,7 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
     else {
       _paymentController.updateIsPayAbleOnce();
     }
-    //print('>>>set된 금액 ${_paymentController.selectedAmount.value}');
+    print('>>> 선택한 금액 ${_paymentController.selectedAmount.value}');
 
     return Column(
       children: [
@@ -120,7 +120,7 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                       if (row[i] == '더보기') {
                         selectedAmountStr = row[i];
                         selectedAmountInt = 0;
-                        //print('선택된 금액: '+selectedAmountInt.toString());
+                        print('선택된 금액: ${selectedAmountInt.toString()}');
                         _paymentController.selectedAmount.value = selectedAmountInt;
                         if(_paymentController.donateState.value == "REGULAR") {
                           _paymentController.updateIsPayAbleReg();
@@ -133,7 +133,7 @@ class _RadioButtonsState extends State<SelectAmountRadioButtons> {
                       setState(() {
                         selectedAmountStr = row[i];
                         selectedAmountInt = int.parse(row[i].replaceAll(',', ''));
-                        //print('선택된 금액: '+selectedAmountInt.toString());
+                        print('선택된 금액: ${selectedAmountInt.toString()}');
                         _paymentController.selectedAmount.value = selectedAmountInt;
                         if(_paymentController.donateState.value == "REGULAR") {
                           _paymentController.updateIsPayAbleReg();

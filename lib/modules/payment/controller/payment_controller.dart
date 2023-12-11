@@ -52,6 +52,16 @@ class PaymentController extends GetxController {
     if (selectedAmount.value > 0 && (selectedDate.value >= 1 && selectedDate.value <= 31)) {
       isPayAbleReg.value = true;
     } else {
+      if (selectedDate.value == 0){
+        Fluttertoast.showToast(msg: "결제일은 1일 이상으로 선택해야 합니다.");
+        selectedDate.value = 0;
+        payDateTextController.value.clear();
+      }
+      if (selectedDate.value > 31) {
+        Fluttertoast.showToast(msg: "결제일은 31일을 넘길 수 없습니다.");
+        selectedDate.value = 0;
+        payDateTextController.value.clear();
+      }
       isPayAbleReg.value = false;
     }
   }
@@ -89,6 +99,9 @@ class PaymentController extends GetxController {
   /// 카드 비밀번호 todo- ** 로 표시
   Rx<TextEditingController> cardPWTextController = TextEditingController().obs;
 
+  //TODO) 결제 정보
+  /// 매월 결제일
+  Rx<TextEditingController> payDateTextController = TextEditingController().obs;
 
 
   //TODO) 애플로그인 사용자 정보
