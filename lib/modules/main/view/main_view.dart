@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:match/model/enum/project_type.dart';
+import 'package:match/modules/donate/controller/donate_controller.dart';
 import 'package:match/modules/donate/view/donate_view.dart';
 import 'package:match/modules/event/view/event_view.dart';
 import 'package:match/modules/home/view/home_view.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
+import 'package:match/provider/api/project_api.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
 import '../../../util/const/style/global_color.dart';
@@ -17,6 +22,7 @@ class MainScreen extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
+    final DonateController donateController = Get.find();
     return Obx(
       () => Scaffold(
         body: [
@@ -31,6 +37,15 @@ class MainScreen extends GetView<MainController> {
           currentIndex: controller.selectIdx.value,
           onTap: ((value) async {
             controller.selectIdx.value = value;
+            if (value == 1) {
+              // 검색탭 클릭
+              donateController.selectIdx.value != 0
+                  ? donateController.projectList.assignAll(
+                  await ProjectApi.getProjectList(
+                      type: ProjectType.values[donateController.selectIdx.value - 1]))
+                  : donateController.projectList.assignAll(
+                  await ProjectApi.getProjectList());
+            }
           }),
           selectedItemColor: AppColors.grey9,
           selectedLabelStyle: AppTextStyles.T1Bold12,
