@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,6 +32,7 @@ class _CarouselExampleState extends State<OnboardingWidget> {
   ];
 
   int _currentSlide = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +139,8 @@ class _CarouselExampleState extends State<OnboardingWidget> {
           );
         }).toList(),
         options: CarouselOptions(
-          enableInfiniteScroll: false,
+          enableInfiniteScroll: false, //좌우 무한 스크롤 해제
+          pauseAutoPlayInFiniteScroll: true,
           aspectRatio: 10 / 9.5,  //슬라이드의 종횡비 4:3
           autoPlay: true,
           viewportFraction: 320 / 320, //화면에 보이는 슬라이드 크기
