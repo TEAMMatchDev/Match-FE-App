@@ -9,6 +9,8 @@ import 'package:match/util/const/style/global_text_styles.dart';
 import 'package:match/util/method/permission_handler.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../provider/api/payment_api.dart';
+
 class CommonDialog extends StatelessWidget {
   final String title;
   final String? subtitle;
@@ -96,14 +98,17 @@ class CommonDialog extends StatelessWidget {
     );
   }
 
-  factory CommonDialog.payDelete({required BuildContext context}) {
+  factory CommonDialog.payDelete(
+      {required BuildContext context, required int regularId}) {
     return CommonDialog(
       title: "정기기부를 해지하시겠어요?",
       subtitle: null,
       grantText: "해지하기",
       onGrant: () async {
-        //TODO: delete api 호출
-        await Get.to(() => const PaymentExpireScreen());
+        var result = await PaymentApi.deleteDonate(regularId: regularId);
+        if(result){
+          await Get.to(() => const PaymentExpireScreen());
+        }
       },
     );
   }

@@ -1,85 +1,146 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:match/modules/payment/controller/payment_controller.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 
-class NumberInputFieldExample extends GetView<PaymentController> {
-  final TextEditingController textController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        NumberInputField(
-          textController: textController,
-          placeHolder: "직접 입력",
-          onChanged: (value) {
-            controller.selectedDate.value = int.parse(value);
-            controller.updateIsPayAbleReg();
-            //print('>>> 입력한: ${controller.selectedDate.value}');
-          },
-          isPlain: true,
-        ),
-      ],
-    );
-  }
-}
-
-class NumberInputField extends StatelessWidget {
+class CommonNumberField extends StatefulWidget {
   final TextEditingController textController;
   final String placeHolder;
-  final void Function(String) onChanged;
-  final bool isPlain;
+  final bool autoFocus;
+  final bool alwaysSuffix;
+  final TextInputType inputType;
+  final double? cursorHeight;
+  final Future<void> Function(String) onSubmitted;
+  final Future<void> Function(String) onChanged;
+  final Future<void> Function()? suffixOnTap;
+  final int? maxLength;
+  final int? maxLines;
+  final bool isPassword;
 
-  NumberInputField({
+  const CommonNumberField({
     Key? key,
     required this.textController,
     required this.placeHolder,
+    required this.autoFocus,
+    required this.alwaysSuffix,
+    required this.inputType,
+    required this.onSubmitted,
     required this.onChanged,
-    this.isPlain = false,
+    this.suffixOnTap,
+    this.cursorHeight,
+    this.maxLength,
+    this.maxLines,
+    this.isPassword = false,
   }) : super(key: key);
+
+  factory CommonNumberField.payDate({
+    required TextEditingController textController,
+    required Future<void> Function(String) onChange,
+  }) {
+    return CommonNumberField(
+      textController: textController,
+      placeHolder: "직접 입력",
+      alwaysSuffix: false,
+      onSubmitted: (value) async {},
+      onChanged: (value) async {
+        if (value.length > 2) {
+          Fluttertoast.showToast(msg: "2자리를 넘을 수 없습니다.");
+          textController.text = value.substring(0, 2);
+          textController.selection = TextSelection.fromPosition(
+            TextPosition(offset: textController.text.length),
+          );
+        } else {
+          onChange(value);
+        }
+      },
+      inputType: TextInputType.text,
+      autoFocus: true,
+      isPassword: false,
+    );
+  }
+
+  @override
+  _CommonNumberFieldState createState() => _CommonNumberFieldState();
+}
+
+class _CommonNumberFieldState extends State<CommonNumberField> {
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _focusNode.addListener(_handleFocusChange);
+  }
+
+  void _handleFocusChange() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    _focusNode.removeListener(_handleFocusChange);
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100.w,
-      height: 46.h,
-      child: TextField(
-        controller: textController,
-        decoration: InputDecoration(
-          labelText: placeHolder,
-          labelStyle: TextStyle(
-            color: isPlain ? AppColors.white : AppColors.grey10, // placeholder 텍스트 색상 설정
-          ),
-          filled: isPlain,
-          fillColor: isPlain ? AppColors.grey10 : AppColors.white, // 선택되어 활성화되면 배경색을 AppColors.grey9로, 비활성화면 white로 설정
-          contentPadding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: isPlain ? AppColors.grey10 : AppColors.grey1, // 미활성 상태에서는 Colors.grey 사용
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: BorderSide(
-              color: AppColors.grey9, // 활성 상태에서 AppColors.grey9 사용
-            ),
-          ),
-        ),
-        keyboardType: TextInputType.number,
-        onChanged: onChanged,
-        textAlign: TextAlign.center,
-        inputFormatters: [
-          FilteringTextInputFormatter.allow(RegExp(r'^1?[1-9]$|^2[0-8]$')),
-        ],
-        style: AppTextStyles.T1Bold16.copyWith(
-          color: isPlain ? AppColors.white : AppColors.grey9,
+    return CupertinoTextField(
+      focusNode: _focusNode,
+      maxLines: widget.isPassword ? 1 : widget.maxLines,
+      maxLength: widget.maxLength,
+      controller: widget.textController,
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
+      decoration: BoxDecoration(
+        color: _focusNode.hasFocus ? AppColors.black : AppColors.white,
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          color: _focusNode.hasFocus ? AppColors.white : (widget.textController
+              .text.isNotEmpty ? AppColors.grey8 : AppColors.grey1),
         ),
       ),
+      keyboardType: widget.inputType,
+      textAlignVertical: widget.cursorHeight != null ? TextAlignVertical(
+          y: widget.cursorHeight!) : null,
+      cursorColor: AppColors.black,
+      cursorHeight: 18.h,
+      style: AppTextStyles.T1Bold13.copyWith(
+        color: _focusNode.hasFocus ? AppColors.white : AppColors.grey8,
+        height: 1.5,
+      ),
+      placeholder: widget.placeHolder,
+      placeholderStyle: AppTextStyles.T1Bold13.copyWith(
+          color: AppColors.grey4, height: 1.5),
+      suffixMode: !widget.alwaysSuffix
+          ? OverlayVisibilityMode.editing
+          : OverlayVisibilityMode.always,
+      suffix: GestureDetector(
+        onTap: () async {
+          widget.textController.clear();
+          if (widget.onChanged != null) {
+            await widget.onChanged("");
+          }
+        },
+        child: Padding(
+          padding: EdgeInsets.only(right: 14.w),
+          child: SvgPicture.asset(
+              "assets/icons/ic_search_cancel_22.svg"), // Update with your icon path
+        ),
+      ),
+      autofocus: widget.autoFocus,
+      onSubmitted: (value) async {
+        await widget.onSubmitted(value);
+      },
+      onChanged: (value) async {
+        await widget.onChanged(value);
+      },
+      obscureText: widget.isPassword,
     );
   }
 }

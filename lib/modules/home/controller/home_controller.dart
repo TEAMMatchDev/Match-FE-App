@@ -3,7 +3,9 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk_share.dart';
 import 'package:match/provider/api/banner_api.dart';
 import 'package:match/provider/api/flame_api.dart';
 import 'package:match/provider/api/util/global_api_field.dart';
+import 'package:match/util/const/global_variable.dart';
 import '../../../model/banner/banners.dart';
+import '../../../model/enum/banner_type.dart';
 import '../../../model/flame/flame.dart';
 import '../../../util/const/style/global_logger.dart';
 import '../../../util/method/dynamic_link.dart';
@@ -16,8 +18,18 @@ class HomeController extends GetxController {
   RxInt currentIdx = 1.obs;
 
   /// banner 전체 개수
-  RxInt adCount = 0.obs;
-  RxList<Banners> bannerList = <Banners>[].obs;
+  RxInt adCount = 2.obs;
+  RxList<Banners> bannerList = <Banners>[
+    Banners(
+        bannerId: -2,
+        bannerType: BannerType.CONTENTS.name,
+        bannerImg: imgDir + "iv_ad_1.png"),
+    Banners(
+        bannerId: -1,
+        bannerType: BannerType.CONTENTS.name,
+        bannerImg: imgDir + "iv_ad_2.png",
+        contentsUrl: "https://litt.ly/match.official"),
+  ].obs;
 
   /// flame 전체 개수
   /// * flame 전체 개수를 화면에 text형태로 표시하기 위해
@@ -33,16 +45,17 @@ class HomeController extends GetxController {
     if (!(FlameApi.burningFlame.totalCnt ~/ PAGINATION_SIZE <
             FlameApi.burningFlame.currentpage + 1) &&
         !FlameApi.burningFlame.isLast) {
-      FlameApi.burningFlame.currentpage = index;
-
       flameList.addAll(await FlameApi.getBurningFlameList(getMore: true));
+      FlameApi.burningFlame.currentpage = index;
     }
   }
 
   ///*카카오톡 공유하기 메소드
-  Future<void> kakoShare({required String imgUrl,required int donationId}) async {
+  Future<void> kakoShare(
+      {required String imgUrl, required int projectId}) async {
     var appLink =
-    await DynamicLink.getShortLink(screenName: "project", id: donationId);
+        await DynamicLink.getShortLink(screenName: "project", id: projectId);
+    logger.e(appLink);
     ShareClient shareClient = ShareClient.instance;
     //카카오톡 설치 여부 판별
     bool isKakaoTalkSharingAvailable =
@@ -90,10 +103,17 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    bannerList.assignAll(await BannerApi.getBannerList());
-    adCount.value = bannerList.length;
 
-    flameList.assignAll(await FlameApi.getBurningFlameList());
-    totalCnt = FlameApi.burningFlame.totalCnt.obs;
+    ///* home의 경우, 자동로그인이 적용되었을때
+    /// MainBinding에서 mypage API와 동시 호출되어 refresh api 중복호출 가능성이 있음
+    /// 이에 API를 3초 가량 delay후 호출
+    Future.delayed(Duration(seconds: 2), () async {
+      //기획 변경으로 인한 api 사용 X
+      // bannerList.assignAll(await BannerApi.getBannerList());
+      // adCount.value = bannerList.length;
+
+      flameList.assignAll(await FlameApi.getBurningFlameList());
+      totalCnt = FlameApi.burningFlame.totalCnt.obs;
+    });
   }
 }

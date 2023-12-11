@@ -35,6 +35,8 @@ class NotificationApi {
     try {
       if (!getMore) {
         notification.currentpage = 0;
+      } else {
+        notification.currentpage += 1;
       }
       Response response = await DioServices().to().get("/notifications",
           queryParameters: {

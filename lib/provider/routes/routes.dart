@@ -19,6 +19,9 @@ abstract class _Paths {
   /// 홈 화면
   static const home = "/home";
 
+  /// 설문조사 화면
+  static const review = "/review";
+
   // /// 검색 화면
   // static const search = "/search";
 
@@ -30,6 +33,9 @@ abstract class _Paths {
 
   ///결제내역
   static const pay = "/pay";
+
+  ///공지사항 상세 화면
+  static const payment_detail = "/payment_detail";
 
   ///후원 상세내역
   static const project = "/project";
@@ -55,8 +61,11 @@ abstract class _Paths {
   /// 닉네임 화면
   static const nickname = "/nickname";
 
-  // 핸드폰 변경화면
+  /// 핸드폰 변경화면
   static const phone = "/phone";
+
+  /// 결제 수단 관리 화면
+  static const pay_method = "/pay_method";
 
   ///알람 화면
   static const alarm = "/alarm";
@@ -95,6 +104,9 @@ abstract class Routes {
   /// 홈 화면
   static const home = _Paths.home;
 
+  /// 설문조사 화면
+  static const review = _Paths.review;
+
   // /// 검색 화면
   // static const search = _Paths.search;
 
@@ -105,7 +117,7 @@ abstract class Routes {
   static const total_pay = _Paths.total_pay;
 
   /// 불타는 매치 결제 상세 화면
-  static const pay = _Paths.pay;
+  static const payment_detail = _Paths.payment_detail;
 
   ///후원 상세내역
   static const project = _Paths.project;
@@ -133,6 +145,9 @@ abstract class Routes {
 
   /// 핸드폰 변경화면
   static const phone = _Paths.phone;
+
+  /// 결제 수단 관리 화면
+  static const pay_method = _Paths.pay_method;
 
   /// 공지사항 화면
   static const notice = _Paths.notice;

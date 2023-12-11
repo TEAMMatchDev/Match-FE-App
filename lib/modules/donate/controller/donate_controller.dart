@@ -20,9 +20,7 @@ class DonateController extends GetxController {
 
   ///pagination 함수
   Future<void> getMoreProject(int index) async {
-    if (!(ProjectApi.project.totalCnt ~/ PAGINATION_SIZE < index) &&
-        !ProjectApi.project.isLast) {
-      ProjectApi.project.currentpage = index;
+    if (!ProjectApi.project.isLast) {
       projectList.addAll(await ProjectApi.getProjectList(
           type: selectType.value, getMore: true));
     }

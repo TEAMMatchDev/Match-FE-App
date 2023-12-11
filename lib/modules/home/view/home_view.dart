@@ -8,8 +8,8 @@ import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import '../../../provider/api/util/global_api_field.dart';
+import '../../../provider/api/util/pagination_function.dart';
 import '../../../util/components/global_widget.dart';
-import '../../../util/const/style/global_logger.dart';
 import '../../../util/const/style/global_skeleton.dart';
 import '../controller/home_controller.dart';
 import '../widget/home_widget.dart';
@@ -94,7 +94,7 @@ class HomeScreen extends GetView<HomeController> {
                             Container(
                               constraints: BoxConstraints(maxWidth: 110.w),
                               child: Text(
-                                  AuthService.to.myProfile.value.nickName,
+                                  AuthService.to.nickName.value,
                                   style: AppTextStyles.T1Bold20,
                                   overflow: TextOverflow.ellipsis),
                             ),
@@ -103,7 +103,7 @@ class HomeScreen extends GetView<HomeController> {
                         ),
                       ),
                       //총 불꽃이 1개일때는 개수를 나타내지 않는다
-                      controller.totalCnt.value != 1
+                      controller.totalCnt.value >= 1
                           ? Text(
                               "${controller.currentIdx.value} / ${controller.totalCnt.value}",
                               style: AppTextStyles.T1Bold20)
@@ -130,13 +130,12 @@ class HomeScreen extends GetView<HomeController> {
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 controller.currentIdx.value = index + 1;
                               });
-                              if (index % (PAGINATION_SIZE - 1) == 0 &&
-                                  index != 0) {
-                                Future.wait({
-                                  controller.getMoreFlame(
-                                      index ~/ (PAGINATION_SIZE - 1))
-                                });
-                              }
+
+                              getMoreData(
+                                  index: index,
+                                  totalCnt: controller.flameList.length,
+                                  getMore: controller.getMoreFlame);
+
                               final flame = controller.flameList[index];
                               return Column(
                                 children: [
@@ -150,9 +149,9 @@ class HomeScreen extends GetView<HomeController> {
                                   SizedBox(
                                     height: 9.h,
                                   ),
-                                  // shareChip(
-                                  //     imgUrl: flame.image,
-                                  //     donationId: flame.donationId)
+                                  shareChip(
+                                      imgUrl: flame.image,
+                                      projectId: flame.projectId)
                                 ],
                               );
                             },
@@ -167,17 +166,17 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 
-  Widget shareChip({required String imgUrl, required int donationId}) {
+//TODO: kakao -> app routing 테스트 이전
+  Widget shareChip({required String imgUrl, required int projectId}) {
     return GestureDetector(
       onTap: () async {
-        //TODO: donationId -> ProjectID로 변경
-        await controller.kakoShare(imgUrl: imgUrl, donationId: donationId);
+        await controller.kakoShare(imgUrl: imgUrl, projectId: projectId);
       },
       child: IntrinsicWidth(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 5.h),
           decoration: BoxDecoration(
-            color: AppColors.grey0,
+              color: AppColors.grey0,
               borderRadius: BorderRadius.circular(5.r),
               border: Border.all(color: AppColors.grey1)),
           child: Row(
@@ -189,7 +188,8 @@ class HomeScreen extends GetView<HomeController> {
               ),
               Text(
                 "공유하기",
-                style: AppTextStyles.L1Medium12.copyWith(color: AppColors.grey5),
+                style:
+                    AppTextStyles.L1Medium12.copyWith(color: AppColors.grey5),
               )
             ],
           ),

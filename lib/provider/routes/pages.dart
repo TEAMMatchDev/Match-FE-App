@@ -19,6 +19,7 @@ import 'package:match/modules/mypage/view/setting_view.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/modules/onboarding/view/onboarding_view.dart';
 import 'package:match/modules/payment/binding/payment_binding.dart';
+import 'package:match/modules/payment/binding/payment_detail_binding.dart';
 import 'package:match/modules/payment/view/payment_detail_view.dart';
 import 'package:match/modules/project/binding/project_binding.dart';
 import 'package:match/modules/project/view/project_view.dart';
@@ -28,6 +29,8 @@ import 'package:match/modules/signUp/binding/signup_binding.dart';
 import 'package:match/modules/signUp/view/signup_user_mail_view.dart';
 import 'package:match/modules/total_pay/view/total_pay_view.dart';
 import 'package:match/modules/tutorial/view/tutorial_view.dart';
+import 'package:match/modules/user_paymethod/binding/user_paymethod_binding.dart';
+import 'package:match/modules/user_paymethod/view/user_paymethod_view.dart';
 import 'package:match/modules/user_phone/binding/user_phone_binding.dart';
 import 'package:match/modules/user_phone/view/user_phone_view.dart';
 
@@ -44,6 +47,8 @@ import '../../modules/notice/binding/notice_binding.dart';
 import '../../modules/notice/binding/notice_detail_binding.dart';
 import '../../modules/notice/view/notice_detail_view.dart';
 import '../../modules/notice/view/notice_view.dart';
+import '../../modules/review/binding/review_binding.dart';
+import '../../modules/review/view/review_view.dart';
 import '../../modules/total_pay/binding/total_pay_binding.dart';
 import '../../modules/tutorial/binding/tutorial_binding.dart';
 import 'routes.dart';
@@ -71,7 +76,7 @@ class Pages {
     GetPage(
       title: "회원가입 화면",
       name: Routes.sign_up,
-      page: () => const SignUpMailScreen(),
+      page: () => SignUpMailScreen(),
       transition: Transition.noTransition,
       binding: SignUpBinding(),
       curve: Curves.easeIn,
@@ -101,6 +106,15 @@ class Pages {
       page: () => const HomeScreen(),
       transition: Transition.noTransition,
       binding: HomeBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "설문조사 화면",
+      name: Routes.review,
+      page: () => const ReviewScreen(),
+      transition: Transition.noTransition,
+      binding: ReviewBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
@@ -160,10 +174,10 @@ class Pages {
     ),
     GetPage(
       title: "결제 상세내역",
-      name: Routes.pay,
+      name: Routes.payment_detail,
       page: () => const PaymentDetailScreen(),
       transition: Transition.noTransition,
-      binding: PaymentBinding(),
+      binding: PaymentDetailBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),
@@ -191,6 +205,15 @@ class Pages {
       page: () => const UserPhoneScreen(),
       transition: Transition.noTransition,
       binding: UserPhoneBinding(),
+      curve: Curves.easeIn,
+      popGesture: false,
+    ),
+    GetPage(
+      title: "간편결제 관리 화면",
+      name: Routes.pay_method,
+      page: () => UserPayMethodScreen(),
+      transition: Transition.noTransition,
+      binding: UserPayMethodBinding(),
       curve: Curves.easeIn,
       popGesture: false,
     ),

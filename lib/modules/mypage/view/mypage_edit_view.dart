@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:match/modules/mypage/view/mypage_view.dart';
+import 'package:match/modules/payment/controller/payment_controller.dart';
 import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/provider/api/auth_api.dart';
 import 'package:match/provider/api/mypage_api.dart';
@@ -25,6 +26,9 @@ class MypageEditScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.lazyPut<LoginController>(() => LoginController(), fenix: true);
     final LoginController loginController = Get.find<LoginController>();
+    Get.lazyPut<PaymentController>(() => PaymentController(), fenix: true);
+    final PaymentController paymentController = Get.find<PaymentController>();
+
 
     return Scaffold(
       appBar: CommonAppBar.basic("회원정보 수정"),
@@ -96,7 +100,13 @@ class MypageEditScreen extends StatelessWidget {
           thickness: 1.h,
           color: AppColors.divider1,
         ),
-        const MypageListTile(title: "결제 수단 관리"),
+        MypageListTile(
+            title: "결제수단 관리",
+            onTap: () async {
+              paymentController.setAccess('mypage');
+              Get.toNamed(Routes.pay_method);
+            },
+        ),
         MypageListTile(
           title: "로그아웃",
           onTap: () async {

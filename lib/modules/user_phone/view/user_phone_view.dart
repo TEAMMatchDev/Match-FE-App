@@ -79,9 +79,9 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                                         phone: controller.newPhone.value);
                                 if (controller.isPhoneValid.value) {
                                   Fluttertoast.showToast(msg: "인증번호가 발송되었습니다");
-                                }else{
-                                  Fluttertoast.showToast(msg: "인증번호 발송에 실패하였습니다. 전화번호를 다시 확인해주세요");
-                                  
+                                } else {
+                                  Fluttertoast.showToast(
+                                      msg: "인증번호 발송에 실패하였습니다. 전화번호를 다시 확인해주세요");
                                 }
                               }
                             },
@@ -115,10 +115,10 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                                               .authCodeController.value,
                                           onChange: (text) async {
                                             if (text != "") {
-                                              controller.validNumChange.value =
+                                              controller.validNum.value =
                                                   true;
                                             } else {
-                                              controller.validNumChange.value =
+                                              controller.validNum.value =
                                                   false;
                                             }
                                           }),
@@ -127,14 +127,15 @@ class UserPhoneScreen extends GetView<UserPhoneController> {
                                       width: 10.w,
                                     ),
                                     CommonButton.phone(
-                                      isActive: controller.validNumChange.value,
+                                      isActive: controller.validNum.value,
                                       text: "인증번호 확인",
                                       onTap: () async {
-                                        controller.isSendValidNum.value = true;
                                         controller.isValidCode.value =
-                                            await MypageApi.getPhoneValidCode(
+                                            await MypageApi.checkCodeWithPhone(
                                                 phone: controller
-                                                    .phoneController
+                                                    .phoneController.value.text,
+                                                code: controller
+                                                    .authCodeController
                                                     .value
                                                     .text);
                                         if (controller.isValidCode.value) {

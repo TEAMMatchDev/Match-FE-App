@@ -20,6 +20,7 @@ Flame _$FlameFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Flame {
+  int get projectId => throw _privateConstructorUsedError;
   int get donationId => throw _privateConstructorUsedError;
   String get usages => throw _privateConstructorUsedError;
   String get inherenceName => throw _privateConstructorUsedError;
@@ -37,7 +38,8 @@ abstract class $FlameCopyWith<$Res> {
       _$FlameCopyWithImpl<$Res, Flame>;
   @useResult
   $Res call(
-      {int donationId,
+      {int projectId,
+      int donationId,
       String usages,
       String inherenceName,
       String image,
@@ -57,6 +59,7 @@ class _$FlameCopyWithImpl<$Res, $Val extends Flame>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? projectId = null,
     Object? donationId = null,
     Object? usages = null,
     Object? inherenceName = null,
@@ -64,6 +67,10 @@ class _$FlameCopyWithImpl<$Res, $Val extends Flame>
     Object? randomMessage = null,
   }) {
     return _then(_value.copyWith(
+      projectId: null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int,
       donationId: null == donationId
           ? _value.donationId
           : donationId // ignore: cast_nullable_to_non_nullable
@@ -96,7 +103,8 @@ abstract class _$$FlameImplCopyWith<$Res> implements $FlameCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int donationId,
+      {int projectId,
+      int donationId,
       String usages,
       String inherenceName,
       String image,
@@ -114,6 +122,7 @@ class __$$FlameImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? projectId = null,
     Object? donationId = null,
     Object? usages = null,
     Object? inherenceName = null,
@@ -121,6 +130,10 @@ class __$$FlameImplCopyWithImpl<$Res>
     Object? randomMessage = null,
   }) {
     return _then(_$FlameImpl(
+      projectId: null == projectId
+          ? _value.projectId
+          : projectId // ignore: cast_nullable_to_non_nullable
+              as int,
       donationId: null == donationId
           ? _value.donationId
           : donationId // ignore: cast_nullable_to_non_nullable
@@ -149,7 +162,8 @@ class __$$FlameImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$FlameImpl with DiagnosticableTreeMixin implements _Flame {
   const _$FlameImpl(
-      {required this.donationId,
+      {required this.projectId,
+      required this.donationId,
       required this.usages,
       required this.inherenceName,
       required this.image,
@@ -158,6 +172,8 @@ class _$FlameImpl with DiagnosticableTreeMixin implements _Flame {
   factory _$FlameImpl.fromJson(Map<String, dynamic> json) =>
       _$$FlameImplFromJson(json);
 
+  @override
+  final int projectId;
   @override
   final int donationId;
   @override
@@ -171,7 +187,7 @@ class _$FlameImpl with DiagnosticableTreeMixin implements _Flame {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Flame(donationId: $donationId, usages: $usages, inherenceName: $inherenceName, image: $image, randomMessage: $randomMessage)';
+    return 'Flame(projectId: $projectId, donationId: $donationId, usages: $usages, inherenceName: $inherenceName, image: $image, randomMessage: $randomMessage)';
   }
 
   @override
@@ -179,6 +195,7 @@ class _$FlameImpl with DiagnosticableTreeMixin implements _Flame {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Flame'))
+      ..add(DiagnosticsProperty('projectId', projectId))
       ..add(DiagnosticsProperty('donationId', donationId))
       ..add(DiagnosticsProperty('usages', usages))
       ..add(DiagnosticsProperty('inherenceName', inherenceName))
@@ -191,6 +208,8 @@ class _$FlameImpl with DiagnosticableTreeMixin implements _Flame {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FlameImpl &&
+            (identical(other.projectId, projectId) ||
+                other.projectId == projectId) &&
             (identical(other.donationId, donationId) ||
                 other.donationId == donationId) &&
             (identical(other.usages, usages) || other.usages == usages) &&
@@ -203,8 +222,8 @@ class _$FlameImpl with DiagnosticableTreeMixin implements _Flame {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, donationId, usages, inherenceName, image, randomMessage);
+  int get hashCode => Object.hash(runtimeType, projectId, donationId, usages,
+      inherenceName, image, randomMessage);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +241,8 @@ class _$FlameImpl with DiagnosticableTreeMixin implements _Flame {
 
 abstract class _Flame implements Flame {
   const factory _Flame(
-      {required final int donationId,
+      {required final int projectId,
+      required final int donationId,
       required final String usages,
       required final String inherenceName,
       required final String image,
@@ -230,6 +250,8 @@ abstract class _Flame implements Flame {
 
   factory _Flame.fromJson(Map<String, dynamic> json) = _$FlameImpl.fromJson;
 
+  @override
+  int get projectId;
   @override
   int get donationId;
   @override

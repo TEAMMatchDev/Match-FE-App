@@ -23,13 +23,10 @@ class PolicyScreen extends StatelessWidget {
                 onTap: () {
                   Get.to(const PolicyDetailView(
                     webUrl: "/terms/service",
-                    title: "개인정보 처리 방침",
+                    title: "서비스 이용약관",
                   ));
                 },
-                child: Text(
-                  "이용약관",
-                  style: AppTextStyles.T1Bold15,
-                )),
+                child: Text("이용약관", style: AppTextStyles.T1Bold15)),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20.h),
               child: Divider(
@@ -54,15 +51,15 @@ class PolicyScreen extends StatelessWidget {
                 color: AppColors.divider1,
               ),
             ),
-            GestureDetector(
-                onTap: () {
-                  Get.to(const PolicyDetailView(
-                    webUrl: "/terms/marketing ",
-                    title: "마케팅 정보 수집 및 수신 동의",
-                  ));
-                },
-                child:
-                    Text("마케팅 정보 수집 및 수신 동의", style: AppTextStyles.T1Bold15)),
+            // GestureDetector(
+            //     onTap: () {
+            //       Get.to(const PolicyDetailView(
+            //         webUrl: "/terms/marketing ",
+            //         title: "마케팅 정보 수집 및 수신 동의",
+            //       ));
+            //     },
+            //     child:
+            //         Text("마케팅 정보 수집 및 수신 동의", style: AppTextStyles.T1Bold15)),
           ],
         ),
       ),

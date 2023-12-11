@@ -7,15 +7,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:match/model/enum/login_type.dart';
 import 'package:match/modules/signIn/controller/login_controller.dart';
+import 'package:match/modules/signUp/controller/signup_controller.dart';
+import 'package:match/modules/signUp/view/signup_user_info_view.dart';
 import 'package:match/provider/api/auth_api.dart';
+import 'package:match/provider/api/util/global_api_field.dart';
 import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+
+import '../../../provider/service/auth_service.dart';
+import '../../tutorial/view/init_tutorial_view.dart';
 
 class AppleLoginWidget extends StatefulWidget {
   @override
@@ -23,7 +30,8 @@ class AppleLoginWidget extends StatefulWidget {
 }
 
 class _AppleLoginState extends State<AppleLoginWidget> {
-  LoginController controller = Get.find<LoginController>();
+  LoginController loginController = Get.find<LoginController>();
+  SignUpController signUpController = Get.find();
 
   Future<void> signInWithApple() async {
     try {
@@ -42,6 +50,7 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       // 인증 성공 후 처리
       // print('>>> 애플로그인 사용자 정보 : credential 전체 = $credential');
       // print('>>> 애플로그인 사용자 정보 : userIdentifier = ${credential.userIdentifier}');
+      // print('>>> 애플로그인 사용자 정보 : userIdentifier = ${credential.userIdentifier}');
       // print('>>> 애플로그인 사용자 정보 : givenName = ${credential.givenName}');
       // print('>>> 애플로그인 사용자 정보 : familyName = ${credential.familyName}');
       // print('>>> 애플로그인 사용자 정보 : authorizationCode = ${credential.authorizationCode}');
@@ -49,18 +58,45 @@ class _AppleLoginState extends State<AppleLoginWidget> {
       // print('>>> 애플로그인 사용자 정보 : identityToken = ${credential.identityToken}');
       // print('>>> 애플로그인 사용자 정보 : state = ${credential.state}');
 
-      controller.setAppleLoginCode(credential.authorizationCode);
-      controller.appleLoginCode.value = credential.authorizationCode.toString();
-      print(">>> 애플유저 코드: ${controller.appleLoginCode.value}");
-      var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
-      if (result) {
-        Fluttertoast.showToast(msg: "애플 로그인 성공!");
-        controller.setPlatform('apple');
-        //print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
+      loginController.setAppleLoginCode(credential.authorizationCode);
+      loginController.appleLoginCode.value = credential.authorizationCode.toString();
+      print(">>> 애플유저 코드: ${loginController.appleLoginCode.value}");
+      loginController.setAppleLoginToken(credential.identityToken.toString());
+      loginController.appleLoginToken.value = credential.identityToken.toString();
+      print(">>> 애플유저 토큰: ${loginController.appleLoginToken.value}");
 
-        Get.offAllNamed(Routes.main);
+      var result = await UserAuthApi.setAppleLogin(accessToken: credential.identityToken.toString());
+
+      if (result) { /// true : 기존 애플유저 / false : 신규 애플유저
+        Fluttertoast.showToast(msg: "애플 로그인 성공!");
+        loginController.setPlatform('apple');
+
+        if(AuthService.to.isTutorial.value) {
+          await AuthService.to.getUserInfo();
+          Get.to(()=>const InitTutorialScreen());
+        }
+        else {
+          Get.offAllNamed(Routes.main);
+        }
       } else {
-        Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
+        // false 일 때 socailId 출력
+        Fluttertoast.showToast(msg: "애플유저 회원가입을 진행합니다.");
+        loginController.setPlatform('apple');
+        print(">>> apple_login_widget:: controller에 저장된 socialId: ${signUpController.socialId.value}");
+        print(">>> apple_login_widget:: controller에 저장된 email: ${signUpController.signUpId.value}");
+
+        if (credential.givenName != '' && credential.familyName != '') {
+          String given = credential.givenName ?? '';
+          String family = credential.familyName ?? '';
+          print('>>> 애플로그인 사용자 givenName = ${given}');
+          print('>>> 애플로그인 사용자 familyName = ${family}');
+
+          signUpController.signUpName.value = loginController.setAppleLoginUserName(given, family);
+          print(">>> 애플로그인 사용자 정보 : ${loginController.setAppleLoginUserName(given, family)}");
+        }
+
+        //Get.to(Routes.sign_up, arguments: {'socialId': signUpController.socialId.value});
+        Get.to(SignUpInfoScreen()); /// 애플유저 회원가입 정보 입력
       }
 
     } catch (error) {

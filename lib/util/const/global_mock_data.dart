@@ -3,6 +3,7 @@ import 'package:match/model/card_info/card_info.dart';
 import 'package:match/model/donator/donator.dart';
 import 'package:match/model/notice/notice.dart';
 import 'package:match/model/notice_detail/notice_detail.dart';
+import 'package:match/model/recommend_project/recommend_project.dart';
 
 import '../../model/comment/comment.dart';
 import '../../model/content/content.dart';
@@ -119,15 +120,15 @@ var tmpProfile = const Profile(
     name: "test",
     nickName: "test",
     socialType: "NORMAL",
-    email: "gusdn8926@naver.com",
+    email: "test@naver.com",
     phone: "01049177672");
 var tmpDonator = const Donator(
     //기부자 정보 임시 데이터
     name: "테스트",
-    birthDay: "2001-01-02",
-    phoneNumber: "010-1234-5678");
+    birthDay: "2099-01-01",
+    phoneNumber: "010-9999-9999");
 var tmpCardInfo = const CardInfo(
-    id: 1,
+    id: 999,
     cardCode: "041",
     cardName: "우리카드",
     cardNo: "4170********0825",
@@ -170,3 +171,5 @@ var tmpComments = const [
       userId: 1,
       my: true),
 ];
+
+var tmpRecommendProject = RecommendProject(projectId: -1, projectKind: "", randomMessage: "로딩중");

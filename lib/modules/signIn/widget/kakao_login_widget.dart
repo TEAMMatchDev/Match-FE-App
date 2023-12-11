@@ -7,11 +7,15 @@ import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:match/model/enum/login_type.dart';
 import 'package:match/modules/signIn/controller/login_controller.dart';
+import 'package:match/modules/tutorial/view/init_tutorial_view.dart';
 import 'package:match/provider/api/auth_api.dart';
 import 'package:match/provider/routes/routes.dart';
+import 'package:match/provider/service/auth_service.dart';
 import 'package:match/util/const/global_variable.dart';
 import 'package:match/util/const/style/global_color.dart';
+import 'package:match/util/const/style/global_logger.dart';
 import 'package:match/util/const/style/global_text_styles.dart';
+import 'package:uuid/uuid.dart';
 
 class KakaoLoginWidget extends StatefulWidget {
   final LoginController loginController = Get.find<LoginController>();
@@ -46,7 +50,13 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
     if (result) {
       controller.setPlatform('kakao');
       print(">> 로그인한 플랫폼: ${controller.loginPlatform}");
-      Get.offAllNamed(Routes.main);
+      if(AuthService.to.isTutorial.value) {
+        await AuthService.to.getUserInfo();
+        Get.to(()=>const InitTutorialScreen());
+      }
+      else {
+        Get.offAllNamed(Routes.main);
+      }
     } else {
       Fluttertoast.showToast(msg: "로그인에 실패했습니다.");
     }
@@ -55,9 +65,22 @@ class _KakaoLoginState extends State<KakaoLoginWidget> {
   Future<void> loginWithKakaoAccount() async { /// 카카오계정으로 로그인 시도
     try {
       OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
+      logger.i('카카오계정으로 로그인 성공: ${token.accessToken}');
+      _getUserInfo();
+
       await handleKakaoSignIn(token);
+
     } catch (error) {
       print('카카오계정으로 로그인 실패: $error');
+    }
+  }
+  void _getUserInfo() async {
+    try {
+      User user = await UserApi.instance.me();
+      logger.i(
+          '사용자 정보 요청 성공: 회원번호: ${user.id}, 닉네임: ${user.kakaoAccount?.profile?.nickname}');
+    } catch (error) {
+      logger.e('사용자 정보 요청 실패: $error');
     }
   }
 

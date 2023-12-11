@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/card_info/card_info.dart';
@@ -22,10 +23,12 @@ class PaymentController extends GetxController {
 
   RxList<Pay> payList = <Pay>[].obs;
 
-  final ProjectController _projectController = Get.find<ProjectController>();
-  RxString donateState = "".obs;
-
   /// 기부상태 (정기/단기)
+  RxString donateState = "".obs; // or REGULAR
+  RxInt projectId = 0.obs;
+
+  var orderId = ''.obs; /// 단기결제 시 웹뷰에 전달 해야하는 orderId
+
 
   //TODO) 후원자 정보
   Rx<Donator> donator = tmpDonator.obs;
@@ -42,12 +45,23 @@ class PaymentController extends GetxController {
 
   final Rx<int> inputValue = 0.obs;
   final Rx<int> selectedAmount = 1000.obs;
-  final Rx<int> selectedDate = 1.obs;
+  final Rx<int> selectedDate = 0.obs;
+
 
   void updateIsPayAbleReg() { /// 금액, 날짜 null 체크
     if (selectedAmount.value > 0 && (selectedDate.value >= 1 && selectedDate.value <= 31)) {
       isPayAbleReg.value = true;
     } else {
+      if (selectedDate.value == 0){
+        Fluttertoast.showToast(msg: "결제일은 1일 이상으로 선택해야 합니다.");
+        selectedDate.value = 0;
+        payDateTextController.value.clear();
+      }
+      if (selectedDate.value > 31) {
+        Fluttertoast.showToast(msg: "결제일은 31일을 넘길 수 없습니다.");
+        selectedDate.value = 0;
+        payDateTextController.value.clear();
+      }
       isPayAbleReg.value = false;
     }
   }
@@ -76,19 +90,18 @@ class PaymentController extends GetxController {
   //TODO) 카드 신규 등록
   /// 카드 번호
   Rx<TextEditingController> cardNumTextController = TextEditingController().obs;
-
   /// 유효기간
   Rx<TextEditingController> cardExpTextController = TextEditingController().obs;
-
   /// CVC
   Rx<TextEditingController> cardCVCTextController = TextEditingController().obs;
-
   /// 생년월일
-  Rx<TextEditingController> cardUserBirthTextController =
-      TextEditingController().obs;
-
+  Rx<TextEditingController> cardUserBirthTextController = TextEditingController().obs;
   /// 카드 비밀번호 todo- ** 로 표시
   Rx<TextEditingController> cardPWTextController = TextEditingController().obs;
+
+  //TODO) 결제 정보
+  /// 매월 결제일
+  Rx<TextEditingController> payDateTextController = TextEditingController().obs;
 
 
   //TODO) 애플로그인 사용자 정보
@@ -100,19 +113,66 @@ class PaymentController extends GetxController {
   Rx<TextEditingController> userBirthTextController = TextEditingController().obs;
   Rx<TextEditingController> userPhoneTextController = TextEditingController().obs;
 
+  var accessFrom = ''.obs;
+  void setAccess(String str) {
+    accessFrom.value = str;
+  }
+
+  /// 카드 삭제 가능 여부
+  Rx<bool> isDeleteAble = true.obs;
+  /// 필수 항목을 모두 동의 했는지
+  Rx<bool> isAuthAble = false.obs;
+
+  Future<void> refreshCardList() async {
+    List<CardInfo> newCardInfoList = await OrderApi.getCardList();
+
+    cardInfoList.assignAll(newCardInfoList);
+    cardCodeList.assignAll(newCardInfoList.map((card) => card.cardCode.toString()).toList());
+    cardNumList.assignAll(newCardInfoList.map((card) => card.cardNo).toList());
+  }
+
   @override
   void onInit() async {
     super.onInit();
+    clearInputFields();
+
+    if(ProjectController.to.projectDetail.value.regularStatus == 'REGULAR') {
+      selectedDate.value = 1;
+    }
+  }
+
+  void clearInputFields() {
+    // 입력 필드 클리어
+    cardNumTextController.value.clear();
+    cardExpTextController.value.clear();
+    cardCVCTextController.value.clear();
+    cardUserBirthTextController.value.clear();
+    cardPWTextController.value.clear();
+  }
+
+  Future<void> updateCardList() async {
+    List<CardInfo> newCardInfoList = await OrderApi.getCardList();
+    cardInfoList.assignAll(newCardInfoList);
+    cardCodeList.assignAll(newCardInfoList.map((card) => card.cardCode.toString()).toList());
+    cardNumList.assignAll(newCardInfoList.map((card) => card.cardNo).toList());
+  }
+
+  Future<void> loadData() async {
     await AuthService.to.getDonatorInfo();
-    //print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}");
+    print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n ");
 
     payList.assignAll(await PaymentApi.getPaymentDetail(regularPayId: id));
     cardInfoList.assignAll(await OrderApi.getCardList());
-    cardCodeList.assignAll(
-        cardInfoList.map((card) => card.cardCode.toString()).toList());
+    cardCodeList.assignAll(cardInfoList.map((card) => card.cardCode.toString()).toList());
     cardNumList.assignAll(cardInfoList.map((card) => card.cardNo).toList());
     cardIdList.assignAll(cardInfoList.map((card) => card.id).toList());
 
-    donateState.value = _projectController.projectDetail.value.regularStatus;
+    if (accessFrom != 'mypage'){
+      print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n "
+          "paymentController onInit 내부 :: projectId: ${ProjectController.to.projectId}");
+
+      donateState.value = ProjectController.to.projectDetail.value.regularStatus;
+      projectId.value = ProjectController.to.projectId;
+    }
   }
 }

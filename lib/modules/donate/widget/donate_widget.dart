@@ -89,6 +89,7 @@ class ProjectWidget extends StatelessWidget {
         TodayMatchList(
             count: project.totalDonationCnt,
             imgList: project.userProfileImages,
+            backgroundImg: project.imgUrl,
             projectId: project.projectId,
             isLike: project.like),
 
@@ -126,6 +127,7 @@ class CircleType extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
           width: 50.w,
@@ -145,9 +147,6 @@ class CircleType extends StatelessWidget {
                   ))
               : SvgPicture.asset(
                   "${iconDir}project/ic_${type?.engName}${!isSelect.value ? "_unable" : ""}.svg"),
-        ),
-        SizedBox(
-          height: 6.h,
         ),
         Text(type?.stateName ?? "전체",
             style: AppTextStyles.T1Bold13.copyWith(
@@ -205,10 +204,10 @@ class TodayMatchList extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Positioned(
-            //     top: 16.h,
-            //     right: 19.w,
-            //     child: LikeIcon(projectId: projectId, isLike: isLike.obs)),
+            Positioned(
+                top: 16.h,
+                right: 19.w,
+                child: LikeIcon(projectId: projectId, isLike: isLike.obs)),
             Positioned(
               bottom: 17.h,
               left: 20.w,
@@ -225,7 +224,8 @@ class TodayMatchList extends StatelessWidget {
                           Wrap(
                             spacing: -4,
                             children: imgList
-                                .map((e) => profileItem(size: 30))
+                                .map(
+                                    (e) => profileItem(size: 30, profileUrl: e))
                                 .toList(),
                           ),
                           SizedBox(

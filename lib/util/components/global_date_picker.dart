@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart'; //Date Format 사용
 import 'package:flutter/cupertino.dart';
 
@@ -15,19 +16,23 @@ class CallSelectBirthBottomSheet extends StatefulWidget {
 }
 
 class _CallSelectBirthBottomSheetState extends State<CallSelectBirthBottomSheet> {
-  DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate; // = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    selectedDate = DateTime.now();
+    selectedDate = null; //DateTime.now();
   }
 
   @override
   Widget build(BuildContext context) {
+    // 선택된 날짜가 없는 경우 기본값 사용
+    final defaultDate = DateFormat('yyyy.MM.dd').parse('2099.01.01');
+    final initDate = selectedDate ?? defaultDate;
+
     return CupertinoButton(
       child: Text(
-        DateFormat('yyyy.MM.dd').format(selectedDate),
+        selectedDate != null ? DateFormat('yyyy.MM.dd').format(selectedDate!) : '생년월일을 선택하세요', // 날짜 선택 여부 확인
         style: AppTextStyles.T1Bold14,
       ),
       onPressed: () {
@@ -50,9 +55,9 @@ class _CallSelectBirthBottomSheetState extends State<CallSelectBirthBottomSheet>
                         setState(() {
                           selectedDate = dateTime;
                         });
-                        widget.onBirthSelected(DateFormat('yyyy-MM-dd').format(selectedDate));
+                        widget.onBirthSelected(DateFormat('yyyy-MM-dd').format(selectedDate!));
                       },
-                      initDateStr: DateFormat('yyyy.MM.dd').format(selectedDate),
+                      initDateStr: selectedDate != null ? DateFormat('yyyy.MM.dd').format(selectedDate!) : '2000.01.01',
                     ),
                   ),
                 ],
@@ -76,7 +81,8 @@ class BirthDatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initDate = DateFormat('yyyy.MM.dd').parse(initDateStr ?? '2000.01.01');
+    // 초기 날짜가 null일 경우 '2000.01.01'을 사용
+    final initDate = initDateStr != null ? DateFormat('yyyy.MM.dd').parse(initDateStr!) : DateFormat('yyyy.MM.dd').parse('2099.01.01');
 
     return SizedBox(
       height: 150.h,

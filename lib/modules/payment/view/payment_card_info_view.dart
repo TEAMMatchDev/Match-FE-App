@@ -7,9 +7,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:match/model/card_info/card_info.dart';
+import 'package:match/model/enum/card_types.dart';
 import 'package:match/modules/payment/view/payment_method_info_view.dart';
 import 'package:match/modules/payment/widget/select_pay_method_widget.dart';
+import 'package:match/modules/user_paymethod/view/user_paymethod_view.dart';
 import 'package:match/provider/api/order_api.dart';
+import 'package:match/provider/routes/routes.dart';
 import 'package:match/util/components/gloabl_text_field.dart';
 import 'package:match/util/components/global_app_bar.dart';
 import 'package:match/util/components/global_button.dart';
@@ -24,19 +27,6 @@ import '../widget/payment_widget.dart';
 class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
   final String selectedCardName;
-  final List<List<String>> cardBankList = [
-    ['하나','ic_card_hana.svg','374'],
-    ['현대','ic_card_hyundai.svg','367'],
-    // ['기업','ic_card_ibk.svg',''],
-    ['카카오뱅크','ic_card_kakao.svg','090'],
-    ['국민','ic_card_kb.svg','381'],
-    ['MG새마을금고','ic_card_mg.svg','045'],
-    // ['SC제일','ic_card_sc.svg',''],
-    ['신한','ic_card_shinhan.svg','366'],
-    ['우리','ic_card_woori.svg','041'],
-    ['기타','ic_card_etc.svg',''], //나머지 모든 카드 '' 이면 전부 기타카드
-  ];
-
   String cardNum = '';
   String cardExp = '';
   String cardCvc = '';
@@ -49,6 +39,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context){
+    controller.clearInputFields();
 
     return  Scaffold(
       body: SingleChildScrollView(
@@ -100,17 +91,15 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
                 //TODO) 카드 svg
                 (() {
-                  final matchingCard = cardBankList.firstWhere(
-                        (card) => selectedCardName.contains(card[0]),
-                      orElse: () => cardBankList.firstWhere((card) => card[2] == '')
-                  );
+                  final matchingCard = CardBank.fromName(selectedCardName);
+
                   return Center(
                     child: Stack(
                       children: [
                         // 기존 카드 이미지
                         Container(
                           child: SvgPicture.asset(
-                            iconDir + "card/" + matchingCard[1],
+                            iconDir + "card/" + matchingCard.cardIcon,
                             width: 263.w,
                             height: 150.h,
                           ),
@@ -120,7 +109,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           bottom: 40.h,
                           left: 18.w,
                           child: Text(
-                              matchingCard[0],
+                              matchingCard.bankName,
                               style: AppTextStyles.T1Bold15.copyWith(color: AppColors.white)
                           ),
                         ),
@@ -150,7 +139,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                         textController : controller.cardNumTextController.value,
                         onChange: (value) async {
                           cardNum = value;
-                          //print(">>> 입력한 카드번호: $cardNum");
+                          print(">>> 입력한 카드번호: $cardNum");
                         }),
                     SizedBox(height: 37.h),
 
@@ -172,9 +161,9 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                     cardExp = value;
                                     cardExpYear = value.substring(2,4);
                                     cardExpMonth = value.substring(0,2);
-                                    //print(">>> 입력한 유효기간: $value");
-                                    //print(">>> 입력한 유효기간 year: ${cardExpYear}");
-                                    //print(">>> 입력한 유효기간 month: ${cardExpMonth}");
+                                    print(">>> 입력한 유효기간: $value");
+                                    print(">>> 입력한 유효기간 year: ${cardExpYear}");
+                                    print(">>> 입력한 유효기간 month: ${cardExpMonth}");
                                   }),
                             ),
                           ],
@@ -202,7 +191,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                   textController : controller.cardCVCTextController.value,
                                   onChange: (value) async {
                                     cardCvc = value;
-                                    //print(">>> 입력한 CVC: $cardCvc");
+                                    print(">>> 입력한 CVC: $cardCvc");
                                   }),
                             ),
                           ],
@@ -235,7 +224,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                   textController : controller.cardUserBirthTextController.value,
                                   onChange: (value) async {
                                     cardUserBirth = value;
-                                    //print(">>> 입력한 생년월일: $cardUserBirth");
+                                    print(">>> 입력한 생년월일: $cardUserBirth");
                                   }),
                             ),
                           ],
@@ -263,7 +252,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                                   textController : controller.cardPWTextController.value,
                                   onChange: (value) async {
                                     cardPw = value;
-                                    //print(">>> 입력한 카드 비밀번호: $cardPw");
+                                    print(">>> 입력한 카드 비밀번호: $cardPw");
                                   }),
                             ),
                           ],
@@ -306,11 +295,13 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                             expMonth: cardExpMonth,
                             idNo: cardUserBirth,
                             cardPw: cardPw);
-                        if(result) {
+                        if (result) {
+                          Fluttertoast.showToast(msg: "카드가 등록되었습니다.");
                           // PaymentController 인스턴스를 가져옴
                           final PaymentController paymentController = Get.find<PaymentController>();
 
                           // 새로운 카드 정보를 가져와서 cardInfoList를 업데이트함
+                          // paymentController.refreshCardList();
                           List<CardInfo> newCardInfoList = await OrderApi.getCardList();
                           paymentController.cardInfoList.assignAll(newCardInfoList);
                           paymentController.cardCodeList.assignAll(
@@ -320,10 +311,18 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                               newCardInfoList.map((card) => card.cardNo).toList()
                           );
 
-                          Get.to(PaymentMethodScreen());
+                          if (paymentController.accessFrom == 'mypage') {
+                            Get.toNamed(Routes.pay_method);
+                            print('>>> 넘어온 화면: ${paymentController.accessFrom}');
+                          } else {
+                            Get.to(PaymentMethodScreen());
+                            print('>>> 넘어온 화면: ${paymentController.accessFrom}');
+                          }
+                        } else {
+                          Fluttertoast.showToast(msg: "카드 등록에 실패했습니다. 카드 정보를 다시 확인해주세요.");
                         }
                       } else {
-                        Fluttertoast.showToast(msg: "입력값 중 빈 값이 있습니다. 입력 정보를 다시 확인해주세요.");
+                        Fluttertoast.showToast(msg: "입력값 중 빈 값이 있는 지 확인해주세요. (끝자리를 한번씩 다시 입력해주세요)");
                       }
                     },
                   ),

@@ -2,22 +2,24 @@ name: match
 description: match flutter project
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.3+4
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
   flutter_native_splash: ^2.3.3 # splash
-  kakao_flutter_sdk: ^1.5.0 # 전체 추가
-  kakao_flutter_sdk_user: ^1.5.0 # 카카오 로그인
+
+  kakao_flutter_sdk: ^1.7.0 # 전체 추가
+  kakao_flutter_sdk_user: ^1.7.0 # 카카오 로그인
   kakao_flutter_sdk_talk: ^1.5.0 # 카카오톡 메시지, 카카오톡 소셜(프로필 가져오기, 친구 목록 가져오기)
-  kakao_flutter_sdk_story: ^1.5.0 # 카카오스토리
-  kakao_flutter_sdk_share: ^1.6.0 # 카카오톡 공유
-  kakao_flutter_sdk_navi: ^1.5.0 # 카카오내비
   kakao_flutter_sdk_friend: ^1.5.0 # 카카오톡 소셜(피커: 친구 선택하기)
-  flutter_naver_login: ^1.8.0 # 네이버 로그인
+  flutter_naver_login: ^1.6.0 # 네이버 로그인
   sign_in_with_apple: ^5.0.0 # 애플 로그인
+
+  flutter_web_auth: ^0.4.1
+  uuid: ^3.0.6
+
 
   flutter:
     sdk: flutter
@@ -49,6 +51,7 @@ dependencies:
   appsflyer_sdk: ^6.12.2
   firebase_dynamic_links: ^5.3.7
   firebase_core: ^2.17.0
+  firebase_auth: ^4.14.0
   permission_handler: ^11.0.1
   image_gallery_saver: ^2.0.3
   uni_links: ^0.5.1
@@ -87,6 +90,7 @@ flutter:
     - asset/image/icon/mypage/
     - asset/image/logo/
     - asset/image/onboarding/
+    - asset/image/icon/survey/
 
   fonts:
     - family: AppleSDGothicNeo

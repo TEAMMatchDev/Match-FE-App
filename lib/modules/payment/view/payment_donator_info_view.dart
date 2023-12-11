@@ -25,9 +25,7 @@ import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
 class PaymentDonatorScreen extends GetView<PaymentController> {
-  PaymentDonatorScreen({Key? key}) : super(key: key) {
-    Get.find<PaymentController>();
-  }
+  PaymentDonatorScreen({Key? key}) : super(key: key);
   final loginController = Get.find<LoginController>();
 
   String formatPhoneNumber(String rawNumber) {
@@ -43,7 +41,8 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
 
   @override
   Widget build(BuildContext context){
-    //print(">>> DonatorScreen 기부자 프로필 조회: ${AuthService.to.donatorProfile.value}");
+    controller.loadData();
+    print(">>> DonatorScreen 기부자 프로필 조회: ${AuthService.to.donatorProfile.value}");
     //print(">> 로그인 플랫폼 정보: ${loginController.loginPlatform.value}");
 
     return Obx(() {
@@ -122,21 +121,22 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                         ),
                                         child: Align(
                                           alignment: Alignment.centerLeft,
-                                          child: donatorProfile.name != '테스트'
-                                              ? Padding(
-                                            padding: EdgeInsets.only(left: 10.w),
-                                            child: Text(
-                                              '${donatorProfile.name}',
-                                              style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
-                                            ),
-                                          )
-                                              : CommonInputField.userName(
-                                              textController : controller.userNameTextController.value,
-                                              onChange: (value) async {
-                                                //print(">>> 입력한 이름: $value");
-                                                controller.userName.value = value;
-                                              }
-                                          ),
+                                          child: //donatorProfile.name != '테스트'
+                                          // ?
+                                          Padding(
+                                                  padding: EdgeInsets.only(left: 10.w),
+                                                  child: Text(
+                                                    '${donatorProfile.name}',
+                                                    style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
+                                                  ),
+                                                ),
+                                              // : CommonInputField.userName(
+                                              //     textController : controller.userNameTextController.value,
+                                              //     onChange: (value) async {
+                                              //       //print(">>> 입력한 이름: $value");
+                                              //       controller.userName.value = value;
+                                              //     }
+                                              // ),
                                         ),
                                       )
                                     ],
@@ -157,8 +157,9 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                           color: AppColors.grey11, // 배경색 설정
                                           borderRadius: BorderRadius.circular(5.0), // 모서리를 둥글게 설정
                                         ),
-                                        child: donatorProfile.name != '테스트'
-                                            ? Padding(
+                                        child: //donatorProfile.name != '테스트'
+                                            // ?
+                                          Padding(
                                           padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
                                           child: Align(
                                             alignment: Alignment.centerLeft,
@@ -168,19 +169,19 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                             ),
                                           ),
                                         )
-                                            : Padding(
-                                          padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: CallSelectBirthBottomSheet(
-                                              onBirthSelected: (birth) {
-                                                //print('>>> 선택한 생년월일: $birth');
-                                                controller.birthState.value = birth.toString();
-                                                controller.userBirth.value = birth.toString(); //.replaceAll("-", "");
-                                              },
-                                            ),
-                                          ),
-                                        ),
+                                            // : Padding(
+                                            //     padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
+                                            //     child: Align(
+                                            //       alignment: Alignment.centerLeft,
+                                            //       child: CallSelectBirthBottomSheet(
+                                            //         onBirthSelected: (birth) {
+                                            //           //print('>>> 선택한 생년월일: $birth');
+                                            //           controller.birthState.value = birth.toString();
+                                            //           controller.userBirth.value = birth.toString(); //.replaceAll("-", "");
+                                            //         },
+                                            //       ),
+                                            //   ),
+                                            // ),
                                       )
                                     ],
                                   ),
@@ -200,8 +201,9 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                           color: AppColors.grey11, // 배경색 설정
                                           borderRadius: BorderRadius.circular(5.0),
                                         ),
-                                        child: donatorProfile.name != '테스트'
-                                            ? Padding(
+                                        child: //donatorProfile.name != '테스트'
+                                            // ?
+                                        Padding(
                                                 padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
                                                 child: Align(
                                                   alignment: Alignment.centerLeft,
@@ -210,24 +212,24 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                                                     style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey7),
                                                   ),
                                                 ),
-                                              )
-                                            : Padding(
-                                                padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
-                                                child: Align(
-                                                  alignment: Alignment.centerLeft,
-                                                  child: CommonInputField.userPhone(
-                                                    textController: controller.userPhoneTextController.value,
-                                                    onChange: (value) async {
-                                                      //print(">>> 입력한 전화번호: $value");
-                                                      controller.userPhone.value = value;
-                                                    },
-                                                  ),
-                                                ),
                                               ),
+                                            // : Padding(
+                                            //     padding: EdgeInsets.only(left: 10.w), // 왼쪽 패딩 추가
+                                            //     child: Align(
+                                            //       alignment: Alignment.centerLeft,
+                                            //       child: CommonInputField.userPhone(
+                                            //         textController: controller.userPhoneTextController.value,
+                                            //         onChange: (value) async {
+                                            //           //print(">>> 입력한 전화번호: $value");
+                                            //           controller.userPhone.value = value;
+                                            //         },
+                                            //       ),
+                                            //     ),
+                                            //   ),
                                       )
                                     ],
                                   ),
-                                  SizedBox(height: 16.h),
+                                  SizedBox(height: 40.h),
                                   Container(
                                     width: 360.w,
                                     decoration: BoxDecoration(
@@ -249,55 +251,53 @@ class PaymentDonatorScreen extends GetView<PaymentController> {
                               ),
                             );
                           }),
-                          SizedBox(height: 8.h),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 20.w, right: 6),
-                                  child: CommonButton.back(
-                                    text: "이전 돌아가기",
-                                    onTap: () async {
-                                      Get.back();
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 6.w, right: 20),
-                                  child: CommonButton.login(
-                                    text: "확인",
-                                    onTap: () async {
-
-                                      if (loginController.loginPlatform.value == 'apple' && controller.userName.value != null && controller.userPhone.value != ''){
-                                        var result = await OrderApi.postProfile(
-                                            name: controller.userName.value,
-                                            birthDate: controller.userBirth.value,
-                                            phone: controller.userPhone.value);
-                                        if(result) {
-                                          Get.to(() => PaymentDonationScreen(),
-                                              binding: PaymentBinding());
-                                        }
-                                        else {
-                                          Fluttertoast.showToast(msg: '사용자님의 정보를 올바르게 입력해주세요.');
-                                        }
-                                      }
-                                      else {
-                                        Get.to(() => PaymentDonationScreen(),
-                                            binding: PaymentBinding());
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 24.h),
                         ],
                       )
                   ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20.w, right: 6.w, bottom: 20.h),
+                        child: CommonButton.back(
+                          text: "이전 돌아가기",
+                          onTap: () async {
+                            Get.back();
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 6.w, right: 20.w, bottom: 20.h),
+                        child: CommonButton.login(
+                          text: "확인",
+                          onTap: () async {
+                            if (loginController.loginPlatform.value == 'apple' && controller.userName.value != null && controller.userPhone.value != ''){
+                              var result = await OrderApi.postProfile(
+                                  name: controller.userName.value,
+                                  birthDate: controller.userBirth.value,
+                                  phone: controller.userPhone.value);
+                              if(result) {
+                                Get.to(() => PaymentDonationScreen(),
+                                    binding: PaymentBinding());
+                              }
+                              else {
+                                Fluttertoast.showToast(msg: '사용자님의 정보를 올바르게 입력해주세요.');
+                              }
+                            }
+                            else {
+                              Get.to(() => PaymentDonationScreen(),
+                                  binding: PaymentBinding());
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ])
         );

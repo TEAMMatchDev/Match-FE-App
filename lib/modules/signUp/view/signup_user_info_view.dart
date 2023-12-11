@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart'; //Date Format 사용
 import 'package:match/model/enum/search_status.dart';
+import 'package:match/modules/signIn/controller/login_controller.dart';
 import 'package:match/modules/signUp/controller/signup_controller.dart';
 import 'package:match/modules/signUp/view/agreement_view.dart';
 import 'package:match/modules/signIn/widget/login_widget.dart';
@@ -34,6 +35,13 @@ class SignUpInfoScreen extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context){
+    final LoginController loginController = Get.find<LoginController>();
+
+    print(">>> signup_user_info_view:: controller에 저장된 socialId: ${controller.socialId.value}");
+    print(">>> signup_user_info_view:: controller에 저장된 email: ${controller.signUpId.value}");
+    print(">>> signup_user_info_view:: loginController에 저장된 loginPlatform: ${loginController.loginPlatform}");
+    print(">>> signup_user_info_view:: loginController에 저장된 default 생년월일: ${controller.signUpBirth.value}");
+
     return  Scaffold(
       appBar: CommonAppBar.basic("회원가입"),
       body: Column(
@@ -53,18 +61,24 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                           style: AppTextStyles.T1Bold18,
                         ),
                         SizedBox(height: 30.h),
-                        Text(
-                          '이름',
-                          style: AppTextStyles.T1Bold14,
-                        ),
-                        SizedBox(height: 10.h),
-                        CommonInputField.userName(
-                            textController : controller.userNameTextController.value,
-                            onChange: (value) async {
-                              //print(">>> 입력한 이름: $value");
-                              controller.signUpName.value = value;
-                            }),
-                        SizedBox(height: 20.h),
+                        if (loginController.loginPlatform != 'apple')
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '이름',
+                                style: AppTextStyles.T1Bold14,
+                              ),
+                              SizedBox(height: 10.h),
+                              CommonInputField.userName(
+                                  textController : controller.userNameTextController.value,
+                                  onChange: (value) async {
+                                    print(">>> 입력한 이름: $value");
+                                    controller.signUpName.value = value;
+                                  }),
+                              SizedBox(height: 20.h),
+                            ],
+                          ),
                         Text(
                           '성별',
                           style: AppTextStyles.T1Bold14,
@@ -72,7 +86,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                         SizedBox(height: 10.h),
                         SelectGenderRadioButtons(
                           onGenderSelected: (gender) {
-                            //print(">>> 선택한 성별: $gender");
+                            print(">>> 선택한 성별: $gender");
                             controller.selectedItemsgendrState.value = gender;
                             controller.signUpGender.value = gender;
                           },
@@ -94,10 +108,10 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               alignment: Alignment.centerLeft,
                               child: CallSelectBirthBottomSheet(
                                 onBirthSelected: (birth) {
-                                  //print('>>> 선택한 생년월일: $birth');
-                                  //print('>>> 선택한 생년월일: ${controller.signUpBirth.value}');
-                                  controller.birthState.value = birth.toString();
                                   controller.signUpBirth.value = birth.toString().replaceAll("-", "");
+                                  controller.birthState.value = birth.toString();
+                                  print('>>> 선택한 생년월일: $birth');
+                                  print('>>> 선택한 생년월일: ${controller.signUpBirth.value}');
                                 },
                               ),
                             ),
@@ -115,7 +129,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               child: CommonInputField.userPhone(
                                   textController : controller.userPhoneTextController.value,
                                   onChange: (value) async {
-                                    //print(">>> 입력한 전화번호: $value");
+                                    print(">>> 입력한 전화번호: $value");
                                     controller.signUpPhone.value = value;
                                   }),
                             ),
@@ -156,7 +170,7 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               child: CommonInputField.userPhoneConfirm(
                                   textController : controller.userPhoneConfirmTextController.value,
                                   onChange: (value) async {
-                                    //print(">>> 입력한 인증번호: $value");
+                                    print(">>> 입력한 인증번호: $value");
                                     controller.signUpPhoneConfirm.value = value;
                                   }),
                             ),
@@ -167,10 +181,10 @@ class SignUpInfoScreen extends GetView<SignUpController> {
                               text: "인증번호 확인",
                               onTap: () async {
                                 var result = await UserAuthApi.postAuthCheckPhone(phone: controller.signUpPhone.value, code: controller.signUpPhoneConfirm.value);
-                                if (controller.signUpAuthMail.value != '' && result) {
+                                if (result) {
                                   Fluttertoast.showToast(msg: "전화번호 인증에 성공했습니다.");
                                   controller.authPhone.value = true;
-                                } else{
+                                } else {
                                   Fluttertoast.showToast(msg: "올바른 인증번호가 아닙니다.");
                                 }
                               },
@@ -192,8 +206,9 @@ class SignUpInfoScreen extends GetView<SignUpController> {
               child: CommonButton.login(
                       text: "확인",
                       onTap: () async {
-                        if(controller.authPhone.value) {
+                        if (controller.authPhone.value) {
                           Get.to(AgreementScreen());
+                          print(">>> signup_user_into_view:: controller에 저장된 애플유저 socialId: ${controller.socialId.value}");
                         }
                         else {
                           Fluttertoast.showToast(msg: "회원정보와 전화번호 인증확인을 해주세요.");

@@ -18,9 +18,7 @@ import 'package:match/util/method/permission_handler.dart';
 import '../../../util/components/global_app_bar.dart';
 import '../../../util/const/style/global_color.dart';
 
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart'; //카카오 로그인
-import 'dart:convert';
-import 'dart:io';
+import 'package:match/model/user/user.dart';
 
 import '../../../provider/routes/routes.dart';
 
@@ -109,23 +107,7 @@ class AuthAbleScreen extends GetView<SignUpController> {
               onTap: () async {
                 await PermissionHandler.checkGalleryPermission();
                 await PermissionHandler.checkAlarmPermission();
-
-                var result = await UserAuthApi.setSignUp(
-                  email: controller.signUpId.value,
-                  password: controller.signUpPw.value,
-                  name: controller.signUpName.value,
-                  phone: controller.signUpPhone.value,
-                  gender: controller.signUpGender.value,
-                  birthDate: controller.signUpBirth.value,
-                );
-                if (result) {
-                  //TODO) 메인화면으로 바로 보내기
-                  //Get.offAllNamed(Routes.main);
-                  Get.to(LoginScreen());
-                }
-                else {
-                  Fluttertoast.showToast(msg: "회원가입에 실패했습니다. ");
-                }
+                Get.to(LoginScreen());
               },
             ),
           ),
@@ -134,5 +116,7 @@ class AuthAbleScreen extends GetView<SignUpController> {
       ),
     );
   }
+
+
 
 }

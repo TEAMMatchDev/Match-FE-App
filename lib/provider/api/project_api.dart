@@ -26,6 +26,8 @@ class ProjectApi {
   }) async {
     if (!getMore) {
       project.currentpage = 0;
+    } else {
+      project.currentpage += 1;
     }
     var queryParameters = {
       "page": project.currentpage,
@@ -99,6 +101,8 @@ class ProjectApi {
     try {
       if (!getMore) {
         projectHistory.currentpage = 0;
+      } else {
+        projectHistory.currentpage += 1;
       }
       Response response = await DioServices()
           .to()

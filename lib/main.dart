@@ -13,6 +13,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk_share/kakao_flutter_sdk_share.dart';
 import 'package:match/modules/onboarding/binding/onboarding_binding.dart';
 import 'package:match/provider/api/notification_api.dart';
+import 'package:match/provider/api/util/dio_services.dart';
 import 'package:match/provider/service/fcm_service.dart';
 import 'package:match/util/const/style/global_logger.dart';
 import 'package:match/util/method/dynamic_link.dart';
@@ -48,10 +49,30 @@ Future<void> initService() async {
 
   /// * GetStorage 초기화
   await GetStorage.init();
-  await DynamicLink.setUp();
+  var reulst = await DynamicLink.setUp();
+  logger.e("dynamicc link initialized ; $reulst");
 
   // 푸시 알림 설정 및 권한 요청
   await requestPermission();
+
+  //알림 클릭시 접근할때 token 저장
+  String? token = await GetStorageUtil.getToken(StorageKey.ACCESS_TOKEN);
+  if (token != null) {
+    DioServices().setAccessToken(token);
+  }
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+  if (message.notification != null) {
+    logger.d(message.notification!.title);
+    logger.d(message.notification!.body);
+    FcmService.showNotification(
+        title: message.notification!.title ?? "",
+        content: message.notification!.body ?? "");
+  }
 }
 
 // 알림권한 관련 APNS 토큰 발급 코드

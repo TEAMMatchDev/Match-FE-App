@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:match/provider/api/util/pagination_function.dart';
 import '../../../model/enum/search_status.dart';
 import '../../../provider/api/util/global_api_field.dart';
 import '../../../util/components/gloabl_text_field.dart';
@@ -110,15 +111,7 @@ class DonationSearchScreen extends GetView<DonationSearchController> {
                           itemCount: controller.projectList.length,
                           itemBuilder: (context, index) {
                             //검색 결과 리스트 스크롤시 pagination
-                            if (index % (PAGINATION_SIZE - 1) == 0 &&
-                                index != 0) {
-                              Future.wait({
-                                controller.getMoreSearchList(
-                                    content: controller
-                                        .searchTextController.value.text,
-                                    index: index ~/ (PAGINATION_SIZE - 1))
-                              });
-                            }
+                            getMoreData(index: index, totalCnt: controller.projectList.length, getMore: controller.getMoreSearchList);
                             final project = controller.projectList[index];
                             return Container(
                                 padding: EdgeInsets.symmetric(

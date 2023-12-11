@@ -18,15 +18,15 @@ class OnboardingWidget extends StatefulWidget {
 class _CarouselExampleState extends State<OnboardingWidget> {
 
   final List<String> images = [
-    '$imgDir'+'onboarding/iv_onboarding_1.png',
-    '$imgDir'+'onboarding/iv_onboarding_2.png',
-    '$imgDir'+'onboarding/iv_onboarding_3.png',
+    '$imgDir'+'onboarding/iv_onboarding_new1.png',
+    '$imgDir'+'onboarding/iv_onboarding_new2.png',
+    '$imgDir'+'onboarding/iv_onboarding_new1.png',
   ];
   final List<String> titles = ['Title 1', 'Title 2', 'Title 3'];
   final List<String> descriptions = [
-    'MATCH를 통해 기부된\n여러분의 마음은 불꽃이가 돼요.',
-    '불꽃이는 선택한 기부처에 따라\n필요한 쓰임으로 변신합니다.',
-    'MATCH에서 후원금이\n어떻게 관리되고 있는지 알아보세요.',
+    '안녕! 나는 네가 남을 위하는\n따뜻한 마음이 들 때 피어나는 불꽃이야.',
+    '나는 도움을 기다리는 이들이\n\필요한 물품으로 변할 수 있어!',
+    '이제 앞으로 내가 무엇으로 변했는지\n너에게 직접 알려줄게. 앞으로 자주 보자!',
   ];
 
   int _currentSlide = 0;
@@ -36,12 +36,13 @@ class _CarouselExampleState extends State<OnboardingWidget> {
     return Scaffold(
       body: Column(
         children: [
+          SizedBox(height: 30.h),
           SizedBox(height: 10.h),
           skipWidget(), //상단 건너뛰기 버튼
+          SizedBox(height: 50.h),
           sliderWidget(images, _currentSlide), //온보딩 이미지
-          SizedBox(height: 90.h),
+          SizedBox(height: 70.h),
           indicatorWidget(images.length, _currentSlide), //인디케이터
-          SizedBox(height: 100.h),
         ],
       ),
     );
@@ -74,36 +75,68 @@ class _CarouselExampleState extends State<OnboardingWidget> {
         items: images.asMap().entries.map((entry) {
           final int index = entry.key;
           final String image = entry.value;
-          final String description = descriptions[index]; // Get the description for the current image
+          final String description = descriptions[index];
 
           return Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Image
-                ClipRRect(
+                if (index == 2)
+                  Stack(
+                    children: [
+                      Container(
+                        child: Image.asset(
+                          iconDir + "login/iv_login_msg_background.png",
+                          width: 275.w,
+                          height: 60.h,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 23.h,
+                        left: 65.w,
+                        child: Text(
+                          '나 방금 행복동에 연탄이 필요한\n할머니를 위한 연탄으로 변했어! ',
+                          style: AppTextStyles.T1Bold12.copyWith(color: AppColors.grey7),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                if (index != 2)
+                  ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    image,
-                    width: 180.w,
-                    height: 180.h,
+                      image,
+                      width: index == 1 ? 167.w : 100.w,
+                      height: index == 1 ? 170.h : 100.h,
+                    ),
                   ),
-                ),
-                SizedBox(height: 28.h), // Add spacing
+                if (index == 2)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      image,
+                      width: 100.w,
+                      height: 100.h,
+                    ),
+                  ),
+                SizedBox(height: 35.h),
                 Container(
-                  width: 230.w,
-                  height: 48.h,
+                  width: 300.w,
+                  height: 70.h,
                   child: Text(
                     description,
                     style: AppTextStyles.T1Bold16,
                     textAlign: TextAlign.center,
                   ),
                 ),
+
               ],
             ),
           );
         }).toList(),
         options: CarouselOptions(
+          enableInfiniteScroll: false,
           aspectRatio: 10 / 9.5,  //슬라이드의 종횡비 4:3
           autoPlay: true,
           viewportFraction: 320 / 320, //화면에 보이는 슬라이드 크기
