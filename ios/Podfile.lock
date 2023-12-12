@@ -21,22 +21,22 @@ PODS:
   - Firebase/Messaging (10.18.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 10.18.0)
-  - firebase_auth (4.15.0):
+  - firebase_auth (4.15.2):
     - Firebase/Auth (= 10.18.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.24.0):
+  - firebase_core (2.24.2):
     - Firebase/CoreOnly (= 10.18.0)
     - Flutter
-  - firebase_dynamic_links (5.4.6):
+  - firebase_dynamic_links (5.4.8):
     - Firebase/DynamicLinks (= 10.18.0)
     - firebase_core
     - Flutter
-  - firebase_in_app_messaging (0.7.4-6):
+  - firebase_in_app_messaging (0.7.4-8):
     - Firebase/InAppMessaging (= 10.18.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.7.6):
+  - firebase_messaging (14.7.8):
     - Firebase/Messaging (= 10.18.0)
     - firebase_core
     - Flutter
@@ -245,11 +245,11 @@ SPEC CHECKSUMS:
   AppsFlyerFramework: 6eb4d89d2eb9a6632317f1055b359d9fd85fd5ff
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
   Firebase: 414ad272f8d02dfbf12662a9d43f4bba9bec2a06
-  firebase_auth: 02d1a6340f81020cc302fb8fea8518908c546cec
-  firebase_core: f802c5c1f6caff9b8d38b591a36e7b25f8878936
-  firebase_dynamic_links: 212953c972f7e952c853f69896dc4da0fa5cb06e
-  firebase_in_app_messaging: 5fe3329169cde4893f404fd60d0d6564b3115633
-  firebase_messaging: ca2fc59ddd52ef032d80f1a717d12eae8fa0e994
+  firebase_auth: 0099901926d85bda1688f6e451755b413c16154d
+  firebase_core: 0af4a2b24f62071f9bf283691c0ee41556dcb3f5
+  firebase_dynamic_links: b626a11f5eb02033981ae377377c3f297eb4c1b0
+  firebase_in_app_messaging: 1aefd295a4e79d55cb317f5dd6ad42f12f7661a6
+  firebase_messaging: d4e4603f091c7b716b3f6c55550b2fa5dbf62ffd
   FirebaseABTesting: bfa3b384b68cee10a89183649c64cd7998a37a12
   FirebaseAppCheckInterop: 37884781f3e16a1ba47e7ec80a1e805f987788e3
   FirebaseAuth: 12314b438fa76048540c8fb86d6cfc9e08595176
