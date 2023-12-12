@@ -216,7 +216,7 @@ class CommonInputField extends StatelessWidget {
       suffixMode: !alwaysSuffix
           ? OverlayVisibilityMode.editing
           : OverlayVisibilityMode.always,
-      suffix: GestureDetector(
+      suffix: !alwaysSuffix ? GestureDetector(
         onTap: () async {
           textController.clear();
           //TODO) textController 가 초기화 될 때 onChange callback
@@ -226,9 +226,8 @@ class CommonInputField extends StatelessWidget {
         },
         child: Padding(
             padding: EdgeInsets.only(right: 14.w),
-            //TODO 추후 다른 아이콘 추가시 변수 추가
             child: SvgPicture.asset(iconDir + "ic_search_cancel_22.svg")),
-      ),
+      ) : null, // alwaysSuffix가 false일 경우 suffix를 null로 설정
       //자동 키보드 활성화
       autofocus: autoFocus ? true : false,
       onSubmitted: ((value) async {
@@ -474,13 +473,13 @@ class CommonInputField extends StatelessWidget {
   }) {
     return CommonInputField(
         textController: textController,
-        placeHolder: "NNNN - NNNN - NNNN - NNNN",
-        alwaysSuffix: false,
+        placeHolder: "NNNN",
+        alwaysSuffix: true,
         onSubmitted: (value) async {},
         onChanged: (value) async {
-          if (value.length > 16) {
-            Fluttertoast.showToast(msg: "카드번호는 16자리를 넘을 수 없습니다.");
-            textController.text = value.substring(0, 16);
+          if (value.length > 4) {
+            Fluttertoast.showToast(msg: "카드번호를 4자리씩 입력해주세요.");
+            textController.text = value.substring(0, 4);
             textController.selection = TextSelection.fromPosition( // 커서를 맨 끝으로 이동
               TextPosition(offset: textController.text.length),
             );

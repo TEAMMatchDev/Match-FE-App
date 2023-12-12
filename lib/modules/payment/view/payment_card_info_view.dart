@@ -130,7 +130,7 @@ class _PaymentRegisterCardInfoScreenState extends State<PaymentRegisterCardInfoS
                           bottom: 20.h,
                           left: 18.w,
                           child: Text(
-                              '${part1} - **** - **** - ${part4}',
+                              'NNNN - **** - **** - NNNN',
                               style: AppTextStyles.T1Bold14.copyWith(color: AppColors.white)
                           ),
                         ),
@@ -147,26 +147,86 @@ class _PaymentRegisterCardInfoScreenState extends State<PaymentRegisterCardInfoS
                         style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                     ),
                     SizedBox(height: 12.h),
-                    CommonInputField.cardNum(
-                        textController : controller.cardNumTextController.value,
-                        onChange: (value) async {
-                          cardNum = value;
-                          print(">>> 입력한 카드번호: $cardNum");
+                    Row(
+                      children: [
+                        Container(
+                          width: 70.w,
+                          child: CommonInputField.cardNum(
+                              textController : controller.cardNumTextControllerPart1.value,
+                              onChange: (value) async {
+                                cardNum = value;
+                                print(">>> 입력한 카드번호: $cardNum");
 
-                          String numericValue = value.replaceAll(RegExp(r'[^0-9]'), '');
-                          if (numericValue.length > 16) {
-                            numericValue = numericValue.substring(0, 16);
-                          }
-                          controller.cardNumTextController.value.text = numericValue;
+                                part1 = controller.cardNumTextControllerPart1.value.text;
+                                print('>>입력된 카드번호1: ${part1}');
+                                //await onChange(numericValue); //callback
+                              }),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                          child: Text(
+                            '-',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                            textAlign: TextAlign.center, // Center text inside the container
+                          ),
+                        ),
+                        Container(
+                          width: 70.w,
+                          child: CommonInputField.cardNum(
+                              textController : controller.cardNumTextControllerPart2.value,
+                              onChange: (value) async {
+                                cardNum = value;
+                                print(">>> 입력한 카드번호: $cardNum");
 
-                          part1 = controller.cardNumTextControllerPart1.value.text = numericValue.length > 4 ? numericValue.substring(0, 4) : numericValue;
-                          part2 = controller.cardNumTextControllerPart2.value.text = numericValue.length > 8 ? numericValue.substring(4, 8) : (numericValue.length > 4 ? numericValue.substring(4) : '');
-                          part3 = controller.cardNumTextControllerPart3.value.text = numericValue.length > 12 ? numericValue.substring(8, 12) : (numericValue.length > 8 ? numericValue.substring(8) : '');
-                          part4 = controller.cardNumTextControllerPart4.value.text = numericValue.length > 16 ? numericValue.substring(12, 16) : (numericValue.length > 12 ? numericValue.substring(12) : '');
+                                part2 = controller.cardNumTextControllerPart2.value.text;
+                                print('>>입력된 카드번호1: ${part2}');
+                                //await onChange(numericValue); //callback
+                              }),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                          child: Text(
+                            '-',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                            textAlign: TextAlign.center, // Center text inside the container
+                          ),
+                        ),
+                        Container(
+                          width: 70.w,
+                          child: CommonInputField.cardNum(
+                              textController : controller.cardNumTextControllerPart3.value,
+                              onChange: (value) async {
+                                cardNum = value;
+                                print(">>> 입력한 카드번호: $cardNum");
 
-                          print('>>입력된 카드번호 (-포함) ${part1}-${part2}-${part3}-${part4}');
-                          //await onChange(numericValue); //callback
-                        }),
+                                part3 = controller.cardNumTextControllerPart3.value.text;
+                                print('>>입력된 카드번호3: ${part3}');
+                                //await onChange(numericValue); //callback
+                              }),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                          child: Text(
+                            '-',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                            textAlign: TextAlign.center, // Center text inside the container
+                          ),
+                        ),
+                        Container(
+                          width: 70.w,
+                          child: CommonInputField.cardNum(
+                              textController : controller.cardNumTextControllerPart4.value,
+                              onChange: (value) async {
+                                cardNum = value;
+                                print(">>> 입력한 카드번호: $cardNum");
+
+                                part4 = controller.cardNumTextControllerPart4.value.text;
+                                print('>>입력된 카드번호4: ${part4}');
+                                //await onChange(numericValue); //callback
+                              }),
+                        ),
+                      ],
+                    ),
                     SizedBox(height: 37.h),
 
                     Row(
@@ -314,9 +374,9 @@ class _PaymentRegisterCardInfoScreenState extends State<PaymentRegisterCardInfoS
                   child: CommonButton.login(
                     text: "등록",
                     onTap: () async {
-                      if (cardNum != "" && cardExpYear != "" && cardExpMonth != "" && cardUserBirth != "" && cardPw != ""){
+                      if (part1 != "" && part2 != "" && part3 != "" && part4 != "" && cardExpYear != "" && cardExpMonth != "" && cardUserBirth != "" && cardPw != ""){
                         var result = await OrderApi.setCard(
-                            cardNo: cardNum,
+                            cardNo: part1+part2+part3+part4,
                             expYear: cardExpYear,
                             expMonth: cardExpMonth,
                             idNo: cardUserBirth,
