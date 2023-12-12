@@ -38,30 +38,21 @@ class _UserPayMethodScreenState extends State<UserPayMethodScreen> with WidgetsB
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: Column(
           children: [
-            Expanded(
-              child: CardSlider(),
-            ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 150.h),
+            CardSlider(),
+            SizedBox(height: 135.h),
             Obx(() => CommonButton.deletePay(
                 isActive: paymentController.isDeleteAble.value,
                 onTap: () async {
-                  print('>>> 삭제할 cardId: ${paymentController.cardId.value}');
+                  print('>>> 삭제하는 cardId: ${paymentController.cardId.value}');
 
                   var result = await OrderApi.deleteCard(cardId: paymentController.cardId.value);
                   if (result) {
                     Fluttertoast.showToast(msg: "선택한 카드가 삭제 되었습니다.");
-                    await paymentController.updateCardList(); // 카드 목록 업데이트
 
-                    // List<CardInfo> newCardInfoList = await OrderApi.getCardList();
-                    // paymentController.cardInfoList.assignAll(newCardInfoList);
-                    // paymentController.cardCodeList.assignAll(
-                    //     newCardInfoList.map((card) => card.cardCode.toString()).toList()
-                    // );
-                    // paymentController.cardNumList.assignAll(
-                    //     newCardInfoList.map((card) => card.cardNo).toList()
-                    // );
-                    //
-                    // Get.forceAppUpdate();
+                    paymentController.currentSlide.value = 0;
+                    paymentController.refreshCardList(); // 카드 목록 업데이트
+                    paymentController.loadData(); // 카드 목록 재조회
                   } else {
                     Fluttertoast.showToast(msg: "카드 삭제를 실패했습니다.");
                   }

@@ -79,7 +79,6 @@ class PaymentController extends GetxController {
 
   /// 카드등록 화면 --현재 선택된 카드사의 인덱스
   RxInt selectedCardIndex = (-1).obs;
-
   void selectCard(int index) {
     selectedCardIndex.value = index;
   }
@@ -90,6 +89,11 @@ class PaymentController extends GetxController {
   //TODO) 카드 신규 등록
   /// 카드 번호
   Rx<TextEditingController> cardNumTextController = TextEditingController().obs;
+  Rx<TextEditingController> cardNumTextControllerPart1 = TextEditingController().obs; //substring(0,4)
+  Rx<TextEditingController> cardNumTextControllerPart2 = TextEditingController().obs; //substring(4,8)
+  Rx<TextEditingController> cardNumTextControllerPart3 = TextEditingController().obs; //substring(8,12)
+  Rx<TextEditingController> cardNumTextControllerPart4 = TextEditingController().obs; //substring(12,16)
+
   /// 유효기간
   Rx<TextEditingController> cardExpTextController = TextEditingController().obs;
   /// CVC
@@ -122,13 +126,17 @@ class PaymentController extends GetxController {
   Rx<bool> isDeleteAble = true.obs;
   /// 필수 항목을 모두 동의 했는지
   Rx<bool> isAuthAble = false.obs;
+  /// 현재 카드 슬라이드 인덱스
+  RxInt currentSlide = 0.obs; // RxInt(0);
+
 
   Future<void> refreshCardList() async {
     List<CardInfo> newCardInfoList = await OrderApi.getCardList();
-
     cardInfoList.assignAll(newCardInfoList);
     cardCodeList.assignAll(newCardInfoList.map((card) => card.cardCode.toString()).toList());
     cardNumList.assignAll(newCardInfoList.map((card) => card.cardNo).toList());
+    cardIdList.assignAll(newCardInfoList.map((card) => card.id).toList());
+    print('>> 카드정보 list 업데이트: ${cardIdList}');
   }
 
   @override
@@ -150,13 +158,6 @@ class PaymentController extends GetxController {
     cardPWTextController.value.clear();
   }
 
-  Future<void> updateCardList() async {
-    List<CardInfo> newCardInfoList = await OrderApi.getCardList();
-    cardInfoList.assignAll(newCardInfoList);
-    cardCodeList.assignAll(newCardInfoList.map((card) => card.cardCode.toString()).toList());
-    cardNumList.assignAll(newCardInfoList.map((card) => card.cardNo).toList());
-  }
-
   Future<void> loadData() async {
     await AuthService.to.getDonatorInfo();
     print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n ");
@@ -166,6 +167,7 @@ class PaymentController extends GetxController {
     cardCodeList.assignAll(cardInfoList.map((card) => card.cardCode.toString()).toList());
     cardNumList.assignAll(cardInfoList.map((card) => card.cardNo).toList());
     cardIdList.assignAll(cardInfoList.map((card) => card.id).toList());
+    print('>> 카드정보 list: ${cardIdList}');
 
     if (accessFrom != 'mypage'){
       print("paymentController onInit 내부 - 기부자 정보조회: ${AuthService.to.donatorProfile.value}\n "

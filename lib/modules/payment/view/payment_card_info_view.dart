@@ -24,9 +24,17 @@ import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
-class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
-
+class PaymentRegisterCardInfoScreen extends StatefulWidget {
   final String selectedCardName;
+
+  PaymentRegisterCardInfoScreen({Key? key, required this.selectedCardName}) : super(key: key);
+
+  @override
+  _PaymentRegisterCardInfoScreenState createState() => _PaymentRegisterCardInfoScreenState();
+}
+
+class _PaymentRegisterCardInfoScreenState extends State<PaymentRegisterCardInfoScreen> {
+
   String cardNum = '';
   String cardExp = '';
   String cardCvc = '';
@@ -34,11 +42,15 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
   String cardPw = '';
   String cardExpYear = '';
   String cardExpMonth = '';
-
-  PaymentRegisterCardInfoScreen({Key? key, required this.selectedCardName}) : super(key: key);
+  String part1 = '';
+  String part2 = '';
+  String part3 = '';
+  String part4 = '';
 
   @override
   Widget build(BuildContext context){
+    final PaymentController controller = Get.find();
+
     controller.clearInputFields();
 
     return  Scaffold(
@@ -91,7 +103,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
                 //TODO) 카드 svg
                 (() {
-                  final matchingCard = CardBank.fromName(selectedCardName);
+                  final matchingCard = CardBank.fromName(widget.selectedCardName);
 
                   return Center(
                     child: Stack(
@@ -118,7 +130,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                           bottom: 20.h,
                           left: 18.w,
                           child: Text(
-                              'NNNN - **** - **** - NNNN',
+                              '${part1} - **** - **** - ${part4}',
                               style: AppTextStyles.T1Bold14.copyWith(color: AppColors.white)
                           ),
                         ),
@@ -140,6 +152,20 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                         onChange: (value) async {
                           cardNum = value;
                           print(">>> 입력한 카드번호: $cardNum");
+
+                          String numericValue = value.replaceAll(RegExp(r'[^0-9]'), '');
+                          if (numericValue.length > 16) {
+                            numericValue = numericValue.substring(0, 16);
+                          }
+                          controller.cardNumTextController.value.text = numericValue;
+
+                          part1 = controller.cardNumTextControllerPart1.value.text = numericValue.length > 4 ? numericValue.substring(0, 4) : numericValue;
+                          part2 = controller.cardNumTextControllerPart2.value.text = numericValue.length > 8 ? numericValue.substring(4, 8) : (numericValue.length > 4 ? numericValue.substring(4) : '');
+                          part3 = controller.cardNumTextControllerPart3.value.text = numericValue.length > 12 ? numericValue.substring(8, 12) : (numericValue.length > 8 ? numericValue.substring(8) : '');
+                          part4 = controller.cardNumTextControllerPart4.value.text = numericValue.length > 16 ? numericValue.substring(12, 16) : (numericValue.length > 12 ? numericValue.substring(12) : '');
+
+                          print('>>입력된 카드번호 (-포함) ${part1}-${part2}-${part3}-${part4}');
+                          //await onChange(numericValue); //callback
                         }),
                     SizedBox(height: 37.h),
 
@@ -297,27 +323,18 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                             cardPw: cardPw);
                         if (result) {
                           Fluttertoast.showToast(msg: "카드가 등록되었습니다.");
-                          // PaymentController 인스턴스를 가져옴
-                          final PaymentController paymentController = Get.find<PaymentController>();
+                          controller.refreshCardList();
+                          controller.loadData();
+                          Get.offAllNamed(Routes.pay_method);
 
-                          // 새로운 카드 정보를 가져와서 cardInfoList를 업데이트함
-                          // paymentController.refreshCardList();
-                          List<CardInfo> newCardInfoList = await OrderApi.getCardList();
-                          paymentController.cardInfoList.assignAll(newCardInfoList);
-                          paymentController.cardCodeList.assignAll(
-                              newCardInfoList.map((card) => card.cardCode.toString()).toList()
-                          );
-                          paymentController.cardNumList.assignAll(
-                              newCardInfoList.map((card) => card.cardNo).toList()
-                          );
-
-                          if (paymentController.accessFrom == 'mypage') {
-                            Get.toNamed(Routes.pay_method);
-                            print('>>> 넘어온 화면: ${paymentController.accessFrom}');
-                          } else {
-                            Get.to(PaymentMethodScreen());
-                            print('>>> 넘어온 화면: ${paymentController.accessFrom}');
-                          }
+                          // if (controller.accessFrom == 'mypage') {
+                          //   Get.offAllNamed(Routes.pay_method);
+                          //   print('>>> 넘어온 화면: ${controller.accessFrom}');
+                          // }
+                          // else {
+                          //   Get.to(PaymentMethodScreen());
+                          //   print('>>> 넘어온 화면: ${controller.accessFrom}');
+                          // }
                         } else {
                           Fluttertoast.showToast(msg: "카드 등록에 실패했습니다. 카드 정보를 다시 확인해주세요.");
                         }

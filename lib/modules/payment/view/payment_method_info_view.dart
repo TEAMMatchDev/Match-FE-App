@@ -28,7 +28,7 @@ class PaymentMethodScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentMethodScreen> with WidgetsBindingObserver {
 
   final PaymentController controller = Get.find();
-  ProjectController _projectController = Get.find();
+  final ProjectController _projectController = Get.find();
 
   List<String> payAgreeStringList = [
       '[필수] 결제대행 서비스 이용약관 동의',
