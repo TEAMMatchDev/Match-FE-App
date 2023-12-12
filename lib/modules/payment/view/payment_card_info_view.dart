@@ -24,9 +24,17 @@ import '../../../util/const/style/global_color.dart';
 import '../controller/payment_controller.dart';
 import '../widget/payment_widget.dart';
 
-class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
-
+class PaymentRegisterCardInfoScreen extends StatefulWidget {
   final String selectedCardName;
+
+  PaymentRegisterCardInfoScreen({Key? key, required this.selectedCardName}) : super(key: key);
+
+  @override
+  _PaymentRegisterCardInfoScreenState createState() => _PaymentRegisterCardInfoScreenState();
+}
+
+class _PaymentRegisterCardInfoScreenState extends State<PaymentRegisterCardInfoScreen> {
+
   String cardNum = '';
   String cardExp = '';
   String cardCvc = '';
@@ -34,11 +42,15 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
   String cardPw = '';
   String cardExpYear = '';
   String cardExpMonth = '';
-
-  PaymentRegisterCardInfoScreen({Key? key, required this.selectedCardName}) : super(key: key);
+  String part1 = '';
+  String part2 = '';
+  String part3 = '';
+  String part4 = '';
 
   @override
   Widget build(BuildContext context){
+    final PaymentController controller = Get.find();
+
     controller.clearInputFields();
 
     return  Scaffold(
@@ -91,7 +103,7 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
 
                 //TODO) 카드 svg
                 (() {
-                  final matchingCard = CardBank.fromName(selectedCardName);
+                  final matchingCard = CardBank.fromName(widget.selectedCardName);
 
                   return Center(
                     child: Stack(
@@ -135,12 +147,86 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                         style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9)
                     ),
                     SizedBox(height: 12.h),
-                    CommonInputField.cardNum(
-                        textController : controller.cardNumTextController.value,
-                        onChange: (value) async {
-                          cardNum = value;
-                          print(">>> 입력한 카드번호: $cardNum");
-                        }),
+                    Row(
+                      children: [
+                        Container(
+                          width: 70.w,
+                          child: CommonInputField.cardNum(
+                              textController : controller.cardNumTextControllerPart1.value,
+                              onChange: (value) async {
+                                cardNum = value;
+                                print(">>> 입력한 카드번호: $cardNum");
+
+                                part1 = controller.cardNumTextControllerPart1.value.text;
+                                print('>>입력된 카드번호1: ${part1}');
+                                //await onChange(numericValue); //callback
+                              }),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                          child: Text(
+                            '-',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                            textAlign: TextAlign.center, // Center text inside the container
+                          ),
+                        ),
+                        Container(
+                          width: 70.w,
+                          child: CommonInputField.cardNum(
+                              textController : controller.cardNumTextControllerPart2.value,
+                              onChange: (value) async {
+                                cardNum = value;
+                                print(">>> 입력한 카드번호: $cardNum");
+
+                                part2 = controller.cardNumTextControllerPart2.value.text;
+                                print('>>입력된 카드번호1: ${part2}');
+                                //await onChange(numericValue); //callback
+                              }),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                          child: Text(
+                            '-',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                            textAlign: TextAlign.center, // Center text inside the container
+                          ),
+                        ),
+                        Container(
+                          width: 70.w,
+                          child: CommonInputField.cardNum(
+                              textController : controller.cardNumTextControllerPart3.value,
+                              onChange: (value) async {
+                                cardNum = value;
+                                print(">>> 입력한 카드번호: $cardNum");
+
+                                part3 = controller.cardNumTextControllerPart3.value.text;
+                                print('>>입력된 카드번호3: ${part3}');
+                                //await onChange(numericValue); //callback
+                              }),
+                        ),
+                        SizedBox(
+                          width: 12.w,
+                          child: Text(
+                            '-',
+                            style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey9),
+                            textAlign: TextAlign.center, // Center text inside the container
+                          ),
+                        ),
+                        Container(
+                          width: 70.w,
+                          child: CommonInputField.cardNum(
+                              textController : controller.cardNumTextControllerPart4.value,
+                              onChange: (value) async {
+                                cardNum = value;
+                                print(">>> 입력한 카드번호: $cardNum");
+
+                                part4 = controller.cardNumTextControllerPart4.value.text;
+                                print('>>입력된 카드번호4: ${part4}');
+                                //await onChange(numericValue); //callback
+                              }),
+                        ),
+                      ],
+                    ),
                     SizedBox(height: 37.h),
 
                     Row(
@@ -288,36 +374,27 @@ class PaymentRegisterCardInfoScreen extends GetView<PaymentController> {
                   child: CommonButton.login(
                     text: "등록",
                     onTap: () async {
-                      if (cardNum != "" && cardExpYear != "" && cardExpMonth != "" && cardUserBirth != "" && cardPw != ""){
+                      if (part1 != "" && part2 != "" && part3 != "" && part4 != "" && cardExpYear != "" && cardExpMonth != "" && cardUserBirth != "" && cardPw != ""){
                         var result = await OrderApi.setCard(
-                            cardNo: cardNum,
+                            cardNo: part1+part2+part3+part4,
                             expYear: cardExpYear,
                             expMonth: cardExpMonth,
                             idNo: cardUserBirth,
                             cardPw: cardPw);
                         if (result) {
                           Fluttertoast.showToast(msg: "카드가 등록되었습니다.");
-                          // PaymentController 인스턴스를 가져옴
-                          final PaymentController paymentController = Get.find<PaymentController>();
+                          controller.refreshCardList();
+                          controller.loadData();
+                          Get.offAllNamed(Routes.pay_method);
 
-                          // 새로운 카드 정보를 가져와서 cardInfoList를 업데이트함
-                          // paymentController.refreshCardList();
-                          List<CardInfo> newCardInfoList = await OrderApi.getCardList();
-                          paymentController.cardInfoList.assignAll(newCardInfoList);
-                          paymentController.cardCodeList.assignAll(
-                              newCardInfoList.map((card) => card.cardCode.toString()).toList()
-                          );
-                          paymentController.cardNumList.assignAll(
-                              newCardInfoList.map((card) => card.cardNo).toList()
-                          );
-
-                          if (paymentController.accessFrom == 'mypage') {
-                            Get.toNamed(Routes.pay_method);
-                            print('>>> 넘어온 화면: ${paymentController.accessFrom}');
-                          } else {
-                            Get.to(PaymentMethodScreen());
-                            print('>>> 넘어온 화면: ${paymentController.accessFrom}');
-                          }
+                          // if (controller.accessFrom == 'mypage') {
+                          //   Get.offAllNamed(Routes.pay_method);
+                          //   print('>>> 넘어온 화면: ${controller.accessFrom}');
+                          // }
+                          // else {
+                          //   Get.to(PaymentMethodScreen());
+                          //   print('>>> 넘어온 화면: ${controller.accessFrom}');
+                          // }
                         } else {
                           Fluttertoast.showToast(msg: "카드 등록에 실패했습니다. 카드 정보를 다시 확인해주세요.");
                         }
