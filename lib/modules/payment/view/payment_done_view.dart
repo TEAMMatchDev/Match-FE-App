@@ -132,7 +132,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '${_projectController.projectDetail.value.usages}',
+                                  '${_projectController.projectDetail.value.title}',
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],
@@ -146,7 +146,7 @@ class PaymentDoneScreen extends GetView<PaymentController> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '${_projectController.projectDetail.value.title}',
+                                  '${_projectController.projectDetail.value.usages}',
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],
