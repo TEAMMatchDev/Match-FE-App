@@ -65,8 +65,8 @@ class DynamicLink {
     int id = int.parse(dynamicLinkData.link.queryParameters["id"] ?? "-1");
 
     String donatorName = dynamicLinkData.link.queryParameters["donatorName"] ?? "김매치"; //후원자 이름
-    String donateUsage = dynamicLinkData.link.queryParameters["donateUsage"] ?? "test title"; //후원제목
-    String sponsorName = dynamicLinkData.link.queryParameters["sponsorName"] ?? "sponsor name"; //후원처명
+    String donateTitle = dynamicLinkData.link.queryParameters["donateTitle"] ?? "test title"; //후원제목
+    String donateUsages = dynamicLinkData.link.queryParameters["donateUsages"] ?? "sponsor name"; //후원처명
     int amount = int.parse(dynamicLinkData.link.queryParameters["donateAmount"] ?? "1000"); //후원금액, 후원방식
     String status = dynamicLinkData.link.queryParameters["donateStatus"] ?? "ONE_TIME";
 
@@ -78,8 +78,8 @@ class DynamicLink {
       Get.to(PaymentFinishScreen(),
           arguments: {
             "donatorName": donatorName,
-            "donateUsage": donateUsage,
-            "sponsorName": sponsorName,
+            "donateTitle": donateTitle,
+            "donateUsages": donateUsages,
             "donateAmount": amount,
             "donateStatus": status,
           });

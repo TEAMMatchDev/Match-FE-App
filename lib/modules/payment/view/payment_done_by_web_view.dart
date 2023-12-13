@@ -25,8 +25,8 @@ class PaymentFinishScreen extends StatefulWidget {
 
 class _PaymentFinishScreenState extends State<PaymentFinishScreen> {
   String donatorName = '';
-  String donateUsage = '';
-  String sponsorName = '';
+  String donateTitle = '';
+  String donateUsages = '';
   String doanteAmount = '';
   String donateStatus = '';
 
@@ -35,8 +35,8 @@ class _PaymentFinishScreenState extends State<PaymentFinishScreen> {
     super.initState();
     final arguments = Get.arguments as Map<String, dynamic>;
     donatorName = arguments["donatorName"] ?? 'Unknown';
-    donateUsage = arguments["donateUsage"] ?? 'Unknown';
-    sponsorName = arguments["sponsorName"] ?? 'Unknown';
+    donateTitle = arguments["donateTitle"] ?? 'Unknown';
+    donateUsages = arguments["donateUsages"] ?? 'Unknown';
     doanteAmount = arguments["donateAmount"] ?? 'Unknown';
     donateStatus = arguments["donateStatus"] ?? 'Unknown';
   }
@@ -150,7 +150,7 @@ class _PaymentFinishScreenState extends State<PaymentFinishScreen> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '${donateUsage}',
+                                  '${donateTitle}',
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],
@@ -164,7 +164,7 @@ class _PaymentFinishScreenState extends State<PaymentFinishScreen> {
                                 ),
                                 SizedBox(width: 27.w),
                                 Text(
-                                  '${sponsorName}',
+                                  '${donateUsages}',
                                   style: AppTextStyles.T1Bold14.copyWith(color: AppColors.grey8),
                                 ),
                               ],
