@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <application
-        android:label="match"
+        android:label="MATCH"
         android:name="${applicationName}"
         android:icon="@drawable/splash">
         <activity

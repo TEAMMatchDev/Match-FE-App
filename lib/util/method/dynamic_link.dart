@@ -68,7 +68,9 @@ class DynamicLink {
     String donateTitle = dynamicLinkData.link.queryParameters["donateTitle"] ?? "test title"; //후원제목
     String donateUsages = dynamicLinkData.link.queryParameters["donateUsages"] ?? "sponsor name"; //후원처명
     int amount = int.parse(dynamicLinkData.link.queryParameters["donateAmount"] ?? "1000"); //후원금액, 후원방식
-    String status = dynamicLinkData.link.queryParameters["donateStatus"] ?? "ONE_TIME";
+    String status = dynamicLinkData.link.queryParameters["donateStatus"] ?? "";
+
+    logger.d('>> 딥링크)\n 기부자 이름: ${donatorName}\n 후원제목: ${donateTitle}\n 후원처명: ${donateUsages}\n 후원금액: ${amount}\n 후원방식: ${status}');
 
     if (link.contains("project")) {
       Get.toNamed(Routes.project, arguments: {"projectId": id});

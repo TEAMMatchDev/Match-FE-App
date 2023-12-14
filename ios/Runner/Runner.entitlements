@@ -10,7 +10,6 @@
 	</array>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>webcredentials:example.com</string>
 		<string>applinks:teammatch.page.link</string>
 	</array>
 </dict>
