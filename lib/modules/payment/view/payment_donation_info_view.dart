@@ -44,22 +44,22 @@ class PaymentDonationScreen extends GetView<PaymentController> {
     String queryParamsReg = "";
     String queryParamsOnce = "";
 
-    void _urlMaker() {
+    void _urlMaker(String orderId) {
       if (controller.projectId.value != null) queryParamsReg += "projectId=${controller.projectId.value}&";
       if (controller.selectedAmount.value != null) queryParamsReg += "amount=${controller.selectedAmount.value}&";
       if (controller.selectedDate.value != null) queryParamsReg += "date=${controller.selectedDate.value}&";
-      if (controller.orderId.value != null) queryParamsReg += "orderId=${controller.orderId.value}&";
+      if (controller.orderId.value != null) queryParamsReg += "orderId=${orderId}&";
       queryParamsReg += "inApp=$inApp";
 
       if (controller.projectId.value != null) queryParamsOnce += "projectId=${controller.projectId.value}&";
       if (controller.selectedAmount.value != null) queryParamsOnce += "amount=${controller.selectedAmount.value}&";
       if (controller.selectedDate.value != null) queryParamsOnce += "date=${controller.selectedDate.value}&";
       if (title != null) queryParamsOnce += "title=$title&";
-      if (controller.orderId.value != null) queryParamsOnce += "orderId=${controller.orderId.value}&";
+      if (controller.orderId.value != null) queryParamsOnce += "orderId=${orderId}&";
       queryParamsOnce += "inApp=$inApp";
 
-      final regUrl = (dotenv.env['prodWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
-      final onceUrl = (dotenv.env['prodWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
+      final regUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
+      final onceUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
 
       finalUrl = state == 'REGULAR' ? regUrl : onceUrl;
       (state == 'REGULAR') ? print('>> 생성된 인앱 정기결제 url: ${finalUrl}') : print('>> 생성된 인앱 단기결제 url: ${finalUrl}');
@@ -203,7 +203,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
                                 print('>> orderId --controller: ${controller.orderId.value}');
                                 //print('>> 현재 선택된 금액: ${controller.selectedAmount.value}');
                                 Fluttertoast.showToast(msg: "기부 진행 시작!");
-                                _urlMaker();
+                                _urlMaker(controller.orderId.value);
                                 await launch(finalUrl, forceWebView: false, forceSafariVC: false); //TODO) forceWebView forceSafariVC 가 false : 외부 브라우저, true : 내부 브라우저
                               } else {
                                 Fluttertoast.showToast(msg: "기부 진행 실패");

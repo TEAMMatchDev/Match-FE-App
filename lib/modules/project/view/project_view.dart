@@ -159,9 +159,7 @@ class ProjectScreen extends GetView<ProjectController> {
                     unselectedLabelColor: AppColors.grey4,
                     indicatorColor: AppColors.grey9,
                     tabs: const [
-                      Tab(
-                        text: "기부처 이야기",
-                      ),
+                      Tab(text: "기부처 이야기"),
                       Tab(text: "불꽃이 기록"),
                       Tab(text: "응원&댓글"),
                     ],

@@ -60,7 +60,7 @@ class _UserPayMethodScreenState extends State<UserPayMethodScreen> with WidgetsB
               ),
             ),
             SizedBox(
-              height: 30.h,
+              height: 15.h,
             ),
           ],
         ),
