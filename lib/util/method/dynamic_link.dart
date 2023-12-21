@@ -67,21 +67,19 @@ class DynamicLink {
     int id = int.parse(dynamicLinkData.link.queryParameters["id"] ?? "-1");
     print('>>> 딥링크 id: ${id}');
 
-    String donatorName = dynamicLinkData.link.queryParameters["donatorName"] ?? "김매치"; //후원자 이름
-    String donateTitle = dynamicLinkData.link.queryParameters["donateTitle"] ?? "test title"; //후원제목
-    String donateUsages = dynamicLinkData.link.queryParameters["donateUsages"] ?? "sponsor name"; //후원처명
-    String amountString = dynamicLinkData.link.queryParameters["donateAmount"] ?? "1000"; //후원금액 str
+    String donatorName = Uri.decodeComponent(dynamicLinkData.link.queryParameters["donatorName"] ?? "김매치");
+    String donateTitle = Uri.decodeComponent(dynamicLinkData.link.queryParameters["donateTitle"] ?? "후원제목"); //후원제목
+    String donateUsages = Uri.decodeComponent(dynamicLinkData.link.queryParameters["donateUsages"] ?? "후원처명"); //후원제목
+    String amountString = dynamicLinkData.link.queryParameters["donateAmount"] ?? "후원금액"; //후원금액 str
     int amount = int.parse(amountString); //후원금액 int
-    String status = dynamicLinkData.link.queryParameters["donateStatus"] ?? ""; //후원방식
+    String status = dynamicLinkData.link.queryParameters["donateStatus"] ?? "ONE_TIME or REGULAR"; //후원방식
 
     if (link.contains("project")) {
       Get.toNamed(Routes.project, arguments: {"projectId": id});
     } else if (link.contains("flame")) {
       Get.toNamed(Routes.burning_match, arguments: {"donationId": id});
     } else if (link.contains("donate")) {
-
       logger.d('>> 웹에서 생성된 딥링크)\n 기부자 이름: ${donatorName}\n 후원제목: ${donateTitle}\n 후원처명: ${donateUsages}\n 후원금액: ${amountString}\n 후원방식: ${status}');
-
       Get.to(PaymentFinishScreen(),
           arguments: {
             "donatorName": donatorName,
