@@ -78,7 +78,7 @@ class DynamicLink {
       Get.toNamed(Routes.project, arguments: {"projectId": id});
     } else if (link.contains("flame")) {
       Get.toNamed(Routes.burning_match, arguments: {"donationId": id});
-    } else if (link.contains("donate")) {
+    } else { //if (link.contains("donate"))
       logger.d('>> 웹에서 생성된 딥링크)\n 기부자 이름: ${donatorName}\n 후원제목: ${donateTitle}\n 후원처명: ${donateUsages}\n 후원금액: ${amountString}\n 후원방식: ${status}');
       Get.to(PaymentFinishScreen(),
           arguments: {
