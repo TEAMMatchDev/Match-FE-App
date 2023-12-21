@@ -34,6 +34,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
   Widget build(BuildContext context){
     final String state = _projectController.projectDetail.value.regularStatus;
     final String title = _projectController.projectDetail.value.title;
+    final String usages = _projectController.projectDetail.value.usages;
     final bool inApp = true;
     // final int projectId = controller.projectId.value;
     // final int amount = controller.selectedAmount.value;
@@ -49,6 +50,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
       if (controller.selectedAmount.value != null) queryParamsReg += "amount=${controller.selectedAmount.value}&";
       if (controller.selectedDate.value != null) queryParamsReg += "date=${controller.selectedDate.value}&";
       if (title != null) queryParamsReg += "title=$title&";
+      if (usages != null) queryParamsReg += "donateUsages=$usages&";
       if (controller.orderId.value != null) queryParamsReg += "orderId=${orderId}&";
       queryParamsReg += "doanteStatus=${state}&";
       queryParamsReg += "inApp=$inApp";
@@ -58,6 +60,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
       if (controller.selectedAmount.value != null) queryParamsOnce += "amount=${controller.selectedAmount.value}&";
       if (controller.selectedDate.value != null) queryParamsOnce += "date=${controller.selectedDate.value}&";
       if (title != null) queryParamsOnce += "title=$title&";
+      if (usages != null) queryParamsOnce += "donateUsages=$usages&";
       if (controller.orderId.value != null) queryParamsOnce += "orderId=${orderId}&";
       queryParamsOnce += "doanteStatus=${state}&";
       queryParamsOnce += "inApp=$inApp";
