@@ -49,6 +49,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
       if (controller.selectedAmount.value != null) queryParamsReg += "amount=${controller.selectedAmount.value}&";
       if (controller.selectedDate.value != null) queryParamsReg += "date=${controller.selectedDate.value}&";
       if (controller.orderId.value != null) queryParamsReg += "orderId=${orderId}&";
+      queryParamsReg += "doanteStatus=${state}&";
       queryParamsReg += "inApp=$inApp";
 
 
@@ -57,6 +58,7 @@ class PaymentDonationScreen extends GetView<PaymentController> {
       if (controller.selectedDate.value != null) queryParamsOnce += "date=${controller.selectedDate.value}&";
       if (title != null) queryParamsOnce += "title=$title&";
       if (controller.orderId.value != null) queryParamsOnce += "orderId=${orderId}&";
+      queryParamsOnce += "doanteStatus=${state}&";
       queryParamsOnce += "inApp=$inApp";
 
 
