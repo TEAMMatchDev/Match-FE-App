@@ -51,12 +51,14 @@ class PaymentDonationScreen extends GetView<PaymentController> {
       if (controller.orderId.value != null) queryParamsReg += "orderId=${orderId}&";
       queryParamsReg += "inApp=$inApp";
 
+
       if (controller.projectId.value != null) queryParamsOnce += "projectId=${controller.projectId.value}&";
       if (controller.selectedAmount.value != null) queryParamsOnce += "amount=${controller.selectedAmount.value}&";
       if (controller.selectedDate.value != null) queryParamsOnce += "date=${controller.selectedDate.value}&";
       if (title != null) queryParamsOnce += "title=$title&";
       if (controller.orderId.value != null) queryParamsOnce += "orderId=${orderId}&";
       queryParamsOnce += "inApp=$inApp";
+
 
       final regUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsReg;
       final onceUrl = (dotenv.env['devWebUrl'] ?? "") + webUrl + "?" + queryParamsOnce;
