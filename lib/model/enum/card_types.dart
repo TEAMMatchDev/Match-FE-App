@@ -7,8 +7,8 @@ enum CardBank {
   IBK('기업', '기업카드', 'ic_ibk.svg', 'ic_card_ibk.svg', '999','기업'), ///기업은행 코드 없어서 임시 부여
   Hana('하나', '하나카드', 'ic_hana.svg', 'ic_card_hana.svg', '374','하나'),
   PostOffice('우체국', '우체국카드', 'ic_postoffice.svg', 'ic_card_etc.svg','998','우체국'), ///우체국 코드 없음
+  Hyundai('현대', '현대카드','ic_hyundai.svg','ic_card_hyundai.svg', '367','현대'),
   Etc('기타','기타', 'ic_etc.svg', 'ic_card_etc.svg', '','기타'); //나머지 모든 카드 '' 이면 전부 기타카드
-  //Hyundai('현대', 'ic_card_hyundai.svg', '367','현대'),
   //MG('MG새마을금고', 'ic_card_mg.svg', '045','MG새마을금고');
 
   final String name; ///은행사 이름
