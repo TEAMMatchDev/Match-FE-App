@@ -36,7 +36,7 @@ class DynamicLink {
     required int id,
   }) async {
     final dynamicLinkParams = DynamicLinkParameters(
-      link: Uri.parse("$dynamicBase/$screenName?id=$id"),
+      link: Uri.parse("$dynamicBase/$screenName/$id"),
       uriPrefix: dynamicBase,
       androidParameters: const AndroidParameters(packageName: "com.dev.match"),
       iosParameters: const IOSParameters(bundleId: "com.dev.match"),
@@ -59,12 +59,14 @@ class DynamicLink {
   }
 
   static void _redirectScreen(PendingDynamicLinkData dynamicLinkData) {
-    logger.e(dynamicLinkData);
+    logger.e(dynamicLinkData.link);
     String link = dynamicLinkData.link.path;
-    int id = int.parse(dynamicLinkData.link.queryParameters["id"] ?? "-1");
+    // logger.e(link);
+    int id = int.tryParse(link.split('/').last)??-1;
+    // int id = int.parse(dynamicLinkData.link.path[0] ?? "-1");
     if (link.contains("project")) {
       Get.toNamed(Routes.project, arguments: {"projectId": id});
-    }else if(link.contains("flame")){
+    } else if (link.contains("flame")) {
       Get.toNamed(Routes.burning_match, arguments: {"donationId": id});
     }
   }
