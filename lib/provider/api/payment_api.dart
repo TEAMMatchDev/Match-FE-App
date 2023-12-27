@@ -46,9 +46,9 @@ class PaymentApi {
   }) async {
     try {
       Response response = await DioServices().to().get(
-            "/donations/pay/${regularPayId}",
+            "/donations/pay/$regularPayId",
           );
-      // logger.d(response.data);
+      logger.d(response.data);
       return List.generate(
         response.data[RESULT].length,
         (index) => Pay.fromJson(response.data[RESULT][index]),
